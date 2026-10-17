@@ -26,11 +26,21 @@ def pages_base_url(raw):
 def main():
     try:
         base = pages_base_url(os.environ.get('CF_PAGES_URL'))
-        result = build('public', base, '', True)
-        return 0 if result['passed'] else 1
     except ValueError as error:
+        # These are our fixed origin-validation messages, never the raw URL.
         print(str(error), file=sys.stderr)
         return 1
+    try:
+        result = build('public', base, '', True)
+        if result['passed'] is True:
+            return 0
+    except Exception:
+        # At this CLI boundary, command failures and unexpected builder errors
+        # must fail closed without exposing exception text, paths or output.
+        pass
+    print('Cloudflare Pages build failed. No verified output is available.',
+          file=sys.stderr)
+    return 1
 
 
 if __name__ == '__main__':

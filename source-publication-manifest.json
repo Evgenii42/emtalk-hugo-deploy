@@ -1995,8 +1995,8 @@
     },
     {
       "path": "scripts/build_cloudflare.py",
-      "bytes": 1369,
-      "sha256": "996230a7d0389039e67ee8c0f16401a1ea1ae9070cf81e9be1cab1000e49cec3"
+      "bytes": 1777,
+      "sha256": "12284c0c00accdd08872fa1a339bebe291c9fd6e0dab429a7c3ec77ab9196765"
     }
   ],
   "excluded": [

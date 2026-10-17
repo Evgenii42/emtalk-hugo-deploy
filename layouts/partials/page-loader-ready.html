@@ -1,2 +1,7 @@
-{{- $ready := resources.Get "js/page-loader-ready.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
+{{- if eq .Params.routeId "/" -}}
+  {{- $ready := resources.Get "js/page-loader-ready.js" | js.Build (dict "minify" true "target" "es2020" "format" "iife") -}}
+<script data-emt-loader-ready data-emt-loader-static>{{ $ready.Content | safeJS }}</script>
+{{- else -}}
+  {{- $ready := resources.Get "js/page-loader-ready.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
 <script data-emt-loader-ready type="module" src="{{ $ready.RelPermalink }}" integrity="{{ $ready.Data.Integrity }}"></script>
+{{- end -}}

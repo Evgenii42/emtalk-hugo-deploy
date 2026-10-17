@@ -1,5 +1,8 @@
-// Page modules initialize at DOMContentLoaded. This coordinator does not run
-// them again or equate their diagnostic flags with media/backend success.
+// The Home classic script runs after its complete server-rendered markup.
+// Capture currentScript now; it is null after an asynchronous continuation.
+// Other pages retain the module/DOMContentLoaded readiness contract.
+const parsedStaticHome = document.currentScript?.hasAttribute("data-emt-loader-static") === true &&
+  document.documentElement.dataset.routeId === "/";
 const gate = window.EmTalkPageLoader;
 if (gate?.isPending()) {
   const { signal } = gate;
@@ -31,7 +34,7 @@ if (gate?.isPending()) {
     if (!signal.aborted) await aborted;
   }
   async function settleViewport() {
-    if (document.readyState === "loading") {
+    if (!parsedStaticHome && document.readyState === "loading") {
       await bounded(new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve, { once:true, signal })));
     }
     if (signal.aborted) return;

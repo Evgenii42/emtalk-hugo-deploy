@@ -5,44 +5,24 @@
   "baselineDeploymentCommit": "5be1ace3cd6192f33a9102c09d833fa78131c0b1",
   "baselineManifestSha256": "9ba8e0434698a934698fac0a23883a7b3f3c0157cc8bb973f458eb09c8194f4e",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+  "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
   "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified.",
   "currentSelection": {
-    "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+    "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
     "files": [
       {
-        "bytes": 10533,
-        "path": "layouts/source.html",
-        "sha256": "3ec0f9a98f4c9f5141e13c91702ac1e4e31bd27df1424a57848b618721733b2f"
-      },
-      {
-        "bytes": 1712,
-        "path": "layouts/partials/analytics.html",
-        "sha256": "6ae6cd11f47d3517404bb4dd900705b7ff66fb1f61c936358d3e6ad039156618"
-      },
-      {
-        "bytes": 1483,
-        "path": "layouts/partials/home-styles.html",
-        "sha256": "bf442671aa46724111b3de66ca50d019f63003685dea62f9df026004503e9efa"
-      },
-      {
-        "bytes": 54320,
-        "path": "static/fonts/home/manrope-variable.woff2",
-        "sha256": "2d65cb231c2dd56cb8de01c856f56a72c5fefeeb86bdf71f81b6d09bda531b3f"
-      },
-      {
-        "bytes": 119228,
-        "path": "static/fonts/home/geologica-variable.woff2",
-        "sha256": "be83b404bc028dc3fdc7e5efba12bc4685b84de660aa040ecbd0ca5725a1e4fe"
-      },
-      {
-        "bytes": 2730,
+        "bytes": 2972,
         "path": "assets/js/page-loader-ready.js",
-        "sha256": "49913b102088b816ee4cf83346eb46f3ede9da46f23b1e539a0bbd8a32d30778"
+        "sha256": "5876ebf8e16bd19e8e33098a0b5ebd37e3db1e5822e8e7e63af8bbf8a044183f"
+      },
+      {
+        "bytes": 527,
+        "path": "layouts/partials/page-loader-ready.html",
+        "sha256": "472cedbb7e0d55b1fed944bb1a91244855a2314c6026f0507dddba91abd6260b"
       }
     ],
-    "path": "docs/audits/home-performance025-selected-inputs.json",
-    "sha256": "a09ec5fbb3a2bcb1af55d755f2cd04ff5bdaedcbc13fa1e292d2272ca92e6760"
+    "path": "docs/audits/home-reveal027-selected-inputs.json",
+    "sha256": "4b9f90161b2fb18813b361601580f56785cebdc33a03a9274cdd66a74f3f1751"
   },
   "deploymentFiles": [
     {
@@ -56,9 +36,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 1266,
+      "bytes": 1341,
       "path": "README.md",
-      "sha256": "c1a08a487d5ee40ea2952eb927cdb45140a1682159de370e91327848ae88adba"
+      "sha256": "e1fc048a8d66ddfeb9a7127dfeb01b35a6f9555ba4a1f18b107bb0d86d8015c1"
     },
     {
       "bytes": 4238,
@@ -67,7 +47,7 @@
     }
   ],
   "effectiveSourceFileCount": 412,
-  "effectiveSourceMapSha256": "e293c08d0c613341a004e257b8a76480a23a022306d28d93f61edd4cf4bae64c",
+  "effectiveSourceMapSha256": "172fd484724dfb18c87ab41fd5f702d7e7cca40190f561dad3ab7f18825cc678",
   "excluded": [
     "Forgejo Git history",
     "source archives",
@@ -78,16 +58,16 @@
   ],
   "exportFileCountIncludingManifest": 417,
   "generatedDeploymentReadme": {
-    "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
-    "generator": "docs/audits/home-performance025-export.py",
-    "generatorSha256": "69d9415662305d57bd8287cd06907118121e6ec1d421e11d90be2639ce47f45d"
+    "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
+    "generator": "docs/audits/home-reveal027-export.py",
+    "generatorSha256": "01267c9c7fed47d597ccf3d501a9e792bafb9934bff00a5df20dd7b176c71364"
   },
   "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately.",
-  "previousPublicationCommit": "eded693b7ae1c724264ca2d14a671e0e41361a91",
-  "previousPublicationManifestSha256": "966ad52c3960c7d6974a98849428053e5e82fb55e896ab1ce9c8b8130d7b1e3e",
+  "previousPublicationCommit": "d1c4e893f0942b9c82bd80cc8b87d9de25347986",
+  "previousPublicationManifestSha256": "a346b396c66933d4eda6b8e51f1f098a0136901e131c1fa38c36a9e1b87bf607",
   "reviewedLocalBuild": {
     "baseURL": "https://www.emtalk.org/",
-    "outputSnapshotSha256": "6c49faa11edd57b31a172a8f1b94feeae9c39b64cff93d55f8e63c8faa2e309a",
+    "outputSnapshotSha256": "ef18be78a97236c3b30b573906908d88d01a280f52f3c32cc44594e0f91f6d01",
     "outputsIncludingControl": 321,
     "preparedHugoInputs": 412,
     "preview": false,
@@ -95,13 +75,13 @@
       "_headers"
     ],
     "publicArtifacts": 320,
-    "qualification": "Windows execution; actual Linux/host checks separate.",
-    "receiptPath": "docs/audits/home-performance025-local-build003.json",
-    "receiptSha256": "41224135786a97a85664b275fc1cd4428c812e4f501071d5e75dbde4d5792821",
-    "sourceInputSnapshotSha256": "78ff9e153c1c5df679be6e932e5381abed159ffffcaa437f1b87af997dff9e20"
+    "qualification": "Local LF prediction on Windows; actual Linux/host checks separate.",
+    "receiptPath": "docs/audits/home-reveal027-local-build.json",
+    "receiptSha256": "c2f53d48d263e67be579d4681c11c5b6f67171a4ff5f65e3764c82935ae05947",
+    "sourceInputSnapshotSha256": "61aaf442c8b761a3ec9af5db53b96548032f8b990ab66b10cbce94f2700bb05a"
   },
   "schemaVersion": 2,
-  "scope": "Original394 immutable baseline with14overrides/18additions; Home-only ordered CSS/WOFF2 delivery/main landmark plus existing analytics defer and font-independent page reveal. No deferred privacy code or final release certification.",
+  "scope": "Original394 immutable baseline and unchanged025 retained. Home-only inline parsed-markup readiness removes ordered module-fetch dependency; other routes retain external readiness. No026, privacy WIP, CSS or analytics change.",
   "sourceAdditions": [
     {
       "bytes": 1749,
@@ -122,10 +102,10 @@
       "sha256": "3ad1f6c87b20a77127c7e25376063a87a43bf5301d9c63c4cf81cf30522cd36f"
     },
     {
-      "bytes": 2730,
-      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "bytes": 2972,
+      "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
       "path": "assets/js/page-loader-ready.js",
-      "sha256": "49913b102088b816ee4cf83346eb46f3ede9da46f23b1e539a0bbd8a32d30778"
+      "sha256": "5876ebf8e16bd19e8e33098a0b5ebd37e3db1e5822e8e7e63af8bbf8a044183f"
     },
     {
       "bytes": 36867,
@@ -146,10 +126,10 @@
       "sha256": "9d9ce3b03f66a06915a15884851740df553490f4bb317ccb050fbc994840a1b3"
     },
     {
-      "bytes": 248,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 527,
+      "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
       "path": "layouts/partials/page-loader-ready.html",
-      "sha256": "de80304053c3084b6cdd6113623aca8259cc19b80b97ab88f8728228c8cc2244"
+      "sha256": "472cedbb7e0d55b1fed944bb1a91244855a2314c6026f0507dddba91abd6260b"
     },
     {
       "bytes": 356,

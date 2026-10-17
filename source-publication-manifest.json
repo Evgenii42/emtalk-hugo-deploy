@@ -1990,8 +1990,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 2993,
-      "sha256": "ec1946f3049f3863efdd5a25cbc299dcc5b4e78bc1b2f99a67d475dfa7ae0f18"
+      "bytes": 3244,
+      "sha256": "098b75bae1436a2eb736fef48b00411977fadab465a3195c5988e799224b7afd"
     },
     {
       "path": "scripts/build_cloudflare.py",
@@ -2007,5 +2007,6 @@
     "visitor submissions",
     "unpublished CMS items"
   ],
-  "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately."
+  "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately.",
+  "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified."
 }

@@ -28,6 +28,9 @@ canonical source and identifies deployment-only additions. This is an export,
 not a mirror of Forgejo history. It contains published content, localized media,
 Hugo templates, CSS/JS and the build pipeline; no source archives, audit/review
 bundles, credentials, visitor submissions or unpublished CMS items are exported.
+These are accepted staged-derived build snapshots. All exported CMS items carry
+published metadata, but `liveApiVerified=false`: parity of their field values
+with the current live CMS has not been independently confirmed.
 Existing font license files and notices remain under `static`.
 
 To update this repository, export another explicitly reviewed source snapshot
@@ -45,7 +48,7 @@ Neither the report nor source inputs are copied into the published output.
 
 After the first Pages deployment, verify CSS, JS, images, article playback,
 keyboard/mobile navigation, deep links, unknown-route HTTP 404, canonical URLs
-and query/fragment behavior on the actual assigned address. Pages currently
-serves HTTP Range requests as 200 full responses; do not assume 206 or certify
+and query/fragment behavior on the actual assigned address. The current Pages documentation states that
+HTTP Range requests receive 200 full responses; do not assume 206 or certify
 media seeking until browser checks are complete. The existing GitHub Pages
 repository and the production Webflow domain are independent and unchanged.

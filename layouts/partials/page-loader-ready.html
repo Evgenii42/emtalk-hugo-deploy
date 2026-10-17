@@ -1,5 +1,9 @@
 {{- if eq .Params.routeId "/" -}}
   {{- $ready := resources.Get "js/page-loader-ready.js" | js.Build (dict "minify" true "target" "es2020" "format" "iife") -}}
+  {{- $inlineLower := lower $ready.Content -}}
+  {{- if or (in $inlineLower "</script") (in $inlineLower "<!--") -}}
+    {{- errorf "Home coordinator contains an unsafe inline script delimiter" -}}
+  {{- end -}}
 <script data-emt-loader-ready data-emt-loader-static>{{ $ready.Content | safeJS }}</script>
 {{- else -}}
   {{- $ready := resources.Get "js/page-loader-ready.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}

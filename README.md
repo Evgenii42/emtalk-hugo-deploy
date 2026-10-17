@@ -19,5 +19,5 @@ and defer on the existing analytics bootstrap preserve content/controller
 contracts. Consent/tag/Google provider reconciliation remains separate.
 No new WebMCP/ARD tools are claimed by this delivery patch.
 
-Canonical commit: 823dd5a80c91680881e263d0bbc6e29bdd7501b5
-Reviewed Windows receipt: docs/audits/home-reveal027-local-build.json
+Canonical commit: c1583fb532920a58a30150d24dc996391f23c40f
+Reviewed Windows receipt: docs/audits/home-reveal027-final002-build.json

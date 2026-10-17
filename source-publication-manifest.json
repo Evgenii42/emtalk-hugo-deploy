@@ -5,10 +5,10 @@
   "baselineDeploymentCommit": "5be1ace3cd6192f33a9102c09d833fa78131c0b1",
   "baselineManifestSha256": "9ba8e0434698a934698fac0a23883a7b3f3c0157cc8bb973f458eb09c8194f4e",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
+  "canonicalSourceCommit": "c1583fb532920a58a30150d24dc996391f23c40f",
   "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified.",
   "currentSelection": {
-    "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
+    "canonicalSourceCommit": "c1583fb532920a58a30150d24dc996391f23c40f",
     "files": [
       {
         "bytes": 2972,
@@ -16,13 +16,13 @@
         "sha256": "5876ebf8e16bd19e8e33098a0b5ebd37e3db1e5822e8e7e63af8bbf8a044183f"
       },
       {
-        "bytes": 527,
+        "bytes": 739,
         "path": "layouts/partials/page-loader-ready.html",
-        "sha256": "472cedbb7e0d55b1fed944bb1a91244855a2314c6026f0507dddba91abd6260b"
+        "sha256": "ce9da8579ad67916d333cde5d14150afb53c71fb29431bc6f2edbdb4e4da1dcd"
       }
     ],
-    "path": "docs/audits/home-reveal027-selected-inputs.json",
-    "sha256": "4b9f90161b2fb18813b361601580f56785cebdc33a03a9274cdd66a74f3f1751"
+    "path": "docs/audits/home-reveal027-final002-inputs.json",
+    "sha256": "ab6e968e0d2470cde08c682cdf8299e3a8d85fa941768db9a54af43ae326d86c"
   },
   "deploymentFiles": [
     {
@@ -36,9 +36,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 1341,
+      "bytes": 1344,
       "path": "README.md",
-      "sha256": "e1fc048a8d66ddfeb9a7127dfeb01b35a6f9555ba4a1f18b107bb0d86d8015c1"
+      "sha256": "09aa8d1a359b6cd5de20d352a53644211f65199ea90a74b8fbf4d945cb886998"
     },
     {
       "bytes": 4238,
@@ -47,7 +47,7 @@
     }
   ],
   "effectiveSourceFileCount": 412,
-  "effectiveSourceMapSha256": "172fd484724dfb18c87ab41fd5f702d7e7cca40190f561dad3ab7f18825cc678",
+  "effectiveSourceMapSha256": "0db7eb810f32d4b5c2260a227ce772e434559699a6f570adf3aa161f02f94c24",
   "excluded": [
     "Forgejo Git history",
     "source archives",
@@ -58,7 +58,7 @@
   ],
   "exportFileCountIncludingManifest": 417,
   "generatedDeploymentReadme": {
-    "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
+    "canonicalSourceCommit": "c1583fb532920a58a30150d24dc996391f23c40f",
     "generator": "docs/audits/home-reveal027-export.py",
     "generatorSha256": "01267c9c7fed47d597ccf3d501a9e792bafb9934bff00a5df20dd7b176c71364"
   },
@@ -76,9 +76,9 @@
     ],
     "publicArtifacts": 320,
     "qualification": "Local LF prediction on Windows; actual Linux/host checks separate.",
-    "receiptPath": "docs/audits/home-reveal027-local-build.json",
-    "receiptSha256": "c2f53d48d263e67be579d4681c11c5b6f67171a4ff5f65e3764c82935ae05947",
-    "sourceInputSnapshotSha256": "61aaf442c8b761a3ec9af5db53b96548032f8b990ab66b10cbce94f2700bb05a"
+    "receiptPath": "docs/audits/home-reveal027-final002-build.json",
+    "receiptSha256": "36d8691b18099702cdc7bed9bbf09d8bb209ab59acafd9f57f265bf25895e727",
+    "sourceInputSnapshotSha256": "a789a36c0d2a9e1b2c5d3be83ac6f8a8e701ad786b55a5feef28797ac0ccb1ca"
   },
   "schemaVersion": 2,
   "scope": "Original394 immutable baseline and unchanged025 retained. Home-only inline parsed-markup readiness removes ordered module-fetch dependency; other routes retain external readiness. No026, privacy WIP, CSS or analytics change.",
@@ -103,7 +103,7 @@
     },
     {
       "bytes": 2972,
-      "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
+      "canonicalSourceCommit": "c1583fb532920a58a30150d24dc996391f23c40f",
       "path": "assets/js/page-loader-ready.js",
       "sha256": "5876ebf8e16bd19e8e33098a0b5ebd37e3db1e5822e8e7e63af8bbf8a044183f"
     },
@@ -126,10 +126,10 @@
       "sha256": "9d9ce3b03f66a06915a15884851740df553490f4bb317ccb050fbc994840a1b3"
     },
     {
-      "bytes": 527,
-      "canonicalSourceCommit": "823dd5a80c91680881e263d0bbc6e29bdd7501b5",
+      "bytes": 739,
+      "canonicalSourceCommit": "c1583fb532920a58a30150d24dc996391f23c40f",
       "path": "layouts/partials/page-loader-ready.html",
-      "sha256": "472cedbb7e0d55b1fed944bb1a91244855a2314c6026f0507dddba91abd6260b"
+      "sha256": "ce9da8579ad67916d333cde5d14150afb53c71fb29431bc6f2edbdb4e4da1dcd"
     },
     {
       "bytes": 356,

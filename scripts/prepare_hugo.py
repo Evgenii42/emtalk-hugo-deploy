@@ -26,6 +26,55 @@ METADATA_URL_FIELDS = {'og:image', 'og:image:url', 'og:image:secure_url', 'twitt
                        'og:audio', 'og:audio:url', 'og:audio:secure_url', 'og:video', 'og:video:url',
                        'og:video:secure_url', 'twitter:player', 'twitter:player:stream'}
 
+# The archived product page predates the guest workspace. Correct only these
+# observed /dm text nodes; preserve its layout, links and immutable source data.
+DM_WEB_COPY = {
+    'Sign up': 'Open the workspace',
+    'Create your free account in seconds and get access to BRET.':
+        'Try Decision Matrix in your browser. No account is needed.',
+    'Manual input, suggested topics, or AI-generated ideas.':
+        'Enter your own options or choose a ready-made topic. AI ideas are available in the Android app.',
+    'Compare them one by one, or use AI-powered pros and cons.':
+        'Compare options one by one or weigh your own pros and cons. AI assistance is available in the Android app.',
+    'Your AI-Powered Work Advisor': 'AI assistance in the Android app',
+    'AI will generate relevant options for your evaluation.':
+        'Explore AI-generated options in the Android app. AI assistance is coming soon to the website.',
+    'AI helps you generate alternatives and sometimes even compare them. You just describe your':
+        'In the Android app, AI helps generate alternatives from your description.',
+    'decision problem, and the system suggests structured options to get you started.':
+        'Website AI is coming soon; the browser workspace currently uses your own options or ready-made topics.',
+    'In manual mode, you enter and compare your own options. In AI mode, you describe your':
+        'On the website, you enter and compare your own options without an account.',
+    'challenge, and the app generates alternatives for you.':
+        'AI assistance is available in the Android app and is coming soon to the website.',
+    'Your data is stored securely and never shared. You can delete your account and all related ':
+        'The guest workspace keeps drafts and saved decisions in this browser. Other people using the same browser profile may see them.',
+    'data at any time.':
+        'Use Files and privacy to export or clear local data. Exported files are separate. For Android app data, see the app privacy and account-deletion information.',
+    'No. The tool is currently free. You can support the team if you’d like to help us grow.':
+        'The browser workspace is free and needs no account. Check the Android app for its current AI access and plans.',
+}
+
+
+def dm_web_copy(node):
+    """Apply an explicit, complete text-only correction to the /dm tree."""
+    counts = dict.fromkeys(DM_WEB_COPY, 0)
+
+    def visit(value):
+        if isinstance(value, str):
+            if value in DM_WEB_COPY:
+                counts[value] += 1
+                return DM_WEB_COPY[value]
+            return value
+        result = copy.deepcopy(value)
+        result['children'] = [visit(child) for child in result.get('children', [])]
+        return result
+
+    result = visit(node)
+    if any(count != 1 for count in counts.values()):
+        raise ValueError('DM entry copy changed; reconcile the explicit guest corrections')
+    return result
+
 
 def parse_json(value):
     def reject_constant(constant):
@@ -562,6 +611,8 @@ def prepare(prefix='', preview=False):
                 'family': source['family'], 'sourceHash': source['sourceArchiveSha256'],
                 'body': transform(source['dom'], route, fields), 'metadata': [], 'icons': [],
                 'structuredData': page_schema(source, route), 'testModel': models.get(route)}
+        if route == '/dm':
+            page['body'] = dm_web_copy(page['body'])
         audio_winner = fields.get('audio-url') if 'audio-url' in fields else source['audio'].get('url')
         selected_audio = audio_sources(audio_winner, route)
         page['audioMp3'] = selected_audio['mp3'] if selected_audio else ''

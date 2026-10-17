@@ -1,0 +1,30 @@
+# EmTalk
+
+> EmTalk is an independent website with articles, audio, self-reflection questionnaires, and tools for calm and clearer decisions.
+
+Canonical website: https://www.emtalk.org/
+
+Website content and tools can be explored without an account. Self-assessment questionnaires support reflection; their results are not a diagnosis.
+
+BRET offers free browser-based breathing and relaxation practices. Decision Matrix offers local option comparison and pros-and-cons exercises. Decision Matrix AI features are available in the Android app and are planned for the website. Website AI, account synchronization, and subscriptions are not currently offered. TAPL is in development.
+
+## Explore
+
+- [Home](https://www.emtalk.org/): Choose a starting point.
+- [Understand myself](https://www.emtalk.org/understand-myself): Introduction to articles and questionnaires.
+- [Articles](https://www.emtalk.org/articles): Read or listen to articles about sleep and burnout.
+- [Tests](https://www.emtalk.org/tests): Find a self-assessment questionnaire.
+- [About EmTalk](https://www.emtalk.org/about-us): The team and approach.
+
+## Tools
+
+- [BRET](https://www.emtalk.org/bret): Breathing and relaxation tools.
+- [BRET web practice](https://www.emtalk.org/bret/practice): Try a free practice in the browser.
+- [Decision Matrix](https://www.emtalk.org/dm): How structured option comparison works.
+- [Decision Matrix workspace](https://www.emtalk.org/dm/workspace): Compare options and explore reasons locally in the browser.
+
+## Optional
+
+- [Privacy policy](https://www.emtalk.org/documents/emtalk-privacy-policy): Website privacy information.
+- [Terms of use](https://www.emtalk.org/documents/emtalk-terms-and-conditions-of-use): Website terms.
+- [Sitemap](https://www.emtalk.org/sitemap.xml): Indexable website URLs.

@@ -1,0 +1,4 @@
+{{- $css := resources.Get "css/page-loader.css" | minify -}}
+<style data-emt-loader-style>{{ $css.Content | safeCSS }}</style>
+{{- $bootstrap := resources.Get "js/page-loader-bootstrap.js" | js.Build (dict "minify" true "target" "es2020") -}}
+<script data-emt-loader-bootstrap>{{ $bootstrap.Content | safeJS }}</script>

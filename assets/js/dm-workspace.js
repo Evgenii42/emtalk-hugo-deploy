@@ -1,6 +1,8 @@
+import { parseTopics } from "./dm-topics.js";
 import { createDecisionDialog } from "./dm-dialog.js";
 import {
   createDecision,
+  createDraft, parseDraft, serializeDraft,
   makePairs,
   orderedResults,
   validateDecision,
@@ -19,6 +21,7 @@ import {
   HISTORY_KEY,
   HistoryProblem,
   createHistoryStorage,
+  DraftProblem, createDraftStorage,
 } from "./dm-storage.js";
 
 const priorityNames = new Map([
@@ -97,24 +100,48 @@ function init() {
   const app = document.querySelector("[data-dm-app]");
   if (!app) return;
   const screen = app.querySelector("[data-dm-screen]"),
-    status = app.querySelector("[data-dm-status]");
+    status = app.querySelector("[data-dm-status]"),
+    filesPanel = app.querySelector("[data-dm-files]");
   let activeHistoryId = null,
     exportSequence = 0;
   let state = createDecision(),
     pairIndex = 0,
     optionIndex = 0,
     dirty = false;
+  let topicCategory = null, topics = null;
+  try { topics = parseTopics(document.getElementById("emtalk-dm-topics").textContent); } catch { /* Manual decisions stay available if the optional catalog fails. */ }
   const announce = (message) => {
     status.textContent = message;
   };
   const changed = () => {
     dirty = true;
+    draftSuppressed = false;
+    persistDraft();
   };
-  const { readHistory, writeHistory } = createHistoryStorage({
+  const { readHistory, writeHistory, resetHistoryObservation } = createHistoryStorage({
     getStorage: () => globalThis.localStorage,
     parseHistory,
     parseDecision,
   });
+  const draftStore = createDraftStorage({getStorage: () => globalThis.localStorage, parseDraft, serializeDraft});
+  let draftProblem = null, draftBlocked = false, draftSuppressed = false, draftResumed = false;
+  let lastPersistedDraft = null;
+  try {
+    const draft = draftStore.readDraft();
+    if (draft) {
+      state = draft.decision;
+      pairIndex = draft.pairIndex;
+      optionIndex = draft.optionIndex;
+      activeHistoryId = draft.savedEntryId;
+      dirty = true;
+      draftResumed = true;
+      // Opening an existing draft is observation, not an edit. Preserve its
+      // stored bytes so another tab does not receive a false stale-draft error.
+      lastPersistedDraft = serializeDraft(createDraft(state, {
+        pairIndex, optionIndex, savedEntryId: activeHistoryId,
+      }, 0));
+    }
+  } catch (error) { draftProblem = error; draftBlocked = true; }
   const id = createIdGenerator();
   const heading = (title) =>
     node("h2", { tabindex: "-1", "data-step-heading": "" }, [title]);
@@ -205,16 +232,21 @@ function init() {
     return;
   }
   function show(focus = true) {
+    screen.hidden = false;
+    historyPanel.hidden = true;
+    filesPanel.hidden = true;
+    setNavigation("decision");
     screen.replaceChildren();
     if (state.step === "options") showOptions();
     if (state.step === "compare") showComparison();
     if (state.step === "review") showReview();
     if (state.step === "pros") showPros();
     if (state.step === "results") showResults();
+    if (!draftSuppressed && (dirty || draftResumed || state.options.length || state.title)) persistDraft();
     if (focus) {
       const title = screen.querySelector("[data-step-heading]");
       title?.focus({ preventScroll: true });
-      title?.scrollIntoView({ block: "start", behavior: "instant" });
+      app.scrollIntoView({ block: "start", behavior: "instant" });
     }
   }
   function transition(step) {
@@ -224,11 +256,75 @@ function init() {
     announce("");
     show();
   }
-  const askDecision = createDecisionDialog({
+  const askBaseDecision = createDecisionDialog({
     dialog: document.querySelector("[data-dm-dialog]"),
     announce,
   });
 
+  const navButtons = [...app.querySelectorAll('.dm-workspace__nav button')];
+  function setNavigation(view) {
+    for(const item of navButtons) {
+      const current = item.dataset.dmView || 'saved';
+      if(current===view)item.setAttribute('aria-current','true');
+      else item.removeAttribute('aria-current');
+    }
+  }
+  function askDecision(options) { return askBaseDecision(options); }
+  app.querySelector('[data-dm-view="decision"]').addEventListener('click',()=>{announce('');show();});
+  app.querySelector('[data-dm-view="files"]').addEventListener('click',()=>{
+    announce('');screen.hidden=true;historyPanel.hidden=true;filesPanel.hidden=false;
+    setNavigation('files');filesPanel.querySelector('h2').focus({preventScroll:true});app.scrollIntoView({block:'start',behavior:'instant'});
+  });
+  app.querySelector('[data-dm-draft-notice]').textContent = draftResumed
+    ? 'Draft resumed. Changes save in this browser only.'
+    : 'Local draft: changes save in this browser only.';
+  function persistDraft() {
+    if (draftBlocked || draftSuppressed) return;
+    try {
+      const draft = createDraft(state, {
+        pairIndex: Math.max(0, Math.min(pairIndex, state.pairs.length - 1)),
+        optionIndex: Math.max(0, Math.min(optionIndex, state.selected.length - 1)),
+        savedEntryId: activeHistoryId,
+      });
+      // Compare actual draft content, excluding its save timestamp. Navigation
+      // alone must not rewrite storage or create a false conflict in another tab.
+      const signature = serializeDraft({ ...draft, savedAt: 0 });
+      if (signature === lastPersistedDraft) { draftResumed = false; return; }
+      draftStore.writeDraft(draft);
+      lastPersistedDraft = signature;
+      draftResumed = false;
+      app.querySelector('[data-dm-draft-notice]').textContent = 'Draft saved in this browser only. Nothing is uploaded.';
+    } catch (error) { draftProblem = error; draftBlocked = true; showDraftProblem(); }
+  }
+  function showDraftProblem() {
+    const panel = app.querySelector('[data-dm-draft-recovery]');
+    panel.hidden = false;
+    panel.replaceChildren(node('h3', {}, ['Your working decision is still here']), node('p', {}, [
+      draftProblem?.kind === 'corrupt' || draftProblem?.kind === 'conflict'
+        ? 'Another draft could not be restored safely or changed in another tab. It has not been overwritten. Export your work before deciding whether to delete the stored draft.'
+        : 'Automatic draft saving is unavailable. Keep this tab open or use Export JSON to keep your work.'
+    ]));
+    app.querySelector('[data-dm-draft-notice]').textContent = 'Draft not saved automatically. Your working decision remains available for export.';
+    panel.append(button('Export working decision', () => download(serializeDecision(state), 'application/json', exportName())));
+    if (typeof draftProblem?.raw === 'string' && new TextEncoder().encode(draftProblem.raw).length <= 220000) {
+      panel.append(button('Download raw draft backup', () => download(draftProblem.raw, 'text/plain;charset=utf-8', 'emtalk-dm-draft-backup.txt')));
+    } else if (typeof draftProblem?.raw === 'string') {
+      panel.append(node('p', {}, ['A raw draft backup is unavailable here because this stored draft exceeds the 220 KB recovery limit. The stored bytes have not been changed.']));
+    }
+    panel.append(button('Delete current draft', deleteCurrentDraft));
+  }
+  async function deleteCurrentDraft(event) {
+    if (!(await askDecision({title:'Delete current draft?', description:'This deletes only the automatically saved draft from this browser. Your working decision, named saves and exported files remain. New edits start a new local draft.', accept:'Delete current draft', returnFocus:event?.currentTarget}))) return;
+    try {
+      draftStore.deleteDraft(typeof draftProblem?.raw === 'string' ? {expectedRaw:draftProblem.raw} : {});
+      draftProblem = null; draftBlocked = false; draftSuppressed = true; draftResumed = false;
+      lastPersistedDraft = null;
+      app.querySelector('[data-dm-draft-recovery]').hidden = true;
+      app.querySelector('[data-dm-draft-notice]').textContent = 'Current draft deleted. New edits will save a new draft in this browser.';
+      announce('Current draft deleted. Named saved decisions are unchanged.');
+    } catch (error) { draftProblem = error; draftBlocked = true; showDraftProblem(); }
+  }
+  app.querySelector('[data-dm-action="delete-draft"]').addEventListener('click', deleteCurrentDraft);
   async function editOptions(event) {
     if (
       !(await askDecision({
@@ -247,131 +343,96 @@ function init() {
     transition("options");
   }
   function showOptions() {
-    screen.append(heading("1. What are you deciding?"));
-    const title = node("input", {
-      type: "text",
-      maxlength: 160,
-      "aria-label": "Decision name",
-      placeholder: "For example: choosing a work arrangement",
-    });
+    screen.append(heading('What would you like to decide?'), aiEntry('Find options with AI'), availability());
+    screen.append(topicCatalog());
+    const naming = node('details', {}, [node('summary',{},['Name this decision (optional)'])]);
+    const title = node('input', {type:'text', maxlength:160, 'aria-label':'Decision name', placeholder:'What are you deciding?'});
     title.value = state.title;
-    title.addEventListener("input", () => {
-      state.title = title.value;
-      changed();
-    });
-    screen.append(field("Decision name (optional)", title));
-    const list = node("div", { "aria-label": "Your options" });
-    state.options.forEach((option, index) => {
-      const input = node("input", {
-        type: "text",
-        maxlength: 100,
-        "aria-label": "Option " + (index + 1),
-      });
-      input.value = option.title;
-      input.addEventListener("change", () => {
-        const value = input.value.trim();
-        if (
-          !value ||
-          state.options.some(
-            (o) =>
-              o.id !== option.id &&
-              o.title.trim().toLowerCase() === value.toLowerCase(),
-          )
-        ) {
-          input.value = option.title;
-          announce("Use a different, nonempty name for each option.");
-          return;
+    title.addEventListener('input', () => { state.title = title.value; changed(); });
+    naming.append(field('Decision name',title)); screen.append(naming);
+    const list = node('div', {class:'dm-workspace__option-list', 'aria-label':'Your options'});
+    state.options.forEach((option,index) => {
+      const input = node('input', {type:'text',maxlength:100,'aria-label':'Option '+(index+1)}); input.value=option.title;
+      input.addEventListener('change', () => {
+        const value=input.value.trim();
+        if (!value || state.options.some(o => o.id!==option.id && o.title.trim().toLowerCase()===value.toLowerCase())) {
+          input.value=option.title; announce('Use a different, nonempty name for each option.'); return;
         }
-        option.title = value;
-        changed();
+        option.title=value; changed();
       });
-      const remove = button("Remove", () => {
-        state.options = state.options.filter((o) => o.id !== option.id);
-        // Strict options-phase states already have no derived comparison data.
-        // Reassert that invariant defensively when the option set changes.
-        state.pairs = [];
-        state.answers = {};
-        state.selected = [];
-        state.opinions = [];
-        pairIndex = 0;
-        optionIndex = 0;
-        changed();
-        show(false);
-        screen.querySelector("[data-new-option]")?.focus();
+      input.addEventListener('input', () => {
+        const value=input.value.trim();
+        if(value && !state.options.some(o=>o.id!==option.id && o.title.trim().toLowerCase()===value.toLowerCase())) { option.title=value;changed(); }
       });
-      remove.setAttribute("aria-label", "Remove option " + (index + 1));
-      list.append(
-        node("div", { class: "dm-workspace__row" }, [
-          field("Option " + (index + 1), input),
-          remove,
-        ]),
-      );
+      const remove=button('\u00d7', () => {
+        state.options=state.options.filter(o=>o.id!==option.id); pairIndex=0;optionIndex=0;
+        changed();show(false);screen.querySelector('[data-new-option]')?.focus();announce('Option removed.');
+      });
+      remove.setAttribute('aria-label','Remove option '+(index+1));
+      list.append(node('div',{class:'dm-workspace__row'},[field('Option '+(index+1),input),remove]));
     });
     screen.append(list);
-    const form = node("form"),
-      input = node("input", {
-        type: "text",
-        maxlength: 100,
-        required: "",
-        "data-new-option": "",
-        "aria-label": "New option",
-      });
-    const add = node("button", { type: "submit" }, ["Add option"]);
-    if (state.options.length >= MAX_OPTIONS) {
-      add.disabled = true;
-      input.disabled = true;
-    }
-    form.append(
-      field("Add an option (" + state.options.length + "/8)", input),
-      add,
-    );
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const value = input.value.trim();
-      if (
-        !value ||
-        state.options.some(
-          (o) => o.title.trim().toLowerCase() === value.toLowerCase(),
-        )
-      ) {
-        announce("Use a different, nonempty name for each option.");
-        return;
-      }
-      if (state.options.length >= MAX_OPTIONS) return;
-      const optionId = id("o");
-      if (optionId === null) return disableWorkspace();
-      state.options.push({ id: optionId, title: value });
-      changed();
-      announce("Option added.");
-      show(false);
-      screen.querySelector("[data-new-option]")?.focus();
+    const form=node('form',{class:'dm-workspace__new-option'}),input=node('input',{type:'text',maxlength:100,required:'','data-new-option':'','aria-label':'New option',placeholder:state.options.length ? 'Another option...' : 'Enter your first option...'});
+    const submit=node('button',{type:'submit'},['Add option']);
+    if(state.options.length>=MAX_OPTIONS){input.disabled=true;submit.disabled=true;}
+    form.append(field('Your options ('+state.options.length+'/8)',input),submit);
+    form.addEventListener('submit',event=>{
+      event.preventDefault();const value=input.value.trim();
+      if(!value || state.options.some(o=>o.title.trim().toLowerCase()===value.toLowerCase())){announce('Use a different, nonempty name for each option.');input.focus();return;}
+      if(state.options.length>=MAX_OPTIONS)return;
+      const optionId=id('o');if(optionId===null)return disableWorkspace();
+      state.options.push({id:optionId,title:value});changed();show(false);screen.querySelector('[data-new-option]')?.focus();announce('Option added.');
     });
-    screen.append(
-      form,
-      actions([
-        button(
-          "Start with these options",
-          () => {
-            if (!state.options.length) {
-              announce("Add at least one option to begin.");
-              input.focus();
-              return;
-            }
-            if (state.options.length > 3) {
-              state.pairs = makePairs(state.options);
-              pairIndex = 0;
-              transition("compare");
-            } else {
-              state.selected = state.options.map((o) => o.id);
-              optionIndex = 0;
-              transition("pros");
-            }
-          },
-          true,
-        ),
-      ]),
-      aiNotice(),
-    );
+    screen.append(form);
+    const start=button(state.options.length>3?'Compare options':state.options.length?'Start pros and cons':'Add your options',()=>{
+      if(!state.options.length){form.requestSubmit();return;}
+      // Commit any typed extra option explicitly; never silently discard it.
+      if(input.value.trim()){announce('Add or clear the option you are typing before starting.');input.focus();return;}
+      if(state.options.length>3){state.pairs=makePairs(state.options);pairIndex=0;transition('compare');}
+      else{state.selected=state.options.map(o=>o.id);optionIndex=0;transition('pros');}
+    },true);
+    const add=button('+',()=>form.requestSubmit());add.className='dm-workspace__add';add.setAttribute('aria-label','Add option');add.disabled=state.options.length>=MAX_OPTIONS;
+    screen.append(node('div',{class:'dm-workspace__bottom'},state.options.length?[start,add]:[start]));
+  }
+  function topicCatalog() {
+    const card=node('section',{class:'dm-workspace__topics'},[node('h3',{},['Topics'])]);
+    if(!topics){card.append(node('p',{},['Topics could not be loaded. Add your own options below to start a decision.']));return card;}
+    const category=topics.categories.find(c=>c.id===topicCategory)||topics.categories[0];
+    topicCategory=category.id;
+    const categories=node('div',{class:'dm-workspace__categories',role:'group','aria-label':'Topic categories'});
+    const list=node('div',{class:'dm-workspace__topic-list','aria-label':category.label+' topics'});
+    for(const c of topics.categories){
+      const select=button(c.label,()=>{
+        topicCategory=c.id;show(false);
+        [...screen.querySelectorAll('[data-dm-category]')].find(b=>b.dataset.dmCategory===c.id)?.focus({preventScroll:true});
+      });
+      select.dataset.dmCategory=c.id;select.setAttribute('aria-pressed',String(c.id===category.id));categories.append(select);
+    }
+    for(const topic of category.topics){const select=button(topic.title,()=>showTopic(topic));select.dataset.dmTopic=topic.id;list.append(select);}
+    card.append(categories,list);return card;
+  }
+  function showTopic(topic) {
+    screen.replaceChildren(heading(topic.title),node('p',{},['Choose one to eight options that fit your situation. You can edit them before starting.']));
+    const selected=new Set(), count=node('p',{'role':'status','aria-live':'polite'},['0 of 8 selected']);
+    const choices=node('fieldset',{class:'dm-workspace__choices','data-dm-topic-options':''},[node('legend',{},['Options for this topic'])]);
+    const apply=button('Use selected options',async event=>{
+      if(selected.size<1 || selected.size>8)return;
+      if((state.options.length || state.title) && !(await askDecision({title:'Use this topic?',description:'This replaces the current decision name and options. Named saved decisions and exported files remain unchanged.',accept:'Use selected options',returnFocus:event.currentTarget})))return;
+      const next=createDecision();next.title=topic.title;
+      for(const title of topic.options.filter(t=>selected.has(t))){const optionId=id('o');if(optionId===null)return disableWorkspace();next.options.push({id:optionId,title});}
+      state=next;activeHistoryId=null;pairIndex=0;optionIndex=0;changed();show();announce('Topic added. Edit the options or start your exercise.');
+    },true);apply.disabled=true;
+    for(const title of topic.options){
+      const input=node('input',{type:'checkbox',value:title});
+      input.addEventListener('change',()=>{
+        if(input.checked && selected.size>=8){input.checked=false;announce('Choose up to eight options. Uncheck one to choose another.');return;}
+        if(input.checked)selected.add(title);else selected.delete(title);
+        count.textContent=selected.size+' of 8 selected';apply.disabled=selected.size===0;
+      });
+      choices.append(node('label',{class:'dm-workspace__choice'},[input,title]));
+    }
+    screen.append(count,choices,actions([apply,button('Back to my options',()=>show())]));
+    const title=screen.querySelector('[data-step-heading]');title.focus({preventScroll:true});app.scrollIntoView({block:'start',behavior:'instant'});
   }
   function showComparison() {
     // Imported/UI states require pairs; keep the renderer safe if a future
@@ -381,7 +442,7 @@ function init() {
       return;
     }
     pairIndex = Math.max(0, Math.min(state.pairs.length - 1, pairIndex));
-    screen.append(heading("2. Compare your options"));
+    screen.append(heading("Which option would you choose?"));
     const answered = Object.keys(state.answers).length;
     const undecided = Object.values(state.answers).filter(
       (answer) => answer === null,
@@ -406,9 +467,9 @@ function init() {
     );
     const pair = state.pairs[pairIndex],
       choices = node("fieldset", { class: "dm-workspace__choices" }, [
-        node("legend", {}, ["Choose an option or leave this pair undecided"]),
+        node("legend", {}, ["Choose one of these two options"]),
       ]);
-    for (const winner of [...pair, null]) {
+    for (const winner of pair) {
       const radio = node("input", {
         type: "radio",
         name: "comparison",
@@ -420,7 +481,8 @@ function init() {
       radio.addEventListener("change", () => {
         state.answers[pairIndex] = winner;
         changed();
-        announce("Answer saved in this working decision.");
+        next.disabled = false;
+        announce("Choice saved in this browser draft.");
       });
       choices.append(
         node("label", { class: "dm-workspace__choice" }, [
@@ -436,72 +498,33 @@ function init() {
       show();
     });
     previous.disabled = pairIndex === 0;
-    screen.append(
-      choices,
-      actions([
-        previous,
-        button(
-          pairIndex < state.pairs.length - 1
-            ? "Next pair"
-            : "Review comparison",
-          () => {
-            if (!Object.hasOwn(state.answers, String(pairIndex))) {
-              announce("Choose an option or Leave undecided.");
-              return;
-            }
-            if (pairIndex < state.pairs.length - 1) {
-              pairIndex++;
-              show();
-            } else {
-              const missing = state.pairs.findIndex(
-                (_, i) => !Object.hasOwn(state.answers, String(i)),
-              );
-              if (missing >= 0) {
-                pairIndex = missing;
-                announce("Answer this remaining pair.");
-                show();
-              } else transition("review");
-            }
-          },
-          true,
-        ),
-        button("Edit options", editOptions),
-      ]),
-    );
+    const next = button(pairIndex < state.pairs.length-1 ? 'Next pair' : 'Review comparison', () => {
+      if(!pair.includes(state.answers[pairIndex])){announce('Choose one of the two options to continue.');return;}
+      if(pairIndex<state.pairs.length-1){pairIndex++;show();}
+      else {
+        const missing=state.pairs.findIndex((p,i)=>!p.includes(state.answers[i]));
+        if(missing>=0){pairIndex=missing;show();announce('Choose an option for this remaining pair.');}
+        else transition('review');
+      }
+    },true);
+    next.disabled = !pair.includes(state.answers[pairIndex]);
+    const card=node('div',{class:'dm-workspace__choice-card'},[choices]);
+    if(Object.hasOwn(state.answers,String(pairIndex)) && state.answers[pairIndex]===null)
+      card.append(node('p',{class:'dm-workspace__legacy'},['This earlier saved pair was undecided. Choose one option to continue; the old answer is kept until you choose.']));
+    screen.append(card,actions([previous,next,button('Edit options',editOptions)]));
   }
   function resultTable(rows) {
-    const table = node("table"),
-      head = node(
-        "tr",
-        {},
-        ["Option", "Pairwise wins", "Pairwise /100", "Pros and cons /100"].map(
-          (x) => node("th", { scope: "col" }, [x]),
-        ),
-      );
-    table.append(node("thead", {}, [head]));
-    const body = node("tbody");
-    for (const r of rows)
-      body.append(
-        node("tr", {}, [
-          node("th", { scope: "row" }, [r.title]),
-          ...[
-            state.pairs.length ? String(r.wins) : "Not used",
-            r.comparison == null ? "Not used" : String(r.comparison),
-            r.prosCons == null ? "Not reviewed" : String(r.prosCons),
-          ].map((x) => node("td", {}, [x])),
-        ]),
-      );
-    table.append(body);
-    return node(
-      "div",
-      {
-        class: "dm-workspace__table-wrap",
-        role: "region",
-        "aria-label": "Decision scores",
-        tabindex: "0",
-      },
-      [table],
-    );
+    const list=node('div',{class:'dm-workspace__result-list', 'aria-label':'Decision scores'});
+    for(const row of rows){
+      const card=node('article',{class:'dm-workspace__result','data-dm-result':'','data-option-id':row.id,'data-wins':row.wins},[
+        node('div',{class:'dm-workspace__result-top'},[node('h3',{},[row.title]),node('strong',{},[state.pairs.length?row.wins+' points':row.prosCons+'/100'])])
+      ]);
+      if(state.pairs.length)card.append(node('p',{},['Chosen '+row.wins+' times in '+(state.options.length-1)+' pairs.']));
+      if(row.prosCons!==null){card.append(node('meter',{min:0,max:100,value:row.prosCons,'aria-label':'Pros and cons score for '+row.title}),node('p',{},['Pros and cons: '+row.prosCons+'/100']));}
+      else if(state.pairs.length)card.append(node('p',{},['Pros and cons not reviewed.']));
+      list.append(card);
+    }
+    return list;
   }
   function showReview() {
     screen.append(
@@ -514,7 +537,7 @@ function init() {
     const choices = node("fieldset", { class: "dm-workspace__choices" }, [
       node("legend", {}, ["Options for a closer look"]),
     ]);
-    for (const option of state.options) {
+    for (const option of orderedResults(state)) {
       const input = node("input", { type: "checkbox", value: option.id });
       input.checked = state.selected.includes(option.id);
       input.addEventListener("change", () => {
@@ -523,13 +546,12 @@ function init() {
           announce("Choose at most three options.");
           return;
         }
-        state.selected = input.checked
-          ? [...state.selected, option.id]
-          : state.selected.filter((x) => x !== option.id);
+        const chosen = input.checked ? [...state.selected,option.id] : state.selected.filter(x=>x!==option.id);
+        state.selected = orderedResults(state).map(o=>o.id).filter(id=>chosen.includes(id));
         changed();
       });
       choices.append(
-        node("label", { class: "dm-workspace__choice" }, [input, option.title]),
+        node("label", { class: "dm-workspace__choice" }, [input, node("span",{class:"dm-workspace__choice-name"},[option.title]),node("span",{class:"dm-workspace__points"},[option.wins+" points"])]),
       );
     }
     screen.append(
@@ -559,19 +581,16 @@ function init() {
     }
     return select;
   }
+  function storeLink(label) {
+    return node('a',{href:'https://play.google.com/store/apps/details?id=org.emtalk.dm',target:'_blank',rel:'noopener noreferrer'},[label]);
+  }
+  function availability(){return node('p',{class:'dm-workspace__availability'},['Coming soon to the website. Coming soon to the App Store.']);}
+  function aiEntry(label){
+    const link=storeLink('');link.className='dm-workspace__ai';
+    link.append(node('span',{class:'dm-workspace__ai-icon','aria-hidden':'true'},[node('img',{src:(document.documentElement.dataset.mountPrefix||'')+'/media/dm/ai-options.svg',alt:'',width:24,height:24})]),node('span',{},[node('strong',{},[label]),node('small',{},['Available in the app on Google Play'])]),node('span',{'aria-hidden':'true'},['\u2197']));return link;
+  }
   function aiNotice() {
-    return node("p", { class: "dm-workspace__notice" }, [
-      "Want AI assistance with ideas or a summary? It is available in the DM app. Web support is coming later. ",
-      node(
-        "a",
-        {
-          href: "https://play.google.com/store/apps/details?id=org.emtalk.dm",
-          target: "_blank",
-          rel: "noopener noreferrer",
-        },
-        ["View the DM app on Google Play"],
-      ),
-    ]);
+    return node('aside',{class:'dm-workspace__notice'},[node('p',{},['AI assistance is available in the app. Coming soon to the website.']),storeLink('Get DM on Google Play'),node('p',{},['Coming soon to the App Store.'])]);
   }
   function showPros() {
     optionIndex = Math.max(0, Math.min(state.selected.length - 1, optionIndex));
@@ -604,23 +623,28 @@ function init() {
       ]);
       const notes = state.opinions.filter(
         (n) => n.optionId === option.id && n.type === type,
-      );
+      ).sort((a,b)=>b.priority-a.priority);
       if (!notes.length)
         section.append(node("p", {}, ["No reasons added yet."]));
       notes.forEach((note, i) => {
         const input = node("textarea", {
           maxlength: 400,
           "aria-label": (type === "pros" ? "Pro " : "Con ") + (i + 1),
+          "data-dm-note-id":note.id,
         });
         input.value = note.text;
         input.addEventListener("change", () => {
-          if (!input.value.trim()) {
+          if (!input.value.trim() || state.opinions.some(n=>n.id!==note.id && n.optionId===option.id && n.text.trim().toLowerCase()===input.value.trim().toLowerCase())) {
             input.value = note.text;
-            announce("A reason cannot be empty. Use Remove reason instead.");
+            announce("Use a nonempty reason that is different from the other reasons for this option.");
           } else {
             note.text = input.value.trim();
             changed();
           }
+        });
+        input.addEventListener('input', () => {
+          const value=input.value.trim();
+          if(value && !state.opinions.some(n=>n.id!==note.id && n.optionId===option.id && n.text.trim().toLowerCase()===value.toLowerCase())){note.text=value;changed();}
         });
         const priority = prioritySelect(
           note.priority,
@@ -633,7 +657,7 @@ function init() {
         );
         priority.addEventListener("change", () => {
           note.priority = Number(priority.value);
-          changed();
+          changed();show(false);screen.querySelector('[data-dm-note-id="'+note.id+'"]')?.parentElement.querySelector("select")?.focus();
         });
         section.append(
           node("div", { class: "dm-workspace__note" }, [
@@ -666,7 +690,7 @@ function init() {
             type === "pros" ? "New reason for" : "New reason against",
         }),
         priority = prioritySelect(
-          3,
+          8,
           "Importance of new " + type + " reason for " + option.title,
         );
       form.append(
@@ -681,6 +705,7 @@ function init() {
         event.preventDefault();
         const value = input.value.trim();
         if (!value) return;
+        if (state.opinions.some(n=>n.optionId===option.id && n.text.trim().toLowerCase()===value.toLowerCase())) return announce("This reason already exists for this option. Add a different reason.");
         if (state.opinions.length >= 120)
           return announce(
             "This decision already has 120 reasons. Remove a reason before adding another.",
@@ -764,6 +789,7 @@ function init() {
             })
           ) {
             state = createDecision();
+            pairIndex = 0; optionIndex = 0;
             activeHistoryId = null;
             changed();
             show();
@@ -880,13 +906,15 @@ function init() {
           ]),
         );
       }
-      historyPanel.hidden = false;
+      filesPanel.hidden=true;setNavigation("saved");screen.hidden=true;historyPanel.hidden = false;
       announce(
         "Saved data could not be read safely. Nothing was saved or changed. Export JSON keeps your current working decision; recovery exports are below.",
       );
     } else {
       announce(
-        (error instanceof HistoryProblem && error.kind === "quota"
+        (error instanceof HistoryProblem && error.kind === "conflict"
+          ? "Saved decisions changed in another tab. They were not overwritten; review the latest saves and try again. "
+          : error instanceof HistoryProblem && error.kind === "quota"
           ? "This browser's storage is full. "
           : "This browser could not read or write saved decisions. ") +
           (saving
@@ -898,7 +926,8 @@ function init() {
   }
   function renderHistory(history, open = false) {
     historyPanel.replaceChildren(
-      node("h2", {}, [
+      button("Back to decision",()=>{announce("");show();}),
+      node("h2", {tabindex:"-1"}, [
         "Saved decisions on this device (" + history.entries.length + "/20)",
       ]),
     );
@@ -971,7 +1000,7 @@ function init() {
             (item) => item.id !== entry.id,
           );
           writeHistory(history);
-          if (activeHistoryId === entry.id) activeHistoryId = null;
+          if (activeHistoryId === entry.id) { activeHistoryId = null; persistDraft(); }
           renderHistory(history, true);
           (
             historyPanel.querySelector("button") ||
@@ -995,7 +1024,7 @@ function init() {
       row.append(actions([openButton, exportButton, remove]));
       historyPanel.append(row);
     }
-    if (open) historyPanel.hidden = false;
+    if (open) { filesPanel.hidden=true;setNavigation("saved");screen.hidden=true;historyPanel.hidden=false;historyPanel.querySelector("h2")?.focus({preventScroll:true});app.scrollIntoView({block:"start",behavior:"instant"}); }
   }
   async function saveDecision(asNew, trigger) {
     let history;
@@ -1073,7 +1102,7 @@ function init() {
         name +
         ". No data was uploaded." +
         (legacyRetained
-          ? " The earlier local save was retained on this device."
+          ? " Earlier-save cleanup could not be completed. Check Files and privacy before removing site data."
           : ""),
     );
   }
@@ -1124,15 +1153,26 @@ function init() {
         }))
       )
         return;
+      let modernCleared = false;
       try {
         localStorage.removeItem(HISTORY_KEY);
-        localStorage.removeItem(STORAGE_KEY);
+        modernCleared = true;
+        // Owner-confirmed partial deletion also changes the observed snapshot.
+        // Reset before legacy cleanup, which can independently be denied.
+        resetHistoryObservation();
         activeHistoryId = null;
+        persistDraft();
+        localStorage.removeItem(STORAGE_KEY);
         renderHistory({ schemaVersion: 1, entries: [] });
         announce("All saved decisions deleted from this browser.");
       } catch {
+        if (modernCleared) {
+          try { renderHistory(readHistory()); } catch (error) { showHistoryFailure(error); }
+        }
         announce(
-          "This browser could not clear its storage. Use browser settings to remove site data.",
+          modernCleared
+            ? "Current-format saved decisions were cleared, but an earlier-format save could not be removed. Your working decision remains. Use Files and privacy to review or export the earlier save."
+            : "Saved decisions could not be cleared. Use browser settings to remove site data.",
         );
       }
     });
@@ -1163,7 +1203,7 @@ function init() {
         optionIndex = 0;
         show();
         announce(
-          "Decision imported. It has not been saved on this device yet.",
+          "Decision imported into the current local draft. Named saved decisions are unchanged.",
         );
       } catch {
         announce(
@@ -1175,6 +1215,7 @@ function init() {
     });
   app.hidden = false;
   show(false);
+  if(draftProblem)showDraftProblem();
 }
 if (document.readyState === "loading")
   document.addEventListener("DOMContentLoaded", init, { once: true });

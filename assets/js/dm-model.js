@@ -213,6 +213,59 @@ export function parseDecision(raw) {
 export function serializeDecision(state) {
   return JSON.stringify(validateDecision(state), null, 2);
 }
+// Interrupted work is independent of named history and portable decision JSON.
+// Keep cursors outside schemaVersion1 decisions so old exports remain readable.
+export function createDraft(
+  decision,
+  { pairIndex = 0, optionIndex = 0, savedEntryId = null } = {},
+  savedAt = Date.now(),
+) {
+  return validateDraft({
+    schemaVersion: 1,
+    savedAt,
+    decision,
+    pairIndex,
+    optionIndex,
+    savedEntryId,
+  });
+}
+export function validateDraft(value) {
+  requireValue(
+    allowed(value, [
+      "schemaVersion",
+      "savedAt",
+      "decision",
+      "pairIndex",
+      "optionIndex",
+      "savedEntryId",
+    ]) &&
+      value.schemaVersion === 1 &&
+      Number.isSafeInteger(value.savedAt) &&
+      value.savedAt >= 0,
+  );
+  const decision = validateDecision(value.decision);
+  requireValue(
+    Number.isSafeInteger(value.pairIndex) &&
+      value.pairIndex >= 0 &&
+      value.pairIndex < Math.max(1, decision.pairs.length) &&
+      Number.isSafeInteger(value.optionIndex) &&
+      value.optionIndex >= 0 &&
+      value.optionIndex < Math.max(1, decision.selected.length) &&
+      (value.savedEntryId === null ||
+        (text(value.savedEntryId, 80) &&
+          /^[a-zA-Z0-9_-]+$/.test(value.savedEntryId))),
+  );
+  return { ...value, decision };
+}
+export function parseDraft(raw) {
+  requireValue(
+    typeof raw === "string" && new TextEncoder().encode(raw).length <= 220000,
+  );
+  return validateDraft(JSON.parse(raw));
+}
+export function serializeDraft(draft) {
+  return JSON.stringify(validateDraft(draft));
+}
 function cell(value) {
   let s = String(value == null ? "" : value);
   // Quoting protects separators/newlines. Apostrophe protects spreadsheet formulas
@@ -223,7 +276,7 @@ function cell(value) {
 }
 export function resultsCsv(state) {
   const rows = [
-    ["Decision", state.title],
+    ["Decision", state.title, "", ""],
     ["Option", "Pairwise wins", "Pairwise score /100", "Pros and cons /100"],
   ];
   for (const r of orderedResults(state))

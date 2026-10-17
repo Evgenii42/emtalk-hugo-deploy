@@ -5,8 +5,130 @@
   "baselineDeploymentCommit": "5be1ace3cd6192f33a9102c09d833fa78131c0b1",
   "baselineManifestSha256": "9ba8e0434698a934698fac0a23883a7b3f3c0157cc8bb973f458eb09c8194f4e",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
+  "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
   "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified.",
+  "currentSelection": {
+    "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+    "files": [
+      {
+        "bytes": 11796,
+        "path": "assets/css/dm-workspace.css",
+        "sha256": "76bfa03ad2a5932b26f2eb1306dca7d4aefe5fe1021cc501de557e9de032b185"
+      },
+      {
+        "bytes": 1749,
+        "path": "assets/css/page-loader.css",
+        "sha256": "bb7bf5dcca0d602f45ed939d95a14b6965c6805cf690e1c8e84dbdba32040309"
+      },
+      {
+        "bytes": 11801,
+        "path": "assets/js/dm-model.js",
+        "sha256": "3bf6bdb53d1a0cf92dd020258810694d529a7b5a407f8e6a07794944dc25c8a1"
+      },
+      {
+        "bytes": 5924,
+        "path": "assets/js/dm-storage.js",
+        "sha256": "ed072a6eefa293ee83d28974d0b7bea667d9715094c34b95a7431dcc25530bde"
+      },
+      {
+        "bytes": 3097,
+        "path": "assets/js/dm-topics.js",
+        "sha256": "eccd78fc1f475389f2e192202d4a89616cd09cd806146e0a5b1ff840dd8b4004"
+      },
+      {
+        "bytes": 51178,
+        "path": "assets/js/dm-workspace.js",
+        "sha256": "d33a23458f38bb67090e376859bb2cc19a5b0ac4092ceb5cdfc48aaf6b6a33b1"
+      },
+      {
+        "bytes": 3813,
+        "path": "assets/js/page-loader-bootstrap.js",
+        "sha256": "3ad1f6c87b20a77127c7e25376063a87a43bf5301d9c63c4cf81cf30522cd36f"
+      },
+      {
+        "bytes": 2709,
+        "path": "assets/js/page-loader-ready.js",
+        "sha256": "b9ed78bfd6bd8756110c75de4c6157dd72a7e0bbce47d8e41a6f6907e96ca7cd"
+      },
+      {
+        "bytes": 36867,
+        "path": "data/dm-topics.json",
+        "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
+      },
+      {
+        "bytes": 1987,
+        "path": "layouts/404.html",
+        "sha256": "108a97e11a59928c5dc11e8d22bc0309c8cfe8cfffa15c518793392e8386bac3"
+      },
+      {
+        "bytes": 617,
+        "path": "layouts/partials/dm-launch.html",
+        "sha256": "b7daa7bde02a26cb58405dada7f5112acef7887c6b49cc063da88fe224721767"
+      },
+      {
+        "bytes": 4870,
+        "path": "layouts/partials/dm-workspace.html",
+        "sha256": "bb9268ef637e94f607734c562bc613fee79351bff6681a1532ee0f82e5aa73e0"
+      },
+      {
+        "bytes": 320,
+        "path": "layouts/partials/page-loader-head.html",
+        "sha256": "9d9ce3b03f66a06915a15884851740df553490f4bb317ccb050fbc994840a1b3"
+      },
+      {
+        "bytes": 248,
+        "path": "layouts/partials/page-loader-ready.html",
+        "sha256": "de80304053c3084b6cdd6113623aca8259cc19b80b97ab88f8728228c8cc2244"
+      },
+      {
+        "bytes": 356,
+        "path": "layouts/partials/page-loader.html",
+        "sha256": "e7304ab388c6aa11e8e813ff2c6f7e40a293e4b60fc739099a132639a7c05625"
+      },
+      {
+        "bytes": 10132,
+        "path": "layouts/source.html",
+        "sha256": "322119c061e4a16a73fd77caac05bfd19c284ffafed10824fe9c0c34007dfcc5"
+      },
+      {
+        "bytes": 45799,
+        "path": "scripts/prepare_hugo.py",
+        "sha256": "d7e4f8aacd93e7c1b4624bf19632cfdafb014cc6ad903104fdddb556e083998f"
+      },
+      {
+        "bytes": 11358,
+        "path": "static/font-licenses/dm-roboto/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "bytes": 755,
+        "path": "static/font-licenses/dm-roboto/NOTICE.txt",
+        "sha256": "5d2c9af7523345f24d57229283e757dc2b12e5e5bc9091177b5072d5718e8ebd"
+      },
+      {
+        "bytes": 168644,
+        "path": "static/fonts/dm/roboto_medium.ttf",
+        "sha256": "9d0d55a303bfd13b79a87721f65185e93f235e2d77fe398b2dca67ac519915f5"
+      },
+      {
+        "bytes": 168260,
+        "path": "static/fonts/dm/roboto_regular.ttf",
+        "sha256": "4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14"
+      },
+      {
+        "bytes": 1802,
+        "path": "static/llms.txt",
+        "sha256": "eaebf3be9ff9b63182f3d33bc0eb2bab4f7f4b81c16461e787a81ee80c283fad"
+      },
+      {
+        "bytes": 2759,
+        "path": "static/media/dm/ai-options.svg",
+        "sha256": "2a61e72033fbf64b839cbd174e3da11cd01e592d445faee41d0758d79dcadedb"
+      }
+    ],
+    "path": "docs/audits/dm-publication024-selected-inputs.json",
+    "sha256": "aef2084e1af09444db9711f5ce3ebaf49d1cf09b6176e1baa0969ac5b9009cb4"
+  },
   "deploymentFiles": [
     {
       "bytes": 9,
@@ -19,9 +141,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 3104,
+      "bytes": 2648,
       "path": "README.md",
-      "sha256": "e776aee70602dc5d51dfdc46ab4542b5984842520dffd688813c078f6e898d19"
+      "sha256": "d7e12f280919a714e0516a833be9a450dff8154cbff2e39e9f6252421fec72d7"
     },
     {
       "bytes": 4238,
@@ -29,8 +151,8 @@
       "sha256": "91178f149febf5cb85d3bb4c27656475fd043bff503bb38ad8df94548400e5c2"
     }
   ],
-  "effectiveSourceFileCount": 395,
-  "effectiveSourceMapSha256": "099052683a9b111ab9a1415ff1b92870a17bc7aa14c828243af05b52fb2e1a18",
+  "effectiveSourceFileCount": 409,
+  "effectiveSourceMapSha256": "158039d4ef6f2e578c0bad45e2d2625dea2e69bba9708e89045a9c4887bb9814",
   "excluded": [
     "Forgejo Git history",
     "source archives",
@@ -39,36 +161,122 @@
     "visitor submissions",
     "unpublished CMS items"
   ],
-  "exportFileCountIncludingManifest": 400,
+  "exportFileCountIncludingManifest": 414,
   "generatedDeploymentReadme": {
-    "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
-    "generator": "docs/audits/cf-pages-source-export002-prepare.py",
-    "generatorSha256": "a1fb3b6fe40f4ad5f9517e39fc7a3fc4b34157206aceb49de2ebf20f25ce8852"
+    "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+    "generator": "docs/audits/cf-hugo-export018-prepare.py",
+    "generatorSha256": "f91b7460b1b7317ce992d7cbd702e30466afa83034e2bf8140f50ae4884b9183"
   },
   "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately.",
+  "previousPublicationCommit": "0c248db59d4f355ac9c6dfd8661af7109cabbd89",
+  "previousPublicationManifestSha256": "9f3fadfe74b21cdf7cbac33a8ec45f0410a524773951feb9eccd296a702fce1d",
   "reviewedLocalBuild": {
     "baseURL": "https://www.emtalk.org/",
-    "outputSnapshotSha256": "5bbb5dd780c62eeac51615bc4e9fec5015959282825d3fb0b07c9ace8c57ed7f",
-    "outputsIncludingControl": 313,
-    "preparedHugoInputs": 395,
+    "outputSnapshotSha256": "289f8fdba85f4e5fd952f69f0008b63fbbe9795794e6cff8d122be3d06ced395",
+    "outputsIncludingControl": 320,
+    "preparedHugoInputs": 409,
     "preview": false,
     "providerControlPaths": [
       "_headers"
     ],
-    "publicArtifacts": 312,
-    "qualification": "Prepared local Windows build, not raw export or future Linux/CDN identity.",
-    "receiptPath": "docs/audits/cf-pages-production-local-build015.json",
-    "receiptSha256": "35cc97b5aab780733b1cdbebebf7a6d366f77bede7b3a2373ace8f7994f250d6",
-    "sourceInputSnapshotSha256": "f3e5f2d39e7c02407586d2a656523a5b0e5eb45b307d4529d1299f8a3d89b7e8"
+    "publicArtifacts": 319,
+    "qualification": "Prepared local Windows receipt; raw exported source differs. Actual Linux/hosted identity needs separate binding.",
+    "receiptPath": "docs/audits/dm-publication-local-build024.json",
+    "receiptSha256": "7a2fc06515a4b54446e7ede5cf9ef74c26c6b2b534288cee45769356046f9eb6",
+    "sourceInputSnapshotSha256": "4fd687109dab7dc073f356a3a0b2382ee7ef0d802946bc1baa4c3b8b7525413e"
   },
   "schemaVersion": 2,
-  "scope": "Finite original394-source baseline with five reviewed overrides, one addition and deployment helper; newer canonical DM/loader changes excluded. No hosted release acceptance.",
+  "scope": "Immutable original394 public baseline with13overrides/15additions and selected DM/loader/dm-copy/llms delta over0c. No release/hosted certification.",
   "sourceAdditions": [
+    {
+      "bytes": 1749,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/css/page-loader.css",
+      "sha256": "bb7bf5dcca0d602f45ed939d95a14b6965c6805cf690e1c8e84dbdba32040309"
+    },
+    {
+      "bytes": 3097,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/js/dm-topics.js",
+      "sha256": "eccd78fc1f475389f2e192202d4a89616cd09cd806146e0a5b1ff840dd8b4004"
+    },
+    {
+      "bytes": 3813,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/js/page-loader-bootstrap.js",
+      "sha256": "3ad1f6c87b20a77127c7e25376063a87a43bf5301d9c63c4cf81cf30522cd36f"
+    },
+    {
+      "bytes": 2709,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/js/page-loader-ready.js",
+      "sha256": "b9ed78bfd6bd8756110c75de4c6157dd72a7e0bbce47d8e41a6f6907e96ca7cd"
+    },
+    {
+      "bytes": 36867,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "data/dm-topics.json",
+      "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
+    },
+    {
+      "bytes": 320,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/partials/page-loader-head.html",
+      "sha256": "9d9ce3b03f66a06915a15884851740df553490f4bb317ccb050fbc994840a1b3"
+    },
+    {
+      "bytes": 248,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/partials/page-loader-ready.html",
+      "sha256": "de80304053c3084b6cdd6113623aca8259cc19b80b97ab88f8728228c8cc2244"
+    },
+    {
+      "bytes": 356,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/partials/page-loader.html",
+      "sha256": "e7304ab388c6aa11e8e813ff2c6f7e40a293e4b60fc739099a132639a7c05625"
+    },
     {
       "bytes": 136,
       "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
       "path": "static/_headers",
       "sha256": "6f669128819a559eacde79def3bfd68079b0674da14b4d190ca4bfcc73b80b37"
+    },
+    {
+      "bytes": 11358,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "static/font-licenses/dm-roboto/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "bytes": 755,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "static/font-licenses/dm-roboto/NOTICE.txt",
+      "sha256": "5d2c9af7523345f24d57229283e757dc2b12e5e5bc9091177b5072d5718e8ebd"
+    },
+    {
+      "bytes": 168644,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "static/fonts/dm/roboto_medium.ttf",
+      "sha256": "9d0d55a303bfd13b79a87721f65185e93f235e2d77fe398b2dca67ac519915f5"
+    },
+    {
+      "bytes": 168260,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "static/fonts/dm/roboto_regular.ttf",
+      "sha256": "4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14"
+    },
+    {
+      "bytes": 1802,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "static/llms.txt",
+      "sha256": "eaebf3be9ff9b63182f3d33bc0eb2bab4f7f4b81c16461e787a81ee80c283fad"
+    },
+    {
+      "bytes": 2759,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "static/media/dm/ai-options.svg",
+      "sha256": "2a61e72033fbf64b839cbd174e3da11cd01e592d445faee41d0758d79dcadedb"
     }
   ],
   "sourceFiles": [
@@ -2045,11 +2253,39 @@
   ],
   "sourceOverrides": [
     {
+      "baselineSha256": "9b7345de72c5047a647b787152fb21ceda775b0c630554fa6d8c219dad3a3d9a",
+      "bytes": 11796,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/css/dm-workspace.css",
+      "sha256": "76bfa03ad2a5932b26f2eb1306dca7d4aefe5fe1021cc501de557e9de032b185"
+    },
+    {
       "baselineSha256": "3bc7001fcb25b1ac1ea7db455cd5f0e73c533eed2154026cd722bfd1aeef2d7b",
       "bytes": 8981,
       "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
       "path": "assets/css/site-navigation.css",
       "sha256": "06919f3082509ba470ea6eb9360f60cf48ccd1f00f065109872d62762d043478"
+    },
+    {
+      "baselineSha256": "eefd5d3caccedbcd62187a767825371dc6064983805880667a3925d664c6f39c",
+      "bytes": 11801,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/js/dm-model.js",
+      "sha256": "3bf6bdb53d1a0cf92dd020258810694d529a7b5a407f8e6a07794944dc25c8a1"
+    },
+    {
+      "baselineSha256": "e1a66d365b1a388ebfeea6193cbdf1fadb3d981c0694b16427e5f89f6b0eb7ad",
+      "bytes": 5924,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/js/dm-storage.js",
+      "sha256": "ed072a6eefa293ee83d28974d0b7bea667d9715094c34b95a7431dcc25530bde"
+    },
+    {
+      "baselineSha256": "d6b032757818b6b84c16a30ac3eccab7baf266587c0cbad76fb21d3f2d6e52d4",
+      "bytes": 51178,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "assets/js/dm-workspace.js",
+      "sha256": "d33a23458f38bb67090e376859bb2cc19a5b0ac4092ceb5cdfc48aaf6b6a33b1"
     },
     {
       "baselineSha256": "7034343974aa8684aec32c5e4aa5215d43ed31eb0aa9672ea1208929719ccf0f",
@@ -2059,6 +2295,13 @@
       "sha256": "8fa9a4c5885538b724a38bd0c5bd7e004862f97d1b4c75ca3d0afe1f90a4091f"
     },
     {
+      "baselineSha256": "9bbeb996bd5627b2c4f6d6d5549c5dd21c8f4b5c0af15b8b8a97269bdfc3a089",
+      "bytes": 1987,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/404.html",
+      "sha256": "108a97e11a59928c5dc11e8d22bc0309c8cfe8cfffa15c518793392e8386bac3"
+    },
+    {
       "baselineSha256": "35d6185c5ff29b15b60d19560a1c2052c9a7301628ea2d16ca7c636da701d7a6",
       "bytes": 11375,
       "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
@@ -2066,11 +2309,32 @@
       "sha256": "8ac65841163c1d857996edab64bed48e2aceb256ee992cb6bc06bcf03a79ef33"
     },
     {
+      "baselineSha256": "68447e140c6e33267218281259a8742c131da30dd7355f7b439652a8dff08b07",
+      "bytes": 617,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/partials/dm-launch.html",
+      "sha256": "b7daa7bde02a26cb58405dada7f5112acef7887c6b49cc063da88fe224721767"
+    },
+    {
+      "baselineSha256": "7d50724152fcc4610274e2cf00f9ca3bcf89d0f6ea453c91fe7b175a679df5d9",
+      "bytes": 4870,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/partials/dm-workspace.html",
+      "sha256": "bb9268ef637e94f607734c562bc613fee79351bff6681a1532ee0f82e5aa73e0"
+    },
+    {
+      "baselineSha256": "f8e54c17991598cbe35c0dddfc8325436f7042164668eb3f77bd286428dd1ce5",
+      "bytes": 10132,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "path": "layouts/source.html",
+      "sha256": "322119c061e4a16a73fd77caac05bfd19c284ffafed10824fe9c0c34007dfcc5"
+    },
+    {
       "baselineSha256": "229051a6025e506cfa0374795cf8eb5dbec0e81715fed10764c081886d816d38",
-      "bytes": 42734,
-      "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
+      "bytes": 45799,
+      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
       "path": "scripts/prepare_hugo.py",
-      "sha256": "e28233485d868972d07f785e48204576d1a8f851074f4aeb2f06ec9cbe0a68ae"
+      "sha256": "d7e4f8aacd93e7c1b4624bf19632cfdafb014cc6ad903104fdddb556e083998f"
     },
     {
       "baselineSha256": "6b1deb0ca385d465e6faa66c6b005099231db38e6bf5797c171cd1d1f4d2194e",

@@ -25,6 +25,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{ partial "page-loader-head.html" . }}
 {{ partial "analytics.html" . }}
 {{ partial "seo.html" (dict "page" $page "context" .) }}
 {{ range $page.icons }}<link{{ partial "attributes.html" . }}>{{ end }}
@@ -41,6 +42,7 @@
 {{ if $articleReader }}{{ $readerCss := resources.Get "css/article-reader.css" | fingerprint }}<link rel="stylesheet" href="{{ $readerCss.RelPermalink }}" integrity="{{ $readerCss.Data.Integrity }}">{{ $relatedCss := resources.Get "css/article-related.css" | fingerprint }}<link rel="stylesheet" href="{{ $relatedCss.RelPermalink }}" integrity="{{ $relatedCss.Data.Integrity }}">{{ end }}{{ if $articleCatalog }}{{ $libraryCss := resources.Get "css/article-catalog.css" | fingerprint }}<link rel="stylesheet" href="{{ $libraryCss.RelPermalink }}" integrity="{{ $libraryCss.Data.Integrity }}">{{ end }}</head>
 {{ $bodyAttributes := $page.body.attributes }}{{ if and $page.ownedEntry (not (in (split (index $bodyAttributes "class" | default "") " ") "intent-page")) }}{{ $bodyAttributes = merge $bodyAttributes (dict "class" (strings.TrimSpace (printf "%s intent-page" (index $bodyAttributes "class" | default "")))) }}{{ end }}
 {{ printf "<body%s>" (partial "attributes.html" $bodyAttributes) | safeHTML }}
+{{ partial "page-loader.html" . }}
 {{ partial "site-header.html" (dict "route" $page.routeId "skipTarget" $page.skipTarget) }}
 {{ if eq $page.routeId "/bret/practice" }}{{ partial "bret-practice.html" . }}{{ else if eq $page.routeId "/bret" }}{{ with $page.ownedEntry }}{{ partial "bret-launch.html" . }}{{ end }}{{ else if eq $page.routeId "/dm/workspace" }}{{ partial "dm-workspace.html" . }}{{ else if eq $page.routeId "/dm" }}{{ with $page.ownedEntry }}{{ partial "dm-launch.html" . }}{{ end }}{{ else }}{{ with $page.ownedEntry }}{{ partial "intent-entry.html" . }}{{ end }}{{ end }}
 {{/* Authored Home replaces the approved hero and three known lower sections; source footer stays intact. */}}
@@ -54,5 +56,5 @@
 {{ if eq $page.routeId "/tests" }}{{ $catalogJs := resources.Get "js/test-catalog.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $catalogJs.RelPermalink }}" integrity="{{ $catalogJs.Data.Integrity }}"></script>{{ end }}
 {{ if eq $page.routeId "/dm/workspace" }}{{ $dmJs := resources.Get "js/dm-workspace.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $dmJs.RelPermalink }}" integrity="{{ $dmJs.Data.Integrity }}"></script>{{ end }}
 {{ if eq $page.routeId "/bret/practice" }}{{ $bretJs := resources.Get "js/bret-practice.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $bretJs.RelPermalink }}" integrity="{{ $bretJs.Data.Integrity }}"></script>{{ end }}
-{{ if $articleCatalog }}{{ $libraryJs := resources.Get "js/article-catalog.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $libraryJs.RelPermalink }}" integrity="{{ $libraryJs.Data.Integrity }}"></script>{{ end }}</body>
+{{ if $articleCatalog }}{{ $libraryJs := resources.Get "js/article-catalog.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $libraryJs.RelPermalink }}" integrity="{{ $libraryJs.Data.Integrity }}"></script>{{ end }}{{ partial "page-loader-ready.html" . }}</body>
 </html>

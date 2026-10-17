@@ -1,0 +1,2 @@
+{{- $ready := resources.Get "js/page-loader-ready.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
+<script data-emt-loader-ready type="module" src="{{ $ready.RelPermalink }}" integrity="{{ $ready.Data.Integrity }}"></script>

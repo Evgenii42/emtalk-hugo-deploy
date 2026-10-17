@@ -1,0 +1,30 @@
+/* Critical and inline: content is visible unless the guarded bootstrap opts in. */
+:root { --emt-page-loader-css: ready; }
+.emt-page-loader[hidden] { display:none!important; }
+.emt-page-loader {
+  position:fixed; inset:0; z-index:2147483000; display:grid;
+  place-content:center; justify-items:center; gap:18px;
+  margin:0; padding:24px; background:#fee9fb; color:#281c37;
+  font:500 15px/1.5 Manrope,Arial,sans-serif;
+  opacity:1; transition:opacity 140ms ease-out; pointer-events:none;
+}
+.emt-page-loader__brand { margin:0; font-size:32px; font-weight:700; letter-spacing:-1.3px; }
+.emt-page-loader__dots { display:flex; align-items:center; justify-content:center; gap:8px; width:64px; height:32px; }
+.emt-page-loader__dots span {
+  display:block; width:8px; height:8px; border-radius:50%; background:currentColor;
+  animation:emt-page-dot 1s infinite; transform:scale(.4); opacity:.3;
+}
+.emt-page-loader__dots span:nth-child(2) { animation-delay:200ms; }
+.emt-page-loader__dots span:nth-child(3) { animation-delay:400ms; }
+.emt-page-loader__sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+html.emt-page-pending body > :not([data-emt-page-loader]):not(script):not(style):not(link) { opacity:0!important; }
+html.emt-page-revealed .emt-page-loader { opacity:0; }
+@keyframes emt-page-dot { 0%,60%,100% { transform:scale(.4); opacity:.3; } 30% { transform:scale(1); opacity:1; } }
+@media(prefers-reduced-motion:reduce) {
+  .emt-page-loader { transition:none; }
+  .emt-page-loader__dots span { animation:none; transform:none; opacity:1; }
+}
+@media(forced-colors:active) {
+  .emt-page-loader { background:Canvas; color:CanvasText; }
+  .emt-page-loader__dots span { background:CanvasText; }
+}

@@ -20,6 +20,13 @@ FORBIDDEN_DIRS = {'docs', 'inventory', 'scripts', '.git', '.review', '.agents', 
 ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.ttf', '.woff', '.woff2', '.opus', '.mp3', '.ogg', '.wav', '.mp4', '.avif', '.pdf'}
 
 
+# Provider-consumed control file, not a public route or a general extensionless exception.
+PAGES_ALIAS_HEADERS = (b'https://emtalk-hugo-deploy.pages.dev/*\n'
+                       b'  X-Robots-Tag: noindex\n\n'
+                       b'https://:version.emtalk-hugo-deploy.pages.dev/*\n'
+                       b'  X-Robots-Tag: noindex\n')
+
+
 class UrlContext(Enum):
     RESOURCE = 'resource'
     NAVIGATION = 'navigation'
@@ -313,9 +320,12 @@ def verify(build, prefix=''):
         relative = path.relative_to(build).as_posix()
         if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html'}:
             errors.append(f'Unmapped HTML output: {relative}')
-        if any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or path.suffix.lower() not in ALLOWED_EXT:
-            errors.append(f'Output allowlist violation: {relative}')
         body = path.read_bytes()
+        if relative == '_headers':
+            if body != PAGES_ALIAS_HEADERS:
+                errors.append('Invalid Pages alias header policy: _headers')
+        elif any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or path.suffix.lower() not in ALLOWED_EXT:
+            errors.append(f'Output allowlist violation: {relative}')
         if seo_enabled and path.suffix.lower() == '.html':
             errors.extend(relative + ': ' + error for error in document_metadata_errors(body))
         files.append({'path': relative, 'bytes': len(body), 'sha256': hashlib.sha256(body).hexdigest()})
@@ -453,6 +463,8 @@ def verify(build, prefix=''):
     return {'schemaVersion': 1, 'scope': 'Static route/dependency/output checks; no functional parity claim',
             'routeCount': len(expected), 'mountPrefix': prefix, 'outputSnapshotSha256': snapshot,
             'files': files, 'errors': errors, 'passed': not errors,
+            'providerControlPaths': [row['path'] for row in files if row['path'] == '_headers'],
+            'publicArtifactCount': sum(row['path'] != '_headers' for row in files),
             'limitations': ['Canonical origins are selected by the bounded builder and bound through exact output bytes; this verifier does not independently certify DNS ownership or the live host.']}
 
 

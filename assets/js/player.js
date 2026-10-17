@@ -1,5 +1,79 @@
 const players = new Set();
 const actions = new Map();
+const bufferedSources = new WeakMap();
+const pendingSources = new WeakMap();
+const nativeSources = new WeakSet();
+const MAX_AUDIO_BYTES = 16 * 1024 * 1024;
+
+function localMediaUrl(audio) {
+  if (!document.baseURI || typeof fetch !== 'function' || typeof URL.createObjectURL !== 'function') return null;
+  let url;
+  try {
+    url = new URL(audio.getAttribute('src') || '', document.baseURI);
+  } catch { return null; }
+  const page = new URL(document.baseURI);
+  // Only the prepared local article media filenames use complete-file playback.
+  // External and standalone player sources retain native streaming behavior.
+  return url.origin === page.origin && !url.search && !url.hash
+    && /\/media\/(?:mp3-[a-f0-9]{20}-|[a-f0-9]{20}-)[^/]+\.(?:opus|mp3)$/i.test(url.pathname) ? url : null;
+}
+
+function assignAudioSource(audio, source) {
+  const cached = bufferedSources.get(audio);
+  if (cached?.source === source && audio.getAttribute('src') === cached.objectUrl) return false;
+  const pending = pendingSources.get(audio);
+  if (pending && pending.source !== source) pending.cancel();
+  if (cached) {
+    URL.revokeObjectURL(cached.objectUrl);
+    bufferedSources.delete(audio);
+  }
+  if (audio.getAttribute('src') === source) return false;
+  nativeSources.delete(audio);
+  audio.src = source;
+  return true;
+}
+
+function bufferLocalAudio(audio, signal) {
+  if (nativeSources.has(audio)) return null;
+  if (bufferedSources.get(audio)?.objectUrl === audio.getAttribute('src')) return null;
+  const url = localMediaUrl(audio);
+  if (!url) return null;
+  const source = audio.getAttribute('src');
+  return (async () => {
+    // Static hosts may return 200 for Range requests. A real local Blob provides
+    // finite duration and seeking without an audio backend. Download on Play only.
+    const response = await fetch(url.href, { signal, credentials: 'omit', redirect: 'error', mode: 'same-origin' });
+    if (response.status !== 200 || !response.body || Number(response.headers.get('content-length')) > MAX_AUDIO_BYTES) {
+      await response.body?.cancel();
+      throw new Error('Audio download failed');
+    }
+    const reader = response.body.getReader();
+    const chunks = [];
+    let size = 0;
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        size += value.byteLength;
+        if (size > MAX_AUDIO_BYTES) {
+          await reader.cancel();
+          throw new Error('Audio download too large');
+        }
+        chunks.push(value);
+      }
+    } finally {
+      reader.releaseLock();
+    }
+    if (!size || signal.aborted || audio.getAttribute('src') !== source) {
+      throw new DOMException('Audio load superseded', 'AbortError');
+    }
+    const blob = new Blob(chunks, { type: /\.mp3$/i.test(url.pathname) ? 'audio/mpeg' : 'audio/ogg; codecs="opus"' });
+    const objectUrl = URL.createObjectURL(blob);
+    bufferedSources.set(audio, { source, objectUrl });
+    audio.src = objectUrl;
+  })();
+}
+
 let activePlayer;
 const playerActivity = new Map();
 let lastActivity = 0;
@@ -73,6 +147,17 @@ function initPlayer(root, legacy = false) {
   // Ignore errors from an inactive cancelled load until the next explicit attempt.
   let cancelledStart = false;
   let cancelStart;
+  window.addEventListener?.('pagehide', event => {
+    cancelStart?.();
+    audio.pause();
+    if (!event.persisted) {
+      const cached = bufferedSources.get(audio);
+      if (cached) {
+        URL.revokeObjectURL(cached.objectUrl);
+        bufferedSources.delete(audio);
+      }
+    }
+  });
   const toggle = async event => {
     event?.preventDefault();
     markActive(audio);
@@ -89,21 +174,58 @@ function initPlayer(root, legacy = false) {
     showStatus('Loading audio...');
     let rejectLoad;
     let cancelled = false;
+    let decodingBlob = false;
+    const download = new AbortController();
     const failed = new Promise((_, reject) => { rejectLoad = reject; });
     cancelStart = () => {
       cancelled = true;
       cancelledStart = true;
+      download.abort();
       audio.pause();
       rejectLoad(new DOMException('Playback cancelled', 'AbortError'));
     };
-    const onError = () => rejectLoad(new Error('Media load failed'));
-    audio.addEventListener('error', onError, { once: true });
-    const loadTimeout = setTimeout(() => rejectLoad(new Error('Media load timed out')), 15000);
+    const attempt = { source: audio.getAttribute('src'), cancel: cancelStart };
+    pendingSources.set(audio, attempt);
+    const onError = () => {
+      if (!decodingBlob) rejectLoad(new Error('Media load failed'));
+    };
+    audio.addEventListener('error', onError);
+    // Local complete-file playback gets a bounded minute for download/start.
+    // Native sources retain their 15-second deadline. Both can be cancelled.
+    const loadTimeout = setTimeout(() => {
+      download.abort();
+      rejectLoad(new Error('Media load timed out'));
+    }, localMediaUrl(audio) && !nativeSources.has(audio) ? 60000 : 15000);
     try {
       // Retry after a failed load without changing the CMS/local media URL.
-      if (audio.error) audio.load();
-      // Promise.race observes rejections from both inputs, including a late losing play promise.
-      await Promise.race([audio.play(), failed]);
+      if (audio.error && (!localMediaUrl(audio) || nativeSources.has(audio))) audio.load();
+      const buffered = bufferLocalAudio(audio, download.signal);
+      const play = buffered ? buffered.then(async () => {
+        if (download.signal.aborted) throw new DOMException('Playback cancelled', 'AbortError');
+        decodingBlob = true;
+        try {
+          return await audio.play();
+        } catch (error) {
+          const cached = bufferedSources.get(audio);
+          if (download.signal.aborted || !cached || error?.name === 'NotAllowedError'
+              || error?.name === 'AbortError'
+              || (error?.name !== 'NotSupportedError' && audio.error?.code !== 4)) throw error;
+          // Some native decoders accept HTTP media but reject the same Blob.
+          // Restore the approved source only for that format failure, not for
+          // network, cancellation or playback-policy failures. Replays stay native.
+          decodingBlob = false;
+          audio.src = cached.source;
+          audio.load();
+          URL.revokeObjectURL(cached.objectUrl);
+          bufferedSources.delete(audio);
+          nativeSources.add(audio);
+          return audio.play();
+        } finally {
+          decodingBlob = false;
+        }
+      }) : audio.play();
+      // Observe both inputs, including a late losing download or play rejection.
+      await Promise.race([play, failed]);
     } catch {
       audio.pause();
       root.dataset.playbackState = cancelled ? 'paused' : 'error';
@@ -111,6 +233,8 @@ function initPlayer(root, legacy = false) {
       showStatus(cancelled ? '' : 'Audio could not start. Please try again.');
       showIcon(true);
     } finally {
+      download.abort();
+      if (pendingSources.get(audio) === attempt) pendingSources.delete(audio);
       clearTimeout(loadTimeout);
       audio.removeEventListener('error', onError);
       starting = false;
@@ -133,6 +257,10 @@ function initPlayer(root, legacy = false) {
     }
   });
   audio.addEventListener('play', () => {
+    if (audio.paused || cancelledStart || root.dataset.playbackState === 'error') {
+      if (!audio.paused) audio.pause();
+      return;
+    }
     markActive(audio);
     for (const other of players) if (other !== audio && !other.paused) other.pause();
     showIcon(false);
@@ -141,6 +269,10 @@ function initPlayer(root, legacy = false) {
     showStatus('');
   });
   audio.addEventListener('playing', () => {
+    if (audio.paused || cancelledStart || root.dataset.playbackState === 'error') {
+      if (!audio.paused) audio.pause();
+      return;
+    }
     root.dataset.playbackState = 'playing';
     showStatus('');
   });
@@ -190,7 +322,7 @@ function initPlayer(root, legacy = false) {
     }
   });
   audio.controls = false;
-  audio.preload = 'metadata';
+  audio.preload = localMediaUrl(audio) ? 'none' : 'metadata';
   players.add(audio);
   actions.set(audio, { play: () => { if (audio.paused) return toggle(); }, pause: () => starting ? cancelStart?.() : audio.pause() });
   showIcon(true);
@@ -221,9 +353,9 @@ export function initPlayers() {
     const audio = root.querySelector('.emtalk-audio-player__control');
     const name = root.querySelector('.emtalk-player-ui__name');
     const selectedUrl = audio && supportedUrl(audio);
-    if (selectedUrl && audio && audio.getAttribute('src') !== selectedUrl) {
-      audio.src = selectedUrl;
-      audio.load();
+    if (selectedUrl && audio && assignAudioSource(audio, selectedUrl)) {
+      if (localMediaUrl(audio)) audio.preload = 'none';
+      else audio.load();
     }
     if (title && name) name.textContent = title;
     if (!selectedUrl) { root.hidden = true; return; }
@@ -239,7 +371,7 @@ export function initPlayers() {
     const retainedHidden = root.closest('.legacy-audio-player-hidden');
     if (retainedHidden && getComputedStyle(retainedHidden).display === 'none') return;
     const selectedUrl = audio && supportedUrl(audio);
-    if (selectedUrl && audio && audio.getAttribute('src') !== selectedUrl) audio.src = selectedUrl;
+    if (selectedUrl && audio) assignAudioSource(audio, selectedUrl);
     if (!selectedUrl) { root.hidden = true; return; }
     initPlayer(root, true);
     if (players.has(audio)) initializedPlayers.add(audio);

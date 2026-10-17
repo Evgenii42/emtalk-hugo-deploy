@@ -521,7 +521,7 @@ def prepare(prefix='', preview=False):
             if selected_audio:
                 attrs.pop('src', None)
                 attrs['controls'] = ''
-                attrs['preload'] = 'metadata'
+                attrs['preload'] = 'none'
                 node['children'] = [
                     {'tag': 'source', 'attributes': {'src': selected_audio['mp3'], 'type': 'audio/mpeg'}, 'children': []},
                     {'tag': 'source', 'attributes': {'src': selected_audio['opus'], 'type': 'audio/ogg; codecs="opus"'}, 'children': []}]

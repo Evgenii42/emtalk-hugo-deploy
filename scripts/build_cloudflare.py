@@ -1,10 +1,15 @@
-"""Build a root-mounted, non-indexable Cloudflare Pages preview with Hugo."""
+"""Build a root-mounted Pages preview or explicitly selected EmTalk production."""
+import hashlib
 import os
+from pathlib import Path
 import re
 import sys
 from urllib.parse import urlsplit
 
 from build_site import build
+from verify_build import PAGES_ALIAS_HEADERS
+
+PAGES_PROJECT_HOST = 'emtalk-hugo-deploy.pages.dev'
 
 
 def pages_base_url(raw):
@@ -23,16 +28,64 @@ def pages_base_url(raw):
     return 'https://' + host + '/'
 
 
+def build_options(environment):
+    """Default to preview; a supplied production request must match both guards."""
+    deployment_base = pages_base_url(environment.get('CF_PAGES_URL'))
+    if 'EMTALK_SITE_ORIGIN' not in environment:
+        return deployment_base, True
+    if environment['EMTALK_SITE_ORIGIN'] != 'https://www.emtalk.org/':
+        raise ValueError('EMTALK_SITE_ORIGIN must be the exact approved production origin')
+    if environment.get('CF_PAGES_BRANCH') != 'main':
+        raise ValueError('Production origin requires the approved main branch')
+    deployment_host = urlsplit(deployment_base).hostname
+    if not (deployment_host == PAGES_PROJECT_HOST or
+            (deployment_host.endswith('.' + PAGES_PROJECT_HOST) and
+             deployment_host.count('.') == PAGES_PROJECT_HOST.count('.') + 1)):
+        raise ValueError('Production deployment must use the approved Pages project alias')
+    return 'https://www.emtalk.org/', False
+
+
+def validate_alias_headers():
+    """The header policy is a static build input, never an output patch."""
+    try:
+        headers = (Path(__file__).resolve().parents[1] / 'static/_headers').read_bytes()
+    except OSError:
+        raise ValueError('Required Pages alias header policy is unavailable') from None
+    if headers != PAGES_ALIAS_HEADERS:
+        raise ValueError('Required Pages alias header policy is invalid')
+
+
+def verified_pages_output(result):
+    """Require the consumed policy in the builder's verified artifact inventory."""
+    if not isinstance(result, dict) or result.get('passed') is not True:
+        return False
+    if result.get('providerControlPaths') != ['_headers']:
+        return False
+    files = result.get('files')
+    if not isinstance(files, list) or not all(isinstance(row, dict) for row in files):
+        return False
+    headers = [row for row in files if row.get('path') == '_headers']
+    if len(headers) != 1:
+        return False
+    header = headers[0]
+    return (type(header.get('bytes')) is int and
+            header['bytes'] == len(PAGES_ALIAS_HEADERS) and
+            header.get('sha256') == hashlib.sha256(PAGES_ALIAS_HEADERS).hexdigest() and
+            type(result.get('publicArtifactCount')) is int and
+            result['publicArtifactCount'] == len(files) - 1)
+
+
 def main():
     try:
-        base = pages_base_url(os.environ.get('CF_PAGES_URL'))
+        base, preview = build_options(os.environ)
+        validate_alias_headers()
     except ValueError as error:
-        # These are our fixed origin-validation messages, never the raw URL.
+        # These are fixed configuration-validation messages, never raw values.
         print(str(error), file=sys.stderr)
         return 1
     try:
-        result = build('public', base, '', True)
-        if result['passed'] is True:
+        result = build('public', base, '', preview)
+        if verified_pages_output(result):
             return 0
     except Exception:
         # At this CLI boundary, command failures and unexpected builder errors

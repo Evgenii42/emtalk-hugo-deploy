@@ -1,54 +1,52 @@
 # EmTalk Hugo deployment snapshot
 
-This repository is a selected deployment input snapshot for Cloudflare Pages.
-The canonical source and development history remain in [Forgejo](https://forgejo.emtalk.org/Emtalk/emtalk_site).
-The initial snapshot uses the accepted public source `1645005a77ecc54bfd811b7b2636add0529447eb`.
-The newer DM workspace and loader are separate pending increments.
+This is a finite Cloudflare Pages input export. Canonical source and history
+remain in [Forgejo](https://forgejo.emtalk.org/Emtalk/emtalk_site).
+The immutable public baseline is `1645005a77ecc54bfd811b7b2636add0529447eb`. Five selected source
+overrides, one source addition and the updated build helper are bound to
+canonical checkpoint `889dbd69ae65b28fddfb32c685166c97f3393c06`. Newer DM and loader changes are excluded.
 
-## Cloudflare Pages settings
+## Build settings
 
-- Import this repository as a **Pages** project, not a Worker.
-- Production branch: `main`; root directory: repository root.
-- Framework preset: None (the command below runs the project's Hugo pipeline).
-- Build command: `python -m pip install -r requirements-build.txt && python scripts/build_cloudflare.py`
-- Build output directory: `public`.
-- Production and Preview environment: `HUGO_VERSION=0.168.0`, `PYTHON_VERSION=3.13.3`.
-- `CF_PAGES_URL` is supplied by Pages. Do not set it to the old GitHub project URL.
+- Pages project: `emtalk-hugo-deploy`; production branch: `main`.
+- Repository root; output directory: `public`; framework preset: None.
+- Command: `python -m pip install -r requirements-build.txt && python scripts/build_cloudflare.py`.
+- Pinned environment: `HUGO_VERSION=0.168.0`, `PYTHON_VERSION=3.13.3`.
+- Pages supplies `CF_PAGES_URL` and `CF_PAGES_BRANCH`.
 
-The build prepares the public content, invokes pinned Hugo and verifies routes,
-local assets and SEO. It fails if the deployment origin is absent or invalid.
-The output uses the domain root with no `/emtalk-site-preview/` mount.
-All deployments currently remain noindex previews. A production-domain switch
-requires a separate verified release and explicit decision.
+Without `EMTALK_SITE_ORIGIN`, every branch builds a noindex preview. Production
+requires the exact `EMTALK_SITE_ORIGIN=https://www.emtalk.org/`, branch `main`,
+and the approved Pages project or its one-label deployment subdomain. Set this
+opt-in only in the intended Production environment. Invalid requests stop the
+build. The static `_headers` policy adds noindex to Pages aliases; it has no
+global or www rule. The helper checks this policy before and after the build.
 
-## Contents and provenance
+## Provenance and limits
 
-`source-publication-manifest.json` binds the finite original input files to the
-canonical source and identifies deployment-only additions. This is an export,
-not a mirror of Forgejo history. It contains published content, localized media,
-Hugo templates, CSS/JS and the build pipeline; no source archives, audit/review
-bundles, credentials, visitor submissions or unpublished CMS items are exported.
-These are accepted staged-derived build snapshots. All exported CMS items carry
-published metadata, but `liveApiVerified=false`: parity of their field values
-with the current live CMS has not been independently confirmed.
-Existing font license files and notices remain under `static`.
+Manifest schema2 preserves all394 original `sourceFiles` unchanged, then records
+five `sourceOverrides`, one `sourceAdditions` entry and deployment-only files.
+The effective raw source contains395 files; the finite repository export has400
+files including this manifest. This is a selected export, not a Git-history mirror.
+Only the original published-content snapshot, localized media, Hugo inputs and
+explicit reviewed code changes are exported. No audit bundles, source archives,
+credentials, visitor submissions or unpublished CMS items are included.
 
-To update this repository, export another explicitly reviewed source snapshot
-from Forgejo and update the manifest. Do not edit the site in two repositories.
-Generated files are rebuilt; platform line endings may change their hashes.
-The new deployment Git commit is distinct from the canonical source commit.
+CMS data remains accepted staged-derived data: published metadata is present,
+but `liveApiVerified=false` and current live field-value parity is unconfirmed.
+Font licenses and notices remain under `static`.
 
-## Local check
+Hugo preparation regenerates tracked render/CSS inputs; the raw export hash is
+distinct from the prepared395-input build receipt. Local build dirtiness is not
+an instruction to publish generated source changes. Build outputs and reports
+are excluded by `.gitignore`. Platform line endings may change generated hashes.
 
-Install Hugo extended 0.168.0 and the pinned Python dependencies. Then set
-`CF_PAGES_URL=https://local-check.pages.dev` and run
-`python scripts/build_cloudflare.py`. The built website is in `public`;
-`docs/audits/build-preview.json` records that particular build's actual hashes.
-Neither the report nor source inputs are copied into the published output.
+The reviewed local production015 fixture has313 output files:312 public assets
+and one provider-consumed `_headers` control. The helper is outside the Hugo
+input list and is separately bound in the manifest. A future Cloudflare Linux
+build, host-specific headers, redirects, TLS and domain readiness need actual
+deployment evidence. Local VM/browser observations do not certify those states.
+Native Windows WebKit no-JS playback has a tested MP3 download alternative;
+physical audio output is not certified by the local tests.
 
-After the first Pages deployment, verify CSS, JS, images, article playback,
-keyboard/mobile navigation, deep links, unknown-route HTTP 404, canonical URLs
-and query/fragment behavior on the actual assigned address. The current Pages documentation states that
-HTTP Range requests receive 200 full responses; do not assume 206 or certify
-media seeking until browser checks are complete. The existing GitHub Pages
-repository and the production Webflow domain are independent and unchanged.
+Update this export from another explicit canonical checkpoint. Keep source
+development in Forgejo and retain exact source/build/review/hosted receipts.

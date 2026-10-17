@@ -86,6 +86,7 @@ html[data-route-id^="/affirmations"] body {
   align-items: center;
   min-height: 44px;
   font-size: 21px;
+  border-radius: 12px;
   font-weight: 700;
   letter-spacing: -.04em
 }

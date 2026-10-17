@@ -1,0 +1,6 @@
+{{- $attrs := "" -}}
+{{- range $name, $value := . -}}
+  {{- if not (findRE `^[A-Za-z_:][A-Za-z0-9_.:-]*$` $name) -}}{{- errorf "Invalid HTML attribute name %q" $name -}}{{- end -}}
+  {{- $attrs = printf "%s %s=\"%s\"" $attrs $name (htmlEscape (printf "%v" $value)) -}}
+{{- end -}}
+{{- return ($attrs | safeHTMLAttr) -}}

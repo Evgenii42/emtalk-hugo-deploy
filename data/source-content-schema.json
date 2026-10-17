@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "scope": "Owner-authorized repair of two source-proven broken JSON-LD paths; preserve other source graph fields",
+  "articleCatalog": {
+    "routeId": "/articles",
+    "sourceArchiveSha256": "8b586d472ba4e0e8700eeea8b32d5bd0fbcc6fe0b56b20e8e90d8fff2578e742",
+    "sourceStructuredDataSha256": [
+      "76023486c068837460feb86ae3ec6e9da8f4635d94a07f7b7bd6026af056afdb"
+    ],
+    "statusEvidence": "docs/audits/content/schema-source-probe-2026-10-12.json",
+    "statusEvidenceSha256": "1bfb32a11f9817a26cce62c695f93f7173819f8b04c134edeefaa4e85a5cd4ff",
+    "removedBrokenPaths": [
+      "/articles/corporate-culture-guide",
+      "/articles/burnout-comprehensive-guide"
+    ],
+    "itemRefs": [
+      {
+        "itemId": "6a8022856d5fc73fd9203a2a",
+        "routeId": "/articles/burnout-prevention-vs-recovery",
+        "position": 1
+      },
+      {
+        "itemId": "6a801e2248a7ec3ac980e391",
+        "routeId": "/articles/how-to-know-if-you-are-burned-out",
+        "position": 2
+      },
+      {
+        "itemId": "6a801d242cd3d9bcbeff6868",
+        "routeId": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "position": 3
+      },
+      {
+        "itemId": "6a77f08ca594e82a1eb7a2bd",
+        "routeId": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+        "position": 4
+      },
+      {
+        "itemId": "6a77eaf138ffe76b49eae849",
+        "routeId": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+        "position": 5
+      },
+      {
+        "itemId": "6a7208b57c78f55736c2c445",
+        "routeId": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+        "position": 6
+      },
+      {
+        "itemId": "6a66781031282825c549fadf",
+        "routeId": "/articles/the-chemistry-behind-a-good-nights-sleep",
+        "position": 7
+      },
+      {
+        "itemId": "6a6677a8e4be2e6501e79e5a",
+        "routeId": "/articles/the-truth-about-how-much-sleep-you-need",
+        "position": 8
+      },
+      {
+        "itemId": "6a60aa78ceb42c80bc6b143d",
+        "routeId": "/articles/why-sleep-matters",
+        "position": 9
+      }
+    ],
+    "replacementHasPart": [
+      {
+        "@type": "Article",
+        "@id": "/articles/burnout-prevention-vs-recovery",
+        "headline": "Prevention or cure? Why timing Is everything when it comes to burnout",
+        "description": "Discover why prevention becomes harder once burnout takes hold, what the research says about early intervention, and how workplaces can reduce burnout before recovery becomes necessary.",
+        "url": "/articles/burnout-prevention-vs-recovery",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25163edcc1eecf7a82e_6a95befccde5dadb821b1c5e_%25D0%25B1%25D0%25B0%25D1%2580%25D1%2581%25D1%2583%25D0%25BA1600%25D1%25851000.webp",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/how-to-know-if-you-are-burned-out",
+        "headline": "How do you know if you're actually burned out? Inside the science of measuring It",
+        "description": "Explore how researchers assess burnout, why there’s no universal cutoff, and how exhaustion, cynicism, and professional efficacy can point to very different experiences and different solutions.",
+        "url": "/articles/how-to-know-if-you-are-burned-out",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25363edcc1eecf7a870_6a8b1c1e55f48eb328f6f1ed_Generated%2520Image%2520August%252020%252C%25202026%2520-%252012_34AM.jpeg",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "headline": "What burnout really is and why rest alone won’t fix it",
+        "description": "Explore what burnout does to your mind and body, why workplace conditions matter, and what sustainable recovery actually requires.",
+        "url": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25263edcc1eecf7a838_6a871eeb3441bbcea62f5ebc_%25D0%25B3%25D0%25BE%25D0%25BB%25D1%2583%25D0%25B1%25D1%258C%25201600%25D1%25851000.webp",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+        "headline": "Body position and sleep: why how you lie down matters as much as how long",
+        "description": "A guide to sleep posture, mattress support and pillow fit, explaining which positions are friendliest to the spine and offering a quick self-check for your bedroom setup",
+        "url": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25263edcc1eecf7a83b_6a801867b13e7b4116e567c2_magnific_.-._gOJ4xblSXO.webp",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+        "headline": "The sound of sleep: why silence isn't always the goal",
+        "description": "An exploration of how consistent sound, not silence, supports deeper sleep, backed by research on white noise with practical alternatives and tips for handling a noisy bed partner",
+        "url": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25263edcc1eecf7a83e_6a7f31601aeecc26bcf9ebd6_magnific_.-.-.-._CqHKmq4EEy.webp",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+        "headline": "Lights out: how light quietly runs your sleep schedule",
+        "description": "A look at how light exposure shapes your sleep-wake cycle, backed by research on blue-light therapy with practical steps for using morning light and managing evening screens.",
+        "url": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25363edcc1eecf7a873_6a79ec91230dae0562fff571_magnific_7949qUnJAL.png",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/the-chemistry-behind-a-good-nights-sleep",
+        "headline": "The Chemistry Behind a Good Night's Sleep",
+        "description": "Explore the hidden chemical ballet behind your sleep patterns, from how melatonin and cortisol regulate your circadian rhythm to the genetic chronotypes coded into your DNA",
+        "url": "/articles/the-chemistry-behind-a-good-nights-sleep",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25263edcc1eecf7a84d_6a7205e00ec536dba0cbd427_%25D1%2583%25D1%2587%25D0%25B5%25D0%25BD%25D0%25B0%25D1%258F%2520%25D0%25BB%25D0%25B8%25D1%2581%25D0%25B0%2520%25D0%25B3%25D0%25BE%25D1%2580%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25BD%25D1%2582%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25B0%25D1%258F%252016%25D0%25BA10.webp",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/the-truth-about-how-much-sleep-you-need",
+        "headline": "The Truth About How Much Sleep You Need",
+        "description": "Rethink the 8-hour sleep myth and learn how to optimize your daily rest, including a simple 20-minute coffee nap trick for maximum mental alertness",
+        "url": "/articles/the-truth-about-how-much-sleep-you-need",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a9dd25263edcc1eecf7a855_6a70d5b840aa5850753fa6e2_%25D0%25BB%25D0%25B8%25D1%2581%25D0%25B0%2520%25D0%25B3%25D0%25BE%25D1%2580%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25BD%25D1%2582%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25B0%25D1%258F%252016%25D0%25BA10.webp",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Article",
+        "@id": "/articles/why-sleep-matters",
+        "headline": "A deep dive into sleep — the most underrated power hack in your career and life",
+        "description": "Explore what really happens in your brain while you sleep and why every stage matters",
+        "url": "/articles/why-sleep-matters",
+        "image": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6a63f1ad92fc3e55b10f7c03_6a6092212de65c51e9f8c5f4_%25D0%25B4%25D0%25B5%25D1%2581%25D0%25BA%25D1%2582%25D0%25BE%25D0%25BF.webp",
+        "inLanguage": "en"
+      }
+    ],
+    "replacementItemList": {
+      "@type": "ItemList",
+      "@id": "/articles#catalog",
+      "numberOfItems": 9,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "/articles/burnout-prevention-vs-recovery",
+            "@type": "Article",
+            "url": "/articles/burnout-prevention-vs-recovery"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "/articles/how-to-know-if-you-are-burned-out",
+            "@type": "Article",
+            "url": "/articles/how-to-know-if-you-are-burned-out"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+            "@type": "Article",
+            "url": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+            "@type": "Article",
+            "url": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@id": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+            "@type": "Article",
+            "url": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@id": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+            "@type": "Article",
+            "url": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@id": "/articles/the-chemistry-behind-a-good-nights-sleep",
+            "@type": "Article",
+            "url": "/articles/the-chemistry-behind-a-good-nights-sleep"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@id": "/articles/the-truth-about-how-much-sleep-you-need",
+            "@type": "Article",
+            "url": "/articles/the-truth-about-how-much-sleep-you-need"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@id": "/articles/why-sleep-matters",
+            "@type": "Article",
+            "url": "/articles/why-sleep-matters"
+          }
+        }
+      ]
+    },
+    "buildPolicy": "Dereference editable CMS itemRefs each build; refresh titles/descriptions/images and localize recursively",
+    "preserve": "All other source graph fields, including any BreadcrumbList; raw archives unchanged"
+  }
+}

@@ -1,0 +1,46 @@
+<main id="emtalk-main" class="dm-workspace" tabindex="-1" aria-labelledby="dm-title">
+  <div class="dm-workspace__intro">
+    <p class="dm-workspace__eyebrow">Decision Matrix / Guest workspace</p>
+    <h1 id="dm-title">Make room for a clearer decision</h1>
+    <p>Compare your options, then weigh the reasons for and against. No account, AI or payment is needed.</p>
+    <p class="dm-workspace__privacy">Your decision stays in this page unless you choose Save on this device or export a file. Nothing you enter is sent to a server. Avoid sensitive information on a shared device.</p>
+  </div>
+  <noscript><p class="dm-workspace__notice">This exercise needs JavaScript for its local calculations. No answers have been saved. <a href="{{ hugo.Data.render.mountPrefix }}/dm" {{ partial "native-link-focus.html" . }}>Read about Decision Matrix</a>.</p></noscript>
+  <div data-dm-app hidden>
+    <p class="dm-workspace__notice" data-dm-draft-notice>Working draft: this page does not save automatically. Unsaved changes are lost when you close, reload or leave this page. Choose Save on this device or Export JSON to keep a copy.</p>
+    <div class="dm-workspace__toolbar" role="group" aria-label="Decision files">
+      <button type="button" data-dm-action="save">Save on this device</button>
+      <button type="button" data-dm-action="save-new">Save as a new decision</button>
+      <button type="button" data-dm-action="restore">Saved decisions</button>
+      <button type="button" data-dm-action="json">Export JSON</button>
+      <label class="dm-workspace__import">Import JSON <input type="file" accept=".json,application/json" data-dm-import></label>
+      <button type="button" data-dm-action="clear">Delete all saved decisions</button>
+    </div>
+    <section data-dm-history hidden aria-label="Saved decisions on this device"></section>
+    <p data-dm-status role="status" aria-live="polite" aria-atomic="true"></p>
+    <div data-dm-screen></div>
+  </div>
+  <dialog class="dm-workspace__dialog" data-dm-dialog aria-labelledby="dm-dialog-title" aria-describedby="dm-dialog-description">
+    <form data-dm-dialog-form novalidate>
+      <h2 id="dm-dialog-title"></h2>
+      <p id="dm-dialog-description"></p>
+      <label data-dm-dialog-name hidden>Decision name
+        <input data-dm-dialog-input type="text" maxlength="160" autocomplete="off" aria-describedby="dm-dialog-error">
+      </label>
+      <p id="dm-dialog-error" role="alert"></p>
+      <div class="dm-workspace__actions">
+        <button type="button" data-dm-dialog-cancel>Cancel</button>
+        <button type="submit" class="dm-workspace__primary" data-dm-dialog-submit></button>
+      </div>
+    </form>
+  </dialog>
+  <details class="dm-workspace__explanation">
+    <summary>How this works and what the numbers mean</summary>
+    <p>Start with one to eight options. With up to three, begin with pros and cons. With four or more, compare every pair, then choose up to three options to explore in more depth.</p>
+    <p>Pairwise results count your choices. The score is wins divided by the number of other options, on a scale of 0 to 100. Undecided pairs add no wins.</p>
+    <p>Pros and cons use importance weights of 1, 3, 5 and 8. Balanced reasons start at 50. Stronger reasons move the score toward 0 or 100 using the same confidence curve as the DM app. A score is a reflection of what you entered, not a probability, guarantee or instruction about what you should choose.</p>
+    <p>This guest version includes local decisions and files. AI assistance is available in the DM app. Web support is coming later. This web version does not connect accounts, cloud sync or subscriptions. You can complete the entire guest exercise here without them.</p>
+    {{ partial "keyboard-help.html" . }}
+  </details>
+  <p><a href="{{ hugo.Data.render.mountPrefix }}/dm" {{ partial "native-link-focus.html" . }}>About Decision Matrix</a></p>
+</main>

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "scope": "Approved previously published staged CMS, no drafts or visitor data",
+  "liveApiVerified": false,
+  "collections": [
+    {
+      "collectionId": "695a33b772303659b0dbc14b",
+      "slug": "tests",
+      "itemCount": 5,
+      "source": "docs/sources/mcp/2026-10-12/cms/695a33b772303659b0dbc14b.json",
+      "output": "data/cms/tests.json",
+      "outputSha256": "795590b29b8ae39521c0e2ad13e5b10fafc812e0b47bc2a81a1d3444d6d4cdb5"
+    },
+    {
+      "collectionId": "695a36fc72303659b0dc0928",
+      "slug": "questions-v2",
+      "itemCount": 127,
+      "source": "docs/sources/mcp/2026-10-12/cms/695a36fc72303659b0dc0928.json",
+      "output": "data/cms/questions-v2.json",
+      "outputSha256": "b4cb1cb613d324fc3aabb51d4a6178d21ecaa2c77d1934d51807564f59588faa"
+    },
+    {
+      "collectionId": "695a37f096ba170fa8cae236",
+      "slug": "answers-v2",
+      "itemCount": 168,
+      "source": "docs/sources/mcp/2026-10-12/cms/695a37f096ba170fa8cae236.json",
+      "output": "data/cms/answers-v2.json",
+      "outputSha256": "57392634b177af530ad5ad1793483b359119ea96359f4e597f6f8ee1e5226b20"
+    },
+    {
+      "collectionId": "695adbd6b0a7fb008822927b",
+      "slug": "articles",
+      "itemCount": 9,
+      "source": "docs/sources/mcp/2026-10-12/cms/695adbd6b0a7fb008822927b.json",
+      "output": "data/cms/articles.json",
+      "outputSha256": "ef50bcfc4082327475223dda6e866f955369d333aec4e143182d03790face344"
+    },
+    {
+      "collectionId": "695adedac4ee406eb86d40d0",
+      "slug": "categories",
+      "itemCount": 7,
+      "source": "docs/sources/mcp/2026-10-12/cms/695adedac4ee406eb86d40d0.json",
+      "output": "data/cms/categories.json",
+      "outputSha256": "5818b741b1b50d46c35754962f115df65e3f650360ba2a43bbf8996a8d410bce"
+    },
+    {
+      "collectionId": "69600ed16bc688e4ca511fba",
+      "slug": "affirmations",
+      "itemCount": 2,
+      "source": "docs/sources/mcp/2026-10-12/cms/69600ed16bc688e4ca511fba.json",
+      "output": "data/cms/affirmations.json",
+      "outputSha256": "67b70ca3e0eec82e8c7001b2ad0c4638c719eacd335f6c468fe26a95450d433d"
+    },
+    {
+      "collectionId": "69658fb7ac5f765d79b22732",
+      "slug": "meditations",
+      "itemCount": 1,
+      "source": "docs/sources/mcp/2026-10-12/cms/69658fb7ac5f765d79b22732.json",
+      "output": "data/cms/meditations.json",
+      "outputSha256": "69eac7a0e567e494c953454b7668db7d3408c4afada9377b46b82b226b971b80"
+    },
+    {
+      "collectionId": "697008e059f93448c756e214",
+      "slug": "documents",
+      "itemCount": 15,
+      "source": "docs/sources/mcp/2026-10-12/cms/697008e059f93448c756e214.json",
+      "output": "data/cms/documents.json",
+      "outputSha256": "956e2d49272ca5095b26960172611ac53045efc6ce55e31ae44e88f652c213b8"
+    }
+  ]
+}

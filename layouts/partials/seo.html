@@ -1,0 +1,74 @@
+{{- $page := .page -}}
+{{- $context := .context -}}
+{{- $config := hugo.Data.seo -}}
+{{- $seo := index $config.pages $page.routeId -}}
+{{- if not $seo -}}{{- errorf "Missing SEO configuration for route %q" $page.routeId -}}{{- end -}}
+{{- $base := strings.TrimSuffix "/" $context.Site.BaseURL -}}
+{{- $home := printf "%s/" $base -}}
+{{- $organizationLogoPath := $config.site.organizationLogo -}}
+{{- if ne (printf "%T" $organizationLogoPath) "string" -}}{{- errorf "Organization logo requires a configured owned media path" -}}{{- end -}}
+{{- if not (findRE "^/media/[A-Za-z0-9][A-Za-z0-9._-]*[.](png|jpg|jpeg|gif|webp|svg|avif)$" $organizationLogoPath) -}}{{- errorf "Organization logo requires a bounded owned image path" -}}{{- end -}}
+{{- $canonical := printf "%s%s" $base $page.routeId -}}
+{{- $article := strings.HasPrefix $page.routeId "/articles/" -}}
+{{- $imagePath := default $config.site.defaultImage $seo.image -}}
+{{- if ne (printf "%T" $imagePath) "string" -}}{{- errorf "SEO image requires a configured owned media path" -}}{{- end -}}
+{{- if not (findRE "^/media/[A-Za-z0-9][A-Za-z0-9._-]*[.](png|jpg|jpeg|gif|webp|svg|avif)$" $imagePath) -}}{{- errorf "SEO image requires a bounded owned image path for route %q" $page.routeId -}}{{- end -}}
+{{- if and $seo.image (or (not $seo.imageWidth) (not $seo.imageHeight)) -}}{{- errorf "Custom SEO image requires explicit dimensions for route %q" $page.routeId -}}{{- end -}}
+{{- $image := printf "%s%s" $base $imagePath -}}
+{{- $imageAlt := $config.site.defaultImageAlt -}}
+{{- if $seo.image -}}{{- $imageAlt = default (default $seo.title $seo.headline) $seo.imageAlt -}}{{- end -}}
+{{- $type := cond $article "article" "website" -}}
+<title>{{ $seo.title }}</title>
+{{- range $page.metadata -}}
+  {{- /* Property takes precedence over name, matching preserved_metadata. */ -}}
+  {{- $name := lower (or .property .name "") -}}
+  {{- if and $name (not (or (isset . "charset") (in (slice "description" "robots" "generator" "viewport") $name) (strings.HasPrefix $name "og:") (strings.HasPrefix $name "twitter:") (strings.HasPrefix $name "article:"))) }}
+<meta{{ partial "attributes.html" . }}>
+  {{- end -}}
+{{- end }}
+<meta name="description" content="{{ $seo.description }}">
+<meta name="robots" content="{{ if or hugo.Data.render.preview (not $seo.indexable) }}noindex, follow{{ else }}index, follow, max-image-preview:large{{ end }}">
+<meta name="generator" content="Hugo {{ hugo.Version }}">
+<link rel="canonical" href="{{ $canonical }}">
+<meta property="og:site_name" content="{{ $config.site.name }}">
+<meta property="og:title" content="{{ $seo.title }}">
+<meta property="og:description" content="{{ $seo.description }}">
+<meta property="og:type" content="{{ $type }}">
+<meta property="og:url" content="{{ $canonical }}">
+<meta property="og:locale" content="{{ $config.site.locale }}">
+<meta property="og:image" content="{{ $image }}">
+<meta property="og:image:alt" content="{{ $imageAlt }}">
+<meta property="og:image:width" content="{{ default $config.site.defaultImageWidth $seo.imageWidth }}">
+<meta property="og:image:height" content="{{ default $config.site.defaultImageHeight $seo.imageHeight }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $seo.title }}">
+<meta name="twitter:description" content="{{ $seo.description }}">
+<meta name="twitter:image" content="{{ $image }}">
+<meta name="twitter:image:alt" content="{{ $imageAlt }}">
+{{- $organizationID := printf "%s#organization" $home -}}
+{{- $websiteID := printf "%s#website" $home -}}
+{{- $webpageID := printf "%s#webpage" $canonical -}}
+{{- $organization := dict "@type" "Organization" "@id" $organizationID "name" $config.site.name "url" $home "logo" (printf "%s%s" $base $organizationLogoPath) -}}
+{{- $website := dict "@type" "WebSite" "@id" $websiteID "url" $home "name" $config.site.name "description" $config.site.description "inLanguage" $page.language "publisher" (dict "@id" $organizationID) -}}
+{{- $pageType := "WebPage" -}}
+{{- if eq $page.routeId "/about-us" -}}{{- $pageType = "AboutPage" -}}{{- end -}}
+{{- if in (slice "/articles" "/tests") $page.routeId -}}{{- $pageType = "CollectionPage" -}}{{- end -}}
+{{- $webpage := dict "@type" $pageType "@id" $webpageID "url" $canonical "name" $seo.title "description" $seo.description "inLanguage" $page.language "isPartOf" (dict "@id" $websiteID) -}}
+{{- $graph := slice $organization $website $webpage -}}
+{{- if $article -}}
+  {{- $articleID := printf "%s#article" $canonical -}}
+  {{- $posting := dict "@type" "BlogPosting" "@id" $articleID "url" $canonical "headline" $seo.headline "description" $seo.description "image" $image "inLanguage" $page.language "publisher" (dict "@id" $organizationID) "mainEntityOfPage" (dict "@id" $webpageID) -}}
+  {{- if $page.audioMp3 -}}
+    {{- $audioID := printf "%s#audio" $canonical -}}
+    {{- $mount := default "" hugo.Data.render.mountPrefix -}}
+    {{- if ne (printf "%T" $page.audioMp3) "string" -}}{{- errorf "Article audio requires an owned mounted MP3 path" -}}{{- end -}}
+    {{- if not (strings.HasPrefix $page.audioMp3 (printf "%s/" $mount)) -}}{{- errorf "Article audio mount prefix mismatch" -}}{{- end -}}
+    {{- $audioPath := strings.TrimPrefix $mount $page.audioMp3 -}}
+    {{- if not (findRE "^/media/[A-Za-z0-9][A-Za-z0-9._-]*[.]mp3$" $audioPath) -}}{{- errorf "Article audio requires a bounded owned MP3 path" -}}{{- end -}}
+    {{- $audio := dict "@type" "AudioObject" "@id" $audioID "name" $seo.headline "description" $seo.description "inLanguage" $page.language "encodingFormat" "audio/mpeg" "contentUrl" (printf "%s%s" $base $audioPath) -}}
+    {{- $posting = merge $posting (dict "audio" (dict "@id" $audioID)) -}}
+    {{- $graph = $graph | append $audio -}}
+  {{- end -}}
+  {{- $graph = $graph | append $posting -}}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

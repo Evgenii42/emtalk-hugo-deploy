@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+{{ if not hugo.Data.render.preview }}Sitemap: {{ .Site.BaseURL }}sitemap.xml{{ end }}

@@ -1,0 +1,98 @@
+/* Standalone utility page: retain its approved geometry and local font.
+   Normal pages and 404 load separate stylesheets; this declaration gives 404
+   the same owned Manrope file without loading the complete site stylesheet. */
+@font-face {
+    font-family: 'Manrope';
+    src: url('../media/db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Manrope', sans-serif;
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+h1 {
+    margin: 0 0 0.4em;
+    font-size: 3.125rem;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+p {
+    margin: 1em 0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.text-mono {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.utility-wrapper {
+    display: flex;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.site-header ~ .utility-wrapper {
+    padding-top: calc(var(--emt-header-top) + var(--emt-header-bar-height) + var(--emt-header-fragment-gap));
+    box-sizing: border-box;
+}
+
+.utility-container {
+    display: flex;
+    width: 90%;
+    height: 100%;
+    margin-bottom: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.utility-content {
+    max-width: 580px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+@media screen and (max-width: 767px) {
+    h1 { font-size: 2.25rem; }
+    .utility-container {
+        width: 85%;
+        padding-top: 10%;
+        padding-bottom: 10%;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    h1 { font-size: 2rem; }
+}

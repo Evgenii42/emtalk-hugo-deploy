@@ -1,0 +1,295 @@
+/* Shared metrics derive panel reserves. Retained desktop focus uses the
+   separately measured panel top when the no-JS bar wraps. */
+:root {
+  --emt-header-top: 16px;
+  --emt-header-inline-inset: 24px;
+  --emt-header-bar-height: 64px;
+  /* Preserve the tested104px fragment clearance:16+64+24, mobile12+60+32. */
+  --emt-header-fragment-gap: 24px;
+  --emt-header-panel-gap: 12px;
+  --emt-header-panel-bottom: 20px;
+  --emt-header-trailing-padding: 14px;
+  --emt-header-border: 1px;
+  /* Measured reserve for the retained desktop navigation after wrapping on
+     mobile. Reproduce with keyboard focus in Apps, resize 900 to390 and768
+     to320 (and reverse), then measure the open panel top and the wrapped bar.
+     The panel must stay below the bar and inside the viewport. Its132px top
+     is a conservative measured reserve, not the normal one-row bar height.
+     Any bar metric/font/padding change requires all48 JS/no-JS resize edges
+     in the native integration gate, including the320px inline alignment. */
+  --emt-header-retained-panel-top: 132px
+}
+html {
+  scroll-padding-top: calc(var(--emt-header-top) + var(--emt-header-bar-height) + var(--emt-header-fragment-gap))
+}
+.site-header a.site-header__skip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: var(--emt-action,#5e3a7d);
+  color: var(--emt-surface,#fffefa);
+  font-size: 14px;
+  font-weight: 700;
+  transform: translateY(calc(-100% - 24px))
+}
+/* Reveal any focused bypass link. Explicit tabindex0 supports native WebKit
+   first-Tab behavior; the stricter focus-visible selector supplies its outline. */
+.site-header a.site-header__skip:focus {
+  transform: none
+}
+/* These source screens had no header, or placed the mobile title behind its
+   transparent middle. Reserve room for the new continuous navigation bar. */
+html[data-route-id^="/affirmations"] body {
+  padding-top: calc(var(--emt-header-top) + var(--emt-header-bar-height) + var(--emt-header-fragment-gap))
+}
+@media(max-width:767px) {
+  html[data-route-id="/dm"] body {
+    /* The source hero supplies its own leading space; reserve the whole bar. */
+    padding-top: calc(var(--emt-header-top) + var(--emt-header-bar-height))
+  }
+}
+.site-header {
+  position: fixed;
+  top: var(--emt-header-top);
+  inset-inline: var(--emt-header-inline-inset);
+  z-index: 1000;
+  color: var(--emt-ink,#261238);
+  font-family: Manrope,sans-serif
+}
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1184px;
+  min-height: var(--emt-header-bar-height);
+  margin: auto;
+  padding: 8px var(--emt-header-trailing-padding) 8px 18px;
+  border: var(--emt-header-border) solid rgba(94,58,125,.15);
+  border-radius: 18px;
+  background: rgba(255,254,250,.96);
+  box-shadow: 0 5px 24px rgba(38,18,56,.06);
+  box-sizing: border-box
+}
+.site-header a,.site-header summary {
+  color: inherit;
+  text-decoration: none;
+  box-sizing: border-box
+}
+.site-header__brand {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  min-height: 44px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.04em
+}
+.site-header__brand img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px
+}
+.site-header .site-header__brand[aria-current] {
+  background: transparent;
+  color: inherit
+}
+.site-header__desktop,.site-header__mobile {
+  display: flex;
+  gap: 4px;
+  align-items: center
+}
+.site-header__navs {
+  display: flex;
+  align-items: center;
+  max-width: 100%
+}
+.site-header__desktop>a,.site-header__mobile>a,.site-header summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none
+}
+.site-header summary::-webkit-details-marker {
+  display: none
+}
+.site-header [aria-current],.site-header summary[data-current] {
+  color: var(--emt-action,#5e3a7d);
+  background: #f4eaf8
+}
+.site-header__disclosure {
+  position: relative
+}
+.site-header summary span {
+  font-size: 17px;
+  line-height: 1;
+  transition: transform .15s
+}
+.site-header details[open]>summary span {
+  transform: rotate(180deg)
+}
+.site-header details[open]>summary {
+  background: #f4eaf8
+}
+/* Desktop reserve112px covers top16+bar64+gap12+bottom20; the actual
+   summary sits inside the bar, so this also leaves room below the panel. */
+.site-header__panel {
+  position: absolute;
+  top: calc(100% + var(--emt-header-panel-gap));
+  right: 0;
+  width: 290px;
+  padding: 10px;
+  border: var(--emt-header-border) solid rgba(94,58,125,.15);
+  border-radius: 16px;
+  background: var(--emt-surface,#fffefa);
+  box-shadow: 0 12px 32px rgba(38,18,56,.14);
+  box-sizing: border-box;
+  max-height: calc(100vh - var(--emt-header-top) - var(--emt-header-bar-height) - var(--emt-header-panel-gap) - var(--emt-header-panel-bottom));
+  max-height: calc(100svh - var(--emt-header-top) - var(--emt-header-bar-height) - var(--emt-header-panel-gap) - var(--emt-header-panel-bottom));
+  overflow: auto;
+  overscroll-behavior: contain
+}
+.site-header__panel a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-height: 48px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4
+}
+.site-header__panel a strong {
+  font-weight: 650
+}
+.site-header__panel a span {
+  font-size: 12px;
+  color: #51435f
+}
+.site-header__panel p {
+  padding: 0 12px;
+  margin: 15px 0 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #51435f
+}
+.site-header__mobile {
+  display: none
+}
+.site-header a:focus-visible,.site-header summary:focus-visible {
+  outline: 3px solid var(--emt-action,#5e3a7d);
+  outline-offset: 3px
+}
+@media(hover:hover) {
+  .site-header a:hover,.site-header summary:hover {
+    background: #f4eaf8;
+    color: var(--emt-action,#5e3a7d)
+  }
+}
+@media(max-width:767px) {
+  :root {
+    --emt-header-top: 12px;
+    --emt-header-inline-inset: 16px;
+    --emt-header-bar-height: 60px;
+    --emt-header-fragment-gap: 32px;
+    --emt-header-panel-bottom: 16px;
+    --emt-header-trailing-padding: 8px
+  }
+  .site-header__bar {
+    padding: 6px var(--emt-header-trailing-padding) 6px 12px;
+    gap: 8px;
+    border-radius: 16px
+  }
+  .site-header__desktop {
+    display: none
+  }
+  .site-header__mobile {
+    display: flex
+  }
+  .site-header__brand {
+    font-size: 19px;
+    gap: 7px
+  }
+  .site-header__brand img {
+    width: 28px;
+    height: 28px
+  }
+  .site-header__mobile>a,.site-header summary {
+    padding: 10px 12px;
+    font-size: 13px
+  }
+  .site-header__panel--mobile {
+    width: min(360px,calc(100vw - 32px));
+    right: calc(-1 * var(--emt-header-trailing-padding) - var(--emt-header-border))
+  }
+}
+@media(max-width:359px) {
+  :root {
+    --emt-header-inline-inset: 10px
+  }
+  .site-header__brand {
+    font-size: 18px
+  }
+  .site-header__mobile>a,.site-header summary {
+    padding: 10px
+  }
+  .site-header__panel--mobile {
+    width: calc(100vw - 20px)
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .site-header summary span {
+    transition: none
+  }
+}
+/* Panel metrics intentionally match the current bounded bar: mobile trailing
+   padding8px+border1px gives right:-9px; normal viewport reserve100px covers
+   top12+bar60+gap12+bottom16. The retained desktop focus layout uses132px panel
+   top and16px bottom reserve. Changes to bar geometry require resize QA.
+   Preserve the focused navigation through viewport changes in both modes.
+   Focus moves only through the visitor's next keyboard or pointer action. */
+@media(max-width:767px) {
+  .site-header__bar {
+    flex-wrap: wrap
+  }
+  .site-header__desktop:focus-within {
+    flex-wrap: wrap;
+    width: 100%
+  }
+  .site-header__desktop:focus-within>a,.site-header__desktop:focus-within summary {
+    padding: 10px 8px;
+    font-size: 13px
+  }
+  .site-header__desktop:focus-within .site-header__panel {
+    position: fixed;
+    top: var(--emt-header-retained-panel-top);
+    inset-inline: var(--emt-header-inline-inset);
+    width: auto;
+    max-height: calc(100vh - var(--emt-header-retained-panel-top) - var(--emt-header-panel-bottom));
+    max-height: calc(100svh - var(--emt-header-retained-panel-top) - var(--emt-header-panel-bottom))
+  }
+}
+/* Preserve either native navigation when focus survives a viewport resize.
+   Mutually exclusive focus conditions avoid depending on selector order.
+   Brand focus uses the normal breakpoint. */
+.site-header__navs:focus-within>nav:not(:focus-within) {
+  display: none
+}
+.site-header__navs>nav:focus-within {
+  display: flex
+}

@@ -1,0 +1,97 @@
+
+  .section-24 {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .section-24 > .image-38,
+  .section-24 > .image-39 {
+    transform-origin: 50% 72%;
+    animation: emt-landscape-breathe 12s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .emt-sky {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .emt-tree-image {
+    position: absolute;
+    z-index: 1;
+    max-width: none;
+    pointer-events: none;
+    transform-origin: var(--origin-x) var(--origin-y);
+    clip-path: polygon(var(--tree-mask));
+    animation: emt-tree-sway var(--sway-time) ease-in-out var(--sway-delay) infinite;
+    will-change: transform;
+  }
+
+  .emt-star {
+    --size: 7px;
+    --drift: 18px;
+    --duration: 7s;
+    --delay: 0s;
+    position: absolute;
+    top: -10%;
+    left: var(--x);
+    width: var(--size);
+    height: var(--size);
+    opacity: 0;
+    border-radius: 50%;
+    background: #fff5c9;
+    box-shadow: 0 0 7px 2px rgba(255, 237, 188, .58);
+    animation: emt-star-fall var(--duration) linear var(--delay) infinite;
+    will-change: transform, opacity;
+  }
+
+  .emt-star::before,
+  .emt-star::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    background: inherit;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+  }
+
+  .emt-star::before { width: 240%; height: 24%; }
+  .emt-star::after { width: 24%; height: 240%; }
+
+  .emt-star--dot::before,
+  .emt-star--dot::after { display: none; }
+
+  @keyframes emt-star-fall {
+    0%   { transform: translate3d(0, -6vh, 0) rotate(0); opacity: 0; }
+    10%  { opacity: .88; }
+    68%  { opacity: .72; }
+    82%, 100% { transform: translate3d(var(--drift), 70vh, 0) rotate(55deg); opacity: 0; }
+  }
+
+  @keyframes emt-landscape-breathe {
+    0%, 100% { transform: scale(1.001) translate3d(0, 0, 0); }
+    50% { transform: scale(1.012) translate3d(0, -2px, 0); }
+  }
+
+  @keyframes emt-tree-sway {
+    0%, 100% { transform: rotate(-.18deg) translateX(-.3px); }
+    50% { transform: rotate(.28deg) translateX(.4px); }
+  }
+
+  @media (max-width: 767px) {
+    .emt-star { filter: none; }
+    .section-24 > .image-38,
+    .section-24 > .image-39 { animation-duration: 14s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-24 > .image-38,
+    .section-24 > .image-39,
+    .emt-star,
+    .emt-tree-image { animation: none !important; }
+    .emt-sky { display: none; }
+  }

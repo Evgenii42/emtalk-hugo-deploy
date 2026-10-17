@@ -1,0 +1,18 @@
+{{- /* Explicit sequential focus preserves native Tab reachability in the tested
+WebKit configuration: Windows x64, Playwright 1.64.0, WebKit 27.2/revision2370,
+headless default keyboard settings. Removing zero broke actual native Tab entry
+on desktop and narrow JS profiles (historical004); current nine-profile checks
+cover all three engines, desktop/narrow and no-JS. Zero keeps document order.
+Never use positive indices.
+Static minimal native anchors without CSS/JS/iframes reproduced this policy
+in all three tested WebKit profiles. Explicit zero preserved link roles, names
+and href activation in nine ARIA/native-keyboard comparisons. This does not
+certify OS assistive-technology speech. Apple documents Tab/Option-Tab policy:
+https://support.apple.com/guide/safari/keyboard-and-other-shortcuts-cpsh003/mac
+WebKit HTMLAnchorElement.cpp gates ordinary link focus on tabsToLinks:
+https://github.com/WebKit/WebKit/blob/main/Source/WebCore/html/HTMLAnchorElement.cpp
+The exact packaged revision2370 ChromeClient preference remains unconfirmed;
+no upstream bug ticket is assumed. Recheck native controls on engine upgrades.
+The guest-practice help explains the explicit link Tab order to users.
+This shared attribute keeps the compatibility policy in one place. */ -}}
+{{- return (`tabindex="0"` | safeHTMLAttr) -}}

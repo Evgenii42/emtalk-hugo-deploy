@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/understand-myself": {
+      "mode": "new",
+      "language": "en",
+      "title": "Understand myself",
+      "lead": "Read, listen, or explore a questionnaire.",
+      "indexable": true,
+      "sections": [
+        {
+          "title": "What you can explore",
+          "text": "EmTalk brings together nine articles about sleep and burnout, each with an audio version, and five questionnaire pages."
+        },
+        {
+          "title": "Why start here?",
+          "text": "Start with a topic you want to understand. Reading and listening offer context; questionnaires give you a set of questions to reflect on."
+        },
+        {
+          "title": "How to begin",
+          "text": "Choose Read articles to browse the articles and listen on their pages. Choose Explore tests to see the available questionnaires. You can return here and choose a different resource at any time."
+        }
+      ],
+      "actions": [
+        {
+          "label": "Read articles",
+          "path": "/articles"
+        },
+        {
+          "label": "Explore tests",
+          "path": "/tests"
+        }
+      ]
+    },
+    "/tapl": {
+      "mode": "augment",
+      "language": "en",
+      "title": "TAPL",
+      "eyebrow": "In development",
+      "lead": "TAPL is in development and is not available to try yet. This page marks its place in EmTalk while development continues. You can explore EmTalk's articles and tests now.",
+      "indexable": false,
+      "sections": [],
+      "actions": [
+        {
+          "label": "Read articles",
+          "path": "/articles"
+        },
+        {
+          "label": "Explore tests",
+          "path": "/tests"
+        }
+      ]
+    },
+    "/dm/workspace": {
+      "mode": "new",
+      "language": "en",
+      "title": "Decision Matrix guest workspace",
+      "lead": "Compare options and weigh pros and cons locally, without an account.",
+      "indexable": true,
+      "sections": [],
+      "actions": []
+    },
+    "/dm": {
+      "mode": "augment",
+      "language": "en",
+      "title": "Try Decision Matrix in your browser",
+      "lead": "Compare your options and weigh pros and cons. The guest workspace runs locally and needs no account. AI assistance is available in the DM app; web support is coming later.",
+      "indexable": true,
+      "sections": [],
+      "actions": [
+        {
+          "label": "Open guest workspace",
+          "path": "/dm/workspace"
+        }
+      ]
+    },
+    "/bret": {
+      "mode": "augment",
+      "language": "en",
+      "title": "Try BRET in your browser",
+      "lead": "Breathe with one of five rhythms, create your own, or try progressive muscle relaxation. Free to use, without an account.",
+      "indexable": true,
+      "sections": [],
+      "actions": [
+        {
+          "label": "Start a free practice",
+          "path": "/bret/practice"
+        }
+      ]
+    },
+    "/bret/practice": {
+      "mode": "new",
+      "language": "en",
+      "title": "Make a little room to breathe.",
+      "lead": "Choose a breathing rhythm or relax one muscle group at a time. No account needed.",
+      "indexable": true,
+      "sections": [],
+      "actions": [
+        {
+          "label": "About BRET",
+          "path": "/bret"
+        }
+      ]
+    }
+  }
+}

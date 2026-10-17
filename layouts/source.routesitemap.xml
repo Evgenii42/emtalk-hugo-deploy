@@ -1,0 +1,4 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{ if not hugo.Data.render.preview }}{{ range (index hugo.Data "route-map").routes }}{{ $seo := index hugo.Data.seo.pages .path }}{{ if $seo.indexable }}<url><loc>{{ printf "%s%s" (strings.TrimSuffix "/" $.Site.BaseURL) .path | htmlEscape }}</loc></url>{{ end }}{{ end }}{{ end }}
+</urlset>

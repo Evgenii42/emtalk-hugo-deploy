@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "sourceFile": "docs/sources/mcp/2026-10-12/cms/695adedac4ee406eb86d40d0.json",
+  "sourceSha256": "61cde3310e5e73479f627fe76e2f16028153c5923f4200bf95aad8adf8e6f05d",
+  "liveApiVerified": false,
+  "collection": {
+    "id": "695adedac4ee406eb86d40d0",
+    "displayName": "Categories",
+    "singularName": "Category",
+    "slug": "categories",
+    "createdOn": "2026-01-04T21:42:50.349Z",
+    "lastUpdated": "2026-01-08T23:49:10.285Z",
+    "fields": [
+      {
+        "id": "9767bf258e222bc20aac95fb7c6f1a39",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "short-description",
+        "displayName": "Short Description",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "ba29de9ba215f78e558673521bab0f8a",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Image",
+        "slug": "icon",
+        "displayName": "Icon"
+      },
+      {
+        "id": "6d3a06538f0fc48c9f91271ec4531766",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "icon-url",
+        "displayName": "Icon URL",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "2a1bba4886e94fdef4917c04198395ed",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Color",
+        "slug": "color",
+        "displayName": "Color"
+      },
+      {
+        "id": "af9b3823fb16f46177448cbc189970e8",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "order",
+        "displayName": "Order",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "f262864f9b5755464f691ff07271dd94",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "seo-title",
+        "displayName": "SEO Title",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "809d0762668795b18c9625604563ddd3",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "meta-description",
+        "displayName": "Meta Description",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "8b6b06c4819b6e47dfed0d60b1e34945",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Switch",
+        "slug": "is-active",
+        "displayName": "Is Active"
+      },
+      {
+        "id": "a1b3349ae96331b9c67dc7dcb315b91d",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "name",
+        "displayName": "Name",
+        "validations": {
+          "maxLength": 256
+        }
+      },
+      {
+        "id": "c3129552e7a22e86d6955655f0dd6a41",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "slug",
+        "displayName": "Slug",
+        "validations": {
+          "maxLength": 256,
+          "pattern": {},
+          "messages": {
+            "pattern": "Must be alphanumerical and not contain any spaces or special characters",
+            "maxLength": "Must be less than 256 characters"
+          }
+        }
+      }
+    ],
+    "fieldGroups": []
+  },
+  "items": [
+    {
+      "id": "69604155bb5deea06814f1c5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T20:55:31.407Z",
+      "lastUpdated": "2026-09-06T20:53:02.346Z",
+      "createdOn": "2026-01-08T23:44:21.268Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "All Categories",
+        "icon": null,
+        "icon-url": null,
+        "color": null,
+        "order": 1,
+        "seo-title": null,
+        "meta-description": null,
+        "is-active": false,
+        "name": "All",
+        "slug": "all"
+      }
+    },
+    {
+      "id": "695ae1df5c7885dce9bccd03",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T20:55:31.407Z",
+      "lastUpdated": "2026-09-06T20:53:02.346Z",
+      "createdOn": "2026-01-04T21:55:43.973Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "Harmful behaviors, unhealthy workplaces, and environments that negatively affect mental health.",
+        "icon": null,
+        "icon-url": null,
+        "color": "#8e8e93",
+        "order": 7,
+        "seo-title": "Toxic Environment – Recognizing and Escaping Harmful Workplaces",
+        "meta-description": "How to recognize toxic environments at work and protect your mental health.",
+        "is-active": true,
+        "name": "Toxic Environment",
+        "slug": "toxic-environment"
+      }
+    },
+    {
+      "id": "695ae1b886d166513bed139f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T20:55:31.407Z",
+      "lastUpdated": "2026-09-06T20:53:02.346Z",
+      "createdOn": "2026-01-04T21:55:04.504Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "Leadership styles, decision-making, and their influence on teams and mental well-being.",
+        "icon": null,
+        "icon-url": null,
+        "color": "#f5a623",
+        "order": 6,
+        "seo-title": "Leadership – Healthy Leadership and Team Dynamics",
+        "meta-description": "Articles about leadership styles, emotional intelligence, and building psychologically safe teams.",
+        "is-active": true,
+        "name": "Leadership",
+        "slug": "leadership"
+      }
+    },
+    {
+      "id": "695ae18114ba5f56dd6b22c2",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T20:55:31.407Z",
+      "lastUpdated": "2026-09-06T20:53:02.346Z",
+      "createdOn": "2026-01-04T21:54:09.231Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "Values, behaviors, and practices that shape how people work and interact inside organizations.",
+        "icon": null,
+        "icon-url": null,
+        "color": "#6c5ce7",
+        "order": 5,
+        "seo-title": "Corporate Culture – How Workplace Environment Shapes Well-Being",
+        "meta-description": "Insights into corporate culture, workplace values, and their impact on mental health and performance.",
+        "is-active": true,
+        "name": "Corporate Culture",
+        "slug": "corporate-culture"
+      }
+    },
+    {
+      "id": "695ae11111e774c598e25a75",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-01-08T23:51:50.715Z",
+      "lastUpdated": "2026-01-08T23:43:40.949Z",
+      "createdOn": "2026-01-04T21:52:17.704Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "Techniques and strategies to reduce stress and regain emotional control.",
+        "icon": null,
+        "icon-url": null,
+        "color": "#50b27f",
+        "order": 4,
+        "seo-title": "Stress Management – Techniques for Everyday Life",
+        "meta-description": "Effective stress management techniques for daily life, work, and emotional resilience.",
+        "is-active": true,
+        "name": "Stress Management",
+        "slug": "stress-management"
+      }
+    },
+    {
+      "id": "695ae0d8510ee0f3297f7a7c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-01-08T23:51:50.715Z",
+      "lastUpdated": "2026-01-08T23:43:50.691Z",
+      "createdOn": "2026-01-04T21:51:20.501Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "Healthy balance between work, personal life, rest, and mental well-being.",
+        "icon": null,
+        "icon-url": null,
+        "color": "#4a90e2",
+        "order": 3,
+        "seo-title": "Work-Life Balance – Productivity Without Burnout",
+        "meta-description": "Practical advice on building a sustainable work-life balance without sacrificing productivity.",
+        "is-active": true,
+        "name": "Work-Life Balance",
+        "slug": "work-life-balance"
+      }
+    },
+    {
+      "id": "695ae070d80a06cbedab89df",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-01-08T23:51:50.715Z",
+      "lastUpdated": "2026-01-08T23:43:57.243Z",
+      "createdOn": "2026-01-04T21:49:36.262Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "short-description": "Emotional exhaustion, chronic stress, and loss of motivation caused by prolonged overload.",
+        "icon": null,
+        "icon-url": "dsdd",
+        "color": null,
+        "order": 2,
+        "seo-title": "Burnout – Signs, Causes, and Recovery",
+        "meta-description": "Articles and tools to understand burnout, recognize early signs, and recover emotional balance.",
+        "is-active": true,
+        "name": "Burnout",
+        "slug": "burnout"
+      }
+    }
+  ]
+}

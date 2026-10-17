@@ -1,0 +1,3385 @@
+{
+  "schemaVersion": 1,
+  "sourceFile": "docs/sources/mcp/2026-10-12/cms/695a36fc72303659b0dc0928.json",
+  "sourceSha256": "541c1df39dbc77a28d9a3bfedd86af71dfd3968f3520acc19de4fc94af3dbf07",
+  "liveApiVerified": false,
+  "collection": {
+    "id": "695a36fc72303659b0dc0928",
+    "displayName": "Questions v2s",
+    "singularName": "Questions v2",
+    "slug": "questions-v2",
+    "createdOn": "2026-01-04T09:46:36.248Z",
+    "lastUpdated": "2026-09-06T16:54:31.874Z",
+    "fields": [
+      {
+        "id": "85cd3a5cc96a142200112ed41805f4af",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "question-text",
+        "displayName": "Question text",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "3b7d900e46746af7b1a5b7b0b8d69e2e",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Reference",
+        "slug": "test",
+        "displayName": "Test",
+        "validations": {
+          "collectionId": "695a33b772303659b0dbc14b"
+        }
+      },
+      {
+        "id": "a65ef2011f166e6c0315ed1141dd322b",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "order",
+        "displayName": "Order",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "c08690b2d19e093dd20c314aaea81c3b",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Option",
+        "slug": "question-type",
+        "displayName": "Question type",
+        "validations": {
+          "options": [
+            {
+              "name": "Single choice",
+              "id": "c40e8f2518802c240deecc9a0f16314c"
+            },
+            {
+              "name": "Multiple choice",
+              "id": "63b8bedf7127ae199421a92f62b4f9ca"
+            }
+          ]
+        }
+      },
+      {
+        "id": "59549404182e70eab5f0f3520e7deff7",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Switch",
+        "slug": "is-required",
+        "displayName": "Is required"
+      },
+      {
+        "id": "5563970470c8ec6cf99013e8737ed2a9",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "MultiReference",
+        "slug": "answers",
+        "displayName": "Answers",
+        "validations": {
+          "collectionId": "695a37f096ba170fa8cae236"
+        }
+      },
+      {
+        "id": "cac22b944ed317ac916f2524631bb848",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "max-answers",
+        "displayName": "Max answers",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "7937e31d0c99b3885e0efff71cabeb8c",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "name",
+        "displayName": "Name",
+        "validations": {
+          "maxLength": 256
+        }
+      },
+      {
+        "id": "5e65b12b2419d24b847fb2ff290b7fe8",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "slug",
+        "displayName": "Slug",
+        "validations": {
+          "maxLength": 256,
+          "pattern": {},
+          "messages": {
+            "pattern": "Must be alphanumerical and not contain any spaces or special characters",
+            "maxLength": "Must be less than 256 characters"
+          }
+        }
+      }
+    ],
+    "fieldGroups": []
+  },
+  "items": [
+    {
+      "id": "6a6d151fa422a19533609750",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.517Z",
+      "createdOn": "2026-07-31T21:35:27.588Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I get in a state of tension or turmoil as I think over my recent concerns and interests.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 40,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q40 Spielberger",
+        "slug": "q40-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc357",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.512Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am a steady person.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 39,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q39 Spielberger",
+        "slug": "q39-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc355",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.514Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I take disappointments so keenly that I can’t put them out of my mind.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 38,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q38 Spielberger",
+        "slug": "q38-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc353",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.508Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Some unimportant thought runs through my mind and bothers me.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 37,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q37 Spielberger",
+        "slug": "q37-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc351",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.438Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am content.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 36,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q36 Spielberger",
+        "slug": "q36-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc34f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.413Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel inadequate.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 35,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q35 Spielberger",
+        "slug": "q35-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc34d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.408Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I make decisions easily.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 34,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q34 Spielberger",
+        "slug": "q34-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc34b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.410Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel secure.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 33,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q33 Spielberger",
+        "slug": "q33-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc349",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.404Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I lack self-confidence.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 32,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q32 Spielberger",
+        "slug": "q32-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc347",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.328Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I have disturbing thoughts.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 31,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q31 Spielberger",
+        "slug": "q31-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc345",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.310Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am happy.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 30,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q30 Spielberger",
+        "slug": "q30-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc343",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.304Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I worry too much over something that really doesn’t matter.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 29,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q29 Spielberger",
+        "slug": "q29-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc341",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.307Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel that difficulties are piling up so that I cannot overcome them.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 28,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q28 Spielberger",
+        "slug": "q28-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc33f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.300Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am 'calm, cool, and collected.'",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 27,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q27 Spielberger",
+        "slug": "q27-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc33d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.228Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel rested.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 26,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q26 Spielberger",
+        "slug": "q26-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc33b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.205Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel like a failure.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 25,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q25 Spielberger",
+        "slug": "q25-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc339",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.202Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I wish I could be as happy as others seem to be.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 24,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q24 Spielberger",
+        "slug": "q24-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc337",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.195Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel satisfied with myself.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 23,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q23 Spielberger",
+        "slug": "q23-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc335",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.199Z",
+      "createdOn": "2026-07-31T21:35:26.429Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel nervous and restless.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 22,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q22 Spielberger",
+        "slug": "q22-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc333",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.121Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel pleasant.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 21,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1534e",
+          "6a6d14d5cc9cafb4c9b15350",
+          "6a6d14d5cc9cafb4c9b15352",
+          "6a6d14d5cc9cafb4c9b15354"
+        ],
+        "max-answers": null,
+        "name": "Q21 Spielberger",
+        "slug": "q21-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc331",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.100Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel pleasant.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 20,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q20 Spielberger",
+        "slug": "q20-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc32f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.097Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel steady.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 19,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q19 Spielberger",
+        "slug": "q19-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc32d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.102Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel confused.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 18,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q18 Spielberger",
+        "slug": "q18-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc32b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.087Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am worried.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 17,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q17 Spielberger",
+        "slug": "q17-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc329",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:16.011Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel content.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 16,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q16 Spielberger",
+        "slug": "q16-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc327",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.991Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am relaxed.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 15,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q15 Spielberger",
+        "slug": "q15-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc325",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.993Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel indecisive.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 14,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q14 Spielberger",
+        "slug": "q14-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc323",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.987Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am jittery.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 13,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q13 Spielberger",
+        "slug": "q13-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc321",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.983Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel nervous.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 12,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q12 Spielberger",
+        "slug": "q12-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc31f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.913Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel self-confident.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 11,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q11 Spielberger",
+        "slug": "q11-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc31d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.888Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel comfortable.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 10,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q10 Spielberger",
+        "slug": "q10-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc31b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.886Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel frightened.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 9,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q9 Spielberger",
+        "slug": "q9-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc319",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.882Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel satisfied.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 8,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q8 Spielberger",
+        "slug": "q8-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc317",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.947Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am presently worrying over possible misfortunes.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 7,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q7 Spielberger",
+        "slug": "q7-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc315",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.938Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel upset.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 6,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q6 Spielberger",
+        "slug": "q6-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc313",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.864Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel at ease.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 5,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q5 Spielberger",
+        "slug": "q5-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc311",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.792Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel strained.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 4,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q4 Spielberger",
+        "slug": "q4-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc30f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.789Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am tense.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 3,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q3 Spielberger",
+        "slug": "q3-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc30d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.783Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel secure.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 2,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q2 Spielberger",
+        "slug": "q2-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc30b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.787Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel calm.",
+        "test": "6a6d142608c3dd46ac6ceeb0",
+        "order": 1,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "6a6d14d5cc9cafb4c9b15348",
+          "6a6d14d5cc9cafb4c9b1534a",
+          "6a6d14d5cc9cafb4c9b1534c"
+        ],
+        "max-answers": null,
+        "name": "Q1 Spielberger",
+        "slug": "q1-spielberger"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc309",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:58:33.346Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What do you like about your current job? You can give one or two answers:",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 28,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1533a",
+          "6a6d14d5cc9cafb4c9b1533c",
+          "6a6d14d5cc9cafb4c9b1533e",
+          "6a6d14d5cc9cafb4c9b15340",
+          "6a6d14d5cc9cafb4c9b15342",
+          "6a6d14d5cc9cafb4c9b15344"
+        ],
+        "max-answers": 2,
+        "name": "Q28 Gerchikov",
+        "slug": "q28-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc307",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:58:24.548Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What do you dislike about your current job? You can give one or two answers:",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 27,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b1532e",
+          "6a6d14d5cc9cafb4c9b15330",
+          "6a6d14d5cc9cafb4c9b15332",
+          "6a6d14d5cc9cafb4c9b15334",
+          "6a6d14d5cc9cafb4c9b15336",
+          "6a6d14d5cc9cafb4c9b15338"
+        ],
+        "max-answers": 2,
+        "name": "Q27 Gerchikov",
+        "slug": "q27-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc305",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T16:52:40.604Z",
+      "lastUpdated": "2026-09-06T16:52:40.604Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "If the situation at your workplace deteriorates, what changes in your work and position would you agree to in order to keep your job? You can give as many answers as you like.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 26,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15320",
+          "6a6d14d5cc9cafb4c9b15322",
+          "6a6d14d5cc9cafb4c9b15324",
+          "6a6d14d5cc9cafb4c9b15326",
+          "6a6d14d5cc9cafb4c9b15328",
+          "6a6d14d5cc9cafb4c9b1532a",
+          "6a6d14d5cc9cafb4c9b1532c"
+        ],
+        "max-answers": null,
+        "name": "Q26 Gerchikov",
+        "slug": "q26-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc303",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:58:11.391Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "If you are not a manager, would you like to become one? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 25,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15310",
+          "6a6d14d5cc9cafb4c9b15312",
+          "6a6d14d5cc9cafb4c9b15314",
+          "6a6d14d5cc9cafb4c9b15316",
+          "6a6d14d5cc9cafb4c9b15318",
+          "6a6d14d5cc9cafb4c9b1531a",
+          "6a6d14d5cc9cafb4c9b1531c",
+          "6a6d14d5cc9cafb4c9b1531e"
+        ],
+        "max-answers": 2,
+        "name": "Q25 Gerchikov",
+        "slug": "q25-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc301",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:58:04.104Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "If you are a manager, what attracts you the most about this position? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 24,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15302",
+          "6a6d14d5cc9cafb4c9b15304",
+          "6a6d14d5cc9cafb4c9b15306",
+          "6a6d14d5cc9cafb4c9b15308",
+          "6a6d14d5cc9cafb4c9b1530a",
+          "6a6d14d5cc9cafb4c9b1530c",
+          "6a6d14d5cc9cafb4c9b1530e"
+        ],
+        "max-answers": 2,
+        "name": "Q24 Gerchikov",
+        "slug": "q24-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2ff",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:57:56.802Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What do you think is the main cause of misunderstanding and conflicts between management and employees? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 23,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b152f6",
+          "6a6d14d5cc9cafb4c9b152f8",
+          "6a6d14d5cc9cafb4c9b152fa",
+          "6a6d14d5cc9cafb4c9b152fc",
+          "6a6d14d5cc9cafb4c9b152fe",
+          "6a6d14d5cc9cafb4c9b15300"
+        ],
+        "max-answers": 2,
+        "name": "Q23 Gerchikov",
+        "slug": "q23-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2fd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:57:23.214Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Which statement about work quality best suits your opinion? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 22,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b152ea",
+          "6a6d14d5cc9cafb4c9b152ec",
+          "6a6d14d5cc9cafb4c9b152ee",
+          "6a6d14d5cc9cafb4c9b152f0",
+          "6a6d14d5cc9cafb4c9b152f2",
+          "6a6d14d5cc9cafb4c9b152f4"
+        ],
+        "max-answers": 2,
+        "name": "Q22 Gerchikov",
+        "slug": "q22-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2fb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:57:14.995Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Which statement about control best suits your opinion? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 21,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b152de",
+          "6a6d14d5cc9cafb4c9b152e0",
+          "6a6d14d5cc9cafb4c9b152e2",
+          "6a6d14d5cc9cafb4c9b152e4",
+          "6a6d14d5cc9cafb4c9b152e6",
+          "6a6d14d5cc9cafb4c9b152e8"
+        ],
+        "max-answers": 2,
+        "name": "Q21 Gerchikov",
+        "slug": "q21-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2f9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:57:08.140Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What, in your opinion, determines the promotion of an employee? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 20,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b152d0",
+          "6a6d14d5cc9cafb4c9b152d2",
+          "6a6d14d5cc9cafb4c9b152d4",
+          "6a6d14d5cc9cafb4c9b152d6",
+          "6a6d14d5cc9cafb4c9b152d8",
+          "6a6d14d5cc9cafb4c9b152da",
+          "6a6d14d5cc9cafb4c9b152dc"
+        ],
+        "max-answers": 2,
+        "name": "Q20 Gerchikov",
+        "slug": "q20-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2f7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:56:59.825Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "If you were temporarily not working and could choose a new job, what would you choose? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 19,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b152c2",
+          "6a6d14d5cc9cafb4c9b152c4",
+          "6a6d14d5cc9cafb4c9b152c6",
+          "6a6d14d5cc9cafb4c9b152c8",
+          "6a6d14d5cc9cafb4c9b152ca",
+          "6a6d14d5cc9cafb4c9b152cc",
+          "6a6d14d5cc9cafb4c9b152ce"
+        ],
+        "max-answers": 2,
+        "name": "Q19 Gerchikov",
+        "slug": "q19-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2f5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:56:52.446Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "How do you deal with difficulties at work? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 18,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e48429562b",
+          "6a6d14d34a24a0e48429562d",
+          "6a6d14d34a24a0e48429562f",
+          "6a6d14d34a24a0e484295631",
+          "6a6d14d34a24a0e484295633",
+          "6a6d14d34a24a0e484295635"
+        ],
+        "max-answers": 2,
+        "name": "Q18 Gerchikov",
+        "slug": "q18-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2f3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:56:45.482Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Which statement about collective work is closer to your opinion? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 17,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e48429561f",
+          "6a6d14d34a24a0e484295621",
+          "6a6d14d34a24a0e484295623",
+          "6a6d14d34a24a0e484295625",
+          "6a6d14d34a24a0e484295627",
+          "6a6d14d34a24a0e484295629"
+        ],
+        "max-answers": 2,
+        "name": "Q17 Gerchikov",
+        "slug": "q17-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2f1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:56:31.808Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Why do people usually show initiative at work and make various proposals? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 16,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e484295613",
+          "6a6d14d34a24a0e484295615",
+          "6a6d14d34a24a0e484295617",
+          "6a6d14d34a24a0e484295619",
+          "6a6d14d34a24a0e48429561b",
+          "6a6d14d34a24a0e48429561d"
+        ],
+        "max-answers": 2,
+        "name": "Q16 Gerchikov",
+        "slug": "q16-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2ef",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:56:24.066Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "On what principles, in your opinion, should the relationship between the worker and the organization be built? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 15,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e484295607",
+          "6a6d14d34a24a0e484295609",
+          "6a6d14d34a24a0e48429560b",
+          "6a6d14d34a24a0e48429560d",
+          "6a6d14d34a24a0e48429560f",
+          "6a6d14d34a24a0e484295611"
+        ],
+        "max-answers": 2,
+        "name": "Q15 Gerchikov",
+        "slug": "q15-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2ed",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:38:35.288Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Lottery or casino winnings",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 14,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e484295601",
+          "6a6d14d34a24a0e484295603",
+          "6a6d14d34a24a0e484295605"
+        ],
+        "max-answers": null,
+        "name": "Q14 Gerchikov",
+        "slug": "q14-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2eb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:38:26.948Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Income from personal household or garden",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 13,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955fb",
+          "6a6d14d34a24a0e4842955fd",
+          "6a6d14d34a24a0e4842955ff"
+        ],
+        "max-answers": null,
+        "name": "Q13 Gerchikov",
+        "slug": "q13-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2e9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:38:20.393Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Additional earnings only in my specialty",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 12,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955f5",
+          "6a6d14d34a24a0e4842955f7",
+          "6a6d14d34a24a0e4842955f9"
+        ],
+        "max-answers": null,
+        "name": "Q12 Gerchikov",
+        "slug": "q12-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2e7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:38:11.767Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Any additional earnings",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 11,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955ef",
+          "6a6d14d34a24a0e4842955f1",
+          "6a6d14d34a24a0e4842955f3"
+        ],
+        "max-answers": null,
+        "name": "Q11 Gerchikov",
+        "slug": "q11-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2e5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:38:02.862Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Income from property, shares, investments",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 10,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955e9",
+          "6a6d14d34a24a0e4842955eb",
+          "6a6d14d34a24a0e4842955ed"
+        ],
+        "max-answers": null,
+        "name": "Q10 Gerchikov",
+        "slug": "q10-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2e3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:37:55.810Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Social benefits and allowances",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 9,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955e3",
+          "6a6d14d34a24a0e4842955e5",
+          "6a6d14d34a24a0e4842955e7"
+        ],
+        "max-answers": null,
+        "name": "Q9 Gerchikov",
+        "slug": "q9-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2e1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:37:46.265Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Allowances for difficult and hazardous working conditions",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 8,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955dd",
+          "6a6d14d34a24a0e4842955df",
+          "6a6d14d34a24a0e4842955e1"
+        ],
+        "max-answers": null,
+        "name": "Q8 Gerchikov",
+        "slug": "q8-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2df",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:37:37.416Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Qualification allowances",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 7,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955d7",
+          "6a6d14d34a24a0e4842955d9",
+          "6a6d14d34a24a0e4842955db"
+        ],
+        "max-answers": null,
+        "name": "Q7 Gerchikov",
+        "slug": "q7-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2dd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:37:20.525Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Salary and bonuses, pensions, scholarships",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 6,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955d1",
+          "6a6d14d34a24a0e4842955d3",
+          "6a6d14d34a24a0e4842955d5"
+        ],
+        "max-answers": null,
+        "name": "Q6 Gerchikov",
+        "slug": "q6-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2db",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:55:55.468Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What does your income represent to you? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 5,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955c5",
+          "6a6d14d34a24a0e4842955c7",
+          "6a6d14d34a24a0e4842955c9",
+          "6a6d14d34a24a0e4842955cb",
+          "6a6d14d34a24a0e4842955cd",
+          "6a6d14d34a24a0e4842955cf"
+        ],
+        "max-answers": 2,
+        "name": "Q5 Gerchikov",
+        "slug": "q5-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2d9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:55:44.856Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What are the main functions of a supervisor, in your opinion? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 4,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955bb",
+          "6a6d14d34a24a0e4842955bd",
+          "6a6d14d34a24a0e4842955bf",
+          "6a6d14d34a24a0e4842955c1",
+          "6a6d14d34a24a0e4842955c3"
+        ],
+        "max-answers": 2,
+        "name": "Q4 Gerchikov",
+        "slug": "q4-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2d7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:55:13.069Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "How do you prefer to work? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 3,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955af",
+          "6a6d14d34a24a0e4842955b1",
+          "6a6d14d34a24a0e4842955b3",
+          "6a6d14d34a24a0e4842955b5",
+          "6a6d14d34a24a0e4842955b7",
+          "6a6d14d34a24a0e4842955b9"
+        ],
+        "max-answers": 2,
+        "name": "Q3 Gerchikov",
+        "slug": "q3-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2d5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:52:28.627Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Which statement suits you best? Give only one answer.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 2,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e4842955a3",
+          "6a6d14d34a24a0e4842955a5",
+          "6a6d14d34a24a0e4842955a7",
+          "6a6d14d34a24a0e4842955a9",
+          "6a6d14d34a24a0e4842955ab",
+          "6a6d14d34a24a0e4842955ad"
+        ],
+        "max-answers": null,
+        "name": "Q2 Gerchikov",
+        "slug": "q2-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2d3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-09-06T17:02:19.046Z",
+      "lastUpdated": "2026-09-06T16:54:57.251Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "What do you value most in your job? You can give one or two answers.",
+        "test": "6a6d142608c3dd46ac6ceeae",
+        "order": 1,
+        "question-type": "63b8bedf7127ae199421a92f62b4f9ca",
+        "is-required": true,
+        "answers": [
+          "6a6d14d34a24a0e484295597",
+          "6a6d14d34a24a0e484295599",
+          "6a6d14d34a24a0e48429559b",
+          "6a6d14d34a24a0e48429559d",
+          "6a6d14d34a24a0e48429559f",
+          "6a6d14d34a24a0e4842955a1"
+        ],
+        "max-answers": 2,
+        "name": "Q1 Gerchikov",
+        "slug": "q1-motivation-test-by-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2d1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.260Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel that your physical health or mental well-being has been affected by the treatment at work?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 20,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q20 Mobbing",
+        "slug": "q20-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2cf",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.179Z",
+      "createdOn": "2026-07-31T21:35:26.428Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you been denied access to necessary resources (e.g., information, tools) that are needed to do your job?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 19,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q19 Mobbing",
+        "slug": "q19-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2cd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.153Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you find it difficult to concentrate on your work due to stress from harassment?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 18,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q18 Mobbing",
+        "slug": "q18-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2cb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.155Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel pressured to leave your job because of the treatment you receive?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 17,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q17 Mobbing",
+        "slug": "q17-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2c9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.149Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel that your achievements or success are minimized by others?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 16,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q16 Mobbing",
+        "slug": "q16-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2c7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.145Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel that there is an organized group that is deliberately harassing you?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 15,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q15 Mobbing",
+        "slug": "q15-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2c5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.071Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you been threatened with negative consequences (e.g., firing, demotion) without clear reasons?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 14,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q14 Mobbing",
+        "slug": "q14-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2c3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.055Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do your colleagues or supervisors make fun of your personal life or private matters?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 13,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q13 Mobbing",
+        "slug": "q13-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2c1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.051Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you experience frequent public shaming or embarrassment in front of colleagues?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 12,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q12 Mobbing",
+        "slug": "q12-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2bf",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.049Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you been denied opportunities for promotion or professional development without explanation?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 11,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q11 Mobbing",
+        "slug": "q11-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2bd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.039Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel uncomfortable or unsafe at your workplace due to the behavior of others?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 10,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q10 Mobbing",
+        "slug": "q10-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2bb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.965Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you experienced social exclusion, such as being ignored during conversations or left out of group activities?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 9,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q9 Mobbing",
+        "slug": "q9-mobbing-test"
+      }
+    },
+    {
+      "id": "6a6d151eccfd77b907edc2b9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.945Z",
+      "createdOn": "2026-07-31T21:35:26.427Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel that your ideas and suggestions are ignored or ridiculed?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 8,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q8 Mobbing",
+        "slug": "q8-mobbing-test"
+      }
+    },
+    {
+      "id": "696398e2f1cc1e6fb9d7b83c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.250Z",
+      "createdOn": "2026-01-11T12:34:42.434Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel recipients blame me for some of their problems.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 22,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q22 Maslach",
+        "slug": "q22-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696398a9f60397cafb18ede7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.635Z",
+      "createdOn": "2026-01-11T12:33:45.924Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "In my work, I deal with emotional problems very calmly.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 21,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q21 Maslach",
+        "slug": "q21-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69639872537da6a59cd68d63",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.478Z",
+      "createdOn": "2026-01-11T12:32:50.784Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel like I’m at the end of my rope.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 20,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q20 Maslach",
+        "slug": "q20-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963984247e6fc943240e2fd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.622Z",
+      "createdOn": "2026-01-11T12:32:02.590Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I have accomplished many worthwhile things in this job.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 19,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q19 Maslach",
+        "slug": "q19-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69639802cc385e79edd5b462",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.942Z",
+      "createdOn": "2026-01-11T12:30:58.155Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel exhilarated after working closely with my recipients.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 18,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q18 Maslach",
+        "slug": "q18-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696397c3ff60e518c1d51f7e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.638Z",
+      "createdOn": "2026-01-11T12:29:55.695Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I can easily create a relaxed atmosphere with my recipients.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 17,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q17 Maslach",
+        "slug": "q17-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963978575ba89d8650446f5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.630Z",
+      "createdOn": "2026-01-11T12:28:53.422Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Working with people directly puts too much stress on me.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 16,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q16 Maslach",
+        "slug": "q16-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963973bf22b9070765190a4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.624Z",
+      "createdOn": "2026-01-11T12:27:39.175Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I don’t really care what happens to some recipients.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 15,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q15 Maslach",
+        "slug": "q15-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696386db26e967f055c68c8d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.475Z",
+      "createdOn": "2026-01-11T11:17:47.599Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel I’m working too hard on my job.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 14,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q14 Maslach",
+        "slug": "q14-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963869a3e6914e38245e017",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.606Z",
+      "createdOn": "2026-01-11T11:16:42.689Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel frustrated by my job.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 13,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q13 Maslach",
+        "slug": "q13-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963865c00fdcab9624056b6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.469Z",
+      "createdOn": "2026-01-11T11:15:40.712Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel very energetic.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 12,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q12 Maslach",
+        "slug": "q12-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69638612417b10471e4abfb5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.464Z",
+      "createdOn": "2026-01-11T11:14:26.390Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I worry that this job is hardening me emotionally.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 11,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q11 Maslach",
+        "slug": "q11-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696385d08c61d07bf80864dd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.619Z",
+      "createdOn": "2026-01-11T11:13:20.567Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I’ve become more callous toward people since I took this job.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 10,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q10 Maslach",
+        "slug": "q10-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963858c5783630eaae389a6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.473Z",
+      "createdOn": "2026-01-11T11:12:12.837Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel I’m positively influencing other people’s lives through my work.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 9,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q9 Maslach",
+        "slug": "q9-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696385477d489803843114e4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.254Z",
+      "createdOn": "2026-01-11T11:11:03.836Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel burned out from my work.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 8,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q8 Maslach",
+        "slug": "q8-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696384de58aac6a4890a3fee",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.641Z",
+      "createdOn": "2026-01-11T11:09:18.364Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I deal very effectively with the problems of my recipients.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 7,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q7 Maslach",
+        "slug": "q7-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69638499d4e79bd485b9f60e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.649Z",
+      "createdOn": "2026-01-11T11:08:09.667Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Working with people all day is really a strain for me.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 6,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q6 Maslach",
+        "slug": "q6-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69638421e95d5e16d527cf85",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:15.470Z",
+      "createdOn": "2026-01-11T11:06:09.217Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel I treat some recipients as if they were impersonal objects.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 5,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q5 Maslach",
+        "slug": "q5-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696383d1cc5fe7cb53a3b0b2",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:14.615Z",
+      "createdOn": "2026-01-11T11:04:49.903Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I can easily understand how my recipients feel about things.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 4,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q4 Maslach",
+        "slug": "q4-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963838b8fc857467c57cf61",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.951Z",
+      "createdOn": "2026-01-11T11:03:39.740Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel fatigued when I get up in the morning and have to face another day on the job.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 3,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q3 Maslach",
+        "slug": "q3-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69638341a2675d727a3f1174",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.932Z",
+      "createdOn": "2026-01-11T11:02:25.900Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel used up at the end of the workday.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 2,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q2 Maslach",
+        "slug": "q2-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69637577a237dd559199a242",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.949Z",
+      "createdOn": "2026-01-11T10:03:35.909Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I feel emotionally drained from my work.",
+        "test": "6960e8293c61785dd3e53f72",
+        "order": 1,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "696375b017d6448d536b7487",
+          "69637633a49fbdc2c67164c3",
+          "6963766826eb6ead1a695d5d",
+          "69637685dc6712cdeda74fbb",
+          "696376a5ee157a9f6943a389",
+          "696376c6bc78ca8d24bec2e3",
+          "696376db5a8493b0caf95a80"
+        ],
+        "max-answers": null,
+        "name": "Q1 Maslach",
+        "slug": "q1-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696370a72cc9475fb72de2c9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.138Z",
+      "createdOn": "2026-01-11T09:43:03.837Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Trembling or shaking in front of others is distressing to me.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 17,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q17 SPIN",
+        "slug": "q16-anxiety-test-system"
+      }
+    },
+    {
+      "id": "6963707d30a74349e494a931",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.185Z",
+      "createdOn": "2026-01-11T09:42:21.237Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I avoid speaking to anyone in authority.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 16,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q16 SPIN",
+        "slug": "q15-anxiety-test-system"
+      }
+    },
+    {
+      "id": "6963704c537da6a59cd30bae",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.067Z",
+      "createdOn": "2026-01-11T09:41:32.988Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Being embarrassed or looking stupid are among my worst fears.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 15,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q15 SPIN",
+        "slug": "q14-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69637020b2ce78dbb9477ae9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.999Z",
+      "createdOn": "2026-01-11T09:40:48.110Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am afraid of doing things when people might be watching.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 14,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q14 SPIN",
+        "slug": "q13-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69636fdf4d66c3471f17e795",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.045Z",
+      "createdOn": "2026-01-11T09:39:43.414Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Heart palpitations bother me when I am around people.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 13,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q13 SPIN",
+        "slug": "q12-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69636fb39c176be6aaff312f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.001Z",
+      "createdOn": "2026-01-11T09:38:59.408Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I avoid having to give speeches.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 11,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q11 SPIN",
+        "slug": "q11-anxiety-test-system-2"
+      }
+    },
+    {
+      "id": "69636f867b44da5cc12f5b52",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.055Z",
+      "createdOn": "2026-01-11T09:38:14.456Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I would do anything to avoid being criticized.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 12,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q12 SPIN",
+        "slug": "q11-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69636f022c607cafde951888",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.140Z",
+      "createdOn": "2026-01-11T09:36:02.991Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Talking to strangers scares me.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 10,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q10 SPIN",
+        "slug": "q10-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69635a97a80a4a0850eee294",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.988Z",
+      "createdOn": "2026-01-11T08:08:55.904Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I avoid activities in which I am the center of attention.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 9,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q9 SPIN",
+        "slug": "q9-anxiety-test-system"
+      }
+    },
+    {
+      "id": "696356132bc073def4b6b128",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.073Z",
+      "createdOn": "2026-01-11T07:49:39.204Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I avoid going to parties.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 8,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q8 SPIN",
+        "slug": "q8-anxiety-test-system"
+      }
+    },
+    {
+      "id": "696355d7e51a5ff74956c3fb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.183Z",
+      "createdOn": "2026-01-11T07:48:39.849Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Sweating in front of others causes me distress.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 7,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q7 SPIN",
+        "slug": "q7-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69635531eec7e8d28aa9106f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.996Z",
+      "createdOn": "2026-01-11T07:45:53.893Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Fear of embarrassment causes me to avoid doing things or speaking to people.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 6,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q6 SPIN",
+        "slug": "q6-anxiety-test-system"
+      }
+    },
+    {
+      "id": "696354f2cc5460d685e57109",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.069Z",
+      "createdOn": "2026-01-11T07:44:50.166Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Being criticized scares me a lot.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 5,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q5 SPIN",
+        "slug": "q5-anxiety-test-system"
+      }
+    },
+    {
+      "id": "696354ac1117a5a3416bb311",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.065Z",
+      "createdOn": "2026-01-11T07:43:40.414Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I avoid talking to people I don't know.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 4,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q4 SPIN",
+        "slug": "q4-anxiety-test-system"
+      }
+    },
+    {
+      "id": "69634df8fa51b7c6b53fabc8",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.047Z",
+      "createdOn": "2026-01-11T07:15:04.984Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Parties and social events scare me.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 3,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q3 SPIN",
+        "slug": "q3-anxiety-test-system"
+      }
+    },
+    {
+      "id": "695f6ddd98717a056ef2d87d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.134Z",
+      "createdOn": "2026-01-08T08:42:05.075Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do your colleagues or supervisors make sarcastic or hurtful jokes about you?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 7,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q7 Mobbing",
+        "slug": "q7-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6db62a6803e0e738840d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.939Z",
+      "createdOn": "2026-01-08T08:41:26.096Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you ever been intentionally given meaningless or excessive workloads?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 6,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q6 Mobbing",
+        "slug": "q6-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6d87924a8ff16c3af5dc",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.150Z",
+      "createdOn": "2026-01-08T08:40:39.762Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you frequently receive unjust criticism or excessive control over your tasks?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 5,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q5 Mobbing",
+        "slug": "q5-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6d5fb88b4f423e3ba15b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.053Z",
+      "createdOn": "2026-01-08T08:39:59.235Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you noticed that colleagues or supervisors speak negatively about you behind your back?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 4,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q4 Mobbing",
+        "slug": "q4-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6d218b20d694d98fb5d4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.051Z",
+      "createdOn": "2026-01-08T08:38:57.523Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel that your work or contributions are intentionally sabotaged?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 3,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q3 Mobbing",
+        "slug": "q3-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6cfeae47c9901bdb0823",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.936Z",
+      "createdOn": "2026-01-08T08:38:22.851Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Have you been verbally insulted or humiliated at work?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 2,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q2 Mobbing",
+        "slug": "q2-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6cdbb5f3f526a93f0913",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.063Z",
+      "createdOn": "2026-01-08T08:37:47.100Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "Do you feel isolated by your colleagues or excluded from important meetings?",
+        "test": "695f6c6c160d73ed3520b27c",
+        "order": 1,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "695f6e3c16321f7e86331250",
+          "695f6e67a3af393c1f0ed603"
+        ],
+        "max-answers": null,
+        "name": "Q1 Mobbing",
+        "slug": "q1-mobbing-test"
+      }
+    },
+    {
+      "id": "695a376d1334dcd50637a572",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:19.136Z",
+      "createdOn": "2026-01-04T09:48:29.426Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am bothered by blushing in front of people.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 2,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q2 SPIN",
+        "slug": "q2-anxiety-test-system"
+      }
+    },
+    {
+      "id": "695a3737ec64ef30d068b1cb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:18.993Z",
+      "createdOn": "2026-01-04T09:47:35.611Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "question-text": "I am afraid of people in authority.",
+        "test": "695a3405bcbd3be3bba23c50",
+        "order": 1,
+        "question-type": "c40e8f2518802c240deecc9a0f16314c",
+        "is-required": true,
+        "answers": [
+          "6a6d14d5cc9cafb4c9b15346",
+          "695a38366206c56554015755",
+          "6a6d14d5cc9cafb4c9b15348",
+          "695a385b3d3896edb998ea83",
+          "695a5d04068371dd28c8d266"
+        ],
+        "max-answers": null,
+        "name": "Q1 SPIN",
+        "slug": "q1-anxiety-test-system"
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $content := index hugo.Data "home-content" -}}
+{{- if not $content -}}{{- errorf "Missing authored Home content" -}}{{- end -}}
+{{- if or (ne $content.schemaVersion 1) (ne (len $content.products) 3) (ne (len $content.resources) 2) -}}{{- errorf "Invalid authored Home content shape" -}}{{- end -}}
+{{- if ne $content.sourcePageHash .page.sourceHash -}}{{- errorf "Home content source identity changed; reconcile the authored Home override" -}}{{- end -}}
+<section id="Products" class="home-content home-content--products" aria-labelledby="home-products-title">
+  <div class="home-content__inner">
+    <div class="home-content__intro">
+      <h2 id="home-products-title">{{ $content.productsTitle }}</h2>
+      <p>{{ $content.productsLead }}</p>
+    </div>
+    <div class="home-products">
+      {{ range $index, $product := $content.products }}
+      <article class="home-product" aria-labelledby="home-product-{{ $product.id }}">
+        <div class="home-product__image"><img src="{{ $prefix }}/media/{{ $product.image }}" alt="{{ $product.imageAlt }}" loading="lazy" width="400" height="832"></div>
+        <div class="home-product__copy">
+          {{ with $product.status }}<p class="home-product__status">{{ . }}</p>{{ end }}
+          <h3 id="home-product-{{ $product.id }}">{{ $product.name }}</h3>
+          <p class="home-product__purpose">{{ $product.purpose }}</p>
+          <p>{{ $product.description }}</p>
+          <div class="home-product__links">
+            <a class="home-content__link" href="{{ $prefix }}{{ $product.path }}" {{ partial "native-link-focus.html" . }}>{{ $product.linkLabel }}</a>
+            {{ with $product.storeUrl }}<a class="home-product__store" href="{{ . }}" {{ partial "native-link-focus.html" . }}>{{ $product.storeLabel }}</a>{{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<section id="Journey" class="home-content home-content--resources" aria-labelledby="home-resources-title">
+  <div class="home-content__inner">
+    <div class="home-content__intro">
+      <h2 id="home-resources-title">{{ $content.resourcesTitle }}</h2>
+      <p>{{ $content.resourcesLead }}</p>
+    </div>
+    <div class="home-resources">
+      {{ range $content.resources }}<article class="home-resource"><h3>{{ .title }}</h3><p>{{ .description }}</p><a class="home-content__link" href="{{ $prefix }}{{ .path }}" {{ partial "native-link-focus.html" . }}>{{ .linkLabel }}</a></article>{{ end }}
+    </div>
+    <p class="home-content__hub"><a href="{{ $prefix }}{{ $content.hubPath }}" {{ partial "native-link-focus.html" . }}>{{ $content.hubLabel }}</a></p>
+  </div>
+</section>

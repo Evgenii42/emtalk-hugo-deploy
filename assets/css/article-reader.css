@@ -1,0 +1,82 @@
+/* Native fragments use shared root scroll-padding; sticky audio keeps an extra 8px breathing room. */
+/* Route-local reader presentation; article copy and shared audio logic stay intact. */
+html[data-route-id^="/articles/"] body { background:#fee9fb; color:#281c37; }
+.article-reader { font-family:Manrope,Arial,sans-serif; color:#281c37; background:#fee9fb; padding:128px 32px 88px; }
+.article-reader *,.article-reader *::before,.article-reader *::after { box-sizing:border-box; }
+.article-reader__hero,.article-reader__layout { max-width:1184px; margin:0 auto; }
+.article-reader__hero { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr); gap:48px; align-items:center; padding:0 0 64px; }
+.article-reader__intro { min-width:0; }
+.article-reader__back { display:inline-flex; min-height:44px; gap:12px; align-items:center; color:var(--emt-action); font-weight:700; text-decoration:underline; text-underline-offset:5px; }
+.article-reader__eyebrow { margin:24px 0 18px; color:#694574; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.article-reader h1.h1 { width:auto; margin:0; color:inherit; font:600 clamp(34px,3.5vw,52px)/1.18 Manrope,Arial,sans-serif; letter-spacing:-.035em; text-align:left; }
+.article-reader .text-middle-white { width:auto; height:auto; margin:24px 0 0; color:inherit; font:400 19px/1.7 Manrope,Arial,sans-serif; text-align:left; }
+.article-reader__meta { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 0; color:#694574; font-size:14px; line-height:1.6; }
+.article-reader__actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px 24px; margin-top:28px; }
+.article-reader__read,.article-reader__listen { display:inline-flex; min-height:52px; align-items:center; justify-content:center; gap:24px; font-size:16px; font-weight:700; }
+.article-reader__read { padding:14px 22px; border:1px solid var(--emt-action); border-radius:14px; background:var(--emt-action); color:#fff; text-decoration:none; }
+.article-reader__read:hover { background:var(--emt-action-hover); }
+.article-reader__listen { color:var(--emt-action); text-decoration:underline; text-underline-offset:5px; }
+.article-reader__cover { min-width:0; overflow:hidden; border-radius:28px; background:#d7bed3; }
+.article-reader__cover .image-40 { display:block; width:100%; max-width:none; height:auto; max-height:460px; margin:0; padding:0; aspect-ratio:1/1; object-fit:cover; border-radius:0; }
+.article-reader__layout { display:grid; grid-template-columns:296px minmax(0,1fr); gap:64px; align-items:start; border-top:1px solid #d7bed3; padding-top:48px; }
+.article-reader__sidebar { min-width:0; position:sticky; top:calc(var(--emt-header-top,16px) + var(--emt-header-bar-height,64px) + var(--emt-header-fragment-gap,24px) + 8px); }
+.article-reader__audio { scroll-margin-top:0; }
+.article-reader__audio > .article-reader__eyebrow { margin:0 0 14px; }
+html[data-route-id^="/articles/"] .article-reader .emtalk-audio-player { display:block; width:100%; max-width:none; min-width:0; height:auto; min-height:0; margin:0; padding:20px; border:1px solid #c29ac3; border-radius:20px; background:#d7bed3; box-shadow:none; }
+.article-reader .emtalk-player-ui { width:100%; margin:0; }
+.article-reader .emtalk-audio-player:not([data-player-ready="true"]) .emtalk-player-ui { display:none; }
+.article-reader .emtalk-audio-player[data-player-ready="true"] > audio { display:none; }
+.article-reader .emtalk-player-ui__meta { display:flex; gap:12px; align-items:center; padding:0; margin:0 0 18px; }
+.article-reader .emtalk-player-ui__name { width:auto; min-width:0; margin:0; color:#281c37; font:600 14px/1.6 Manrope,Arial,sans-serif; }
+.article-reader .emtalk-player-ui__cover { flex:0 0 48px; width:48px; height:48px; margin:0; border-radius:10px; object-fit:cover; }
+html[data-route-id^="/articles/"] .article-reader .emtalk-player-ui__controls { display:grid; grid-template-columns:48px 1fr 1fr; gap:8px 12px; width:100%; margin:0; padding:14px; background:#281c37; border-radius:14px; }
+html[data-route-id^="/articles/"] .article-reader .emtalk-player-ui__play { grid-column:1; grid-row:1/3; display:flex; align-items:center; justify-content:center; width:48px; height:48px; min-width:48px; min-height:48px; margin:0; padding:12px; border-radius:50%; }
+.article-reader .emtalk-player-ui__time { width:auto; min-width:0; padding:0; color:#fffefa; font-size:12px; line-height:1.5; }
+.article-reader .emtalk-player-ui__current { grid-column:2; grid-row:2; text-align:left; }
+.article-reader .emtalk-player-ui__duration { grid-column:3; grid-row:2; text-align:right; }
+html[data-route-id^="/articles/"] .article-reader .emtalk-player-ui__progress { grid-column:2/4; grid-row:1; align-self:center; width:100%; min-width:0; margin:0; }
+.article-reader .emtalk-player-status { margin:16px 0 0; font-size:14px; line-height:1.6; }
+.article-reader__contents,.article-reader__overview { margin-top:20px; border-bottom:1px solid #d7bed3; }
+.article-reader summary { display:flex; min-height:52px; gap:16px; align-items:center; justify-content:space-between; padding:12px 0; color:var(--emt-action); font-size:15px; font-weight:700; line-height:1.5; cursor:pointer; list-style:none; }
+.article-reader summary::-webkit-details-marker { display:none; }
+.article-reader details[open] > summary > span { transform:rotate(45deg); }
+.article-reader__contents ol { margin:0; padding:4px 0 20px 22px; }
+.article-reader__contents li { padding:0 0 6px 4px; color:#694574; font-size:14px; line-height:1.65; }
+.article-reader__contents a { display:inline-block; min-height:44px; padding:10px 0; color:var(--emt-action); text-decoration:underline; text-underline-offset:4px; overflow-wrap:anywhere; }
+.article-reader .rich-text-block-4 { width:auto; max-width:none; margin:0; padding:4px 0 20px; color:#694574; font:400 14px/1.8 Manrope,Arial,sans-serif; }
+.article-reader .rich-text-block-4 li { margin:8px 0 8px 20px; }
+.article-reader__text { min-width:0; max-width:72ch; scroll-margin-top:0; }
+.article-reader .rich-text-block-3 { width:auto; height:auto; max-width:none; margin:0; padding:0; color:#281c37; font:400 18px/1.85 Manrope,Arial,sans-serif; text-align:left; overflow-wrap:anywhere; }
+.article-reader .rich-text-block-3 :is(p,ul,ol,blockquote) { margin:0 0 1.35em; font:inherit; color:inherit; }
+.article-reader .rich-text-block-3 :is(h2,h3) { margin:1.8em 0 .7em; color:inherit; font-family:Manrope,Arial,sans-serif; font-weight:600; line-height:1.35; letter-spacing:-.02em; scroll-margin-top:0; }
+.article-reader .rich-text-block-3 > :first-child { margin-top:0; }
+.article-reader .rich-text-block-3 h2 { font-size:28px; }
+.article-reader .rich-text-block-3 h3 { font-size:23px; }
+.article-reader .rich-text-block-3 a { color:var(--emt-action); text-decoration:underline; text-underline-offset:4px; }
+.article-reader .rich-text-block-3 :is(img,video,table) { max-width:100%; height:auto; }
+.article-reader .rich-text-block-3 li { margin:0 0 .6em; padding:0; }
+.article-reader__back-bottom { margin-top:32px; }
+.article-reader :is([tabindex="-1"]):focus-visible { outline:3px solid currentColor; outline-offset:5px; }
+@media (max-width:1023px) {
+ .article-reader__hero { gap:32px; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); }
+ .article-reader__layout { grid-template-columns:250px minmax(0,1fr); gap:32px; }
+ .article-reader .emtalk-player-ui__meta { display:block; }
+ .article-reader .emtalk-player-ui__cover { display:none; }
+}
+@media (max-width:767px) {
+ .article-reader { padding:104px 24px 56px; }
+ .article-reader__hero { display:flex; flex-direction:column; gap:28px; align-items:stretch; padding-bottom:36px; }
+ .article-reader h1.h1 { font-size:34px; }
+ .article-reader .text-middle-white { font-size:18px; }
+ .article-reader__cover .image-40 { aspect-ratio:16/10; max-height:320px; }
+ .article-reader__layout { display:flex; flex-direction:column; gap:36px; padding-top:32px; }
+ .article-reader__sidebar { position:static; width:100%; }
+ .article-reader .emtalk-player-ui__meta { display:flex; }
+ .article-reader .emtalk-player-ui__cover { display:block; }
+ .article-reader .emtalk-player-ui__name { font-size:14px; }
+ .article-reader .rich-text-block-3 { font-size:17px; line-height:1.85; }
+ .article-reader .rich-text-block-3 h2 { font-size:26px; }
+ .article-reader .rich-text-block-3 h3 { font-size:22px; }
+}
+
+@media (max-height:800px) and (min-width:768px) { .article-reader__sidebar { position:static; } }

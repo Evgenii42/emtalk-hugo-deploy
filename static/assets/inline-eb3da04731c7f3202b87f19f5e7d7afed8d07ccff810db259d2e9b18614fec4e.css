@@ -1,0 +1,5 @@
+
+  .emt-inner-page .header-clean__cta,
+  .emt-inner-page .header-clean__mobile-cta {
+    display: none !important;
+  }

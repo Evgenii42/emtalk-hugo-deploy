@@ -1,0 +1,45 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $guide := index hugo.Data "test-experience" -}}
+{{- $scene := (index hugo.Data "home-explore").scene -}}
+{{- $listed := slice -}}{{- range $guide.groups -}}{{- range .tests -}}{{- $listed = $listed | append . -}}{{- end -}}{{- end -}}
+{{- if ne (len $listed) (len (uniq $listed)) -}}{{- errorf "Test catalog has duplicate test entries" -}}{{- end -}}
+<main id="emtalk-main" class="tests-explore" tabindex="-1">
+  <section class="tests-scene" aria-labelledby="tests-title">
+    <picture>{{ range $scene.variants }}<source media="{{ .media }}" srcset="{{ $prefix }}/media/{{ .file }}">{{ end }}<img class="tests-scene__art" src="{{ $prefix }}/media/{{ $scene.file }}" alt="" width="1505" height="1045" fetchpriority="high"></picture>
+    <div class="tests-scene__stars" aria-hidden="true"><span>&#10022;</span><span>&#10023;</span><span>&#10022;</span><span>&#10023;</span><span>&#10022;</span><span>&#10023;</span></div>
+    <div class="tests-scene__content">
+      <p class="tests-eyebrow">{{ $guide.eyebrow }}</p>
+      <h1 id="tests-title">{{ $guide.title }}</h1>
+      <p class="tests-lead">{{ $guide.lead }}</p>
+      <p class="tests-scene__note">{{ len $listed }} self-assessments <span aria-hidden="true">·</span> Free to explore <span aria-hidden="true">·</span> At your pace</p>
+      <a class="tests-text-link" href="#tests-list">Help me choose <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+  <section id="tests-list" class="tests-library tests-width" data-test-catalog aria-labelledby="tests-choose-title" tabindex="-1">
+    <div class="tests-library__heading"><div><p class="tests-eyebrow">Start with what matters to you</p><h2 id="tests-choose-title">What feels closest to your experience?</h2></div><p>Choose a focus, read what the test explores, then decide whether to begin. You do not need to take them all.</p></div>
+    <ol class="tests-choice-path" aria-label="How to choose a test"><li aria-current="step"><span>1</span> Choose your focus</li><li><span>2</span> Read about the test</li><li><span>3</span> Start at your pace</li></ol>
+    <form class="tests-focus-picker" hidden><fieldset><legend>Which sounds most like you?</legend><div class="tests-focus-options">{{ range $guide.groups }}{{ range .tests }}{{ $slug := . }}{{ $copy := index $guide.tests $slug }}<label class="tests-focus-option"><input type="radio" name="test-focus" value="{{ $slug }}" data-focus-label="{{ $copy.focus }}"><span>{{ $copy.focus }}</span></label>{{ end }}{{ end }}</div></fieldset></form>
+    <div class="tests-selection-summary"><p class="tests-focus-status" role="status" aria-live="polite" aria-atomic="true">All five tests are shown. You can compare them below.</p><div class="tests-selection-actions"><a class="tests-see-choice" hidden>See this test <span aria-hidden="true">↓</span></a><button type="button" class="tests-show-all" hidden>Not sure? Compare all 5</button></div></div>
+    <nav class="tests-topics tests-focus-fallback" aria-label="Find a test by topic">{{ range $guide.groups }}<a href="#tests-{{ .id }}">{{ .label }} <span aria-hidden="true">↗</span></a>{{ end }}</nav>
+    {{ range $guide.groups }}
+    <section id="tests-{{ .id }}" class="tests-topic" aria-labelledby="tests-heading-{{ .id }}" tabindex="-1">
+      <div class="tests-topic__intro"><h3 id="tests-heading-{{ .id }}">{{ .prompt }}</h3><p>{{ .description }}</p></div>
+      <div class="tests-topic__cards">
+      {{ range .tests }}
+        {{ $slug := . }}{{ $cms := partial "test-cms.html" $slug }}{{ $copy := index $guide.tests $slug }}{{ $route := printf "/tests/%s" $slug }}{{ $model := index (index hugo.Data "source-content-tests").models $route }}
+        <article class="tests-choice" id="test-choice-{{ $slug }}" data-test-choice="{{ $slug }}" tabindex="-1">
+          <p class="tests-choice__meta">{{ len $model.questions }} questions <span aria-hidden="true">·</span> About {{ index $cms "time" }} min</p>
+          <h4>{{ $copy.question }}</h4><p class="tests-choice__summary">{{ $copy.summary }}</p><p class="tests-choice__scope">{{ $copy.scope }}</p>
+          <p class="tests-choice__method">{{ index $cms "test-title" }}</p>
+          <a class="tests-choice__link" href="{{ $prefix }}{{ $route }}">Read about this test<span class="tests-sr">: {{ index $cms "test-title" }}</span> <span aria-hidden="true">↗</span></a>
+        </article>
+      {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </section>
+  <section class="tests-perspective tests-width" aria-labelledby="tests-perspective-title">
+    <div><p class="tests-eyebrow">A starting point, not a label</p><h2 id="tests-perspective-title">Make room for reflection.</h2></div>
+    <div><p>These self-assessments can help you put words to your experience. They do not provide a diagnosis or replace professional assessment.</p><p>If what you are experiencing persists or affects daily life, consider speaking with a qualified professional.</p><a class="tests-text-link" href="{{ $prefix }}/articles">Prefer to read first? Explore articles <span aria-hidden="true">↗</span></a></div>
+  </section>
+</main>

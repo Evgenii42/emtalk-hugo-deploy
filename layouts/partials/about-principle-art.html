@@ -1,0 +1,15 @@
+{{/* Decorative illustrations mirror the three existing principle titles; no interactive controls. */}}
+<svg class="about-principle-art" viewBox="0 0 140 96" aria-hidden="true" focusable="false" fill="none" xmlns="http://www.w3.org/2000/svg">
+{{ if eq . 2 }}
+  <path d="M18 77h28V58h28V39h28V20h21" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m109 12 14 8-14 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="59" r="8" fill="#d7bed3"/><circle cx="60" cy="40" r="8" fill="#f6d5f1"/><circle cx="88" cy="21" r="8" fill="#fee9fb"/>
+{{ else if eq . 3 }}
+  <circle cx="42" cy="26" r="10" fill="#d7bed3"/><path d="M24 70V55c0-12 7-18 18-18s18 6 18 18v15" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="102" cy="26" r="10" fill="#f6d5f1"/><path d="M84 70V55c0-12 7-18 18-18s18 6 18 18v15M60 55h22m-8-8 8 8-8 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="78" r="6" fill="#fee9fb"/>
+{{ else }}
+  <path d="M20 72V20h100v52M20 80h100" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="31" y="51" width="23" height="20" rx="4" fill="#d7bed3"/><rect x="58" y="40" width="23" height="31" rx="4" fill="#f6d5f1"/><rect x="85" y="28" width="23" height="43" rx="4" fill="#fee9fb"/>
+{{ end }}
+</svg>

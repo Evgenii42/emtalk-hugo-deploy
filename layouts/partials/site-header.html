@@ -1,0 +1,37 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $route := .route -}}
+{{- $apps := in (slice "/bret" "/bret/practice" "/dm" "/dm/workspace" "/tapl") $route -}}
+<header class="site-header">
+  {{/* Explicit0 keeps the shared navigation in native Tab order in WebKit, without positive tabindex values. */}}
+  {{ with .skipTarget }}<a class="site-header__skip" href="{{ .href }}" tabindex="0">Skip to content</a>{{ end }}
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="{{ $prefix }}/" tabindex="0" aria-label="EmTalk home"{{ if eq $route "/" }} aria-current="page"{{ end }}><img src="{{ $prefix }}/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp" alt="" width="32" height="32"><span>EmTalk</span></a>
+    <div class="site-header__navs">
+    <nav class="site-header__desktop" aria-label="Main navigation">
+      {{ partial "site-direct-link.html" (dict "route" $route "path" "/articles" "label" "Articles" "section" true) }}
+      {{ partial "site-direct-link.html" (dict "route" $route "path" "/tests" "label" "Tests" "section" true) }}
+      {{/* Apps marks only its product section. Generic mobile Menu keeps current-page semantics on its destination links. */ -}}
+      <details class="site-header__disclosure"><summary{{ if $apps }} data-current="true" aria-current="location"{{ end }}>Apps <span aria-hidden="true">⌄</span></summary>
+        <div class="site-header__panel" role="group" aria-label="Apps">
+          {{ partial "site-app-links.html" (dict "route" $route) }}
+        </div>
+      </details>
+      {{ partial "site-direct-link.html" (dict "route" $route "path" "/about-us" "label" "About" "section" false) }}
+    </nav>
+    <nav class="site-header__mobile" aria-label="Main navigation">
+      {{ partial "site-direct-link.html" (dict "route" $route "path" "/articles" "label" "Articles" "section" true) }}
+      {{/* Menu is a stable generic control; current-page cues belong to its destination links, rather than marking the whole site as current. */}}
+      <details class="site-header__disclosure"><summary>Menu <span aria-hidden="true">⌄</span></summary>
+        <div class="site-header__panel site-header__panel--mobile">
+          {{ partial "site-direct-link.html" (dict "route" $route "path" "/tests" "label" "Tests" "section" true) }}
+          <div role="group" aria-label="Apps">
+            <p>Apps</p>
+            {{ partial "site-app-links.html" (dict "route" $route) }}
+          </div>
+          {{ partial "site-direct-link.html" (dict "route" $route "path" "/about-us" "label" "About" "section" false) }}
+        </div>
+      </details>
+    </nav>
+    </div>
+  </div>
+</header>

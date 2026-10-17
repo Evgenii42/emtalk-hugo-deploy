@@ -1,0 +1,65 @@
+{{/* API: partial "article-catalog.html" (dict "page" $page). Shared header/footer remain caller-owned. */}}
+{{- $library := index hugo.Data "article-library" -}}
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $routes := slice -}}
+{{- $topics := dict -}}
+{{- range $library.topics -}}
+  {{- if or (not .id) (eq .id "all") (not .label) (not .statusLabel) (isset $topics .id) -}}
+    {{- errorf "Article catalog subjects require unique IDs, labels and announcement labels" -}}
+  {{- end -}}
+  {{- $topics = merge $topics (dict .id .) -}}
+{{- end -}}
+{{- if or (not $topics) (not $library.allTopicsLabel) -}}{{- errorf "Article catalog requires subjects and an All label" -}}{{- end -}}
+{{- if or (not $library.title) (not $library.intro) (not $library.articles) (not $library.hero.src) -}}
+  {{- errorf "Article catalog requires title, intro, local hero and public article rows in data/article-library.json" -}}
+{{- end -}}
+{{- $hero := $library.hero -}}
+{{- if or (not $hero.src) (not (strings.HasPrefix $hero.src "media/")) (ne (path.Clean $hero.src) $hero.src) (strings.Contains $hero.src "\\") (not (fileExists (printf "static/%s" $hero.src))) (le ($hero.width | default 0) 0) (le ($hero.height | default 0) 0) -}}
+  {{- errorf "Article catalog hero requires an existing local media image and positive width and height" -}}
+{{- end -}}
+{{- range $hero.variants -}}
+  {{- if or (not .src) (not (strings.HasPrefix .src "media/")) (ne (path.Clean .src) .src) (strings.Contains .src "\\") (not (fileExists (printf "static/%s" .src))) (le (.width | default 0) 0) -}}
+    {{- errorf "Article catalog hero variant requires an existing local media image and positive width" -}}
+  {{- end -}}
+{{- end -}}
+{{- range $library.articles -}}
+  {{- if or (not (strings.HasPrefix .route "/articles/")) (not (isset $topics .topic)) (not .title) (not .summary) (not (strings.HasPrefix .cover.src "media/")) (not (fileExists (printf "static/%s" .cover.src))) (le .readingMinutes 0) (le .listeningMinutes 0) -}}
+    {{- errorf "Article catalog row requires a published route, subject, title, summary, local cover and positive source times: %s" .route -}}
+  {{- end -}}
+  {{- $routes = $routes | append .route -}}
+{{- end -}}
+{{- if ne (len $routes) (len (uniq $routes)) -}}{{- errorf "Article catalog routes must be unique" -}}{{- end -}}
+<main class="article-catalog" aria-labelledby="emtalk-main">
+  <section class="article-catalog__hero">
+    <div class="article-catalog__twinkles" aria-hidden="true"><span>&#10022;</span><span>&#10023;</span><span>&#10022;</span><span>&#10023;</span><span>&#10022;</span><span>&#10023;</span></div>
+    <div class="article-catalog__width article-catalog__hero-inner">
+      <div class="article-catalog__intro">
+        <h1 id="emtalk-main" tabindex="-1">{{ $library.title }}</h1>
+        {{ range $index, $paragraph := $library.intro }}<p class="{{ if eq $index 0 }}article-catalog__lead{{ else }}article-catalog__note{{ end }}">{{ $paragraph }}</p>{{ end }}
+        <a class="article-catalog__browse" href="#Articles" {{ partial "native-link-focus.html" . }}>Browse articles <span aria-hidden="true">&#8595;</span></a>
+      </div>
+    </div>
+      <div class="article-catalog__art" aria-hidden="true"><img src="{{ $prefix }}/{{ $library.hero.src }}" {{ with $library.hero.variants }}srcset="{{ range $index, $variant := . }}{{ if $index }}, {{ end }}{{ $prefix }}/{{ $variant.src }} {{ $variant.width }}w{{ end }}" {{ end }} sizes="(min-width: 901px) 74vw, 100vw" width="{{ $library.hero.width }}" height="{{ $library.hero.height }}" alt="" decoding="async" fetchpriority="high"></div>
+  </section>
+  <div class="article-library-surface">
+  <section id="Articles" class="article-library article-catalog__width" data-article-catalog aria-labelledby="article-library-title" tabindex="-1">
+    <div class="article-library__heading"><h2 id="article-library-title">Explore the articles</h2><p>Read or listen, at your own pace.</p></div>
+    <div class="article-library__filters" data-article-filters role="group" aria-label="Filter articles by subject" hidden>
+      <button type="button" data-article-filter="all" data-article-reset data-article-label="{{ $library.allTopicsLabel }}" aria-pressed="true">{{ $library.allTopicsLabel }} <span>{{ len $library.articles }}</span></button>
+      {{ range $library.topics }}<button type="button" data-article-filter="{{ .id }}" data-article-label="{{ .statusLabel }}" aria-pressed="false">{{ .label }} <span>{{ len (where $library.articles "topic" .id) }}</span></button>{{ end }}
+    </div>
+    <div class="article-library__meta"><p class="article-library__count" data-article-count role="status" aria-live="polite" aria-atomic="true">{{ $library.allTopicsLabel }} {{ len $library.articles }} {{ if eq (len $library.articles) 1 }}article is{{ else }}articles are{{ end }} shown.</p><p class="article-library__times">Reading and listening times are approximate.</p></div>
+    <div class="article-library__grid">
+      {{ range $library.articles }}{{ $id := printf "article-card-%s" (strings.TrimPrefix "/articles/" .route) }}
+      <article class="article-library__entry" data-article-topic="{{ .topic }}">
+        <a class="article-card" href="{{ partial "article-url.html" (dict "route" .route) }}" aria-labelledby="{{ $id }}" {{ partial "native-link-focus.html" . }}>
+          <img class="article-card__cover" src="{{ $prefix }}/{{ .cover.src }}" width="{{ .cover.width }}" height="{{ .cover.height }}" alt="{{ .cover.alt }}" loading="lazy" decoding="async">
+          <div class="article-card__body"><p class="article-card__topic">{{ (index $topics .topic).label }}</p><h3 id="{{ $id }}">{{ .title }}</h3><p class="article-card__summary">{{ .summary }}</p><p class="article-card__time"><span>{{ .readingMinutes }} min read</span><span aria-hidden="true">&middot;</span><span>{{ .listeningMinutes }} min listen</span></p><span class="article-card__open">Read article <span aria-hidden="true">&#8599;</span></span></div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+    {{ if or $library.topicCrossListing $library.sourceTopicsWithoutArticles }}<details class="article-library__topics"><summary>More topics</summary>{{ with $library.topicCrossListing }}<p>{{ . }}</p>{{ end }}{{ with $library.sourceTopicsWithoutArticles }}<p>No articles yet: {{ delimit . ", " }}.</p>{{ end }}</details>{{ end }}
+  </section>
+  </div>
+</main>

@@ -1,0 +1,119 @@
+{{/* Source-layout integrity gate, not a restriction on plain-text copy edits.
+Approved structural edits: preserve the immutable baseline, update this mapping and
+its shape fixtures together, then repeat content/keyboard/motion review per docs/content/about.md.
+Unchanged copy-node shapes do not require editing this template or its source identity. */}}
+{{- $page := .page -}}
+{{- $errors := slice -}}
+{{- if ne $page.sourceHash "75b73ddd89e42411283eced221ac142f32c031cd3aa3b98a304daf34ebf0298d" -}}
+  {{- $errors = $errors | append "source identity changed" -}}
+{{- end -}}
+{{- $sections := slice -}}
+{{- range $position, $node := $page.body.children -}}
+  {{- if and (reflect.IsMap $node) (eq $node.tag "section") -}}
+    {{- $sections = $sections | append $node -}}
+  {{- else if and (eq (printf "%T" $node) "string") (eq (strings.TrimSpace $node) "") -}}
+    {{/* Source serialization whitespace is the only non-section top-level content. */}}
+  {{- else -}}
+    {{- $errors = $errors | append (printf "unexpected top-level node at slot %d" $position) -}}
+  {{- end -}}
+{{- end -}}
+{{- $heroStory := dict -}}{{- $howInner := dict -}}{{- $howStory := dict -}}
+{{- if ne (len $sections) 6 -}}
+  {{- $errors = $errors | append "expected five content sections and one footer" -}}
+{{- else -}}
+  {{- $classes := slice "section-hero" "section-why" "section-how" "section-who" "section-contribution" "section-30" -}}
+  {{- $ids := slice "" "Why" "How" "Who" "Section-Contribution" "" -}}
+  {{- range $index, $section := $sections -}}
+    {{- if not (and (reflect.IsMap $section.attributes) (eq (index $section.attributes "class") (index $classes $index))) -}}
+      {{- $errors = $errors | append (printf "section order or class changed at slot %d" $index) -}}
+    {{- end -}}
+    {{- if and (gt $index 0) (lt $index 5) -}}
+      {{- if not (and (reflect.IsMap $section.attributes) (eq (index $section.attributes "id") (index $ids $index))) -}}
+        {{- $errors = $errors | append (printf "story section anchor changed at slot %d" $index) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $hero := index $sections 0 -}}
+  {{- if and (eq (len $hero.children) 1) (reflect.IsMap (index $hero.children 0)) -}}
+    {{- $heroInner := index $hero.children 0 -}}
+    {{- if and (eq (len $heroInner.children) 3) (reflect.IsMap (index $heroInner.children 1)) -}}
+      {{- $heroStory = index $heroInner.children 1 -}}
+      {{- if gt (len $heroStory.children) 0 -}}
+        {{- $heading := index $heroStory.children 0 -}}
+        {{- if not (and (reflect.IsMap $heading) (eq $heading.tag "h1") (reflect.IsMap $heading.attributes) (eq (index $heading.attributes "id") "emtalk-main")) -}}
+          {{- $errors = $errors | append "hero heading must be h1 with id emtalk-main" -}}
+        {{- end -}}
+      {{- else -}}{{- $errors = $errors | append "hero heading missing" -}}{{- end -}}
+    {{- else -}}{{- $errors = $errors | append "hero story structure changed" -}}{{- end -}}
+  {{- else -}}{{- $errors = $errors | append "hero container structure changed" -}}{{- end -}}
+  {{- $how := index $sections 2 -}}
+  {{- if and (eq (len $how.children) 1) (reflect.IsMap (index $how.children 0)) -}}
+    {{- $howInner = index $how.children 0 -}}
+    {{- if and (eq (len $howInner.children) 2) (reflect.IsMap (index $howInner.children 0)) -}}
+      {{- $howStory = index $howInner.children 0 -}}
+      {{- if eq (len $howStory.children) 5 -}}
+        {{- range $number, $principle := $howStory.children -}}{{- if gt $number 1 -}}
+          {{- if and (reflect.IsMap $principle) (eq $principle.tag "div") (eq (len $principle.children) 5) -}}
+            {{- if ne (printf "%T" (index $principle.children 0)) "string" -}}{{- $errors = $errors | append "principle heading must be text" -}}{{- end -}}
+            {{- range $line, $node := $principle.children -}}
+              {{- if in (slice 1 3) $line -}}
+                {{- if not (and (reflect.IsMap $node) (eq $node.tag "br") (eq (len $node.children) 0)) -}}{{- $errors = $errors | append "principle separator must be an empty br" -}}{{- end -}}
+              {{- else -}}
+                {{- if ne (printf "%T" $node) "string" -}}{{- $errors = $errors | append "principle copy must be text" -}}{{- end -}}
+              {{- end -}}
+            {{- end -}}
+          {{- else -}}{{- $errors = $errors | append "principle structure changed" -}}{{- end -}}
+        {{- end -}}{{- end -}}
+      {{- else -}}{{- $errors = $errors | append "expected heading, intro and three principles" -}}{{- end -}}
+    {{- else -}}{{- $errors = $errors | append "principles story structure changed" -}}{{- end -}}
+  {{- else -}}{{- $errors = $errors | append "principles container structure changed" -}}{{- end -}}
+  {{/* These exact source slots drive the route-local editorial CSS. Fail before rendering if they drift. */}}
+  {{- range $contract := slice (dict "index" 1 "classes" (slice "header-level-2" "text-block-44" "text-block-44" "text-block-44")) (dict "index" 3 "classes" (slice "header-level-2-white" "text-block-how" "text-block-how" "text-block-how" "text-block-how")) (dict "index" 4 "classes" (slice "header-level-2" "text-block-contr" "header-level-3" "cards-level-1" "cards-level-2")) -}}
+    {{- $section := index $sections $contract.index -}}
+    {{- $valid := false -}}
+    {{- if and (eq (len $section.children) 1) (reflect.IsMap (index $section.children 0)) -}}
+      {{- $container := index $section.children 0 -}}
+      {{- if and (gt (len $container.children) 0) (reflect.IsMap (index $container.children 0)) -}}
+        {{- $story := index $container.children 0 -}}
+        {{- if and (reflect.IsMap $story.attributes) (eq (index $story.attributes "class") "div-block-123") (eq (len $story.children) (len $contract.classes)) -}}
+          {{- $valid = true -}}
+          {{- range $position, $class := $contract.classes -}}
+            {{- $node := index $story.children $position -}}
+            {{- $tag := "div" -}}{{- if eq $position 0 -}}{{- $tag = "h2" -}}{{- else if and (eq $contract.index 4) (eq $position 2) -}}{{- $tag = "h3" -}}{{- end -}}
+            {{- if not (and (reflect.IsMap $node) (eq $node.tag $tag) (reflect.IsMap $node.attributes) (eq (index $node.attributes "class") $class)) -}}{{- $valid = false -}}{{- end -}}
+            {{- if and (eq $contract.index 4) (gt $position 2) -}}
+              {{- $count := 3 -}}{{- if eq $position 4 -}}{{- $count = 2 -}}{{- end -}}
+              {{- if not (and (reflect.IsMap $node) (eq (len $node.children) $count)) -}}{{- $valid = false -}}{{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $valid -}}{{- $errors = $errors | append (printf "story layout slots changed in section %d" $contract.index) -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $errors -}}
+  {{- errorf "About source contract invalid: /about-us: %s. For approved structural changes see docs/content/about.md" (delimit $errors "; ") -}}
+{{- else -}}
+{{/* The first principle br is a validated heading/body separator; its remaining body nodes are rendered in order. */}}
+<main class="about-page" aria-labelledby="emtalk-main">
+  <section class="section-hero about-hero">
+    <div class="container-26">
+      <p class="about-eyebrow">About EmTalk</p>
+      {{ partial "node.html" $heroStory }}
+      <div class="about-hero__actions"><a class="about-button" href="#Why" {{ partial "native-link-focus.html" . }}>Why we build <span aria-hidden="true">↓</span></a><a class="about-text-link" href="#Section-Contribution" {{ partial "native-link-focus.html" . }}>Be part of EmTalk <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="about-hero__illustration" aria-hidden="true"><img src="{{ "media/about-horizon-v1.webp" | relURL }}" srcset="{{ "media/about-horizon-v1.webp" | relURL }} 720w, {{ "media/about-horizon-large-v1.webp" | relURL }} 1440w" sizes="(min-width: 1024px) 90vw, 145vw" width="720" height="540" alt="" decoding="async"></div>
+  </section>
+  <nav class="about-sections" aria-label="On this page"><div class="about-sections__inner"><span>Explore our story</span><a href="#Why" {{ partial "native-link-focus.html" . }}>Why we build</a><a href="#How" {{ partial "native-link-focus.html" . }}>How we work</a><a href="#Who" {{ partial "native-link-focus.html" . }}>Who it is for</a><a href="#Section-Contribution" {{ partial "native-link-focus.html" . }}>Join in</a></div></nav>
+  {{ range $index, $section := $sections }}{{ if and (gt $index 0) (lt $index 5) }}{{ if eq (index $section.attributes "id") "How" }}
+  {{ $inner := $howInner }}{{ $story := $howStory }}
+  <section{{ partial "attributes.html" (merge $section.attributes (dict "tabindex" "-1")) }}><div class="container-26"><div class="div-block-123">
+    {{ partial "node.html" (index $story.children 0) }}{{ partial "node.html" (index $story.children 1) }}
+    {{ range $number, $principle := $story.children }}{{ if gt $number 1 }}<article class="about-principle">{{ partial "about-principle-art.html" $number }}<h3>{{ partial "node.html" (index $principle.children 0) }}</h3><p>{{ range $line, $node := $principle.children }}{{ if gt $line 1 }}{{ partial "node.html" $node }}{{ end }}{{ end }}</p></article>{{ end }}{{ end }}
+  </div>{{ partial "node.html" (index $inner.children 1) }}</div></section>
+  {{ else }}{{ $accessibleSection := merge $section (dict "attributes" (merge $section.attributes (dict "tabindex" "-1"))) }}{{ partial "node.html" $accessibleSection }}{{ end }}{{ end }}{{ end }}
+  <section class="about-invitation" aria-labelledby="about-invitation-title"><div><p class="about-eyebrow">Start a conversation</p><h2 id="about-invitation-title">Find your way to be part of EmTalk.</h2><p>Want to contribute, share an idea, or give feedback? We would like to hear from you.</p><a class="about-button" href="mailto:info@emtalk.org" {{ partial "native-link-focus.html" . }}>Write to us <span aria-hidden="true">↗</span></a></div></section>
+</main>
+
+{{- end -}}

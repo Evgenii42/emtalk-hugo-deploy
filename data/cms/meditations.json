@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "sourceFile": "docs/sources/mcp/2026-10-12/cms/69658fb7ac5f765d79b22732.json",
+  "sourceSha256": "ed6c4b4fabb8cf1b31387881d60ac2046183c94a2da82a8caec11877dda7816e",
+  "liveApiVerified": false,
+  "collection": {
+    "id": "69658fb7ac5f765d79b22732",
+    "displayName": "Meditations",
+    "singularName": "Meditation",
+    "slug": "meditations",
+    "createdOn": "2026-01-13T00:20:07.567Z",
+    "lastUpdated": "2026-01-13T00:26:25.725Z",
+    "fields": [
+      {
+        "id": "820162a0972eeed49ee6ca3d40e51a5c",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "description",
+        "displayName": "Description",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "6256607620e2e39d455587ce46c91dcf",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Image",
+        "slug": "small-image",
+        "displayName": "Small Image"
+      },
+      {
+        "id": "d2f1ab7c7c46d2a6f463505a2c4df7ac",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Image",
+        "slug": "image",
+        "displayName": "Image"
+      },
+      {
+        "id": "dafc822f5fd45d796ccf957236a3370a",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "order",
+        "displayName": "Order",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "ddba50256394298c73a11dd4b5078923",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Switch",
+        "slug": "is-active",
+        "displayName": "is active"
+      },
+      {
+        "id": "b4b187abd03b35b7610995b35e58a17c",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "sound-url",
+        "displayName": "Sound URL",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "daf6a759d56ade2f149857ec85bdacf3",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "time",
+        "displayName": "Time",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "ae93687f4ac1168492f0d4171ddbab0f",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "name",
+        "displayName": "Name",
+        "validations": {
+          "maxLength": 256
+        }
+      },
+      {
+        "id": "ac79a09d42341bbda24673fe90b263ef",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "slug",
+        "displayName": "Slug",
+        "validations": {
+          "maxLength": 256,
+          "pattern": {},
+          "messages": {
+            "pattern": "Must be alphanumerical and not contain any spaces or special characters",
+            "maxLength": "Must be less than 256 characters"
+          }
+        }
+      }
+    ],
+    "fieldGroups": []
+  },
+  "items": [
+    {
+      "id": "69658fd1faac15436a0e938c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-01-13T11:40:23.167Z",
+      "lastUpdated": "2026-01-13T00:26:34.823Z",
+      "createdOn": "2026-01-13T00:20:33.819Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "description": "A quick ambient session to ease tension and bring back calm.",
+        "small-image": {
+          "fileId": "6965905faddef75f0a142df3",
+          "url": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6965905faddef75f0a142df3_Test.webp",
+          "alt": null
+        },
+        "image": {
+          "fileId": "6965905faddef75f0a142df3",
+          "url": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/6965905faddef75f0a142df3_Test.webp",
+          "alt": null
+        },
+        "order": 1,
+        "is-active": true,
+        "sound-url": null,
+        "time": 5,
+        "name": "Relax Short",
+        "slug": "relax-short"
+      }
+    }
+  ]
+}

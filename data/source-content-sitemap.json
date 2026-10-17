@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 1,
+  "scope": "Exact original SEO sitemap admission set minus explicit owner meditation exclusion",
+  "sourceFiles": [
+    {
+      "file": "docs/sources/public/2026-10-11-public/sitemaps/001.xml",
+      "sha256": "58137d452d7347022b15601aa01ac52c67c3b5bc436d8ca1953f714327a259f5"
+    }
+  ],
+  "originalCount": 38,
+  "expectedTargetCount": 37,
+  "routes": [
+    {
+      "path": "/",
+      "sourceLoc": "https://www.emtalk.org",
+      "exactSuffix": "",
+      "lastmod": "2026-09-11T13:23:22.573Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles",
+      "sourceLoc": "https://www.emtalk.org/articles",
+      "exactSuffix": "/articles",
+      "lastmod": "2026-09-18T12:58:57.175Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/tests",
+      "sourceLoc": "https://www.emtalk.org/tests",
+      "exactSuffix": "/tests",
+      "lastmod": "2026-09-18T12:46:20.041Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/bret",
+      "sourceLoc": "https://www.emtalk.org/bret",
+      "exactSuffix": "/bret",
+      "lastmod": "2026-09-07T20:40:58.331Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/dm",
+      "sourceLoc": "https://www.emtalk.org/dm",
+      "exactSuffix": "/dm",
+      "lastmod": "2026-09-07T20:48:09.080Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/about-us",
+      "sourceLoc": "https://www.emtalk.org/about-us",
+      "exactSuffix": "/about-us",
+      "lastmod": "2026-09-07T20:40:28.013Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/tests/maslach-burnout-inventory",
+      "sourceLoc": "https://www.emtalk.org/tests/maslach-burnout-inventory",
+      "exactSuffix": "/tests/maslach-burnout-inventory",
+      "lastmod": "2026-09-06T21:25:16.488Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/tests/mobbing-test",
+      "sourceLoc": "https://www.emtalk.org/tests/mobbing-test",
+      "exactSuffix": "/tests/mobbing-test",
+      "lastmod": "2026-09-06T21:17:38.915Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/tests/motivation-test-by-gerchikov",
+      "sourceLoc": "https://www.emtalk.org/tests/motivation-test-by-gerchikov",
+      "exactSuffix": "/tests/motivation-test-by-gerchikov",
+      "lastmod": "2026-09-06T21:17:38.915Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/tests/social-phobia-inventory-spin",
+      "sourceLoc": "https://www.emtalk.org/tests/social-phobia-inventory-spin",
+      "exactSuffix": "/tests/social-phobia-inventory-spin",
+      "lastmod": "2026-09-06T21:25:16.488Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/tests/spielberger-state-trait-anxiety-inventory",
+      "sourceLoc": "https://www.emtalk.org/tests/spielberger-state-trait-anxiety-inventory",
+      "exactSuffix": "/tests/spielberger-state-trait-anxiety-inventory",
+      "lastmod": "2026-09-06T21:17:38.915Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+      "sourceLoc": "https://www.emtalk.org/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+      "exactSuffix": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/burnout-prevention-vs-recovery",
+      "sourceLoc": "https://www.emtalk.org/articles/burnout-prevention-vs-recovery",
+      "exactSuffix": "/articles/burnout-prevention-vs-recovery",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/how-to-know-if-you-are-burned-out",
+      "sourceLoc": "https://www.emtalk.org/articles/how-to-know-if-you-are-burned-out",
+      "exactSuffix": "/articles/how-to-know-if-you-are-burned-out",
+      "lastmod": "2026-09-06T21:17:38.915Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+      "sourceLoc": "https://www.emtalk.org/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+      "exactSuffix": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/the-chemistry-behind-a-good-nights-sleep",
+      "sourceLoc": "https://www.emtalk.org/articles/the-chemistry-behind-a-good-nights-sleep",
+      "exactSuffix": "/articles/the-chemistry-behind-a-good-nights-sleep",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+      "sourceLoc": "https://www.emtalk.org/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+      "exactSuffix": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/the-truth-about-how-much-sleep-you-need",
+      "sourceLoc": "https://www.emtalk.org/articles/the-truth-about-how-much-sleep-you-need",
+      "exactSuffix": "/articles/the-truth-about-how-much-sleep-you-need",
+      "lastmod": "2026-09-07T20:41:16.365Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+      "sourceLoc": "https://www.emtalk.org/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+      "exactSuffix": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/articles/why-sleep-matters",
+      "sourceLoc": "https://www.emtalk.org/articles/why-sleep-matters",
+      "exactSuffix": "/articles/why-sleep-matters",
+      "lastmod": "2026-09-06T20:55:31.407Z",
+      "sourceRobotsMeta": [],
+      "sourceNoindex": false
+    },
+    {
+      "path": "/affirmations/af-01",
+      "sourceLoc": "https://www.emtalk.org/affirmations/af-01",
+      "exactSuffix": "/affirmations/af-01",
+      "lastmod": "2026-01-08T23:51:50.715Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/affirmations/af-02",
+      "sourceLoc": "https://www.emtalk.org/affirmations/af-02",
+      "exactSuffix": "/affirmations/af-02",
+      "lastmod": "2026-01-08T23:51:50.715Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/bret-delete-your-account-and-associated-data",
+      "sourceLoc": "https://www.emtalk.org/documents/bret-delete-your-account-and-associated-data",
+      "exactSuffix": "/documents/bret-delete-your-account-and-associated-data",
+      "lastmod": "2026-01-21T02:14:27.757Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/bret-delete-your-account-and-associated-data-v1",
+      "sourceLoc": "https://www.emtalk.org/documents/bret-delete-your-account-and-associated-data-v1",
+      "exactSuffix": "/documents/bret-delete-your-account-and-associated-data-v1",
+      "lastmod": "2026-09-06T16:02:46.211Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/bret-privacy-policy",
+      "sourceLoc": "https://www.emtalk.org/documents/bret-privacy-policy",
+      "exactSuffix": "/documents/bret-privacy-policy",
+      "lastmod": "2026-01-21T01:52:22.711Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/bret-privacy-policy-v1",
+      "sourceLoc": "https://www.emtalk.org/documents/bret-privacy-policy-v1",
+      "exactSuffix": "/documents/bret-privacy-policy-v1",
+      "lastmod": "2026-09-06T16:02:46.211Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/bret-terms-and-conditions-of-use",
+      "sourceLoc": "https://www.emtalk.org/documents/bret-terms-and-conditions-of-use",
+      "exactSuffix": "/documents/bret-terms-and-conditions-of-use",
+      "lastmod": "2026-01-21T01:52:22.711Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/bret-terms-and-conditions-of-use-v1",
+      "sourceLoc": "https://www.emtalk.org/documents/bret-terms-and-conditions-of-use-v1",
+      "exactSuffix": "/documents/bret-terms-and-conditions-of-use-v1",
+      "lastmod": "2026-09-06T16:02:46.211Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/dm-delete-your-account-and-associated-data",
+      "sourceLoc": "https://www.emtalk.org/documents/dm-delete-your-account-and-associated-data",
+      "exactSuffix": "/documents/dm-delete-your-account-and-associated-data",
+      "lastmod": "2026-01-21T02:14:06.332Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/dm-delete-your-account-and-associated-data-v1",
+      "sourceLoc": "https://www.emtalk.org/documents/dm-delete-your-account-and-associated-data-v1",
+      "exactSuffix": "/documents/dm-delete-your-account-and-associated-data-v1",
+      "lastmod": "2026-09-06T16:02:46.211Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/dm-privacy-policy",
+      "sourceLoc": "https://www.emtalk.org/documents/dm-privacy-policy",
+      "exactSuffix": "/documents/dm-privacy-policy",
+      "lastmod": "2026-01-21T02:14:06.332Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/dm-privacy-policy-v1",
+      "sourceLoc": "https://www.emtalk.org/documents/dm-privacy-policy-v1",
+      "exactSuffix": "/documents/dm-privacy-policy-v1",
+      "lastmod": "2026-09-06T16:02:46.211Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/dm-terms-and-conditions-of-use",
+      "sourceLoc": "https://www.emtalk.org/documents/dm-terms-and-conditions-of-use",
+      "exactSuffix": "/documents/dm-terms-and-conditions-of-use",
+      "lastmod": "2026-03-30T15:19:55.787Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/dm-terms-and-conditions-of-use-v1",
+      "sourceLoc": "https://www.emtalk.org/documents/dm-terms-and-conditions-of-use-v1",
+      "exactSuffix": "/documents/dm-terms-and-conditions-of-use-v1",
+      "lastmod": "2026-09-06T16:02:46.211Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/emtalk-delete-your-account-and-associated-data",
+      "sourceLoc": "https://www.emtalk.org/documents/emtalk-delete-your-account-and-associated-data",
+      "exactSuffix": "/documents/emtalk-delete-your-account-and-associated-data",
+      "lastmod": "2026-08-31T16:15:36.856Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/emtalk-privacy-policy",
+      "sourceLoc": "https://www.emtalk.org/documents/emtalk-privacy-policy",
+      "exactSuffix": "/documents/emtalk-privacy-policy",
+      "lastmod": "2026-04-06T19:33:28.259Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    },
+    {
+      "path": "/documents/emtalk-terms-and-conditions-of-use",
+      "sourceLoc": "https://www.emtalk.org/documents/emtalk-terms-and-conditions-of-use",
+      "exactSuffix": "/documents/emtalk-terms-and-conditions-of-use",
+      "lastmod": "2026-04-06T19:33:16.798Z",
+      "sourceRobotsMeta": [
+        "noindex, nofollow"
+      ],
+      "sourceNoindex": true
+    }
+  ],
+  "routePaths": [
+    "/",
+    "/articles",
+    "/tests",
+    "/bret",
+    "/dm",
+    "/about-us",
+    "/tests/maslach-burnout-inventory",
+    "/tests/mobbing-test",
+    "/tests/motivation-test-by-gerchikov",
+    "/tests/social-phobia-inventory-spin",
+    "/tests/spielberger-state-trait-anxiety-inventory",
+    "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+    "/articles/burnout-prevention-vs-recovery",
+    "/articles/how-to-know-if-you-are-burned-out",
+    "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+    "/articles/the-chemistry-behind-a-good-nights-sleep",
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+    "/articles/the-truth-about-how-much-sleep-you-need",
+    "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+    "/articles/why-sleep-matters",
+    "/affirmations/af-01",
+    "/affirmations/af-02",
+    "/documents/bret-delete-your-account-and-associated-data",
+    "/documents/bret-delete-your-account-and-associated-data-v1",
+    "/documents/bret-privacy-policy",
+    "/documents/bret-privacy-policy-v1",
+    "/documents/bret-terms-and-conditions-of-use",
+    "/documents/bret-terms-and-conditions-of-use-v1",
+    "/documents/dm-delete-your-account-and-associated-data",
+    "/documents/dm-delete-your-account-and-associated-data-v1",
+    "/documents/dm-privacy-policy",
+    "/documents/dm-privacy-policy-v1",
+    "/documents/dm-terms-and-conditions-of-use",
+    "/documents/dm-terms-and-conditions-of-use-v1",
+    "/documents/emtalk-delete-your-account-and-associated-data",
+    "/documents/emtalk-privacy-policy",
+    "/documents/emtalk-terms-and-conditions-of-use"
+  ],
+  "excludedOriginalPaths": [
+    "/meditations/relax-short"
+  ],
+  "additionalSourceRoutesNotAdded": [
+    {
+      "path": "/affirmations",
+      "sourceNoindex": true,
+      "ownerExcluded": false
+    },
+    {
+      "path": "/meditations",
+      "sourceNoindex": true,
+      "ownerExcluded": true
+    },
+    {
+      "path": "/tapl",
+      "sourceNoindex": true,
+      "ownerExcluded": false
+    }
+  ],
+  "retainedSourceNoindexPaths": [
+    "/affirmations/af-01",
+    "/affirmations/af-02",
+    "/documents/bret-delete-your-account-and-associated-data",
+    "/documents/bret-delete-your-account-and-associated-data-v1",
+    "/documents/bret-privacy-policy",
+    "/documents/bret-privacy-policy-v1",
+    "/documents/bret-terms-and-conditions-of-use",
+    "/documents/bret-terms-and-conditions-of-use-v1",
+    "/documents/dm-delete-your-account-and-associated-data",
+    "/documents/dm-delete-your-account-and-associated-data-v1",
+    "/documents/dm-privacy-policy",
+    "/documents/dm-privacy-policy-v1",
+    "/documents/dm-terms-and-conditions-of-use",
+    "/documents/dm-terms-and-conditions-of-use-v1",
+    "/documents/emtalk-delete-your-account-and-associated-data",
+    "/documents/emtalk-privacy-policy",
+    "/documents/emtalk-terms-and-conditions-of-use"
+  ],
+  "policy": "Retain existing source noindex entries as explicit parity; do not add union-only/noindex routes automatically",
+  "activeTargetPageCount": 39
+}

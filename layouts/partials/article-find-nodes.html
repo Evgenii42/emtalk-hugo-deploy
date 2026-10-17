@@ -1,0 +1,17 @@
+{{- $found := slice -}}
+{{- $node := .node -}}
+{{- $class := .class | default "" -}}
+{{- $tag := .tag | default "" -}}
+{{- $withId := .withId | default false -}}
+{{- if reflect.IsMap $node -}}
+  {{- $attrs := $node.attributes | default (dict) -}}
+  {{- if and (or (not $tag) (eq $node.tag $tag)) (or (not $class) (in (split (index $attrs "class" | default "") " ") $class)) (or (not $withId) (isset $attrs "id")) -}}
+    {{- $found = $found | append $node -}}
+  {{- end -}}
+  {{- range $node.children -}}
+    {{- range partial "article-find-nodes.html" (dict "node" . "class" $class "tag" $tag "withId" $withId) -}}
+      {{- $found = $found | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $found -}}

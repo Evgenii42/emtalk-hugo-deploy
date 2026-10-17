@@ -1,0 +1,2769 @@
+{
+  "schemaVersion": 1,
+  "sourceFile": "docs/sources/mcp/2026-10-12/cms/695a37f096ba170fa8cae236.json",
+  "sourceSha256": "8e0bca148a37b2e3f7f119c90ccbb3b5cd9a4a456a06e5d9b3ce344408279882",
+  "liveApiVerified": false,
+  "collection": {
+    "id": "695a37f096ba170fa8cae236",
+    "displayName": "Answers v2s",
+    "singularName": "Answers v2",
+    "slug": "answers-v2",
+    "createdOn": "2026-01-04T09:50:40.084Z",
+    "lastUpdated": "2026-01-04T09:50:40.357Z",
+    "fields": [
+      {
+        "id": "c494805c3e3ed13899c599fb2962e01a",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "answer-text",
+        "displayName": "Answer Text",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "cf307fa0c9ee888cd0801fc64a1ef3b0",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Reference",
+        "slug": "question",
+        "displayName": "Question",
+        "validations": {
+          "collectionId": "695a36fc72303659b0dc0928"
+        }
+      },
+      {
+        "id": "54a99d80be4c7e4ca5c0f5cbb0f7e4ea",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "order",
+        "displayName": "Order",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "4e397fb944f948e8910681b1b2097090",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "name",
+        "displayName": "Name",
+        "validations": {
+          "maxLength": 256
+        }
+      },
+      {
+        "id": "9b2d740cb256b934c40f2be2ebcf9303",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "slug",
+        "displayName": "Slug",
+        "validations": {
+          "maxLength": 256,
+          "pattern": {},
+          "messages": {
+            "pattern": "Must be alphanumerical and not contain any spaces or special characters",
+            "maxLength": "Must be less than 256 characters"
+          }
+        }
+      }
+    ],
+    "fieldGroups": []
+  },
+  "items": [
+    {
+      "id": "6a6d14d5cc9cafb4c9b15354",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.924Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Almost always",
+        "question": null,
+        "order": 4,
+        "name": "Trait A4 Spielberger",
+        "slug": "trait-a4-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15352",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.923Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Often",
+        "question": null,
+        "order": 3,
+        "name": "Trait A3 Spielberger",
+        "slug": "trait-a3-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15350",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.922Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Sometimes",
+        "question": null,
+        "order": 2,
+        "name": "Trait A2 Spielberger",
+        "slug": "trait-a2-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1534e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.921Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Almost never",
+        "question": null,
+        "order": 1,
+        "name": "Trait A1 Spielberger",
+        "slug": "trait-a1-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1534c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.920Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very much so",
+        "question": null,
+        "order": 4,
+        "name": "State A4 Spielberger",
+        "slug": "state-a4-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1534a",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.919Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Moderately so",
+        "question": null,
+        "order": 3,
+        "name": "State A3 Spielberger",
+        "slug": "state-a3-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15348",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.918Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Somewhat",
+        "question": null,
+        "order": 2,
+        "name": "State A2 Spielberger",
+        "slug": "state-a2-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15346",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.917Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not at all",
+        "question": null,
+        "order": 1,
+        "name": "State A1 Spielberger",
+        "slug": "state-a1-spielberger"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15344",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.916Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q28 A6 Gerchikov",
+        "slug": "q28-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15342",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.915Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I've been working here for many years, I'm used to it, and I won't be able to leave.",
+        "question": null,
+        "order": 5,
+        "name": "Q28 A5 Gerchikov",
+        "slug": "q28-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15340",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.913Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "We have a great team, and we work towards a common goal.",
+        "question": null,
+        "order": 4,
+        "name": "Q28 A4 Gerchikov",
+        "slug": "q28-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1533e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.912Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I feel like the master of my work here.",
+        "question": null,
+        "order": 3,
+        "name": "Q28 A3 Gerchikov",
+        "slug": "q28-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1533c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.911Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I can fully demonstrate my knowledge and skills.",
+        "question": null,
+        "order": 2,
+        "name": "Q28 A2 Gerchikov",
+        "slug": "q28-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1533a",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.910Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The salary here suits me.",
+        "question": null,
+        "order": 1,
+        "name": "Q28 A1 Gerchikov",
+        "slug": "q28-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15338",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.909Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q27 A6 Gerchikov",
+        "slug": "q27-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15336",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.908Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I would like to change jobs, but I probably won't, because although it's unstable everywhere, at least here I have something.",
+        "question": null,
+        "order": 5,
+        "name": "Q27 A5 Gerchikov",
+        "slug": "q27-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15334",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.907Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "There is no unity in the team, no striving for a common goal.",
+        "question": null,
+        "order": 4,
+        "name": "Q27 A4 Gerchikov",
+        "slug": "q27-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15332",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.906Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Management is too controlling, and I want more independence.",
+        "question": null,
+        "order": 3,
+        "name": "Q27 A3 Gerchikov",
+        "slug": "q27-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15330",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.905Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I can't fully apply my knowledge and skills here.",
+        "question": null,
+        "order": 2,
+        "name": "Q27 A2 Gerchikov",
+        "slug": "q27-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1532e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.904Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I want to get a higher salary.",
+        "question": null,
+        "order": 1,
+        "name": "Q27 A1 Gerchikov",
+        "slug": "q27-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1532c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.903Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I'd rather leave the organization.",
+        "question": null,
+        "order": 7,
+        "name": "Q26 A7 Gerchikov",
+        "slug": "q26-a7-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1532a",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.902Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q26 A6 Gerchikov",
+        "slug": "q26-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15328",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.901Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I'll just endure it because there's nowhere else to go.",
+        "question": null,
+        "order": 5,
+        "name": "Q26 A5 Gerchikov",
+        "slug": "q26-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15326",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.900Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Work more intensively.",
+        "question": null,
+        "order": 4,
+        "name": "Q26 A4 Gerchikov",
+        "slug": "q26-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15324",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.899Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Switch to a less convenient work schedule.",
+        "question": null,
+        "order": 3,
+        "name": "Q26 A3 Gerchikov",
+        "slug": "q26-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15322",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.898Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Work part-time or take a lower-paid, less qualified job.",
+        "question": null,
+        "order": 2,
+        "name": "Q26 A2 Gerchikov",
+        "slug": "q26-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15320",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.896Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Learn a new profession.",
+        "question": null,
+        "order": 1,
+        "name": "Q26 A1 Gerchikov",
+        "slug": "q26-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1531e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.895Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 8,
+        "name": "Q25 A8 Gerchikov",
+        "slug": "q25-a8-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1531c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.894Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "No, it's too much responsibility for me.",
+        "question": null,
+        "order": 7,
+        "name": "Q25 A7 Gerchikov",
+        "slug": "q25-a7-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1531a",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.893Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "No, management does not attract me, I can earn well in my current position.",
+        "question": null,
+        "order": 6,
+        "name": "Q25 A6 Gerchikov",
+        "slug": "q25-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15318",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.892Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Yes, because I will be able to better apply my knowledge and skills.",
+        "question": null,
+        "order": 5,
+        "name": "Q25 A5 Gerchikov",
+        "slug": "q25-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15316",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.891Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Yes, why not?",
+        "question": null,
+        "order": 4,
+        "name": "Q25 A4 Gerchikov",
+        "slug": "q25-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15314",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.884Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I don't mind if it's needed for the greater good.",
+        "question": null,
+        "order": 3,
+        "name": "Q25 A3 Gerchikov",
+        "slug": "q25-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15312",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.883Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Yes, if it is paid accordingly.",
+        "question": null,
+        "order": 2,
+        "name": "Q25 A2 Gerchikov",
+        "slug": "q25-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15310",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.881Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Yes, because it will give me the opportunity to make independent and responsible decisions.",
+        "question": null,
+        "order": 1,
+        "name": "Q25 A1 Gerchikov",
+        "slug": "q25-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1530e",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.880Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Nothing particularly attracts me, I'm not attached to a managerial position.",
+        "question": null,
+        "order": 7,
+        "name": "Q24 A7 Gerchikov",
+        "slug": "q24-a7-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1530c",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.879Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q24 A6 Gerchikov",
+        "slug": "q24-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b1530a",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.878Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The best way to apply my knowledge and skills.",
+        "question": null,
+        "order": 5,
+        "name": "Q24 A5 Gerchikov",
+        "slug": "q24-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15308",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.877Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The ability to organize the work of others.",
+        "question": null,
+        "order": 4,
+        "name": "Q24 A4 Gerchikov",
+        "slug": "q24-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15306",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.876Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The ability to bring the greatest benefit to the organization.",
+        "question": null,
+        "order": 3,
+        "name": "Q24 A3 Gerchikov",
+        "slug": "q24-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15304",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.875Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "High pay.",
+        "question": null,
+        "order": 2,
+        "name": "Q24 A2 Gerchikov",
+        "slug": "q24-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15302",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.874Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The ability to make independent decisions.",
+        "question": null,
+        "order": 1,
+        "name": "Q24 A1 Gerchikov",
+        "slug": "q24-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b15300",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.873Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q23 A6 Gerchikov",
+        "slug": "q23-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152fe",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.872Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Management intervenes too much in matters where the employee knows better.",
+        "question": null,
+        "order": 5,
+        "name": "Q23 A5 Gerchikov",
+        "slug": "q23-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152fc",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.871Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Management is more often to blame — they don't provide normal working conditions but still demand results.",
+        "question": null,
+        "order": 4,
+        "name": "Q23 A4 Gerchikov",
+        "slug": "q23-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152fa",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.870Z",
+      "createdOn": "2026-07-31T21:34:13.149Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Dissatisfaction with unfair pay, so people don't work as well as they could.",
+        "question": null,
+        "order": 3,
+        "name": "Q23 A3 Gerchikov",
+        "slug": "q23-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152f8",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.869Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "They care more about personal interests than the company's interests, which harms the overall business.",
+        "question": null,
+        "order": 2,
+        "name": "Q23 A2 Gerchikov",
+        "slug": "q23-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152f6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.868Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Lack of professionals — among both employees and managers.",
+        "question": null,
+        "order": 1,
+        "name": "Q23 A1 Gerchikov",
+        "slug": "q23-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152f4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.867Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q22 A6 Gerchikov",
+        "slug": "q22-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152f2",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.865Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "A professional cannot do a bad job, so quality is important all the time, even if the customer can't appreciate it.",
+        "question": null,
+        "order": 5,
+        "name": "Q22 A5 Gerchikov",
+        "slug": "q22-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152f0",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.864Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Quality is especially important when it's paid extra.",
+        "question": null,
+        "order": 4,
+        "name": "Q22 A4 Gerchikov",
+        "slug": "q22-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152ee",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.863Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "You need to meet the requirements because mistakes and defects are punished.",
+        "question": null,
+        "order": 3,
+        "name": "Q22 A3 Gerchikov",
+        "slug": "q22-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152ec",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.862Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Don't slack off, but the quality of my work depends on the resources and conditions I have.",
+        "question": null,
+        "order": 2,
+        "name": "Q22 A2 Gerchikov",
+        "slug": "q22-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152ea",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.861Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The quality of our work is very important because, in the end, it determines the organization's reputation.",
+        "question": null,
+        "order": 1,
+        "name": "Q22 A1 Gerchikov",
+        "slug": "q22-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152e8",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.860Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q21 A6 Gerchikov",
+        "slug": "q21-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152e6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.859Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Without control, it's hard to determine who did how much and what they should get for it.",
+        "question": null,
+        "order": 5,
+        "name": "Q21 A5 Gerchikov",
+        "slug": "q21-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152e4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.858Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I recognize only professional control.",
+        "question": null,
+        "order": 4,
+        "name": "Q21 A4 Gerchikov",
+        "slug": "q21-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152e2",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.857Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Control only hinders work; a good worker knows what and how to do.",
+        "question": null,
+        "order": 3,
+        "name": "Q21 A3 Gerchikov",
+        "slug": "q21-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152e0",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.856Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Control is needed primarily for the benefit of the whole business.",
+        "question": null,
+        "order": 2,
+        "name": "Q21 A2 Gerchikov",
+        "slug": "q21-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152de",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.855Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Control is necessary because some workers may slack off.",
+        "question": null,
+        "order": 1,
+        "name": "Q21 A1 Gerchikov",
+        "slug": "q21-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152dc",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.854Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 7,
+        "name": "Q20 A7 Gerchikov",
+        "slug": "q20-a7-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152da",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.852Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Promotion is not the main thing, it's important that the work is paid decently.",
+        "question": null,
+        "order": 6,
+        "name": "Q20 A6 Gerchikov",
+        "slug": "q20-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152d8",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.851Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Their ability to behave correctly with management.",
+        "question": null,
+        "order": 5,
+        "name": "Q20 A5 Gerchikov",
+        "slug": "q20-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152d6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.850Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "How responsibly they approach any task assigned to them.",
+        "question": null,
+        "order": 4,
+        "name": "Q20 A4 Gerchikov",
+        "slug": "q20-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152d4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.849Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "How their level of professionalism grows.",
+        "question": null,
+        "order": 3,
+        "name": "Q20 A3 Gerchikov",
+        "slug": "q20-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152d2",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.848Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Their connections and acquaintances.",
+        "question": null,
+        "order": 2,
+        "name": "Q20 A2 Gerchikov",
+        "slug": "q20-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152d0",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.847Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Whether the employee is valuable and indispensable to the organization.",
+        "question": null,
+        "order": 1,
+        "name": "Q20 A1 Gerchikov",
+        "slug": "q20-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152ce",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.846Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I can't imagine leaving my current organization.",
+        "question": null,
+        "order": 7,
+        "name": "Q19 A7 Gerchikov",
+        "slug": "q19-a7-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152cc",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.845Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q19 A6 Gerchikov",
+        "slug": "q19-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152ca",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.844Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I would return to my previous workplace because we have a great team.",
+        "question": null,
+        "order": 5,
+        "name": "Q19 A5 Gerchikov",
+        "slug": "q19-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152c8",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.843Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The one with not too heavy work and, although small, a guaranteed income.",
+        "question": null,
+        "order": 4,
+        "name": "Q19 A4 Gerchikov",
+        "slug": "q19-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152c6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.842Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The one with the highest pay.",
+        "question": null,
+        "order": 3,
+        "name": "Q19 A3 Gerchikov",
+        "slug": "q19-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152c4",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.841Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The most independent and autonomous one.",
+        "question": null,
+        "order": 2,
+        "name": "Q19 A2 Gerchikov",
+        "slug": "q19-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d5cc9cafb4c9b152c2",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.840Z",
+      "createdOn": "2026-07-31T21:34:13.148Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The most interesting, creative one.",
+        "question": null,
+        "order": 1,
+        "name": "Q19 A1 Gerchikov",
+        "slug": "q19-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295635",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.839Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q18 A6 Gerchikov",
+        "slug": "q18-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295633",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.837Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I have enough knowledge and experience to handle difficulties.",
+        "question": null,
+        "order": 5,
+        "name": "Q18 A5 Gerchikov",
+        "slug": "q18-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295631",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.836Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "We solve complex issues as a team. The team is a great force, any difficulties are manageable.",
+        "question": null,
+        "order": 4,
+        "name": "Q18 A4 Gerchikov",
+        "slug": "q18-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429562f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.835Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I am obliged to handle difficulties on my own in the work assigned to me.",
+        "question": null,
+        "order": 3,
+        "name": "Q18 A3 Gerchikov",
+        "slug": "q18-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429562d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.834Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I am ready to solve complex issues because my salary depends on it.",
+        "question": null,
+        "order": 2,
+        "name": "Q18 A2 Gerchikov",
+        "slug": "q18-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429562b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.833Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I turn to my manager.",
+        "question": null,
+        "order": 1,
+        "name": "Q18 A1 Gerchikov",
+        "slug": "q18-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295629",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.832Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q17 A6 Gerchikov",
+        "slug": "q17-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295627",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.831Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Teamwork is very important to me, it is impossible to achieve significant results alone.",
+        "question": null,
+        "order": 5,
+        "name": "Q17 A5 Gerchikov",
+        "slug": "q17-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295625",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.830Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I need freedom of action, but the team often limits this freedom.",
+        "question": null,
+        "order": 4,
+        "name": "Q17 A4 Gerchikov",
+        "slug": "q17-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295623",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.829Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I prefer to work autonomously, but I can also work in a team of professionals.",
+        "question": null,
+        "order": 3,
+        "name": "Q17 A3 Gerchikov",
+        "slug": "q17-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295621",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.828Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I like working in a team — I can always rely on a colleague, and if things go wrong, we'll deal with it together.",
+        "question": null,
+        "order": 2,
+        "name": "Q17 A2 Gerchikov",
+        "slug": "q17-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429561f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.827Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "You can work in a team, but payment should be based on personal results.",
+        "question": null,
+        "order": 1,
+        "name": "Q17 A1 Gerchikov",
+        "slug": "q17-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429561d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.826Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q16 A6 Gerchikov",
+        "slug": "q16-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429561b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.813Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "They want to earn money, since any useful initiative should be rewarded.",
+        "question": null,
+        "order": 5,
+        "name": "Q16 A5 Gerchikov",
+        "slug": "q16-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295619",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.812Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "They want to realize their knowledge and experience, going beyond established work boundaries.",
+        "question": null,
+        "order": 4,
+        "name": "Q16 A4 Gerchikov",
+        "slug": "q16-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295617",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.811Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "They usually want to improve the organization's work.",
+        "question": null,
+        "order": 3,
+        "name": "Q16 A3 Gerchikov",
+        "slug": "q16-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295615",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.810Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "They want to win the favor of management.",
+        "question": null,
+        "order": 2,
+        "name": "Q16 A2 Gerchikov",
+        "slug": "q16-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295613",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.809Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "They feel special responsibility for their work.",
+        "question": null,
+        "order": 1,
+        "name": "Q16 A1 Gerchikov",
+        "slug": "q16-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295611",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.808Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q15 A6 Gerchikov",
+        "slug": "q15-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429560f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.807Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The worker sells their labor to the organization, and if they are not given a good price, they have the right to find another buyer.",
+        "question": null,
+        "order": 5,
+        "name": "Q15 A5 Gerchikov",
+        "slug": "q15-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429560d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.806Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "A person works for the organization, but they should do their job on their own; excessive attachment to the team only interferes.",
+        "question": null,
+        "order": 4,
+        "name": "Q15 A4 Gerchikov",
+        "slug": "q15-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429560b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.805Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The worker spends their energy on the organization, and the organization must guarantee their salary and social benefits.",
+        "question": null,
+        "order": 3,
+        "name": "Q15 A3 Gerchikov",
+        "slug": "q15-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295609",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.804Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The worker comes to the organization to develop their abilities. The organization should provide this opportunity and benefit from it.",
+        "question": null,
+        "order": 2,
+        "name": "Q15 A2 Gerchikov",
+        "slug": "q15-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295607",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.802Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "The worker should treat the organization as their home and share all difficulties and successes. The organization should accordingly value the worker's loyalty and effort.",
+        "question": null,
+        "order": 1,
+        "name": "Q15 A1 Gerchikov",
+        "slug": "q15-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295605",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.801Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q14 A3 Gerchikov",
+        "slug": "q14-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295603",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:39:59.799Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q14 A2 Gerchikov",
+        "slug": "q14-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295601",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.661Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q14 A1 Gerchikov",
+        "slug": "q14-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955ff",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.660Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q13 A3 Gerchikov",
+        "slug": "q13-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955fd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.659Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q13 A2 Gerchikov",
+        "slug": "q13-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955fb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.658Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q13 A1 Gerchikov",
+        "slug": "q13-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955f9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.656Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q12 A3 Gerchikov",
+        "slug": "q12-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955f7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.655Z",
+      "createdOn": "2026-07-31T21:34:11.068Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q12 A2 Gerchikov",
+        "slug": "q12-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955f5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.654Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q12 A1 Gerchikov",
+        "slug": "q12-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955f3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.653Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q11 A3 Gerchikov",
+        "slug": "q11-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955f1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.652Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q11 A2 Gerchikov",
+        "slug": "q11-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955ef",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.650Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q11 A1 Gerchikov",
+        "slug": "q11-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955ed",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.649Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q10 A3 Gerchikov",
+        "slug": "q10-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955eb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.648Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q10 A2 Gerchikov",
+        "slug": "q10-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955e9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.647Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q10 A1 Gerchikov",
+        "slug": "q10-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955e7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.646Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q9 A3 Gerchikov",
+        "slug": "q9-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955e5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.645Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q9 A2 Gerchikov",
+        "slug": "q9-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955e3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.643Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q9 A1 Gerchikov",
+        "slug": "q9-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955e1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.642Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q8 A3 Gerchikov",
+        "slug": "q8-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955df",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.641Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q8 A2 Gerchikov",
+        "slug": "q8-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955dd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.640Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q8 A1 Gerchikov",
+        "slug": "q8-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955db",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.639Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q7 A3 Gerchikov",
+        "slug": "q7-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955d9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.638Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q7 A2 Gerchikov",
+        "slug": "q7-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955d7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.636Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q7 A1 Gerchikov",
+        "slug": "q7-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955d5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.635Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not important at all",
+        "question": null,
+        "order": 3,
+        "name": "Q6 A3 Gerchikov",
+        "slug": "q6-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955d3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.633Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not very important",
+        "question": null,
+        "order": 2,
+        "name": "Q6 A2 Gerchikov",
+        "slug": "q6-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955d1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.632Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very important",
+        "question": null,
+        "order": 1,
+        "name": "Q6 A1 Gerchikov",
+        "slug": "q6-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955cf",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.631Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q5 A6 Gerchikov",
+        "slug": "q5-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955cd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.629Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I need a guaranteed income, even if it's small, but stable.",
+        "question": null,
+        "order": 5,
+        "name": "Q5 A5 Gerchikov",
+        "slug": "q5-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955cb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.628Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "It's payment for my contribution to the overall success of the organization.",
+        "question": null,
+        "order": 4,
+        "name": "Q5 A4 Gerchikov",
+        "slug": "q5-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955c9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.626Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Whatever it is, I earned it myself.",
+        "question": null,
+        "order": 3,
+        "name": "Q5 A3 Gerchikov",
+        "slug": "q5-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955c7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.625Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "It's payment for the time and effort spent on the job.",
+        "question": null,
+        "order": 2,
+        "name": "Q5 A2 Gerchikov",
+        "slug": "q5-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955c5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.624Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "It's primarily a reward for my knowledge and qualifications.",
+        "question": null,
+        "order": 1,
+        "name": "Q5 A1 Gerchikov",
+        "slug": "q5-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955c3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.623Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 5,
+        "name": "Q4 A5 Gerchikov",
+        "slug": "q4-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955c1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.622Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Assign tasks according to qualifications and ensure material support.",
+        "question": null,
+        "order": 4,
+        "name": "Q4 A4 Gerchikov",
+        "slug": "q4-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955bf",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.621Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Distribute the work and clearly define who is responsible for what.",
+        "question": null,
+        "order": 3,
+        "name": "Q4 A3 Gerchikov",
+        "slug": "q4-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955bd",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.619Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Control the progress of the work and make sure everything is done properly.",
+        "question": null,
+        "order": 2,
+        "name": "Q4 A2 Gerchikov",
+        "slug": "q4-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955bb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.618Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Ensure team cohesion.",
+        "question": null,
+        "order": 1,
+        "name": "Q4 A1 Gerchikov",
+        "slug": "q4-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955b9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.617Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q3 A6 Gerchikov",
+        "slug": "q3-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955b7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.616Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I prefer to work with full personal responsibility.",
+        "question": null,
+        "order": 5,
+        "name": "Q3 A5 Gerchikov",
+        "slug": "q3-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955b5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.615Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "It must be clear what needs to be done and what I will receive for it.",
+        "question": null,
+        "order": 4,
+        "name": "Q3 A4 Gerchikov",
+        "slug": "q3-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955b3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.613Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "There must always be something new in the job to avoid stagnation.",
+        "question": null,
+        "order": 3,
+        "name": "Q3 A3 Gerchikov",
+        "slug": "q3-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955b1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.604Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I am ready to do whatever is necessary for the organization.",
+        "question": null,
+        "order": 2,
+        "name": "Q3 A2 Gerchikov",
+        "slug": "q3-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955af",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.603Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I prefer to do what is familiar and comfortable.",
+        "question": null,
+        "order": 1,
+        "name": "Q3 A1 Gerchikov",
+        "slug": "q3-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955ad",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.602Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q2 A6 Gerchikov",
+        "slug": "q2-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955ab",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.601Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I am a valuable, indispensable employee for the organization.",
+        "question": null,
+        "order": 5,
+        "name": "Q2 A5 Gerchikov",
+        "slug": "q2-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955a9",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.600Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I always do what is required of me.",
+        "question": null,
+        "order": 4,
+        "name": "Q2 A4 Gerchikov",
+        "slug": "q2-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955a7",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.598Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I have enough knowledge and experience to handle any difficulties in my job.",
+        "question": null,
+        "order": 3,
+        "name": "Q2 A3 Gerchikov",
+        "slug": "q2-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955a5",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.597Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I am the master of my work.",
+        "question": null,
+        "order": 2,
+        "name": "Q2 A2 Gerchikov",
+        "slug": "q2-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955a3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.596Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I can provide a decent income for myself and my family.",
+        "question": null,
+        "order": 1,
+        "name": "Q2 A1 Gerchikov",
+        "slug": "q2-a1-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e4842955a1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.595Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Other",
+        "question": null,
+        "order": 6,
+        "name": "Q1 A6 Gerchikov",
+        "slug": "q1-a6-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429559f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.594Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I don't particularly value anything, but the job is familiar and comfortable.",
+        "question": null,
+        "order": 5,
+        "name": "Q1 A5 Gerchikov",
+        "slug": "q1-a5-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429559d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.593Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I am paid well for it.",
+        "question": null,
+        "order": 4,
+        "name": "Q1 A4 Gerchikov",
+        "slug": "q1-a4-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e48429559b",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.592Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I feel useful and necessary as an employee.",
+        "question": null,
+        "order": 3,
+        "name": "Q1 A3 Gerchikov",
+        "slug": "q1-a3-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295599",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.591Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "It allows me to demonstrate what I know and can do.",
+        "question": null,
+        "order": 2,
+        "name": "Q1 A2 Gerchikov",
+        "slug": "q1-a2-gerchikov"
+      }
+    },
+    {
+      "id": "6a6d14d34a24a0e484295597",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:41:21.711Z",
+      "lastUpdated": "2026-07-31T21:40:06.590Z",
+      "createdOn": "2026-07-31T21:34:11.067Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "I decide what and how to do things myself.",
+        "question": null,
+        "order": 1,
+        "name": "Q1 A1 Gerchikov",
+        "slug": "q1-a1-gerchikov"
+      }
+    },
+    {
+      "id": "696376db5a8493b0caf95a80",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.588Z",
+      "lastUpdated": "2026-07-31T21:40:06.588Z",
+      "createdOn": "2026-01-11T10:09:31.483Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Every day",
+        "question": null,
+        "order": 7,
+        "name": "A7 Emotional Exhaustion",
+        "slug": "a7-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696376c6bc78ca8d24bec2e3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.587Z",
+      "lastUpdated": "2026-07-31T21:40:06.587Z",
+      "createdOn": "2026-01-11T10:09:10.294Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "A few times a week",
+        "question": null,
+        "order": 6,
+        "name": "A6 Emotional Exhaustion",
+        "slug": "a6-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696376a5ee157a9f6943a389",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.586Z",
+      "lastUpdated": "2026-07-31T21:40:06.586Z",
+      "createdOn": "2026-01-11T10:08:37.800Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Once a week",
+        "question": null,
+        "order": 5,
+        "name": "A5 Emotional Exhaustion",
+        "slug": "a5-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69637685dc6712cdeda74fbb",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.585Z",
+      "lastUpdated": "2026-07-31T21:40:06.585Z",
+      "createdOn": "2026-01-11T10:08:05.043Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "A few times a month",
+        "question": null,
+        "order": 4,
+        "name": "A4 Emotional Exhaustion",
+        "slug": "a4-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "6963766826eb6ead1a695d5d",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.584Z",
+      "lastUpdated": "2026-07-31T21:40:06.584Z",
+      "createdOn": "2026-01-11T10:07:36.184Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Once a month",
+        "question": null,
+        "order": 3,
+        "name": "A3 Emotional Exhaustion",
+        "slug": "a3-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "69637633a49fbdc2c67164c3",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.583Z",
+      "lastUpdated": "2026-07-31T21:40:06.583Z",
+      "createdOn": "2026-01-11T10:06:43.894Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "A few times a year",
+        "question": null,
+        "order": 2,
+        "name": "A2 Emotional Exhaustion",
+        "slug": "a2-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "696375b017d6448d536b7487",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.581Z",
+      "lastUpdated": "2026-07-31T21:40:06.581Z",
+      "createdOn": "2026-01-11T10:04:32.279Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Never",
+        "question": null,
+        "order": null,
+        "name": "A1 Emotional Exhaustion",
+        "slug": "a1-emotional-exhaustion"
+      }
+    },
+    {
+      "id": "695f6e67a3af393c1f0ed603",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.908Z",
+      "lastUpdated": "2026-07-31T21:40:06.908Z",
+      "createdOn": "2026-01-08T08:44:23.096Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "No",
+        "question": "695f6cdbb5f3f526a93f0913",
+        "order": 1,
+        "name": "A2 Q1 Mobbing test",
+        "slug": "a2-q1-mobbing-test"
+      }
+    },
+    {
+      "id": "695f6e3c16321f7e86331250",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.910Z",
+      "lastUpdated": "2026-07-31T21:40:06.910Z",
+      "createdOn": "2026-01-08T08:43:40.199Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Yes",
+        "question": "695f6cdbb5f3f526a93f0913",
+        "order": 1,
+        "name": "A1 Q1 Mobbing test",
+        "slug": "a1-q1-mobbing-test"
+      }
+    },
+    {
+      "id": "695a5d04068371dd28c8d266",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.915Z",
+      "lastUpdated": "2026-07-31T21:40:06.915Z",
+      "createdOn": "2026-01-04T12:28:52.622Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Extremely",
+        "question": "695a376d1334dcd50637a572",
+        "order": 5,
+        "name": "A5 Q Anxiety test (system)",
+        "slug": "a1-q2-anxiety-test-system"
+      }
+    },
+    {
+      "id": "695a385b3d3896edb998ea83",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.914Z",
+      "lastUpdated": "2026-07-31T21:40:06.914Z",
+      "createdOn": "2026-01-04T09:52:27.723Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Very much",
+        "question": "695a3737ec64ef30d068b1cb",
+        "order": 4,
+        "name": "A4 Q Anxiety test (system)",
+        "slug": "a4-q1-anxiety-test-system"
+      }
+    },
+    {
+      "id": "695a384d6f756e21ad810ed1",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.912Z",
+      "lastUpdated": "2026-07-31T21:40:06.912Z",
+      "createdOn": "2026-01-04T09:52:13.604Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Somewhat",
+        "question": "695a3737ec64ef30d068b1cb",
+        "order": 3,
+        "name": "A3 Q Anxiety test (system)",
+        "slug": "a3-q1-anxiety-test-system"
+      }
+    },
+    {
+      "id": "695a38366206c56554015755",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.906Z",
+      "lastUpdated": "2026-07-31T21:40:06.906Z",
+      "createdOn": "2026-01-04T09:51:50.335Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "A little bit",
+        "question": "695a3737ec64ef30d068b1cb",
+        "order": 2,
+        "name": "A2 Q Anxiety test (system)",
+        "slug": "a2-q1-anxiety-test-system"
+      }
+    },
+    {
+      "id": "695a381f3adf0e4d050bccf6",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-07-31T21:40:06.903Z",
+      "lastUpdated": "2026-07-31T21:40:06.903Z",
+      "createdOn": "2026-01-04T09:51:27.279Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "answer-text": "Not at all",
+        "question": "695a3737ec64ef30d068b1cb",
+        "order": 1,
+        "name": "A1 Q Anxiety test (system)",
+        "slug": "a1-q1-anxiety-test-system"
+      }
+    }
+  ]
+}

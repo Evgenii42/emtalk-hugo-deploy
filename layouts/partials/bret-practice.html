@@ -1,0 +1,41 @@
+{{- $entry := (index hugo.Data.render.pages "/bret/practice").ownedEntry -}}
+<main id="emtalk-main" class="bret-practice" tabindex="-1" data-bret-practice data-audio-root="{{ hugo.Data.render.mountPrefix }}/bret/audio/">
+  <div class="bret-intro"><p class="bret-eyebrow">BRET / FREE WEB PRACTICE</p><h1>{{ $entry.title }}</h1><p>{{ $entry.lead }}</p><a href="{{ hugo.Data.render.mountPrefix }}/bret" {{ partial "native-link-focus.html" . }}>About BRET</a></div>
+  <noscript><p class="bret-notice">This timed practice needs JavaScript. BRET offers five breathing rhythms and progressive muscle relaxation. You can read about BRET using the link above.</p></noscript>
+  <p data-bret-load-error class="bret-notice" role="status" hidden>The practice could not load. Please reload this page to try again. You can still read about BRET using the link above.</p>
+  <div data-bret-app hidden>
+    <p class="bret-notice">Stay within a comfortable range. Breathe normally or stop if you feel uncomfortable. This is a relaxation practice, not medical treatment.</p>
+    {{/* Deliberately polite for this relaxation context: sound failures have a
+    visible fallback and optional Skip, rather than interrupting narration with
+    an assertive alert. Invalid fields retain aria-invalid/described feedback;
+    native reportValidity supplies immediate focused submit validation. This
+    design choice is not a claim of tested physical screen-reader delivery. */}}
+    <p id="bret-feedback" data-feedback role="status" class="bret-feedback"></p>
+    <p id="bret-persistence-feedback" data-persistence-feedback role="status" class="bret-feedback"></p>
+    <section data-setup aria-labelledby="bret-choose"><h2 id="bret-choose">Your practice, your pace</h2>
+      <form data-practice-form>
+        <fieldset class="bret-modes"><legend>Choose a practice</legend><label><input type="radio" name="mode" value="breathing" checked> Breathing</label><label><input type="radio" name="mode" value="custom"> Custom breathing</label><label><input type="radio" name="mode" value="pmr"> Muscle relaxation</label></fieldset>
+        <div class="bret-config" data-standard><label for="bret-preset">Breathing rhythm</label><select id="bret-preset" name="preset"><option value="4444">4 : 4 : 4 : 4 / To ground</option><option value="478">4 : 7 : 8 / To relax</option><option value="464">4 : 6 : 4 / To restore</option><option value="343">3 : 4 : 3 / To refocus</option><option value="575">5 : 7 : 5 / To concentrate</option></select><p>Inhale, hold, exhale, then hold where included. Values are seconds.</p></div>
+        <fieldset class="bret-custom" data-custom hidden><legend>Seconds in each phase</legend><label>Inhale<input name="inhale" type="number" min="1" max="10" value="4" required></label><label>Hold after inhale<input name="holdIn" type="number" min="0" max="10" value="2" required></label><label>Exhale<input name="exhale" type="number" min="1" max="10" value="4" required></label><label>Hold after exhale<input name="holdOut" type="number" min="0" max="10" value="2" required></label><p>A zero hold is skipped. One-second phases can end before a spoken cue finishes. Follow the labels and timer; you can turn spoken guidance off.</p></fieldset>
+        <div data-cycles-field><label for="bret-cycles">Cycles</label><input id="bret-cycles" name="cycles" type="number" min="1" max="99" value="10" required></div>
+        <fieldset class="bret-groups" data-groups hidden><legend>Muscle groups</legend>{{ range $id, $name := dict "head" "Head" "neck" "Neck" "chest" "Chest" "back" "Upper back" "arms" "Arms" "abdomen" "Abdomen" "legs" "Legs" "feet" "Feet" }}<label><input type="checkbox" name="group" value="{{ $id }}" checked> {{ $name }}</label>{{ end }}<p>No selection means all groups. Every practice ends with whole-body relaxation and a gentle finish.</p></fieldset>
+        <button class="bret-primary" type="submit">Start practice</button>
+      </form>
+    </section>
+    <section data-session hidden aria-labelledby="bret-session-heading">
+      <h2 id="bret-session-heading" tabindex="-1">Your practice</h2>
+      <div class="bret-orbit" data-orbit aria-hidden="true"><span></span></div>
+      <div class="bret-body-guide" data-body-guide hidden aria-hidden="true"><svg viewBox="0 0 180 280" focusable="false"><g class="bret-body-base"><circle cx="90" cy="32" r="23"/><path d="M80 55h20v20h-20z M63 76q27-10 54 0l-5 95H68z M61 78l-14 7-18 85 14 5 19-60z M119 78l14 7 18 85-14 5-19-60z M68 173h20l-4 87H66z M92 173h20l2 87H96z"/><ellipse cx="73" cy="266" rx="18" ry="7"/><ellipse cx="107" cy="266" rx="18" ry="7"/></g><g class="bret-body-highlight"><path data-part="1" d="M74 17q16-9 32 0v9H74z"/><ellipse data-part="2" cx="90" cy="34" rx="17" ry="8"/><path data-part="3" d="M76 44h28q-14 17-28 0"/><path data-part="4" d="M80 55h20v20H80z"/><path data-part="5" d="M60 76q30-17 60 0v12H60z"/><path data-part="9" d="M67 89h46v26H67z"/><path data-part="6" d="M69 123h42v20H69z"/><path data-part="7" d="M30 158h16v22H26z M134 158h16l4 22h-20z"/><path data-part="8" d="M48 89l13 4-13 59-14-3z M119 93l13-4 14 60-14 3z"/><path data-part="10" d="M72 135h36v30H72z"/><path data-part="11" d="M69 218h16v38H68z M95 218h16l1 38H96z"/><ellipse data-part="12" cx="73" cy="266" rx="18" ry="7"/><ellipse data-part="12" cx="107" cy="266" rx="18" ry="7"/><path data-part="13" d="M68 173h20l-2 41H67z M92 173h20l1 41H94z"/></g></svg></div>
+      <p data-stage class="bret-stage"></p><p data-instruction class="bret-instruction"></p>
+      <p data-instruction-announcement class="bret-sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p data-countdown class="bret-countdown" role="timer" aria-live="off" aria-label="Time remaining in this phase"></p><progress data-progress max="1" value="0" aria-label="Practice progress"></progress>
+      <p data-metrics></p><button type="button" data-query-time>Check time remaining</button><p data-time-answer role="status" aria-live="polite" aria-atomic="true"></p><div class="bret-actions"><button type="button" data-pause>Pause</button><button type="button" data-skip hidden>Skip instruction</button><button type="button" data-stop>Stop practice</button></div>
+    </section>
+    <section data-finish hidden aria-labelledby="bret-finish-heading"><h2 id="bret-finish-heading" tabindex="-1">A moment for yourself.</h2><p data-summary></p><button type="button" data-again>Choose another practice</button></section>
+    <details class="bret-settings" data-settings><summary>Sound and practice settings</summary><div class="bret-setting-grid">
+      <label><input type="checkbox" data-setting="music" checked> Background music</label><label><input type="checkbox" data-setting="voice" checked> Spoken guidance</label><label><input type="checkbox" data-setting="metronome"> Metronome</label><label><input type="checkbox" data-setting="vibration"> Vibration where supported</label><label><input type="checkbox" data-setting="mute"> Mute all sound</label>
+      <label for="bret-sound">Background sound</label><select id="bret-sound" data-sound><option value="pattern">Pattern music</option><option value="rain">Rain</option><option value="sunrise">Sunrise</option><option value="wind">Wind</option></select>
+    </div><p>Settings stay in this browser only. Opening settings pauses an active practice. Continue when ready.</p>{{ partial "keyboard-help.html" . }}<p data-vibration-note></p><button type="button" data-reset>Reset saved settings</button></details>
+  </div>
+  <script id="bret-practice-data" type="application/json">{{ index hugo.Data "bret-practice" | jsonify | safeJS }}</script>
+</main>

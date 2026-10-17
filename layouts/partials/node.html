@@ -1,0 +1,15 @@
+{{- if reflect.IsMap . -}}
+  {{- if not (and (eq .tag "header") (in (split (index .attributes "class" | default "") " ") "header-clean")) -}}
+  {{- $localTag := replaceRE "^.*:" "" (lower .tag) -}}
+  {{- if or (not (findRE "^[A-Za-z][A-Za-z0-9:-]*$" .tag)) (in (slice "script" "style" "iframe" "object" "embed" "base" "meta" "title") $localTag) -}}
+    {{- errorf "Unsupported content tag %q" .tag -}}
+  {{- end -}}
+  {{- printf "<%s%s>" .tag (partial "attributes.html" .attributes) | safeHTML -}}
+  {{- if not .void -}}
+    {{- range .children -}}{{- partial "node.html" . -}}{{- end -}}
+    {{- printf "</%s>" .tag | safeHTML -}}
+  {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- . -}}
+{{- end -}}

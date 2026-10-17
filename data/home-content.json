@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "sourcePageHash": "226d0987b88ebca1a9a6b531737f70c420878a163a5d96d4fba3d60e4745c6fd",
+  "productsTitle": "Tools for your next step",
+  "productsLead": "Take a pause, work through a choice, or learn about what you are feeling.",
+  "products": [
+    {
+      "id": "bret",
+      "name": "BRET",
+      "purpose": "Breathing and relaxation",
+      "description": "Choose a breathing pattern or follow progressive muscle relaxation. Make room for a short pause, at your own pace.",
+      "image": "be47f36bc0e62d97c12c-6972929d2ad38b3691266514_Bret-Screen.webp",
+      "imageAlt": "BRET breathing practice screens",
+      "path": "/bret/practice",
+      "linkLabel": "Try BRET free",
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.bret",
+      "storeLabel": "BRET on Google Play"
+    },
+    {
+      "id": "dm",
+      "name": "Decision Matrix",
+      "purpose": "A clearer view of your options",
+      "description": "Compare your options, then weigh the reasons for and against. A structured way to think through a choice.",
+      "image": "08dcf216799159f0bc9e-6973e87b80258fd84132badc_Dm-Screen.webp",
+      "imageAlt": "Decision Matrix option comparison screen",
+      "path": "/dm/workspace",
+      "linkLabel": "Try Decision Matrix free",
+      "storeUrl": "https://play.google.com/store/apps/details?id=org.emtalk.dm",
+      "storeLabel": "Decision Matrix on Google Play"
+    },
+    {
+      "id": "tapl",
+      "name": "TAPL",
+      "purpose": "Small steps, at your own pace",
+      "description": "A planned tool for habits, learning, and gradual progress. TAPL is in development and is not available to try yet.",
+      "image": "f2ecec909f0bff730c38-697292a3d9f2ce88678857d3_Tapl-Screen.webp",
+      "imageAlt": "TAPL development concept screen",
+      "path": "/tapl",
+      "linkLabel": "About TAPL",
+      "status": "In development"
+    }
+  ],
+  "resourcesTitle": "Read, listen, or reflect",
+  "resourcesLead": "Start with a topic you want to understand. There is no required order, and you can choose a different resource at any time.",
+  "resources": [
+    {
+      "title": "Articles with audio",
+      "description": "Explore nine articles about sleep and burnout. Read at your own pace or listen on each article page.",
+      "path": "/articles",
+      "linkLabel": "Read or listen"
+    },
+    {
+      "title": "Self-assessment questionnaires",
+      "description": "Explore five questionnaires as a starting point for reflection. They offer questions to consider, not a diagnosis.",
+      "path": "/tests",
+      "linkLabel": "Explore questionnaires"
+    }
+  ],
+  "hubLabel": "How to begin exploring yourself",
+  "hubPath": "/understand-myself"
+}

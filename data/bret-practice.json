@@ -1,0 +1,65 @@
+{
+  "sourceCommit": "d300887af44bd0dbd0d14b739dbbce908904bcf9",
+  "steps": {
+    "1": {
+      "name": "Forehead",
+      "instruction": "• Sit comfortably\n\n• Tighten the muscles of your forehead. To do this, raise your eyebrows as high as possible. Try to feel how the muscles of your forehead tense up, become dense… and relax…"
+    },
+    "2": {
+      "name": "Face",
+      "instruction": "• Now tense the muscles of your eyelids, cheeks and upper jaw. To do this, you need to close your eyes tightly and wrinkle your nose. Concentrate on the sensations that arise when these muscles are tense… and relax…"
+    },
+    "3": {
+      "name": "Chin",
+      "instruction": "• Let's move on to the muscles of the lower part of your face. Clench your teeth and stretch the corners of your mouth, as if you were smiling. Concentrate on the sensations of tension in these muscles… and relax, relieve the tension."
+    },
+    "4": {
+      "name": "Neck",
+      "instruction": "• Lower your chin to your chest, without touching your chest, and tense your neck muscles… relax."
+    },
+    "5": {
+      "name": "Shoulders",
+      "instruction": "• Now bring your shoulder blades together and tense the muscles of your upper back… and relax, relieve the tension."
+    },
+    "9": {
+      "name": "Chest",
+      "instruction": "• Take a deep breath into your chest, hold your breath for a bit (tensing the muscles of the chest)… and calmly exhale completely."
+    },
+    "6": {
+      "name": "Lower back",
+      "instruction": "• Now move on to the lower back – press your back against the back of the chair and arch, feel how the muscles in the lumbar region tense up… and relax completely."
+    },
+    "7": {
+      "name": "Hands",
+      "instruction": "• Good. Now clench your hands into fists and tense the muscles of your hands and forearms strongly… relax."
+    },
+    "8": {
+      "name": "Arms",
+      "instruction": "• Now tense the muscles of your arms. Rest your palms on the armrests, as if trying to push off from them, tense the muscles of your arms strongly… relax your arms."
+    },
+    "10": {
+      "name": "Abdomen",
+      "instruction": "• Now move on to the muscles of your abdomen. Pull in your stomach and tense the muscles of the abdominal press… and relax the muscles of your abdomen."
+    },
+    "11": {
+      "name": "Calves",
+      "instruction": "• Tighten the muscles of your calves: press your feet to the floor and lift your toes, pull them towards you (heels pressed to the floor). Concentrate on the tension of these muscles… and relax, release the tension."
+    },
+    "12": {
+      "name": "Feet",
+      "instruction": "• Now press the toes of your feet to the floor and lift your heels as high as possible. Feel how the muscles of your feet and shins tense… relax the muscles of your legs."
+    },
+    "13": {
+      "name": "Legs",
+      "instruction": "• Press your feet into the floor (as if you were going to stand up), tense the muscles of both legs strongly… and relax."
+    },
+    "14": {
+      "name": "Whole body",
+      "instruction": "• Now you can completely relax. Sit in a relaxation pose (lean your back against the back of the chair, feet on the floor, legs uncrossed, hands on the armrests or on your hips, fingers unclasped) and relax the muscles of your face, neck, shoulders, arms, back, chest, stomach, legs. If you notice that any muscle is even a little tense, try to release this tension. Concentrate all your attention on the pleasant sensations of peace, relaxation, warmth, tranquility. Try to feel how the muscles relax more and more. Enjoy the feeling of complete relaxation spreading throughout your body."
+    },
+    "15": {
+      "name": "Finish gently",
+      "instruction": "• When you are ready to end the relaxation, move your arms, legs and open your eyes."
+    }
+  }
+}

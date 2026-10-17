@@ -1,0 +1,5 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $route := .route -}}
+<a href="{{ $prefix }}/bret" tabindex="0"{{ if eq $route "/bret" }} aria-current="page"{{ else if eq $route "/bret/practice" }} aria-current="location"{{ end }}><strong>BRET</strong><span>Breathing and relaxation</span></a>
+<a href="{{ $prefix }}/dm" tabindex="0"{{ if eq $route "/dm" }} aria-current="page"{{ else if eq $route "/dm/workspace" }} aria-current="location"{{ end }}><strong>Decision Matrix</strong><span>Explore a decision</span></a>
+<a href="{{ $prefix }}/tapl" tabindex="0"{{ if eq $route "/tapl" }} aria-current="page"{{ end }}><strong>TAPL</strong><span>In development</span></a>

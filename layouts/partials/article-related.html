@@ -1,0 +1,55 @@
+{{/* API: partial "article-related.html" (dict "page" $page). Static editorial links; no runtime recommendation service. */}}
+{{- $library := index hugo.Data "article-library" -}}
+{{- $related := index hugo.Data "article-related" -}}
+{{- $entries := dict -}}
+{{- $errors := slice -}}
+{{- range $library.articles -}}
+  {{- if isset $entries .route -}}{{- $errors = $errors | append "library routes must be unique" -}}{{- end -}}
+  {{- $entries = merge $entries (dict .route .) -}}
+{{- end -}}
+{{- if or (ne $related.schemaVersion 1) (ne (len $related.articles) (len $entries)) -}}
+  {{- $errors = $errors | append "requires exactly one related-reading entry per library article and schemaVersion 1" -}}
+{{- end -}}
+{{- range $source, $links := $related.articles -}}
+  {{- if not (isset $entries $source) -}}
+    {{- $errors = $errors | append (printf "unknown source article %s" $source) -}}
+  {{- else -}}
+    {{- $sourceEntry := index $entries $source -}}
+    {{- $targets := slice -}}
+    {{- $types := slice -}}
+    {{- if ne (len $links) 2 -}}{{- $errors = $errors | append (printf "%s requires exactly two related articles" $source) -}}{{- end -}}
+    {{- range $links -}}
+      {{- if or (not .route) (not (isset $entries .route)) (eq .route $source) (in $targets .route) -}}
+        {{- $errors = $errors | append (printf "%s has an unknown, self or duplicate target" $source) -}}
+      {{- else -}}
+        {{- $target := index $entries .route -}}
+        {{- if or (not (in (slice "same-topic" "adjacent-topic") .type)) (in $types .type) (ne (eq $sourceEntry.topic $target.topic) (eq .type "same-topic")) -}}
+          {{- $errors = $errors | append (printf "%s requires one same-topic and one adjacent-topic target with matching types" $source) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not (strings.TrimSpace (.reason | default "")) -}}{{- $errors = $errors | append (printf "%s requires a concise editorial reason for each target" $source) -}}{{- end -}}
+      {{- $targets = $targets | append .route -}}
+      {{- $types = $types | append .type -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range $source, $_ := $entries -}}
+  {{- if not (isset $related.articles $source) -}}{{- $errors = $errors | append (printf "missing related-reading entry for %s" $source) -}}{{- end -}}
+{{- end -}}
+{{- $route := .page.routeId -}}
+{{- if not (isset $entries $route) -}}{{- $errors = $errors | append "current reader route must match a library article" -}}{{- end -}}
+{{- if $errors -}}
+  {{- errorf "Article related-reading contract invalid: %s" (delimit $errors "; ") -}}
+{{- else -}}
+<section class="article-related" aria-label="Related reading">
+  <h2>Related reading</h2>
+  <ul class="article-related__list" role="list">
+    {{ range index $related.articles $route }}{{ $entry := index $entries .route }}
+    <li><a class="article-related__card" href="{{ partial "article-url.html" (dict "route" $entry.route) }}" {{ partial "native-link-focus.html" . }}>
+      <img class="article-related__cover" src="{{ strings.TrimSuffix "/" (hugo.Data.render.mountPrefix | default "") }}/{{ $entry.cover.src }}" width="{{ $entry.cover.width }}" height="{{ $entry.cover.height }}" alt="" loading="lazy" decoding="async">
+      <div class="article-related__copy"><p class="article-related__type">{{ if eq .type "same-topic" }}Same topic{{ else }}A related perspective{{ end }}</p><h3>{{ $entry.title }}</h3><p class="article-related__reason">{{ .reason }}</p><p class="article-related__time">{{ $entry.readingMinutes }} min read <span aria-hidden="true">&middot;</span> {{ $entry.listeningMinutes }} min listen</p></div>
+    </a></li>
+    {{ end }}
+  </ul>
+</section>
+{{- end -}}

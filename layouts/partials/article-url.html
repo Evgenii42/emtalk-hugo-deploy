@@ -1,0 +1,7 @@
+{{/* Canonical article URL policy uses the prepared render mount, independent of baseURL/relURL. */}}
+{{- $route := .route | default "/articles" -}}
+{{- if not (or (eq $route "/articles") (strings.HasPrefix $route "/articles/")) -}}
+  {{- errorf "Article URL requires /articles or an article route; got %q" $route -}}
+{{- end -}}
+{{- $prefix := strings.TrimSuffix "/" (hugo.Data.render.mountPrefix | default "") -}}
+{{- return (printf "%s%s" $prefix $route) -}}

@@ -1,0 +1,344 @@
+.bret-practice {
+  --bret-ink: var(--emt-ink, #281c37);
+  --bret-accent: var(--emt-action, #5e3a7d);
+  max-width: 960px;
+  margin: 0 auto;
+  padding: calc(
+      var(--emt-header-top, 16px) + var(--emt-header-bar-height, 64px) + 40px
+    )
+    24px 80px;
+  color: var(--bret-ink);
+  font-family: Manrope, sans-serif;
+  line-height: 1.65;
+}
+.bret-practice [hidden] {
+  display: none !important;
+}
+.bret-practice input[aria-invalid="true"] {
+  outline: 2px solid var(--bret-accent);
+  outline-offset: 2px;
+}
+.bret-practice .bret-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.bret-practice h1 {
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  line-height: 1.12;
+  font-weight: 650;
+  max-width: 700px;
+  margin: 12px 0 20px;
+}
+.bret-practice h2 {
+  font-size: 1.6rem;
+  margin: 12px 0 24px;
+}
+.bret-intro > p {
+  max-width: 620px;
+}
+.bret-eyebrow {
+  font-size: 0.76rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+.bret-intro {
+  padding-bottom: 28px;
+}
+.bret-intro a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.bret-practice a {
+  color: var(--bret-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.bret-practice section,
+.bret-settings {
+  background: var(--emt-surface, #fffefa);
+  border: 1px solid #b49bc5;
+  border-radius: 24px;
+  padding: clamp(20px, 4vw, 36px);
+  margin: 24px 0;
+  box-shadow: 0 10px 36px #39204f10;
+}
+.bret-notice {
+  font-size: 0.9rem;
+  border-left: 3px solid #8a679d;
+  padding: 8px 16px;
+  background: #fee9fb;
+}
+.bret-feedback:empty {
+  display: none;
+}
+.bret-feedback {
+  padding: 12px;
+  background: #fff4dc;
+  border: 1px solid #8a6726;
+  border-radius: 10px;
+  color: #563c0b;
+}
+.bret-practice label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 48px;
+}
+.bret-practice fieldset {
+  border: 0;
+  margin: 20px 0;
+  padding: 0;
+}
+.bret-practice legend {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.bret-practice input[type="checkbox"],
+.bret-practice input[type="radio"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--bret-accent);
+  flex: none;
+}
+.bret-practice select,
+.bret-practice input[type="number"] {
+  font: inherit;
+  min-height: 48px;
+  border: 1px solid #75528f;
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--bret-ink);
+  background: white;
+  max-width: 100%;
+}
+.bret-practice input[type="number"] {
+  width: 90px;
+}
+.bret-config select {
+  width: 100%;
+}
+.bret-custom,
+.bret-groups,
+.bret-setting-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+.bret-custom label {
+  justify-content: space-between;
+}
+.bret-custom p,
+.bret-groups p {
+  grid-column: 1/-1;
+}
+.bret-practice button {
+  font: inherit;
+  font-weight: 650;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 10px 24px;
+  border: 1px solid #75528f;
+  background: #fff;
+  color: var(--bret-ink);
+  cursor: pointer;
+}
+.bret-practice button:hover {
+  background: #fee9fb;
+}
+.bret-practice .bret-primary {
+  display: block;
+  margin-top: 24px;
+  background: var(--bret-accent);
+  color: white;
+  width: 100%;
+}
+.bret-practice .bret-primary:hover {
+  background: var(--emt-action-hover, #4b2b66);
+}
+.bret-practice .bret-primary:active {
+  background: var(--emt-action-pressed, #39204f);
+}
+.bret-practice :is(button, a, input, select, summary):focus-visible {
+  outline: 3px solid var(--emt-ink, #281c37);
+  outline-offset: 4px;
+}
+.bret-practice button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+.bret-settings summary {
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 48px;
+}
+.bret-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.bret-practice [data-session] {
+  text-align: center;
+}
+.bret-orbit {
+  width: min(60vw, 240px);
+  aspect-ratio: 1;
+  margin: 32px auto;
+  border: 1px solid #c8abd8;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, #fffefa, #f4dff3);
+}
+.bret-orbit span {
+  width: 68%;
+  height: 68%;
+  border-radius: 50%;
+  background: linear-gradient(150deg, #d1abe5, #8660a3);
+  transform: scale(var(--bret-scale, 0.7));
+  transition: none;
+  box-shadow: 0 0 48px #b995d170;
+}
+.bret-stage {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 16px 0;
+}
+.bret-instruction {
+  white-space: pre-line;
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.bret-countdown {
+  font-size: 2rem;
+  font-variant-numeric: tabular-nums;
+  margin: 12px;
+}
+.bret-practice progress {
+  accent-color: var(--bret-accent);
+  width: min(100%, 500px);
+  height: 12px;
+}
+.bret-practice [data-metrics] {
+  font-variant-numeric: tabular-nums;
+}
+.bret-practice [data-finish] {
+  text-align: center;
+}
+@media (max-width: 540px) {
+  .bret-practice {
+    padding: calc(
+        var(--emt-header-top, 12px) + var(--emt-header-bar-height, 60px) + 32px
+      )
+      16px 48px;
+  }
+  .bret-custom,
+  .bret-groups,
+  .bret-setting-grid {
+    grid-template-columns: 1fr;
+  }
+  .bret-practice section,
+  .bret-settings {
+    border-radius: 18px;
+  }
+  .bret-actions > * {
+    flex: 1 1 100%;
+  }
+  .bret-practice h1 {
+    font-size: 2.25rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bret-orbit span {
+    transition: none;
+    transform: none !important;
+  }
+}
+@media (forced-colors: active) {
+  .bret-practice section,
+  .bret-settings,
+  .bret-practice button,
+  .bret-practice select {
+    border: 1px solid CanvasText;
+  }
+  .bret-orbit {
+    background: Canvas;
+    border: 2px solid CanvasText;
+  }
+  .bret-orbit span {
+    background: CanvasText;
+    box-shadow: none;
+  }
+}
+
+.bret-body-guide {
+  width: 180px;
+  max-width: 55vw;
+  margin: 20px auto;
+}
+.bret-body-base {
+  fill: #f4dff3;
+  stroke: #8a679d;
+  stroke-width: 1;
+}
+.bret-body-highlight {
+  fill: #6c438b;
+  opacity: 1;
+}
+.bret-body-highlight [data-part] {
+  opacity: 0;
+}
+.bret-body-guide[data-muscle="1"] [data-part="1"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="2"] [data-part="2"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="3"] [data-part="3"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="4"] [data-part="4"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="5"] [data-part="5"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="6"] [data-part="6"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="7"] [data-part="7"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="8"] [data-part="8"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="9"] [data-part="9"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="10"] [data-part="10"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="11"] [data-part="11"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="12"] [data-part="12"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="13"] [data-part="13"] {
+  opacity: 1;
+}
+.bret-body-guide[data-muscle="14"] .bret-body-base {
+  fill: #b98bcf;
+}
+.bret-body-guide[data-muscle="15"] .bret-body-base {
+  fill: #d2b7e2;
+}

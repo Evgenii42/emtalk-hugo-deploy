@@ -1,0 +1,50 @@
+{
+  "eyebrow": "Start where you are",
+  "title": "Find your next step",
+  "lead": "Breathing, articles, tests, and tools for clearer decisions.",
+  "groupLabel": "Explore EmTalk",
+  "scene": {
+    "file": "home-explore-lake.4c65a31e0d11.webp",
+    "variants": [
+      {
+        "media": "(max-width: 479px)",
+        "file": "home-explore-lake-601.4b74e33eec55.webp"
+      },
+      {
+        "media": "(max-width: 767px)",
+        "file": "home-explore-lake-1001.2cd8104b488f.webp"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "calm",
+      "type": "link",
+      "title": "Calm",
+      "caption": "Breathing and relaxation",
+      "path": "/bret"
+    },
+    {
+      "id": "understand",
+      "type": "link",
+      "title": "Understand myself",
+      "caption": "Articles and tests",
+      "path": "/understand-myself"
+    },
+    {
+      "id": "decision",
+      "type": "link",
+      "title": "Make a decision",
+      "caption": "Decision Matrix",
+      "path": "/dm"
+    },
+    {
+      "id": "moving",
+      "type": "link",
+      "title": "Start moving",
+      "caption": "TAPL",
+      "badge": "In development",
+      "path": "/tapl"
+    }
+  ]
+}

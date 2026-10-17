@@ -1,0 +1,152 @@
+{{- $page := .page -}}
+{{- $slots := newScratch -}}
+{{- range $key, $class := dict "summary" "text-middle-white" "cover" "image-40" "player" "emtalk-audio-player" "legacy" "sp-track-wrapper" "overview" "rich-text-block-4" "body" "rich-text-block-3" -}}
+  {{- $matches := partial "article-find-nodes.html" (dict "node" $page.body "class" $class) -}}
+  {{- if ne (len $matches) 1 -}}{{- errorf "Article %s needs one %s source slot; found %d" $page.routeId $key (len $matches) -}}{{- end -}}
+  {{- if eq (len $matches) 1 -}}{{- $slots.Set $key (index $matches 0) -}}{{- end -}}
+{{- end -}}
+{{- $titles := partial "article-find-nodes.html" (dict "node" $page.body "tag" "h1") -}}
+{{- if ne (len $titles) 1 -}}{{- errorf "Article %s needs exactly one source h1" $page.routeId -}}{{- end -}}
+{{- $library := index hugo.Data "article-library" -}}
+{{- $rows := where $library.articles "route" $page.routeId -}}
+{{- if ne (len $rows) 1 -}}{{- errorf "Article %s needs one library metadata row" $page.routeId -}}{{- end -}}
+{{- $entry := index $rows 0 -}}
+{{- $topicRows := where ($library.topics | default (slice)) "id" $entry.topic -}}
+{{- $topicLabel := "" -}}
+{{- if eq (len $topicRows) 1 -}}{{- $topicLabel = (index $topicRows 0).label | default "" -}}{{- end -}}
+{{- $body := $slots.Get "body" -}}
+{{/* Availability is a build contract: both retained players must expose the same approved local native sources. */}}
+{{- $audioErrors := slice -}}
+{{- $audioPairs := newScratch -}}
+{{- $prefix := strings.TrimSuffix "/" (hugo.Data.render.mountPrefix | default "") -}}
+{{- range $slot := slice "player" "legacy" -}}
+  {{- $audios := partial "article-find-nodes.html" (dict "node" ($slots.Get $slot) "tag" "audio") -}}
+  {{- $pairs := dict -}}
+  {{- if ne (len $audios) 1 -}}
+    {{- $audioErrors = $audioErrors | append (printf "%s requires exactly one native audio element; found %d" $slot (len $audios)) -}}
+  {{- else -}}
+    {{- $audio := index $audios 0 -}}
+    {{- $attrs := $audio.attributes | default (dict) -}}
+    {{- if not (isset $attrs "controls") -}}{{- $audioErrors = $audioErrors | append (printf "%s native audio requires controls for the unenhanced fallback" $slot) -}}{{- end -}}
+    {{- $sources := partial "article-find-nodes.html" (dict "node" $audio "tag" "source") -}}
+    {{- if ne (len $sources) 2 -}}{{- $audioErrors = $audioErrors | append (printf "%s requires the prepared MP3 and Opus source pair" $slot) -}}{{- end -}}
+    {{- range $source := $sources -}}
+      {{- $sourceAttrs := $source.attributes | default (dict) -}}
+      {{- $url := printf "%v" (index $sourceAttrs "src" | default "") -}}
+      {{- $type := printf "%v" (index $sourceAttrs "type" | default "") -}}
+      {{- $local := strings.TrimPrefix $prefix $url -}}
+      {{- $validPath := and (strings.HasPrefix $url (printf "%s/media/" $prefix)) (not (findRE `[?#%[:space:][:cntrl:]]` $url)) (not (strings.Contains $url "\\")) (not (in (split $local "/") ".")) (not (in (split $local "/") "..")) -}}
+      {{- $validType := or (and (eq $type "audio/mpeg") (strings.HasSuffix $url ".mp3")) (and (eq $type `audio/ogg; codecs="opus"`) (strings.HasSuffix $url ".opus")) -}}
+      {{- if not (and $validPath $validType (fileExists (printf "static%s" $local))) -}}
+        {{- $audioErrors = $audioErrors | append (printf "%s requires an existing local /media/ MP3 or Opus source with its declared type" $slot) -}}
+      {{- end -}}
+      {{- if isset $pairs $type -}}{{- $audioErrors = $audioErrors | append (printf "%s has a duplicate audio source type" $slot) -}}{{- end -}}
+      {{- $pairs = merge $pairs (dict $type $url) -}}
+    {{- end -}}
+    {{- if or (not (isset $pairs "audio/mpeg")) (not (isset $pairs `audio/ogg; codecs="opus"`)) -}}{{- $audioErrors = $audioErrors | append (printf "%s requires both MPEG and Opus native source types" $slot) -}}{{- end -}}
+  {{- end -}}
+  {{- $audioPairs.Set $slot $pairs -}}
+{{- end -}}
+{{- $modernPairs := $audioPairs.Get "player" | default (dict) -}}
+{{- $legacyPairs := $audioPairs.Get "legacy" | default (dict) -}}
+{{- if ne (jsonify $modernPairs) (jsonify $legacyPairs) -}}{{- $audioErrors = $audioErrors | append "modern and legacy native audio sources must match" -}}{{- end -}}
+{{- if or (not $page.audioMp3) (ne $page.audioMp3 (index $modernPairs "audio/mpeg")) -}}{{- $audioErrors = $audioErrors | append "page.audioMp3 must match the existing native MPEG source" -}}{{- end -}}
+{{- if $audioErrors -}}
+  {{- errorf "Article %s audio contract invalid: %s. Reconcile the approved media inventory and scripts/prepare_hugo.py; see docs/content/articles-reader-contract.md" $page.routeId (delimit $audioErrors "; ") -}}
+{{- else if not $topicLabel -}}
+  {{- errorf "Article %s topic contract invalid: requires exactly one matching library.topics entry with a label" $page.routeId -}}
+{{- else -}}
+{{/* Existing published IDs are immutable. Source wrappers count for collision checks even when their content is remounted. */}}
+{{- $idErrors := slice -}}
+{{- $sourceIds := slice -}}
+{{- range partial "article-find-nodes.html" (dict "node" $page.body "withId" true) -}}
+  {{- $attrs := .attributes | default (dict) -}}
+  {{- $id := printf "%v" (index $attrs "id") -}}
+  {{- if not $id -}}{{- $idErrors = $idErrors | append "source ID must not be empty" -}}{{- end -}}
+  {{- if in $sourceIds $id -}}{{- $idErrors = $idErrors | append (printf "duplicate existing source ID %q" $id) -}}{{- end -}}
+  {{- $sourceIds = $sourceIds | append $id -}}
+  {{- if in (slice "article-text" "article-audio") $id -}}{{- $idErrors = $idErrors | append (printf "source ID %q is reserved for the authored reader" $id) -}}{{- end -}}
+{{- end -}}
+{{- if eq (len $titles) 1 -}}
+  {{- $titleAttrs := (index $titles 0).attributes | default (dict) -}}
+  {{- if ne (index $titleAttrs "id") "emtalk-main" -}}{{- $idErrors = $idErrors | append "source H1 must retain the published emtalk-main ID" -}}{{- end -}}
+{{- end -}}
+{{/* The original outer #single-player-example section is replaced by the explicit span. It cannot also occur in a retained slot. */}}
+{{- range $slot := slice "summary" "cover" "player" "legacy" "overview" "body" -}}
+  {{- range partial "article-find-nodes.html" (dict "node" ($slots.Get $slot) "withId" true) -}}
+    {{- $attrs := .attributes | default (dict) -}}
+    {{- $id := printf "%v" (index $attrs "id") -}}
+    {{- if in (slice "emtalk-main" "single-player-example") $id -}}{{- $idErrors = $idErrors | append (printf "retained %s source ID %q collides with a reserved reader anchor" $slot $id) -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $idErrors -}}
+  {{- errorf "Article %s ID contract invalid: %s. Preserve published IDs and reconcile the reader source; see docs/content/articles-reader-contract.md" $page.routeId (delimit $idErrors "; ") -}}
+{{- else -}}
+{{- $headings := slice -}}
+{{- $headingIds := newScratch -}}
+{{- $occupiedIds := $sourceIds | append "emtalk-main" "article-text" "article-audio" "single-player-example" -}}
+{{- range $index, $node := $body.children -}}
+  {{- if and (reflect.IsMap $node) (in (slice "h2" "h3") $node.tag) -}}
+    {{- $label := partial "node.html" $node | plainify | htmlUnescape | strings.TrimSpace -}}
+    {{- $headingAttrs := $node.attributes | default (dict) -}}
+    {{- $id := index $headingAttrs "id" | default "" -}}
+    {{- if not $id -}}
+      {{- $base := printf "article-%s" (anchorize $label) -}}
+      {{- $id = $base -}}
+      {{- if in $occupiedIds $id -}}
+        {{- $id = printf "%s-%d" $base $index -}}
+        {{/* At most N occupied IDs can block the next N+1 suffix candidates. Keep the former index suffix whenever it is available. */}}
+        {{- range seq 1 (add (len $occupiedIds) 1) -}}
+          {{- if in $occupiedIds $id -}}{{- $id = printf "%s-%d-%d" $base $index . -}}{{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not (in $occupiedIds $id) -}}{{- $occupiedIds = $occupiedIds | append $id -}}{{- end -}}
+    {{- $headingIds.Set (string $index) $id -}}
+    {{- $headings = $headings | append (dict "id" $id "label" $label) -}}
+  {{- end -}}
+{{- end -}}
+<main class="article-reader">
+  <header class="article-reader__hero">
+    <div class="article-reader__intro">
+      <a class="article-reader__back" href="{{ partial "article-url.html" (dict) }}" {{ partial "native-link-focus.html" . }}>← All articles</a>
+      <p class="article-reader__eyebrow">{{ $topicLabel }}</p>
+      {{ partial "node.html" (index $titles 0) }}
+      {{ partial "node.html" ($slots.Get "summary") }}
+      <p class="article-reader__meta">About {{ $entry.readingMinutes }} min read <span aria-hidden="true">·</span> Audio available</p>
+      <div class="article-reader__actions">
+        <a class="article-reader__read" href="#article-text" {{ partial "native-link-focus.html" . }}>Read article <span aria-hidden="true">↓</span></a>
+        <a class="article-reader__listen" href="#article-audio" {{ partial "native-link-focus.html" . }}>Listen to the article <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <div class="article-reader__cover">{{ partial "node.html" ($slots.Get "cover") }}</div>
+  </header>
+  <div class="article-reader__layout">
+    <aside class="article-reader__sidebar" aria-label="Listen and explore this article">
+      <section id="article-audio" class="article-reader__audio" tabindex="-1" aria-label="Listen to this article">
+        <p class="article-reader__eyebrow">Listen at your own pace</p>
+        {{/* Preserve the published #single-player-example deep link from the original reader; not a JavaScript hook. */}}
+        <span id="single-player-example" aria-hidden="true"></span>
+        {{ partial "node.html" ($slots.Get "player") }}
+        {{ partial "node.html" (partial "article-passive-legacy.html" ($slots.Get "legacy")) }}
+      </section>
+      {{ if $headings }}<details class="article-reader__contents">
+        <summary>On this page <span aria-hidden="true">+</span></summary>
+        <nav aria-label="Article sections"><ol>{{ range $headings }}<li><a href="#{{ .id }}" {{ partial "native-link-focus.html" . }}>{{ .label }}</a></li>{{ end }}</ol></nav>
+      </details>{{ end }}
+      <details class="article-reader__overview">
+        <summary>What this article covers <span aria-hidden="true">+</span></summary>
+        {{ partial "node.html" ($slots.Get "overview") }}
+      </details>
+    </aside>
+    <article id="article-text" class="article-reader__text" tabindex="-1" aria-label="Article text">
+      {{ printf "<div%s>" (partial "attributes.html" ($body.attributes | default (dict))) | safeHTML }}
+      {{ range $index, $node := $body.children }}{{ with $headingIds.Get (string $index) }}{{ partial "node.html" (merge $node (dict "attributes" (merge ($node.attributes | default (dict)) (dict "id" . "tabindex" "-1")))) }}{{ else }}{{ partial "node.html" $node }}{{ end }}{{ end }}
+      </div>
+      <a class="article-reader__back article-reader__back-bottom" href="{{ partial "article-url.html" (dict) }}" {{ partial "native-link-focus.html" . }}>Explore more articles <span aria-hidden="true">→</span></a>
+    </article>
+  </div>
+  {{ partial "article-related.html" (dict "page" $page) }}
+</main>
+{{- end -}}
+{{- end -}}

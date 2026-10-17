@@ -1,0 +1,12 @@
+
+  .emt-inner-page .header-clean__cta,
+  .emt-inner-page .header-clean__mobile-cta {
+    display: none !important;
+  }
+
+
+.audio-player{display:flex;align-items:center;gap:16px;width:100%;padding:20px;border-radius:16px;background:#5c1b69}
+#play-btn{width:48px;height:48px;border:none;border-radius:999px;background:#ffffff22;color:white;font-size:20px;cursor:pointer}
+.progress-bar{flex:1;height:6px;background:#ffffff22;border-radius:999px;overflow:hidden;cursor:pointer}
+.progress-fill{width:0%;height:100%;background:white}
+.time{color:white;font-size:14px;min-width:40px}

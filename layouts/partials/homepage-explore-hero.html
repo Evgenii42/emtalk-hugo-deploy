@@ -1,0 +1,24 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $hero := index hugo.Data "home-explore" -}}
+{{- if not $hero -}}{{- errorf "Missing home-explore data" -}}{{- end -}}
+{{- if ne (len $hero.cards) 4 -}}{{- errorf "Home hero requires four intent entries" -}}{{- end -}}
+<section class="home-explore section-24" aria-labelledby="home-explore-title">
+  <picture>
+    {{ range $hero.scene.variants }}<source media="{{ .media }}" srcset="{{ $prefix }}/media/{{ .file }}">{{ end }}
+    <img class="home-explore__art" src="{{ $prefix }}/media/{{ $hero.scene.file }}" alt="" width="1505" height="1045" fetchpriority="high">
+  </picture>
+  <div class="home-explore__content">
+    <div class="home-explore__intro">
+      <p class="home-explore__eyebrow">{{ $hero.eyebrow }}</p>
+      <h1 id="home-explore-title" tabindex="-1">{{ $hero.title }}</h1>
+      <p class="home-explore__lead">{{ $hero.lead }}</p>
+    </div>
+    <div class="home-explore__choices" role="group" aria-label="{{ $hero.groupLabel }}">
+      {{ range $hero.cards }}
+        {{ if eq .type "link" }}
+          <a class="home-explore__card home-explore__direct" data-intent="{{ .id }}" href="{{ $prefix }}{{ .path }}" {{ partial "native-link-focus.html" . }}>{{ partial "homepage-intent-label.html" . }}</a>
+        {{ else }}{{ errorf "Unsupported home intent type %q" .type }}{{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>

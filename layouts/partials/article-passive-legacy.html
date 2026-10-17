@@ -1,0 +1,11 @@
+{{/* Preserve published legacy IDs and metadata without a second native preload. */}}
+{{- $node := . -}}
+{{- if reflect.IsMap $node -}}
+  {{- $children := slice -}}
+  {{- range $node.children -}}{{- $children = $children | append (partial "article-passive-legacy.html" .) -}}{{- end -}}
+  {{- $node = merge $node (dict "children" $children) -}}
+  {{- if eq $node.tag "audio" -}}
+    {{- $node = merge $node (dict "attributes" (merge ($node.attributes | default (dict)) (dict "preload" "none"))) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $node -}}

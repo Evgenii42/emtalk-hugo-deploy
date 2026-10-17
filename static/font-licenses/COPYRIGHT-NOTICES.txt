@@ -1,0 +1,26 @@
+Embedded copyright notices for EmTalk local font binaries
+
+Geologica
+Copyright 2020 The Geologica Project Authors (https://github.com/googlefonts/geologica)
+SIL Open Font License 1.1: geologica/OFL.txt
+Local font files:
+  d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf
+
+Manrope
+Copyright 2019 The Manrope Project Authors (https://github.com/sharanda/manrope)
+SIL Open Font License 1.1: manrope/OFL.txt
+Local font files:
+  db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf
+
+Oswald
+Copyright 2016 The Oswald Project Authors (https://github.com/googlefonts/OswaldFont)
+SIL Open Font License 1.1: oswald/OFL.txt
+Local font files:
+  c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2
+  33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2
+  4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2
+  02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2
+  50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2
+
+The embedded notices above are preserved alongside original upstream OFL headers.
+Geologica upstream OFL uses the historical Geologisk project heading. Manrope upstream OFL copyright is 2018 while the binaries say 2019. The pinned official upstream binaries contain the same embedded notices and versions as the local files.

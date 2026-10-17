@@ -1,0 +1,39 @@
+{{- $page := .page -}}{{- $model := $page.testModel -}}{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $copy := index (index hugo.Data "test-experience").tests $model.slug -}}
+{{- $cms := partial "test-cms.html" $model.slug -}}
+{{- if not $copy -}}{{- errorf "Missing test guidance for %s" $model.slug -}}{{- end -}}
+<main id="emtalk-main" class="tests-experience" tabindex="-1">
+  <div class="tests-width">
+    <a class="tests-back" href="{{ $prefix }}/tests#tests-list"><span aria-hidden="true">←</span> All tests</a>
+    <section class="tests-introduction" aria-labelledby="test-title">
+      <div><p class="tests-eyebrow">{{ $copy.label }}</p><h1 id="test-title" class="test-hero-title">{{ index $cms "test-title" }}</h1><p class="tests-lead">{{ $copy.summary }}</p><p class="tests-facts"><span><span class="test-question-count">{{ len $model.questions }}</span> questions</span><span>About {{ index $cms "time" }} min</span><span>No account needed</span></p><a class="tests-button tests-start" href="#test-questions">Start test <span aria-hidden="true">↓</span></a></div>
+      <aside class="tests-fit"><p class="tests-eyebrow">Is this the right starting point?</p><p>{{ $copy.fit }}</p><details><summary>What can I take away?</summary><p>{{ $copy.outcome }}</p><p>This is a self-assessment, not a diagnosis.</p></details></aside>
+    </section>
+    <div class="tests-before"><p><strong>Before you start.</strong> {{ index $cms "intro-text" }}</p><details><summary>Your answers and privacy</summary><p>Your answers are held in this tab. Refreshing or leaving this page can clear them. They are sent to EmTalk's result service when you request a result.</p><a href="{{ $prefix }}/documents/emtalk-privacy-policy">Read the privacy policy</a></details></div>
+    <noscript><p class="emtalk-nojs">JavaScript is required to answer and score this test. You can read all the questions below.</p></noscript>
+    <div class="test-layout" id="test-questions" tabindex="-1">
+      <div class="tests-progress-label"><p class="tests-position" aria-live="polite" aria-atomic="true">Question 1 of {{ len $model.questions }}</p><p class="tests-answered">0 answered</p></div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <details class="tests-question-map"><summary>Review or change an answer</summary><p>Choose a question. Filled circles mark questions you have answered.</p><div class="tests-question-grid" role="group" aria-label="Question overview">{{ range $index, $question := $model.questions }}<button class="tests-jump" type="button" data-question-index="{{ $index }}" aria-label="Question {{ .number }}, not answered">{{ .number }}</button>{{ end }}</div></details>
+      <div class="test-screen">
+      {{ range $index, $question := $model.questions }}
+        <section class="question-slide" aria-labelledby="emtalk-question-{{ .number }}">
+          <p class="tests-question-context"><span class="tests-readonly-number">Question {{ .number }}. </span>{{ if and (eq $model.slug "spielberger-state-trait-anxiety-inventory") (gt .number 20) }}How you generally feel{{ else if eq $model.slug "spielberger-state-trait-anxiety-inventory" }}How you feel right now{{ else }}{{ $copy.label }}{{ end }}</p>
+          <h2 class="test-question-title" id="emtalk-question-{{ .number }}" tabindex="-1">{{ .question }}</h2>
+          <p class="tests-selection-hint" id="test-selection-{{ .number }}">{{ if eq .mode "single" }}Choose one answer.{{ else if .maxAnswers }}Choose up to {{ .maxAnswers }} answers.{{ else }}Choose all answers that apply.{{ end }}</p>
+          <div class="collection-list-3" aria-describedby="test-selection-{{ .number }}">
+          {{ range .answers }}<div class="collection-item-2"><div class="answer-option"><span class="test-radio" aria-hidden="true"><span class="test-radio-dot"></span></span><span class="text-answer">{{ .text }}</span></div></div>{{ end }}
+          </div>
+        </section>
+      {{ end }}
+      </div>
+      <div class="tests-question-nav"><button class="nav-prev" type="button" disabled><span aria-hidden="true">←</span> Previous</button><p class="tests-next-hint" id="tests-next-hint">Choose an answer to continue.</p><button class="nav-next" type="button" aria-describedby="tests-next-hint" disabled><span class="tests-next-label">Next</span> <span class="tests-next-arrow" aria-hidden="true">→</span></button></div>
+      <p class="tests-session-note">Take your time. You can go back and change an answer before requesting your result.</p>
+    </div>
+    <p class="tests-request-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div class="load-screen" aria-hidden="true" style="display:none">Requesting your result…</div>
+    <section class="result-screen" style="display:none" aria-labelledby="test-results-heading">
+      <div class="test-results"><p class="tests-eyebrow">A moment to reflect</p><h2 id="test-results-heading" class="test-results-heading">Your test result</h2><div class="test-results-summary"><div class="test-results-score"><strong class="test-score-value"></strong><span class="test-score-total"></span></div><div class="test-results-description"><h3 class="test-result-title"></h3><p class="test-result-lead"></p></div></div><div class="test-results-tips"><h3 class="test-tip-title"></h3><div class="test-tip-body"></div></div><p class="tests-result-perspective">A self-assessment is a starting point for reflection, not a diagnosis. If your experiences persist or affect daily life, consider professional support.</p><div class="test-results-actions"><button class="test-retry-button" type="button">Take the test again</button><button class="tests-review-answers" type="button" hidden>Review my answers</button><a class="tests-text-link" href="{{ $prefix }}/tests#tests-list">Explore other tests <span aria-hidden="true">↗</span></a></div><div class="tests-email" hidden><button type="button" disabled aria-describedby="tests-email-note">Email my result · Coming soon</button><p id="tests-email-note">Email delivery is not available yet. We are not collecting email addresses here.</p></div></div>
+    </section>
+  </div>
+</main>

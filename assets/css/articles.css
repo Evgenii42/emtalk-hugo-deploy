@@ -1,0 +1,4 @@
+/* Keep long references readable within the article column. */
+html[data-route-id^="/articles/"] .rich-text-block-3 {
+  overflow-wrap: anywhere;
+}

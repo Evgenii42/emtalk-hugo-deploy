@@ -1,0 +1,4 @@
+{{- $route := .route -}}
+{{- $path := .path -}}
+{{- $section := or (eq $route $path) (and .section (strings.HasPrefix $route (printf "%s/" $path))) -}}
+<a href="{{ hugo.Data.render.mountPrefix }}{{ $path }}" tabindex="0"{{ if $section }} aria-current="{{ if eq $route $path }}page{{ else }}location{{ end }}"{{ end }}>{{ .label }}</a>

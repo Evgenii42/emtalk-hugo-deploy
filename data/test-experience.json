@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Understand myself",
+  "title": "Find a test that fits you.",
+  "lead": "Start with what has been on your mind. See what a test explores before deciding to begin.",
+  "groups": [
+    {
+      "id": "energy",
+      "label": "Work & energy",
+      "prompt": "Work feels draining",
+      "description": "Explore how work has been affecting your energy and sense of accomplishment.",
+      "tests": [
+        "maslach-burnout-inventory"
+      ]
+    },
+    {
+      "id": "anxiety",
+      "label": "Worry & anxiety",
+      "prompt": "I have been feeling anxious",
+      "description": "Choose a broader look at anxiety, or focus on how social situations feel.",
+      "tests": [
+        "spielberger-state-trait-anxiety-inventory",
+        "social-phobia-inventory-spin"
+      ]
+    },
+    {
+      "id": "relationships",
+      "label": "Workplace relationships",
+      "prompt": "Something feels wrong at work",
+      "description": "Reflect on specific experiences of exclusion, pressure or bullying at work.",
+      "tests": [
+        "mobbing-test"
+      ]
+    },
+    {
+      "id": "motivation",
+      "label": "Motivation",
+      "prompt": "I want to know what drives me",
+      "description": "Explore what matters to you in your work.",
+      "tests": [
+        "motivation-test-by-gerchikov"
+      ]
+    }
+  ],
+  "tests": {
+    "maslach-burnout-inventory": {
+      "label": "Work & energy",
+      "question": "Feeling drained by work?",
+      "summary": "Reflect on exhaustion, distance from work and your sense of accomplishment.",
+      "fit": "You want to reflect on how work has been affecting you over the past few months.",
+      "outcome": "A starting point for reflecting on your work experience and discussing it with someone you trust.",
+      "focus": "Work leaves me drained",
+      "scope": "Work and energy over the past few months."
+    },
+    "spielberger-state-trait-anxiety-inventory": {
+      "label": "Worry & anxiety",
+      "question": "Anxious now, or often?",
+      "summary": "Explore how anxious you feel right now and how you generally feel.",
+      "fit": "You want a broader look at anxiety, rather than a focus on social situations alone.",
+      "outcome": "A way to reflect on the difference between your current feelings and your usual experience.",
+      "focus": "I feel anxious now or often",
+      "scope": "Two parts: how you feel now and how you generally feel."
+    },
+    "social-phobia-inventory-spin": {
+      "label": "Worry & anxiety",
+      "question": "Do social situations feel difficult?",
+      "summary": "Reflect on fear, avoidance and discomfort in social situations over the past week.",
+      "fit": "Your main concern is how being around other people or being observed has been feeling.",
+      "outcome": "A prompt to describe your recent social experiences more clearly.",
+      "focus": "Social situations feel difficult",
+      "scope": "Fear, avoidance and discomfort over the past week."
+    },
+    "mobbing-test": {
+      "label": "Workplace relationships",
+      "question": "Feeling pushed out at work?",
+      "summary": "Reflect on experiences of bullying, exclusion or interference in your work.",
+      "fit": "You want to look more closely at specific things that have happened in your current workplace.",
+      "outcome": "A starting point for naming your experiences. It cannot establish whether bullying has occurred.",
+      "focus": "I feel excluded or mistreated at work",
+      "scope": "Specific experiences in your current workplace."
+    },
+    "motivation-test-by-gerchikov": {
+      "label": "Motivation",
+      "question": "What makes work meaningful to you?",
+      "summary": "Explore the different things that motivate you in your working life.",
+      "fit": "You are reflecting on what you value at work, rather than looking for a mental health assessment.",
+      "outcome": "A prompt to think about your preferences and what you would like from your work.",
+      "focus": "I want to understand what motivates me",
+      "scope": "Your preferences and what you value at work."
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "articles": {
+    "/articles/burnout-prevention-vs-recovery": [
+      {
+        "route": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "type": "same-topic",
+        "reason": "Understand the workplace conditions behind burnout."
+      },
+      {
+        "route": "/articles/the-truth-about-how-much-sleep-you-need",
+        "type": "adjacent-topic",
+        "reason": "Consider how sleep duration fits into sustainable rest."
+      }
+    ],
+    "/articles/how-to-know-if-you-are-burned-out": [
+      {
+        "route": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "type": "same-topic",
+        "reason": "Put signs of burnout in the context of work and recovery."
+      },
+      {
+        "route": "/articles/why-sleep-matters",
+        "type": "adjacent-topic",
+        "reason": "Explore what sleep does for attention and everyday functioning."
+      }
+    ],
+    "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": [
+      {
+        "route": "/articles/burnout-prevention-vs-recovery",
+        "type": "same-topic",
+        "reason": "Explore the difference between prevention and recovery."
+      },
+      {
+        "route": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+        "type": "adjacent-topic",
+        "reason": "Look at one everyday influence on the sleep-wake cycle."
+      }
+    ],
+    "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": [
+      {
+        "route": "/articles/the-truth-about-how-much-sleep-you-need",
+        "type": "same-topic",
+        "reason": "Consider sleep duration alongside physical comfort."
+      },
+      {
+        "route": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "type": "adjacent-topic",
+        "reason": "Explore why rest alone may not resolve burnout."
+      }
+    ],
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": [
+      {
+        "route": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+        "type": "same-topic",
+        "reason": "Compare sound and light as influences on sleep."
+      },
+      {
+        "route": "/articles/how-to-know-if-you-are-burned-out",
+        "type": "adjacent-topic",
+        "reason": "Learn how researchers approach the signs of burnout."
+      }
+    ],
+    "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule": [
+      {
+        "route": "/articles/the-chemistry-behind-a-good-nights-sleep",
+        "type": "same-topic",
+        "reason": "Explore the chemistry behind sleep timing."
+      },
+      {
+        "route": "/articles/burnout-prevention-vs-recovery",
+        "type": "adjacent-topic",
+        "reason": "Look beyond daily routines to boundaries and support at work."
+      }
+    ],
+    "/articles/the-chemistry-behind-a-good-nights-sleep": [
+      {
+        "route": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+        "type": "same-topic",
+        "reason": "Connect sleep chemistry with daily light exposure."
+      },
+      {
+        "route": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+        "type": "adjacent-topic",
+        "reason": "Read a workplace perspective on recovery and rest."
+      }
+    ],
+    "/articles/the-truth-about-how-much-sleep-you-need": [
+      {
+        "route": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+        "type": "same-topic",
+        "reason": "Consider physical comfort alongside sleep duration."
+      },
+      {
+        "route": "/articles/how-to-know-if-you-are-burned-out",
+        "type": "adjacent-topic",
+        "reason": "Explore how burnout is assessed beyond tiredness alone."
+      }
+    ],
+    "/articles/why-sleep-matters": [
+      {
+        "route": "/articles/the-chemistry-behind-a-good-nights-sleep",
+        "type": "same-topic",
+        "reason": "Take a closer look at the chemistry of sleep."
+      },
+      {
+        "route": "/articles/burnout-prevention-vs-recovery",
+        "type": "adjacent-topic",
+        "reason": "Explore how early support can shape burnout prevention."
+      }
+    ]
+  }
+}

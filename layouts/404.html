@@ -1,0 +1,35 @@
+{{- if not (reflect.IsMap hugo.Data.render) -}}{{- errorf "Missing prepared render configuration" -}}{{- end -}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <title>404 - Page not found</title>
+    <meta content="The page you are looking for doesn&#x27;t exist or has been moved." name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    {{ $style := resources.Get "css/404.css" | fingerprint "sha256" }}
+    <link href="{{ $style.RelPermalink }}" rel="stylesheet" type="text/css" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
+
+    <link href="{{ hugo.Data.render.mountPrefix }}/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp" rel="shortcut icon" type="image/webp">
+    {{ $navCss := resources.Get "css/site-navigation.css" | fingerprint }}<link rel="stylesheet" href="{{ $navCss.RelPermalink }}" integrity="{{ $navCss.Data.Integrity }}">
+</head>
+
+<body>
+{{ partial "site-header.html" (dict "route" "/404" "skipTarget" (dict "id" "emtalk-main" "href" "#emtalk-main")) }}
+<div class="utility-wrapper">
+    <div class="utility-container">
+        <div class="text-mono">404</div>
+        <div class="utility-content">
+            <h1 id="emtalk-main" tabindex="-1">Page not found<br></h1>
+            <p>The page you are looking for doesn&#x27;t exist or has been moved.</p>
+        </div>
+        <div></div>
+    </div>
+</div>
+{{/* This utility page intentionally uses native fragment focus plus CSS scroll-padding for Skip. The retained trailing break preserves source geometry. */}}
+{{ $navJs := resources.Get "js/site-navigation.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $navJs.RelPermalink }}" integrity="{{ $navJs.Data.Integrity }}"></script>
+</body>
+
+</html>

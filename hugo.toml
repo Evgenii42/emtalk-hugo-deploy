@@ -1,0 +1,23 @@
+baseURL = "https://www.emtalk.org/"
+locale = "en"
+title = "EmTalk"
+uglyURLs = true
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "section"]
+enableRobotsTXT = true
+buildDrafts = false
+[build]
+  noJSConfigInAssets = true
+[markup.goldmark.renderer]
+  unsafe = false
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+    files = ["! assets/*.css"]
+[outputFormats.RouteSitemap]
+  mediaType = "application/xml"
+  baseName = "sitemap"
+  isPlainText = true
+  notAlternative = true
+[outputs]
+  home = ["HTML", "RouteSitemap"]

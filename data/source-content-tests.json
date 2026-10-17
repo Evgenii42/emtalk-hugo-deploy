@@ -1,0 +1,4126 @@
+{
+  "schemaVersion": 1,
+  "scope": "Exact public runtime projections; scoring remains external",
+  "models": {
+    "/tests/maslach-burnout-inventory": {
+      "slug": "maslach-burnout-inventory",
+      "apiTitle": "maslach",
+      "apiEndpoint": "https://api-web.emtalk.org/v1/tests",
+      "sourceArchiveSha256": "55d7d304a294c48249c9f0b33f581af8042778211baedf6a70689663f1b2574d",
+      "sourceControllerSha256": "39c8184ea313a1fb4fc61396f2f8be24ce5d555113f51d396d948cabe86ced52",
+      "questions": [
+        {
+          "id": "69637577a237dd559199a242",
+          "number": 1,
+          "question": "I feel emotionally drained from my work.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "69638341a2675d727a3f1174",
+          "number": 2,
+          "question": "I feel used up at the end of the workday.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963838b8fc857467c57cf61",
+          "number": 3,
+          "question": "I feel fatigued when I get up in the morning and have to face another day on the job.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696383d1cc5fe7cb53a3b0b2",
+          "number": 4,
+          "question": "I can easily understand how my recipients feel about things.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "69638421e95d5e16d527cf85",
+          "number": 5,
+          "question": "I feel I treat some recipients as if they were impersonal objects.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "69638499d4e79bd485b9f60e",
+          "number": 6,
+          "question": "Working with people all day is really a strain for me.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696384de58aac6a4890a3fee",
+          "number": 7,
+          "question": "I deal very effectively with the problems of my recipients.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696385477d489803843114e4",
+          "number": 8,
+          "question": "I feel burned out from my work.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963858c5783630eaae389a6",
+          "number": 9,
+          "question": "I feel I’m positively influencing other people’s lives through my work.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696385d08c61d07bf80864dd",
+          "number": 10,
+          "question": "I’ve become more callous toward people since I took this job.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "69638612417b10471e4abfb5",
+          "number": 11,
+          "question": "I worry that this job is hardening me emotionally.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963865c00fdcab9624056b6",
+          "number": 12,
+          "question": "I feel very energetic.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963869a3e6914e38245e017",
+          "number": 13,
+          "question": "I feel frustrated by my job.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696386db26e967f055c68c8d",
+          "number": 14,
+          "question": "I feel I’m working too hard on my job.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963973bf22b9070765190a4",
+          "number": 15,
+          "question": "I don’t really care what happens to some recipients.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963978575ba89d8650446f5",
+          "number": 16,
+          "question": "Working with people directly puts too much stress on me.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696397c3ff60e518c1d51f7e",
+          "number": 17,
+          "question": "I can easily create a relaxed atmosphere with my recipients.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "69639802cc385e79edd5b462",
+          "number": 18,
+          "question": "I feel exhilarated after working closely with my recipients.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "6963984247e6fc943240e2fd",
+          "number": 19,
+          "question": "I have accomplished many worthwhile things in this job.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "69639872537da6a59cd68d63",
+          "number": 20,
+          "question": "I feel like I’m at the end of my rope.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696398a9f60397cafb18ede7",
+          "number": 21,
+          "question": "In my work, I deal with emotional problems very calmly.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        },
+        {
+          "id": "696398e2f1cc1e6fb9d7b83c",
+          "number": 22,
+          "question": "I feel recipients blame me for some of their problems.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a year",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a month",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a month",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Once a week",
+              "index": 4,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A few times a week",
+              "index": 5,
+              "origin": "inline-controller-augmentation"
+            },
+            {
+              "text": "Every day",
+              "index": 6,
+              "origin": "inline-controller-augmentation"
+            }
+          ]
+        }
+      ]
+    },
+    "/tests/mobbing-test": {
+      "slug": "mobbing-test",
+      "apiTitle": "mobbing",
+      "apiEndpoint": "https://api-web.emtalk.org/v1/tests",
+      "sourceArchiveSha256": "8a92308880ec7cc32135dfe0f844d16837e1ee47d6a0b8682ff09924bdb5a9e8",
+      "sourceControllerSha256": "39c8184ea313a1fb4fc61396f2f8be24ce5d555113f51d396d948cabe86ced52",
+      "questions": [
+        {
+          "id": "695f6cdbb5f3f526a93f0913",
+          "number": 1,
+          "question": "Do you feel isolated by your colleagues or excluded from important meetings?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695f6cfeae47c9901bdb0823",
+          "number": 2,
+          "question": "Have you been verbally insulted or humiliated at work?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695f6d218b20d694d98fb5d4",
+          "number": 3,
+          "question": "Do you feel that your work or contributions are intentionally sabotaged?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695f6d5fb88b4f423e3ba15b",
+          "number": 4,
+          "question": "Have you noticed that colleagues or supervisors speak negatively about you behind your back?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695f6d87924a8ff16c3af5dc",
+          "number": 5,
+          "question": "Do you frequently receive unjust criticism or excessive control over your tasks?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695f6db62a6803e0e738840d",
+          "number": 6,
+          "question": "Have you ever been intentionally given meaningless or excessive workloads?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695f6ddd98717a056ef2d87d",
+          "number": 7,
+          "question": "Do your colleagues or supervisors make sarcastic or hurtful jokes about you?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2b9",
+          "number": 8,
+          "question": "Do you feel that your ideas and suggestions are ignored or ridiculed?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2bb",
+          "number": 9,
+          "question": "Have you experienced social exclusion, such as being ignored during conversations or left out of group activities?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2bd",
+          "number": 10,
+          "question": "Do you feel uncomfortable or unsafe at your workplace due to the behavior of others?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2bf",
+          "number": 11,
+          "question": "Have you been denied opportunities for promotion or professional development without explanation?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2c1",
+          "number": 12,
+          "question": "Do you experience frequent public shaming or embarrassment in front of colleagues?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2c3",
+          "number": 13,
+          "question": "Do your colleagues or supervisors make fun of your personal life or private matters?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2c5",
+          "number": 14,
+          "question": "Have you been threatened with negative consequences (e.g., firing, demotion) without clear reasons?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2c7",
+          "number": 15,
+          "question": "Do you feel that there is an organized group that is deliberately harassing you?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2c9",
+          "number": 16,
+          "question": "Do you feel that your achievements or success are minimized by others?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2cb",
+          "number": 17,
+          "question": "Do you feel pressured to leave your job because of the treatment you receive?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2cd",
+          "number": 18,
+          "question": "Do you find it difficult to concentrate on your work due to stress from harassment?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2cf",
+          "number": 19,
+          "question": "Have you been denied access to necessary resources (e.g., information, tools) that are needed to do your job?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2d1",
+          "number": 20,
+          "question": "Do you feel that your physical health or mental well-being has been affected by the treatment at work?",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "No",
+              "index": 1,
+              "origin": "raw-html"
+            }
+          ]
+        }
+      ]
+    },
+    "/tests/motivation-test-by-gerchikov": {
+      "slug": "motivation-test-by-gerchikov",
+      "apiTitle": "gerchikov",
+      "apiEndpoint": "https://api-web.emtalk.org/v1/tests",
+      "sourceArchiveSha256": "d19bba8fef70a5cdfd61199a175f12dde71005c31832d33c748c9ad088661aa4",
+      "sourceControllerSha256": "39c8184ea313a1fb4fc61396f2f8be24ce5d555113f51d396d948cabe86ced52",
+      "questions": [
+        {
+          "id": "6a6d151eccfd77b907edc2d3",
+          "number": 1,
+          "question": "What do you value most in your job? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "I decide what and how to do things myself.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "It allows me to demonstrate what I know and can do.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I feel useful and necessary as an employee.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I am paid well for it.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I don't particularly value anything, but the job is familiar and comfortable.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2d5",
+          "number": 2,
+          "question": "Which statement suits you best? Give only one answer.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "I can provide a decent income for myself and my family.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I am the master of my work.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I have enough knowledge and experience to handle any difficulties in my job.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I always do what is required of me.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I am a valuable, indispensable employee for the organization.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2d7",
+          "number": 3,
+          "question": "How do you prefer to work? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "I prefer to do what is familiar and comfortable.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I am ready to do whatever is necessary for the organization.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "There must always be something new in the job to avoid stagnation.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "It must be clear what needs to be done and what I will receive for it.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I prefer to work with full personal responsibility.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2d9",
+          "number": 4,
+          "question": "What are the main functions of a supervisor, in your opinion? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Ensure team cohesion.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Control the progress of the work and make sure everything is done properly.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Distribute the work and clearly define who is responsible for what.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Assign tasks according to qualifications and ensure material support.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Other",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2db",
+          "number": 5,
+          "question": "What does your income represent to you? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "It's primarily a reward for my knowledge and qualifications.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "It's payment for the time and effort spent on the job.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Whatever it is, I earned it myself.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "It's payment for my contribution to the overall success of the organization.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I need a guaranteed income, even if it's small, but stable.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2dd",
+          "number": 6,
+          "question": "Salary and bonuses, pensions, scholarships",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2df",
+          "number": 7,
+          "question": "Qualification allowances",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2e1",
+          "number": 8,
+          "question": "Allowances for difficult and hazardous working conditions",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2e3",
+          "number": 9,
+          "question": "Social benefits and allowances",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2e5",
+          "number": 10,
+          "question": "Income from property, shares, investments",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2e7",
+          "number": 11,
+          "question": "Any additional earnings",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2e9",
+          "number": 12,
+          "question": "Additional earnings only in my specialty",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2eb",
+          "number": 13,
+          "question": "Income from personal household or garden",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2ed",
+          "number": 14,
+          "question": "Lottery or casino winnings",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Very important",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not very important",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Not important at all",
+              "index": 2,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2ef",
+          "number": 15,
+          "question": "On what principles, in your opinion, should the relationship between the worker and the organization be built? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "The worker should treat the organization as their home and share all difficulties and successes. The organization should accordingly value the worker's loyalty and effort.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The worker comes to the organization to develop their abilities. The organization should provide this opportunity and benefit from it.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The worker spends their energy on the organization, and the organization must guarantee their salary and social benefits.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A person works for the organization, but they should do their job on their own; excessive attachment to the team only interferes.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The worker sells their labor to the organization, and if they are not given a good price, they have the right to find another buyer.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2f1",
+          "number": 16,
+          "question": "Why do people usually show initiative at work and make various proposals? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "They feel special responsibility for their work.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "They want to win the favor of management.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "They usually want to improve the organization's work.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "They want to realize their knowledge and experience, going beyond established work boundaries.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "They want to earn money, since any useful initiative should be rewarded.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2f3",
+          "number": 17,
+          "question": "Which statement about collective work is closer to your opinion? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "You can work in a team, but payment should be based on personal results.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I like working in a team — I can always rely on a colleague, and if things go wrong, we'll deal with it together.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I prefer to work autonomously, but I can also work in a team of professionals.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I need freedom of action, but the team often limits this freedom.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Teamwork is very important to me, it is impossible to achieve significant results alone.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2f5",
+          "number": 18,
+          "question": "How do you deal with difficulties at work? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "I turn to my manager.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I am ready to solve complex issues because my salary depends on it.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I am obliged to handle difficulties on my own in the work assigned to me.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "We solve complex issues as a team. The team is a great force, any difficulties are manageable.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I have enough knowledge and experience to handle difficulties.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2f7",
+          "number": 19,
+          "question": "If you were temporarily not working and could choose a new job, what would you choose? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "The most interesting, creative one.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The most independent and autonomous one.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The one with the highest pay.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The one with not too heavy work and, although small, a guaranteed income.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I would return to my previous workplace because we have a great team.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2f9",
+          "number": 20,
+          "question": "What, in your opinion, determines the promotion of an employee? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Whether the employee is valuable and indispensable to the organization.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Their connections and acquaintances.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "How their level of professionalism grows.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "How responsibly they approach any task assigned to them.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Their ability to behave correctly with management.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2fb",
+          "number": 21,
+          "question": "Which statement about control best suits your opinion? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Control is necessary because some workers may slack off.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Control is needed primarily for the benefit of the whole business.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Control only hinders work; a good worker knows what and how to do.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I recognize only professional control.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Without control, it's hard to determine who did how much and what they should get for it.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2fd",
+          "number": 22,
+          "question": "Which statement about work quality best suits your opinion? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "The quality of our work is very important because, in the end, it determines the organization's reputation.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Don't slack off, but the quality of my work depends on the resources and conditions I have.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "You need to meet the requirements because mistakes and defects are punished.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Quality is especially important when it's paid extra.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A professional cannot do a bad job, so quality is important all the time, even if the customer can't appreciate it.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc2ff",
+          "number": 23,
+          "question": "What do you think is the main cause of misunderstanding and conflicts between management and employees? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Lack of professionals — among both employees and managers.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "They care more about personal interests than the company's interests, which harms the overall business.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Dissatisfaction with unfair pay, so people don't work as well as they could.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Management is more often to blame — they don't provide normal working conditions but still demand results.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Management intervenes too much in matters where the employee knows better.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc301",
+          "number": 24,
+          "question": "If you are a manager, what attracts you the most about this position? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "The ability to make independent decisions.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "High pay.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The ability to bring the greatest benefit to the organization.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The ability to organize the work of others.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "The best way to apply my knowledge and skills.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc303",
+          "number": 25,
+          "question": "If you are not a manager, would you like to become one? You can give one or two answers.",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Yes, because it will give me the opportunity to make independent and responsible decisions.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Yes, if it is paid accordingly.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I don't mind if it's needed for the greater good.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Yes, why not?",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Yes, because I will be able to better apply my knowledge and skills.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc305",
+          "number": 26,
+          "question": "If the situation at your workplace deteriorates, what changes in your work and position would you agree to in order to keep your job? You can give as many answers as you like.",
+          "mode": "multiple",
+          "maxAnswers": null,
+          "unlimited": true,
+          "answers": [
+            {
+              "text": "Learn a new profession.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Work part-time or take a lower-paid, less qualified job.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Switch to a less convenient work schedule.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Work more intensively.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I'll just endure it because there's nowhere else to go.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc307",
+          "number": 27,
+          "question": "What do you dislike about your current job? You can give one or two answers:",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "I want to get a higher salary.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I can't fully apply my knowledge and skills here.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Management is too controlling, and I want more independence.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "There is no unity in the team, no striving for a common goal.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I would like to change jobs, but I probably won't, because although it's unstable everywhere, at least here I have something.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc309",
+          "number": 28,
+          "question": "What do you like about your current job? You can give one or two answers:",
+          "mode": "multiple",
+          "maxAnswers": 2,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "The salary here suits me.",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I can fully demonstrate my knowledge and skills.",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I feel like the master of my work here.",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "We have a great team, and we work towards a common goal.",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "I've been working here for many years, I'm used to it, and I won't be able to leave.",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        }
+      ]
+    },
+    "/tests/social-phobia-inventory-spin": {
+      "slug": "social-phobia-inventory-spin",
+      "apiTitle": "spin",
+      "apiEndpoint": "https://api-web.emtalk.org/v1/tests",
+      "sourceArchiveSha256": "9f988d91392b6751cfeab44da98e67ea8b330be2051db545541f02d47c8e512a",
+      "sourceControllerSha256": "39c8184ea313a1fb4fc61396f2f8be24ce5d555113f51d396d948cabe86ced52",
+      "questions": [
+        {
+          "id": "695a3737ec64ef30d068b1cb",
+          "number": 1,
+          "question": "I am afraid of people in authority.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "695a376d1334dcd50637a572",
+          "number": 2,
+          "question": "I am bothered by blushing in front of people.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69634df8fa51b7c6b53fabc8",
+          "number": 3,
+          "question": "Parties and social events scare me.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "696354ac1117a5a3416bb311",
+          "number": 4,
+          "question": "I avoid talking to people I don't know.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "696354f2cc5460d685e57109",
+          "number": 5,
+          "question": "Being criticized scares me a lot.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69635531eec7e8d28aa9106f",
+          "number": 6,
+          "question": "Fear of embarrassment causes me to avoid doing things or speaking to people.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "696355d7e51a5ff74956c3fb",
+          "number": 7,
+          "question": "Sweating in front of others causes me distress.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "696356132bc073def4b6b128",
+          "number": 8,
+          "question": "I avoid going to parties.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69635a97a80a4a0850eee294",
+          "number": 9,
+          "question": "I avoid activities in which I am the center of attention.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69636f022c607cafde951888",
+          "number": 10,
+          "question": "Talking to strangers scares me.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69636fb39c176be6aaff312f",
+          "number": 11,
+          "question": "I avoid having to give speeches.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69636f867b44da5cc12f5b52",
+          "number": 12,
+          "question": "I would do anything to avoid being criticized.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69636fdf4d66c3471f17e795",
+          "number": 13,
+          "question": "Heart palpitations bother me when I am around people.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "69637020b2ce78dbb9477ae9",
+          "number": 14,
+          "question": "I am afraid of doing things when people might be watching.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6963704c537da6a59cd30bae",
+          "number": 15,
+          "question": "Being embarrassed or looking stupid are among my worst fears.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6963707d30a74349e494a931",
+          "number": 16,
+          "question": "I avoid speaking to anyone in authority.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "696370a72cc9475fb72de2c9",
+          "number": 17,
+          "question": "Trembling or shaking in front of others is distressing to me.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "A little bit",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much",
+              "index": 3,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Extremely",
+              "index": 4,
+              "origin": "raw-html"
+            }
+          ]
+        }
+      ]
+    },
+    "/tests/spielberger-state-trait-anxiety-inventory": {
+      "slug": "spielberger-state-trait-anxiety-inventory",
+      "apiTitle": "spielberger",
+      "apiEndpoint": "https://api-web.emtalk.org/v1/tests",
+      "sourceArchiveSha256": "81f18e1afd61b75ff094a689a01df09ca0341f64c9432d9df2aceac8370abddf",
+      "sourceControllerSha256": "39c8184ea313a1fb4fc61396f2f8be24ce5d555113f51d396d948cabe86ced52",
+      "questions": [
+        {
+          "id": "6a6d151eccfd77b907edc30b",
+          "number": 1,
+          "question": "I feel calm.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc30d",
+          "number": 2,
+          "question": "I feel secure.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc30f",
+          "number": 3,
+          "question": "I am tense.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc311",
+          "number": 4,
+          "question": "I feel strained.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc313",
+          "number": 5,
+          "question": "I feel at ease.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc315",
+          "number": 6,
+          "question": "I feel upset.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc317",
+          "number": 7,
+          "question": "I am presently worrying over possible misfortunes.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc319",
+          "number": 8,
+          "question": "I feel satisfied.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc31b",
+          "number": 9,
+          "question": "I feel frightened.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc31d",
+          "number": 10,
+          "question": "I feel comfortable.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc31f",
+          "number": 11,
+          "question": "I feel self-confident.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc321",
+          "number": 12,
+          "question": "I feel nervous.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc323",
+          "number": 13,
+          "question": "I am jittery.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc325",
+          "number": 14,
+          "question": "I feel indecisive.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc327",
+          "number": 15,
+          "question": "I am relaxed.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc329",
+          "number": 16,
+          "question": "I feel content.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc32b",
+          "number": 17,
+          "question": "I am worried.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc32d",
+          "number": 18,
+          "question": "I feel confused.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc32f",
+          "number": 19,
+          "question": "I feel steady.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc331",
+          "number": 20,
+          "question": "I feel pleasant.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Not at all",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Somewhat",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Moderately so",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Very much so",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc333",
+          "number": 21,
+          "question": "I feel pleasant.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc335",
+          "number": 22,
+          "question": "I feel nervous and restless.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc337",
+          "number": 23,
+          "question": "I feel satisfied with myself.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc339",
+          "number": 24,
+          "question": "I wish I could be as happy as others seem to be.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc33b",
+          "number": 25,
+          "question": "I feel like a failure.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc33d",
+          "number": 26,
+          "question": "I feel rested.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc33f",
+          "number": 27,
+          "question": "I am 'calm, cool, and collected.'",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc341",
+          "number": 28,
+          "question": "I feel that difficulties are piling up so that I cannot overcome them.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc343",
+          "number": 29,
+          "question": "I worry too much over something that really doesn’t matter.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc345",
+          "number": 30,
+          "question": "I am happy.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc347",
+          "number": 31,
+          "question": "I have disturbing thoughts.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc349",
+          "number": 32,
+          "question": "I lack self-confidence.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc34b",
+          "number": 33,
+          "question": "I feel secure.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc34d",
+          "number": 34,
+          "question": "I make decisions easily.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc34f",
+          "number": 35,
+          "question": "I feel inadequate.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc351",
+          "number": 36,
+          "question": "I am content.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc353",
+          "number": 37,
+          "question": "Some unimportant thought runs through my mind and bothers me.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc355",
+          "number": 38,
+          "question": "I take disappointments so keenly that I can’t put them out of my mind.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151eccfd77b907edc357",
+          "number": 39,
+          "question": "I am a steady person.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        },
+        {
+          "id": "6a6d151fa422a19533609750",
+          "number": 40,
+          "question": "I get in a state of tension or turmoil as I think over my recent concerns and interests.",
+          "mode": "single",
+          "maxAnswers": 1,
+          "unlimited": false,
+          "answers": [
+            {
+              "text": "Almost never",
+              "index": 0,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Sometimes",
+              "index": 1,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Often",
+              "index": 2,
+              "origin": "raw-html"
+            },
+            {
+              "text": "Almost always",
+              "index": 3,
+              "origin": "raw-html"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

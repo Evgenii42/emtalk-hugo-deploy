@@ -1,0 +1,6 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+<section id="emtalk-main" class="intent-entry" aria-labelledby="bret-launch-title" tabindex="-1">
+  <h2 id="bret-launch-title">{{ .title }}</h2>
+  <p class="intent-entry__lead">{{ .lead }}</p>
+  <div class="intent-entry__actions">{{ range .actions }}<a href="{{ $prefix }}{{ .path }}">{{ .label }}</a>{{ end }}</div>
+</section>

@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "title": "Mental Wellness Articles for Calm and Clarity",
+  "intro": [
+    "Short reflections and practical articles to help you slow down and think clearly.",
+    "No feed. No pressure. Just reading."
+  ],
+  "hero": {
+    "src": "media/articles-read-listen-lake-v2-1536.webp",
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "media/articles-read-listen-lake-v2-540.webp",
+        "width": 540
+      },
+      {
+        "src": "media/articles-read-listen-lake-v2-900.webp",
+        "width": 900
+      },
+      {
+        "src": "media/articles-read-listen-lake-v2-1536.webp",
+        "width": 1536
+      }
+    ]
+  },
+  "articles": [
+    {
+      "route": "/articles/burnout-prevention-vs-recovery",
+      "topic": "burnout",
+      "title": "Prevention or cure? Why timing Is everything when it comes to burnout",
+      "summary": "Discover why prevention becomes harder once burnout takes hold, what the research says about early intervention, and how workplaces can reduce burnout before recovery becomes necessary.",
+      "cover": {
+        "src": "media/e545e85e07d41e1d27d5-eecf7a82e_6a95befccde5dadb821b1c5e_-D0-B1-D0-B0-D1-80-D1-81-D1-83-D0-BA1600-D1-851000.webp",
+        "alt": "Badger resting at a desk, illustrating burnout prevention and recovery",
+        "width": 1600,
+        "height": 1000
+      },
+      "readingMinutes": 5,
+      "listeningMinutes": 6,
+      "sourceCategories": [
+        "Burnout"
+      ]
+    },
+    {
+      "route": "/articles/how-to-know-if-you-are-burned-out",
+      "topic": "burnout",
+      "title": "How do you know if you're actually burned out? Inside the science of measuring It",
+      "summary": "Explore how researchers assess burnout, why there’s no universal cutoff, and how exhaustion, cynicism, and professional efficacy can point to very different experiences and different solutions.",
+      "cover": {
+        "src": "media/405e3132b8bf95c14913-a870_6a8b1c1e55f48eb328f6f1ed_Generated-20Image-20August-2020-2C-202026-20--2012_34AM.webp",
+        "alt": "Illustration accompanying a guide to recognizing and measuring burnout",
+        "width": 2752,
+        "height": 1536
+      },
+      "readingMinutes": 6,
+      "listeningMinutes": 6,
+      "sourceCategories": [
+        "Burnout"
+      ]
+    },
+    {
+      "route": "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it",
+      "topic": "burnout",
+      "title": "What burnout really is and why rest alone won’t fix it",
+      "summary": "Explore what burnout does to your mind and body, why workplace conditions matter, and what sustainable recovery actually requires.",
+      "cover": {
+        "src": "media/19b341ee6f2e1fce3890-f7a838_6a871eeb3441bbcea62f5ebc_-D0-B3-D0-BE-D0-BB-D1-83-D0-B1-D1-8C-201600-D1-851000.webp",
+        "alt": "Pigeon resting at work, illustrating the effects of occupational burnout",
+        "width": 1600,
+        "height": 1000
+      },
+      "readingMinutes": 6,
+      "listeningMinutes": 6,
+      "sourceCategories": [
+        "Burnout"
+      ]
+    },
+    {
+      "route": "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long",
+      "topic": "sleep",
+      "title": "Body position and sleep: why how you lie down matters as much as how long",
+      "summary": "A guide to sleep posture, mattress support and pillow fit, explaining which positions are friendliest to the spine and offering a quick self-check for your bedroom setup",
+      "cover": {
+        "src": "media/fc30dbe7081254136892-6a9dd25263edcc1eecf7a83b_6a801867b13e7b4116e567c2_magnific_.-._gOJ4xblSXO.webp",
+        "alt": "Illustration of healthy sleep posture and body alignment",
+        "width": 1376,
+        "height": 768
+      },
+      "readingMinutes": 3,
+      "listeningMinutes": 3,
+      "sourceCategories": [
+        "Work-Life Balance",
+        "Stress Management"
+      ]
+    },
+    {
+      "route": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
+      "topic": "sleep",
+      "title": "The sound of sleep: why silence isn't always the goal",
+      "summary": "An exploration of how consistent sound, not silence, supports deeper sleep, backed by research on white noise with practical alternatives and tips for handling a noisy bed partner",
+      "cover": {
+        "src": "media/5ea887ea3c19775bc05d-6a9dd25263edcc1eecf7a83e_6a7f31601aeecc26bcf9ebd6_magnific_.-.-.-._CqHKmq4EEy.webp",
+        "alt": "Illustration of a calm nighttime soundscape for better sleep",
+        "width": 1376,
+        "height": 768
+      },
+      "readingMinutes": 3,
+      "listeningMinutes": 3,
+      "sourceCategories": [
+        "Work-Life Balance",
+        "Stress Management"
+      ]
+    },
+    {
+      "route": "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule",
+      "topic": "sleep",
+      "title": "Lights out: how light quietly runs your sleep schedule",
+      "summary": "A look at how light exposure shapes your sleep-wake cycle, backed by research on blue-light therapy with practical steps for using morning light and managing evening screens.",
+      "cover": {
+        "src": "media/83dae24ad6ad5f87cf9b-6a9dd25363edcc1eecf7a873_6a79ec91230dae0562fff571_magnific_7949qUnJAL.webp",
+        "alt": "Illustration showing how morning and evening light affect sleep",
+        "width": 2048,
+        "height": 1152
+      },
+      "readingMinutes": 3,
+      "listeningMinutes": 3,
+      "sourceCategories": [
+        "Work-Life Balance",
+        "Stress Management"
+      ]
+    },
+    {
+      "route": "/articles/the-chemistry-behind-a-good-nights-sleep",
+      "topic": "sleep",
+      "title": "The Chemistry Behind a Good Night's Sleep",
+      "summary": "Explore the hidden chemical ballet behind your sleep patterns, from how melatonin and cortisol regulate your circadian rhythm to the genetic chronotypes coded into your DNA",
+      "cover": {
+        "src": "media/b679b72d2987b79948e6--D1-80-D0-B8-D0-B7-D0-BE-D0-BD-D1-82-D0-B0-D0-BB-D1-8C-D0-BD-D0-B0-D1-8F-2016-D0-BA10.webp",
+        "alt": "Fox scientist illustrating melatonin, cortisol and sleep chemistry",
+        "width": 1600,
+        "height": 1000
+      },
+      "readingMinutes": 2,
+      "listeningMinutes": 3,
+      "sourceCategories": [
+        "Work-Life Balance",
+        "Stress Management"
+      ]
+    },
+    {
+      "route": "/articles/the-truth-about-how-much-sleep-you-need",
+      "topic": "sleep",
+      "title": "The Truth About How Much Sleep You Need",
+      "summary": "Rethink the 8-hour sleep myth and learn how to optimize your daily rest, including a simple 20-minute coffee nap trick for maximum mental alertness",
+      "cover": {
+        "src": "media/48e01e1b9c8462377b69--D1-80-D0-B8-D0-B7-D0-BE-D0-BD-D1-82-D0-B0-D0-BB-D1-8C-D0-BD-D0-B0-D1-8F-2016-D0-BA10.webp",
+        "alt": "Sleeping fox illustrating healthy sleep duration for adults",
+        "width": 1600,
+        "height": 1000
+      },
+      "readingMinutes": 2,
+      "listeningMinutes": 2,
+      "sourceCategories": [
+        "Work-Life Balance",
+        "Stress Management"
+      ]
+    },
+    {
+      "route": "/articles/why-sleep-matters",
+      "topic": "sleep",
+      "title": "A deep dive into sleep — the most underrated power hack in your career and life",
+      "summary": "Explore what really happens in your brain while you sleep and why every stage matters",
+      "cover": {
+        "src": "media/bab45c4afdd0bb086900-d92fc3e55b10f7c03_6a6092212de65c51e9f8c5f4_-D0-B4-D0-B5-D1-81-D0-BA-D1-82-D0-BE-D0-BF.webp",
+        "alt": "Sleeping corgi illustrating sleep cycles and brain health",
+        "width": 1600,
+        "height": 1000
+      },
+      "readingMinutes": 4,
+      "listeningMinutes": 5,
+      "sourceCategories": [
+        "Work-Life Balance",
+        "Stress Management"
+      ]
+    }
+  ],
+  "sourceTopicsWithoutArticles": [
+    "Toxic Environment",
+    "Leadership",
+    "Corporate Culture"
+  ],
+  "timeQualification": "Original public CMS nominal reading-time/audio-duration values, not newly measured reading or playback durations.",
+  "groupingQualification": "Sleep and Burnout are editorial subject groupings; Sleep is not an original CMS category. Source categories are retained separately per row.",
+  "emptyTopicHandling": "Preserved as plain text in the More topics disclosure, explicitly identified as having no articles. No inactive filter controls or empty filtered screens.",
+  "topics": [
+    {
+      "id": "sleep",
+      "label": "Sleep",
+      "statusLabel": "sleep"
+    },
+    {
+      "id": "burnout",
+      "label": "Burnout",
+      "statusLabel": "burnout"
+    }
+  ],
+  "allTopicsLabel": "All",
+  "topicCrossListing": "Sleep articles are also listed under Stress Management and Work-Life Balance."
+}

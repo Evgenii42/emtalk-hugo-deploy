@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "site": {
+    "name": "EmTalk",
+    "productionOrigin": "https://www.emtalk.org",
+    "description": "Read and listen to articles on sleep and burnout, explore self-assessment questionnaires, and discover BRET and Decision Matrix.",
+    "locale": "en_US",
+    "language": "en",
+    "organizationLogo": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+    "defaultImage": "/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp",
+    "defaultImageAlt": "Illustrated EmTalk landscape",
+    "defaultImageWidth": 2560,
+    "defaultImageHeight": 1440
+  },
+  "pages": {
+    "/": {
+      "title": "EmTalk: Tools for Calm, Clarity and Better Decisions",
+      "description": "Read or listen to EmTalk articles on sleep and burnout, explore self-assessment questionnaires, and discover BRET and Decision Matrix.",
+      "indexable": true,
+      "headline": "Find your next step",
+      "image": "/media/home-social.f8bd9ede0260.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Illustrated pink and purple lake at sunrise, with mountains and a winding path"
+    },
+    "/about-us": {
+      "title": "About EmTalk: Tools for Calm and Clarity",
+      "description": "Learn about EmTalk and its independent team building tools for calm, clarity and decision-making.",
+      "indexable": true,
+      "headline": "We build tools for calm, clarity, and conscious growth."
+    },
+    "/affirmations": {
+      "title": "Affirmations | EmTalk",
+      "description": "The affirmations section of EmTalk.",
+      "indexable": false
+    },
+    "/affirmations/af-01": {
+      "title": "Affirmation AF-01 | EmTalk",
+      "description": "EmTalk page AF-01.",
+      "indexable": false
+    },
+    "/affirmations/af-02": {
+      "title": "Affirmation AF-02 | EmTalk",
+      "description": "EmTalk page AF-02.",
+      "indexable": false
+    },
+    "/articles": {
+      "title": "Articles on Sleep and Burnout | EmTalk",
+      "description": "Read or listen to nine articles about sleep and burnout. Explore sleep habits, work-related exhaustion and the ideas discussed on EmTalk.",
+      "indexable": true,
+      "headline": "Mental Wellness Articles for Calm and Clarity"
+    },
+    "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": {
+      "title": "Body Position: Why How You Lie Down Matters | EmTalk",
+      "description": "Explore how sleep position, mattresses and pillows relate to rest, with discussion of posture and comfort. Read or listen on EmTalk.",
+      "indexable": true,
+      "image": "/media/fc30dbe7081254136892-6a9dd25263edcc1eecf7a83b_6a801867b13e7b4116e567c2_magnific_.-._gOJ4xblSXO.webp",
+      "headline": "Body position and sleep: why how you lie down matters as much as how long",
+      "imageWidth": 1376,
+      "imageHeight": 768
+    },
+    "/articles/burnout-prevention-vs-recovery": {
+      "title": "Burnout Prevention vs. Recovery: Why Timing Matters | EmTalk",
+      "description": "Explore the difference between preventing burnout and recovering from it, including timing and work-related factors. Read or listen on EmTalk.",
+      "indexable": true,
+      "image": "/media/e545e85e07d41e1d27d5-eecf7a82e_6a95befccde5dadb821b1c5e_-D0-B1-D0-B0-D1-80-D1-81-D1-83-D0-BA1600-D1-851000.webp",
+      "headline": "Prevention or cure? Why timing Is everything when it comes to burnout",
+      "imageWidth": 1600,
+      "imageHeight": 1000
+    },
+    "/articles/how-to-know-if-you-are-burned-out": {
+      "title": "How to Know If You’re Burned Out: Signs and Burnout Tests | EmTalk",
+      "description": "Read about signs of work-related burnout and questionnaires discussed in burnout research. Read or listen to the article on EmTalk.",
+      "indexable": true,
+      "image": "/media/405e3132b8bf95c14913-a870_6a8b1c1e55f48eb328f6f1ed_Generated-20Image-20August-2020-2C-202026-20--2012_34AM.webp",
+      "headline": "How do you know if you're actually burned out? Inside the science of measuring It",
+      "imageWidth": 2752,
+      "imageHeight": 1536
+    },
+    "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule": {
+      "title": "Lights Out: How Light Quietly Runs Your Sleep Schedule | EmTalk",
+      "description": "Explore how morning daylight and evening screens relate to sleep timing and the body clock. Read or listen to the article on EmTalk.",
+      "indexable": true,
+      "image": "/media/83dae24ad6ad5f87cf9b-6a9dd25363edcc1eecf7a873_6a79ec91230dae0562fff571_magnific_7949qUnJAL.webp",
+      "headline": "Lights out: how light quietly runs your sleep schedule",
+      "imageWidth": 2048,
+      "imageHeight": 1152
+    },
+    "/articles/the-chemistry-behind-a-good-nights-sleep": {
+      "title": "The Chemistry of Sleep: Melatonin, Cortisol & Genetics | EmTalk",
+      "description": "Read about melatonin, cortisol and chronotype in an introduction to the body clock and sleep. Listen to the audio version on EmTalk.",
+      "indexable": true,
+      "image": "/media/b679b72d2987b79948e6--D1-80-D0-B8-D0-B7-D0-BE-D0-BD-D1-82-D0-B0-D0-BB-D1-8C-D0-BD-D0-B0-D1-8F-2016-D0-BA10.webp",
+      "headline": "The Chemistry Behind a Good Night's Sleep",
+      "imageWidth": 1600,
+      "imageHeight": 1000
+    },
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": {
+      "title": "The Sound of Sleep: Why Silence Isn't Always the Goal | EmTalk",
+      "description": "Explore silence, white noise and other sound environments discussed in sleep research. Read or listen to the article on EmTalk.",
+      "indexable": true,
+      "image": "/media/5ea887ea3c19775bc05d-6a9dd25263edcc1eecf7a83e_6a7f31601aeecc26bcf9ebd6_magnific_.-.-.-._CqHKmq4EEy.webp",
+      "headline": "The sound of sleep: why silence isn't always the goal",
+      "imageWidth": 1376,
+      "imageHeight": 768
+    },
+    "/articles/the-truth-about-how-much-sleep-you-need": {
+      "title": "How Much Sleep Do Adults Need? A Practical Guide | EmTalk",
+      "description": "Read about adult sleep duration, individual differences and coffee naps in this EmTalk article. An audio version is also available.",
+      "indexable": true,
+      "image": "/media/c82729a1f1988cb05e30--BE-D0-BD-D1-82-D0-B0-D0-BB-D1-8C-D0-BD-D0-B0-D1-8F-20-D0-BC-D0-BE-D0-B1-2016-D0-BA10.webp",
+      "headline": "The Truth About How Much Sleep You Need",
+      "imageWidth": 800,
+      "imageHeight": 500
+    },
+    "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": {
+      "title": "What Burnout Really Is - and Why Rest Alone Won’t Fix It | EmTalk",
+      "description": "Explore work-related exhaustion, the meaning of burnout and why recovery involves more than rest. Read or listen on EmTalk.",
+      "indexable": true,
+      "image": "/media/19b341ee6f2e1fce3890-f7a838_6a871eeb3441bbcea62f5ebc_-D0-B3-D0-BE-D0-BB-D1-83-D0-B1-D1-8C-201600-D1-851000.webp",
+      "headline": "What burnout really is and why rest alone won’t fix it",
+      "imageWidth": 1600,
+      "imageHeight": 1000
+    },
+    "/articles/why-sleep-matters": {
+      "title": "Why Sleep Matters: Sleep Cycles & Brain Health | EmTalk",
+      "description": "Explore sleep, rest and their role in everyday life in an introductory EmTalk article. Read the text or listen to the audio version.",
+      "indexable": true,
+      "image": "/media/bab45c4afdd0bb086900-d92fc3e55b10f7c03_6a6092212de65c51e9f8c5f4_-D0-B4-D0-B5-D1-81-D0-BA-D1-82-D0-BE-D0-BF.webp",
+      "headline": "A deep dive into sleep — the most underrated power hack in your career and life",
+      "imageWidth": 1600,
+      "imageHeight": 1000
+    },
+    "/bret": {
+      "title": "BRET: Breathing and Relaxation App | EmTalk",
+      "description": "Explore BRET, EmTalk’s breathing and relaxation app, and its guided practices.",
+      "indexable": true,
+      "headline": "BRET"
+    },
+    "/dm": {
+      "title": "Decision Matrix: Prioritize and Compare Options | EmTalk",
+      "description": "Explore Decision Matrix, EmTalk’s tool for prioritizing tasks, comparing options and making decisions.",
+      "indexable": true,
+      "image": "/media/ce2e0b92be190f17e1a1-69c432ae7918b4bbf56cbf1a_Open-Graph-Image-DM.webp",
+      "headline": "Your Professional Prioritization Tool",
+      "imageWidth": 1200,
+      "imageHeight": 630
+    },
+    "/documents/bret-delete-your-account-and-associated-data": {
+      "title": "BRET Account and Data Deletion | EmTalk",
+      "description": "Information about requesting deletion of a BRET account and associated data.",
+      "indexable": false,
+      "headline": "Delete Your Account and Associated Data"
+    },
+    "/documents/bret-delete-your-account-and-associated-data-v1": {
+      "title": "BRET Account and Data Deletion (v1) | EmTalk",
+      "description": "Version 1: BRET account and data deletion information.",
+      "indexable": false,
+      "headline": "Delete Your Account and Associated Data"
+    },
+    "/documents/bret-privacy-policy": {
+      "title": "BRET Privacy Policy | EmTalk",
+      "description": "Read the privacy policy for BRET.",
+      "indexable": false,
+      "headline": "BRET App Privacy Policy"
+    },
+    "/documents/bret-privacy-policy-v1": {
+      "title": "BRET Privacy Policy (v1) | EmTalk",
+      "description": "Version 1: BRET privacy policy information.",
+      "indexable": false,
+      "headline": "BRET App Privacy Policy"
+    },
+    "/documents/bret-terms-and-conditions-of-use": {
+      "title": "BRET Terms and Conditions of Use | EmTalk",
+      "description": "Read the terms and conditions of use for BRET.",
+      "indexable": false,
+      "headline": "BRET Terms and Conditions of Use"
+    },
+    "/documents/bret-terms-and-conditions-of-use-v1": {
+      "title": "BRET Terms and Conditions of Use (v1) | EmTalk",
+      "description": "Version 1: BRET terms and conditions of use information.",
+      "indexable": false,
+      "headline": "BRET Terms and Conditions of Use"
+    },
+    "/documents/dm-delete-your-account-and-associated-data": {
+      "title": "Decision Matrix Account and Data Deletion | EmTalk",
+      "description": "Information about requesting deletion of a Decision Matrix account and associated data.",
+      "indexable": false,
+      "headline": "Delete Your Account and Associated Data"
+    },
+    "/documents/dm-delete-your-account-and-associated-data-v1": {
+      "title": "Decision Matrix Account and Data Deletion (v1) | EmTalk",
+      "description": "Version 1: Decision Matrix account and data deletion information.",
+      "indexable": false,
+      "headline": "Delete Your Account and Associated Data"
+    },
+    "/documents/dm-privacy-policy": {
+      "title": "Decision Matrix Privacy Policy | EmTalk",
+      "description": "Read the privacy policy for Decision Matrix.",
+      "indexable": false,
+      "headline": "Decision Matrix App Privacy Policy"
+    },
+    "/documents/dm-privacy-policy-v1": {
+      "title": "Decision Matrix Privacy Policy (v1) | EmTalk",
+      "description": "Version 1: Decision Matrix privacy policy information.",
+      "indexable": false,
+      "headline": "Decision Matrix App Privacy Policy"
+    },
+    "/documents/dm-terms-and-conditions-of-use": {
+      "title": "Decision Matrix Terms and Conditions of Use | EmTalk",
+      "description": "Read the terms and conditions of use for Decision Matrix.",
+      "indexable": false,
+      "headline": "Decision Matrix Terms and Conditions of Use"
+    },
+    "/documents/dm-terms-and-conditions-of-use-v1": {
+      "title": "Decision Matrix Terms and Conditions of Use (v1) | EmTalk",
+      "description": "Version 1: Decision Matrix terms and conditions of use information.",
+      "indexable": false,
+      "headline": "Decision Matrix Terms and Conditions of Use"
+    },
+    "/documents/emtalk-delete-your-account-and-associated-data": {
+      "title": "EmTalk Personal Data Deletion",
+      "description": "How to request deletion of personal data associated with interactions with EmTalk.",
+      "indexable": false,
+      "headline": "Delete Your Account and Associated Data"
+    },
+    "/documents/emtalk-privacy-policy": {
+      "title": "EmTalk Privacy Policy",
+      "description": "Read the privacy policy for EmTalk.",
+      "indexable": false,
+      "headline": "EmTalk Privacy Policy"
+    },
+    "/documents/emtalk-terms-and-conditions-of-use": {
+      "title": "EmTalk Terms and Conditions of Use",
+      "description": "Read the terms and conditions of use for EmTalk.",
+      "indexable": false,
+      "headline": "EmTalk Terms and Conditions of Use"
+    },
+    "/tapl": {
+      "title": "TAPL: In Development | EmTalk",
+      "description": "TAPL is in development and not available to try yet. Explore EmTalk's existing articles and tests while development continues.",
+      "indexable": false
+    },
+    "/tests": {
+      "title": "Self-Assessment Tests for Anxiety and Work | EmTalk",
+      "description": "Explore five questionnaires about anxiety, burnout, workplace motivation and mobbing. Read about each test and its scope on EmTalk.",
+      "indexable": true,
+      "headline": "Discover yourself through gentle tests"
+    },
+    "/tests/maslach-burnout-inventory": {
+      "title": "Maslach Burnout Inventory | EmTalk",
+      "description": "Explore the Maslach Burnout Inventory questionnaire on emotional exhaustion, depersonalization and personal accomplishment.",
+      "indexable": true,
+      "image": "/media/a181e52f8777f7b88f2f-6a9dd83863edcc1eecfa600c_6a7a46c0046050d6ea2f7c4e_emotional-exhaustion-16x10.webp",
+      "headline": "Maslach Burnout Inventory",
+      "imageWidth": 1586,
+      "imageHeight": 991
+    },
+    "/tests/mobbing-test": {
+      "title": "Workplace Mobbing Test | EmTalk",
+      "description": "Explore a workplace mobbing questionnaire covering exclusion, humiliation, sabotage, excessive control and pressure to leave a job.",
+      "indexable": true,
+      "image": "/media/f501092ab612ef833808-6a9dd83863edcc1eecfa600f_6a7a463855f6e26890a1792b_mobbing-test-16x10.webp",
+      "headline": "Mobbing Test",
+      "imageWidth": 1586,
+      "imageHeight": 991
+    },
+    "/tests/motivation-test-by-gerchikov": {
+      "title": "Gerchikov Workplace Motivation Test | EmTalk",
+      "description": "Explore Gerchikov’s workplace motivation questionnaire covering five motivation types.",
+      "indexable": true,
+      "image": "/media/ef13f351d1ca10926004-6a9dd83863edcc1eecfa6009_6a7a460b480ef2ffaef65209_motivation-test-by-gerchikov-16x10.webp",
+      "headline": "Motivation Test by Gerchikov",
+      "imageWidth": 1586,
+      "imageHeight": 991
+    },
+    "/tests/social-phobia-inventory-spin": {
+      "title": "Social Phobia Inventory (SPIN) | EmTalk",
+      "description": "Assess social anxiety symptoms with the 17-item SPIN questionnaire and understand how social situations may be affecting your daily life.",
+      "indexable": true,
+      "image": "/media/c50f452da21d451f947c-6a9dd83863edcc1eecfa6012_6a7a45dd8971dcee692c9342_anxiety-test-system-16x10.webp",
+      "headline": "Social Phobia Inventory (SPIN)",
+      "imageWidth": 1586,
+      "imageHeight": 991
+    },
+    "/tests/spielberger-state-trait-anxiety-inventory": {
+      "title": "Spielberger Anxiety Inventory | EmTalk",
+      "description": "Measure current state anxiety and general trait anxiety with the 40-item Spielberger State-Trait Anxiety Inventory.",
+      "indexable": true,
+      "image": "/media/bd0dc1c4feb9a73aa5cd-cc1eecfa6006_6a7a468f480ef2ffaef6933b_spielberger-state-trait-anxiety-inventory-16x10.webp",
+      "headline": "Spielberger State-Trait Anxiety Inventory",
+      "imageWidth": 1586,
+      "imageHeight": 991
+    },
+    "/understand-myself": {
+      "title": "Understand Yourself: Articles and Tests | EmTalk",
+      "description": "Read or listen to EmTalk articles about sleep and burnout, or explore five questionnaire pages about anxiety, motivation, burnout and related topics.",
+      "indexable": true,
+      "headline": "Understand myself"
+    },
+    "/dm/workspace": {
+      "title": "Decision Matrix Guest Workspace | EmTalk",
+      "description": "Compare your options and weigh pros and cons in a private, local browser workspace. Save or export your decision without an account.",
+      "indexable": true,
+      "headline": "Make room for a clearer decision"
+    },
+    "/bret/practice": {
+      "title": "Free Breathing and Muscle Relaxation Practice | BRET by EmTalk",
+      "description": "Practise five breathing rhythms, create a custom rhythm, or follow progressive muscle relaxation. Free BRET practice in your browser, with no account needed.",
+      "indexable": true,
+      "headline": "Make a little room to breathe."
+    }
+  }
+}

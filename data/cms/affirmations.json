@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "sourceFile": "docs/sources/mcp/2026-10-12/cms/69600ed16bc688e4ca511fba.json",
+  "sourceSha256": "e9e8546b7c35d1eaf88c1ba199a0009a0f0bdb744c4b7c96b1d0f5ed24e1014e",
+  "liveApiVerified": false,
+  "collection": {
+    "id": "69600ed16bc688e4ca511fba",
+    "displayName": "Affirmations",
+    "singularName": "Affirmation",
+    "slug": "affirmations",
+    "createdOn": "2026-01-08T20:08:49.866Z",
+    "lastUpdated": "2026-01-08T21:58:35.400Z",
+    "fields": [
+      {
+        "id": "77c0f85569bd42a1b0689467530170b5",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Image",
+        "slug": "affirmation",
+        "displayName": "Affirmation"
+      },
+      {
+        "id": "5c0e98740cae9ce90fa272f3b04321ae",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Image",
+        "slug": "affirmation-small",
+        "displayName": "Affirmation Small"
+      },
+      {
+        "id": "099b04fa4ce784e957a5dee07bae0bb1",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "text",
+        "displayName": "Text",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "71cb751b588d65b45c3ab84461219ce5",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "PlainText",
+        "slug": "author",
+        "displayName": "Author",
+        "validations": {
+          "singleLine": true
+        }
+      },
+      {
+        "id": "7609e7852ad3d5a93f2138e0861aa050",
+        "isEditable": true,
+        "isRequired": false,
+        "type": "Number",
+        "slug": "order",
+        "displayName": "Order",
+        "validations": {
+          "format": "integer",
+          "precision": 1,
+          "allowNegative": false
+        }
+      },
+      {
+        "id": "d7d85500584bde8196d900305f93851e",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "name",
+        "displayName": "Name",
+        "validations": {
+          "maxLength": 256
+        }
+      },
+      {
+        "id": "cb7df740d146cefef879a21f90e72b3b",
+        "isEditable": true,
+        "isRequired": true,
+        "type": "PlainText",
+        "slug": "slug",
+        "displayName": "Slug",
+        "validations": {
+          "maxLength": 256,
+          "pattern": {},
+          "messages": {
+            "pattern": "Must be alphanumerical and not contain any spaces or special characters",
+            "maxLength": "Must be less than 256 characters"
+          }
+        }
+      }
+    ],
+    "fieldGroups": []
+  },
+  "items": [
+    {
+      "id": "69602921a09f6040d0bf5e1f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-01-08T23:51:50.715Z",
+      "lastUpdated": "2026-01-08T23:33:30.928Z",
+      "createdOn": "2026-01-08T22:01:05.809Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "affirmation": {
+          "fileId": "69603eae13b0c54e0f4d76b8",
+          "url": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/69603eae13b0c54e0f4d76b8_af_02_v.webp",
+          "alt": null
+        },
+        "affirmation-small": {
+          "fileId": "69603dee8be7fa01f6d57ca7",
+          "url": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/69603dee8be7fa01f6d57ca7_af_02_s.webp",
+          "alt": null
+        },
+        "text": "Life requires movement!",
+        "author": "Aristotle",
+        "order": 2,
+        "name": "af_02",
+        "slug": "af-02"
+      }
+    },
+    {
+      "id": "6960287e68b4e053cd50e68f",
+      "cmsLocaleId": "694d3cf15c7b6fe254c86197",
+      "lastPublished": "2026-01-08T23:51:50.715Z",
+      "lastUpdated": "2026-01-08T23:33:49.326Z",
+      "createdOn": "2026-01-08T21:58:22.806Z",
+      "isArchived": false,
+      "isDraft": false,
+      "fieldData": {
+        "affirmation": {
+          "fileId": "69603eb741c8c479075d287d",
+          "url": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/69603eb741c8c479075d287d_af_01_v.webp",
+          "alt": null
+        },
+        "affirmation-small": {
+          "fileId": "69603d019c59d4efad24d10c",
+          "url": "https://cdn.prod.website-files.com/694d3cf15c7b6fe254c86198/69603d019c59d4efad24d10c_af_01_s.webp",
+          "alt": null
+        },
+        "text": "Truly great is the man who manages to master his time",
+        "author": "Hesiod",
+        "order": 1,
+        "name": "af_01",
+        "slug": "af-01"
+      }
+    }
+  ]
+}

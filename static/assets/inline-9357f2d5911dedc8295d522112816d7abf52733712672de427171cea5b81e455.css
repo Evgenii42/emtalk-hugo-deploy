@@ -1,0 +1,30 @@
+
+.answer-option[role="radio"] .test-radio {
+  border-radius: 50%;
+  background-color: #fff;
+}
+.answer-option[role="radio"] .test-radio-dot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background-color: #6c4e88;
+  transform: none;
+}
+.answer-option[role="checkbox"] .test-radio {
+  border-radius: 5px;
+  background-color: #fff;
+}
+.answer-option[role="checkbox"].is-selected .test-radio {
+  border-color: #6c4e88;
+  background-color: #6c4e88;
+}
+.answer-option[role="checkbox"] .test-radio-dot {
+  width: 11px;
+  height: 6px;
+  border: solid #fff;
+  border-width: 0 0 2px 2px;
+  border-radius: 0;
+  background: transparent;
+  transform: rotate(-45deg) translate(1px, -1px);
+}

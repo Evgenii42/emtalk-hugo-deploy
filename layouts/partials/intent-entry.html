@@ -1,0 +1,8 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+<main id="emtalk-main" class="intent-entry" aria-labelledby="intent-entry-title" tabindex="-1">
+  {{ with .eyebrow }}<p class="intent-entry__eyebrow">{{ . }}</p>{{ end }}
+  <h1 id="intent-entry-title">{{ .title }}</h1>
+  <p class="intent-entry__lead">{{ .lead }}</p>
+  <div class="intent-entry__sections">{{ range .sections }}<section><h2>{{ .title }}</h2><p>{{ .text }}</p></section>{{ end }}</div>
+  <div class="intent-entry__actions">{{ range .actions }}<a href="{{ $prefix }}{{ .path }}">{{ .label }}</a>{{ end }}</div>
+</main>

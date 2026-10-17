@@ -1,0 +1,15 @@
+{{- if not (reflect.IsMap hugo.Data.integrations) -}}{{- errorf "Missing integrations configuration" -}}{{- end -}}
+{{- $analytics := hugo.Data.integrations.analytics -}}
+{{- if not (reflect.IsMap $analytics) -}}{{- errorf "Missing analytics configuration" -}}{{- end -}}
+{{- $localPractice := in (slice "/bret/practice" "/dm/workspace") .Params.routeId -}}
+{{/* Guest practice pages keep personal decisions and practice activity local. */}}
+{{- if and $analytics.enabledForProduction (not hugo.Data.render.preview) (not $localPractice) -}}
+  {{- if not (findRE `^G-[A-Z0-9]+$` $analytics.measurementId) -}}{{- errorf "Invalid configured Google Analytics measurement ID" -}}{{- end -}}
+  {{- if not (findRE `^GTM-[A-Z0-9]+$` $analytics.tagManagerContainerId) -}}{{- errorf "Invalid configured Google Tag Manager container ID" -}}{{- end -}}
+  {{- range $analytics.developerIds -}}
+    {{- if not (findRE `^developer_id\.[A-Za-z0-9_]+$` .) -}}{{- errorf "Invalid configured public analytics developer ID" -}}{{- end -}}
+  {{- end -}}
+  {{- $script := resources.Get "js/analytics.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
+  {{/* Keep the small classic bootstrap startup order. Its external Google loaders are async in analytics.js; broader loading changes are outside article presentation. */}}
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-tag-manager="{{ $analytics.tagManagerContainerId }}" data-emtalk-analytics-developers="{{ delimit $analytics.developerIds "," }}"></script>
+{{- end -}}

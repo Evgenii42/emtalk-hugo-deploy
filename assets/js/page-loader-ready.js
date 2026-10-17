@@ -48,8 +48,8 @@ if (gate?.isPending()) {
       const rect = image.getBoundingClientRect();
       return rect.width > 0 && rect.bottom >= 0 && rect.top < innerHeight && rect.right > 0 && rect.left < innerWidth;
     });
+    // Font faces swap in when available; they never hold page reveal.
     await bounded(Promise.all([
-      document.fonts?.ready ?? Promise.resolve(),
       ...images.map(imageSettled),
     ]));
     if (gate.isPending()) gate.release("settled");

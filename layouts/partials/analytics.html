@@ -10,6 +10,6 @@
     {{- if not (findRE `^developer_id\.[A-Za-z0-9_]+$` .) -}}{{- errorf "Invalid configured public analytics developer ID" -}}{{- end -}}
   {{- end -}}
   {{- $script := resources.Get "js/analytics.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
-  {{/* Keep the small classic bootstrap startup order. Its external Google loaders are async in analytics.js; broader loading changes are outside article presentation. */}}
-  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-tag-manager="{{ $analytics.tagManagerContainerId }}" data-emtalk-analytics-developers="{{ delimit $analytics.developerIds "," }}"></script>
+  {{/* Defer the existing owned classic bootstrap until parsing completes. Its configuration attributes precede execution; analytics code, service IDs and async vendor loaders are unchanged. This is a delivery change, not a consent implementation. */}}
+  <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-tag-manager="{{ $analytics.tagManagerContainerId }}" data-emtalk-analytics-developers="{{ delimit $analytics.developerIds "," }}"></script>
 {{- end -}}

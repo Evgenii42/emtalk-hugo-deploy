@@ -1,0 +1,15 @@
+{{/* Home-only delivery: keep the exact existing five-sheet cascade, changing only font containers. Other routes keep their original stylesheets and fonts. */}}
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $site := resources.Get "css/site.css" -}}
+{{- $content := $site.Content -}}
+{{- range slice (dict "old" "db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf" "new" "manrope-variable.woff2") (dict "old" "d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf" "new" "geologica-variable.woff2") -}}
+  {{- $old := printf `url("%s/media/%s") format("truetype")` $prefix .old -}}
+  {{- $new := printf `url("%s/fonts/home/%s") format("woff2")` $prefix .new -}}
+  {{- if ne (strings.Count $old $content) 1 -}}{{- errorf "Home font source changed; reconcile the bounded WOFF2 delivery mapping" -}}{{- end -}}
+  {{- if not (os.FileExists (printf "static/fonts/home/%s" .new)) -}}{{- errorf "Home WOFF2 asset is missing" -}}{{- end -}}
+  {{- $content = strings.Replace $content $old $new -}}
+{{- end -}}
+{{- $siteHome := resources.FromString "css/home-site-fonts.css" $content -}}
+{{- $styles := slice $siteHome (resources.Get .pageCss) (resources.Get "css/interface.css") (resources.Get "css/homepage-explore.css") (resources.Get "css/site-navigation.css") -}}
+{{- $bundle := $styles | resources.Concat "css/home-entry.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">

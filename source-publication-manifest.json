@@ -5,129 +5,44 @@
   "baselineDeploymentCommit": "5be1ace3cd6192f33a9102c09d833fa78131c0b1",
   "baselineManifestSha256": "9ba8e0434698a934698fac0a23883a7b3f3c0157cc8bb973f458eb09c8194f4e",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+  "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
   "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified.",
   "currentSelection": {
-    "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+    "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
     "files": [
       {
-        "bytes": 11796,
-        "path": "assets/css/dm-workspace.css",
-        "sha256": "76bfa03ad2a5932b26f2eb1306dca7d4aefe5fe1021cc501de557e9de032b185"
-      },
-      {
-        "bytes": 1749,
-        "path": "assets/css/page-loader.css",
-        "sha256": "bb7bf5dcca0d602f45ed939d95a14b6965c6805cf690e1c8e84dbdba32040309"
-      },
-      {
-        "bytes": 11801,
-        "path": "assets/js/dm-model.js",
-        "sha256": "3bf6bdb53d1a0cf92dd020258810694d529a7b5a407f8e6a07794944dc25c8a1"
-      },
-      {
-        "bytes": 5924,
-        "path": "assets/js/dm-storage.js",
-        "sha256": "ed072a6eefa293ee83d28974d0b7bea667d9715094c34b95a7431dcc25530bde"
-      },
-      {
-        "bytes": 3097,
-        "path": "assets/js/dm-topics.js",
-        "sha256": "eccd78fc1f475389f2e192202d4a89616cd09cd806146e0a5b1ff840dd8b4004"
-      },
-      {
-        "bytes": 51178,
-        "path": "assets/js/dm-workspace.js",
-        "sha256": "d33a23458f38bb67090e376859bb2cc19a5b0ac4092ceb5cdfc48aaf6b6a33b1"
-      },
-      {
-        "bytes": 3813,
-        "path": "assets/js/page-loader-bootstrap.js",
-        "sha256": "3ad1f6c87b20a77127c7e25376063a87a43bf5301d9c63c4cf81cf30522cd36f"
-      },
-      {
-        "bytes": 2709,
-        "path": "assets/js/page-loader-ready.js",
-        "sha256": "b9ed78bfd6bd8756110c75de4c6157dd72a7e0bbce47d8e41a6f6907e96ca7cd"
-      },
-      {
-        "bytes": 36867,
-        "path": "data/dm-topics.json",
-        "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
-      },
-      {
-        "bytes": 1987,
-        "path": "layouts/404.html",
-        "sha256": "108a97e11a59928c5dc11e8d22bc0309c8cfe8cfffa15c518793392e8386bac3"
-      },
-      {
-        "bytes": 617,
-        "path": "layouts/partials/dm-launch.html",
-        "sha256": "b7daa7bde02a26cb58405dada7f5112acef7887c6b49cc063da88fe224721767"
-      },
-      {
-        "bytes": 4870,
-        "path": "layouts/partials/dm-workspace.html",
-        "sha256": "bb9268ef637e94f607734c562bc613fee79351bff6681a1532ee0f82e5aa73e0"
-      },
-      {
-        "bytes": 320,
-        "path": "layouts/partials/page-loader-head.html",
-        "sha256": "9d9ce3b03f66a06915a15884851740df553490f4bb317ccb050fbc994840a1b3"
-      },
-      {
-        "bytes": 248,
-        "path": "layouts/partials/page-loader-ready.html",
-        "sha256": "de80304053c3084b6cdd6113623aca8259cc19b80b97ab88f8728228c8cc2244"
-      },
-      {
-        "bytes": 356,
-        "path": "layouts/partials/page-loader.html",
-        "sha256": "e7304ab388c6aa11e8e813ff2c6f7e40a293e4b60fc739099a132639a7c05625"
-      },
-      {
-        "bytes": 10132,
+        "bytes": 10533,
         "path": "layouts/source.html",
-        "sha256": "322119c061e4a16a73fd77caac05bfd19c284ffafed10824fe9c0c34007dfcc5"
+        "sha256": "3ec0f9a98f4c9f5141e13c91702ac1e4e31bd27df1424a57848b618721733b2f"
       },
       {
-        "bytes": 45799,
-        "path": "scripts/prepare_hugo.py",
-        "sha256": "d7e4f8aacd93e7c1b4624bf19632cfdafb014cc6ad903104fdddb556e083998f"
+        "bytes": 1712,
+        "path": "layouts/partials/analytics.html",
+        "sha256": "6ae6cd11f47d3517404bb4dd900705b7ff66fb1f61c936358d3e6ad039156618"
       },
       {
-        "bytes": 11358,
-        "path": "static/font-licenses/dm-roboto/LICENSE.txt",
-        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        "bytes": 1483,
+        "path": "layouts/partials/home-styles.html",
+        "sha256": "bf442671aa46724111b3de66ca50d019f63003685dea62f9df026004503e9efa"
       },
       {
-        "bytes": 755,
-        "path": "static/font-licenses/dm-roboto/NOTICE.txt",
-        "sha256": "5d2c9af7523345f24d57229283e757dc2b12e5e5bc9091177b5072d5718e8ebd"
+        "bytes": 54320,
+        "path": "static/fonts/home/manrope-variable.woff2",
+        "sha256": "2d65cb231c2dd56cb8de01c856f56a72c5fefeeb86bdf71f81b6d09bda531b3f"
       },
       {
-        "bytes": 168644,
-        "path": "static/fonts/dm/roboto_medium.ttf",
-        "sha256": "9d0d55a303bfd13b79a87721f65185e93f235e2d77fe398b2dca67ac519915f5"
+        "bytes": 119228,
+        "path": "static/fonts/home/geologica-variable.woff2",
+        "sha256": "be83b404bc028dc3fdc7e5efba12bc4685b84de660aa040ecbd0ca5725a1e4fe"
       },
       {
-        "bytes": 168260,
-        "path": "static/fonts/dm/roboto_regular.ttf",
-        "sha256": "4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14"
-      },
-      {
-        "bytes": 1802,
-        "path": "static/llms.txt",
-        "sha256": "eaebf3be9ff9b63182f3d33bc0eb2bab4f7f4b81c16461e787a81ee80c283fad"
-      },
-      {
-        "bytes": 2759,
-        "path": "static/media/dm/ai-options.svg",
-        "sha256": "2a61e72033fbf64b839cbd174e3da11cd01e592d445faee41d0758d79dcadedb"
+        "bytes": 2730,
+        "path": "assets/js/page-loader-ready.js",
+        "sha256": "49913b102088b816ee4cf83346eb46f3ede9da46f23b1e539a0bbd8a32d30778"
       }
     ],
-    "path": "docs/audits/dm-publication024-selected-inputs.json",
-    "sha256": "aef2084e1af09444db9711f5ce3ebaf49d1cf09b6176e1baa0969ac5b9009cb4"
+    "path": "docs/audits/home-performance025-selected-inputs.json",
+    "sha256": "a09ec5fbb3a2bcb1af55d755f2cd04ff5bdaedcbc13fa1e292d2272ca92e6760"
   },
   "deploymentFiles": [
     {
@@ -141,9 +56,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 2648,
+      "bytes": 1266,
       "path": "README.md",
-      "sha256": "d7e12f280919a714e0516a833be9a450dff8154cbff2e39e9f6252421fec72d7"
+      "sha256": "c1a08a487d5ee40ea2952eb927cdb45140a1682159de370e91327848ae88adba"
     },
     {
       "bytes": 4238,
@@ -151,8 +66,8 @@
       "sha256": "91178f149febf5cb85d3bb4c27656475fd043bff503bb38ad8df94548400e5c2"
     }
   ],
-  "effectiveSourceFileCount": 409,
-  "effectiveSourceMapSha256": "158039d4ef6f2e578c0bad45e2d2625dea2e69bba9708e89045a9c4887bb9814",
+  "effectiveSourceFileCount": 412,
+  "effectiveSourceMapSha256": "e293c08d0c613341a004e257b8a76480a23a022306d28d93f61edd4cf4bae64c",
   "excluded": [
     "Forgejo Git history",
     "source archives",
@@ -161,32 +76,32 @@
     "visitor submissions",
     "unpublished CMS items"
   ],
-  "exportFileCountIncludingManifest": 414,
+  "exportFileCountIncludingManifest": 417,
   "generatedDeploymentReadme": {
-    "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
-    "generator": "docs/audits/cf-hugo-export018-prepare.py",
-    "generatorSha256": "f91b7460b1b7317ce992d7cbd702e30466afa83034e2bf8140f50ae4884b9183"
+    "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+    "generator": "docs/audits/home-performance025-export.py",
+    "generatorSha256": "69d9415662305d57bd8287cd06907118121e6ec1d421e11d90be2639ce47f45d"
   },
   "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately.",
-  "previousPublicationCommit": "0c248db59d4f355ac9c6dfd8661af7109cabbd89",
-  "previousPublicationManifestSha256": "9f3fadfe74b21cdf7cbac33a8ec45f0410a524773951feb9eccd296a702fce1d",
+  "previousPublicationCommit": "eded693b7ae1c724264ca2d14a671e0e41361a91",
+  "previousPublicationManifestSha256": "966ad52c3960c7d6974a98849428053e5e82fb55e896ab1ce9c8b8130d7b1e3e",
   "reviewedLocalBuild": {
     "baseURL": "https://www.emtalk.org/",
-    "outputSnapshotSha256": "289f8fdba85f4e5fd952f69f0008b63fbbe9795794e6cff8d122be3d06ced395",
-    "outputsIncludingControl": 320,
-    "preparedHugoInputs": 409,
+    "outputSnapshotSha256": "6c49faa11edd57b31a172a8f1b94feeae9c39b64cff93d55f8e63c8faa2e309a",
+    "outputsIncludingControl": 321,
+    "preparedHugoInputs": 412,
     "preview": false,
     "providerControlPaths": [
       "_headers"
     ],
-    "publicArtifacts": 319,
-    "qualification": "Prepared local Windows receipt; raw exported source differs. Actual Linux/hosted identity needs separate binding.",
-    "receiptPath": "docs/audits/dm-publication-local-build024.json",
-    "receiptSha256": "7a2fc06515a4b54446e7ede5cf9ef74c26c6b2b534288cee45769356046f9eb6",
-    "sourceInputSnapshotSha256": "4fd687109dab7dc073f356a3a0b2382ee7ef0d802946bc1baa4c3b8b7525413e"
+    "publicArtifacts": 320,
+    "qualification": "Windows execution; actual Linux/host checks separate.",
+    "receiptPath": "docs/audits/home-performance025-local-build003.json",
+    "receiptSha256": "41224135786a97a85664b275fc1cd4428c812e4f501071d5e75dbde4d5792821",
+    "sourceInputSnapshotSha256": "78ff9e153c1c5df679be6e932e5381abed159ffffcaa437f1b87af997dff9e20"
   },
   "schemaVersion": 2,
-  "scope": "Immutable original394 public baseline with13overrides/15additions and selected DM/loader/dm-copy/llms delta over0c. No release/hosted certification.",
+  "scope": "Original394 immutable baseline with14overrides/18additions; Home-only ordered CSS/WOFF2 delivery/main landmark plus existing analytics defer and font-independent page reveal. No deferred privacy code or final release certification.",
   "sourceAdditions": [
     {
       "bytes": 1749,
@@ -207,16 +122,22 @@
       "sha256": "3ad1f6c87b20a77127c7e25376063a87a43bf5301d9c63c4cf81cf30522cd36f"
     },
     {
-      "bytes": 2709,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 2730,
+      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
       "path": "assets/js/page-loader-ready.js",
-      "sha256": "b9ed78bfd6bd8756110c75de4c6157dd72a7e0bbce47d8e41a6f6907e96ca7cd"
+      "sha256": "49913b102088b816ee4cf83346eb46f3ede9da46f23b1e539a0bbd8a32d30778"
     },
     {
       "bytes": 36867,
       "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
       "path": "data/dm-topics.json",
       "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
+    },
+    {
+      "bytes": 1483,
+      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "path": "layouts/partials/home-styles.html",
+      "sha256": "bf442671aa46724111b3de66ca50d019f63003685dea62f9df026004503e9efa"
     },
     {
       "bytes": 320,
@@ -265,6 +186,18 @@
       "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
       "path": "static/fonts/dm/roboto_regular.ttf",
       "sha256": "4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14"
+    },
+    {
+      "bytes": 119228,
+      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "path": "static/fonts/home/geologica-variable.woff2",
+      "sha256": "be83b404bc028dc3fdc7e5efba12bc4685b84de660aa040ecbd0ca5725a1e4fe"
+    },
+    {
+      "bytes": 54320,
+      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "path": "static/fonts/home/manrope-variable.woff2",
+      "sha256": "2d65cb231c2dd56cb8de01c856f56a72c5fefeeb86bdf71f81b6d09bda531b3f"
     },
     {
       "bytes": 1802,
@@ -2302,6 +2235,13 @@
       "sha256": "108a97e11a59928c5dc11e8d22bc0309c8cfe8cfffa15c518793392e8386bac3"
     },
     {
+      "baselineSha256": "03daaae433a804c42ac17f7bb2855f1bebd8fcbfd1d1f1fa951f710ddfcc6a69",
+      "bytes": 1712,
+      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "path": "layouts/partials/analytics.html",
+      "sha256": "6ae6cd11f47d3517404bb4dd900705b7ff66fb1f61c936358d3e6ad039156618"
+    },
+    {
       "baselineSha256": "35d6185c5ff29b15b60d19560a1c2052c9a7301628ea2d16ca7c636da701d7a6",
       "bytes": 11375,
       "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
@@ -2324,10 +2264,10 @@
     },
     {
       "baselineSha256": "f8e54c17991598cbe35c0dddfc8325436f7042164668eb3f77bd286428dd1ce5",
-      "bytes": 10132,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 10533,
+      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
       "path": "layouts/source.html",
-      "sha256": "322119c061e4a16a73fd77caac05bfd19c284ffafed10824fe9c0c34007dfcc5"
+      "sha256": "3ec0f9a98f4c9f5141e13c91702ac1e4e31bd27df1424a57848b618721733b2f"
     },
     {
       "baselineSha256": "229051a6025e506cfa0374795cf8eb5dbec0e81715fed10764c081886d816d38",

@@ -5,19 +5,19 @@
   "baselineDeploymentCommit": "5be1ace3cd6192f33a9102c09d833fa78131c0b1",
   "baselineManifestSha256": "9ba8e0434698a934698fac0a23883a7b3f3c0157cc8bb973f458eb09c8194f4e",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "42327975d036a0d73825762b7e50bf46b8b13f82",
+  "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
   "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified.",
   "currentSelection": {
-    "canonicalSourceCommit": "42327975d036a0d73825762b7e50bf46b8b13f82",
+    "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
     "files": [
       {
-        "bytes": 3498,
-        "path": "layouts/partials/home-styles.html",
-        "sha256": "b97ad88a7e2f236ae02f82d464df3d482ec281378447d469ada5e8830a8207b4"
+        "bytes": 4063,
+        "path": "assets/js/analytics.js",
+        "sha256": "ba22ab3e46e5124abf3d2018f7fd52fe266fe922bff6064f7c1e1ef7bf36bfb1"
       }
     ],
-    "path": "docs/audits/home-css028-selected-inputs.json",
-    "sha256": "b33f8f49c550991d61e73de8c168e0d49229589e3480367db35123a722040100"
+    "path": "docs/audits/home-sdk029-selected-inputs.json",
+    "sha256": "1fe77ec4527090ca4cce7d104580af64e2a24d8ac270fa338cff5646e4ae1504"
   },
   "deploymentFiles": [
     {
@@ -31,9 +31,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 1501,
+      "bytes": 1544,
       "path": "README.md",
-      "sha256": "ffed9ed79b5117f28ec419fb806e1f2be77da5e7ebf11ae635665d8d9c841568"
+      "sha256": "5cd6f08bdef7b27964d84c1261ed58f8c468ccc1f1363d8a2694310742d1f1d5"
     },
     {
       "bytes": 4238,
@@ -42,7 +42,7 @@
     }
   ],
   "effectiveSourceFileCount": 412,
-  "effectiveSourceMapSha256": "ab418ddd483f1a644691255e7be7c0d55aa805d6223a5385bf0b83a2f9430ebe",
+  "effectiveSourceMapSha256": "947e59c85bde001b8f9175d6166ca6f6cbecc586f845c49973a37ae01c5ed5e1",
   "excluded": [
     "Forgejo Git history",
     "source archives",
@@ -53,16 +53,16 @@
   ],
   "exportFileCountIncludingManifest": 417,
   "generatedDeploymentReadme": {
-    "canonicalSourceCommit": "42327975d036a0d73825762b7e50bf46b8b13f82",
-    "generator": "docs/audits/home-css028-export.py",
-    "generatorSha256": "7d3bf0519556eb94582ed673da8df9927de6ce6032543569e20fa16b880d335a"
+    "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
+    "generator": "docs/audits/home-sdk029-export.py",
+    "generatorSha256": "41bd3f4d4494adf96f5791ceeba2a770300c2c62e536abe16039100e8dfe3404"
   },
   "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately.",
-  "previousPublicationCommit": "8cac7e94c9593f38b94958839f788a7c917a85d1",
-  "previousPublicationManifestSha256": "bb22f199be36ef7f5f61e24f377d9822677937b2f15dc456944915edc428abe5",
+  "previousPublicationCommit": "97d38305c90a208a1bb8497d8563a1170d9b412a",
+  "previousPublicationManifestSha256": "3a635099684547c6234df54a7ff716fc98593e48b6ae3d6e4833a5de0972a3be",
   "reviewedLocalBuild": {
     "baseURL": "https://www.emtalk.org/",
-    "outputSnapshotSha256": "27287f4dd70cabcb36f9f1fdb0e58b58d44106e1d1ac48de90d6825f1d66415b",
+    "outputSnapshotSha256": "666cd5f00f566adad18217a7c83d94192d20e1780fcb44a9afe89f471a83bb45",
     "outputsIncludingControl": 320,
     "preparedHugoInputs": 412,
     "preview": false,
@@ -71,12 +71,12 @@
     ],
     "publicArtifacts": 319,
     "qualification": "Local LF prediction on Windows; actual Linux/host checks separate.",
-    "receiptPath": "docs/audits/home-css028-local-build.json",
-    "receiptSha256": "00a5d06242df324397a3f68d5d74225a90c7c14932546ce993b6b755cfe6f826",
-    "sourceInputSnapshotSha256": "5e42d8f734f40103fef36015c907f9a325d2d05ac9a627bf70fe49a280b46840"
+    "receiptPath": "docs/audits/home-sdk029-local-build.json",
+    "receiptSha256": "3a13a3d5c5cdd6617b774f09ed43e69ec4948025d3761688ac4e60436f6e6d04",
+    "sourceInputSnapshotSha256": "3eb0467d46b8b9d7eae254b95dc80d07b41c22a281f99521e3f77a28c7f19ac7"
   },
   "schemaVersion": 2,
-  "scope": "Original394 immutable baseline and published027 retained. OneHomeCSS delivery partial inlines equivalent rootCSS with one guarded URL rebase and early responsive preloads; mountedpreview externalfallback. No026/privacy/analytics/rule/layout change.",
+  "scope": "Original394immutablebaseline and published028 retained. Oneanalytics bootstrap change queues samecommands immediately, defersonlyHomeSDKinjection untilcriticalreveal andtwoframes; otherpagesimmediate. No026/consentWIP/provideroptionschange.",
   "sourceAdditions": [
     {
       "bytes": 1749,
@@ -2173,6 +2173,13 @@
       "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
       "path": "assets/css/site-navigation.css",
       "sha256": "06919f3082509ba470ea6eb9360f60cf48ccd1f00f065109872d62762d043478"
+    },
+    {
+      "baselineSha256": "38939c43815adf74287ef4bf412c0568d00c4c73199b2230dc4c3d8c11a8b956",
+      "bytes": 4063,
+      "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
+      "path": "assets/js/analytics.js",
+      "sha256": "ba22ab3e46e5124abf3d2018f7fd52fe266fe922bff6064f7c1e1ef7bf36bfb1"
     },
     {
       "baselineSha256": "eefd5d3caccedbcd62187a767825371dc6064983805880667a3925d664c6f39c",

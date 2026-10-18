@@ -1,5 +1,13 @@
-{{/* Home-only delivery: keep the exact existing five-sheet cascade, changing only font containers. Other routes keep their original stylesheets and fonts. */}}
+{{/* Home-only delivery keeps the exact five-sheet cascade and accepted WOFF2 mapping. */}}
 {{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $scene := (index hugo.Data "home-explore").scene -}}
+{{- if or (ne (len $scene.variants) 2) (ne (index $scene.variants 0).media "(max-width: 479px)") (ne (index $scene.variants 1).media "(max-width: 767px)") -}}{{- errorf "Home preload requires the accepted two picture breakpoints" -}}{{- end -}}
+{{- range $file := slice (index $scene.variants 0).file (index $scene.variants 1).file $scene.file -}}
+  {{- if or (not (findRE "^[A-Za-z0-9._-]+[.]webp$" $file)) (not (os.FileExists (printf "static/media/%s" $file))) -}}{{- errorf "Home preload requires an existing bounded local WebP" -}}{{- end -}}
+{{- end -}}
+<link rel="preload" as="image" href="{{ $prefix }}/media/{{ (index $scene.variants 0).file }}" media="(width &lt;= 479px)" fetchpriority="high">
+<link rel="preload" as="image" href="{{ $prefix }}/media/{{ (index $scene.variants 1).file }}" media="(479px &lt; width &lt;= 767px)" fetchpriority="high">
+<link rel="preload" as="image" href="{{ $prefix }}/media/{{ $scene.file }}" media="(width &gt; 767px)" fetchpriority="high">
 {{- $site := resources.Get "css/site.css" -}}
 {{- $content := $site.Content -}}
 {{- range slice (dict "old" "db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf" "new" "manrope-variable.woff2") (dict "old" "d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf" "new" "geologica-variable.woff2") -}}
@@ -12,4 +20,17 @@
 {{- $siteHome := resources.FromString "css/home-site-fonts.css" $content -}}
 {{- $styles := slice $siteHome (resources.Get .pageCss) (resources.Get "css/interface.css") (resources.Get "css/homepage-explore.css") (resources.Get "css/site-navigation.css") -}}
 {{- $bundle := $styles | resources.Concat "css/home-entry.css" | minify | fingerprint -}}
+{{- if $prefix -}}
+{{/* Keep relative CSS URL resolution intact for project previews with a mount. */}}
 <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+{{- else -}}
+  {{/* The only relative URL resolves to /media from the former /css location.
+       Rebase it explicitly for inline delivery; all rules and their order stay exact. */}}
+  {{- $relative := `url("../media/be3c9bbf364b96573039-699f41e3d7567d6efbb47cda_Large-Icon-Background.svg")` -}}
+  {{- $absolute := `url("/media/be3c9bbf364b96573039-699f41e3d7567d6efbb47cda_Large-Icon-Background.svg")` -}}
+  {{- if ne (strings.Count $relative $bundle.Content) 1 -}}{{- errorf "Home inline stylesheet requires one approved relative URL rebase" -}}{{- end -}}
+  {{- $inline := strings.Replace $bundle.Content $relative $absolute -}}
+  {{- $lower := lower $inline -}}
+  {{- if or (strings.Contains $lower "</style") (strings.Contains $lower "<!--") (strings.Contains $lower "-->") -}}{{- errorf "Home stylesheet contains an unsafe HTML style boundary" -}}{{- end -}}
+<style data-emt-home-styles>{{ $inline | safeCSS }}</style>
+{{- end -}}

@@ -7,7 +7,7 @@ import sys
 from urllib.parse import urlsplit
 
 from build_site import build
-from verify_build import PAGES_ALIAS_HEADERS
+from verify_build import PAGES_ALIAS_HEADERS, PROVIDER_CONTROLS
 
 PAGES_PROJECT_HOST = 'emtalk-hugo-deploy.pages.dev'
 
@@ -47,32 +47,30 @@ def build_options(environment):
 
 def validate_alias_headers():
     """The header policy is a static build input, never an output patch."""
-    try:
-        headers = (Path(__file__).resolve().parents[1] / 'static/_headers').read_bytes()
-    except OSError:
-        raise ValueError('Required Pages alias header policy is unavailable') from None
-    if headers != PAGES_ALIAS_HEADERS:
-        raise ValueError('Required Pages alias header policy is invalid')
+    for name, expected in PROVIDER_CONTROLS.items():
+        try:
+            body = (Path(__file__).resolve().parents[1] / 'static' / name).read_bytes()
+        except OSError:
+            raise ValueError('Required Pages provider policy is unavailable') from None
+        if body != expected:
+            raise ValueError('Required Pages provider policy is invalid')
 
 
 def verified_pages_output(result):
     """Require the consumed policy in the builder's verified artifact inventory."""
     if not isinstance(result, dict) or result.get('passed') is not True:
         return False
-    if result.get('providerControlPaths') != ['_headers']:
+    if result.get('providerControlPaths') != sorted(PROVIDER_CONTROLS):
         return False
     files = result.get('files')
     if not isinstance(files, list) or not all(isinstance(row, dict) for row in files):
         return False
-    headers = [row for row in files if row.get('path') == '_headers']
-    if len(headers) != 1:
-        return False
-    header = headers[0]
-    return (type(header.get('bytes')) is int and
-            header['bytes'] == len(PAGES_ALIAS_HEADERS) and
-            header.get('sha256') == hashlib.sha256(PAGES_ALIAS_HEADERS).hexdigest() and
-            type(result.get('publicArtifactCount')) is int and
-            result['publicArtifactCount'] == len(files) - 1)
+    for name, expected in PROVIDER_CONTROLS.items():
+        matches = [row for row in files if row.get('path') == name]
+        if len(matches) != 1 or type(matches[0].get('bytes')) is not int or matches[0]['bytes'] != len(expected) or matches[0].get('sha256') != hashlib.sha256(expected).hexdigest():
+            return False
+    return (type(result.get('publicArtifactCount')) is int and
+            result['publicArtifactCount'] == len(files) - len(PROVIDER_CONTROLS))
 
 
 def main():

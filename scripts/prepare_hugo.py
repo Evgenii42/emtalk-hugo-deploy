@@ -97,7 +97,7 @@ def read(path):
 
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8')
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8', newline='\n')
 
 
 def validate_route(route, root=None):
@@ -747,7 +747,7 @@ def prepare(prefix='', preview=False):
     # first mutation. This does not claim a transaction for filesystem I/O errors.
     for path, value in pending_writes.items():
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(value, encoding='utf-8')
+        path.write_text(value, encoding='utf-8', newline='\n')
     for path in pending_deletions:
         path.unlink()
     return len(pages)

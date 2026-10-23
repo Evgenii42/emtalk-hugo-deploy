@@ -15,7 +15,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     return Object.freeze({ ready: false, mount() {}, render() {} });
   }
   const labels = openers.map(button => button.textContent || "Privacy choices");
-  let opener = null, minimized = false;
+  let opener = null, minimized = false, explicitlyOpened = false;
   function setMinimized(value) {
     minimized = value;
     openers.forEach((button, index) => {
@@ -43,7 +43,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   }
   function close() {
     if (!preferences.valid(snapshot().choice)) preferences.dismissExplicitly();
-    panel.hidden = true; setMinimized(false); render();
+    panel.hidden = true; explicitlyOpened = false; panel.classList.remove("privacy-controls--top"); setMinimized(false); render();
     if (opener?.isConnected) opener.focus({ preventScroll: true }); else focusMain();
     opener = null;
   }
@@ -65,13 +65,17 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     if (!covered()) return;
     window.scrollBy({ top: Math.ceil(target.getBoundingClientRect().bottom - panel.getBoundingClientRect().top) + 12, left: 0, behavior: "auto" });
     if (!covered() || document.activeElement !== target) return;
+    if (explicitlyOpened) {
+      panel.classList.toggle("privacy-controls--top", target.getBoundingClientRect().top > window.innerHeight / 2);
+      return;
+    }
     // Automatic focus recovery is not an explicit dismissal or a consent choice.
     panel.hidden = true; opener = null; setMinimized(true); render(); exposeMinimizedOpener(target);
     announcement.textContent = "Privacy choices were minimized to keep your focused control visible. Your analytics choice is unchanged. Use Privacy choices (minimized) to reopen them.";
   }
   function mount() {
     for (const button of openers) button.addEventListener("click", () => {
-      onRefresh(); opener = button; setMinimized(false); panel.hidden = false; render(); nodes.heading.focus();
+      onRefresh(); opener = button; explicitlyOpened = true; panel.classList.remove("privacy-controls--top"); setMinimized(false); panel.hidden = false; render(); nodes.heading.focus();
     });
     nodes.allow.addEventListener("click", () => { if (onChoose(true)) close(); });
     nodes.reject.addEventListener("click", () => { if (onChoose(false)) close(); });

@@ -26,10 +26,17 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
   }
   function clearCookies() {
     if (!canonical) return;
+    cleanupFailed = false;
     const names = ["_ga", "_ga_" + id.slice(2), "_gid", "_gat", "_gat_gtag_" + id.split("-").join("_")];
     for (const name of names) for (const domain of ["", "; Domain=www.emtalk.org", "; Domain=.emtalk.org"]) {
       try { document.cookie = name + "=; Path=/; Max-Age=0; SameSite=Lax; Secure" + domain; } catch { cleanupFailed = true; }
     }
+    // A cookie setter can silently refuse deletion. Check only readable target
+    // names; JavaScript cannot inspect HttpOnly cookies or inaccessible paths.
+    try {
+      const remaining = document.cookie.split(';').map(cookie => cookie.split('=', 1)[0].trim());
+      if (names.some(name => remaining.includes(name))) cleanupFailed = true;
+    } catch { cleanupFailed = true; }
   }
   function revoke() {
     cancelBoot(); window[disabledKey] = true;

@@ -35,9 +35,9 @@
     "/tapl": {
       "mode": "augment",
       "language": "en",
-      "title": "TAPL",
+      "title": "Tapl: small steps, a clearer way forward",
       "eyebrow": "In development",
-      "lead": "TAPL is in development and is not available to try yet. This page marks its place in EmTalk while development continues. You can explore EmTalk's articles and tests now.",
+      "lead": "Tapl is being developed to help you turn a goal into manageable actions, with a weekly plan you can review and adjust as life changes.",
       "indexable": false,
       "sections": [],
       "actions": [

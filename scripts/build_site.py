@@ -89,8 +89,19 @@ def snapshot_sources(root=None):
     for directory in ['assets', 'layouts', 'content', 'data', 'static']:
         reject_tree_links(root / directory)
         sources.extend(path for path in (root / directory).rglob('*') if path.is_file())
-    sources += [root / name for name in ['hugo.toml', '.hugo-version', 'requirements-build.txt',
-                'inventory/media.json', 'scripts/prepare_hugo.py', 'scripts/prepare_public_content.py', 'scripts/build_site.py', 'scripts/verify_build.py']]
+    backend = {'functions/api/interest.js', 'server/interest-policy.mjs', 'server/interest-registry.mjs',
+               'server/interest-rate-limit.mjs', 'workers/interest-limiter/index.mjs',
+               'workers/interest-limiter/wrangler.jsonc'}
+    actual_backend = set()
+    for directory in ['functions', 'server', 'workers']:
+        reject_tree_links(root / directory)
+        actual_backend.update(path.relative_to(root).as_posix() for path in (root / directory).rglob('*') if path.is_file())
+    if actual_backend != backend:
+        raise ValueError('Backend source owners differ from the finite intake allowlist')
+    sources += [root / name for name in sorted(backend)]
+    sources += [root / name for name in ['hugo.toml', '.hugo-version', 'requirements-build.txt', 'wrangler.jsonc',
+                'inventory/media.json', 'scripts/prepare_hugo.py', 'scripts/prepare_public_content.py',
+                'scripts/build_site.py', 'scripts/build_cloudflare.py', 'scripts/verify_build.py']]
     if (root / 'data/seo.json').is_file():
         sources.append(root / 'scripts/verify_seo.py')
     if any(is_link(part) for path in sources for part in [path, *path.parents]

@@ -16,7 +16,7 @@ import tinycss2
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_HOSTS = ('website-files.com', 'webflow.com', 'webflow.io', 'fonts.googleapis.com', 'fonts.gstatic.com')
-FORBIDDEN_DIRS = {'docs', 'inventory', 'scripts', '.git', '.review', '.agents', '.codex', 'node_modules', 'data', 'content'}
+FORBIDDEN_DIRS = {'docs', 'inventory', 'scripts', '.git', '.review', '.agents', '.codex', 'node_modules', 'data', 'content', 'functions', 'server', 'workers'}
 ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.ttf', '.woff', '.woff2', '.opus', '.mp3', '.ogg', '.wav', '.mp4', '.avif', '.pdf'}
 
 
@@ -25,6 +25,8 @@ PAGES_ALIAS_HEADERS = (b'https://emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n\n'
                        b'https://:version.emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n')
+PAGES_INTEREST_ROUTES = b'{"version":1,"include":["/api/interest"],"exclude":[]}\n'
+PROVIDER_CONTROLS = {'_headers': PAGES_ALIAS_HEADERS, '_routes.json': PAGES_INTEREST_ROUTES}
 
 
 class UrlContext(Enum):
@@ -123,6 +125,22 @@ def srcset_urls(value):
                 depth = max(0, depth - 1)
             elif char == ',' and not depth:
                 break
+
+
+def test_status_errors(soup):
+    """Submission announcements must stay outside the inert questionnaire."""
+    layouts = soup.select('.test-layout')
+    if not layouts:
+        return []
+    statuses = soup.select('.tests-request-status')
+    if len(layouts) != 1 or len(statuses) != 1:
+        return ['Test questionnaire requires one layout and one request status']
+    layout, status = layouts[0], statuses[0]
+    if status.parent is not layout.parent or status.find_parent(attrs={'inert': True}):
+        return ['Test request status must be a sibling outside the inert questionnaire']
+    if status.get('role') != 'status' or status.get('aria-live') != 'polite':
+        return ['Test request status requires a polite live region']
+    return []
 
 
 def document_metadata_errors(body):
@@ -488,9 +506,9 @@ def verify(build, prefix=''):
         if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html'}:
             errors.append(f'Unmapped HTML output: {relative}')
         body = path.read_bytes()
-        if relative == '_headers':
-            if body != PAGES_ALIAS_HEADERS:
-                errors.append('Invalid Pages alias header policy: _headers')
+        if relative in PROVIDER_CONTROLS:
+            if body != PROVIDER_CONTROLS[relative]:
+                errors.append('Invalid Pages provider control policy: ' + relative)
         elif any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or path.suffix.lower() not in ALLOWED_EXT:
             errors.append(f'Output allowlist violation: {relative}')
         if seo_enabled and path.suffix.lower() == '.html':
@@ -498,6 +516,8 @@ def verify(build, prefix=''):
         files.append({'path': relative, 'bytes': len(body), 'sha256': hashlib.sha256(body).hexdigest()})
         if path.suffix.lower() in {'.html', '.svg'}:
             soup = BeautifulSoup(body, 'html.parser')
+            if path.suffix.lower() == '.html':
+                errors.extend(relative + ': ' + error for error in test_status_errors(soup))
             for canonical in soup.select('link[rel~="canonical"]'):
                 if relative == '404.html':
                     errors.append('404 error artifact must omit canonical')
@@ -626,12 +646,15 @@ def verify(build, prefix=''):
             errors.extend('SEO: ' + error for error in seo_result['errors'])
         except Exception:
             errors.append('SEO verification failed with malformed or missing configuration/output')
+    for name in PROVIDER_CONTROLS:
+        if not any(row['path'] == name for row in files):
+            errors.append('Missing Pages provider control policy: ' + name)
     snapshot = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     return {'schemaVersion': 1, 'scope': 'Static route/dependency/output checks; no functional parity claim',
             'routeCount': len(expected), 'mountPrefix': prefix, 'outputSnapshotSha256': snapshot,
             'files': files, 'errors': errors, 'passed': not errors,
-            'providerControlPaths': [row['path'] for row in files if row['path'] == '_headers'],
-            'publicArtifactCount': sum(row['path'] != '_headers' for row in files),
+            'providerControlPaths': [row['path'] for row in files if row['path'] in PROVIDER_CONTROLS],
+            'publicArtifactCount': sum(row['path'] not in PROVIDER_CONTROLS for row in files),
             'limitations': ['Canonical origins are selected by the bounded builder and bound through exact output bytes; this verifier does not independently certify DNS ownership or the live host.']}
 
 

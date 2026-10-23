@@ -25,6 +25,9 @@ html[data-route-id="/dm/workspace"] body{background:#f4eff9}
 .dm-workspace [data-dm-screen],.dm-workspace [data-dm-history]{padding:8px 20px 32px;min-height:520px}
 .dm-workspace [data-dm-status]:not(:empty),.dm-workspace [data-dm-draft-recovery]{margin:8px 20px 16px;padding:12px 16px;background:#f6f1ff;border-radius:16px;font-size:14px}
 .dm-workspace [data-dm-status]:empty{margin:0}
+/* Keep the linked assertive alert accessible when its exact field already
+   displays the same guidance. Empty alerts reserve no layout space. */
+.dm-workspace [data-dm-error]:empty,.dm-workspace [data-dm-error][data-dm-inline-error-duplicate]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .dm-workspace [data-step-heading]{scroll-margin-top:112px}
 .dm-workspace input:not([type=radio]):not([type=checkbox]):not([type=file]),.dm-workspace textarea{display:block;width:100%;min-width:0;padding:12px 16px;border:1px solid #9f89b0;border-radius:16px;background:#f6f6f6;color:#281c37}
 .dm-workspace input[type=radio],.dm-workspace input[type=checkbox]{width:22px;height:22px;flex:0 0 auto;accent-color:#4f1f90}

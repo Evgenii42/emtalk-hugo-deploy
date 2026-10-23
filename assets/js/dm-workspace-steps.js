@@ -53,7 +53,7 @@ export function createWorkspaceSteps(ports){
     state.options.forEach((option,index) => {
       const input = node('input', {type:'text',maxlength:100,'aria-label':'Option '+(index+1)}); input.value=option.title;
       const errorId='dm-option-edit-error-'+index;
-      const editError=node('span',{id:errorId,'data-dm-option-edit-error':'',hidden:''});
+      const editError=node('span',{id:errorId,'data-dm-option-edit-error':'',role:'status','aria-live':'polite','aria-atomic':'true',hidden:''});
       function commitOption(defer) {
         const value=input.value.trim();
         const currentOption=work.read().decision.options.find(o=>o.id===option.id);
@@ -62,13 +62,16 @@ export function createWorkspaceSteps(ports){
           const message=(duplicate?'This name is already used.':'Enter a nonempty option name.')+
             ' This edit has not been applied. The working decision keeps "'+currentOption.title+'" until you correct this field.';
           editError.textContent=message;editError.hidden=false;
-          fail(message,input);
-          // The assertive region announces the error once. The field's own
-          // inline copy describes the retained valid model without duplication.
+          // Typing can pass through empty/duplicate names. Retain the last
+          // valid model and describe the pending edit politely until commit.
+          input.setAttribute('data-dm-pending-edit','');
           input.setAttribute('aria-describedby',errorId);
+          if(defer) clearError(input);
+          else fail(message,input);
           return;
         }
         editError.hidden=true;editError.textContent='';
+        input.removeAttribute('data-dm-pending-edit');
         clearError(input);input.removeAttribute('aria-describedby');
         work.edit(current=>{current.decision.options.find(o=>o.id===option.id).title=value;},{defer});
       }
@@ -89,9 +92,9 @@ export function createWorkspaceSteps(ports){
     if(state.options.length>=MAX_OPTIONS){input.disabled=true;submit.disabled=true;}
     form.append(field('Your options ('+state.options.length+'/8)',input),submit);
     form.addEventListener('submit',event=>{
-      event.preventDefault();const value=input.value.trim();
+      event.preventDefault();if(!validateVisibleFields())return;const value=input.value.trim();
       if(!value || work.read().decision.options.some(o=>o.title.trim().toLowerCase()===value.toLowerCase())){fail('Use a different, nonempty name for each option.',input);input.focus();return;}
-      if(state.options.length>=MAX_OPTIONS)return;
+      if(work.read().decision.options.length>=MAX_OPTIONS)return;
       const optionId=id('o');if(optionId===null)return disableWorkspace();
       work.edit(current=>{current.decision.options.push({id:optionId,title:value});},{replacement:true});show(false);screen.querySelector('[data-new-option]')?.focus();announce('Option added.');
     });

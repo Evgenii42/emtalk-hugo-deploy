@@ -16,7 +16,7 @@
 
     <link href="{{ hugo.Data.render.mountPrefix }}/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp" rel="shortcut icon" type="image/webp">
     {{ $navCss := resources.Get "css/site-navigation.css" | fingerprint }}<link rel="stylesheet" href="{{ $navCss.RelPermalink }}" integrity="{{ $navCss.Data.Integrity }}">
-</head>
+{{ $interestCss := resources.Get "css/interest-controls.css" | fingerprint }}<link rel="stylesheet" href="{{ $interestCss.RelPermalink }}" integrity="{{ $interestCss.Data.Integrity }}"></head>
 
 <body>
 {{ partial "page-loader.html" . }}
@@ -34,7 +34,7 @@
 </div>
 {{/* This utility page intentionally uses native fragment focus plus CSS scroll-padding for Skip. */}}
 {{ $navJs := resources.Get "js/site-navigation.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $navJs.RelPermalink }}" integrity="{{ $navJs.Data.Integrity }}"></script>
-{{ partial "page-loader-ready.html" . }}
+{{ partial "interest-controls.html" (dict "page" (dict "routeId" "/404")) }}{{ $interestJs := resources.Get "js/interest-controls.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $interestJs.RelPermalink }}" integrity="{{ $interestJs.Data.Integrity }}"></script>{{ partial "page-loader-ready.html" . }}
 {{ partial "privacy-controls.html" . }}
 </body>
 

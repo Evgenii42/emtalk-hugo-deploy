@@ -1,0 +1,55 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+<main id="emtalk-main" class="tapl-page" aria-labelledby="tapl-title" tabindex="-1">
+  <section class="tapl-hero" aria-labelledby="tapl-title">
+    {{/* Brand-owned abstract path scene, already published on About. Decorative, not an app preview. */}}
+    <div class="tapl-hero__scene" aria-hidden="true">
+      <img src="{{ "media/about-horizon-v1.webp" | relURL }}" srcset="{{ "media/about-horizon-v1.webp" | relURL }} 720w, {{ "media/about-horizon-large-v1.webp" | relURL }} 1440w" sizes="(min-width: 960px) 70vw, 120vw" width="720" height="540" alt="" decoding="async">
+    </div>
+    <div class="tapl-container tapl-hero__content">
+      <p class="tapl-eyebrow">TAPL / START MOVING</p>
+      <p class="tapl-status">In development</p>
+      <h1 id="tapl-title">Small steps.<br>A clearer way forward.</h1>
+      <p class="tapl-lead">Tapl is being developed to help you turn a goal into manageable actions, with a weekly plan you can review and adjust as life changes.</p>
+      <div class="tapl-actions">
+        <button class="tapl-button" type="button" data-interest-open data-interest-feature="programs">Share interest in Tapl</button>
+        <a class="tapl-text-link" href="#tapl-how">See how it will work <span aria-hidden="true">&#8595;</span></a>
+      </div>
+      <p class="tapl-availability">The app and its planned features are not available here yet.</p>
+    </div>
+  </section>
+
+  <section id="tapl-how" class="tapl-section tapl-container" aria-labelledby="tapl-how-title" tabindex="-1">
+    <p class="tapl-eyebrow">THE IDEA BEHIND TAPL</p>
+    <h2 id="tapl-how-title">From an intention to a next step</h2>
+    <p class="tapl-section__intro">A guided program, smaller actions, and room to change the plan. Here is the approach we are working towards.</p>
+    <ol class="tapl-steps">
+      <li>
+        <span class="tapl-step-number" aria-hidden="true">01</span>
+        <h3>Find a program that fits</h3>
+        <p>Choose a guided program, or join one through a code or invitation.</p>
+      </li>
+      <li>
+        <span class="tapl-step-number" aria-hidden="true">02</span>
+        <h3>Make the week manageable</h3>
+        <p>See the smaller actions in a suggested weekly plan. Review and adjust the tasks before you begin.</p>
+      </li>
+      <li>
+        <span class="tapl-step-number" aria-hidden="true">03</span>
+        <h3>Review and adjust</h3>
+        <p>See your progress and review the next week with room for change.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="tapl-section tapl-container tapl-now" aria-labelledby="tapl-now-title">
+    <div>
+      <p class="tapl-eyebrow">WHILE WE BUILD</p>
+      <h2 id="tapl-now-title">Explore something for today</h2>
+      <p>Tapl is still taking shape. You can read or listen to EmTalk articles, or explore a questionnaire now, without an account.</p>
+    </div>
+    <div class="tapl-now__links">
+      <a class="tapl-text-link" href="{{ $prefix }}/articles">Read or listen to articles <span aria-hidden="true">&#8594;</span></a>
+      <a class="tapl-text-link" href="{{ $prefix }}/tests">Explore tests <span aria-hidden="true">&#8594;</span></a>
+    </div>
+  </section>
+</main>

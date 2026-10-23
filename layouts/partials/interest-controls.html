@@ -1,0 +1,35 @@
+{{- $page := .page -}}
+{{- $features := index (index hugo.Data "interest-registry").pages $page.routeId -}}
+{{- $labels := (index hugo.Data "interest-registry").labels -}}
+{{- if $features -}}
+<aside class="interest-entry" aria-label="Help shape EmTalk" data-analytics-ignore>
+  <p>Help shape what comes next.</p>
+  <button type="button" data-interest-open data-interest-feature="page">Share feedback or interest <span aria-hidden="true">↗</span></button>
+  {{ if gt (len $features) 1 }}<details class="interest-entry__features"><summary>About a specific feature</summary><ul>{{ range $features }}{{ if ne . "page" }}<li><button type="button" data-interest-open data-interest-feature="{{ . }}">{{ index $labels . }}</button></li>{{ end }}{{ end }}</ul></details>{{ end }}
+  <noscript><p>Email <a href="mailto:info@emtalk.org">info@emtalk.org</a> with the page or feature you mean.</p></noscript>
+</aside>
+<dialog class="interest-dialog" aria-labelledby="interest-title" data-interest-dialog data-analytics-ignore data-page-id="{{ $page.routeId }}" data-interest-endpoint="{{ hugo.Data.render.mountPrefix }}/api/interest">
+  <div class="interest-dialog__heading"><h2 id="interest-title">Help shape EmTalk</h2><button type="button" data-interest-close aria-label="Close feedback">×</button></div>
+  <p>Tell us what would be useful, or what needs improving.</p>
+  <p class="interest-dialog__note" data-interest-pending-note hidden>Closing this window does not cancel the request. Keep this page open to retain your draft and check the outcome.</p>
+  <p class="interest-dialog__note" data-interest-receipt hidden>Last saved reference: <span data-interest-saved-reference></span><br>Keep this reference for privacy or deletion requests. It remains in this page only.</p>
+  <form data-interest-form>
+    <label for="interest-feature">About</label>
+    <select id="interest-feature" name="featureId">{{ range $features }}<option value="{{ . }}">{{ index $labels . }}</option>{{ end }}</select>
+    <label for="interest-intent">What would you like to share?</label>
+    <select id="interest-intent" name="intent"><option value="interested">I'm interested in this</option><option value="feedback">An idea or suggestion</option><option value="problem">Something isn't working</option></select>
+    <label for="interest-comment">Comment <span data-interest-comment-label>(optional)</span></label>
+    <textarea id="interest-comment" name="comment" rows="3" maxlength="2000" aria-describedby="interest-private-note"></textarea>
+    <p id="interest-private-note" class="interest-dialog__note">Please leave out test answers, health details, private decisions and passwords.</p>
+    <label for="interest-email">Email <span data-interest-email-label>(optional, if you'd like a reply)</span></label>
+    <input id="interest-email" name="email" type="email" maxlength="254" autocomplete="email" inputmode="email">
+    <label class="interest-dialog__choice"><input name="updatesConsent" type="checkbox"> <span>Email me occasional updates about this feature. I can withdraw this choice by emailing info@emtalk.org.</span></label>
+    <div class="interest-dialog__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <p class="interest-dialog__note">EmTalk uses this submission to review feedback and, if you provide an email, respond to you. Feature updates are optional. See our <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy Policy</a>.</p>
+    <div data-interest-challenge></div>
+    <p role="status" aria-live="polite" data-interest-status></p>
+    <button type="submit" class="interest-dialog__submit">Send feedback</button>
+    <p class="interest-dialog__note">You can also write to <a href="mailto:info@emtalk.org">info@emtalk.org</a>.</p>
+  </form>
+</dialog>
+{{- end -}}

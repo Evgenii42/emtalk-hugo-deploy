@@ -91,7 +91,11 @@ function init() {
       optionIndex:Math.max(0,Math.min(optionIndex,decision.selected.length-1)),savedEntryId:activeHistoryId,
     });},
     signature:value=>serializeDraft({...value,savedAt:0}),
-    onSaved:()=> { app.querySelector('[data-dm-draft-notice]').textContent = hasDecisionWork() ? 'Draft saved in this browser only. Your decision text is not uploaded.' : emptyDraftNotice; },
+    onSaved:()=> {
+      app.querySelector('[data-dm-draft-notice]').textContent = hasDecisionWork() ? 'Draft saved in this browser only. Your decision text is not uploaded.' : emptyDraftNotice;
+      app.querySelector('[data-dm-draft-recovery]').hidden = true;
+      app.querySelector('[data-dm-action="retry-draft"]').hidden = true;
+    },
     onProblem:showDraftProblem, delay:DRAFT_DEBOUNCE_MS,
   });
   draftController.restore(work.restoreDraft);
@@ -213,8 +217,17 @@ function init() {
     }
   }
   function askDecision(options) { flushDraft(); return askBaseDecision(options); }
-  app.querySelector('[data-dm-view="decision"]').addEventListener('click',()=>{announce('');show();});
+  function validateWorkingFields() {
+    if(screen.querySelector('[data-dm-pending-edit], [aria-invalid="true"]')) {
+      // Reveal the existing controls without rebuilding away uncommitted text.
+      screen.hidden=false;historyPanel.hidden=true;filesPanel.hidden=true;
+      setNavigation('decision');
+    }
+    return validateVisibleFields();
+  }
+  app.querySelector('[data-dm-view="decision"]').addEventListener('click',()=>{if(!validateWorkingFields())return;announce('');show();});
   app.querySelector('[data-dm-view="files"]').addEventListener('click',()=>{
+    if(!validateWorkingFields())return;
     flushDraft();
     announce('');screen.hidden=true;historyPanel.hidden=true;filesPanel.hidden=false;
     setNavigation('files');filesPanel.querySelector('h2').focus({preventScroll:true});app.scrollIntoView({block:'start',behavior:'auto'});
@@ -225,11 +238,14 @@ function init() {
   function showDraftProblem() {
     const draftProblem = draftController.problem;
     const panel = app.querySelector('[data-dm-draft-recovery]');
+    app.querySelector('[data-dm-action="retry-draft"]').hidden = !draftController.canRetry;
     panel.hidden = false;
     panel.replaceChildren(node('h3', {}, ['Your working decision is still here']), node('p', {}, [
       draftProblem?.kind === 'corrupt' || draftProblem?.kind === 'conflict'
         ? 'Another draft could not be restored safely or changed in another tab. It has not been overwritten. Export your work before deciding whether to delete the stored draft.'
-        : 'Automatic draft saving is unavailable. Keep this tab open or use Export JSON to keep your work.'
+        : draftController.canRetry
+          ? 'Automatic draft saving is paused. Keep this tab open or export your working decision. Once browser storage is available, choose Retry saving. A changed stored draft will not be overwritten.'
+          : 'This draft could not be saved safely. Keep this tab open or export your working decision, and review the recovery options before changing stored data.'
     ]));
     app.querySelector('[data-dm-draft-notice]').textContent = 'Draft not saved automatically. Your working decision remains available for export.';
     panel.append(button('Export working decision', () => download(serializeDecision(work.read().decision), 'application/json', exportName())));
@@ -242,11 +258,23 @@ function init() {
     panel.append(button('Delete current draft', deleteCurrentDraft));
     fail('Automatic draft saving could not be completed. Your working decision is still here; review the recovery options.');
   }
+  app.querySelector('[data-dm-action="retry-draft"]').addEventListener('click', event => {
+    if (!validateWorkingFields()) return;
+    const retry = event.currentTarget;
+    retry.disabled = true;
+    try {
+      if (draftController.retry()) {
+        announce('Draft saved in this browser. Automatic saving is available again.');
+        app.querySelector('[data-dm-draft-notice]').focus({preventScroll:true});
+      }
+    } finally { retry.disabled = false; }
+  });
   async function deleteCurrentDraft(event) {
     if (!(await askDecision({title:'Delete current draft?', description:'This deletes only the automatically saved draft from this browser. Your working decision, named saves and exported files remain. New edits start a new local draft.', accept:'Delete current draft', returnFocus:event?.currentTarget}))) return;
     const draftProblem = draftController.problem;
     if (draftController.remove(typeof draftProblem?.raw === 'string' ? {expectedRaw:draftProblem.raw} : {})) {
       app.querySelector('[data-dm-draft-recovery]').hidden = true;
+      app.querySelector('[data-dm-action="retry-draft"]').hidden = true;
       app.querySelector('[data-dm-draft-notice]').textContent = 'Current draft deleted. New edits will save a new draft in this browser.';
       announce('Current draft deleted. Named saved decisions are unchanged.');
     }
@@ -266,7 +294,7 @@ function init() {
       saved:work.saved,
       forgetSaved:savedId=>{if(work.forgetSaved(savedId))persistDraft();},
     },
-    ui:{show,setNavigation,askDecision,announce,fail},files:{download,exportName},recoveryNotice:RECOVERY_BACKUP_NOTICE,
+    ui:{show,setNavigation,askDecision,announce,fail,validateVisibleFields:validateWorkingFields},files:{download,exportName},recoveryNotice:RECOVERY_BACKUP_NOTICE,
   });
   const importControl=enhanceDecisionImport(app.querySelector('.dm-workspace__import'));
   app.querySelector("[data-dm-import]").addEventListener("input", event => clearError(event.currentTarget));

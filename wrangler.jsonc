@@ -1,0 +1,39 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4.149.0/config-schema.json",
+  "name": "emtalk-hugo-deploy",
+  "pages_build_output_dir": "./public",
+  "compatibility_date": "2026-10-23",
+  "vars": {
+    "INTEREST_ENABLED": "false",
+    "INTEREST_RELEASE_READY": "false",
+    "INTEREST_ALLOWED_ORIGIN": "https://www.emtalk.org",
+    "EMTALK_SITE_ORIGIN": "https://www.emtalk.org/",
+    "HUGO_VERSION": "0.168.0",
+    "PYTHON_VERSION": "3.13.3"
+  },
+  "services": [
+    {
+      "binding": "INTEREST_LIMITER_SERVICE",
+      "service": "emtalk-interest-limiter-stage006"
+    }
+  ],
+  "env": {
+    "preview": {
+      "vars": {
+        "INTEREST_ENABLED": "true",
+        "INTEREST_RELEASE_READY": "true",
+        "INTEREST_ALLOWED_ORIGIN": "https://interest032.emtalk-hugo-deploy.pages.dev",
+        "HUGO_VERSION": "0.168.0",
+        "PYTHON_VERSION": "3.13.3",
+        "TURNSTILE_SITE_KEY": "0x4AAAAAAFijFU_Pmc2x_7gb",
+        "INTEREST_WEBHOOK_URL": "https://contentfactory.emtalk.org/webhook/emtalk-interest032-private"
+      },
+      "services": [
+        {
+          "binding": "INTEREST_LIMITER_SERVICE",
+          "service": "emtalk-interest-limiter-stage006"
+        }
+      ]
+    }
+  }
+}

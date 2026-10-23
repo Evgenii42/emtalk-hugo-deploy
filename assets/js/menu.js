@@ -1,4 +1,8 @@
+// A shared document token also covers independently bundled copies of this module.
+const menusGuard = Symbol.for('emtalk.contentDisclosures.v1');
 export function initMenus() {
+  if (document[menusGuard]) return;
+  document[menusGuard] = true;
   // Shared site navigation is owned by site-navigation.js. This controller
   // handles content FAQ disclosures only; the former header is no longer rendered.
   // Independent replacement for the source's non-hover Webflow FAQ dropdowns.

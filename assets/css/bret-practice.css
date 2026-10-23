@@ -40,18 +40,18 @@
   font-size: 1.6rem;
   margin: 12px 0 24px;
 }
-.bret-intro > p {
+.bret-practice .bret-intro > p {
   max-width: 620px;
 }
-.bret-eyebrow {
+.bret-practice .bret-eyebrow {
   font-size: 0.76rem;
   letter-spacing: 0.15em;
   font-weight: 700;
 }
-.bret-intro {
+.bret-practice .bret-intro {
   padding-bottom: 28px;
 }
-.bret-intro a {
+.bret-practice .bret-intro a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;

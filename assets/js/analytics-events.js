@@ -143,6 +143,7 @@ export function initPublicMeasurement(root = document) {
   root.addEventListener('click', event => {
     if (!(event.target instanceof Element) || event.button !== 0 || event.defaultPrevented) return;
     const link = event.target.closest('a[href]');
+    if (event.target.closest('[data-analytics-ignore]')) return;
     if (!link || link.hasAttribute('download') || link.getAttribute('aria-disabled') === 'true') return;
     // The native click also covers keyboard activation. We do not double count
     // pointerdown/keydown or prevent/change navigation, including modified clicks.

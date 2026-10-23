@@ -4,19 +4,18 @@ import { BRET_COPY as copy } from "./bret-copy.js";
 // used at screen transitions, never during animation-frame rendering.
 export const practiceClock = (n) => `${Math.floor(n / 60000)}:${String(Math.floor(n / 1000) % 60).padStart(2, "0")}`;
 export class PracticeView {
-  constructor(root, steps) { this.root = root; this.steps = steps; this.timeAnswerKey = null; this.feedbackOwner = null; this.mediaFeedback = null; }
+  constructor(root, steps) { this.root = root; this.steps = steps; this.timeAnswerKey = null; this.feedbackOwner = null; }
   $(selector) { return this.root.querySelector(selector); }
   persistence(message) {
     // Storage recovery cannot replace media, validation or pause feedback.
     const status = this.$("[data-persistence-feedback]");
     if (status.textContent !== message) status.textContent = message;
   }
-  feedback(message, finished = null) {
+  feedback(message) {
     // Every write receives a distinct identity, including identical wording.
     // Cleanup owns this identity, never a localized/displayed text comparison.
     const token = {};
     this.feedbackOwner = token;
-    this.mediaFeedback = finished ? {token, finished} : null;
     if (this.$("[data-feedback]").textContent !== message)
       this.$("[data-feedback]").textContent = message;
     return token;
@@ -26,14 +25,7 @@ export class PracticeView {
     this.feedback("");
     return true;
   }
-  scopeFinishedFeedback() {
-    const owned = this.mediaFeedback;
-    if (owned && this.feedbackOwner === owned.token)
-      this.feedback(owned.finished);
-    this.mediaFeedback = null;
-  }
   show(which) {
-    if (which === "finish") this.scopeFinishedFeedback();
     this.expireTimeAnswer(null);
     for (const key of ["setup", "session", "finish"])
       this.$("[data-" + key + "]").hidden = key !== which;

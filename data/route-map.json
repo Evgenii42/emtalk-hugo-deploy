@@ -179,7 +179,9 @@
   "externalTransitions": [
     "https://null",
     "https://play.google.com/store/apps/details?id=com.bret",
+    "https://play.google.com/store/apps/details?id=com.bret&referrer=utm_source%3Demtalk_web%26utm_medium%3Dwebsite%26utm_campaign%3Dsite_v003_bret",
     "https://play.google.com/store/apps/details?id=org.emtalk.dm",
+    "https://play.google.com/store/apps/details?id=org.emtalk.dm&referrer=utm_source%3Demtalk_web%26utm_medium%3Dwebsite%26utm_campaign%3Dsite_v003_dm",
     "https://pubmed.ncbi.nlm.nih.gov/25686304",
     "https://pubmed.ncbi.nlm.nih.gov/42263407",
     "https://t.me/EmTalk_inc",

@@ -7,12 +7,12 @@ export function createWorkspaceHistory({app,screen,filesPanel,historyPanel,dom,s
   getStorage = () => globalThis.localStorage}) {
   const {node,button,actions} = dom;
   const {readHistory,writeHistory,resetHistoryObservation} = storage;
-  const {show,setNavigation,askDecision,announce,fail} = ui;
+  const {show,setNavigation,askDecision,announce,fail,validateVisibleFields} = ui;
   const {download,exportName} = files;
   function showHistoryFailure(error, saving = false) {
     if (error instanceof HistoryProblem && error.kind === "corrupt") {
       historyPanel.replaceChildren(
-        node("h2", {}, ["Saved-data recovery (export only)"]),
+        node("h2", {tabindex:"-1"}, ["Saved-data recovery (export only)"]),
         node("p", {}, [
           "Saved data could not be read safely. No entries were removed or repaired. Saving will not overwrite it. Export a raw backup before deciding whether to clear saved decisions yourself.",
         ]),
@@ -69,6 +69,8 @@ export function createWorkspaceHistory({app,screen,filesPanel,historyPanel,dom,s
       }
       historyPanel.append(node("p", {class:"dm-workspace__notice"}, [recoveryNotice]));
       filesPanel.hidden=true;setNavigation("saved");screen.hidden=true;historyPanel.hidden = false;
+      historyPanel.querySelector("h2").focus({preventScroll:true});
+      app.scrollIntoView({block:"start",behavior:"auto"});
       fail(
         "Saved data could not be read safely. Nothing was saved or changed. Export JSON keeps your current working decision; recovery exports are below.",
       );
@@ -203,6 +205,7 @@ export function createWorkspaceHistory({app,screen,filesPanel,historyPanel,dom,s
     if (open) { filesPanel.hidden=true;setNavigation("saved");screen.hidden=true;historyPanel.hidden=false;historyPanel.querySelector("h2")?.focus({preventScroll:true});app.scrollIntoView({block:"start",behavior:"auto"}); }
   }
   async function saveDecision(asNew, trigger) {
+    if(!validateVisibleFields())return;
     work.flush();
     let history;
     try {
@@ -296,6 +299,7 @@ export function createWorkspaceHistory({app,screen,filesPanel,historyPanel,dom,s
   app
     .querySelector('[data-dm-action="restore"]')
     .addEventListener("click", () => {
+      if(!validateVisibleFields())return;
       try {
         const history = readHistory();
         renderHistory(history, true);

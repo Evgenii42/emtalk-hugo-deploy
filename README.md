@@ -1,4 +1,4 @@
-# EmTalk010 staging build-source publication
+# EmTalk012 staging build-source publication
 
 Canonical source, specs, reviews, private archives and history remain in Forgejo.
 This finite repository is a build/deployment element; use only branch interest032.
@@ -21,5 +21,6 @@ Authorized deployment from workers/interest-limiter: npx wrangler@4.149.0 deploy
 No separate Worker build command is needed; Wrangler bundles its modules.
 Do not create a Hello World placeholder or silently accept a broad generated CI token.
 No credentials, visitor rows, private business documents or audit artifacts belong here.
+Workers uses manual redirect mode; strict status checks reject every300..399 response.
 Actual clean rebuild, deployment settings, security and staging receipts are separate gates.
-The historical external006 assessment does not certify this exact010 release.
+The historical external006 assessment does not certify this exact012 release.

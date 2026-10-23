@@ -46,7 +46,7 @@ export async function checkInterestRateLimit(service, key) {
     return await Promise.race([deadline,(async () => {
       const response = await service.fetch(new Request(LIMITER_URL, {
         method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key}),
-        redirect:'error',signal:controller.signal
+        redirect:'manual',signal:controller.signal
       }));
       if (response.status !== 200) throw Error('Unavailable rate check');
       const result = await readLimitedJson(response,256,controller.signal);

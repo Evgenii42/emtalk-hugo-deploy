@@ -51,13 +51,13 @@ export async function onRequest({request,env}) {
   try {
     const allowed=await checkInterestRateLimit(env.INTEREST_LIMITER_SERVICE,request.headers.get('CF-Connecting-IP'));
     if(!allowed)return reply(429,{ok:false,code:'too_many_requests'});
-    const check=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:new URLSearchParams({secret:env.TURNSTILE_SECRET_KEY,response:token}),redirect:'error',signal:AbortSignal.timeout(10000)});
+    const check=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:new URLSearchParams({secret:env.TURNSTILE_SECRET_KEY,response:token}),redirect:'manual',signal:AbortSignal.timeout(10000)});
     if(!check.ok)return unavailable();
     const proof=await check.json();
     if(proof.success!==true||proof.hostname!==url.hostname||proof.action!=='interest')return reply(403,{ok:false,code:'security_check_failed'});
     const destination=new URL(env.INTEREST_WEBHOOK_URL);
     if(destination.origin!=='https://contentfactory.emtalk.org'||destination.pathname!=='/webhook/emtalk-interest032-private'||destination.search||destination.hash||destination.username||destination.password)return unavailable();
-    const response=await fetch(destination.href,{method:'POST',headers:{'Content-Type':'application/json','X-EmTalk-Interest-Key':env.INTEREST_WEBHOOK_SECRET},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(15000)});
+    const response=await fetch(destination.href,{method:'POST',headers:{'Content-Type':'application/json','X-EmTalk-Interest-Key':env.INTEREST_WEBHOOK_SECRET},body:JSON.stringify(body),redirect:'manual',signal:AbortSignal.timeout(15000)});
     if(!response.ok)return unavailable();
     const resultBody=await readBounded(response,2048);
     if(resultBody.ok!==true||resultBody.submissionId!==body.submissionId.toLowerCase())return unavailable();

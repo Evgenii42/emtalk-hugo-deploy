@@ -26,7 +26,12 @@
     <label class="interest-dialog__choice"><input name="updatesConsent" type="checkbox"> <span>Email me occasional updates about this feature. I can withdraw this choice by emailing info@emtalk.org.</span></label>
     <div class="interest-dialog__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
     <p class="interest-dialog__note">EmTalk uses this submission to review feedback and, if you provide an email, respond to you. Feature updates are optional. See our <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy Policy</a>.</p>
-    <div data-interest-challenge></div>
+    <div class="interest-dialog__security" aria-labelledby="interest-security-title">
+      <p id="interest-security-title" class="interest-dialog__security-title">Security check</p>
+      <p class="interest-dialog__note" role="status" aria-live="polite" data-interest-security-status></p>
+      <div data-interest-challenge></div>
+      <button type="button" class="interest-dialog__security-retry" data-interest-security-retry hidden>Retry security check</button>
+    </div>
     <p role="status" aria-live="polite" data-interest-status></p>
     <button type="submit" class="interest-dialog__submit">Send feedback</button>
     <p class="interest-dialog__note">You can also write to <a href="mailto:info@emtalk.org">info@emtalk.org</a>.</p>

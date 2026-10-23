@@ -1,3 +1,5 @@
+import { createInterestSecurity } from './interest-security.js';
+
 const dialog = document.querySelector('[data-interest-dialog]');
 if (dialog) {
   const form = dialog.querySelector('[data-interest-form]');
@@ -5,7 +7,7 @@ if (dialog) {
   const submit = form.querySelector('[type=submit]');
   const feature = form.elements.featureId;
   const endpoint = dialog.dataset.interestEndpoint;
-  let opener, busy = false, config, configPromise, widget, challengePromise;
+  let opener, busy = false, configPromise;
   let submissionId = null, submittedFields = null, draftActive = false, outcome = 'idle', retryAt = 0;
   const say = (text) => { status.textContent = text; };
   const uncertainMessage = 'We could not confirm that your feedback was saved. It may already have been received. Your text is still here. Sending the same feedback again uses the same reference.';
@@ -54,32 +56,11 @@ if (dialog) {
   function configuration() {
     if (!configPromise) configPromise = fetch(endpoint, {credentials:'omit', cache:'no-store', signal:AbortSignal.timeout(10000)})
       .then(r => {if (!r.ok) throw Error('Unavailable'); return r.json();})
-      .then(value => {if (value.enabled !== true || typeof value.sitekey !== 'string' || !value.sitekey) throw Error('Unavailable'); config = value; return value;})
+      .then(value => {if (value.enabled !== true || typeof value.sitekey !== 'string' || !value.sitekey) throw Error('Unavailable'); return value;})
       .catch(error => {configPromise = null; throw error;});
     return configPromise;
   }
-  function challenge() {
-    if (window.turnstile) return Promise.resolve(window.turnstile);
-    if (!challengePromise) challengePromise = new Promise((resolve,reject) => {
-      const script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-      script.async = true;
-      const timer = setTimeout(() => {script.remove(); challengePromise=null; reject(Error('Challenge unavailable'));}, 12000);
-      script.onload = () => {clearTimeout(timer); if (window.turnstile) resolve(window.turnstile); else {challengePromise=null;reject(Error('Challenge unavailable'));}};
-      script.onerror = () => {clearTimeout(timer);script.remove();challengePromise=null;reject(Error('Challenge unavailable'));};
-      document.head.append(script);
-    });
-    return challengePromise;
-  }
-  async function prepare() {
-    try {
-      await configuration();
-      const turnstile = await challenge();
-      if (widget === undefined) widget = turnstile.render(dialog.querySelector('[data-interest-challenge]'), {sitekey:config.sitekey, action:'interest', theme:'light'});
-    } catch {
-      if (!busy && outcome === 'idle') say('The feedback service is not available right now. This attempt has not been sent. Please try again later or email info@emtalk.org.');
-    }
-  }
+  const security = createInterestSecurity(dialog, configuration);
   function open(trigger) {
     opener=trigger;
     // Reopening another entry must not silently relabel an unsent, pending or
@@ -92,7 +73,7 @@ if (dialog) {
     }
     if (!dialog.open) dialog.showModal();
     (busy ? dialog.querySelector('[data-interest-close]') : feature).focus({preventScroll:true});
-    if (!busy && outcome !== 'uncertain') prepare();
+    if (!busy) void security.prepare();
   }
   document.addEventListener('click', event => {
     const trigger=event.target.closest('[data-interest-open]');
@@ -124,13 +105,14 @@ if (dialog) {
     busy=true;draftActive=true;outcome='pending';submit.disabled=true;
     dialog.querySelector('[data-interest-pending-note]').hidden=false;
     for(const control of form.elements) if(control!==submit) control.disabled=true;
+    security.setBusy(true);
     say('Sending your feedback. You can close this window while we wait.');
     try {
       await configuration();
-      const token=window.turnstile?.getResponse(widget);
+      const token=security.token();
       if (!token) {
         outcome=previousOutcome==='uncertain'?'uncertain':'idle';
-        say(previousOutcome==='uncertain'?'Please complete the security check before retrying. Earlier delivery remains unconfirmed. Your text is still here.':'Please complete the security check, then send again.');return;
+        say(previousOutcome==='uncertain'?'Choose Retry security check if the check is missing or expired, complete it, then send again. Earlier delivery remains unconfirmed. Your text is still here.':'Choose Retry security check if the check is missing or expired, complete it, then send again. Your text is still here.');return;
       }
       const values=draftValues(), signature=JSON.stringify(values);
       // Unchanged retries retain their reference. Explicitly edited content is
@@ -169,6 +151,6 @@ if (dialog) {
       outcome=requestIssued || previousOutcome==='uncertain'?'uncertain':'idle';
       say(outcome==='uncertain'?uncertainMessage:'This attempt could not be sent. Your text is still here. Please try again later or email info@emtalk.org.');
     }
-    finally {busy=false;dialog.querySelector('[data-interest-pending-note]').hidden=true;submit.disabled=false;for(const control of form.elements)control.disabled=false;if(widget!==undefined)window.turnstile?.reset(widget);}
+    finally {busy=false;dialog.querySelector('[data-interest-pending-note]').hidden=true;submit.disabled=false;for(const control of form.elements)control.disabled=false;security.setBusy(false);security.finishAttempt(requestIssued);}
   });
 }

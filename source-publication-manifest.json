@@ -10,7 +10,7 @@
   "basePublicationCommit": "a1b967d7c052c9f0b8b0c55f70d6681dd984f79f",
   "basePublicationManifestSha256": "7cc2eac2056955cc588834ad509133bc70bbca3d07082f4d14e2fdbba2bcdee3",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "38e019d45e6e9480884a1240bc03d5110163a199",
+  "canonicalSourceCommit": "0857e34f17fe77f9e96abe972a67b37d99870d49",
   "controlledPreviewIntakeEnabled": true,
   "controlledStagingOnly": true,
   "dedicatedLimiterWorkerDeploymentPerformedByHelper": false,
@@ -27,9 +27,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 1746,
+      "bytes": 1833,
       "path": "README.md",
-      "sha256": "dc38ff3d8361121e463917b9077e7eecd9ace0155fdf79eff5e98aa9447664bc"
+      "sha256": "5d2fc3d9b48972fb11a7ae46c4b873884ff71b0611d5b605ce355d13cb53aef0"
     }
   ],
   "effectivePreparedSources": [
@@ -89,9 +89,9 @@
       "sha256": "15cfe209bf5dbbf4c83eb9bb174e0cc38e123484b89a52871dc52f56c7ce6029"
     },
     {
-      "bytes": 3410,
+      "bytes": 3970,
       "path": "assets/css/interest-controls.css",
-      "sha256": "04dc1631b4e24994b4c81c9e7267d51a6271adf81cbf89d5d49ef95cdd998a46"
+      "sha256": "3152ed7dd93d9ffc1e55f56415d8e1c141beda7e07f9bbbd74854c9f2513bb93"
     },
     {
       "bytes": 14574,
@@ -469,9 +469,14 @@
       "sha256": "432b49f560beb6fa8d4089c19110efc3a94b31799634bf0a40742003986b5f66"
     },
     {
-      "bytes": 11550,
+      "bytes": 10390,
       "path": "assets/js/interest-controls.js",
-      "sha256": "1759054753aa4e1591239b7b44192c163c688a10daa062652218c74821e05708"
+      "sha256": "2f4a97ea9f4afb133d1257eb6eba1fc3566527541499ba879630c7a8c3d2beca"
+    },
+    {
+      "bytes": 5259,
+      "path": "assets/js/interest-security.js",
+      "sha256": "8cb4cffd10bafc20a34ad24f8d81ae3ff53624f52db617908f26fd4dac25dc97"
     },
     {
       "bytes": 2491,
@@ -869,9 +874,9 @@
       "sha256": "1417530d486df84c569a743dd80515f9c5bfd5e1dd489c92732aa73336ff1474"
     },
     {
-      "bytes": 4549,
+      "bytes": 4551,
       "path": "functions/api/interest.js",
-      "sha256": "0e7030e4c215df90346d9d46652f3a4440ff5217b5fbb2d1ee02c4fffd73e6d2"
+      "sha256": "c95c5e66447ed4e66252d488e0be2b9ed61d22680773bcbe7f6abea35327399f"
     },
     {
       "bytes": 548,
@@ -989,9 +994,9 @@
       "sha256": "38a2cef384e8e7fb29c67b2247b5ea5ba6a8222d09075a64c2ec29ce92fbd6ef"
     },
     {
-      "bytes": 3895,
+      "bytes": 4337,
       "path": "layouts/partials/interest-controls.html",
-      "sha256": "e8c5e659ff7463c76d2e5d6121e7a2631e9b51777f0865f1c908d6f9d1aac4d6"
+      "sha256": "579e8cc55f07880a5b13bbce8509e6007da3f1337d54c31b486c795ea379a6f4"
     },
     {
       "bytes": 230,
@@ -1129,9 +1134,9 @@
       "sha256": "df8cec71bbd30329065d80074508205a2bd47f3f74250e369ea4e22c0c088345"
     },
     {
-      "bytes": 2658,
+      "bytes": 2659,
       "path": "server/interest-rate-limit.mjs",
-      "sha256": "fa9e042b68114121b9b98d264dffd6f9d4a51b31a6dd34789783e77cb2416254"
+      "sha256": "dce1d68451ff508b55df108bee33a9335a4133f22fd885f3041671b6cb87b4bf"
     },
     {
       "bytes": 4514,
@@ -2289,28 +2294,28 @@
       "sha256": "db295ade2d84f96e176ea6bc6acb39b5c25409ac3cfcc0b0aec34b5ab1f60e49"
     }
   ],
-  "exact010ExternalReviewCertified": false,
+  "exact012ExternalReviewCertified": false,
   "fullReleaseAccepted": false,
   "localBuildBinding": {
     "actualCleanExportRebuildRequired": true,
-    "outputSnapshotSha256": "2cbee9c5c4285bc2233b1b0cf483d09dd35436c7a581575ab2daf509e2a9330f",
+    "outputSnapshotSha256": "b09279a338a9be21f9a6bc9de47115325ee1adb336cf4272c2db490a69883590",
     "outputs": 327,
-    "preparedInputs": 451,
+    "preparedInputs": 452,
     "providerControlPaths": [
       "_headers",
       "_routes.json"
     ],
-    "receiptPath": "docs/audits/tapl032/build010.json",
-    "receiptSha256": "c400b849ac5db1e2f1b44df1c22b439897a02ebf2d6c32a0bd7edfd886ba0e14",
-    "sourceInputSnapshotSha256": "038840d1a524e0b078f90160cff9d6d1c8f3f13affdf2f663af327a317671407"
+    "receiptPath": "docs/audits/tapl032/build012.json",
+    "receiptSha256": "b5972a33052779f09cfc1bd4314217c7794d69410962d5e8ebc91d8ea1035f0e",
+    "sourceInputSnapshotSha256": "c469e9e7ba8c2a5be8632ef19fa3d152d1a172ddb6e28af5ce9a1a74c739828d"
   },
   "productionBranchWritePermitted": false,
   "provenanceQualification": "Original394 baseline hash rows retained verbatim. Effective prepared inputs are bound to the committed canonical receipt; canonical archive-chain reconstruction and actual clean export build remain separate evidence. No Forgejo Git history or audit/private document bytes are exported.",
   "publicationBranch": "interest032",
   "publicationRepository": "https://github.com/Evgenii42/emtalk-hugo-deploy",
-  "repositoryFilesIncludingManifest": 455,
+  "repositoryFilesIncludingManifest": 456,
   "schemaVersion": 3,
-  "scope": "Exact frozen010 source export for interest032 staging only, controlled preview ON only, production OFF, no production acceptance or publication approval",
+  "scope": "Exact frozen012 source export for interest032 staging only, controlled preview ON only, production OFF, no production acceptance or publication approval",
   "sourceFiles": [
     {
       "bytes": 8,

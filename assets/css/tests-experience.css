@@ -6,7 +6,7 @@
 .tests-explore :is(h1,h2,h3,h4,p),.tests-experience :is(h1,h2,h3,p) {margin:0;color:inherit}
 .tests-explore h1 {max-width:760px;font-size:clamp(38px,4.8vw,64px);line-height:1.12;letter-spacing:-.045em;font-weight:600}
 .tests-explore h2 {font-size:clamp(28px,3vw,38px);line-height:1.2;letter-spacing:-.035em;font-weight:600}
-.tests-eyebrow {font-size:11px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:#684a7c!important}
+.tests-eyebrow {font-size:12px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:#684a7c!important}
 .tests-explore .tests-eyebrow,.tests-experience .tests-eyebrow {margin-bottom:16px}
 .tests-scene .tests-eyebrow {color:var(--emt-ink)!important}
 .tests-scene {position:relative;isolation:isolate;overflow:hidden;background:#d7bed3}
@@ -47,6 +47,8 @@
 .tests-focus-options {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 .tests-focus-option {position:relative;display:flex;align-items:center;gap:10px;min-height:100px;padding:17px 14px;border:1px solid #dfbfd1;border-radius:16px;background:#fff8fb;color:#4b2840;font-size:14px;line-height:1.45;cursor:pointer;transition:background .18s,border-color .18s}
 .tests-focus-option input {flex:0 0 17px;width:17px;height:17px;margin:0;accent-color:#943d68}
+/* Native checked state and adjacent label emphasis also work without :has(). */
+.tests-focus-option input:checked + span {font-weight:750;color:#4c1e37}
 .tests-focus-option:hover {background:#fce7f0;border-color:#bb7899}
 .tests-focus-option:has(input:checked) {border:2px solid #943d68;padding:16px 13px;background:#f8dce9;color:#4c1e37}
 .tests-focus-option:focus-within {outline:3px solid var(--emt-focus);outline-offset:4px}
@@ -73,7 +75,7 @@
 .tests-choice__meta span {padding:0 5px}
 .tests-choice h4 {font-size:23px;font-weight:600;line-height:1.3;letter-spacing:-.035em}
 .tests-choice .tests-choice__summary {font-size:14px;color:#584662;margin-top:14px;margin-bottom:18px}
-.tests-choice .tests-choice__method {font-size:11px;color:#6c537c;margin-top:auto;margin-bottom:16px}
+.tests-choice .tests-choice__method {font-size:12px;color:#6c537c;margin-top:auto;margin-bottom:16px}
 .tests-choice__link {display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:46px;border-top:1px solid #e1d4e8;padding-top:14px;color:#573571;font-size:14px;font-weight:750;text-decoration:none}
 .tests-choice__link:hover {text-decoration:underline;text-underline-offset:4px}
 .tests-choice:focus-within {border-color:#6d4a87;box-shadow:0 0 0 1px #6d4a87}
@@ -96,16 +98,21 @@
 .tests-before details {max-width:680px}
 .tests-before details a {display:inline-block;min-height:44px;align-content:center;color:var(--emt-action)}
 .tests-experience .test-layout {display:block;position:relative;float:none;width:100%;max-width:780px;margin:0 auto;padding:30px 36px 22px;background:#fffefa;border:1px solid #dfd0e8;border-radius:24px;box-shadow:0 12px 46px #26123806;scroll-margin-top:12px;color:var(--emt-ink);font-family:Manrope,Arial,sans-serif}
-.tests-experience .tests-readonly-number {display:none}
+.tests-experience .tests-readonly-number {display:inline}
+.tests-experience .test-layout[data-test-ready="true"] .tests-readonly-number {display:none}
+.tests-experience .tests-start {display:none}
+.tests-experience[data-test-ready="true"] .tests-start {display:inline-flex}
+.tests-experience .test-layout:not([data-test-ready="true"]) :is(.tests-progress-label,.progress-bar,.tests-question-nav,.tests-session-note,.tests-selection-hint,.tests-question-map,[data-result-consent]) {display:none}
+.tests-experience .test-layout[data-test-ready="true"] [data-test-unavailable] {display:none}
+.tests-experience .test-layout:not([data-test-ready="true"]) .question-slide {margin-bottom:32px}
 .tests-progress-label {display:flex;justify-content:space-between;gap:16px;font-size:12px;font-weight:700;color:#654677}
 .tests-progress-label .tests-answered {font-weight:500;color:#74607f}
 .tests-experience .progress-bar {display:block;height:4px;max-width:none;width:100%;margin:12px 0 30px;background:#ece3f0;border-radius:10px;overflow:hidden}
 .tests-experience .progress-fill {height:100%;width:0;background:#765092;border-radius:inherit;transition:width .2s}
 .tests-experience .test-screen {display:block;width:auto;max-width:none;min-height:0;margin:0;padding:0;overflow:visible;background:none}
-/* Show only the first question before the module starts. The no-JS stylesheet
-   reveals every question for reading; the initialized controller sets display. */
-.tests-experience .question-slide {display:none;position:static;width:100%;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
-.tests-experience .test-screen>.question-slide:first-child {display:block}
+/* Every question remains readable until the validated controller takes over.
+   A blocked or failed module must not strand readers on the first question. */
+.tests-experience .question-slide {display:block;position:static;width:100%;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
 .tests-experience .tests-question-context {font-size:12px;color:#715581;margin-bottom:12px}
 .tests-experience .question-slide {font-family:Manrope,Arial,sans-serif}
 .tests-experience .test-question-title {color:var(--emt-ink);font-family:Manrope,Arial,sans-serif;font-size:clamp(21px,2.5vw,28px);line-height:1.4;font-weight:600;letter-spacing:-.025em;margin:0 0 14px;padding:0;scroll-margin-top:108px;text-align:left}
@@ -135,8 +142,8 @@
 .tests-experience :is(.nav-prev,.nav-next)::before,.tests-experience :is(.nav-prev,.nav-next)::after {content:none}
 .tests-experience .nav-next:not(:disabled):hover {background:var(--emt-action-hover)}
 .tests-experience .nav-prev:not(:disabled):hover,.tests-review-answers:hover {background:#f3ebf8}
-.tests-experience .tests-next-hint {font-size:11px;color:#6c537a;flex:1;text-align:center;max-width:200px}
-.tests-experience .tests-session-note {font-size:11px;line-height:1.6;color:#74607f;margin-top:18px}
+.tests-experience .tests-next-hint {font-size:12px;color:#6c537a;flex:1;text-align:center;max-width:200px}
+.tests-experience .tests-session-note {font-size:12px;line-height:1.6;color:#74607f;margin-top:18px}
 .tests-experience .et-answer-limit-note {margin:2px 0 0;color:#60367b;font-size:13px}
 .tests-experience .result-screen {width:100%;max-width:780px;margin:36px auto 0;padding:0;background:none;border:0;scroll-margin-top:100px}
 .tests-experience .test-results {width:100%;max-width:none;padding:32px;border:1px solid #dfd0e8;border-radius:24px;background:#fffefa;color:var(--emt-ink)}
@@ -145,7 +152,7 @@
 .tests-experience .test-results-score {display:flex;flex-direction:column;flex:0 0 auto;gap:6px;padding:18px;border:0;border-radius:16px;background:#f1e7f7;min-width:110px;text-align:center}
 .tests-experience .test-results-score[hidden] {display:none}
 .tests-experience .test-score-value {font-size:32px;font-weight:600;line-height:1.2;color:inherit}
-.tests-experience .test-score-total {font-size:10px;color:#6b507b;line-height:1.5}
+.tests-experience .test-score-total {font-size:12px;color:#6b507b;line-height:1.5}
 .tests-experience .test-result-title {font-size:21px;font-weight:600;line-height:1.4;margin-bottom:12px}
 .tests-experience :is(.test-result-lead,.test-tip-body,.tests-result-perspective) {font-size:14px;line-height:1.7;color:#62516d}
 .tests-experience .test-results-tips {padding:20px;margin-top:24px;border-radius:16px;background:#f7f1fa}
@@ -213,3 +220,12 @@
   .tests-scene .emt-sky {display:none}
   .tests-explore *,.tests-experience * {scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* Separate result-processing permission from optional site analytics. */
+.tests-result-consent { margin: 1.5rem 0; padding: clamp(1rem,3vw,1.5rem); border: 1px solid #6e3c68; border-radius: 20px; background: #fee9fb; color: #281c37; }
+.tests-result-consent[hidden] { display: none !important; }
+.tests-result-consent h2 { font-size: 1.25rem; line-height: 1.4; }
+.tests-result-consent p { line-height: 1.6; }
+.tests-result-consent label { display: flex; gap: .75rem; align-items: flex-start; min-height: 44px; padding: .75rem 0; cursor: pointer; }
+.tests-result-consent input { flex: 0 0 auto; width: 24px; height: 24px; margin-top: .2rem; accent-color: #6e3c68; }
+.tests-result-consent input:focus-visible { outline: 3px solid #281c37; outline-offset: 4px; }

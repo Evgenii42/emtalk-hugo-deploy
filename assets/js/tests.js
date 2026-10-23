@@ -1,3 +1,4 @@
+import { emitInterfaceEvent, analyticsEpoch } from './analytics-events.js';
 // Source-derived test controller. API scoring is independent; no local scoring assumptions.
 const initializedLayouts = new WeakSet();
 
@@ -8,12 +9,25 @@ export function failTestInitialization(layout = document.querySelector('.test-la
     var error = document.createElement('p');
     error.className = 'test-initialization-error';
     error.setAttribute('role', 'alert');
-    error.textContent = 'This test could not start. Please reload the page or choose another test.';
+    error.textContent = 'Interactive answering and result calculation could not start. You can read all questions below, reload the page or choose another test.';
     layout.before(error);
   }
-  layout.inert = true;
-  layout.hidden = true;
+  layout.inert = false;
+  layout.hidden = false;
+  layout.style.removeProperty('display');
   layout.dataset.testReady = 'invalid';
+  const experience = layout.closest('.tests-experience');
+  if (experience) experience.dataset.testReady = 'invalid';
+  for (const slide of layout.querySelectorAll('.question-slide')) {
+    slide.style.removeProperty('display');
+    slide.inert = false;
+    slide.removeAttribute('aria-hidden');
+    for (const option of slide.querySelectorAll('.answer-option')) {
+      for (const name of ['role','tabindex','aria-checked']) option.removeAttribute(name);
+    }
+    const list = slide.querySelector('.collection-list-3');
+    if (list) list.removeAttribute('role');
+  }
   var start = document.querySelector('.tests-start');
   if (start) start.hidden = true;
   var loader = document.querySelector('.load-screen');
@@ -50,13 +64,37 @@ export function initTests() {
   var loader = document.querySelector('.load-screen');
   var requestStatus = document.querySelector('.tests-request-status');
   var result = document.querySelector('.result-screen');
+  var consentPanel = layout?.querySelector('[data-result-consent]');
+  var consentCheck = consentPanel?.querySelector('[data-result-consent-check]');
   var selected = new Map();
   var current = 0;
   var submitting = false;
+  // Factual work-start survives consent changes; telemetry latches do not. No
+  // answer, test identity, result or run identifier is sent or persisted here.
+  var workStarted = false;
+  var measuredEpoch = null;
+  var measuredRun = false;
+  var measuredOutcome = false;
+  function disarmMeasurement() { measuredRun = false; measuredEpoch = null; measuredOutcome = false; }
+  window.addEventListener('emtalk:analytics-consent', disarmMeasurement);
+  window.addEventListener('pagehide', disarmMeasurement);
+  function measurementActive(epoch = measuredEpoch) {
+    return measuredRun && epoch !== null && epoch === measuredEpoch && analyticsEpoch() === epoch;
+  }
+  function measure(state, error_kind = 'not_applicable', epoch = measuredEpoch) {
+    return measurementActive(epoch) && emitInterfaceEvent('emtalk_assessment_state', {state, error_kind});
+  }
+  function startMeasurement() {
+    if (workStarted) return;
+    workStarted = true;
+    measuredEpoch = analyticsEpoch();
+    measuredRun = measuredEpoch !== null;
+    if (!measure('started')) disarmMeasurement();
+  }
 
   if (!layout || initializedLayouts.has(layout)) return;
   var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  if (!slides.length || !next || !prev || !nextLabel || !nextArrow || !loader || !requestStatus || !result || !testModel || testModel.apiEndpoint !== API_URL || testModel.apiTitle !== apiTitles[slug] || !Array.isArray(testModel.questions) || testModel.questions.length !== slides.length) {
+  if (!slides.length || !next || !prev || !nextLabel || !nextArrow || !loader || !requestStatus || !result || !consentPanel || !consentCheck || consentCheck.type !== 'checkbox' || !testModel || testModel.apiEndpoint !== API_URL || testModel.apiTitle !== apiTitles[slug] || !Array.isArray(testModel.questions) || testModel.questions.length !== slides.length) {
     failTestInitialization(layout);
     throw new Error('Invalid test model');
   }
@@ -117,6 +155,9 @@ export function initTests() {
 
   var count = document.querySelector('.test-question-count');
   if (count) count.textContent = String(slides.length);
+  // A fresh document never inherits an affirmative processing choice from
+  // browser form restoration. The active document keeps its own user work.
+  consentCheck.checked = false;
 
   function selectionLimit(slide) {
     var multiple = slide.dataset.selectionMode === 'multiple';
@@ -180,7 +221,9 @@ export function initTests() {
     if (answeredLabel) answeredLabel.textContent = answered + ' answered';
     if (nextLabel) nextLabel.textContent = current === slides.length - 1 ? (complete ? 'Get my result' : 'Next unanswered') : 'Next';
     if (nextArrow) nextArrow.hidden = current === slides.length - 1 && complete;
-    if (nextHint) nextHint.textContent = chosen?.size ? (current === slides.length - 1 ? (complete ? 'Ready to request your result.' : 'Answer the remaining questions first.') : 'You can change this answer.') : 'Choose an answer to continue.';
+    var readyForResult = current === slides.length - 1 && complete;
+    consentPanel.hidden = !readyForResult;
+    if (nextHint) nextHint.textContent = chosen?.size ? (current === slides.length - 1 ? (complete ? (consentCheck.checked ? 'Ready to request your result.' : 'Read the processing notice and choose whether to send your answers.') : 'Answer the remaining questions first.') : 'You can change this answer.') : 'Choose an answer to continue.';
     layout.querySelectorAll('.tests-jump').forEach(function (button) {
       var index = Number(button.dataset.questionIndex);
       var hasAnswer = Boolean(selected.get(index)?.size);
@@ -199,7 +242,7 @@ export function initTests() {
       bar.setAttribute('aria-valuetext',answered + ' of ' + slides.length + ' questions answered');
     }
     setDisabled(prev, current === 0 || submitting);
-    setDisabled(next, !chosen || !chosen.size || submitting);
+    setDisabled(next, !chosen || !chosen.size || submitting || (readyForResult && !consentCheck.checked));
   }
 
   function announceLimit(slide, limit) {
@@ -218,12 +261,13 @@ export function initTests() {
   }
 
   function choose(option) {
-    if (submitting) return;
+    if (submitting || layout.dataset.testReady !== 'true') return;
     var slide = option.closest('.question-slide');
     var slideIndex = slides.indexOf(slide);
     var options = Array.from(slide.querySelectorAll('.answer-option'));
     var answerIndex = options.indexOf(option);
     if (slideIndex < 0 || answerIndex < 0) return;
+    startMeasurement();
     if (isMulti(slide)) {
       var set = selected.get(slideIndex) || new Set();
       if (set.has(answerIndex)) {
@@ -300,7 +344,7 @@ export function initTests() {
     var lines = splitResult(resultText(data));
     var singleLine = lines.length === 1;
     var title = singleLine ? (error ? 'We could not calculate your result' : 'Your result is ready') : (lines.shift() || (error ? 'We could not calculate your result' : 'Your result is ready'));
-    var lead = singleLine ? (lines.shift() || '') : (lines.shift() || '');
+    var lead = lines.shift() || '';
     var tipTitle = lines.shift() || '';
     var scoreMatch = [title, lead].join(' ').match(/(\d+)\s*(?:out of|\/)\s*(\d+)/i);
     var score = resultNumber(data?.score) ?? resultNumber(data?.totalScore);
@@ -327,9 +371,10 @@ export function initTests() {
     if (heading) heading.textContent = 'Your ' + (pageTitle ? pageTitle.textContent.trim() : 'Test') + ' Result';
     // A question count is not a score or a maximum. Show only supplied result values.
     var scoreContainer = document.querySelector('.test-results-score');
-    if (scoreContainer) scoreContainer.hidden = error || score == null;
-    if (scoreValue) scoreValue.textContent = score == null ? '' : String(score);
-    if (scoreTotal) scoreTotal.textContent = score == null ? '' : total == null ? 'SCORE' : 'OUT OF ' + total;
+    var showScore = !error && score != null;
+    if (scoreContainer) scoreContainer.hidden = !showScore;
+    if (scoreValue) { scoreValue.hidden = !showScore; scoreValue.textContent = showScore ? String(score) : ''; }
+    if (scoreTotal) { scoreTotal.hidden = !showScore; scoreTotal.textContent = !showScore ? '' : total == null ? 'Your score' : 'OUT OF ' + total; }
     if (resultTitle) resultTitle.textContent = title;
     if (resultLead) resultLead.textContent = lead;
     if (tipHeading) tipHeading.textContent = tipTitle;
@@ -352,8 +397,6 @@ export function initTests() {
     var perspective = document.querySelector('.tests-result-perspective');
     if (perspective) perspective.hidden = error;
     if (error) {
-      if (scoreValue) { scoreValue.textContent = ''; scoreValue.hidden = true; }
-      if (scoreTotal) { scoreTotal.textContent = ''; scoreTotal.hidden = true; }
       if (heading) heading.textContent = 'Your answers are kept in this tab';
       if (resultTitle) resultTitle.textContent = 'We could not send your answers';
       var safeReasons = {
@@ -368,8 +411,6 @@ export function initTests() {
         retry.dataset.action = 'resubmit';
       }
     } else if (retry) {
-      if (scoreValue) scoreValue.hidden = false;
-      if (scoreTotal) scoreTotal.hidden = false;
       retry.textContent = 'Take the test again';
       retry.dataset.action = 'reset';
     }
@@ -378,7 +419,22 @@ export function initTests() {
   }
 
   async function submit() {
-    if (submitting) return;
+    if (submitting || layout.dataset.testReady !== 'true') return;
+    // This function is also used by retry. Validate the local questionnaire
+    // before recording or sending an attempt, not from result-screen visibility.
+    if (slides.some(function (_, index) { return !selected.get(index)?.size; })) return;
+    if (!consentCheck.checked) {
+      if (result) result.style.display = 'none';
+      layout.style.removeProperty('display');
+      update();
+      consentPanel.hidden = false;
+      requestStatus.textContent = 'Your answers have not been sent. Choose whether to allow processing before requesting a result.';
+      consentCheck.focus();
+      return;
+    }
+    var attemptEpoch = measuredEpoch;
+    measuredOutcome = false;
+    var attemptMeasured = measure('submit_attempt', 'not_applicable', attemptEpoch);
     submitting = true;
     update();
     if (loader) loader.style.display = 'flex';
@@ -395,6 +451,7 @@ export function initTests() {
     try {
       var response = await fetch(API_URL, {
         method: 'POST',
+        credentials: 'omit',
         headers: {'Content-Type':'application/json', 'Accept':'application/json'},
         body: JSON.stringify(payload()),
         signal: controller.signal
@@ -407,8 +464,14 @@ export function initTests() {
         throw new Error('The result service returned an incomplete response.');
       }
       render(data, false);
+      // Only validated data successfully accepted by the renderer is ready.
+      if (attemptMeasured && !measuredOutcome) { measuredOutcome = true; measure('result_ready', 'not_applicable', attemptEpoch); }
     } catch (error) {
       render({timeout: error.name === 'AbortError', reason: failureReason, status: failureStatus}, true);
+      if (attemptMeasured && !measuredOutcome) {
+        measuredOutcome = true;
+        measure('result_failed', error.name === 'AbortError' ? 'timeout' : failureReason === 'server' ? 'server' : failureReason === 'response' ? 'invalid_response' : 'network', attemptEpoch);
+      }
     } finally {
       clearTimeout(timer);
       submitting = false;
@@ -418,6 +481,8 @@ export function initTests() {
       requestStatus.textContent = '';
     }
   }
+
+  consentCheck.addEventListener('change', function () { update(); });
 
   if (next) next.addEventListener('click', function (event) {
     event.preventDefault();
@@ -472,11 +537,16 @@ export function initTests() {
   var retry = document.querySelector('.test-retry-button');
   if (retry) retry.addEventListener('click', function (event) {
     event.preventDefault();
+    if (submitting) return;
     if (retry.dataset.action === 'resubmit') {
       if (result) result.style.display = 'none';
       submit();
       return;
     }
+    measure('retake');
+    disarmMeasurement();
+    workStarted = false;
+    consentCheck.checked = false;
     selected.clear();
     slides.forEach(paint);
     current = 0;
@@ -493,4 +563,10 @@ export function initTests() {
   update();
   initializedLayouts.add(layout);
   layout.dataset.testReady = 'true';
+  const experience = layout.closest('.tests-experience');
+  if (experience) experience.dataset.testReady = 'true';
+  document.querySelector('.tests-start')?.addEventListener('click', event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    if (!submitting && !layout.hidden && !layout.inert && layout.dataset.testReady === 'true') startMeasurement();
+  });
 }

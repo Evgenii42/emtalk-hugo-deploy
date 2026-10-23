@@ -1,88 +1,97 @@
-// Preserve the existing service only on its production domains.
-// Preview/local pages never initialize the queue, load Google or send events.
-// Migration preserves legacy content-page analytics; this is not a new consent
-// implementation or a certification of the existing consent/legal policy.
-// The template excludes both guest-practice routes before this script is built.
+import { createAnalyticsPreferences } from "./analytics-preferences.js";
+import { createAnalyticsPayload } from "./analytics-payload.js";
+import { createAnalyticsTransport } from "./analytics-transport.js";
+import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
+
+// Coordinator owns only eligibility epochs, one-pageview latches and lifecycle.
+// Concern owners receive explicit ports; none can infer product/private contents.
 (() => {
-const configuration = document.querySelector('script[data-emtalk-analytics]');
-const measurementId = configuration?.dataset.emtalkAnalytics;
-const containerId = configuration?.dataset.emtalkTagManager;
-const route = document.documentElement.dataset.routeId;
-if (location.protocol === 'https:' && ['www.emtalk.org', 'emtalk.org'].includes(location.hostname)
-  && /^G-[A-Z0-9]+$/.test(measurementId || '') && !['/dm/workspace', '/bret/practice'].includes(route)
-  && configuration.dataset.emtalkAnalyticsInitialized !== 'true') {
-  configuration.dataset.emtalkAnalyticsInitialized = 'true';
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () { window.dataLayer.push(arguments); };
-  const developerIds = (configuration.dataset.emtalkAnalyticsDevelopers || '').split(',');
-  for (const developerId of developerIds) {
-    if (/^developer_id\.[A-Za-z0-9_]+$/.test(developerId)) window.gtag('set', developerId, true);
+  "use strict";
+  const config = document.querySelector("script[data-emtalk-analytics]");
+  const policyNode = document.getElementById("emtalk-analytics-policy");
+  if (!config || !policyNode || window.EmTalkAnalytics) return;
+  let policy;
+  try { policy = JSON.parse(policyNode.textContent); } catch { return; }
+  const payload = createAnalyticsPayload({ policy, configuration: config.dataset, origin: location.origin,
+    pathname: location.pathname, referrer: document.referrer });
+  const preferences = createAnalyticsPreferences({ id: payload.id, now: () => Date.now(),
+    readLocal: key => localStorage.getItem(key), writeLocal: (key, value) => localStorage.setItem(key, value),
+    readSession: key => sessionStorage.getItem(key), writeSession: (key, value) => sessionStorage.setItem(key, value) });
+  let active = false, epoch = 0, pageEpoch = -1, suspended = false, choice = null, timer = null;
+  let ui = null, uiReady = false, notice = "";
+  const gpc = () => navigator.globalPrivacyControl === true;
+  const transport = createAnalyticsTransport({ id: payload.id, home: config.dataset.emtalkRoute === "/",
+    canonical: payload.canonical, lifetime: preferences.lifetime, window, document, canBoot,
+    onFailure: () => { revoke(); notice = "Analytics could not load. Navigation and local tools still work. You can retry using Allow analytics."; render(); } });
+  function changeActive(value) {
+    if (active === value) return;
+    active = value; epoch += 1;
+    window.dispatchEvent(new CustomEvent("emtalk:analytics-consent", { detail: { active, epoch } }));
   }
-  window.gtag('js', new Date());
-  window.gtag('config', measurementId);
-  const hasTagManager = /^GTM-[A-Z0-9]+$/.test(containerId || '');
-  if (hasTagManager) {
-    window.dataLayer.push({'gtm.start': Date.now(), event: 'gtm.js'});
+  function revoke() { transport.revoke(); changeActive(false); }
+  function consented() {
+    choice = preferences.read();
+    return uiReady && payload.eligible && preferences.valid(choice) && choice.analytics &&
+      !gpc() && !transport.hasFailed() && !preferences.isBlocked();
   }
-  let booted = false;
-  function boot() {
-    if (booted) return;
-    booted = true;
-    const loader = document.createElement('script');
-    loader.async = true;
-    loader.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-    document.head.append(loader);
-    if (hasTagManager) {
-      const tagManager = document.createElement('script');
-      tagManager.async = true;
-      tagManager.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(containerId)}`;
-      const firstScript = document.getElementsByTagName('script')[0];
-      firstScript.parentNode.insertBefore(tagManager, firstScript);
-    }
+  function canTrack() {
+    if (!active || suspended || !consented()) { if (active) { revoke(); schedule(); render(); } return false; }
+    return true;
   }
-  if (route !== '/') {
-    boot();
-    return;
+  function canBoot() {
+    if (!active || suspended) return false;
+    if (!consented()) { revoke(); schedule(); render(); return false; } return true;
   }
-  // Home queues commands immediately, but its heavy SDKs start only after the
-  // critical reveal and a completed frame. No font wait or extra delay timer.
-  const gate = window.EmTalkPageLoader;
-  let revealed = !gate?.isPending();
-  let suspended = false, firstFrame = 0, secondFrame = 0;
-  function cancelFrames() {
-    if (firstFrame) cancelAnimationFrame(firstFrame);
-    if (secondFrame) cancelAnimationFrame(secondFrame);
-    firstFrame = secondFrame = 0;
+  function emit(name, params = {}) {
+    if (!canTrack() || (name === "page_view" && pageEpoch === epoch)) return false;
+    let value; try { value = payload.validate(name, params); } catch { return false; }
+    if (!value) return false;
+    if (name === "page_view") pageEpoch = epoch;
+    transport.queue(name, value, payload.fields);
+    return true; // Validated and queued after consent, never provider acceptance.
   }
-  function cleanup() {
-    cancelFrames();
-    document.removeEventListener('visibilitychange', visibility);
-    window.removeEventListener('pagehide', hide);
-    window.removeEventListener('pageshow', show);
-    gate?.signal?.removeEventListener('abort', reveal);
+  Object.defineProperty(window, "EmTalkAnalytics", { value: Object.freeze({ emit, canTrack,
+    epoch: () => epoch, context: payload.context }), writable: false, configurable: false });
+  function activate() {
+    if (suspended || !consented()) return;
+    if (!active) { transport.activate(payload.fields); changeActive(true); emit("page_view"); }
+    transport.requestBoot();
   }
   function schedule() {
-    if (booted || !revealed || suspended || document.hidden || firstFrame || secondFrame) return;
-    firstFrame = requestAnimationFrame(() => {
-      firstFrame = 0;
-      secondFrame = requestAnimationFrame(() => {
-        secondFrame = 0;
-        if (suspended || document.hidden) return;
-        cleanup();
-        boot();
-      });
-    });
+    if (timer !== null) clearTimeout(timer); timer = null;
+    if (preferences.valid(choice)) timer = setTimeout(refresh, Math.min(2147483647, Math.max(1, choice.at + preferences.lifetime - Date.now())));
   }
-  function reveal() { revealed = true; schedule(); }
-  function visibility() { if (document.hidden) cancelFrames(); else schedule(); }
-  function hide() { suspended = true; cancelFrames(); }
-  function show() { suspended = false; schedule(); }
-  document.addEventListener('visibilitychange', visibility);
-  window.addEventListener('pagehide', hide);
-  window.addEventListener('pageshow', show);
-  if (!revealed && gate?.signal) {
-    gate.signal.addEventListener('abort', reveal, {once:true});
-    if (gate.signal.aborted || !gate.isPending()) reveal();
-  } else schedule();
-}
+  function render() { ui?.render(); }
+  function refresh() {
+    if (!consented()) revoke(); else if (suspended) changeActive(false); else activate();
+    schedule(); render();
+  }
+  function choose(allow) {
+    if (allow && (gpc() || !payload.eligible || !uiReady)) { render(); return false; }
+    if (!allow) revoke();
+    notice = ""; transport.resetFailure(); choice = preferences.save(allow);
+    if (!choice) {
+      revoke(); notice = "Your browser could not save this choice. Optional analytics stays off. You can keep using the website.";
+      schedule(); render(); return false;
+    }
+    refresh(); return true;
+  }
+  function mount() {
+    choice = preferences.read();
+    ui = createAnalyticsPrivacyUI({ document, window, preferences, canonical: payload.canonical,
+      snapshot: () => ({ choice, eligible: payload.eligible, gpc: gpc(), notice, cleanupFailed: transport.cleanupFailed() }),
+      onRefresh: refresh, onChoose: choose });
+    uiReady = ui.ready; ui.mount(); refresh();
+  }
+  window.addEventListener("storage", event => { if (event.key === null || event.key === preferences.key) refresh(); });
+  window.addEventListener("focus", refresh);
+  window.addEventListener("pagehide", () => {
+    suspended = true; transport.cancelBoot();
+    if (consented()) changeActive(false); else revoke(); // Navigation is not withdrawal.
+  });
+  window.addEventListener("pageshow", () => { suspended = false; refresh(); });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) transport.cancelBoot(); else if (document.visibilityState === "visible") refresh();
+  });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, { once: true }); else mount();
 })();

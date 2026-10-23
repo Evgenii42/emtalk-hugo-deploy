@@ -2,9 +2,9 @@
   "analytics": {
     "enabledForProduction": true,
     "measurementId": "G-B579M2BRST",
+    "reviewedPolicy": "003",
+    "providerGuardsReviewed": true,
     "tagManagerContainerId": "GTM-KF2D6PT5",
-    "developerIds": ["developer_id.dZGVlNj", "developer_id.dYWYxNW"],
-    "source": "Existing Google Analytics and Google Tag Manager bootstraps confirmed in all 41 published source captures; source uses one shared dataLayer and has no noscript GTM iframe.",
-    "scope": "Production source domains only. Preview and local browsing do not initialize Google Analytics. Visitor data are never part of migration archives."
+    "scope": "Canonical www only after explicit fresh optional-analytics opt-in. Legacy GTM inert. Authenticated enhanced-measurement hybrid and automatic user-data detection OFF saved/reopened on 2026-10-23. Actual SDK collection fields verified with locally intercepted requests; provider ingestion remains unverified. Preview/local never initialize Google."
   }
 }

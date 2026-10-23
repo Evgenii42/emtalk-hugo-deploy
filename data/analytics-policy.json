@@ -1,0 +1,953 @@
+{
+  "version": "003",
+  "preferenceVersion": 3,
+  "policySourceSha256": "0a2c33cc3e7363e5d3cb47c309a1b750c2f871cebb2ddc49cbbe3b61adcaf25a",
+  "coverageSourceSha256": "e63a45f7c009a112693aaed580d445d6c8e8304c56aa38a337c85c5c4448310b",
+  "contexts": {
+    "home": {
+      "location": "https://www.emtalk.org/",
+      "title": "EmTalk"
+    },
+    "about": {
+      "location": "https://www.emtalk.org/about-us",
+      "title": "About EmTalk"
+    },
+    "articles_catalog": {
+      "location": "https://www.emtalk.org/articles",
+      "title": "EmTalk articles"
+    },
+    "bret_landing": {
+      "location": "https://www.emtalk.org/bret",
+      "title": "BRET"
+    },
+    "dm_landing": {
+      "location": "https://www.emtalk.org/dm",
+      "title": "Decision Matrix"
+    },
+    "understand_guide": {
+      "location": "https://www.emtalk.org/understand-myself",
+      "title": "Understand myself"
+    },
+    "tests_catalog": {
+      "location": "https://www.emtalk.org/tests",
+      "title": "EmTalk tests"
+    },
+    "tapl": {
+      "location": "https://www.emtalk.org/tapl",
+      "title": "TAPL"
+    },
+    "article": {
+      "location": "https://www.emtalk.org/_measurement/article",
+      "title": "EmTalk reading"
+    },
+    "assessment": {
+      "location": "https://www.emtalk.org/_measurement/assessment",
+      "title": "EmTalk assessment"
+    },
+    "web_trial": {
+      "location": "https://www.emtalk.org/_measurement/web_trial",
+      "title": "EmTalk web tool"
+    },
+    "documents": {
+      "location": "https://www.emtalk.org/_measurement/documents",
+      "title": "EmTalk documents"
+    },
+    "affirmations": {
+      "location": "https://www.emtalk.org/_measurement/affirmations",
+      "title": "EmTalk affirmations"
+    }
+  },
+  "routes": {
+    "/404": {
+      "context": null,
+      "product": null,
+      "events": []
+    },
+    "/about-us": {
+      "context": "about",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/affirmations/af-01": {
+      "context": "affirmations",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/affirmations/af-02": {
+      "context": "affirmations",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/affirmations": {
+      "context": "affirmations",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/burnout-prevention-vs-recovery": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/how-to-know-if-you-are-burned-out": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/the-chemistry-behind-a-good-nights-sleep": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/the-truth-about-how-much-sleep-you-need": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles/why-sleep-matters": {
+      "context": "article",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_article_action",
+        "emtalk_audio_state",
+        "emtalk_store_click"
+      ]
+    },
+    "/articles": {
+      "context": "articles_catalog",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_catalog_filter",
+        "emtalk_store_click"
+      ]
+    },
+    "/bret/practice": {
+      "context": "web_trial",
+      "product": "bret",
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_trial_state"
+      ]
+    },
+    "/bret": {
+      "context": "bret_landing",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/dm/workspace": {
+      "context": "web_trial",
+      "product": "dm",
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_trial_state"
+      ]
+    },
+    "/dm": {
+      "context": "dm_landing",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/bret-delete-your-account-and-associated-data-v1": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/bret-delete-your-account-and-associated-data": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/bret-privacy-policy-v1": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/bret-privacy-policy": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/bret-terms-and-conditions-of-use-v1": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/bret-terms-and-conditions-of-use": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/dm-delete-your-account-and-associated-data-v1": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/dm-delete-your-account-and-associated-data": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/dm-privacy-policy-v1": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/dm-privacy-policy": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/dm-terms-and-conditions-of-use-v1": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/dm-terms-and-conditions-of-use": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/emtalk-delete-your-account-and-associated-data": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/emtalk-privacy-policy": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/documents/emtalk-terms-and-conditions-of-use": {
+      "context": "documents",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/": {
+      "context": "home",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/tapl": {
+      "context": "tapl",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    },
+    "/tests/maslach-burnout-inventory": {
+      "context": "assessment",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_assessment_state"
+      ]
+    },
+    "/tests/mobbing-test": {
+      "context": "assessment",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_assessment_state"
+      ]
+    },
+    "/tests/motivation-test-by-gerchikov": {
+      "context": "assessment",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_assessment_state"
+      ]
+    },
+    "/tests/social-phobia-inventory-spin": {
+      "context": "assessment",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_assessment_state"
+      ]
+    },
+    "/tests/spielberger-state-trait-anxiety-inventory": {
+      "context": "assessment",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_assessment_state"
+      ]
+    },
+    "/tests": {
+      "context": "tests_catalog",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_catalog_filter",
+        "emtalk_store_click"
+      ]
+    },
+    "/understand-myself": {
+      "context": "understand_guide",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click"
+      ]
+    }
+  },
+  "schemas": {
+    "page_view": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "page_view"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "home",
+            "about",
+            "articles_catalog",
+            "article",
+            "bret_landing",
+            "dm_landing",
+            "understand_guide",
+            "tests_catalog",
+            "assessment",
+            "web_trial",
+            "documents",
+            "affirmations",
+            "tapl"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context"
+      ],
+      "additionalProperties": false
+    },
+    "emtalk_navigation": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_navigation"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "home",
+            "about",
+            "articles_catalog",
+            "article",
+            "bret_landing",
+            "dm_landing",
+            "understand_guide",
+            "tests_catalog",
+            "assessment",
+            "web_trial",
+            "documents",
+            "affirmations",
+            "tapl"
+          ]
+        },
+        "surface": {
+          "type": "string",
+          "enum": [
+            "header",
+            "footer",
+            "home_choices",
+            "public_cta",
+            "article_card",
+            "related_reading",
+            "tool_exit",
+            "catalog"
+          ]
+        },
+        "destination_kind": {
+          "type": "string",
+          "enum": [
+            "public_content",
+            "app_landing",
+            "trial_entry",
+            "assessment_entry",
+            "external_public",
+            "documents"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "surface",
+        "destination_kind"
+      ],
+      "additionalProperties": false
+    },
+    "emtalk_catalog_filter": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_catalog_filter"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "articles_catalog",
+            "tests_catalog"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "filter",
+            "reset"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "emtalk_article_action": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_article_action"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "article"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "read_anchor",
+            "listen_anchor",
+            "contents_open"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "emtalk_audio_state": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_audio_state"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "article"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "start",
+            "resume",
+            "pause",
+            "ended",
+            "error"
+          ]
+        },
+        "error_kind": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "play_rejected",
+            "load_failed",
+            "timeout"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "state",
+        "error_kind"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "error"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error_kind": {
+                "not": {
+                  "const": "not_applicable"
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "error_kind": {
+                "const": "not_applicable"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "emtalk_store_click": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_store_click"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "home",
+            "about",
+            "articles_catalog",
+            "article",
+            "bret_landing",
+            "dm_landing",
+            "understand_guide",
+            "tests_catalog",
+            "assessment",
+            "web_trial",
+            "documents",
+            "affirmations",
+            "tapl"
+          ]
+        },
+        "product": {
+          "type": "string",
+          "enum": [
+            "bret",
+            "dm"
+          ]
+        },
+        "store": {
+          "const": "google_play"
+        },
+        "surface": {
+          "type": "string",
+          "enum": [
+            "public_cta",
+            "app_landing",
+            "tool_exit"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "product",
+        "store",
+        "surface"
+      ],
+      "additionalProperties": false
+    },
+    "emtalk_trial_state": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_trial_state"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "web_trial"
+          ]
+        },
+        "product": {
+          "type": "string",
+          "enum": [
+            "bret",
+            "dm"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "requested",
+            "started",
+            "resumed",
+            "progress",
+            "completed",
+            "stopped",
+            "error"
+          ]
+        },
+        "error_kind": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "initialization_failed",
+            "runtime_failed",
+            "required_capability_failed"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "product",
+        "state",
+        "error_kind"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "error"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error_kind": {
+                "not": {
+                  "const": "not_applicable"
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "error_kind": {
+                "const": "not_applicable"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "product": {
+                "const": "bret"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "not": {
+                  "const": "resumed"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "emtalk_assessment_state": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_assessment_state"
+        },
+        "contract_version": {
+          "const": "003"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "assessment"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "started",
+            "submit_attempt",
+            "result_ready",
+            "result_failed",
+            "retake"
+          ]
+        },
+        "error_kind": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "network",
+            "timeout",
+            "server",
+            "invalid_response"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "state",
+        "error_kind"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "result_failed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error_kind": {
+                "not": {
+                  "const": "not_applicable"
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "error_kind": {
+                "const": "not_applicable"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deferredProposalEvents": [
+    "emtalk_article_progress",
+    "emtalk_audio_progress"
+  ],
+  "referrerPolicy": "031 refinement: fixed reviewed HTTPS search-origin allowlist only; actual Google organic receipt unverified",
+  "searchOrigins": {
+    "https://www.google.com": "google",
+    "https://www.google.ca": "google",
+    "https://www.google.co.uk": "google",
+    "https://www.google.de": "google",
+    "https://www.google.fr": "google",
+    "https://www.google.es": "google",
+    "https://www.google.it": "google",
+    "https://www.google.nl": "google",
+    "https://www.google.kz": "google",
+    "https://www.bing.com": "bing",
+    "https://duckduckgo.com": "duckduckgo",
+    "https://search.yahoo.com": "yahoo",
+    "https://yandex.ru": "yandex",
+    "https://yandex.com": "yandex"
+  }
+}

@@ -1,6 +1,12 @@
 {{- $attrs := "" -}}
 {{- range $name, $value := . -}}
+  {{- if eq $name "href" -}}{{- $value = partial "store-campaign-url.html" $value -}}{{- end -}}
   {{- if not (findRE `^[A-Za-z_:][A-Za-z0-9_.:-]*$` $name) -}}{{- errorf "Invalid HTML attribute name %q" $name -}}{{- end -}}
   {{- $attrs = printf "%s %s=\"%s\"" $attrs $name (htmlEscape (printf "%v" $value)) -}}
+{{- end -}}
+{{- $sourceClasses := partial "analytics-source-classes.html" . -}}
+{{- $tokens := findRE `[^[:space:]]+` (printf "%v" (index . "class" | default "")) -}}
+{{- if and (not (index . "data-analytics-surface")) (gt (len (intersect $tokens $sourceClasses.measuredFooterClasses)) 0) -}}
+  {{- $attrs = printf "%s data-analytics-surface=\"footer\"" $attrs -}}
 {{- end -}}
 {{- return ($attrs | safeHTMLAttr) -}}

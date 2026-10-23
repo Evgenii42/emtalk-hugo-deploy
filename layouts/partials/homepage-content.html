@@ -20,7 +20,7 @@
           <p>{{ $product.description }}</p>
           <div class="home-product__links">
             <a class="home-content__link" href="{{ $prefix }}{{ $product.path }}" {{ partial "native-link-focus.html" . }}>{{ $product.linkLabel }}</a>
-            {{ with $product.storeUrl }}<a class="home-product__store" href="{{ . }}" {{ partial "native-link-focus.html" . }}>{{ $product.storeLabel }}</a>{{ end }}
+            {{ with $product.storeUrl }}<a class="home-product__store" href="{{ partial "store-campaign-url.html" . }}" {{ partial "native-link-focus.html" . }}>{{ $product.storeLabel }}</a>{{ end }}
           </div>
         </div>
       </article>

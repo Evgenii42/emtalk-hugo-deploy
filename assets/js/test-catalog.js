@@ -1,3 +1,4 @@
+import { emitInterfaceEvent } from './analytics-events.js';
 // Optional, tab-only choice guidance. The static catalog remains the fallback.
 export function initTestCatalog() {
   const catalog = document.querySelector('[data-test-catalog]');
@@ -29,7 +30,7 @@ export function initTestCatalog() {
     }
     status.textContent = selected
       ? `Your focus: ${selected.dataset.focusLabel}. Read about this starting point before deciding to begin.`
-      : 'All five tests are shown. Compare their focus, or choose what feels closest above.';
+      : 'All five tests are shown. You can compare them below.';
     steps.forEach((step, index) => {
       if (index === (selected ? 1 : 0)) step.setAttribute('aria-current', 'step');
       else step.removeAttribute('aria-current');
@@ -38,14 +39,20 @@ export function initTestCatalog() {
   }
   picker.addEventListener('submit', event => event.preventDefault());
   picker.addEventListener('change', event => {
-    if (inputs.includes(event.target)) show(event.target.value);
+    if (inputs.includes(event.target) && catalog.dataset.selectedFocus !== event.target.value) {
+      show(event.target.value);
+      emitInterfaceEvent('emtalk_catalog_filter', {action:'filter'});
+    }
   });
   reset.addEventListener('click', () => {
+    const changed = catalog.dataset.selectedFocus !== 'all';
     for (const input of inputs) input.checked = false;
     show('');
+    if (changed) emitInterfaceEvent('emtalk_catalog_filter', {action:'reset'});
   });
   // Initialization never hides tests. Only a deliberate native radio selection does.
   for (const input of inputs) input.checked = false;
+  catalog.dataset.selectedFocus = 'all';
   picker.hidden = false;
   fallback.hidden = true;
   reset.hidden = false;

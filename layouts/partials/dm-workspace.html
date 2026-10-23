@@ -1,4 +1,4 @@
-<main id="emtalk-main" class="dm-workspace" tabindex="-1" aria-labelledby="dm-title">
+<main data-analytics-surface="tool_exit" id="emtalk-main" class="dm-workspace" tabindex="-1" aria-labelledby="dm-title">
   <noscript><h1>Decision Matrix</h1><p class="dm-workspace__notice">This exercise needs JavaScript for its local calculations. <a href="{{ hugo.Data.render.mountPrefix }}/dm">Read about Decision Matrix</a>.</p></noscript>
   <div data-dm-app hidden>
     <header class="dm-workspace__appbar">
@@ -20,7 +20,12 @@
           <button type="button" data-dm-action="save">Save on this device</button>
           <button type="button" data-dm-action="save-new">Save as a new decision</button>
           <button type="button" data-dm-action="json">Export JSON</button>
-          <label class="dm-workspace__import">Import JSON <input type="file" accept=".json,application/json" data-dm-import></label>
+          <div class="dm-workspace__import">
+            <label for="dm-import-file">Import JSON</label>
+            <button type="button" data-dm-import-trigger aria-describedby="dm-import-file-status" hidden>Choose JSON file</button>
+            <span id="dm-import-file-status" data-dm-import-filename role="status" aria-live="polite" hidden>No file selected</span>
+            <input id="dm-import-file" type="file" accept=".json,application/json" data-dm-import aria-describedby="dm-import-file-status">
+          </div>
           <button type="button" data-dm-action="delete-draft">Delete current draft</button>
           <button type="button" data-dm-action="clear">Delete all saved decisions</button>
       <p class="dm-workspace__privacy">The current draft saves automatically in this browser. Named saves are separate. Nothing you enter is uploaded. Avoid sensitive notes on a shared device.</p>
@@ -43,7 +48,7 @@
     <p>Start with one to eight options. With up to three, begin with pros and cons. With four or more, choose between every pair, then select up to three options to explore in more depth.</p>
     <p>Pairwise points count your choices. Earlier saved files may include undecided pairs, which add no points. Reasons use importance weights of 1, 3, 5 and 8. Balanced reasons start at 50; stronger reasons move the score toward 0 or 100 using the DM app's confidence curve.</p>
     <p>Scores reflect what you entered. They are not probabilities, guarantees or instructions about what you should choose. Comparison and pros-and-cons results are separate exercises.</p>
-    <p>AI assistance is available in the app. Coming soon to the website. <a href="https://play.google.com/store/apps/details?id=org.emtalk.dm" target="_blank" rel="noopener noreferrer">Get DM on Google Play</a>. Coming soon to the App Store.</p>
+    <p>AI assistance is available in the app. Coming soon to the website. <a href="{{ partial "store-campaign-url.html" "https://play.google.com/store/apps/details?id=org.emtalk.dm" }}" target="_blank" rel="noopener noreferrer">Get DM on Google Play</a>. Coming soon to the App Store.</p>
     <p>The current draft resumes in this browser. Use Files and privacy to save a named copy, export files or delete local data. Accounts, cloud sync and subscriptions are not connected here.</p>
     {{ partial "keyboard-help.html" . }}
   </details>

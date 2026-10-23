@@ -90,7 +90,7 @@ def snapshot_sources(root=None):
         reject_tree_links(root / directory)
         sources.extend(path for path in (root / directory).rglob('*') if path.is_file())
     sources += [root / name for name in ['hugo.toml', '.hugo-version', 'requirements-build.txt',
-                'inventory/media.json', 'scripts/prepare_hugo.py', 'scripts/build_site.py', 'scripts/verify_build.py']]
+                'inventory/media.json', 'scripts/prepare_hugo.py', 'scripts/prepare_public_content.py', 'scripts/build_site.py', 'scripts/verify_build.py']]
     if (root / 'data/seo.json').is_file():
         sources.append(root / 'scripts/verify_seo.py')
     if any(is_link(part) for path in sources for part in [path, *path.parents]

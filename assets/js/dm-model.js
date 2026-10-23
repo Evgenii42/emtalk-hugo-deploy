@@ -7,7 +7,7 @@ const allowed = (v, keys) =>
   typeof v === "object" &&
   !Array.isArray(v) &&
   Object.keys(v).every((k) => keys.includes(k)) &&
-  keys.every((k) => Object.hasOwn(v, k));
+  keys.every((k) => Object.prototype.hasOwnProperty.call(v, k));
 const text = (v, max, empty = false) =>
   typeof v === "string" && v.length <= max && (empty || v.trim().length > 0);
 function requireValue(value) {
@@ -272,7 +272,7 @@ function cell(value) {
   // and leading control prefixes, including tab/vertical-tab without a formula.
   if (/^[\s]*[=+@-]/.test(s) || /^[\s]*[\u0000-\u001f\u007f]/.test(s))
     s = "'" + s;
-  return '"' + s.replaceAll('"', '""') + '"';
+  return '"' + s.split('"').join('""') + '"';
 }
 export function resultsCsv(state) {
   const rows = [

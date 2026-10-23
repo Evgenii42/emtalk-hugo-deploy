@@ -12,7 +12,7 @@ function record(value, keys) {
   return own.length === keys.length && own.every(key => {
     const descriptor = Object.getOwnPropertyDescriptor(value, key);
     return typeof key === "string" && keys.includes(key) &&
-      Object.hasOwn(descriptor, "value") && descriptor.enumerable;
+      Object.prototype.hasOwnProperty.call(descriptor, "value") && descriptor.enumerable;
   });
 }
 function list(value, maximum) {
@@ -21,7 +21,7 @@ function list(value, maximum) {
       Reflect.ownKeys(value).length !== value.length + 1) return false;
   for (let index = 0; index < value.length; index++) {
     const descriptor = Object.getOwnPropertyDescriptor(value, String(index));
-    if (!descriptor || !Object.hasOwn(descriptor, "value") || !descriptor.enumerable) return false;
+    if (!descriptor || !Object.prototype.hasOwnProperty.call(descriptor, "value") || !descriptor.enumerable) return false;
   }
   return true;
 }

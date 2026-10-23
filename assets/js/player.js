@@ -1,3 +1,9 @@
+import { createAudioMeasurement } from './analytics-events.js';
+// Lifetime contract: Hugo serves static player markup with full document
+// navigation. Repeated initPlayers() calls enhance the same markup idempotently.
+// The registries below belong to that document, including bfcache restoration.
+// Dynamic DOM removal or page swapping requires an explicit disposal contract
+// before it can be supported; the current site keeps each player's markup intact.
 const players = new Set();
 const actions = new Map();
 const bufferedSources = new WeakMap();
@@ -98,6 +104,7 @@ function initPlayer(root, legacy = false) {
   const progress = root.querySelector(legacy ? '.progress-bar' : '.emtalk-player-ui__progress');
   const fill = root.querySelector(legacy ? '.progress-fill' : '.emtalk-player-ui__progress-fill');
   if (!audio || !button || !icon || !current || !duration || !progress || !fill) return;
+  const measurement = createAudioMeasurement();
   root.dataset.playerReady = 'true';
   root.dataset.playbackState = 'idle';
   button.setAttribute('role', 'button');
@@ -163,10 +170,12 @@ function initPlayer(root, legacy = false) {
     markActive(audio);
     if (starting) { cancelStart?.(); return; }
     if (!audio.paused) {
+      measurement.pauseByUser();
       audio.pause();
       return;
     }
     starting = true;
+    measurement.attempt();
     cancelledStart = false;
     root.dataset.playbackState = 'loading';
     button.setAttribute('aria-busy', 'true');
@@ -180,6 +189,7 @@ function initPlayer(root, legacy = false) {
     cancelStart = () => {
       cancelled = true;
       cancelledStart = true;
+      measurement.cancel();
       download.abort();
       audio.pause();
       rejectLoad(new DOMException('Playback cancelled', 'AbortError'));
@@ -192,10 +202,12 @@ function initPlayer(root, legacy = false) {
     audio.addEventListener('error', onError);
     // Local complete-file playback gets a bounded minute for download/start.
     // Native sources retain their 15-second deadline. Both can be cancelled.
+    let timedOut = false;
     const loadTimeout = setTimeout(() => {
+      timedOut = true;
       download.abort();
       rejectLoad(new Error('Media load timed out'));
-    }, localMediaUrl(audio) && !nativeSources.has(audio) ? 60000 : 15000);
+    }, bufferedSources.has(audio) || (localMediaUrl(audio) && !nativeSources.has(audio)) ? 60000 : 15000);
     try {
       // Retry after a failed load without changing the CMS/local media URL.
       if (audio.error && (!localMediaUrl(audio) || nativeSources.has(audio))) audio.load();
@@ -226,9 +238,10 @@ function initPlayer(root, legacy = false) {
       }) : audio.play();
       // Observe both inputs, including a late losing download or play rejection.
       await Promise.race([play, failed]);
-    } catch {
+    } catch (error) {
       audio.pause();
       root.dataset.playbackState = cancelled ? 'paused' : 'error';
+      if (!cancelled) measurement.error(timedOut ? 'timeout' : error?.name === 'NotAllowedError' ? 'play_rejected' : 'load_failed');
       // A rejected play attempt can fail without a MediaError (for example, playback policy).
       showStatus(cancelled ? '' : 'Audio could not start. Please try again.');
       showIcon(true);
@@ -262,7 +275,9 @@ function initPlayer(root, legacy = false) {
       return;
     }
     markActive(audio);
-    for (const other of players) if (other !== audio && !other.paused) other.pause();
+    // Selecting this player is an explicit pause action for an active sibling.
+    // Reuse its registered action so accepted playback has one matching pause.
+    for (const other of players) if (other !== audio && !other.paused) actions.get(other)?.pause();
     showIcon(false);
     if (starting) setAction('cancel');
     root.dataset.playbackState = 'playing';
@@ -275,14 +290,17 @@ function initPlayer(root, legacy = false) {
     }
     root.dataset.playbackState = 'playing';
     showStatus('');
+    measurement.playing();
   });
   audio.addEventListener('pause', () => {
     if (starting) return;
     showIcon(true);
     if (!audio.error && root.dataset.playbackState !== 'error') root.dataset.playbackState = audio.ended ? 'ended' : 'paused';
     if (root.dataset.playbackState !== 'error') showStatus('');
+    measurement.paused();
   });
   audio.addEventListener('ended', () => {
+    measurement.ended();
     root.dataset.playbackState = 'ended';
     showIcon(true);
     update();
@@ -296,6 +314,7 @@ function initPlayer(root, legacy = false) {
   audio.addEventListener('error', () => {
     // Pending failures settle through toggle; a cancelled attempt is not a load error.
     if (starting || cancelledStart) return;
+    measurement.error('load_failed');
     root.dataset.playbackState = 'error';
     showIcon(true);
     showStatus('Audio could not load. Please try again.');
@@ -324,7 +343,18 @@ function initPlayer(root, legacy = false) {
   audio.controls = false;
   audio.preload = localMediaUrl(audio) ? 'none' : 'metadata';
   players.add(audio);
-  actions.set(audio, { play: () => { if (audio.paused) return toggle(); }, pause: () => starting ? cancelStart?.() : audio.pause() });
+  actions.set(audio, { play: () => { if (audio.paused) return toggle(); }, pause: () => {
+    if (starting) {
+      // Native playing can precede resolution of play(). Preserve a factual
+      // accepted pause before cancelling that still-pending start promise.
+      if (!audio.paused) {
+        measurement.pauseByUser();
+        audio.pause();
+        measurement.paused();
+      }
+      cancelStart?.();
+    } else { measurement.pauseByUser(); audio.pause(); }
+  } });
   showIcon(true);
   update();
 }

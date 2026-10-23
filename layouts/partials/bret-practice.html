@@ -1,5 +1,5 @@
 {{- $entry := (index hugo.Data.render.pages "/bret/practice").ownedEntry -}}
-<main id="emtalk-main" class="bret-practice" tabindex="-1" data-bret-practice data-audio-root="{{ hugo.Data.render.mountPrefix }}/bret/audio/">
+<main data-analytics-surface="tool_exit" id="emtalk-main" class="bret-practice" tabindex="-1" data-bret-practice data-audio-root="{{ hugo.Data.render.mountPrefix }}/bret/audio/">
   <div class="bret-intro"><p class="bret-eyebrow">BRET / FREE WEB PRACTICE</p><h1>{{ $entry.title }}</h1><p>{{ $entry.lead }}</p><a href="{{ hugo.Data.render.mountPrefix }}/bret" {{ partial "native-link-focus.html" . }}>About BRET</a></div>
   <noscript><p class="bret-notice">This timed practice needs JavaScript. BRET offers five breathing rhythms and progressive muscle relaxation. You can read about BRET using the link above.</p></noscript>
   <p data-bret-load-error class="bret-notice" role="status" hidden>The practice could not load. Please reload this page to try again. You can still read about BRET using the link above.</p>
@@ -34,8 +34,8 @@
     <section data-finish hidden aria-labelledby="bret-finish-heading"><h2 id="bret-finish-heading" tabindex="-1">A moment for yourself.</h2><p data-summary></p><button type="button" data-again>Choose another practice</button></section>
     <details class="bret-settings" data-settings><summary>Sound and practice settings</summary><div class="bret-setting-grid">
       <label><input type="checkbox" data-setting="music" checked> Background music</label><label><input type="checkbox" data-setting="voice" checked> Spoken guidance</label><label><input type="checkbox" data-setting="metronome"> Metronome</label><label><input type="checkbox" data-setting="vibration"> Vibration where supported</label><label><input type="checkbox" data-setting="mute"> Mute all sound</label>
-      <label for="bret-sound">Background sound</label><select id="bret-sound" data-sound><option value="pattern">Pattern music</option><option value="rain">Rain</option><option value="sunrise">Sunrise</option><option value="wind">Wind</option></select>
-    </div><p>Settings stay in this browser only. Opening settings pauses an active practice. Continue when ready.</p>{{ partial "keyboard-help.html" . }}<p data-vibration-note></p><button type="button" data-reset>Reset saved settings</button></details>
+      <div class="bret-background-sound"><label for="bret-sound">Background sound</label><select id="bret-sound" data-sound><option value="pattern">Pattern music</option><option value="rain">Rain</option><option value="sunrise">Sunrise</option><option value="wind">Wind</option></select></div>
+    </div><p data-muted-note role="status" hidden>All sound is muted. Your sound choices are kept and will return when you turn mute off. Vibration is controlled separately.</p><p>Settings stay in this browser only. Opening settings pauses an active practice. Continue when ready.</p>{{ partial "keyboard-help.html" . }}<p data-vibration-note></p><button type="button" data-reset>Reset saved settings</button></details>
   </div>
   <script id="bret-practice-data" type="application/json">{{ index hugo.Data "bret-practice" | jsonify | safeJS }}</script>
 </main>

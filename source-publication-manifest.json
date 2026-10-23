@@ -5,19 +5,398 @@
   "baselineDeploymentCommit": "5be1ace3cd6192f33a9102c09d833fa78131c0b1",
   "baselineManifestSha256": "9ba8e0434698a934698fac0a23883a7b3f3c0157cc8bb973f458eb09c8194f4e",
   "canonicalRepository": "https://forgejo.emtalk.org/Emtalk/emtalk_site.git",
-  "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
+  "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
   "cmsQualification": "Accepted staged-derived snapshots; all exported items carry published metadata; liveApiVerified=false and current live field-value parity unverified.",
   "currentSelection": {
-    "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
+    "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
     "files": [
       {
-        "bytes": 4063,
+        "bytes": 8636,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/article-reader.css",
+        "path": "assets/css/article-reader.css",
+        "sha256": "b1ba303ddf2e65053dbadec31a5041af1e963824299ed1a34e39c2e5169a0dad"
+      },
+      {
+        "bytes": 7045,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/bret-practice.css",
+        "path": "assets/css/bret-practice.css",
+        "sha256": "5e8a25721d30fbc6f7dcc004cb58f2332aef474265b2035e5cad943115143cd7"
+      },
+      {
+        "bytes": 12432,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/dm-workspace.css",
+        "path": "assets/css/dm-workspace.css",
+        "sha256": "d462263bf7bd251fc1d35a226b9cccf677f097b956fc725e9f122d67ff059623"
+      },
+      {
+        "bytes": 9049,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/homepage-explore.css",
+        "path": "assets/css/homepage-explore.css",
+        "sha256": "244ea46f7c17d48ed48b9ac2a43242163c8942c8485ba4ed0f23235b4b2ff1ab"
+      },
+      {
+        "bytes": 14574,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/interface.css",
+        "path": "assets/css/interface.css",
+        "sha256": "db4d879ce39620427c15afd6b939cd2522e6947788761ed0e58c1e93bf0a53df"
+      },
+      {
+        "bytes": 2937,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/privacy-controls.css",
+        "path": "assets/css/privacy-controls.css",
+        "sha256": "41af979cf9839c3f3c1831e87a44e0e455fc98d2d9fa3d4783a7f59635b62071"
+      },
+      {
+        "bytes": 23662,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/tests-experience.css",
+        "path": "assets/css/tests-experience.css",
+        "sha256": "851b28dd1a13ab0fb414996a89703e20b0658a7e833cd811cc6834a03396a845"
+      },
+      {
+        "bytes": 9523,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-events.js",
+        "path": "assets/js/analytics-events.js",
+        "sha256": "a0156dcfa94272fc76cefd7059ff4cf297452d81c556034f837f58948a517383"
+      },
+      {
+        "bytes": 3328,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-payload.js",
+        "path": "assets/js/analytics-payload.js",
+        "sha256": "22c880ac1e07d4b686190ec1713344ecea5b39d1b6c5f64ba9b92d8f2dd9f64d"
+      },
+      {
+        "bytes": 1631,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-preferences.js",
+        "path": "assets/js/analytics-preferences.js",
+        "sha256": "dd8efd21e2a938bac33bcc216e6200b01035edf3224a2235cfe0257249a83e5b"
+      },
+      {
+        "bytes": 6116,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-privacy-ui.js",
+        "path": "assets/js/analytics-privacy-ui.js",
+        "sha256": "84cb47761a8beb57d07a0c3d40ac130b5fe9dc28a9f9c5cbfafbbd10f2ffccf7"
+      },
+      {
+        "bytes": 4382,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-transport.js",
+        "path": "assets/js/analytics-transport.js",
+        "sha256": "82cbf48a81f678256ed7f611d5dba43c24806976fe9d40f936d0bfeeab60155c"
+      },
+      {
+        "bytes": 5407,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics.js",
         "path": "assets/js/analytics.js",
-        "sha256": "ba22ab3e46e5124abf3d2018f7fd52fe266fe922bff6064f7c1e1ef7bf36bfb1"
+        "sha256": "9c5de51cd976595f756c7c1e23ec479865e33c57d25338cd68c11c2ef88c05be"
+      },
+      {
+        "bytes": 2877,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/article-catalog.js",
+        "path": "assets/js/article-catalog.js",
+        "sha256": "3293f92d5c8e9784742231f6ecccafeefeb6e03336aadd3543f674f7f2aebf3a"
+      },
+      {
+        "bytes": 1591,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-cues.js",
+        "path": "assets/js/bret-cues.js",
+        "sha256": "c4a2a7eedcd6b26eda11d28ea5490ed36b618f1785fd650e3d5c2fbaedbe5557"
+      },
+      {
+        "bytes": 5945,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-engine.js",
+        "path": "assets/js/bret-engine.js",
+        "sha256": "a32a5769ff37762cfe6031e2237235939e33c982fb123f9ba15af68bcae43df6"
+      },
+      {
+        "bytes": 837,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-feedback.js",
+        "path": "assets/js/bret-feedback.js",
+        "sha256": "4ac5284f1156ad11a118bdf3b95ea7a859ab9db39cfc5501f953403d523a7d66"
+      },
+      {
+        "bytes": 5526,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-media.js",
+        "path": "assets/js/bret-media.js",
+        "sha256": "cf6f859520507226d34cb98423573a4ca768ee5e2966db07a39022610da39b38"
+      },
+      {
+        "bytes": 22227,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-practice.js",
+        "path": "assets/js/bret-practice.js",
+        "sha256": "7bd566aff2f25d90cf2a88359ace7e11ede9273de10b9df162fe2e94bad79810"
+      },
+      {
+        "bytes": 11824,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-model.js",
+        "path": "assets/js/dm-model.js",
+        "sha256": "600a640b1a4cb8edbe564e8d179dfcaa6a7f9f1f70c9e93058c4649ec64725b8"
+      },
+      {
+        "bytes": 3143,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-topics.js",
+        "path": "assets/js/dm-topics.js",
+        "sha256": "19a103aa0bcf72ed6b95463d071da0be0a03d569112593d1217d26fb5a024fb6"
+      },
+      {
+        "bytes": 7475,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-dom.js",
+        "path": "assets/js/dm-workspace-dom.js",
+        "sha256": "33e2cbb0baae6eee2b7c5da357a2390567980bf4b13677977ace40abd28a6a1c"
+      },
+      {
+        "bytes": 1986,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-draft.js",
+        "path": "assets/js/dm-workspace-draft.js",
+        "sha256": "41799c32dbd7a3878638f79399dbc7e80f153c00175314434141ee2cf4b94e2e"
+      },
+      {
+        "bytes": 1948,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-feedback.js",
+        "path": "assets/js/dm-workspace-feedback.js",
+        "sha256": "047f9d476bce1d08fe7f4f4b387187bac3c05d8a40abf02ebd6149e89433009f"
+      },
+      {
+        "bytes": 4330,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-files.js",
+        "path": "assets/js/dm-workspace-files.js",
+        "sha256": "d8a99072a63ba7ce2d0c0ba4842f8b3e130f1976268c6ad366cfc25fb48887fe"
+      },
+      {
+        "bytes": 14604,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-history.js",
+        "path": "assets/js/dm-workspace-history.js",
+        "sha256": "34db88520130bfa5b5cba6a3c12aa3d675bd821bff2cd7d0047fba93d3741f37"
+      },
+      {
+        "bytes": 6845,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-state.js",
+        "path": "assets/js/dm-workspace-state.js",
+        "sha256": "9f3f402149eb0bb81d4b06c3ee7342533c4b30b38c799ce874c673619b3e3f6a"
+      },
+      {
+        "bytes": 23184,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-steps.js",
+        "path": "assets/js/dm-workspace-steps.js",
+        "sha256": "3c5b4997eefc5463c8f20b59a71e331c943d9d475d4fa8aca74ee745f40018c3"
+      },
+      {
+        "bytes": 15693,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace.js",
+        "path": "assets/js/dm-workspace.js",
+        "sha256": "847465570ffd76dbdb12840faf7b9a6ac68b13165ea6aaae004821a9292b53d2"
+      },
+      {
+        "bytes": 19713,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/player.js",
+        "path": "assets/js/player.js",
+        "sha256": "4bf14a96cd26d24c0269ab0be40a6b07dc87dfcee53d17993e079948d9a95e4e"
+      },
+      {
+        "bytes": 2571,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/runtime.js",
+        "path": "assets/js/runtime.js",
+        "sha256": "d711e4d876abffd5b3217c996962400d48000f2f97e84d94ad190dca7bcdec65"
+      },
+      {
+        "bytes": 5518,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/scroll.js",
+        "path": "assets/js/scroll.js",
+        "sha256": "e12af067cc749c1fc2f936dbe5c1e6b056feb4a379564973e8e4b9bade1f28ee"
+      },
+      {
+        "bytes": 3293,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/test-catalog.js",
+        "path": "assets/js/test-catalog.js",
+        "sha256": "c7d67fa0302ad8d484a74267921d468c1b86d2ffc42ee57b8e66815c3e83816e"
+      },
+      {
+        "bytes": 27821,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/tests.js",
+        "path": "assets/js/tests.js",
+        "sha256": "d9da6e9683120ee2c80d7ac689230b86c0e4d6ce8eb49c431516271b8415dd02"
+      },
+      {
+        "bytes": 3468,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/trial-analytics.js",
+        "path": "assets/js/trial-analytics.js",
+        "sha256": "f1e32160e9f837cff5aba5003c83861c6fe5b613ef0790c8ee3825a7663979eb"
+      },
+      {
+        "bytes": 22232,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/analytics-policy.json",
+        "path": "data/analytics-policy.json",
+        "sha256": "69c587f3680c3dfca370cdda71776a457ae8cb2feabe73792cff3d08040cc1d5"
+      },
+      {
+        "bytes": 63564,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/cms/articles.json",
+        "path": "data/cms/articles.json",
+        "sha256": "6dc72c9be42e86b58e0c555414024188e01871f7afd54ac23012b590e8c8ea63"
+      },
+      {
+        "bytes": 199983,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/cms/documents.json",
+        "path": "data/cms/documents.json",
+        "sha256": "d567998882b00ad620a6eb71cc4f79f84bd38dc490edf6ff75ede4d26ea3520e"
+      },
+      {
+        "bytes": 567,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/integrations.json",
+        "path": "data/integrations.json",
+        "sha256": "e9425fa5f53e9477ee0af67270bb3988251395daac74bb9cea7433205ac68587"
+      },
+      {
+        "bytes": 2006,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/404.html",
+        "path": "layouts/404.html",
+        "sha256": "609c46da31811ac79a8cc2653ea3f6ba2a817ed6b0fdd6605c7ea02496da1462"
+      },
+      {
+        "bytes": 315,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/analytics-source-classes.html",
+        "path": "layouts/partials/analytics-source-classes.html",
+        "sha256": "e2685f6d9ee9f4cc13a519cf449f8fb66a283ac759fad0b1ac8c7884eee48066"
+      },
+      {
+        "bytes": 1154,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/analytics.html",
+        "path": "layouts/partials/analytics.html",
+        "sha256": "b48c14c204dca92049e2c51c51ba88a45dc4b6650acdfe3d0616c4de00d67d6b"
+      },
+      {
+        "bytes": 6453,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/article-catalog.html",
+        "path": "layouts/partials/article-catalog.html",
+        "sha256": "24578c61367e7a22895a4820be9b5b4ea49aa17bed19fb6bef12544e55c17209"
+      },
+      {
+        "bytes": 11771,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/article-reader.html",
+        "path": "layouts/partials/article-reader.html",
+        "sha256": "ebc6da0afcc97813128d1966584f758b3906ba7f56b83d004859a42b34498da1"
+      },
+      {
+        "bytes": 3731,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/article-related.html",
+        "path": "layouts/partials/article-related.html",
+        "sha256": "618f1b1781ca36e1bd54ea6ad81eb7d04c9a066ab7640087d84e8acb2fde1565"
+      },
+      {
+        "bytes": 782,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/attributes.html",
+        "path": "layouts/partials/attributes.html",
+        "sha256": "307defb895988f68b05d5db171662e9ff9f280268afe95d4ee56833ac17e31e6"
+      },
+      {
+        "bytes": 7874,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/bret-practice.html",
+        "path": "layouts/partials/bret-practice.html",
+        "sha256": "a12dd24b365088d197ca438b08cf9790fd765cab5bd581e2184d8aad6b15f683"
+      },
+      {
+        "bytes": 659,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/dm-launch.html",
+        "path": "layouts/partials/dm-launch.html",
+        "sha256": "ee4917b98d38d106429188d37f735f6f9c7315ffe01ec51463fc35e27f16f266"
+      },
+      {
+        "bytes": 5395,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/dm-workspace.html",
+        "path": "layouts/partials/dm-workspace.html",
+        "sha256": "7d0ef0d5e1f3becf3bf4efe8834fc21e9ea8d42369bf0d2ad342384cfea4c25e"
+      },
+      {
+        "bytes": 2740,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/homepage-content.html",
+        "path": "layouts/partials/homepage-content.html",
+        "sha256": "f4373d4a9cbb8d4dda114a65e4c77bc2f16f2c535162f8906eba2077e7fa39a9"
+      },
+      {
+        "bytes": 1432,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/homepage-explore-hero.html",
+        "path": "layouts/partials/homepage-explore-hero.html",
+        "sha256": "8c9b6362d7e885e8c1eae5af3b6a8ca5adf369cafe84f2e61751c93d2ee72ebf"
+      },
+      {
+        "bytes": 2159,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/privacy-controls.html",
+        "path": "layouts/partials/privacy-controls.html",
+        "sha256": "33a0af75236559a202932c61ede781c8111968b0fb8c3f1c14b0ed0e0e7ccb05"
+      },
+      {
+        "bytes": 2690,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/site-header.html",
+        "path": "layouts/partials/site-header.html",
+        "sha256": "f9be89e87d0bed671027d93f1a4de706fa37f196d64265edec6863ef1476df3d"
+      },
+      {
+        "bytes": 491,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/store-campaign-url.html",
+        "path": "layouts/partials/store-campaign-url.html",
+        "sha256": "11b4ac72d8842bd87a4fc63b6e5022639ec1e446332324186e60ec5877b7fe1a"
+      },
+      {
+        "bytes": 5183,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/test-catalog.html",
+        "path": "layouts/partials/test-catalog.html",
+        "sha256": "132085f61bd4ff165a4e7aac718e979bf877907e93041a370eaf13607ccb50ab"
+      },
+      {
+        "bytes": 7280,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/test-questionnaire.html",
+        "path": "layouts/partials/test-questionnaire.html",
+        "sha256": "49a176848210117968746c1860dcab27a715dc652356de04899c04c2c74465a1"
+      },
+      {
+        "bytes": 10981,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/source.html",
+        "path": "layouts/source.html",
+        "sha256": "2cd9bdb7f4d8c360f8afd61a4663561388050dc8de8201ca8784a999e3f16e5b"
+      },
+      {
+        "bytes": 6852,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/build_site.py",
+        "path": "scripts/build_site.py",
+        "sha256": "3b5c8921e6d6b9798733dc0605cfee6c6741fffb3943236cd891ca43bd8f75a0"
+      },
+      {
+        "bytes": 46326,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/prepare_hugo.py",
+        "path": "scripts/prepare_hugo.py",
+        "sha256": "350aa6c0dc6e7c0c4fba16bd7f504b52b1800dc583a2939954084c1509513e73"
+      },
+      {
+        "bytes": 2892,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/prepare_public_content.py",
+        "path": "scripts/prepare_public_content.py",
+        "sha256": "718be06c9a772f7981126276d658453c24b41c4a61e5d465cc7e096ee8585bf6"
+      },
+      {
+        "bytes": 37448,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/verify_build.py",
+        "path": "scripts/verify_build.py",
+        "sha256": "61ce03eb3108062ba74e1817f7c981ede25c8d7d61696f9df9ddf1543263cb8b"
+      },
+      {
+        "bytes": 946,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/static/font-licenses/dm-roboto/NOTICE.txt",
+        "path": "static/font-licenses/dm-roboto/NOTICE.txt",
+        "sha256": "a8cc36235603c7e911e6f16366c8ceaaa0561f37f73160fb49b7075b4d880e73"
+      },
+      {
+        "bytes": 64636,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/static/fonts/dm/roboto_medium.woff2",
+        "path": "static/fonts/dm/roboto_medium.woff2",
+        "sha256": "f150ce483e096530087b05528bcbe852a3f7d9253458f0165348182fdca8f2de"
+      },
+      {
+        "bytes": 63536,
+        "canonicalPath": "docs/production-overrides/analytics031-r8-final/static/fonts/dm/roboto_regular.woff2",
+        "path": "static/fonts/dm/roboto_regular.woff2",
+        "sha256": "eab3a43cb4c9bfe24c157a01fb91ae80fee90e64b5e08b01e8f0a4bace7f8558"
       }
     ],
-    "path": "docs/audits/home-sdk029-selected-inputs.json",
-    "sha256": "1fe77ec4527090ca4cce7d104580af64e2a24d8ac270fa338cff5646e4ae1504"
+    "path": "docs/audits/analytics031/selection012.json",
+    "sha256": "ec961f182e2a4dbfdcd8420d4c57ef7502c2d112800b0cad523e0ecbb6a97776"
   },
   "deploymentFiles": [
     {
@@ -31,9 +410,9 @@
       "sha256": "f7fdc18d4ddcf366fa11fb4614b316c77d57b821dc1ea0915a99f1a30015f4c6"
     },
     {
-      "bytes": 1544,
+      "bytes": 1043,
       "path": "README.md",
-      "sha256": "5cd6f08bdef7b27964d84c1261ed58f8c468ccc1f1363d8a2694310742d1f1d5"
+      "sha256": "3d268b7df7091033f1bedadf7a9e69366426c6d3eb19de99f6ab51f691e6ca4e"
     },
     {
       "bytes": 4238,
@@ -41,8 +420,8 @@
       "sha256": "91178f149febf5cb85d3bb4c27656475fd043bff503bb38ad8df94548400e5c2"
     }
   ],
-  "effectiveSourceFileCount": 412,
-  "effectiveSourceMapSha256": "947e59c85bde001b8f9175d6166ca6f6cbecc586f845c49973a37ae01c5ed5e1",
+  "effectiveSourceFileCount": 436,
+  "effectiveSourceMapSha256": "328e683b68ff97e1d32ac82f40383ca177d1b397942761eb2246fbb60148d318",
   "excluded": [
     "Forgejo Git history",
     "source archives",
@@ -51,32 +430,33 @@
     "visitor submissions",
     "unpublished CMS items"
   ],
-  "exportFileCountIncludingManifest": 417,
+  "exportFileCountIncludingManifest": 441,
   "generatedDeploymentReadme": {
-    "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
-    "generator": "docs/audits/home-sdk029-export.py",
-    "generatorSha256": "41bd3f4d4494adf96f5791ceeba2a770300c2c62e536abe16039100e8dfe3404"
+    "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+    "generator": "docs/audits/analytics031/export011.py",
+    "generatorSha256": "7929c2df4ae1439924b4106d81f704462a8095be7f9bb0bc52103455f70e4477"
   },
   "platformQualification": "Generated text may use different line endings on Linux and Windows; compare actual deployment bytes separately.",
-  "previousPublicationCommit": "97d38305c90a208a1bb8497d8563a1170d9b412a",
-  "previousPublicationManifestSha256": "3a635099684547c6234df54a7ff716fc98593e48b6ae3d6e4833a5de0972a3be",
+  "previousPublicationCommit": "67acb42704c1a6df2e9f9e002d4f207e71cfb9f9",
+  "previousPublicationManifestSha256": "13ec7eec19a011181307cf20f42a3624c2c95e3193e301dce9166dd061168f76",
   "reviewedLocalBuild": {
     "baseURL": "https://www.emtalk.org/",
-    "outputSnapshotSha256": "666cd5f00f566adad18217a7c83d94192d20e1780fcb44a9afe89f471a83bb45",
-    "outputsIncludingControl": 320,
-    "preparedHugoInputs": 412,
+    "cleanExportActualRebuildRequiredBeforePublication": true,
+    "outputSnapshotSha256": "13429d876271bed8c177210859e0189263b1d11da8521377df1809e9d87ad6fa",
+    "outputsIncludingControl": 323,
+    "preparedHugoInputs": 436,
     "preview": false,
     "providerControlPaths": [
       "_headers"
     ],
-    "publicArtifacts": 319,
-    "qualification": "Local LF prediction on Windows; actual Linux/host checks separate.",
-    "receiptPath": "docs/audits/home-sdk029-local-build.json",
-    "receiptSha256": "3a13a3d5c5cdd6617b774f09ed43e69ec4948025d3761688ac4e60436f6e6d04",
-    "sourceInputSnapshotSha256": "3eb0467d46b8b9d7eae254b95dc80d07b41c22a281f99521e3f77a28c7f19ac7"
+    "publicArtifacts": 322,
+    "qualification": "Existing isolated candidate and prepared/output bytes bound. Generated raw files intentionally retained from029. No prediction or clean-export build is claimed.",
+    "receiptPath": "docs/audits/analytics031/build015-r8-final.json",
+    "receiptSha256": "364b9f28b9b6daa959e91426dc1eb6e7199ee83002c3f85069e8eb7b9324f39c",
+    "sourceInputSnapshotSha256": "5745eb7b709f2aa05df12204ebd2b0bca127f4cf3a158755ca5be0581554d805"
   },
   "schemaVersion": 2,
-  "scope": "Original394immutablebaseline and published028 retained. Oneanalytics bootstrap change queues samecommands immediately, defersonlyHomeSDKinjection untilcriticalreveal andtwoframes; otherpagesimmediate. No026/consentWIP/provideroptionschange.",
+  "scope": "Original394 immutable baseline and published029 retained with finite committed analytics031 archive mappings. No Bing030. Actual clean-export rebuild remains mandatory.",
   "sourceAdditions": [
     {
       "bytes": 1749,
@@ -85,10 +465,123 @@
       "sha256": "bb7bf5dcca0d602f45ed939d95a14b6965c6805cf690e1c8e84dbdba32040309"
     },
     {
-      "bytes": 3097,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 2937,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/privacy-controls.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/css/privacy-controls.css",
+      "sha256": "41af979cf9839c3f3c1831e87a44e0e455fc98d2d9fa3d4783a7f59635b62071"
+    },
+    {
+      "bytes": 9523,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-events.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/analytics-events.js",
+      "sha256": "a0156dcfa94272fc76cefd7059ff4cf297452d81c556034f837f58948a517383"
+    },
+    {
+      "bytes": 3328,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-payload.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/analytics-payload.js",
+      "sha256": "22c880ac1e07d4b686190ec1713344ecea5b39d1b6c5f64ba9b92d8f2dd9f64d"
+    },
+    {
+      "bytes": 1631,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-preferences.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/analytics-preferences.js",
+      "sha256": "dd8efd21e2a938bac33bcc216e6200b01035edf3224a2235cfe0257249a83e5b"
+    },
+    {
+      "bytes": 6116,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-privacy-ui.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/analytics-privacy-ui.js",
+      "sha256": "84cb47761a8beb57d07a0c3d40ac130b5fe9dc28a9f9c5cbfafbbd10f2ffccf7"
+    },
+    {
+      "bytes": 4382,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics-transport.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/analytics-transport.js",
+      "sha256": "82cbf48a81f678256ed7f611d5dba43c24806976fe9d40f936d0bfeeab60155c"
+    },
+    {
+      "bytes": 1591,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-cues.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/bret-cues.js",
+      "sha256": "c4a2a7eedcd6b26eda11d28ea5490ed36b618f1785fd650e3d5c2fbaedbe5557"
+    },
+    {
+      "bytes": 837,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-feedback.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/bret-feedback.js",
+      "sha256": "4ac5284f1156ad11a118bdf3b95ea7a859ab9db39cfc5501f953403d523a7d66"
+    },
+    {
+      "bytes": 5526,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-media.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/bret-media.js",
+      "sha256": "cf6f859520507226d34cb98423573a4ca768ee5e2966db07a39022610da39b38"
+    },
+    {
+      "bytes": 3143,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-topics.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "assets/js/dm-topics.js",
-      "sha256": "eccd78fc1f475389f2e192202d4a89616cd09cd806146e0a5b1ff840dd8b4004"
+      "sha256": "19a103aa0bcf72ed6b95463d071da0be0a03d569112593d1217d26fb5a024fb6"
+    },
+    {
+      "bytes": 7475,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-dom.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-dom.js",
+      "sha256": "33e2cbb0baae6eee2b7c5da357a2390567980bf4b13677977ace40abd28a6a1c"
+    },
+    {
+      "bytes": 1986,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-draft.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-draft.js",
+      "sha256": "41799c32dbd7a3878638f79399dbc7e80f153c00175314434141ee2cf4b94e2e"
+    },
+    {
+      "bytes": 1948,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-feedback.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-feedback.js",
+      "sha256": "047f9d476bce1d08fe7f4f4b387187bac3c05d8a40abf02ebd6149e89433009f"
+    },
+    {
+      "bytes": 4330,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-files.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-files.js",
+      "sha256": "d8a99072a63ba7ce2d0c0ba4842f8b3e130f1976268c6ad366cfc25fb48887fe"
+    },
+    {
+      "bytes": 14604,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-history.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-history.js",
+      "sha256": "34db88520130bfa5b5cba6a3c12aa3d675bd821bff2cd7d0047fba93d3741f37"
+    },
+    {
+      "bytes": 6845,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-state.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-state.js",
+      "sha256": "9f3f402149eb0bb81d4b06c3ee7342533c4b30b38c799ce874c673619b3e3f6a"
+    },
+    {
+      "bytes": 23184,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace-steps.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/dm-workspace-steps.js",
+      "sha256": "3c5b4997eefc5463c8f20b59a71e331c943d9d475d4fa8aca74ee745f40018c3"
     },
     {
       "bytes": 3813,
@@ -103,10 +596,31 @@
       "sha256": "5876ebf8e16bd19e8e33098a0b5ebd37e3db1e5822e8e7e63af8bbf8a044183f"
     },
     {
+      "bytes": 3468,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/trial-analytics.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/trial-analytics.js",
+      "sha256": "f1e32160e9f837cff5aba5003c83861c6fe5b613ef0790c8ee3825a7663979eb"
+    },
+    {
+      "bytes": 22232,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/analytics-policy.json",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "data/analytics-policy.json",
+      "sha256": "69c587f3680c3dfca370cdda71776a457ae8cb2feabe73792cff3d08040cc1d5"
+    },
+    {
       "bytes": 36867,
       "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
       "path": "data/dm-topics.json",
       "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
+    },
+    {
+      "bytes": 315,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/analytics-source-classes.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/analytics-source-classes.html",
+      "sha256": "e2685f6d9ee9f4cc13a519cf449f8fb66a283ac759fad0b1ac8c7884eee48066"
     },
     {
       "bytes": 3498,
@@ -133,6 +647,27 @@
       "sha256": "e7304ab388c6aa11e8e813ff2c6f7e40a293e4b60fc739099a132639a7c05625"
     },
     {
+      "bytes": 2159,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/privacy-controls.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/privacy-controls.html",
+      "sha256": "33a0af75236559a202932c61ede781c8111968b0fb8c3f1c14b0ed0e0e7ccb05"
+    },
+    {
+      "bytes": 491,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/store-campaign-url.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/store-campaign-url.html",
+      "sha256": "11b4ac72d8842bd87a4fc63b6e5022639ec1e446332324186e60ec5877b7fe1a"
+    },
+    {
+      "bytes": 2892,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/prepare_public_content.py",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "scripts/prepare_public_content.py",
+      "sha256": "718be06c9a772f7981126276d658453c24b41c4a61e5d465cc7e096ee8585bf6"
+    },
+    {
       "bytes": 136,
       "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
       "path": "static/_headers",
@@ -145,10 +680,11 @@
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
     },
     {
-      "bytes": 755,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 946,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/static/font-licenses/dm-roboto/NOTICE.txt",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "static/font-licenses/dm-roboto/NOTICE.txt",
-      "sha256": "5d2c9af7523345f24d57229283e757dc2b12e5e5bc9091177b5072d5718e8ebd"
+      "sha256": "a8cc36235603c7e911e6f16366c8ceaaa0561f37f73160fb49b7075b4d880e73"
     },
     {
       "bytes": 168644,
@@ -157,10 +693,24 @@
       "sha256": "9d0d55a303bfd13b79a87721f65185e93f235e2d77fe398b2dca67ac519915f5"
     },
     {
+      "bytes": 64636,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/static/fonts/dm/roboto_medium.woff2",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "static/fonts/dm/roboto_medium.woff2",
+      "sha256": "f150ce483e096530087b05528bcbe852a3f7d9253458f0165348182fdca8f2de"
+    },
+    {
       "bytes": 168260,
       "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
       "path": "static/fonts/dm/roboto_regular.ttf",
       "sha256": "4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14"
+    },
+    {
+      "bytes": 63536,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/static/fonts/dm/roboto_regular.woff2",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "static/fonts/dm/roboto_regular.woff2",
+      "sha256": "eab3a43cb4c9bfe24c157a01fb91ae80fee90e64b5e08b01e8f0a4bace7f8558"
     },
     {
       "bytes": 119228,
@@ -2161,11 +2711,44 @@
   ],
   "sourceOverrides": [
     {
+      "baselineSha256": "b005b487262360302bd466a72897f58b6993e63e73f03951176a988a169a0779",
+      "bytes": 8636,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/article-reader.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/css/article-reader.css",
+      "sha256": "b1ba303ddf2e65053dbadec31a5041af1e963824299ed1a34e39c2e5169a0dad"
+    },
+    {
+      "baselineSha256": "b01ec0595d0e400ea2b43ac52945e934395c7a95bd008d79c32418e8075e13f6",
+      "bytes": 7045,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/bret-practice.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/css/bret-practice.css",
+      "sha256": "5e8a25721d30fbc6f7dcc004cb58f2332aef474265b2035e5cad943115143cd7"
+    },
+    {
       "baselineSha256": "9b7345de72c5047a647b787152fb21ceda775b0c630554fa6d8c219dad3a3d9a",
-      "bytes": 11796,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 12432,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/dm-workspace.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "assets/css/dm-workspace.css",
-      "sha256": "76bfa03ad2a5932b26f2eb1306dca7d4aefe5fe1021cc501de557e9de032b185"
+      "sha256": "d462263bf7bd251fc1d35a226b9cccf677f097b956fc725e9f122d67ff059623"
+    },
+    {
+      "baselineSha256": "ed6d4ace3ec4de593734178ed0ea89eed0b26a4369eb14af2277983780fa5115",
+      "bytes": 9049,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/homepage-explore.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/css/homepage-explore.css",
+      "sha256": "244ea46f7c17d48ed48b9ac2a43242163c8942c8485ba4ed0f23235b4b2ff1ab"
+    },
+    {
+      "baselineSha256": "01eb71f02b097301bee17dced3083707257ca3f22b7b39080e0aa8d4a30d3932",
+      "bytes": 14574,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/interface.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/css/interface.css",
+      "sha256": "db4d879ce39620427c15afd6b939cd2522e6947788761ed0e58c1e93bf0a53df"
     },
     {
       "baselineSha256": "3bc7001fcb25b1ac1ea7db455cd5f0e73c533eed2154026cd722bfd1aeef2d7b",
@@ -2175,18 +2758,52 @@
       "sha256": "06919f3082509ba470ea6eb9360f60cf48ccd1f00f065109872d62762d043478"
     },
     {
+      "baselineSha256": "9a5e5110d15277cf06e6384563be39bd83b6d586664753016b2028832ce349a5",
+      "bytes": 23662,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/css/tests-experience.css",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/css/tests-experience.css",
+      "sha256": "851b28dd1a13ab0fb414996a89703e20b0658a7e833cd811cc6834a03396a845"
+    },
+    {
       "baselineSha256": "38939c43815adf74287ef4bf412c0568d00c4c73199b2230dc4c3d8c11a8b956",
-      "bytes": 4063,
-      "canonicalSourceCommit": "d118b0bab4fef12c4c3897855b06cc32e6ecc2d0",
+      "bytes": 5407,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/analytics.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "assets/js/analytics.js",
-      "sha256": "ba22ab3e46e5124abf3d2018f7fd52fe266fe922bff6064f7c1e1ef7bf36bfb1"
+      "sha256": "9c5de51cd976595f756c7c1e23ec479865e33c57d25338cd68c11c2ef88c05be"
+    },
+    {
+      "baselineSha256": "b0b77dbed23602c5128032c7dffdd24ad3782d6e21a21b7592ef3769af17c680",
+      "bytes": 2877,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/article-catalog.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/article-catalog.js",
+      "sha256": "3293f92d5c8e9784742231f6ecccafeefeb6e03336aadd3543f674f7f2aebf3a"
+    },
+    {
+      "baselineSha256": "e8c67c68da0f0f6eb3a0acc0e53cda4634455a980e89c4e3cd30c0aa6aa3dd3b",
+      "bytes": 5945,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-engine.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/bret-engine.js",
+      "sha256": "a32a5769ff37762cfe6031e2237235939e33c982fb123f9ba15af68bcae43df6"
+    },
+    {
+      "baselineSha256": "2606219e128494b7df87a7326e0cd694c7cd0a7b6330f63b181f5a42a304649d",
+      "bytes": 22227,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/bret-practice.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/bret-practice.js",
+      "sha256": "7bd566aff2f25d90cf2a88359ace7e11ede9273de10b9df162fe2e94bad79810"
     },
     {
       "baselineSha256": "eefd5d3caccedbcd62187a767825371dc6064983805880667a3925d664c6f39c",
-      "bytes": 11801,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 11824,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-model.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "assets/js/dm-model.js",
-      "sha256": "3bf6bdb53d1a0cf92dd020258810694d529a7b5a407f8e6a07794944dc25c8a1"
+      "sha256": "600a640b1a4cb8edbe564e8d179dfcaa6a7f9f1f70c9e93058c4649ec64725b8"
     },
     {
       "baselineSha256": "e1a66d365b1a388ebfeea6193cbdf1fadb3d981c0694b16427e5f89f6b0eb7ad",
@@ -2197,73 +2814,219 @@
     },
     {
       "baselineSha256": "d6b032757818b6b84c16a30ac3eccab7baf266587c0cbad76fb21d3f2d6e52d4",
-      "bytes": 51178,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 15693,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/dm-workspace.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "assets/js/dm-workspace.js",
-      "sha256": "d33a23458f38bb67090e376859bb2cc19a5b0ac4092ceb5cdfc48aaf6b6a33b1"
+      "sha256": "847465570ffd76dbdb12840faf7b9a6ac68b13165ea6aaae004821a9292b53d2"
     },
     {
       "baselineSha256": "7034343974aa8684aec32c5e4aa5215d43ed31eb0aa9672ea1208929719ccf0f",
-      "bytes": 18264,
-      "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
+      "bytes": 19713,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/player.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "assets/js/player.js",
-      "sha256": "8fa9a4c5885538b724a38bd0c5bd7e004862f97d1b4c75ca3d0afe1f90a4091f"
+      "sha256": "4bf14a96cd26d24c0269ab0be40a6b07dc87dfcee53d17993e079948d9a95e4e"
+    },
+    {
+      "baselineSha256": "adc3b84a48fc43ae391c0f789302d0b23d0d327385323f9c8d5d23f3fd981fbe",
+      "bytes": 2571,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/runtime.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/runtime.js",
+      "sha256": "d711e4d876abffd5b3217c996962400d48000f2f97e84d94ad190dca7bcdec65"
+    },
+    {
+      "baselineSha256": "513cc8261a7d6588b3c1c37cc779e710663738367d374ba3ccff8cf53b6c4b64",
+      "bytes": 5518,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/scroll.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/scroll.js",
+      "sha256": "e12af067cc749c1fc2f936dbe5c1e6b056feb4a379564973e8e4b9bade1f28ee"
+    },
+    {
+      "baselineSha256": "349f240c73473f5a81dc027d69201734cd51c1a1151f9fe760688cfdb70664ce",
+      "bytes": 3293,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/test-catalog.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/test-catalog.js",
+      "sha256": "c7d67fa0302ad8d484a74267921d468c1b86d2ffc42ee57b8e66815c3e83816e"
+    },
+    {
+      "baselineSha256": "d3aec8d608884dceaedfe296b4169a9c708169a7626fbc452049c24ce07ab76a",
+      "bytes": 27821,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/assets/js/tests.js",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "assets/js/tests.js",
+      "sha256": "d9da6e9683120ee2c80d7ac689230b86c0e4d6ce8eb49c431516271b8415dd02"
+    },
+    {
+      "baselineSha256": "ef50bcfc4082327475223dda6e866f955369d333aec4e143182d03790face344",
+      "bytes": 63564,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/cms/articles.json",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "data/cms/articles.json",
+      "sha256": "6dc72c9be42e86b58e0c555414024188e01871f7afd54ac23012b590e8c8ea63"
+    },
+    {
+      "baselineSha256": "956e2d49272ca5095b26960172611ac53045efc6ce55e31ae44e88f652c213b8",
+      "bytes": 199983,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/cms/documents.json",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "data/cms/documents.json",
+      "sha256": "d567998882b00ad620a6eb71cc4f79f84bd38dc490edf6ff75ede4d26ea3520e"
+    },
+    {
+      "baselineSha256": "1a9b5a53ed2b5a54d5969a438712537b3e36c20b6e4c7402c45a0aeb7d0cbf59",
+      "bytes": 567,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/data/integrations.json",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "data/integrations.json",
+      "sha256": "e9425fa5f53e9477ee0af67270bb3988251395daac74bb9cea7433205ac68587"
     },
     {
       "baselineSha256": "9bbeb996bd5627b2c4f6d6d5549c5dd21c8f4b5c0af15b8b8a97269bdfc3a089",
-      "bytes": 1987,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 2006,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/404.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "layouts/404.html",
-      "sha256": "108a97e11a59928c5dc11e8d22bc0309c8cfe8cfffa15c518793392e8386bac3"
+      "sha256": "609c46da31811ac79a8cc2653ea3f6ba2a817ed6b0fdd6605c7ea02496da1462"
     },
     {
       "baselineSha256": "03daaae433a804c42ac17f7bb2855f1bebd8fcbfd1d1f1fa951f710ddfcc6a69",
-      "bytes": 1712,
-      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "bytes": 1154,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/analytics.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "layouts/partials/analytics.html",
-      "sha256": "6ae6cd11f47d3517404bb4dd900705b7ff66fb1f61c936358d3e6ad039156618"
+      "sha256": "b48c14c204dca92049e2c51c51ba88a45dc4b6650acdfe3d0616c4de00d67d6b"
+    },
+    {
+      "baselineSha256": "6011388017934dfd9e68b7fe26233faeeaf1977cedc5aaf010e2acfcdd8c75ab",
+      "bytes": 6453,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/article-catalog.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/article-catalog.html",
+      "sha256": "24578c61367e7a22895a4820be9b5b4ea49aa17bed19fb6bef12544e55c17209"
     },
     {
       "baselineSha256": "35d6185c5ff29b15b60d19560a1c2052c9a7301628ea2d16ca7c636da701d7a6",
-      "bytes": 11375,
-      "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
+      "bytes": 11771,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/article-reader.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "layouts/partials/article-reader.html",
-      "sha256": "8ac65841163c1d857996edab64bed48e2aceb256ee992cb6bc06bcf03a79ef33"
+      "sha256": "ebc6da0afcc97813128d1966584f758b3906ba7f56b83d004859a42b34498da1"
+    },
+    {
+      "baselineSha256": "3059b1d605acd31520584d031c6395b181a894cf7cc7f5930dca68de4cee91d4",
+      "bytes": 3731,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/article-related.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/article-related.html",
+      "sha256": "618f1b1781ca36e1bd54ea6ad81eb7d04c9a066ab7640087d84e8acb2fde1565"
+    },
+    {
+      "baselineSha256": "5dcded19be4e91c764d40b8b6a4cf85f2c3103a17112b18755c44eaf7753b543",
+      "bytes": 782,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/attributes.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/attributes.html",
+      "sha256": "307defb895988f68b05d5db171662e9ff9f280268afe95d4ee56833ac17e31e6"
+    },
+    {
+      "baselineSha256": "ce3ca65399e7f6dc202ef74f9174bae76391f6d1a81058b418231ac6eab33424",
+      "bytes": 7874,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/bret-practice.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/bret-practice.html",
+      "sha256": "a12dd24b365088d197ca438b08cf9790fd765cab5bd581e2184d8aad6b15f683"
     },
     {
       "baselineSha256": "68447e140c6e33267218281259a8742c131da30dd7355f7b439652a8dff08b07",
-      "bytes": 617,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 659,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/dm-launch.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "layouts/partials/dm-launch.html",
-      "sha256": "b7daa7bde02a26cb58405dada7f5112acef7887c6b49cc063da88fe224721767"
+      "sha256": "ee4917b98d38d106429188d37f735f6f9c7315ffe01ec51463fc35e27f16f266"
     },
     {
       "baselineSha256": "7d50724152fcc4610274e2cf00f9ca3bcf89d0f6ea453c91fe7b175a679df5d9",
-      "bytes": 4870,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 5395,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/dm-workspace.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "layouts/partials/dm-workspace.html",
-      "sha256": "bb9268ef637e94f607734c562bc613fee79351bff6681a1532ee0f82e5aa73e0"
+      "sha256": "7d0ef0d5e1f3becf3bf4efe8834fc21e9ea8d42369bf0d2ad342384cfea4c25e"
+    },
+    {
+      "baselineSha256": "42ab23ba6735f47274bfeb09dc7c8400a3532a342d37c25297e3b3c09df4655b",
+      "bytes": 2740,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/homepage-content.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/homepage-content.html",
+      "sha256": "f4373d4a9cbb8d4dda114a65e4c77bc2f16f2c535162f8906eba2077e7fa39a9"
+    },
+    {
+      "baselineSha256": "a4cbb5f83af0ddcd8a0dbc3d656d0b8ad0231996c1f0bb27ade992eda632c2d2",
+      "bytes": 1432,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/homepage-explore-hero.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/homepage-explore-hero.html",
+      "sha256": "8c9b6362d7e885e8c1eae5af3b6a8ca5adf369cafe84f2e61751c93d2ee72ebf"
+    },
+    {
+      "baselineSha256": "0eb475397358f10522c73a81d4ca4345a6225ece98f88aff60587ad4d9d2afe6",
+      "bytes": 2690,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/site-header.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/site-header.html",
+      "sha256": "f9be89e87d0bed671027d93f1a4de706fa37f196d64265edec6863ef1476df3d"
+    },
+    {
+      "baselineSha256": "1cdc9b4c7ad33f08e45dda581c791c41ab180cb8b23fa65decf75bd453b3f053",
+      "bytes": 5183,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/test-catalog.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/test-catalog.html",
+      "sha256": "132085f61bd4ff165a4e7aac718e979bf877907e93041a370eaf13607ccb50ab"
+    },
+    {
+      "baselineSha256": "ac0c7e532ce13dda2cb162f32bd8b2da26520065088ab0eaf36a303373e51656",
+      "bytes": 7280,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/partials/test-questionnaire.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "layouts/partials/test-questionnaire.html",
+      "sha256": "49a176848210117968746c1860dcab27a715dc652356de04899c04c2c74465a1"
     },
     {
       "baselineSha256": "f8e54c17991598cbe35c0dddfc8325436f7042164668eb3f77bd286428dd1ce5",
-      "bytes": 10533,
-      "canonicalSourceCommit": "091b7030bf776e4e9d51b3e2e4b17c1bed81ffad",
+      "bytes": 10981,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/layouts/source.html",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "layouts/source.html",
-      "sha256": "3ec0f9a98f4c9f5141e13c91702ac1e4e31bd27df1424a57848b618721733b2f"
+      "sha256": "2cd9bdb7f4d8c360f8afd61a4663561388050dc8de8201ca8784a999e3f16e5b"
+    },
+    {
+      "baselineSha256": "65b4af83d681e0b60ef05c0ba28dc5da44d0a6ac27d0fc32b15aeabe1dd64e74",
+      "bytes": 6852,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/build_site.py",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
+      "path": "scripts/build_site.py",
+      "sha256": "3b5c8921e6d6b9798733dc0605cfee6c6741fffb3943236cd891ca43bd8f75a0"
     },
     {
       "baselineSha256": "229051a6025e506cfa0374795cf8eb5dbec0e81715fed10764c081886d816d38",
-      "bytes": 45799,
-      "canonicalSourceCommit": "6b37cda9ec04aa151572ffa7589b7c549ca66e17",
+      "bytes": 46326,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/prepare_hugo.py",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "scripts/prepare_hugo.py",
-      "sha256": "d7e4f8aacd93e7c1b4624bf19632cfdafb014cc6ad903104fdddb556e083998f"
+      "sha256": "350aa6c0dc6e7c0c4fba16bd7f504b52b1800dc583a2939954084c1509513e73"
     },
     {
       "baselineSha256": "6b1deb0ca385d465e6faa66c6b005099231db38e6bf5797c171cd1d1f4d2194e",
-      "bytes": 27102,
-      "canonicalSourceCommit": "889dbd69ae65b28fddfb32c685166c97f3393c06",
+      "bytes": 37448,
+      "canonicalPath": "docs/production-overrides/analytics031-r8-final/scripts/verify_build.py",
+      "canonicalSourceCommit": "7a88543153700fa6ee526091f9999e3a33b02d1c",
       "path": "scripts/verify_build.py",
-      "sha256": "2685771cd6081ce774f36fdec553dc9e7d621977edcb7bd06961c78238a9e850"
+      "sha256": "61ce03eb3108062ba74e1817f7c981ede25c8d7d61696f9df9ddf1543263cb8b"
     }
   ]
 }

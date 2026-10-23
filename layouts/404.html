@@ -9,6 +9,7 @@
     <meta content="The page you are looking for doesn&#x27;t exist or has been moved." name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     {{ partial "page-loader-head.html" . }}
+    {{ partial "analytics.html" . }}
 
     {{ $style := resources.Get "css/404.css" | fingerprint "sha256" }}
     <link href="{{ $style.RelPermalink }}" rel="stylesheet" type="text/css" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
@@ -19,20 +20,22 @@
 
 <body>
 {{ partial "page-loader.html" . }}
+
 {{ partial "site-header.html" (dict "route" "/404" "skipTarget" (dict "id" "emtalk-main" "href" "#emtalk-main")) }}
 <div class="utility-wrapper">
     <div class="utility-container">
         <div class="text-mono">404</div>
         <div class="utility-content">
-            <h1 id="emtalk-main" tabindex="-1">Page not found<br></h1>
+            <h1 id="emtalk-main" tabindex="-1">Page not found</h1>
             <p>The page you are looking for doesn&#x27;t exist or has been moved.</p>
         </div>
         <div></div>
     </div>
 </div>
-{{/* This utility page intentionally uses native fragment focus plus CSS scroll-padding for Skip. The retained trailing break preserves source geometry. */}}
+{{/* This utility page intentionally uses native fragment focus plus CSS scroll-padding for Skip. */}}
 {{ $navJs := resources.Get "js/site-navigation.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $navJs.RelPermalink }}" integrity="{{ $navJs.Data.Integrity }}"></script>
 {{ partial "page-loader-ready.html" . }}
+{{ partial "privacy-controls.html" . }}
 </body>
 
 </html>

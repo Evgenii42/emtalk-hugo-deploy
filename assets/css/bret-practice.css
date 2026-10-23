@@ -342,3 +342,6 @@
 .bret-body-guide[data-muscle="15"] .bret-body-base {
   fill: #d2b7e2;
 }
+
+.bret-background-sound { grid-column: 1 / -1; }
+.bret-background-sound select { width: 100%; }

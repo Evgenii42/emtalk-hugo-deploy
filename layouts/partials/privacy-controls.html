@@ -1,0 +1,21 @@
+<div class="privacy-controls-shell">
+  <p class="privacy-controls__announcement" data-privacy-announcement role="status" aria-live="polite" aria-atomic="true"></p>
+  <p data-privacy-unavailable hidden>Privacy controls are unavailable. Optional analytics remains off.</p>
+  <button type="button" class="privacy-controls__opener" data-privacy-open aria-controls="privacy-choices" aria-expanded="false">Privacy choices</button>
+  <section id="privacy-choices" class="privacy-controls" data-privacy-controls aria-labelledby="privacy-choices-heading" hidden>
+    <h2 id="privacy-choices-heading" data-privacy-heading tabindex="-1">Your privacy choices</h2>
+    <p>Optional Google Analytics cookies help us improve visits, reading and web tools. Every feature works if you reject them. <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy policy</a>.</p>
+    <p data-privacy-status role="status" aria-live="polite" aria-atomic="true">Optional analytics is off.</p>
+    <div class="privacy-controls__actions">
+      <button type="button" data-privacy-reject>Reject analytics</button>
+      <button type="button" data-privacy-allow>Allow analytics</button>
+      <button type="button" data-privacy-close>Close choices</button>
+    </div>
+    <details class="privacy-controls__details">
+      <summary>What is measured and how to change your choice</summary>
+      <p>We measure visits, navigation, reading, audio use, test workflows, web tool use and app store link clicks. We send coarse categories, not answers or scores, decision text, article topics or exact assessment and document addresses. Google receives connection information when analytics is allowed. Google advertising cookies and advertising signals stay off.</p>
+      <p>Your choice is stored separately for 180 days. Change it here at any time. Withdrawal stops future analytics on this page and attempts to remove known Analytics cookies. It cannot erase information already sent to Google or change your local drafts and saved decisions.</p>
+    </details>
+  </section>
+  <noscript><p>Optional analytics is off because JavaScript is disabled.</p></noscript>
+</div>

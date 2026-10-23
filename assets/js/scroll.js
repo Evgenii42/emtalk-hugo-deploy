@@ -10,9 +10,22 @@ export function initScroll() {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let frame;
   let scrolling = false;
-  const cancel = () => { cancelAnimationFrame(frame); scrolling = false; };
+  let pendingNavigation = null;
+  const cancel = () => {
+    cancelAnimationFrame(frame);
+    scrolling = false;
+    const pending = pendingNavigation;
+    pendingNavigation = null;
+    // Restore only our still-pending URL. A user hash/history change wins.
+    // replaceState avoids a forced traversal, scroll jump or focus takeover;
+    // cancellation can leave one duplicate same-URL entry in native history.
+    if (pending && location.href === pending.url) history.replaceState(pending.state, '', pending.before);
+  };
   document.addEventListener('wheel', cancel, { passive: true });
   document.addEventListener('touchstart', cancel, { passive: true });
+  window.addEventListener('hashchange', cancel);
+  window.addEventListener('popstate', cancel);
+  window.addEventListener('pagehide', cancel);
   // Focus changes and Tab take precedence over a pending anchor animation.
   document.addEventListener('focusin', () => { if (scrolling) cancel(); });
   document.addEventListener('keydown', event => {
@@ -37,7 +50,12 @@ export function initScroll() {
     if (!target) return;
     event.preventDefault();
     cancel();
-    if (location.hash !== url.hash) history.pushState({ hash: url.hash }, '', url.hash);
+    if (location.hash !== url.hash) {
+      pendingNavigation = { before: location.href, state: history.state, url: url.href };
+      // Capture the old entry before animation so native Back restores its position.
+      history.pushState({ hash: url.hash }, '', url.hash);
+    }
+
     const offset = [...document.querySelectorAll('header:not([data-no-scroll]), body > .header:not([data-no-scroll]), body > .w-nav:not([data-no-scroll])')].reduce((height, header) => {
       const style = getComputedStyle(header);
       const rect = header.getBoundingClientRect();
@@ -61,6 +79,7 @@ export function initScroll() {
     const duration = reduced.matches || anchor.classList.contains('site-header__skip') ? 0 : (publishedScrollCurve.logarithmScale * Math.log(Math.abs(from - to) + publishedScrollCurve.distanceOffset) - publishedScrollCurve.durationOffset) * multiplier;
     const begin = performance.now();
     const finish = () => {
+      pendingNavigation = null;
       const previous = target.getAttribute('tabindex');
       target.tabIndex = -1;
       target.focus({ preventScroll: true });

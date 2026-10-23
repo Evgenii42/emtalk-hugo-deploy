@@ -264,3 +264,10 @@ html[data-route-id="/"] .link-block-7:active { background: #e6d7f0; border-color
   html[data-route-id] .emtalk-player-ui__progress::before { background: Canvas; border: 1px solid CanvasText; box-sizing: border-box; }
   html[data-route-id] .emtalk-player-ui__progress-fill { background: CanvasText; }
 }
+
+/* Public business contact links retain document/footer colour and keyboard visibility. */
+.public-contact-email { color:inherit; text-decoration:underline; text-underline-offset:.16em; }
+.public-contact-email:focus-visible { outline:3px solid currentColor; outline-offset:3px; }
+
+/* Three legal links wrap rather than overflow narrow footer columns. */
+.section-30 .legal,.section-footer-dm .legal { flex-wrap:wrap; }

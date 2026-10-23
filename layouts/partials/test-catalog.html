@@ -15,7 +15,7 @@
       <a class="tests-text-link" href="#tests-list">Help me choose <span aria-hidden="true">↓</span></a>
     </div>
   </section>
-  <section id="tests-list" class="tests-library tests-width" data-test-catalog aria-labelledby="tests-choose-title" tabindex="-1">
+  <section id="tests-list" class="tests-library tests-width" data-test-catalog data-analytics-surface="catalog" aria-labelledby="tests-choose-title" tabindex="-1">
     <div class="tests-library__heading"><div><p class="tests-eyebrow">Start with what matters to you</p><h2 id="tests-choose-title">What feels closest to your experience?</h2></div><p>Choose a focus, read what the test explores, then decide whether to begin. You do not need to take them all.</p></div>
     <ol class="tests-choice-path" aria-label="How to choose a test"><li aria-current="step"><span>1</span> Choose your focus</li><li><span>2</span> Read about the test</li><li><span>3</span> Start at your pace</li></ol>
     <form class="tests-focus-picker" hidden><fieldset><legend>Which sounds most like you?</legend><div class="tests-focus-options">{{ range $guide.groups }}{{ range .tests }}{{ $slug := . }}{{ $copy := index $guide.tests $slug }}<label class="tests-focus-option"><input type="radio" name="test-focus" value="{{ $slug }}" data-focus-label="{{ $copy.focus }}"><span>{{ $copy.focus }}</span></label>{{ end }}{{ end }}</div></fieldset></form>

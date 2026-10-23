@@ -36,9 +36,11 @@
       {{- $type := printf "%v" (index $sourceAttrs "type" | default "") -}}
       {{- $local := strings.TrimPrefix $prefix $url -}}
       {{- $validPath := and (strings.HasPrefix $url (printf "%s/media/" $prefix)) (not (findRE `[?#%[:space:][:cntrl:]]` $url)) (not (strings.Contains $url "\\")) (not (in (split $local "/") ".")) (not (in (split $local "/") "..")) -}}
+      {{/* Keep complete-file buffering eligibility aligned with player.localMediaUrl(). */}}
+      {{- $validName := gt (len (findRE `(?i)^/media/(?:mp3-[a-f0-9]{20}-|[a-f0-9]{20}-)[^/]+[.](?:opus|mp3)$` $local)) 0 -}}
       {{- $validType := or (and (eq $type "audio/mpeg") (strings.HasSuffix $url ".mp3")) (and (eq $type `audio/ogg; codecs="opus"`) (strings.HasSuffix $url ".opus")) -}}
-      {{- if not (and $validPath $validType (fileExists (printf "static%s" $local))) -}}
-        {{- $audioErrors = $audioErrors | append (printf "%s requires an existing local /media/ MP3 or Opus source with its declared type" $slot) -}}
+      {{- if not (and $validPath $validName $validType (fileExists (printf "static%s" $local))) -}}
+        {{- $audioErrors = $audioErrors | append (printf "%s requires an existing local /media/ MP3 or Opus source with its declared type and prepared 20-hex filename" $slot) -}}
       {{- end -}}
       {{- if isset $pairs $type -}}{{- $audioErrors = $audioErrors | append (printf "%s has a duplicate audio source type" $slot) -}}{{- end -}}
       {{- $pairs = merge $pairs (dict $type $url) -}}
@@ -115,8 +117,8 @@
       {{ partial "node.html" ($slots.Get "summary") }}
       <p class="article-reader__meta">About {{ $entry.readingMinutes }} min read <span aria-hidden="true">·</span> Audio available</p>
       <div class="article-reader__actions">
-        <a class="article-reader__read" href="#article-text" {{ partial "native-link-focus.html" . }}>Read article <span aria-hidden="true">↓</span></a>
-        <a class="article-reader__listen" href="#article-audio" {{ partial "native-link-focus.html" . }}>Listen to the article <span aria-hidden="true">↓</span></a>
+        <a data-analytics-article-action="read_anchor" class="article-reader__read" href="#article-text" {{ partial "native-link-focus.html" . }}>Read article <span aria-hidden="true">↓</span></a>
+        <a data-analytics-article-action="listen_anchor" class="article-reader__listen" href="#article-audio" {{ partial "native-link-focus.html" . }}>Listen to the article <span aria-hidden="true">↓</span></a>
       </div>
     </div>
     <div class="article-reader__cover">{{ partial "node.html" ($slots.Get "cover") }}</div>
@@ -131,7 +133,7 @@
         <noscript><p>If the player does not start, you can <a href="{{ $page.audioMp3 }}" download>download the audio (MP3)</a>.</p></noscript>
         {{ partial "node.html" (partial "article-passive-legacy.html" ($slots.Get "legacy")) }}
       </section>
-      {{ if $headings }}<details class="article-reader__contents">
+      {{ if $headings }}<details data-analytics-article-action="contents_open" class="article-reader__contents">
         <summary>On this page <span aria-hidden="true">+</span></summary>
         <nav aria-label="Article sections"><ol>{{ range $headings }}<li><a href="#{{ .id }}" {{ partial "native-link-focus.html" . }}>{{ .label }}</a></li>{{ end }}</ol></nav>
       </details>{{ end }}

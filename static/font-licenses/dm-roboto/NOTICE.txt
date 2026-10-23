@@ -14,3 +14,5 @@ core/ui/src/commonMain/composeResources/font/roboto_medium.ttf
 Embedded font name table fields identify Google as author and Apache License,
 Version 2.0 as the license. No Android source code, user data or configuration
 is included in this font distribution.
+
+The adjacent WOFF2 distributions are format-only compressed derivatives of these exact TTF files. No glyph subsetting, name, metrics or outline changes were made. The Apache 2.0 license remains applicable.

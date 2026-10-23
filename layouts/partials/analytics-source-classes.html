@@ -1,0 +1,4 @@
+{{- /* Central class registry for inherited source roles. The build verifier
+checks independent source footer structure against this exact registry. */ -}}
+{{- $primaryFooter := "section-30" -}}
+{{- return (dict "primaryFooter" $primaryFooter "measuredFooterClasses" (slice $primaryFooter "section-footer-dm")) -}}

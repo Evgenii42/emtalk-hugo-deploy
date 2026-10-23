@@ -42,17 +42,17 @@
       <div class="article-catalog__art" aria-hidden="true"><img src="{{ $prefix }}/{{ $library.hero.src }}" {{ with $library.hero.variants }}srcset="{{ range $index, $variant := . }}{{ if $index }}, {{ end }}{{ $prefix }}/{{ $variant.src }} {{ $variant.width }}w{{ end }}" {{ end }} sizes="(min-width: 901px) 74vw, 100vw" width="{{ $library.hero.width }}" height="{{ $library.hero.height }}" alt="" decoding="async" fetchpriority="high"></div>
   </section>
   <div class="article-library-surface">
-  <section id="Articles" class="article-library article-catalog__width" data-article-catalog aria-labelledby="article-library-title" tabindex="-1">
+  <section id="Articles" class="article-library article-catalog__width" data-article-catalog data-analytics-surface="catalog" aria-labelledby="article-library-title" tabindex="-1">
     <div class="article-library__heading"><h2 id="article-library-title">Explore the articles</h2><p>Read or listen, at your own pace.</p></div>
     <div class="article-library__filters" data-article-filters role="group" aria-label="Filter articles by subject" hidden>
       <button type="button" data-article-filter="all" data-article-reset data-article-label="{{ $library.allTopicsLabel }}" aria-pressed="true">{{ $library.allTopicsLabel }} <span>{{ len $library.articles }}</span></button>
       {{ range $library.topics }}<button type="button" data-article-filter="{{ .id }}" data-article-label="{{ .statusLabel }}" aria-pressed="false">{{ .label }} <span>{{ len (where $library.articles "topic" .id) }}</span></button>{{ end }}
     </div>
-    <div class="article-library__meta"><p class="article-library__count" data-article-count role="status" aria-live="polite" aria-atomic="true">{{ $library.allTopicsLabel }} {{ len $library.articles }} {{ if eq (len $library.articles) 1 }}article is{{ else }}articles are{{ end }} shown.</p><p class="article-library__times">Reading and listening times are approximate.</p></div>
+    <div class="article-library__meta"><p class="article-library__count" data-article-count role="status" aria-live="polite" aria-atomic="true">All {{ len $library.articles }} {{ if eq (len $library.articles) 1 }}article is{{ else }}articles are{{ end }} shown.</p><p class="article-library__times">Reading and listening times are approximate.</p></div>
     <div class="article-library__grid">
       {{ range $library.articles }}{{ $id := printf "article-card-%s" (strings.TrimPrefix "/articles/" .route) }}
       <article class="article-library__entry" data-article-topic="{{ .topic }}">
-        <a class="article-card" href="{{ partial "article-url.html" (dict "route" .route) }}" aria-labelledby="{{ $id }}" {{ partial "native-link-focus.html" . }}>
+        <a data-analytics-surface="article_card" class="article-card" href="{{ partial "article-url.html" (dict "route" .route) }}" aria-labelledby="{{ $id }}" {{ partial "native-link-focus.html" . }}>
           <img class="article-card__cover" src="{{ $prefix }}/{{ .cover.src }}" width="{{ .cover.width }}" height="{{ .cover.height }}" alt="{{ .cover.alt }}" loading="lazy" decoding="async">
           <div class="article-card__body"><p class="article-card__topic">{{ (index $topics .topic).label }}</p><h3 id="{{ $id }}">{{ .title }}</h3><p class="article-card__summary">{{ .summary }}</p><p class="article-card__time"><span>{{ .readingMinutes }} min read</span><span aria-hidden="true">&middot;</span><span>{{ .listeningMinutes }} min listen</span></p><span class="article-card__open">Read article <span aria-hidden="true">&#8599;</span></span></div>
         </a>

@@ -208,6 +208,167 @@ def bret_contract_errors(build, prefix=''):
     return errors
 
 
+def verify_home_shared_styles(build, prefix=''):
+    """Inspect delivered Home CSS, preserving inline production and bundled preview delivery."""
+    build = Path(build).resolve()
+    home = build / 'index.html'
+    if not home.is_file():
+        return ['Home shared styles: missing index.html']
+    soup = BeautifulSoup(home.read_bytes(), 'html.parser')
+    inline = soup.select('style[data-emt-home-styles]')
+    links = []
+    for node in soup.select('link[rel~="stylesheet"][href]'):
+        url = urlsplit(node['href'])
+        path = url.path
+        if not url.scheme and not url.netloc and path.startswith(prefix + '/css/home-entry.') and path.endswith('.css'):
+            links.append(path)
+    if prefix:
+        if inline or len(links) != 1:
+            return ['Home shared styles: preview requires exactly one existing owned Home bundle']
+        relative = links[0][len(prefix):].lstrip('/')
+        asset = (build / relative).resolve()
+        if not asset.is_relative_to(build) or not asset.is_file() or asset.is_symlink():
+            return ['Home shared styles: missing or unsafe owned Home bundle']
+        css = asset.read_text(encoding='utf-8')
+    else:
+        if len(inline) != 1 or links:
+            return ['Home shared styles: production requires exactly one critical inline Home bundle']
+        css = inline[0].get_text()
+    # Check actual delivered rules, not a declaration that a source was requested.
+    # These signatures belong to the two explicit shared sheets in home-styles.html.
+    selectors, properties = [], set()
+    pending = [tinycss2.parse_stylesheet(css, skip_comments=True, skip_whitespace=True)]
+    while pending:
+        for rule in pending.pop():
+            if rule.type == 'qualified-rule':
+                prelude = tinycss2.serialize([token for token in rule.prelude if token.type != 'comment'])
+                selectors.append(re.sub(r'\s+', '', prelude).replace('"', '').replace("'", '').lower())
+                for declaration in tinycss2.parse_declaration_list(rule.content, skip_comments=True, skip_whitespace=True):
+                    if declaration.type == 'declaration':
+                        properties.add(declaration.lower_name)
+            elif rule.type == 'at-rule' and rule.content is not None and rule.lower_at_keyword in {'media', 'supports', 'layer', 'container'}:
+                pending.append(tinycss2.parse_rule_list(rule.content, skip_comments=True, skip_whitespace=True))
+    compact = ','.join(selectors)
+    signatures = {
+        'interface': ('.emtalk-player-ui__play-icon', 'html[data-route-id=/].link-block-9'),
+        'navigation': ('.site-header__brand', '.site-header__skip', '.site-header__panel'),
+    }
+    errors = ['Home shared styles: delivered ' + name + ' rules missing'
+              for name, tokens in signatures.items() if not all(token in compact for token in tokens)]
+    if '--emt-icon-play' not in properties:
+        errors.append('Home shared styles: delivered interface icon declaration missing')
+    return errors
+
+
+def verify_dm_font_delivery(build, prefix=''):
+    """Validate actual route-owned font delivery, including immutable native provenance."""
+    expected = {
+        'roboto_regular': (400, '4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14', 'eab3a43cb4c9bfe24c157a01fb91ae80fee90e64b5e08b01e8f0a4bace7f8558'),
+        'roboto_medium': (500, '9d0d55a303bfd13b79a87721f65185e93f235e2d77fe398b2dca67ac519915f5', 'f150ce483e096530087b05528bcbe852a3f7d9253458f0165348182fdca8f2de'),
+    }
+    try:
+        soup = BeautifulSoup((Path(build) / 'dm/workspace.html').read_bytes(), 'html.parser')
+        links = [urlsplit(n['href']) for n in soup.select('link[rel~="stylesheet"][href]')]
+        owned = [u.path for u in links if not u.scheme and not u.netloc and u.path.startswith(prefix + '/css/dm-workspace.') and u.path.endswith('.css')]
+        if len(owned) != 1:
+            raise ValueError('Missing or duplicate route-owned sheet')
+        css_path = (Path(build) / owned[0][len(prefix):].lstrip('/')).resolve()
+        if not css_path.is_relative_to(Path(build).resolve()) or css_path.is_symlink():
+            raise ValueError('Unsafe stylesheet')
+        faces = []
+        for rule in tinycss2.parse_stylesheet(css_path.read_text(encoding='utf-8'), skip_comments=True, skip_whitespace=True):
+            if rule.type == 'at-rule' and rule.lower_at_keyword == 'font-face':
+                values = {d.lower_name: tinycss2.serialize(d.value).strip().replace('"', '').replace("'", '') for d in tinycss2.parse_declaration_list(rule.content) if d.type == 'declaration'}
+                if values.get('font-family') == 'DMRoboto':
+                    faces.append(values)
+        if len(faces) != 2:
+            raise ValueError('Expected exactly two DMRoboto faces')
+        for name, (weight, original, compressed) in expected.items():
+            matches = [f for f in faces if f.get('font-weight') == str(weight)]
+            if len(matches) != 1 or matches[0].get('src') != 'url(../fonts/dm/' + name + '.woff2) format(woff2)' or matches[0].get('font-display') != 'swap' or matches[0].get('font-style') != 'normal':
+                raise ValueError('Face format, weight or swap contract')
+            for base, extension, digest in [(ROOT / 'static', '.ttf', original), (ROOT / 'static', '.woff2', compressed), (Path(build), '.woff2', compressed)]:
+                file = base / 'fonts/dm' / (name + extension)
+                if file.is_symlink() or hashlib.sha256(file.read_bytes()).hexdigest() != digest:
+                    raise ValueError('Font provenance or delivered bytes changed')
+        return []
+    except (OSError, ValueError, TypeError, KeyError):
+        return ['DM font delivery: expected owned WOFF2 faces, native provenance and exact delivered bytes']
+
+
+def verify_source_footer_surfaces(build, prefix=''):
+    """Compare delivered measurement roles with independent prepared source footers."""
+    try:
+        registry = (ROOT / 'layouts/partials/analytics-source-classes.html').read_text(encoding='utf-8')
+        registry = re.sub(r'\{\{-?\s*/\*[\s\S]*?\*/\s*-?\}\}', '', registry)
+        match = re.fullmatch(r'\s*\{\{-?\s*\$primaryFooter\s*:=\s*"([A-Za-z_][A-Za-z0-9_-]*)"\s*-?\}\}\s*'
+                             r'\{\{-?\s*return\s+\(dict\s+"primaryFooter"\s+\$primaryFooter\s+"measuredFooterClasses"\s+'
+                             r'\(slice\s+\$primaryFooter\s+"([A-Za-z_][A-Za-z0-9_-]*)"\)\)\s*-?\}\}\s*', registry)
+        if not match or match.group(1) == match.group(2):
+            return ['Inherited footer contract: malformed central source-class registry']
+        footer_classes = set(match.groups())
+        render = json.loads((ROOT / 'data/render.json').read_text(encoding='utf-8'))
+        route_rows = json.loads((ROOT / 'data/route-map.json').read_text(encoding='utf-8'))['routes']
+        pages, source_prefix = render['pages'], render.get('mountPrefix', '').rstrip('/')
+    except (OSError, ValueError, KeyError, TypeError):
+        return ['Inherited footer contract: missing or malformed source/registry data']
+
+    def source_nodes(node):
+        if isinstance(node, dict):
+            yield node
+            for child in node.get('children', []):
+                yield from source_nodes(child)
+
+    def legal_family(paths):
+        # Independent structural identity: published company/app legal pairs and
+        # public navigation, rather than the class token being verified.
+        if not {'/about-us', '/tests'} <= paths:
+            return False
+        return any({'/documents/' + product + '-privacy-policy',
+                    '/documents/' + product + '-terms-and-conditions-of-use'} <= paths
+                   for product in ('emtalk', 'bret', 'dm'))
+
+    def local_path(href, mount):
+        path = urlsplit(str(href)).path
+        return path[len(mount):] if mount and path.startswith(mount + '/') else path
+
+    errors, expected_footers = [], 0
+    for row in route_rows:
+        route, file = row['path'], Path(build) / row['file']
+        page = pages.get(route)
+        if not isinstance(page, dict):
+            errors.append('Inherited footer contract: missing source route ' + route)
+            continue
+        footers = []
+        for node in source_nodes(page.get('body')):
+            if node.get('tag') != 'section':
+                continue
+            paths = {local_path(child.get('attributes', {}).get('href', ''), source_prefix)
+                     for child in source_nodes(node) if child.get('tag') == 'a'}
+            if legal_family(paths):
+                footers.append(node)
+        if len(footers) > 1:
+            errors.append('Inherited footer contract: ambiguous source footer ' + route)
+        expected_footers += len(footers)
+        for footer in footers:
+            if not footer_classes.intersection(str(footer.get('attributes', {}).get('class', '')).split()):
+                errors.append('Inherited footer contract: source class differs from central registry ' + route)
+        if not file.is_file():
+            errors.append('Inherited footer contract: missing rendered route ' + route)
+            continue
+        soup = BeautifulSoup(file.read_bytes(), 'html.parser')
+        actual = soup.select('[data-analytics-surface="footer"]')
+        if len(actual) != len(footers):
+            errors.append('Inherited footer contract: measured surface count differs from source ' + route)
+        for footer in actual:
+            paths = {local_path(node.get('href', ''), prefix) for node in footer.select('a[href]')}
+            if footer.name != 'section' or not footer_classes.intersection(footer.get('class', [])) or not legal_family(paths):
+                errors.append('Inherited footer contract: measured surface is not the source footer ' + route)
+    if not expected_footers:
+        errors.append('Inherited footer contract: no independent source footers found')
+    return errors
+
+
 def verify(build, prefix=''):
     build = Path(build).resolve()
     prefix = '/' + prefix.strip('/') if prefix.strip('/') else ''
@@ -215,6 +376,12 @@ def verify(build, prefix=''):
     expected = {r['path']: r['file'] for r in routes['routes']}
     errors, files = [], []
     seo_enabled = (ROOT / 'data/seo.json').is_file()
+    if (ROOT / 'layouts/partials/analytics-source-classes.html').is_file():
+        errors.extend(verify_source_footer_surfaces(build, prefix))
+    if '/dm/workspace' in expected:
+        errors.extend(verify_dm_font_delivery(build, prefix))
+    if '/' in expected and (ROOT / 'layouts/partials/home-styles.html').is_file():
+        errors.extend(verify_home_shared_styles(build, prefix))
     # This generic gate validates canonical scheme/path and local resources.
     # Configured production origin is enforced by the mandatory EmTalk SEO
     # layer below (and required by its Hugo partial). Non-SEO synthetic fixtures

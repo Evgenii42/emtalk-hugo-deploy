@@ -1,6 +1,6 @@
 /* Route-owned native DM composition. Site navigation remains shared. */
-@font-face{font-family:DMRoboto;src:url(../fonts/dm/roboto_regular.ttf) format("truetype");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:DMRoboto;src:url(../fonts/dm/roboto_medium.ttf) format("truetype");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:DMRoboto;src:url(../fonts/dm/roboto_regular.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:DMRoboto;src:url(../fonts/dm/roboto_medium.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
 html[data-route-id="/dm/workspace"] body{background:#f4eff9}
 .dm-workspace{--dm-ink:#281c37;--dm-accent:#4f1f90;max-width:760px;margin:112px auto 48px;color:var(--dm-ink);font:16px/1.5 DMRoboto,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#b291d6 0%,#d6d0f5 100%);border-radius:28px;box-shadow:0 12px 60px #281c3712;overflow-wrap:anywhere}
 .dm-workspace *{box-sizing:border-box}
@@ -91,9 +91,16 @@ html[data-route-id="/dm/workspace"] body{background:#f4eff9}
 @media(forced-colors:active){.dm-workspace__nav button[aria-current=true]{background:Highlight;color:HighlightText;border-color:ButtonText}}
 .dm-workspace__categories{display:flex;gap:8px;overflow-x:auto;max-width:100%;padding:4px 4px 10px;margin:0 -4px 4px;scrollbar-width:thin}
 .dm-workspace__categories button{flex:0 0 auto;min-height:44px;padding:8px 12px;font-size:14px;background:transparent;border:1px solid transparent}
-.dm-workspace__categories button[aria-pressed=true]{background:#e8def8;border-color:#715595}
+.dm-workspace__categories button[aria-checked=true]{background:#e8def8;border-color:#715595}
 .dm-workspace__topic-list{max-height:200px;overflow-y:auto;overscroll-behavior:contain;padding:4px;scrollbar-width:thin}
 .dm-workspace__topic-list button{display:block;width:100%;text-align:left;min-height:44px;padding:8px 4px;background:transparent;border-radius:8px;font-size:14px;font-weight:500}
 .dm-workspace__topic-list button:hover{background:#e8def8}
-@media(forced-colors:active){.dm-workspace__categories button[aria-pressed=true]{background:Highlight;color:HighlightText}}
-@media(forced-colors:active){.dm-workspace :is(.dm-workspace__primary,.dm-workspace__nav button[aria-current=true],.dm-workspace__categories button[aria-pressed=true],.dm-workspace__tabs [aria-current=true],.dm-workspace__choice:has(input:checked)){forced-color-adjust:none;background:Highlight;color:HighlightText;border-color:HighlightText;-webkit-text-fill-color:currentColor;text-shadow:none}.dm-workspace__choice input{forced-color-adjust:auto}}
+@media(forced-colors:active){.dm-workspace__categories button[aria-checked=true]{background:Highlight;color:HighlightText}}
+@media(forced-colors:active){.dm-workspace :is(.dm-workspace__primary,.dm-workspace__nav button[aria-current=true],.dm-workspace__categories button[aria-checked=true],.dm-workspace__tabs [aria-current=true],.dm-workspace__choice:has(input:checked)){forced-color-adjust:none;background:Highlight;color:HighlightText;border-color:HighlightText;-webkit-text-fill-color:currentColor;text-shadow:none}.dm-workspace__choice input{forced-color-adjust:auto}}
+
+/* Enhanced import keeps page controls English; the OS file picker stays native. */
+.dm-workspace__import[data-enhanced]{position:relative}
+.dm-workspace__import[data-enhanced]>label{display:block;font-weight:500}
+.dm-workspace__import[data-enhanced]>[data-dm-import-trigger]{margin:8px 0;border-color:#9f89b0;background:#f6f6f6}
+.dm-workspace__import[data-enhanced]>[data-dm-import-filename]{display:block;font-size:13px;line-height:20px;overflow-wrap:anywhere}
+.dm-workspace__import[data-enhanced]>input[data-dm-import]{position:absolute;width:1px;height:1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

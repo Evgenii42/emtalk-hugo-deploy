@@ -1,3 +1,4 @@
+import { emitInterfaceEvent } from './analytics-events.js';
 // Optional subject filters. The server-rendered article list is the complete no-JS fallback.
 export function initArticleCatalog(root = document) {
   for (const catalog of root.querySelectorAll('[data-article-catalog]')) {
@@ -15,6 +16,8 @@ export function initArticleCatalog(root = document) {
         buttons.some(button => !button.dataset.articleFilter || !button.dataset.articleLabel?.trim()) ||
         cards.some(card => !subjects.some(button => button.dataset.articleFilter === card.dataset.articleTopic))) continue;
 
+    // The server owns the complete-list sentence; reset reuses that exact copy.
+    const allArticlesMessage = status.textContent;
     function show(selected) {
       let count = 0;
       for (const card of cards) {
@@ -28,12 +31,18 @@ export function initArticleCatalog(root = document) {
       const noun = count === 1 ? 'article' : 'articles';
       const verb = count === 1 ? 'is' : 'are';
       const message = selected === reset
-        ? `${reset.dataset.articleLabel} ${count} ${noun} ${verb} shown.`
+        ? allArticlesMessage
         : `${count} ${noun} about ${selected.dataset.articleLabel} ${verb} shown.`;
       if (status.textContent !== message) status.textContent = message;
     }
 
-    for (const button of buttons) button.addEventListener('click', () => show(button));
+    let effective = reset;
+    for (const button of buttons) button.addEventListener('click', () => {
+      if (button === effective) return;
+      show(button);
+      effective = button;
+      emitInterfaceEvent('emtalk_catalog_filter', {action:button === reset ? 'reset' : 'filter'});
+    });
     // Initialization never filters anything. Only an explicit native button activation does.
     show(reset);
     controls.hidden = false;

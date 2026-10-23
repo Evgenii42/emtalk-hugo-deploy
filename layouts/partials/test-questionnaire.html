@@ -12,6 +12,7 @@
     <div class="tests-before"><p><strong>Before you start.</strong> {{ index $cms "intro-text" }}</p><details><summary>Your answers and privacy</summary><p>Your answers are held in this tab. Refreshing or leaving this page can clear them. They are sent to EmTalk's result service when you request a result.</p><a href="{{ $prefix }}/documents/emtalk-privacy-policy">Read the privacy policy</a></details></div>
     <noscript><p class="emtalk-nojs">JavaScript is required to answer and score this test. You can read all the questions below.</p></noscript>
     <div class="test-layout" id="test-questions" tabindex="-1">
+      <p data-test-unavailable role="status">Interactive answering and result calculation are not available until the test loads. You can read all questions below.</p>
       <div class="tests-progress-label"><p class="tests-position" aria-live="polite" aria-atomic="true">Question 1 of {{ len $model.questions }}</p><p class="tests-answered">0 answered</p></div>
       <div class="progress-bar"><div class="progress-fill"></div></div>
       <details class="tests-question-map"><summary>Review or change an answer</summary><p>Choose a question. Filled circles mark questions you have answered.</p><div class="tests-question-grid" role="group" aria-label="Question overview">{{ range $index, $question := $model.questions }}<button class="tests-jump" type="button" data-question-index="{{ $index }}" aria-label="Question {{ .number }}, not answered">{{ .number }}</button>{{ end }}</div></details>
@@ -27,6 +28,12 @@
         </section>
       {{ end }}
       </div>
+      <section class="tests-result-consent" data-result-consent hidden aria-labelledby="result-consent-title">
+        <h2 id="result-consent-title">Before requesting your result</h2>
+        <p>Your answers will be sent to EmTalk's result service to calculate this result. They may reveal sensitive information about your wellbeing. The service also receives connection information such as your IP address. This permission is separate from optional analytics, which you can accept or reject separately.</p>
+        <p><a href="{{ $prefix }}/documents/emtalk-privacy-policy">Read how your information is processed</a>. You can decline by leaving this box unchecked and keep reviewing your answers in this tab.</p>
+        <label><input type="checkbox" data-result-consent-check> <span>I explicitly agree to EmTalk processing my answers, including any sensitive wellbeing information, to calculate this result.</span></label>
+      </section>
       <div class="tests-question-nav"><button class="nav-prev" type="button" disabled><span aria-hidden="true">←</span> Previous</button><p class="tests-next-hint" id="tests-next-hint">Choose an answer to continue.</p><button class="nav-next" type="button" aria-describedby="tests-next-hint" disabled><span class="tests-next-label">Next</span> <span class="tests-next-arrow" aria-hidden="true">→</span></button></div>
       <p class="tests-session-note">Take your time. You can go back and change an answer before requesting your result.</p>
     </div>

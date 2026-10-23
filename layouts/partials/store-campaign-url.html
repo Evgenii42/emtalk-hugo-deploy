@@ -1,0 +1,7 @@
+{{- $url := printf "%v" . -}}
+{{- $packages := dict "https://play.google.com/store/apps/details?id=com.bret" "com.bret" "https://play.google.com/store/apps/details?id=org.emtalk.dm" "org.emtalk.dm" -}}
+{{- with index $packages $url -}}
+  {{- $product := "dm" -}}{{- if eq . "com.bret" -}}{{- $product = "bret" -}}{{- end -}}
+  {{- $url = printf "%s&referrer=utm_source%%3Demtalk_web%%26utm_medium%%3Dwebsite%%26utm_campaign%%3Dsite_v003_%s" $url $product -}}
+{{- end -}}
+{{- return $url -}}

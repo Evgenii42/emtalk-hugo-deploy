@@ -13,6 +13,7 @@ from pathlib import Path
 from urllib.parse import urlsplit, urljoin, unquote, quote
 
 from bs4 import BeautifulSoup, Comment, Doctype, ProcessingInstruction, Declaration, CData, NavigableString, Tag
+from prepare_public_content import repair_public_contact_links
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {'/meditations', '/meditations/relax-short'}
@@ -681,6 +682,7 @@ def prepare(prefix='', preview=False):
         page['ownedEntry'] = copy.deepcopy(entry)
         page['ownedHash'] = digest
     for page in pages.values():
+        repair_public_contact_links(page['body'], page['routeId'], prefix)
         target = prepare_skip_target(page)
         if target is not None:
             page['skipTarget'] = target
@@ -714,6 +716,12 @@ def prepare(prefix='', preview=False):
     transitions = sorted({link['href'] for path, page in corpus['pages'].items() if path not in EXCLUDED
                           for link in page['links'] if urlsplit(link['href']).netloc
                           and urlsplit(link['href']).hostname not in {'www.emtalk.org', 'emtalk.org'}})
+    # Explicit static app campaign URLs; never permit arbitrary outbound queries.
+    transitions = sorted(set(transitions) | {
+        'https://play.google.com/store/apps/details?id=' + package +
+        '&referrer=utm_source%3Demtalk_web%26utm_medium%3Dwebsite%26utm_campaign%3Dsite_v003_' + product
+        for product, package in [('bret', 'com.bret'), ('dm', 'org.emtalk.dm')]
+    })
     def semantic_urls(value):
         if isinstance(value, dict):
             return {url for child in value.values() for url in semantic_urls(child)}

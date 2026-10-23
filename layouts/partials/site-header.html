@@ -1,7 +1,7 @@
 {{- $prefix := hugo.Data.render.mountPrefix -}}
 {{- $route := .route -}}
 {{- $apps := in (slice "/bret" "/bret/practice" "/dm" "/dm/workspace" "/tapl") $route -}}
-<header class="site-header">
+<header class="site-header" data-analytics-surface="header">
   {{/* Explicit0 keeps the shared navigation in native Tab order in WebKit, without positive tabindex values. */}}
   {{ with .skipTarget }}<a class="site-header__skip" href="{{ .href }}" tabindex="0">Skip to content</a>{{ end }}
   <div class="site-header__bar">

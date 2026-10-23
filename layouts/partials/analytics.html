@@ -1,15 +1,10 @@
-{{- if not (reflect.IsMap hugo.Data.integrations) -}}{{- errorf "Missing integrations configuration" -}}{{- end -}}
 {{- $analytics := hugo.Data.integrations.analytics -}}
+{{- $policy := index hugo.Data "analytics-policy" -}}
 {{- if not (reflect.IsMap $analytics) -}}{{- errorf "Missing analytics configuration" -}}{{- end -}}
-{{- $localPractice := in (slice "/bret/practice" "/dm/workspace") .Params.routeId -}}
-{{/* Guest practice pages keep personal decisions and practice activity local. */}}
-{{- if and $analytics.enabledForProduction (not hugo.Data.render.preview) (not $localPractice) -}}
-  {{- if not (findRE `^G-[A-Z0-9]+$` $analytics.measurementId) -}}{{- errorf "Invalid configured Google Analytics measurement ID" -}}{{- end -}}
-  {{- if not (findRE `^GTM-[A-Z0-9]+$` $analytics.tagManagerContainerId) -}}{{- errorf "Invalid configured Google Tag Manager container ID" -}}{{- end -}}
-  {{- range $analytics.developerIds -}}
-    {{- if not (findRE `^developer_id\.[A-Za-z0-9_]+$` .) -}}{{- errorf "Invalid configured public analytics developer ID" -}}{{- end -}}
-  {{- end -}}
-  {{- $script := resources.Get "js/analytics.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
-  {{/* Defer the existing owned classic bootstrap until parsing completes. Its configuration attributes precede execution; analytics code, service IDs and async vendor loaders are unchanged. This is a delivery change, not a consent implementation. */}}
-  <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-tag-manager="{{ $analytics.tagManagerContainerId }}" data-emtalk-analytics-developers="{{ delimit $analytics.developerIds "," }}"></script>
-{{- end -}}
+{{- if not (reflect.IsMap $policy) -}}{{- errorf "Missing analytics runtime policy" -}}{{- end -}}
+{{- $allowed := and $analytics.enabledForProduction (not hugo.Data.render.preview) (eq $analytics.reviewedPolicy "003") -}}
+{{- $script := resources.Get "js/analytics.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
+{{- $css := resources.Get "css/privacy-controls.css" | minify -}}
+<style>{{ $css.Content | safeCSS }}</style>
+<script id="emtalk-analytics-policy" type="application/json">{{ $policy | jsonify | safeJS }}</script>
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-route="{{ .Params.routeId | default "/404" }}" data-emtalk-analytics-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-provider-reviewed="{{ if $analytics.providerGuardsReviewed }}true{{ else }}false{{ end }}"></script>

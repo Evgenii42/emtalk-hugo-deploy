@@ -1,3 +1,4 @@
+import { createTrialAnalytics } from "./trial-analytics.js";
 import { BRET_COPY as copy } from "./bret-copy.js";
 import { PracticeView, practiceClock as clock } from "./bret-view.js";
 import {
@@ -7,27 +8,29 @@ import {
   musclePlan,
   Session,
 } from "./bret-engine.js";
-import { Narrator } from "./bret-audio.js";
+import { createPracticeCues } from "./bret-cues.js";
+import { createPracticeFeedback } from "./bret-feedback.js";
+import { createPracticeMedia } from "./bret-media.js";
 import {
-  resumeCueAction,
   instructionAnnouncement,
-  metronomeBeatKey,
   voiceOffAction,
   PracticeAnnouncements,
 } from "./bret-transitions.js";
 
 const root = document.querySelector("[data-bret-practice]");
 if (root) {
+  const trial = createTrialAnalytics("bret");
   try {
-    init(root);
+    init(root, trial);
   } catch {
+    trial.failed("initialization_failed");
     // Keep this outside the hidden app so a damaged configuration has an
     // honest visible recovery path, rather than an empty JavaScript-only page.
     const notice = root.querySelector("[data-bret-load-error]");
     if (notice) notice.hidden = false;
   }
 }
-function init(root) {
+function init(root, trial) {
   const $ = (s) => root.querySelector(s),
     all = (s) => [...root.querySelectorAll(s)];
   const config = JSON.parse($("#bret-practice-data").textContent);
@@ -49,54 +52,35 @@ function init(root) {
     session = null,
     sessionPresentation = null,
     last = 0,
-    raf = 0,
-    lastIndex = -1,
-    lastBeat = null;
+    raf = 0;
   // Introduction: idle -> playing -> paused -> playing, then begin/skip/stop
   // returns to idle. The timed practice uses Session's separate explicit state.
   // One state prevents contradictory playing/ready flags during media callbacks.
   let introState = "idle";
+  let runToken = null, sessionToken = null;
+  let runtimeRecoveryShown = false;
   // Persistence only affects recovery feedback, never access to a practice.
   let confirmSettingsRecovery = false;
-  let narrationUnavailable = false;
-  let pauseFeedback = null;
-  let waitingFeedback = null;
-  let musicFeedback = null;
-  let narrationFeedback = null;
-  let interruptedBreathIndex = null;
-  let musicAttempt = 0;
-  let metronomeEpoch = 0;
-  let metronomeAttempt = 0;
-  let metronomeAttemptEpoch = -1;
-  let metronomeUnavailable = false;
-  let metronomeFeedback = null;
   let formInvalid = false;
-  let formFeedback = null;
-  const music = new Audio(),
-    voice = new Audio(),
-    click = new Audio(audioRoot + "metronom_click.wav");
-  music.loop = true;
-  music.volume = 0.28;
-  voice.preload = "metadata";
-  const waitingMessage = copy.waiting;
   const announcements = new PracticeAnnouncements();
-  const narrator = new Narrator(voice, soundFailure, globalThis, {
-    waiting: () => { waitingFeedback = feedback(waitingMessage); },
-    started: narrationStarted,
+  const cues = createPracticeCues();
+  const feedback = createPracticeFeedback(presentation);
+  const media = createPracticeMedia({audioRoot, copy, feedback,
+    readState: () => ({prefs, session, introState}),
+    silentPreparation: () => session?.useSilentPreparation(),
+    announce: announceInstruction,
   });
-  const feedback = (message, finished = null) => presentation.feedback(message, finished);
   const persistence = (message) => presentation.persistence(message);
   function showPauseFeedback(reason) {
-    if (!reason) return;
-    pauseFeedback = feedback(reason);
+    if (reason) feedback.show("pause", reason);
   }
-  function clearPauseFeedback() {
-    presentation.clearFeedback(pauseFeedback);
-    pauseFeedback = null;
-  }
-  let stored = null;
+  const clearPauseFeedback = () => feedback.clear("pause");
+  const preferenceConflict = "Saved settings changed in another tab and were not overwritten. Your changes work in this tab only. Reload this page to load the saved settings.";
+  let stored = null, observedPreferencesRaw = null, preferencesObserved = false;
   try {
     stored = localStorage.getItem(key);
+    observedPreferencesRaw = stored;
+    preferencesObserved = true;
   } catch {
     confirmSettingsRecovery = true;
     persistence(copy.storageUnavailable);
@@ -108,7 +92,12 @@ function init(root) {
       confirmSettingsRecovery = true;
       persistence(copy.settingsUnreadable);
       try {
-        localStorage.removeItem(key);
+        if (localStorage.getItem(key) !== observedPreferencesRaw) {
+          persistence(preferenceConflict);
+        } else {
+          localStorage.removeItem(key);
+          observedPreferencesRaw = null;
+        }
       } catch {
         confirmSettingsRecovery = true;
         persistence(copy.settingsUnrepaired);
@@ -117,7 +106,19 @@ function init(root) {
   }
   const save = () => {
     try {
-      localStorage.setItem(key, JSON.stringify(prefs));
+      if (!preferencesObserved) {
+        confirmSettingsRecovery = true;
+        persistence(copy.settingsSaveFailure + " Reload this page before saving settings.");
+        return;
+      }
+      if (localStorage.getItem(key) !== observedPreferencesRaw) {
+        confirmSettingsRecovery = true;
+        persistence(preferenceConflict);
+        return;
+      }
+      const nextRaw = JSON.stringify(prefs);
+      localStorage.setItem(key, nextRaw);
+      observedPreferencesRaw = nextRaw;
       if (confirmSettingsRecovery) persistence(copy.settingsSaved);
       confirmSettingsRecovery = false;
     } catch {
@@ -142,11 +143,20 @@ function init(root) {
     all("[name=group]").forEach(
       (e) => (e.checked = prefs.groups.includes(e.value)),
     );
-    all("[data-setting]").forEach(
-      (e) => (e.checked = prefs[e.dataset.setting]),
-    );
-    $("[data-sound]").value = prefs.sound;
+    hydrateSoundSettings();
     showMode();
+  }
+  function hydrateSoundSettings() {
+    // Preserve saved choices; the controls show the effective audible state.
+    for (const input of all("[data-setting]")) {
+      const muted = prefs.mute && ["music", "voice", "metronome"].includes(input.dataset.setting);
+      input.checked = !muted && prefs[input.dataset.setting];
+      input.disabled = muted;
+    }
+    const sound = $("[data-sound]");
+    sound.value = prefs.sound;
+    sound.disabled = prefs.mute || !prefs.music;
+    $("[data-muted-note]").hidden = !prefs.mute;
   }
   function showMode() {
     const mode = form.elements.mode.value;
@@ -173,7 +183,7 @@ function init(root) {
     }
     if (invalid.length) {
       formInvalid = true;
-      formFeedback = feedback(copy.settingsInvalid(invalid[0].validationMessage));
+      feedback.show("form", copy.settingsInvalid(invalid[0].validationMessage));
       return false;
     }
     if (formInvalid) clearFormFeedback();
@@ -195,18 +205,8 @@ function init(root) {
     save();
     return true;
   }
-  function cancelVoice() {
-    narrator.cancel();
-    clearWaitingFeedback();
-  }
-  function clearFormFeedback() {
-    presentation.clearFeedback(formFeedback);
-    formFeedback = null;
-  }
-  function clearWaitingFeedback() {
-    presentation.clearFeedback(waitingFeedback);
-    waitingFeedback = null;
-  }
+  const cancelVoice = () => media.cancelVoice();
+  const clearFormFeedback = () => feedback.clear("form");
   function vibrate(value) {
     try {
       navigator.vibrate?.(value);
@@ -215,41 +215,14 @@ function init(root) {
     }
   }
   function silentAll() {
-    cancelVoice();
-    music.pause();
-    pauseMetronome();
+    media.silence();
     vibrate(0);
-  }
-  function soundFailure() {
-    narrationUnavailable = true;
-    const breathing = introState !== "idle" || session?.current?.kind === "breath";
-    narrationFeedback = feedback(
-      breathing
-        ? copy.breathVoiceFailure
-        : copy.pmrVoiceFailure,
-      copy.voiceUnavailableFinished,
-    );
-    // Failure completion can synchronously replace voice with a reading delay.
-    // Announce the settled phase, rather than replacing its how-to text twice.
-    queueMicrotask(announceInstruction);
-  }
-  function narrationStarted({ confirmedPromise = false } = {}) {
-    clearWaitingFeedback();
-    // Narrator calls this only for its current active request. A newer error,
-    // validation message or pause reason retains its distinct feedback owner.
-    const wanted = prefs.voice && !prefs.mute &&
-      (introState === "playing" || (session?.state === "running" &&
-        ["breath", "voice"].includes(session.current?.kind)));
-    if (wanted && confirmedPromise) {
-      presentation.clearFeedback(narrationFeedback);
-      narrationFeedback = null;
-    }
   }
   function announceInstruction() {
     const instruction = instructionAnnouncement({
       instruction: $("[data-instruction]").textContent,
       voiceEnabled: prefs.voice && !prefs.mute,
-      spokenFailed: narrationUnavailable,
+      spokenFailed: media.narrationUnavailable,
     });
     const message = announcements.update({
       stage: $("[data-stage]").textContent,
@@ -259,101 +232,8 @@ function init(root) {
     const region = $("[data-instruction-announcement]");
     if (message !== null && region.textContent !== message) region.textContent = message;
   }
-  function musicWanted() {
-    return (
-      (introState === "playing" || session?.state === "running") &&
-      prefs.music &&
-      !prefs.mute
-    );
-  }
-  function musicFailure() {
-    if (musicWanted())
-      musicFeedback = feedback(
-        copy.musicFailure,
-        copy.musicUnavailableFinished,
-      );
-  }
-  function metronomeWanted() {
-    return session?.state === "running" &&
-      ["breath", "exercise"].includes(session.current?.kind) &&
-      prefs.metronome && !prefs.mute;
-  }
-  function pauseMetronome() {
-    // Pending play belongs to this lifecycle, not a later resume or PMR phase.
-    metronomeEpoch++;
-    click.pause();
-  }
-  function clearMetronomeFailure() {
-    metronomeUnavailable = false;
-    presentation.clearFeedback(metronomeFeedback);
-    metronomeFeedback = null;
-  }
-  function metronomeFailure(epoch, attempt) {
-    if (epoch === metronomeEpoch && attempt === metronomeAttempt &&
-        metronomeWanted() && !metronomeUnavailable) {
-      metronomeUnavailable = true;
-      metronomeFeedback = feedback(
-        copy.metronomeFailure,
-        copy.metronomeUnavailableFinished,
-      );
-    }
-  }
-  function metronomeStarted(epoch, attempt) {
-    // A late success quiets unwanted playback, but must not pause a newer wanted
-    // beat or clear feedback claimed by a later failed attempt.
-    if (!metronomeWanted() ||
-        (epoch !== metronomeEpoch && metronomeAttemptEpoch !== metronomeEpoch))
-      click.pause();
-    else if (epoch === metronomeEpoch && attempt === metronomeAttempt)
-      clearMetronomeFailure();
-  }
-  async function playMusic() {
-    const attempt = ++musicAttempt;
-    const recoveryFeedback = musicFeedback;
-    if (!musicWanted()) {
-      music.pause();
-      return;
-    }
-    const sound =
-      prefs.sound === "pattern"
-        ? prefs.mode === "breathing"
-          ? "sound_" + prefs.preset
-          : "sound_4444"
-        : prefs.sound;
-    const src = new URL(audioRoot + sound + ".mp3", location.href).href;
-    if (music.src !== src) {
-      music.src = src;
-      music.load();
-    }
-    try {
-      const playing = music.play();
-      await playing;
-      // This media element is shared: a stale success must not pause a newer
-      // desired track. Only current failures may produce a visible error.
-      if (!musicWanted()) music.pause();
-      else if (attempt === musicAttempt && typeof playing?.then === "function") {
-        // Recover the warning present at this retry's start, never a newer
-        // resource-error event even if its visible wording is identical.
-        presentation.clearFeedback(recoveryFeedback);
-        if (musicFeedback === recoveryFeedback) musicFeedback = null;
-      }
-    } catch {
-      if (attempt === musicAttempt) musicFailure();
-    }
-  }
-  function narrate(file, onEnd) {
-    cancelVoice();
-    narrationUnavailable = false;
-    if (!prefs.voice || prefs.mute) {
-      session?.useSilentPreparation();
-      onEnd();
-      return;
-    }
-    narrator.start(audioRoot + file + ".mp3", (failed) => {
-      if (failed) session?.useSilentPreparation();
-      if (session?.state === "running" || introState === "playing") onEnd();
-    });
-  }
+  const playMusic = () => media.playMusic();
+  const narrate = (file, onEnd) => media.narrate(file, onEnd);
   const view = (which) => presentation.show(which);
   const focusHeading = (selector) => presentation.focusHeading(selector);
   function presentationSnapshot() {
@@ -361,11 +241,11 @@ function init(root) {
       offset: session.offset, index: session.index, total: session.plan.length,
       elapsed: session.elapsed, stepCount: session.stepCount, ...sessionPresentation};
   }
-  function begin(withPreparation = false) {
+  function begin(withPreparation = false, token = runToken) {
     clearPauseFeedback();
-    pauseMetronome();
-    clearMetronomeFailure();
-    interruptedBreathIndex = null;
+    media.pauseMetronome();
+    media.clearMetronomeFailure();
+    cues.finish();
     announcements.reset();
     $("[data-instruction-announcement]").textContent = "";
     // Sound settings remain editable, but metrics always describe this plan.
@@ -390,9 +270,9 @@ function init(root) {
             ),
           ];
     session = new Session(plan).start();
+    sessionToken = token;
     last = performance.now();
-    lastIndex = -1;
-    lastBeat = null;
+    cues.begin();
     introState = "idle";
     view("session");
     $("[data-pause]").textContent = copy.pause;
@@ -404,8 +284,11 @@ function init(root) {
   }
   function start() {
     if (!readForm()) return;
-    feedback("");
-    narrationUnavailable = false;
+    runtimeRecoveryShown = false;
+    runToken = trial.request();
+    sessionToken = null;
+    feedback.message("");
+    media.resetNarrationFailure();
     announcements.reset();
     $("[data-instruction-announcement]").textContent = "";
     $("[data-settings]").open = false;
@@ -418,8 +301,9 @@ function init(root) {
       // Start both configured media elements in the actual Start gesture.
       // The native reference also plays background music during its explanation.
       playMusic();
+      const acceptedToken = runToken;
       narrate("start_exercise_explanation", () => {
-        begin(true);
+        begin(true, acceptedToken);
       });
       announceInstruction();
     } else begin();
@@ -428,9 +312,44 @@ function init(root) {
     cancelAnimationFrame(raf);
     if (session?.state === "running") raf = requestAnimationFrame(frame);
   }
+  function physical(kind) { return kind === "breath" || kind === "exercise"; }
+  function observePhysical() {
+    if (session?.state === "running" && physical(session.current?.kind))
+      trial.started(sessionToken);
+  }
+  function tickSession(delta) {
+    const first = session.index;
+    session.tick(delta);
+    // Only clock-elapsed units qualify. Narration/skip advance() is not progress.
+    if (session.index > first && session.plan.slice(first, session.index).some(step => physical(step.kind))) {
+      trial.started(sessionToken);
+      trial.advance(sessionToken);
+    }
+    observePhysical();
+  }
+  function runtimeFailure() {
+    if (runtimeRecoveryShown) return;
+    runtimeRecoveryShown = true;
+    trial.failed("runtime_failed", sessionToken || runToken);
+    // A failed clock cannot certify completion or remaining metrics. Stop media
+    // and expose the existing Again recovery without inferring an outcome.
+    try {
+      cancelAnimationFrame(raf);
+      session?.stop();
+      introState = "idle";
+      silentAll();
+      view("finish");
+      $("[data-summary]").textContent = "The practice could not continue because of a browser timing error. This practice was not completed. Choose another practice to try again.";
+      focusHeading("#bret-finish-heading");
+    } catch {
+      const notice = $("[data-bret-load-error]");
+      if (notice) notice.hidden = false;
+    }
+  }
   function frame(now) {
     if (session?.state !== "running") return;
-    session.tick(Math.max(0, now - last));
+    try { tickSession(Math.max(0, now - last)); }
+    catch { runtimeFailure(); return; }
     last = now;
     if (session.state === "completed") {
       finish(false);
@@ -441,13 +360,13 @@ function init(root) {
   }
   function paint(emitCues = true) {
     if (!session?.current) return;
-    if (!metronomeWanted()) pauseMetronome();
+    media.reconcileMetronome();
     const current = session.current;
-    const changed = lastIndex !== session.index;
+    const changed = cues.claimPhase(session.index, emitCues);
     // Claim cue ownership before effects can synchronously advance and repaint.
     // A paused render refreshes the view without consuming that ownership.
-    if (emitCues && changed) lastIndex = session.index;
     presentation.render(presentationSnapshot());
+    observePhysical();
     if (emitCues) {
       emitMetronomeCue(current);
       if (changed) emitPhaseCue(current);
@@ -474,40 +393,21 @@ function init(root) {
     }
   }
   function narrateBreathHint(s) {
-    if (prefs.voice && !prefs.mute && !narrationUnavailable)
+    if (prefs.voice && !prefs.mute && !media.narrationUnavailable)
       narrate(
         ["inhale", "delay_first", "exhale", "delay_second"][s.phase],
         () => {},
       );
   }
   function emitMetronomeCue(s) {
-    const beat = metronomeBeatKey({kind: s.kind, index: session.index,
-      elapsed: session.elapsed, offset: session.offset});
-    if (beat === null || beat === lastBeat) return;
-    lastBeat = beat;
-    if (metronomeWanted()) {
-      const epoch = metronomeEpoch, attempt = ++metronomeAttempt;
-      metronomeAttemptEpoch = epoch;
-      try {
-        click.currentTime = 0;
-        const playing = click.play();
-        // Only a fulfilled play promise confirms recovery. An older browser
-        // returning no promise does not establish that a beat succeeded.
-        playing?.then(
-          () => metronomeStarted(epoch, attempt),
-          () => metronomeFailure(epoch, attempt),
-        );
-      } catch {
-        metronomeFailure(epoch, attempt);
-      }
-    }
+    if (cues.claimBeat({kind: s.kind, index: session.index,
+      elapsed: session.elapsed, offset: session.offset})) media.beat();
   }
   function pause(reason) {
     if (introState === "playing") {
-      narrator.pause();
-      clearWaitingFeedback();
-      music.pause();
-      pauseMetronome();
+      media.pauseNarration();
+      media.pauseMusic();
+      media.pauseMetronome();
       vibrate(0);
       introState = "paused";
       presentation.intro(true);
@@ -516,17 +416,17 @@ function init(root) {
       return;
     }
     if (session?.state !== "running") return;
-    session.tick(Math.max(0, performance.now() - last));
+    try { tickSession(Math.max(0, performance.now() - last)); }
+    catch { runtimeFailure(); return; }
     if (session.state === "completed") {
       finish(false);
       return;
     }
     session.pause();
     cancelAnimationFrame(raf);
-    music.pause();
-    narrator.pause();
-    clearWaitingFeedback();
-    pauseMetronome();
+    media.pauseMusic();
+    media.pauseNarration();
+    media.pauseMetronome();
     vibrate(0);
     paint(false);
     $("[data-pause]").textContent = copy.continue;
@@ -536,10 +436,10 @@ function init(root) {
   function resume() {
     clearPauseFeedback();
     if (introState === "paused") {
-      if (narrator.hasPending()) {
+      if (media.hasNarration()) {
         introState = "playing";
         presentation.intro(false);
-        narrator.resume();
+        media.resumeNarration();
         playMusic();
         announceInstruction();
       } else begin(true);
@@ -554,33 +454,21 @@ function init(root) {
     // pause() can advance the engine before the next animation frame paints it.
     // A retained narrator belongs only to the last actually painted step.
     const index = session.index;
-    const cue = resumeCueAction({
-      kind: session.current.kind,
-      sameStep: lastIndex === index,
-      hasNarration: narrator.hasPending(),
-      voiceEnabled: prefs.voice && !prefs.mute,
+    const {action: cue, restartBreathHint} = cues.resume({
+      kind: session.current.kind, index,
+      hasNarration: media.hasNarration(), voiceEnabled: prefs.voice && !prefs.mute,
     });
-    // pagehide disposes media, unlike an ordinary retained pause. Reissue only
-    // its still-current breath hint, with no engine advance, vibration or beat.
-    const restartBreathHint = interruptedBreathIndex === index &&
-      lastIndex === index && session.current.kind === "breath" && cue === "silent";
-    interruptedBreathIndex = null;
-    if (cue === "restart-current") {
-      lastIndex = -1;
-      cancelVoice();
-    } else if (cue === "replace-cue") {
-      cancelVoice();
-    } else if (cue === "resume-cue") {
-      narrator.resume();
-    }
+    if (cue === "restart-current" || cue === "replace-cue") cancelVoice();
+    else if (cue === "resume-cue") media.resumeNarration();
     if (restartBreathHint) narrateBreathHint(session.current);
     playMusic();
     paint();
     schedule();
   }
   function finish(stopped, summaryOverride = null) {
+    try {
     clearPauseFeedback();
-    interruptedBreathIndex = null;
+    cues.finish();
     const stoppedIntroduction = stopped && introState !== "idle";
     const elapsed = session?.elapsed || 0,
       cycles = session?.completedCycles || 0;
@@ -598,6 +486,9 @@ function init(root) {
       cycles,
     });
     focusHeading("#bret-finish-heading");
+    if (stopped) trial.stopped(runToken);
+    else if (session?.state === "completed") trial.completed(sessionToken);
+    } catch (error) { trial.failed("runtime_failed", runToken); throw error; }
   }
   form.addEventListener("change", () => {
     showMode();
@@ -605,7 +496,9 @@ function init(root) {
   });
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (form.reportValidity()) start();
+    if (form.reportValidity()) {
+      try { start(); } catch (error) { trial.failed("runtime_failed", runToken); throw error; }
+    }
   });
   $("[data-pause]").addEventListener("click", () =>
     session?.state === "paused" || introState === "paused" ? resume() : pause(),
@@ -624,13 +517,15 @@ function init(root) {
       ["voice", "delay", "preparation"].includes(session.current.kind)
     ) {
       session.advance();
-      lastIndex = -1;
+      cues.invalidatePhase();
       last = performance.now();
       paint();
       schedule();
     }
   });
   $("[data-again]").addEventListener("click", () => {
+    trial.replacement();
+    runToken = sessionToken = null;
     session = null;
     view("setup");
     form.querySelector("[name=mode]").focus();
@@ -642,13 +537,14 @@ function init(root) {
   all("[data-setting]").forEach((input) =>
     input.addEventListener("change", () => {
       prefs[input.dataset.setting] = input.checked;
+      hydrateSoundSettings();
       save();
       if (["metronome", "mute"].includes(input.dataset.setting)) {
-        pauseMetronome();
-        if (prefs.metronome && !prefs.mute) clearMetronomeFailure();
+        media.pauseMetronome();
+        if (prefs.metronome && !prefs.mute) media.clearMetronomeFailure();
       }
       if (["voice", "mute"].includes(input.dataset.setting) && prefs.voice && !prefs.mute)
-        narrationUnavailable = false;
+        media.resetNarrationFailure();
       if (prefs.mute || !prefs.voice) {
         cancelVoice();
         if (introState !== "idle") {
@@ -658,14 +554,14 @@ function init(root) {
         const converted = session?.useSilentPreparation() || false;
         if (session?.current && voiceOffAction({kind: session.current.kind, converted}) === "advance-to-reading") {
           session.advance();
-          lastIndex = -1;
+          cues.invalidatePhase();
           paint(session.state === "running");
         }
       }
       if (prefs.mute) {
-        music.pause();
+        media.pauseMusic();
       }
-      if (!prefs.music) music.pause();
+      if (!prefs.music) media.pauseMusic();
       if (["music", "mute", "voice"].includes(input.dataset.setting))
         playMusic();
       announceInstruction();
@@ -681,9 +577,14 @@ function init(root) {
       (session && ["running", "paused"].includes(session.state)) ||
       introState !== "idle";
     prefs = preferences();
-    let removed = true;
+    let removed = true, conflict = false;
     try {
-      localStorage.removeItem(key);
+      if (!preferencesObserved || localStorage.getItem(key) !== observedPreferencesRaw) {
+        removed = false; conflict = true;
+      } else {
+        localStorage.removeItem(key);
+        observedPreferencesRaw = null;
+      }
     } catch {
       removed = false;
     }
@@ -693,7 +594,7 @@ function init(root) {
       finish(true, removed
         ? copy.resetStopped
         : copy.resetStoppedFailure);
-    persistence(removed ? copy.reset : copy.resetFailure);
+    persistence(removed ? copy.reset : conflict ? preferenceConflict : copy.resetFailure);
   });
   document.addEventListener("visibilitychange", () => {
     if (document.hidden)
@@ -701,12 +602,8 @@ function init(root) {
   });
   window.addEventListener("pagehide", () => {
     pause();
-    if (session?.current?.kind === "breath" && narrator.hasPending())
-      interruptedBreathIndex = lastIndex;
+    cues.dispose({kind: session?.current?.kind, hasNarration: media.hasNarration()});
     silentAll();
-  });
-  music.addEventListener("error", () => {
-    if (music.error) musicFailure();
   });
   hydrate();
   $("[data-vibration-note]").textContent =

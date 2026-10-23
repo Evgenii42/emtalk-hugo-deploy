@@ -41,7 +41,7 @@ export function preferences(value = {}) {
   for (const k of ["music", "voice", "metronome", "vibration", "mute"])
     if (typeof value[k] === "boolean") d[k] = value[k];
   if (["breathing", "custom", "pmr"].includes(value.mode)) d.mode = value.mode;
-  if (Object.hasOwn(PRESETS, value.preset)) d.preset = String(value.preset);
+  if (Object.prototype.hasOwnProperty.call(PRESETS, value.preset)) d.preset = String(value.preset);
   if (
     Array.isArray(value.custom) &&
     value.custom.length === 4 &&
@@ -51,7 +51,7 @@ export function preferences(value = {}) {
   if (int(value.cycles, 1, 99)) d.cycles = value.cycles;
   if (
     Array.isArray(value.groups) &&
-    value.groups.every((k) => Object.hasOwn(GROUPS, k))
+    value.groups.every((k) => Object.prototype.hasOwnProperty.call(GROUPS, k))
   )
     d.groups = [...new Set(value.groups)];
   if (["pattern", "rain", "sunrise", "wind"].includes(value.sound))
@@ -84,7 +84,7 @@ export function breathingPlan(phases, cycles) {
   ).flat();
 }
 export function muscleSteps(groups) {
-  if (!Array.isArray(groups) || groups.some((k) => !Object.hasOwn(GROUPS, k)))
+  if (!Array.isArray(groups) || groups.some((k) => !Object.prototype.hasOwnProperty.call(GROUPS, k)))
     throw new RangeError("Invalid muscle groups");
   const selected = new Set(
     (groups.length ? groups : Object.keys(GROUPS)).flatMap((k) => GROUPS[k]),
@@ -128,7 +128,7 @@ export class Session {
     // PMR plans have steps rather than breathing cycles.
     if (!this.plan.some((step) => Number.isInteger(step.cycle))) return 0;
     return this.state === "completed"
-      ? this.plan.at(-1).cycle || 0
+      ? this.plan[this.plan.length - 1].cycle || 0
       : Math.max(0, (this.current?.cycle || 1) - 1);
   }
   useSilentPreparation() {

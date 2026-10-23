@@ -24,10 +24,20 @@ function start() {
     if (!(event.target instanceof Element) || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.defaultPrevented) return;
     if (!event.target.closest('#back-button')) return;
     event.preventDefault();
-    if (history.length > 1) history.back();
+    const prefix = (document.documentElement.dataset.mountPrefix || '').replace(/\/+$/, '');
+    const withinMount = url => url.origin === location.origin &&
+      (!prefix || url.pathname === prefix || url.pathname.startsWith(prefix + '/'));
+    let internalEntry = false;
+    try { internalEntry = Boolean(document.referrer) && withinMount(new URL(document.referrer)); }
+    catch { /* An absent, opaque or unknown entry never authorizes leaving this site. */ }
+    if (history.length > 1 && internalEntry) history.back();
     else {
-      const prefix = (document.documentElement.dataset.mountPrefix || '').replace(/\/+$/, '');
-      location.href = document.documentElement.dataset.articlesUrl || `${prefix}/articles`;
+      let fallback = `${prefix}/articles`;
+      try {
+        const configured = new URL(document.documentElement.dataset.articlesUrl || fallback, location.href);
+        if (withinMount(configured)) fallback = configured.href;
+      } catch { /* Use the fixed local catalog when the configured URL is invalid. */ }
+      location.href = fallback;
     }
   });
   document.documentElement.dataset.emtalkReady = 'true';

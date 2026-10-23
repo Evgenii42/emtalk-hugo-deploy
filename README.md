@@ -15,5 +15,5 @@ source and output hashes before publication. Selector/export binding is
 not a build, provider receipt, consent compliance or native-media proof.
 Do not restore unconditional029 tracking as an analytics rollback.
 
-Canonical commit: a16f14eaf09ab9ca7785a54c72463e258397c97b
-Reviewed receipt: docs/audits/analytics031/build017-compact-final.json
+Canonical commit: 5d2cc99a4932c15802640380185518f76ef1deb9
+Reviewed receipt: docs/audits/analytics031/build018-footer.json

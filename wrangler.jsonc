@@ -6,6 +6,7 @@
   "vars": {
     "INTEREST_ENABLED": "false",
     "INTEREST_RELEASE_READY": "false",
+    "INTEREST_CAPTCHA_MODE": "none",
     "INTEREST_ALLOWED_ORIGIN": "https://www.emtalk.org",
     "EMTALK_SITE_ORIGIN": "https://www.emtalk.org/",
     "HUGO_VERSION": "0.168.0",
@@ -22,6 +23,7 @@
       "vars": {
         "INTEREST_ENABLED": "true",
         "INTEREST_RELEASE_READY": "true",
+        "INTEREST_CAPTCHA_MODE": "none",
         "INTEREST_ALLOWED_ORIGIN": "https://interest032.emtalk-hugo-deploy.pages.dev",
         "HUGO_VERSION": "0.168.0",
         "PYTHON_VERSION": "3.13.3",

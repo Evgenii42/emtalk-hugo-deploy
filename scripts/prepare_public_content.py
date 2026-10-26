@@ -45,4 +45,8 @@ def repair_public_contact_links(node, route, prefix='', in_footer=False, in_link
         if company_pair.issubset(hrefs) and deletion not in hrefs:
             children.append({'tag': 'a', 'attributes': {'class': 'link-3', 'href': deletion},
                              'children': ['Delete Account'], 'void': False})
+    if in_footer and 'legal' in classes and not any(isinstance(c, dict) and c.get('attributes', {}).get('href') == prefix + '/news' for c in children):
+        # This authored AST link mirrors native-link-focus.html's documented
+        # tabindex=0 WebKit policy; keep both owners aligned when changing it.
+        children.append({'tag':'a','attributes':{'class':'link-3','href':prefix + '/news','tabindex':'0'},'children':['News'],'void':False})
     node['children'] = children

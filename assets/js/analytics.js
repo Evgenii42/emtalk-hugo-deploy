@@ -51,7 +51,7 @@ import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
     return true; // Validated and queued after consent, never provider acceptance.
   }
   Object.defineProperty(window, "EmTalkAnalytics", { value: Object.freeze({ emit, canTrack,
-    epoch: () => epoch, context: payload.context }), writable: false, configurable: false });
+    epoch: () => epoch, context: payload.context, product: payload.product }), writable: false, configurable: false });
   function activate() {
     if (suspended || !consented()) return;
     if (!active) { transport.activate(payload.fields); changeActive(true); emit("page_view"); }
@@ -74,6 +74,7 @@ import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
       revoke(); notice = "Your browser could not save this choice. Optional analytics stays off. You can keep using the website.";
       schedule(); render(); return false;
     }
+    if (!allow && preferences.legacyRevocationFailed()) notice = "Analytics is off here. A previous-version choice could not be updated. Close or reload other EmTalk tabs to stop their older analytics.";
     refresh(); return true;
   }
   function mount() {

@@ -71,10 +71,25 @@ function init(root, trial) {
     announce: announceInstruction,
   });
   const persistence = (message) => presentation.persistence(message);
+  let hiddenPauseToken = null;
   function showPauseFeedback(reason) {
-    if (reason) feedback.show("pause", reason);
+    if (!reason) return;
+    const token = feedback.show("pause", reason);
+    hiddenPauseToken = reason === copy.hiddenPause ? token : null;
   }
-  const clearPauseFeedback = () => feedback.clear("pause");
+  const clearPauseFeedback = () => {
+    hiddenPauseToken = null;
+    feedback.clear("pause");
+  };
+  function refreshVisiblePause() {
+    if (document.hidden || !hiddenPauseToken) return;
+    const token = hiddenPauseToken;
+    hiddenPauseToken = null;
+    // Only replace our still-visible hidden-tab message, never a newer error.
+    if ((session?.state === "paused" || introState === "paused") &&
+        feedback.current("pause") === token && presentation.clearFeedback(token))
+      showPauseFeedback(copy.pausedReady);
+  }
   const preferenceConflict = "Saved settings changed in another tab and were not overwritten. Your changes work in this tab only. Reload this page to load the saved settings.";
   let stored = null, observedPreferencesRaw = null, preferencesObserved = false;
   try {
@@ -234,7 +249,7 @@ function init(root, trial) {
   }
   const playMusic = () => media.playMusic();
   const narrate = (file, onEnd) => media.narrate(file, onEnd);
-  const view = (which) => presentation.show(which);
+  const view = (which) => { if(which === "finish") feedback.finish(); presentation.show(which); };
   const focusHeading = (selector) => presentation.focusHeading(selector);
   function presentationSnapshot() {
     return {step: session.current, remaining: session.remaining, state: session.state,
@@ -287,7 +302,7 @@ function init(root, trial) {
     runtimeRecoveryShown = false;
     runToken = trial.request();
     sessionToken = null;
-    feedback.message("");
+    feedback.reset();
     media.resetNarrationFailure();
     announcements.reset();
     $("[data-instruction-announcement]").textContent = "";
@@ -599,7 +614,9 @@ function init(root, trial) {
   document.addEventListener("visibilitychange", () => {
     if (document.hidden)
       pause(copy.hiddenPause);
+    else refreshVisiblePause();
   });
+  window.addEventListener("pageshow", refreshVisiblePause);
   window.addEventListener("pagehide", () => {
     pause();
     cues.dispose({kind: session?.current?.kind, hasNarration: media.hasNarration()});

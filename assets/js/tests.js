@@ -401,6 +401,7 @@ export function initTests() {
       if (resultTitle) resultTitle.textContent = 'We could not send your answers';
       var safeReasons = {
         connection: 'The result service could not be reached. Check your connection and try again. ',
+        invalid_json: 'The result service returned an unreadable response. Please try again. ',
         response: 'The result service returned an incomplete response. Please try again. ',
         server: 'The result service could not complete this request' + (Number.isInteger(data.status) ? ' (' + data.status + ')' : '') + '. Please try again. '
       };
@@ -414,8 +415,11 @@ export function initTests() {
       retry.textContent = 'Take the test again';
       retry.dataset.action = 'reset';
     }
-    if (result) { result.tabIndex = -1; result.focus({preventScroll:true}); }
-    if (result) result.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth', block:'start'});
+    if (result) {
+      result.tabIndex = -1;
+      result.focus({preventScroll:true});
+      result.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth', block:'start'});
+    }
   }
 
   async function submit() {
@@ -458,8 +462,9 @@ export function initTests() {
       });
       failureStatus = response.status;
       if (!response.ok) { failureReason = 'server'; throw new Error('Result service failed'); }
-      failureReason = 'response';
+      failureReason = 'invalid_json';
       var data = await response.json();
+      failureReason = 'response';
       if (!data || typeof data !== 'object' || Array.isArray(data) || (!resultText(data).trim() && (resultNumber(data.score) ?? resultNumber(data.totalScore)) == null)) {
         throw new Error('The result service returned an incomplete response.');
       }
@@ -470,7 +475,7 @@ export function initTests() {
       render({timeout: error.name === 'AbortError', reason: failureReason, status: failureStatus}, true);
       if (attemptMeasured && !measuredOutcome) {
         measuredOutcome = true;
-        measure('result_failed', error.name === 'AbortError' ? 'timeout' : failureReason === 'server' ? 'server' : failureReason === 'response' ? 'invalid_response' : 'network', attemptEpoch);
+        measure('result_failed', error.name === 'AbortError' ? 'timeout' : failureReason === 'server' ? 'server' : ['response', 'invalid_json'].includes(failureReason) ? 'invalid_response' : 'network', attemptEpoch);
       }
     } finally {
       clearTimeout(timer);

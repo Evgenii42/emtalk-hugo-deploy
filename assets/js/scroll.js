@@ -14,12 +14,9 @@ export function initScroll() {
   const cancel = () => {
     cancelAnimationFrame(frame);
     scrolling = false;
-    const pending = pendingNavigation;
     pendingNavigation = null;
-    // Restore only our still-pending URL. A user hash/history change wins.
-    // replaceState avoids a forced traversal, scroll jump or focus takeover;
-    // cancellation can leave one duplicate same-URL entry in native history.
-    if (pending && location.href === pending.url) history.replaceState(pending.state, '', pending.before);
+    // No history entry is created before completion. Cancellation leaves native
+    // Back/Forward and any intervening user hash/history navigation untouched.
   };
   document.addEventListener('wheel', cancel, { passive: true });
   document.addEventListener('touchstart', cancel, { passive: true });
@@ -51,9 +48,7 @@ export function initScroll() {
     event.preventDefault();
     cancel();
     if (location.hash !== url.hash) {
-      pendingNavigation = { before: location.href, state: history.state, url: url.href };
-      // Capture the old entry before animation so native Back restores its position.
-      history.pushState({ hash: url.hash }, '', url.hash);
+      pendingNavigation = { before: location.href, url: url.href, x: scrollX, y: scrollY };
     }
 
     const offset = [...document.querySelectorAll('header:not([data-no-scroll]), body > .header:not([data-no-scroll]), body > .w-nav:not([data-no-scroll])')].reduce((height, header) => {
@@ -79,11 +74,23 @@ export function initScroll() {
     const duration = reduced.matches || anchor.classList.contains('site-header__skip') ? 0 : (publishedScrollCurve.logarithmScale * Math.log(Math.abs(from - to) + publishedScrollCurve.distanceOffset) - publishedScrollCurve.durationOffset) * multiplier;
     const begin = performance.now();
     const finish = () => {
+      const pending = pendingNavigation;
       pendingNavigation = null;
+      if (pending && location.href === pending.before) {
+        // Snapshot the originating scroll position into its native history
+        // entry. These synchronous scrolls have no intervening rendered frame.
+        const x = scrollX, y = scrollY;
+        scrollTo(pending.x, pending.y);
+        history.pushState({ hash: url.hash }, '', url.hash);
+        scrollTo(x, y);
+      }
       const previous = target.getAttribute('tabindex');
       target.tabIndex = -1;
       target.focus({ preventScroll: true });
-      if (previous == null) target.removeAttribute('tabindex'); else target.setAttribute('tabindex', previous);
+      // Chromium drops focus when a newly focusable heading loses tabindex.
+      // Keep this temporary programmatic target until the user moves away.
+      if (previous == null) target.addEventListener('blur', () => target.removeAttribute('tabindex'), {once:true});
+      else target.setAttribute('tabindex', previous);
     };
     const step = now => {
       if (!scrolling) return;

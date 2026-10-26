@@ -1,3 +1,5 @@
+{{/* Finite campaign mapping is independently projected by scripts/verify_footer.py.
+Update both layers deliberately; sharing omissions would weaken the check. */}}
 {{- $url := printf "%v" . -}}
 {{- $packages := dict "https://play.google.com/store/apps/details?id=com.bret" "com.bret" "https://play.google.com/store/apps/details?id=org.emtalk.dm" "org.emtalk.dm" -}}
 {{- with index $packages $url -}}

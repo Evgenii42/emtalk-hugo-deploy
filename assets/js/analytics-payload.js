@@ -5,7 +5,7 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
   const canonical = origin === "https://www.emtalk.org";
   const route = policy.routes?.[configuration.emtalkRoute];
   const context = route && policy.contexts?.[route.context];
-  const eligible = canonical && configuration.emtalkRoute === pathname && policy.version === "003" &&
+  const eligible = canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
     configuration.emtalkAnalyticsAllowed === "true" && configuration.emtalkProviderReviewed === "true" &&
     /^G-[A-Z0-9]+$/.test(id) && !!context && route.events.includes("page_view");
   function sourceFields() {
@@ -19,10 +19,14 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
   const fields = context ? Object.freeze({ page_location: context.location, page_title: context.title,
     ...sourceFields(), campaign_name: "not_set", campaign_id: "not_set", campaign_term: "not_set",
     campaign_content: "not_set", ignore_referrer: true }) : {};
+  function product() {
+    const value = policy.feedbackProducts?.[configuration.emtalkRoute];
+    return ["emtalk", "bret", "dm", "tapl"].includes(value) ? value : "not_applicable";
+  }
   function validate(name, params) {
     const schema = policy.schemas?.[name];
     if (!schema || !route?.events.includes(name) || !params || typeof params !== "object" || Array.isArray(params)) return null;
-    const payload = { event_name: name, contract_version: "003", page_context: route.context };
+    const payload = { event_name: name, contract_version: "004", page_context: route.context };
     for (const key of Object.keys(params)) {
       if (["event_name", "contract_version", "page_context"].includes(key) || !own(schema.properties, key)) return null;
       const descriptor = Object.getOwnPropertyDescriptor(params, key);
@@ -35,13 +39,25 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
       if (!def || (def.type === "integer" && !Number.isInteger(value)) || (def.type === "string" && typeof value !== "string") ||
           (own(def, "const") && value !== def.const) || (def.enum && !def.enum.includes(value))) return null;
     }
-    if (name === "emtalk_trial_state" && (params.product !== route.product || (params.product === "bret" && params.state === "resumed"))) return null;
-    if (name === "emtalk_store_click" && route.product && params.product !== route.product) return null;
+    if (name === "emtalk_interest_state" && payload.product !== product()) return null;
+    if (name === "emtalk_catalog_filter") {
+      if (route.context === "news_catalog") {
+        if (!["all", "project", "product", "reading"].includes(payload.filter_group) ||
+            (payload.action === "reset" && payload.filter_group !== "all") ||
+            (payload.action === "filter" && payload.filter_group === "all")) return null;
+      } else if (own(payload, "filter_group")) return null;
+    }
+    if (name === "emtalk_navigation" &&
+        ((payload.destination_kind === "trial_entry" && !["bret", "dm"].includes(payload.destination_product)) ||
+         (payload.destination_kind === "app_landing" && !["bret", "dm", "tapl"].includes(payload.destination_product)) ||
+         (!["trial_entry", "app_landing"].includes(payload.destination_kind) && payload.destination_product !== "not_applicable"))) return null;
+    if (name === "emtalk_trial_state" && (payload.product !== route.product || (payload.product === "bret" && payload.state === "resumed"))) return null;
+    if (name === "emtalk_store_click" && route.product && payload.product !== route.product) return null;
     if (["emtalk_audio_state", "emtalk_trial_state", "emtalk_assessment_state"].includes(name)) {
-      const error = params.state === (name === "emtalk_assessment_state" ? "result_failed" : "error");
-      if (error === (params.error_kind === "not_applicable")) return null;
+      const error = payload.state === (name === "emtalk_assessment_state" ? "result_failed" : "error");
+      if (error === (payload.error_kind === "not_applicable")) return null;
     }
     delete payload.event_name; return payload;
   }
-  return Object.freeze({ id, canonical, eligible, fields, validate, context: () => route?.context || null });
+  return Object.freeze({ id, canonical, eligible, fields, validate, context: () => route?.context || null, product });
 }

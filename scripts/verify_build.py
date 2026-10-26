@@ -16,7 +16,7 @@ import tinycss2
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_HOSTS = ('website-files.com', 'webflow.com', 'webflow.io', 'fonts.googleapis.com', 'fonts.gstatic.com')
-FORBIDDEN_DIRS = {'docs', 'inventory', 'scripts', '.git', '.review', '.agents', '.codex', 'node_modules', 'data', 'content'}
+FORBIDDEN_DIRS = {'docs', 'inventory', 'scripts', '.git', '.review', '.agents', '.codex', 'node_modules', 'data', 'content', 'functions', 'server', 'workers'}
 ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.ttf', '.woff', '.woff2', '.opus', '.mp3', '.ogg', '.wav', '.mp4', '.avif', '.pdf'}
 
 
@@ -25,6 +25,8 @@ PAGES_ALIAS_HEADERS = (b'https://emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n\n'
                        b'https://:version.emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n')
+PAGES_INTEREST_ROUTES = b'{"version":1,"include":["/api/interest"],"exclude":[]}\n'
+PROVIDER_CONTROLS = {'_headers': PAGES_ALIAS_HEADERS, '_routes.json': PAGES_INTEREST_ROUTES}
 
 
 class UrlContext(Enum):
@@ -123,6 +125,22 @@ def srcset_urls(value):
                 depth = max(0, depth - 1)
             elif char == ',' and not depth:
                 break
+
+
+def test_status_errors(soup):
+    """Submission announcements must stay outside the inert questionnaire."""
+    layouts = soup.select('.test-layout')
+    if not layouts:
+        return []
+    statuses = soup.select('.tests-request-status')
+    if len(layouts) != 1 or len(statuses) != 1:
+        return ['Test questionnaire requires one layout and one request status']
+    layout, status = layouts[0], statuses[0]
+    if status.parent is not layout.parent or status.find_parent(attrs={'inert': True}):
+        return ['Test request status must be a sibling outside the inert questionnaire']
+    if status.get('role') != 'status' or status.get('aria-live') != 'polite':
+        return ['Test request status requires a polite live region']
+    return []
 
 
 def document_metadata_errors(body):
@@ -296,88 +314,135 @@ def verify_dm_font_delivery(build, prefix=''):
         return ['DM font delivery: expected owned WOFF2 faces, native provenance and exact delivered bytes']
 
 
+def footer_dom_signature(node):
+    """Compatibility entry point for the independently owned footer contract."""
+    from verify_footer import footer_dom_signature as signature
+    return signature(node)
+
+
 def verify_source_footer_surfaces(build, prefix=''):
-    """Compare delivered measurement roles with independent prepared source footers."""
+    from verify_footer import verify_source_footer_surfaces as verify_footers
+    return verify_footers(build, prefix, root=ROOT)
+
+
+def verify_footer_social_geometry(build, prefix=''):
+    from verify_footer import verify_footer_social_geometry as verify_social
+    return verify_social(build, prefix, root=ROOT)
+
+
+def verify_tapl_landing(build, prefix=''):
+    from verify_tapl import verify_tapl_landing as verify_tapl
+    return verify_tapl(build, prefix, root=ROOT)
+
+
+def verify_analytics_feedback_coverage(expected_routes, *, root=None):
+    """Require an explicit feedback-product decision for every policy route.
+
+    The runtime's conservative not_applicable fallback remains useful for an
+    unexpected route, but must not silently certify an omitted authored mapping.
+    Retained policy entries for authored News drafts are allowed; every active
+    route still needs a policy entry, and every policy entry needs a decision.
+    """
+    root = Path(root) if root is not None else ROOT
+    policy_path = root / 'data/analytics-policy.json'
+    if not policy_path.exists():
+        return ['Analytics feedback coverage: missing policy'] if (root / 'layouts/partials/analytics.html').is_file() else []
+
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError('Duplicate policy key')
+            result[key] = value
+        return result
+
     try:
-        registry = (ROOT / 'layouts/partials/analytics-source-classes.html').read_text(encoding='utf-8')
-        registry = re.sub(r'\{\{-?\s*/\*[\s\S]*?\*/\s*-?\}\}', '', registry)
-        match = re.fullmatch(r'\s*\{\{-?\s*\$primaryFooter\s*:=\s*"([A-Za-z_][A-Za-z0-9_-]*)"\s*-?\}\}\s*'
-                             r'\{\{-?\s*return\s+\(dict\s+"primaryFooter"\s+\$primaryFooter\s+"measuredFooterClasses"\s+'
-                             r'\(slice\s+\$primaryFooter\s+"([A-Za-z_][A-Za-z0-9_-]*)"\)\)\s*-?\}\}\s*', registry)
-        if not match or match.group(1) == match.group(2):
-            return ['Inherited footer contract: malformed central source-class registry']
-        footer_classes = set(match.groups())
-        render = json.loads((ROOT / 'data/render.json').read_text(encoding='utf-8'))
-        route_rows = json.loads((ROOT / 'data/route-map.json').read_text(encoding='utf-8'))['routes']
-        pages, source_prefix = render['pages'], render.get('mountPrefix', '').rstrip('/')
-    except (OSError, ValueError, KeyError, TypeError):
-        return ['Inherited footer contract: missing or malformed source/registry data']
-
-    def source_nodes(node):
-        if isinstance(node, dict):
-            yield node
-            for child in node.get('children', []):
-                yield from source_nodes(child)
-
-    def legal_family(paths):
-        # Independent structural identity: published company/app legal pairs and
-        # public navigation, rather than the class token being verified.
-        if not {'/about-us', '/tests'} <= paths:
-            return False
-        return any({'/documents/' + product + '-privacy-policy',
-                    '/documents/' + product + '-terms-and-conditions-of-use'} <= paths
-                   for product in ('emtalk', 'bret', 'dm'))
-
-    def local_path(href, mount):
-        path = urlsplit(str(href)).path
-        return path[len(mount):] if mount and path.startswith(mount + '/') else path
-
-    errors, expected_footers = [], 0
-    for row in route_rows:
-        route, file = row['path'], Path(build) / row['file']
-        page = pages.get(route)
-        if not isinstance(page, dict):
-            errors.append('Inherited footer contract: missing source route ' + route)
-            continue
-        footers = []
-        for node in source_nodes(page.get('body')):
-            if node.get('tag') != 'section':
-                continue
-            paths = {local_path(child.get('attributes', {}).get('href', ''), source_prefix)
-                     for child in source_nodes(node) if child.get('tag') == 'a'}
-            if legal_family(paths):
-                footers.append(node)
-        if len(footers) > 1:
-            errors.append('Inherited footer contract: ambiguous source footer ' + route)
-        expected_footers += len(footers)
-        for footer in footers:
-            if not footer_classes.intersection(str(footer.get('attributes', {}).get('class', '')).split()):
-                errors.append('Inherited footer contract: source class differs from central registry ' + route)
-        if not file.is_file():
-            errors.append('Inherited footer contract: missing rendered route ' + route)
-            continue
-        soup = BeautifulSoup(file.read_bytes(), 'html.parser')
-        actual = soup.select('[data-analytics-surface="footer"]')
-        if len(actual) != len(footers):
-            errors.append('Inherited footer contract: measured surface count differs from source ' + route)
-        for footer in actual:
-            paths = {local_path(node.get('href', ''), prefix) for node in footer.select('a[href]')}
-            if footer.name != 'section' or not footer_classes.intersection(footer.get('class', [])) or not legal_family(paths):
-                errors.append('Inherited footer contract: measured surface is not the source footer ' + route)
-    if not expected_footers:
-        errors.append('Inherited footer contract: no independent source footers found')
+        policy = json.loads(policy_path.read_text(encoding='utf-8'), object_pairs_hook=unique)
+    except (OSError, ValueError, UnicodeError):
+        return ['Analytics feedback coverage: invalid policy JSON']
+    if not isinstance(policy, dict):
+        return ['Analytics feedback coverage: policy must be an object']
+    routes = policy.get('routes')
+    products = policy.get('feedbackProducts')
+    if not isinstance(routes, dict) or not routes or not isinstance(products, dict):
+        return ['Analytics feedback coverage: routes and feedbackProducts must be objects']
+    errors = []
+    if set(products) != set(routes):
+        errors.append('Analytics feedback coverage: feedbackProducts must explicitly cover exactly the policy routes')
+    if not (set(expected_routes) | {'/404'}).issubset(routes):
+        errors.append('Analytics feedback coverage: active route is absent from the policy')
+    # Mirrors the finite runtime product() vocabulary, rather than trusting a
+    # newly extended schema to approve values the browser would silently discard.
+    allowed = {'emtalk', 'bret', 'dm', 'tapl', 'not_applicable'}
+    try:
+        schema_products = policy['schemas']['emtalk_interest_state']['properties']['product']['enum']
+        if not isinstance(schema_products, list) or len(schema_products) != len(allowed) or set(schema_products) != allowed:
+            raise ValueError('Product vocabulary drift')
+    except (KeyError, TypeError, ValueError):
+        errors.append('Analytics feedback coverage: product schema differs from the finite runtime vocabulary')
+    for route, product in products.items():
+        if not isinstance(product, str) or product not in allowed:
+            errors.append('Analytics feedback coverage: mapping must name a known product or explicit not_applicable')
+            break
+    for route, descriptor in routes.items():
+        if not isinstance(descriptor, dict):
+            errors.append('Analytics feedback coverage: route descriptor must be an object')
+            break
+        source_product = descriptor.get('product')
+        if source_product is not None and (not isinstance(source_product, str) or source_product not in allowed - {'not_applicable'}):
+            errors.append('Analytics feedback coverage: route product is outside the finite runtime vocabulary')
+            break
+        if source_product is not None and products.get(route) != source_product:
+            errors.append('Analytics feedback coverage: explicit mapping disagrees with the route product')
+            break
     return errors
 
 
-def verify(build, prefix=''):
+def verify_news_if_expected(build, expected_routes, prefix='', *, base_url=None):
+    """Run the owned News contract only for an active or authored News feature."""
+    if '/news' not in expected_routes and not (ROOT / 'content/news.md').exists():
+        return []
+    try:
+        from news_content import verify_news
+        errors = verify_news(build, ROOT, prefix, base_url=base_url)
+        if not isinstance(errors, list) or any(not isinstance(error, str) for error in errors):
+            return ['NEWS_RESULT_INVALID']
+        return errors
+    except FileNotFoundError:
+        return ['NEWS_REQUIRED_INPUT_MISSING']
+    except OSError:
+        return ['NEWS_INPUT_UNREADABLE']
+    except (json.JSONDecodeError, UnicodeError):
+        return ['NEWS_INPUT_DECODE_INVALID']
+    except (ValueError, TypeError, KeyError):
+        return ['NEWS_STRUCTURE_INVALID']
+    except Exception:
+        # Stable observed failure classes only, never exception text, local
+        # paths, record bodies or a guessed root cause. Returned errors retain
+        # their existing precise contract diagnostics.
+        return ['NEWS_INTERNAL_FAILURE']
+
+
+def verify(build, prefix='', *, base_url=None):
     build = Path(build).resolve()
     prefix = '/' + prefix.strip('/') if prefix.strip('/') else ''
     routes = json.loads((ROOT / 'data/route-map.json').read_text(encoding='utf-8'))
     expected = {r['path']: r['file'] for r in routes['routes']}
     errors, files = [], []
+    expected_base = None
+    if base_url is not None:
+        from news_content import validated_base_url
+        try:
+            expected_base = validated_base_url(base_url, prefix) + '/'
+        except (TypeError, ValueError):
+            errors.append('Build expected base URL is invalid')
+    errors.extend(verify_analytics_feedback_coverage(expected))
+    if '/tapl' in expected:
+        errors.extend(verify_tapl_landing(build, prefix))
     seo_enabled = (ROOT / 'data/seo.json').is_file()
     if (ROOT / 'layouts/partials/analytics-source-classes.html').is_file():
         errors.extend(verify_source_footer_surfaces(build, prefix))
+        errors.extend(verify_footer_social_geometry(build, prefix))
     if '/dm/workspace' in expected:
         errors.extend(verify_dm_font_delivery(build, prefix))
     if '/' in expected and (ROOT / 'layouts/partials/home-styles.html').is_file():
@@ -488,9 +553,9 @@ def verify(build, prefix=''):
         if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html'}:
             errors.append(f'Unmapped HTML output: {relative}')
         body = path.read_bytes()
-        if relative == '_headers':
-            if body != PAGES_ALIAS_HEADERS:
-                errors.append('Invalid Pages alias header policy: _headers')
+        if relative in PROVIDER_CONTROLS:
+            if body != PROVIDER_CONTROLS[relative]:
+                errors.append('Invalid Pages provider control policy: ' + relative)
         elif any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or path.suffix.lower() not in ALLOWED_EXT:
             errors.append(f'Output allowlist violation: {relative}')
         if seo_enabled and path.suffix.lower() == '.html':
@@ -498,6 +563,8 @@ def verify(build, prefix=''):
         files.append({'path': relative, 'bytes': len(body), 'sha256': hashlib.sha256(body).hexdigest()})
         if path.suffix.lower() in {'.html', '.svg'}:
             soup = BeautifulSoup(body, 'html.parser')
+            if path.suffix.lower() == '.html':
+                errors.extend(relative + ': ' + error for error in test_status_errors(soup))
             for canonical in soup.select('link[rel~="canonical"]'):
                 if relative == '404.html':
                     errors.append('404 error artifact must omit canonical')
@@ -622,16 +689,20 @@ def verify(build, prefix=''):
     if seo_enabled:
         from verify_seo import verify as verify_seo
         try:
-            seo_result = verify_seo(build, ROOT, prefix)
+            seo_result = verify_seo(build, ROOT, prefix, base_url=expected_base)
             errors.extend('SEO: ' + error for error in seo_result['errors'])
         except Exception:
             errors.append('SEO verification failed with malformed or missing configuration/output')
+    for name in PROVIDER_CONTROLS:
+        if not any(row['path'] == name for row in files):
+            errors.append('Missing Pages provider control policy: ' + name)
+    errors.extend(verify_news_if_expected(build, expected, prefix, base_url=base_url))
     snapshot = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     return {'schemaVersion': 1, 'scope': 'Static route/dependency/output checks; no functional parity claim',
             'routeCount': len(expected), 'mountPrefix': prefix, 'outputSnapshotSha256': snapshot,
             'files': files, 'errors': errors, 'passed': not errors,
-            'providerControlPaths': [row['path'] for row in files if row['path'] == '_headers'],
-            'publicArtifactCount': sum(row['path'] != '_headers' for row in files),
+            'providerControlPaths': [row['path'] for row in files if row['path'] in PROVIDER_CONTROLS],
+            'publicArtifactCount': sum(row['path'] not in PROVIDER_CONTROLS for row in files),
             'limitations': ['Canonical origins are selected by the bounded builder and bound through exact output bytes; this verifier does not independently certify DNS ownership or the live host.']}
 
 
@@ -639,10 +710,11 @@ def cli(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--build', required=True)
     parser.add_argument('--mount-prefix', default='')
+    parser.add_argument('--base-url')
     parser.add_argument('--report')
     args = parser.parse_args(argv)
     try:
-        result = verify(ROOT / args.build, args.mount_prefix)
+        result = verify(ROOT / args.build, args.mount_prefix, base_url=args.base_url)
     except Exception as error:
         result = {'scope': 'Static build CLI verification; no functional parity claim', 'passed': False,
                   'errors': ['Malformed or missing route configuration, sitemap or output (' + type(error).__name__ + ')']}

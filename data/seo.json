@@ -309,6 +309,42 @@
       "description": "Practise five breathing rhythms, create a custom rhythm, or follow progressive muscle relaxation. Free BRET practice in your browser, with no account needed.",
       "indexable": true,
       "headline": "Make a little room to breathe."
+    },
+    "/news": {
+      "title": "News from EmTalk | EmTalk",
+      "headline": "News from EmTalk",
+      "description": "Project updates, product development and reading highlights across EmTalk.",
+      "indexable": true
+    },
+    "/news/bret-browser-practice": {
+      "title": "Make room for a short pause with BRET | EmTalk",
+      "headline": "Make room for a short pause with BRET",
+      "description": "Choose a breathing rhythm or a muscle-relaxation practice in your browser.",
+      "indexable": true
+    },
+    "/news/decision-matrix-browser": {
+      "title": "Work through a choice with Decision Matrix | EmTalk",
+      "headline": "Work through a choice with Decision Matrix",
+      "description": "Compare options and weigh your reasons in a guest workspace.",
+      "indexable": true
+    },
+    "/news/news-from-emtalk": {
+      "title": "A Place for News Across EmTalk | EmTalk",
+      "headline": "A place for news across EmTalk",
+      "description": "A place for project updates, product development and reading highlights.",
+      "indexable": true
+    },
+    "/news/reading-sleep-burnout": {
+      "title": "Read or listen: sleep and burnout | EmTalk",
+      "headline": "Read or listen: sleep and burnout",
+      "description": "Explore nine articles, with an audio option on each article page.",
+      "indexable": true
+    },
+    "/news/tapl-in-development": {
+      "title": "What we are exploring with TAPL | EmTalk",
+      "headline": "What we are exploring with TAPL",
+      "description": "A planned tool for small steps, learning and gradual progress.",
+      "indexable": true
     }
   }
 }

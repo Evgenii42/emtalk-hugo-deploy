@@ -2078,7 +2078,7 @@ textarea.w-input, textarea.w-select {
 
 @font-face {
   font-family: Geologica;
-  src: url("/emtalk-site-preview/media/d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf") format("truetype");
+  src: url("/media/d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -2086,7 +2086,7 @@ textarea.w-input, textarea.w-select {
 
 @font-face {
   font-family: Manrope;
-  src: url("/emtalk-site-preview/media/db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf") format("truetype");
+  src: url("/media/db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf") format("truetype");
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
@@ -2457,7 +2457,7 @@ h1 {
 
 .section-6 {
   background-color: #281c37;
-  background-image: url("/emtalk-site-preview/media/b31460686416e3f3721d-696ec9176311eb0f141dbdb5_hero.webp");
+  background-image: url("/media/b31460686416e3f3721d-696ec9176311eb0f141dbdb5_hero.webp");
   background-position: 50%;
   background-size: cover;
   flex-flow: column;
@@ -3509,7 +3509,7 @@ h1 {
 
 .section-24 {
   object-fit: contain;
-  background-image: url("/emtalk-site-preview/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp");
+  background-image: url("/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp");
   background-position: 50% 100%;
   background-repeat: repeat;
   background-size: cover;
@@ -4103,7 +4103,7 @@ h1 {
 
 .section-hero {
   background-color: #d7bed3;
-  background-image: url("/emtalk-site-preview/media/361e9aebc52b6052b7ca-6977ff01585a480eca9f55fc_ced4d6f3915a8aee2134ae3ae2ac4c5e_Hero-svg.svg");
+  background-image: url("/media/361e9aebc52b6052b7ca-6977ff01585a480eca9f55fc_ced4d6f3915a8aee2134ae3ae2ac4c5e_Hero-svg.svg");
   background-position: 50% 100%;
   background-size: cover;
   flex-flow: column;
@@ -4619,7 +4619,7 @@ h1 {
 .section-24-copy {
   object-fit: contain;
   object-fit: contain;
-  background-image: url("/emtalk-site-preview/media/d65fada81e0b944e6aeb-69838d06afdb5f4c3a04801b_Hero-main.webp");
+  background-image: url("/media/d65fada81e0b944e6aeb-69838d06afdb5f4c3a04801b_Hero-main.webp");
   background-position: 50% 0;
   background-repeat: repeat;
   background-size: cover;
@@ -4639,7 +4639,7 @@ h1 {
 .hero-artciles {
   -webkit-text-fill-color: inherit;
   object-fit: contain;
-  background-image: url("/emtalk-site-preview/media/65e3b320ed553ec6a0d9-6a876c719a554177a350c42b_Header--2-.webp");
+  background-image: url("/media/65e3b320ed553ec6a0d9-6a876c719a554177a350c42b_Header--2-.webp");
   background-position: 50% 100%;
   background-size: cover;
   background-clip: border-box;
@@ -6756,7 +6756,7 @@ h1 {
 }
 
 .tests-hero-background-v2 {
-  background-image: url("/emtalk-site-preview/media/7d8e091cf1cb8e7f4f7b-6a8df6bdef13d3295b96e2e1_Tests.webp");
+  background-image: url("/media/7d8e091cf1cb8e7f4f7b-6a8df6bdef13d3295b96e2e1_Tests.webp");
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -7313,7 +7313,7 @@ h1 {
   }
 
   .section-24 {
-    background-image: url("/emtalk-site-preview/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp");
+    background-image: url("/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp");
     background-position: 0 100%;
     background-size: cover;
     width: 100%;
@@ -7832,7 +7832,7 @@ h1 {
   }
 
   .section-24 {
-    background-image: url("/emtalk-site-preview/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp");
+    background-image: url("/media/5f569ae993a0c578f06c-6a87669b8066bf850561e16e_Header.webp");
     background-position: 50% 100%;
     background-repeat: repeat;
     background-size: cover;
@@ -8962,7 +8962,7 @@ h1 {
   }
 
   .hero-artciles {
-    background-image: url("/emtalk-site-preview/media/3c79c7a80668f6316d6d-6a0b5e6fa4a2573899d935d3_frame_260860.webp");
+    background-image: url("/media/3c79c7a80668f6316d6d-6a0b5e6fa4a2573899d935d3_frame_260860.webp");
     background-position: 50% 100%;
     background-size: cover;
     height: 70%;
@@ -9487,7 +9487,7 @@ h1 {
   }
 
   .tests-hero-background-v2 {
-    background-image: url("/emtalk-site-preview/media/07b2c0e0cfdfeda9440f-6a8df6bcf5035d8b6fea85e1_Tests_mob.webp");
+    background-image: url("/media/07b2c0e0cfdfeda9440f-6a8df6bcf5035d8b6fea85e1_Tests_mob.webp");
     min-height: 70vh;
   }
 
@@ -10229,7 +10229,7 @@ h1 {
   }
 
   .hero-artciles {
-    background-image: url("/emtalk-site-preview/media/3c79c7a80668f6316d6d-6a0b5e6fa4a2573899d935d3_frame_260860.webp");
+    background-image: url("/media/3c79c7a80668f6316d6d-6a0b5e6fa4a2573899d935d3_frame_260860.webp");
     height: 65%;
     min-height: 65vh;
   }
@@ -10531,7 +10531,7 @@ h1 {
   }
 
   .tests-hero-background-v2 {
-    background-image: url("/emtalk-site-preview/media/07b2c0e0cfdfeda9440f-6a8df6bcf5035d8b6fea85e1_Tests_mob.webp");
+    background-image: url("/media/07b2c0e0cfdfeda9440f-6a8df6bcf5035d8b6fea85e1_Tests_mob.webp");
     background-size: cover;
   }
 
@@ -10809,7 +10809,7 @@ h1 {
   }
 
   .hero-article {
-    background-image: url("/emtalk-site-preview/media/03f5488c0c0ea48c7969-background-image.svg");
+    background-image: url("/media/03f5488c0c0ea48c7969-background-image.svg");
     background-position: 0 0;
     background-size: auto;
     width: 100%;
@@ -11195,7 +11195,7 @@ h1 {
 
   .body-3 {
     background-color: #b291d6;
-    background-image: url("/emtalk-site-preview/media/51b1e82923be825a9dcf-695b128ead9fd6775bc1fb14_Ellipse-2.svg"), linear-gradient(149deg, #b291d6, #d6d0f5);
+    background-image: url("/media/51b1e82923be825a9dcf-695b128ead9fd6775bc1fb14_Ellipse-2.svg"), linear-gradient(149deg, #b291d6, #d6d0f5);
     background-position: 0 0, 0 0;
     background-size: auto, auto;
   }
@@ -11340,7 +11340,7 @@ h1 {
 
   .body-6 {
     background-color: #b291d6;
-    background-image: url("/emtalk-site-preview/media/51b1e82923be825a9dcf-695b128ead9fd6775bc1fb14_Ellipse-2.svg"), linear-gradient(#b291d6, #d6d0f5);
+    background-image: url("/media/51b1e82923be825a9dcf-695b128ead9fd6775bc1fb14_Ellipse-2.svg"), linear-gradient(#b291d6, #d6d0f5);
     background-position: 0 0, 0 0;
     background-size: auto, auto;
   }
@@ -11358,7 +11358,7 @@ h1 {
   }
 
   .hero-meditation {
-    background-image: url("/emtalk-site-preview/media/03f5488c0c0ea48c7969-background-image.svg");
+    background-image: url("/media/03f5488c0c0ea48c7969-background-image.svg");
     background-position: 0 0;
     background-size: auto;
     width: 100%;
@@ -12274,7 +12274,7 @@ h1 {
   }
 
   .section-24-copy {
-    background-image: url("/emtalk-site-preview/media/d65fada81e0b944e6aeb-69838d06afdb5f4c3a04801b_Hero-main.webp");
+    background-image: url("/media/d65fada81e0b944e6aeb-69838d06afdb5f4c3a04801b_Hero-main.webp");
     background-position: 50% 100%;
     background-size: cover;
     height: 80%;
@@ -13016,7 +13016,7 @@ h1 {
   }
 
   .tests-hero-background-v2 {
-    background-image: url("/emtalk-site-preview/media/07b2c0e0cfdfeda9440f-6a8df6bcf5035d8b6fea85e1_Tests_mob.webp");
+    background-image: url("/media/07b2c0e0cfdfeda9440f-6a8df6bcf5035d8b6fea85e1_Tests_mob.webp");
     background-position: 50% 100%;
     background-size: 100vw 100vh;
   }
@@ -13090,7 +13090,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 200;
-  src: url("/emtalk-site-preview/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
+  src: url("/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
@@ -13098,7 +13098,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 200;
-  src: url("/emtalk-site-preview/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
+  src: url("/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 /* vietnamese */
@@ -13106,7 +13106,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 200;
-  src: url("/emtalk-site-preview/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
+  src: url("/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
   unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
@@ -13114,7 +13114,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 200;
-  src: url("/emtalk-site-preview/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
+  src: url("/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -13122,7 +13122,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 200;
-  src: url("/emtalk-site-preview/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
+  src: url("/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* cyrillic-ext */
@@ -13130,7 +13130,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 300;
-  src: url("/emtalk-site-preview/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
+  src: url("/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
@@ -13138,7 +13138,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 300;
-  src: url("/emtalk-site-preview/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
+  src: url("/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 /* vietnamese */
@@ -13146,7 +13146,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 300;
-  src: url("/emtalk-site-preview/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
+  src: url("/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
   unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
@@ -13154,7 +13154,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 300;
-  src: url("/emtalk-site-preview/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
+  src: url("/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -13162,7 +13162,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 300;
-  src: url("/emtalk-site-preview/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
+  src: url("/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* cyrillic-ext */
@@ -13170,7 +13170,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
-  src: url("/emtalk-site-preview/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
+  src: url("/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
@@ -13178,7 +13178,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
-  src: url("/emtalk-site-preview/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
+  src: url("/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 /* vietnamese */
@@ -13186,7 +13186,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
-  src: url("/emtalk-site-preview/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
+  src: url("/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
   unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
@@ -13194,7 +13194,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
-  src: url("/emtalk-site-preview/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
+  src: url("/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -13202,7 +13202,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
-  src: url("/emtalk-site-preview/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
+  src: url("/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* cyrillic-ext */
@@ -13210,7 +13210,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 500;
-  src: url("/emtalk-site-preview/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
+  src: url("/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
@@ -13218,7 +13218,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 500;
-  src: url("/emtalk-site-preview/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
+  src: url("/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 /* vietnamese */
@@ -13226,7 +13226,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 500;
-  src: url("/emtalk-site-preview/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
+  src: url("/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
   unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
@@ -13234,7 +13234,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 500;
-  src: url("/emtalk-site-preview/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
+  src: url("/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -13242,7 +13242,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 500;
-  src: url("/emtalk-site-preview/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
+  src: url("/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* cyrillic-ext */
@@ -13250,7 +13250,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 600;
-  src: url("/emtalk-site-preview/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
+  src: url("/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
@@ -13258,7 +13258,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 600;
-  src: url("/emtalk-site-preview/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
+  src: url("/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 /* vietnamese */
@@ -13266,7 +13266,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 600;
-  src: url("/emtalk-site-preview/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
+  src: url("/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
   unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
@@ -13274,7 +13274,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 600;
-  src: url("/emtalk-site-preview/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
+  src: url("/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -13282,7 +13282,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 600;
-  src: url("/emtalk-site-preview/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
+  src: url("/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* cyrillic-ext */
@@ -13290,7 +13290,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 700;
-  src: url("/emtalk-site-preview/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
+  src: url("/media/c16de6b538583c53e948-TK3iWkUHHAIjg752FD8Ghe4.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
@@ -13298,7 +13298,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 700;
-  src: url("/emtalk-site-preview/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
+  src: url("/media/50c86c83bbc2b3664824-TK3iWkUHHAIjg752HT8Ghe4.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 /* vietnamese */
@@ -13306,7 +13306,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 700;
-  src: url("/emtalk-site-preview/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
+  src: url("/media/33aa922461f71f370dd2-TK3iWkUHHAIjg752Fj8Ghe4.woff2") format("woff2");
   unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
@@ -13314,7 +13314,7 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 700;
-  src: url("/emtalk-site-preview/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
+  src: url("/media/4f7371f60a4b3306c26f-TK3iWkUHHAIjg752Fz8Ghe4.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -13322,6 +13322,6 @@ h1 {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 700;
-  src: url("/emtalk-site-preview/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
+  src: url("/media/02dc97907b81c37a8a92-TK3iWkUHHAIjg752GT8G.woff2") format("woff2");
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

@@ -104,9 +104,16 @@ function initPlayer(root, legacy = false) {
   const progress = root.querySelector(legacy ? '.progress-bar' : '.emtalk-player-ui__progress');
   const fill = root.querySelector(legacy ? '.progress-fill' : '.emtalk-player-ui__progress-fill');
   if (!audio || !button || !icon || !current || !duration || !progress || !fill) return;
+  let starting = false;
+  const seekBlocked = () => starting || root.dataset.playbackState === 'loading';
+  const updateSeekAvailability = () => progress.setAttribute('aria-disabled', String(seekBlocked()));
+  const setPlaybackState = state => {
+    root.dataset.playbackState = state;
+    updateSeekAvailability();
+  };
   const measurement = createAudioMeasurement();
   root.dataset.playerReady = 'true';
-  root.dataset.playbackState = 'idle';
+  setPlaybackState('idle');
   button.setAttribute('role', 'button');
   button.setAttribute('aria-label', 'Play audio');
   if (button.tagName !== 'BUTTON') button.tabIndex = 0;
@@ -150,12 +157,11 @@ function initPlayer(root, legacy = false) {
     progress.setAttribute('aria-valuenow', String(Math.round(percent)));
     progress.setAttribute('aria-valuetext', `${formatTime(audio.currentTime)} of ${formatTime(total)}`);
   };
-  let starting = false;
   // Ignore errors from an inactive cancelled load until the next explicit attempt.
   let cancelledStart = false;
   let cancelStart;
   window.addEventListener?.('pagehide', event => {
-    cancelStart?.();
+    cancelStart?.(true);
     audio.pause();
     if (!event.persisted) {
       const cached = bufferedSources.get(audio);
@@ -177,7 +183,7 @@ function initPlayer(root, legacy = false) {
     starting = true;
     measurement.attempt();
     cancelledStart = false;
-    root.dataset.playbackState = 'loading';
+    setPlaybackState('loading');
     button.setAttribute('aria-busy', 'true');
     setAction('cancel');
     showStatus('Loading audio...');
@@ -186,10 +192,13 @@ function initPlayer(root, legacy = false) {
     let decodingBlob = false;
     const download = new AbortController();
     const failed = new Promise((_, reject) => { rejectLoad = reject; });
-    cancelStart = () => {
+    cancelStart = (preserveCycle = false) => {
       cancelled = true;
       cancelledStart = true;
-      measurement.cancel();
+      // Page lifecycle interruption preserves an existing factual audio cycle.
+      // Explicit cancel/source replacement still end the attempt for a new Play.
+      if (preserveCycle === true) measurement.suspend();
+      else measurement.cancel();
       download.abort();
       audio.pause();
       rejectLoad(new DOMException('Playback cancelled', 'AbortError'));
@@ -240,7 +249,7 @@ function initPlayer(root, legacy = false) {
       await Promise.race([play, failed]);
     } catch (error) {
       audio.pause();
-      root.dataset.playbackState = cancelled ? 'paused' : 'error';
+      setPlaybackState(cancelled ? 'paused' : 'error');
       if (!cancelled) measurement.error(timedOut ? 'timeout' : error?.name === 'NotAllowedError' ? 'play_rejected' : 'load_failed');
       // A rejected play attempt can fail without a MediaError (for example, playback policy).
       showStatus(cancelled ? '' : 'Audio could not start. Please try again.');
@@ -254,11 +263,12 @@ function initPlayer(root, legacy = false) {
       // A resolved play promise can win its race just before an explicit cancel.
       // Native paused state remains authoritative after pending callbacks settle.
       if (audio.paused && root.dataset.playbackState !== 'error') {
-        root.dataset.playbackState = audio.ended ? 'ended' : 'paused';
+        setPlaybackState(audio.ended ? 'ended' : 'paused');
         showStatus('');
       }
       cancelStart = null;
       button.removeAttribute('aria-busy');
+      updateSeekAvailability();
       showIcon(audio.paused);
     }
   };
@@ -280,7 +290,7 @@ function initPlayer(root, legacy = false) {
     for (const other of players) if (other !== audio && !other.paused) actions.get(other)?.pause();
     showIcon(false);
     if (starting) setAction('cancel');
-    root.dataset.playbackState = 'playing';
+    setPlaybackState('playing');
     showStatus('');
   });
   audio.addEventListener('playing', () => {
@@ -288,26 +298,26 @@ function initPlayer(root, legacy = false) {
       if (!audio.paused) audio.pause();
       return;
     }
-    root.dataset.playbackState = 'playing';
+    setPlaybackState('playing');
     showStatus('');
     measurement.playing();
   });
   audio.addEventListener('pause', () => {
     if (starting) return;
     showIcon(true);
-    if (!audio.error && root.dataset.playbackState !== 'error') root.dataset.playbackState = audio.ended ? 'ended' : 'paused';
+    if (!audio.error && root.dataset.playbackState !== 'error') setPlaybackState(audio.ended ? 'ended' : 'paused');
     if (root.dataset.playbackState !== 'error') showStatus('');
     measurement.paused();
   });
   audio.addEventListener('ended', () => {
     measurement.ended();
-    root.dataset.playbackState = 'ended';
+    setPlaybackState('ended');
     showIcon(true);
     update();
   });
   audio.addEventListener('waiting', () => {
     if (audio.paused) return;
-    root.dataset.playbackState = 'loading';
+    setPlaybackState('loading');
     if (starting) setAction('cancel');
     showStatus('Loading audio...');
   });
@@ -315,12 +325,13 @@ function initPlayer(root, legacy = false) {
     // Pending failures settle through toggle; a cancelled attempt is not a load error.
     if (starting || cancelledStart) return;
     measurement.error('load_failed');
-    root.dataset.playbackState = 'error';
+    setPlaybackState('error');
     showIcon(true);
     showStatus('Audio could not load. Please try again.');
   });
   for (const event of ['loadedmetadata', 'durationchange', 'timeupdate', 'seeked']) audio.addEventListener(event, update);
   const seek = time => {
+    if (seekBlocked()) return;
     markActive(audio);
     if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
     audio.currentTime = Math.max(0, Math.min(audio.duration, time));

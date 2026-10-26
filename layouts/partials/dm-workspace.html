@@ -11,8 +11,9 @@
       <button type="button" data-dm-action="restore">Saved decisions</button>
       <button type="button" data-dm-view="files">Files and privacy</button>
     </nav>
-    <p class="dm-workspace__draft" data-dm-draft-notice>Local draft: changes save in this browser only.</p>
+    <p class="dm-workspace__draft" data-dm-draft-notice tabindex="-1">Local draft: changes save in this browser only.</p>
     <section class="dm-workspace__notice" data-dm-draft-recovery hidden aria-label="Current draft recovery"></section>
+    <button type="button" data-dm-action="retry-draft" hidden>Retry saving</button>
     <p data-dm-status role="status" aria-live="polite" aria-atomic="true"></p>
     <section class="dm-workspace__files" data-dm-files hidden aria-labelledby="dm-files-title">
       <h2 id="dm-files-title" tabindex="-1">Files and privacy</h2>

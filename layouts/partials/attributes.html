@@ -1,5 +1,17 @@
+{{/* Paired independent footer projection: scripts/verify_footer.py. Changes to
+string attributes, social dimensions, surface or store URLs need both layers. */}}
 {{- $attrs := "" -}}
-{{- range $name, $value := . -}}
+{{- $attributes := . -}}
+{{/* These shared social SVGs have verified intrinsic48x48 geometry. Reserve it
+     before lazy decoding so the footer cannot move a pending native click. */}}
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $socialSources := slice (printf "%s/media/114ba47600ed2c2e9628-6966c5e22ba6569feec112f9_Facebook.svg" $prefix) (printf "%s/media/01c03a9b2a8db29cac67-6966c5e750a519b527bf07df_Instargam.svg" $prefix) (printf "%s/media/71547b4f4510e7a3a764-6966c5ef7da1c4b4a8b2dc00_Telegram.svg" $prefix) -}}
+{{- if in $socialSources (index $attributes "src" | default "") -}}
+  {{- if not (isset $attributes "width") -}}{{- $attributes = merge $attributes (dict "width" "48") -}}{{- end -}}
+  {{- if not (isset $attributes "height") -}}{{- $attributes = merge $attributes (dict "height" "48") -}}{{- end -}}
+{{- end -}}
+{{- range $name, $value := $attributes -}}
+  {{- if ne (printf "%T" $value) "string" -}}{{- errorf "HTML attribute %q requires a string value" $name -}}{{- end -}}
   {{- if eq $name "href" -}}{{- $value = partial "store-campaign-url.html" $value -}}{{- end -}}
   {{- if not (findRE `^[A-Za-z_:][A-Za-z0-9_.:-]*$` $name) -}}{{- errorf "Invalid HTML attribute name %q" $name -}}{{- end -}}
   {{- $attrs = printf "%s %s=\"%s\"" $attrs $name (htmlEscape (printf "%v" $value)) -}}

@@ -9,6 +9,7 @@
 .privacy-controls__opener--minimized-top { top: max(.5rem,env(safe-area-inset-top)); bottom: auto; }
 .privacy-controls { position:fixed; z-index:1000; box-sizing:border-box; left:max(12px,env(safe-area-inset-left)); right:max(12px,env(safe-area-inset-right)); bottom:max(12px,env(safe-area-inset-bottom)); display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:20px; row-gap:2px; max-width:1080px; max-height:60vh; max-height:60dvh; margin:0 auto; padding:12px 16px; border:1px solid #d7bed3; border-radius:16px; background:#fffaf5; color:#281c37; font:400 13px/1.45 Manrope,Arial,sans-serif; overflow:auto; overflow-wrap:anywhere; overscroll-behavior:contain; box-shadow:0 3px 18px #281c371a; }
 .privacy-controls h2 { color:inherit; font-size:14px; font-weight:700; line-height:1.35; margin:0 0 4px; }
+.privacy-controls.privacy-controls--top { top:max(8px,env(safe-area-inset-top)); bottom:auto; }
 .privacy-controls p { color:inherit; font:inherit; margin:0; }
 .privacy-controls a { color:#573052; text-decoration:underline; text-underline-offset:2px; }
 .privacy-controls__actions { display:flex; flex-wrap:nowrap; align-items:stretch; gap:8px; margin:0; }

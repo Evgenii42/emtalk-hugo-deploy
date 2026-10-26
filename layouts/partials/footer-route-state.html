@@ -1,0 +1,30 @@
+{{/* Copy the standard footer AST without mutating its shared Home source.
+     Current-page semantics belong to the destination route that renders it.
+     Paired independent projection: scripts/verify_footer.py. */}}
+{{- $node := .node -}}
+{{- if not (reflect.IsMap $node) -}}{{- return $node -}}{{- end -}}
+{{- $attrs := dict -}}
+{{- range $key, $value := $node.attributes -}}
+  {{- if not (and (eq $node.tag "a") (in (slice "aria-current" "class") $key)) -}}
+    {{- $attrs = merge $attrs (dict $key $value) -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $node.tag "a" -}}
+  {{- $classes := slice -}}
+  {{- range findRE `[^[:space:]]+` (index $node.attributes "class" | default "") -}}
+    {{- if ne . "w--current" -}}{{- $classes = $classes | append . -}}{{- end -}}
+  {{- end -}}
+  {{- if $classes -}}{{- $attrs = merge $attrs (dict "class" (delimit $classes " ")) -}}{{- end -}}
+  {{- if eq (index $attrs "href") (printf "%s%s" hugo.Data.render.mountPrefix .route) -}}
+    {{- $attrs = merge $attrs (dict "aria-current" "page") -}}
+  {{- end -}}
+{{- end -}}
+{{- $children := slice -}}
+{{- range $node.children -}}
+  {{- $children = $children | append (partial "footer-route-state.html" (dict "node" . "route" $.route)) -}}
+{{- end -}}
+{{- $copy := dict "attributes" $attrs "children" $children -}}
+{{- range $key, $value := $node -}}
+  {{- if not (in (slice "attributes" "children") $key) -}}{{- $copy = merge $copy (dict $key $value) -}}{{- end -}}
+{{- end -}}
+{{- return $copy -}}

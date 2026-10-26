@@ -1,19 +1,6 @@
-# EmTalk finite analytics031 deployment snapshot
+# EmTalk Hugo deployment source
 
-Canonical source/history: https://forgejo.emtalk.org/Emtalk/emtalk_site .
-Original394 baseline rows and published029 raw sources are retained, with
-the explicit reviewed analytics031 authored archive selection applied.
-No Bing030, raw private CMS, visitor rows, credentials or audit archives
-are published. Sources are mapped from committed canonical archive blobs.
-
-Hugo0.168.0, production main, public output. Build using:
-python -m pip install -r requirements-build.txt && python scripts/build_cloudflare.py
-EMTALK_SITE_ORIGIN=https://www.emtalk.org/ is required for production.
-
-MANDATORY: clean-export actual rebuild must match the reviewed prepared
-source and output hashes before publication. Selector/export binding is
-not a build, provider receipt, consent compliance or native-media proof.
-Do not restore unconditional029 tracking as an analytics rollback.
-
-Canonical commit: 5d2cc99a4932c15802640380185518f76ef1deb9
-Reviewed receipt: docs/audits/analytics031/build018-footer.json
+This repository contains public build inputs only. Canonical project history and
+review evidence remain in Forgejo. Build: python -m pip install -r requirements-build.txt
+then python scripts/build_cloudflare.py. Output: public. Controlled staging branch:
+interest032. Production branch: main. Service activation is a separate operation.

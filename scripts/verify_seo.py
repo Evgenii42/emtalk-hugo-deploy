@@ -30,18 +30,31 @@ def preserved_metadata(metadata):
 def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
     root, build = Path(root).resolve(), Path(build).resolve()
     errors, rows = [], []
-    config = json.loads((root / 'data/seo.json').read_text(encoding='utf-8'))
+    def unique_fields(fields):
+        values = {}
+        for key, value in fields:
+            if key in values:
+                raise ValueError('Duplicate SEO configuration field')
+            values[key] = value
+        return values
+    config = json.loads((root / 'data/seo.json').read_text(encoding='utf-8'), object_pairs_hook=unique_fields)
     mapping = json.loads((root / 'data/route-map.json').read_text(encoding='utf-8'))
     render = json.loads((root / 'data/render.json').read_text(encoding='utf-8'))
     source = json.loads((root / 'data/source-content.json').read_text(encoding='utf-8'))
     owned = load_owned_pages(root, source['pages'])
+    from news_content import load_news
+    authored_news = load_news(root, set(source['pages']) | set(owned), include_drafts=True)
+    draft_news_routes = {row['routeId'] for row in authored_news if row['draft']}
     routes, pages = mapping['routes'], config['pages']
     current_render = preview is None
     if current_render:
         preview = render['preview']
     prefix = '/' + prefix.strip('/') if prefix.strip('/') else ''
     expected_routes = {row['path'] for row in routes}
-    if set(pages) != expected_routes or len(routes) != len(expected_routes):
+    # Retained metadata for validated authored drafts supports republishing.
+    # Other extras, missing active routes and duplicate route rows still fail.
+    if (expected_routes - set(pages) or set(pages) - expected_routes - draft_news_routes
+            or len(routes) != len(expected_routes)):
         errors.append('SEO route configuration is incomplete or duplicated')
     registered_routes = (set(source['pages']) - EXCLUDED) | {route for route, entry in owned.items() if entry['mode'] == 'new'}
     if expected_routes != registered_routes:
@@ -291,7 +304,7 @@ def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
     if not robots or 'noindex' not in robots.get('content', '').lower():
         errors.append('404 must be noindex')
     result = {'scope': 'All-route static SEO settings; not Google validation, indexing, ranking or full migration release',
-              'preview': preview, 'routeCount': len(routes), 'indexableCount': sum(bool(p['indexable']) for p in pages.values()),
+              'preview': preview, 'routeCount': len(routes), 'indexableCount': sum(bool(pages.get(row['path'], {}).get('indexable')) for row in routes),
               'sitemapCount': len(actual_sitemap), 'rows': rows, 'errors': errors, 'passed': not errors,
               'decodedSocialImageCount': sum(size is not None for size in measured_images.values()),
               'limitations': ['Author/date/rating claims intentionally omitted until independently verified.',

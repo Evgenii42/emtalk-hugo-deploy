@@ -2,7 +2,7 @@
 {{- $policy := index hugo.Data "analytics-policy" -}}
 {{- if not (reflect.IsMap $analytics) -}}{{- errorf "Missing analytics configuration" -}}{{- end -}}
 {{- if not (reflect.IsMap $policy) -}}{{- errorf "Missing analytics runtime policy" -}}{{- end -}}
-{{- $allowed := and $analytics.enabledForProduction (not hugo.Data.render.preview) (eq $analytics.reviewedPolicy "003") -}}
+{{- $allowed := and $analytics.enabledForProduction (not hugo.Data.render.preview) (eq $analytics.reviewedPolicy "004") -}}
 {{- $script := resources.Get "js/analytics.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
 {{- $css := resources.Get "css/privacy-controls.css" | minify -}}
 <style>{{ $css.Content | safeCSS }}</style>

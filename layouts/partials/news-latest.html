@@ -1,0 +1,18 @@
+{{- if eq .mode "hero" -}}
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{- $latest := .items -}}
+{{- if $latest -}}
+    <div class="home-news-preview" data-home-news-preview>
+    <button class="home-news-toggle" type="button" data-home-news-toggle aria-expanded="true" aria-controls="home-news-panel" aria-describedby="home-news-help" hidden><span>Latest news</span><span data-home-news-icon aria-hidden="true">−</span></button>
+    <span class="home-news-help" id="home-news-help" data-home-news-help hidden>The preview can fold automatically after a total of eight quiet seconds while fully visible below the menu. Reduced motion keeps it open. Use Latest news to show or hide it; reopening keeps it open.</span>
+    <span class="home-news-help" data-home-news-status role="status" aria-live="polite" aria-atomic="true"></span>
+    <nav class="home-news" id="home-news-panel" data-home-news-panel aria-label="Latest news" data-analytics-surface="news_cta">
+      <div class="home-news__heading"><span data-home-news-static>Latest news</span><a {{ partial "native-link-focus.html" . }} class="home-news__all" href="{{ $prefix }}/news">All news <span aria-hidden="true">↗</span></a></div>
+      {{- with index $latest 0 -}}
+      <a {{ partial "native-link-focus.html" . }} class="home-news__primary" href="{{ $prefix }}{{ .routeId }}"><span>{{ if eq .availability "in-development" }}<span class="home-news__status">In development</span>{{ end }}{{ .title }}</span><span aria-hidden="true">↗</span></a>
+      {{- end -}}
+      {{- range after 1 $latest -}}<a {{ partial "native-link-focus.html" . }} class="home-news__secondary" href="{{ $prefix }}{{ .routeId }}"><span>{{ .title }}</span><span aria-hidden="true">↗</span></a>{{- end -}}
+    </nav>
+    </div>
+    {{- end -}}
+{{- else -}}{{- errorf "Unsupported latest News mode %q" .mode -}}{{- end -}}

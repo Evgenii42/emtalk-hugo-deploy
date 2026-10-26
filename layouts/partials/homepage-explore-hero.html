@@ -30,4 +30,12 @@
     </div>
   </div>
 </section>
-{{ if $latest }}{{ $homeNewsJs := resources.Get "js/home-news.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $homeNewsJs.RelPermalink }}" integrity="{{ $homeNewsJs.Data.Integrity }}"></script>{{ end }}
+{{ if $latest }}
+  {{- $homeNewsJs := resources.Get "js/home-news.js" | js.Build (dict "minify" true "target" "es2020" "format" "iife") -}}
+  {{- $inlineLower := lower $homeNewsJs.Content -}}
+  {{- if or (in $inlineLower "</script") (in $inlineLower "<!--") -}}
+    {{- errorf "Home News controller contains an unsafe inline script delimiter" -}}
+  {{- end -}}
+  {{/* Execute after the complete hero but before its existing reveal coordinator. */}}
+<script data-home-news-controller>{{ $homeNewsJs.Content | safeJS }}</script>
+{{ end }}

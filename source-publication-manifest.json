@@ -1,17 +1,17 @@
 {
   "branch": "interest032",
-  "buildReceiptSha256": "2f4b3b5f799fa4624dfeb1c1c3fad4feaa9a8ab61c2af9489fe96946ca8ba68e",
-  "canonicalSourceCommit": "fc5cbc97e0e0a6ef8a73a08f871736297e51b13e",
+  "buildReceiptSha256": "ea7ea1c53f25061ce3243deec8554fc2e7d9d63adf94278db4002f9577531a29",
+  "canonicalSourceCommit": "59cacb1042a35e15f7ca92927ca9fb3e68ec7085",
   "cleanExportRebuildPerformed": false,
   "defaultIntakeEnabled": false,
   "fourReleaseReviewsCertified": false,
   "fullReleaseAccepted": false,
-  "outputCount": 349,
-  "outputSnapshotSha256": "e87f150efe9563da4df4d695059598c1b4356a7777c0c873c7df64b5cb44efc7",
+  "outputCount": 348,
+  "outputSnapshotSha256": "3927ac7775fc9cd43016d4ab9004811110b69002c28605c7aa4fe66b3c1bfdea",
   "routes": 48,
   "scope": "Controlled staging source publication only; not full release or intake acceptance",
   "serviceActivationChanged": false,
-  "sourceCapsuleManifestSha256": "88a2536fc968a911ce38e549462449eaddf8fd90fa6ddc17695abd8422807a52",
+  "sourceCapsuleManifestSha256": "aedf41330cff56ed7bdab72da9020bb665fe88353f0ea95de6d4bf386657c3d1",
   "sourceCount": 486,
   "sourceFiles": [
     {
@@ -455,9 +455,9 @@
       "sha256": "432b49f560beb6fa8d4089c19110efc3a94b31799634bf0a40742003986b5f66"
     },
     {
-      "bytes": 12960,
+      "bytes": 14568,
       "path": "assets/js/home-news.js",
-      "sha256": "ba9439ae8aadc192f35ec8d2ade034e33d2d97e6ce8de5fbda5f776a341fb37e"
+      "sha256": "5c8352cbc2b3a5d0913a3a1dd1b8b5a7ffa8f4a37e492381d12b99ec53e0af51"
     },
     {
       "bytes": 16992,
@@ -1025,9 +1025,9 @@
       "sha256": "af80cb62e0b50a8709b1dca92e3352077c4a0a061acc3b70ea5398a2417c98ac"
     },
     {
-      "bytes": 2199,
+      "bytes": 2489,
       "path": "layouts/partials/homepage-explore-hero.html",
-      "sha256": "e43dcf81c782e31c1ce685a06c23da71b801204b19c7f127b6778c6b9571dedf"
+      "sha256": "5b614d6b17a8a1dee980b9df438142e133ec3d612d55a8c65d8dedaec98d4a93"
     },
     {
       "bytes": 191,
@@ -1060,9 +1060,9 @@
       "sha256": "261d52b0e13ee0ef589a278f4672caf4179d945d3ae0c3c66cffdcf62f680d01"
     },
     {
-      "bytes": 1884,
+      "bytes": 1957,
       "path": "layouts/partials/news-latest.html",
-      "sha256": "695fceeca3a28dd8ab93fab20fb3ef40a599942f7eb9b117cbc9f84199e90405"
+      "sha256": "47b16f79b1e9dfe0301f12864fa789047df98004013d1bdfad36140e6b239fc1"
     },
     {
       "bytes": 3582,
@@ -2445,6 +2445,6 @@
       "sha256": "db295ade2d84f96e176ea6bc6acb39b5c25409ac3cfcc0b0aec34b5ab1f60e49"
     }
   ],
-  "sourceInputSnapshotSha256": "6c6b309213f431f55126d54e33debf0438ae1454b570608cc4e441fe52074f58",
-  "sourceManifestSha256": "0e1376b1d66826b070d4c8bf0eb2f1bae872ad19da2629ed4fd0dbfefb30dfa5"
+  "sourceInputSnapshotSha256": "475e944e927717ece97871879a490044a406ffd587aca56d27de2f0a1c5aebd5",
+  "sourceManifestSha256": "2e4e404b083150d896ea95a8bae28ddc09ead1c6d8aa22134d78ebd14269034d"
 }

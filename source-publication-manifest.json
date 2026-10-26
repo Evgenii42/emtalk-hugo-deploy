@@ -1,24 +1,29 @@
 {
   "branch": "main",
-  "buildReceiptSha256": "2f4b3b5f799fa4624dfeb1c1c3fad4feaa9a8ab61c2af9489fe96946ca8ba68e",
-  "canonicalSourceCommit": "fc5cbc97e0e0a6ef8a73a08f871736297e51b13e",
+  "buildReceiptSha256": "79375b7dfaee09f2b50d391000ab1107f7b1371e96746b42ef0eddeffde8a7b6",
+  "canonicalSourceCommit": "a3886dcb76becb139d9b8eb22e7601a148614fce",
   "cleanExportRebuildPerformed": true,
   "currentStaticIncrementAccepted": true,
   "currentStaticIncrementAcceptedByOwner": true,
   "defaultIntakeEnabled": false,
-  "exportBuildReceiptSha256": "05bc99da23d7c51770e112cfe4a354a9a9f624eb66adaaea9380c5a0e1d068b4",
-  "externalReviewOverall": 8.7,
+  "exportBuildReceiptSha256": "99eca773e6cc05100888021a6f4ae324153b8ee6dcc650c288e7d9233eaa6c97",
+  "externalAssessmentAccepted": false,
+  "externalAssessmentFormatValid": false,
+  "externalFormatProvenanceSha256": "36904a6ae9efa101e15ca3843353a6dbb38324ee7b26580b80d6087e931dbc2f",
+  "externalLiteralSha256": "dd6654ad067f25f5a657c157f98a93aaafa028a8293201397e5fd06dbf2244a1",
+  "externalReviewOverall": 9.2,
+  "externalReviewRobustness": 8.9,
   "fourReleaseReviewsCertified": false,
   "fullReleaseAccepted": false,
-  "outputCount": 349,
-  "outputSnapshotSha256": "e87f150efe9563da4df4d695059598c1b4356a7777c0c873c7df64b5cb44efc7",
-  "ownerReleaseDecisionSha256": "c305ed6ad9232b2ae88dc1cb9471f55867edbd65c4ef99067b08922cb7ed2dc2",
-  "previewReadbackSha256": "94b87b69fbc9522c204b225e85e16afdd5a14429597637c4454d03b52fe606f9",
+  "outputCount": 348,
+  "outputSnapshotSha256": "67592cef5698bd923f57bc22508d2d3b3d4bd62098cbb610b0b4f454550d4f07",
+  "ownerReleaseDecisionSha256": "dc7807e5e38d79eb84b8e3af5f70410ac1862f650b7f9eb98b9dc143ca529f82",
+  "previewReadbackSha256": "8a5837bfacebb0c6488c8d83338d61f8ce2a71677e1d38ddb9483f93e9e4ce69",
   "reviewGatePassed": false,
   "routes": 48,
-  "scope": "Owner-requested static increment production source with external8.7 retained; live intake and whole migration acceptance remain separate.",
+  "scope": "Owner-approved one-release static increment exception; external schema rejection and robustness8.9 retained; live intake and full migration remain separate.",
   "serviceActivationChanged": false,
-  "sourceCapsuleManifestSha256": "88a2536fc968a911ce38e549462449eaddf8fd90fa6ddc17695abd8422807a52",
+  "sourceCapsuleManifestSha256": "c6d276be112576bc5e5716b57be6909e98287887891ddf66ddfa55174c4c2e65",
   "sourceCount": 486,
   "sourceFiles": [
     {
@@ -72,9 +77,9 @@
       "sha256": "da1d99422428d9c67b53cd6af837f5e37131f30ae14547c4fd19ea656e6ce44a"
     },
     {
-      "bytes": 12849,
+      "bytes": 13756,
       "path": "assets/css/homepage-explore.css",
-      "sha256": "9ee96c2fee8bfd1246c47276db4382ae2e9826720dbd1a356d1787e31b438433"
+      "sha256": "ca98ef1c3234a38ec3420ab7c4db15499fd9f85e96acf9380d745d67173a0281"
     },
     {
       "bytes": 1633,
@@ -462,9 +467,9 @@
       "sha256": "432b49f560beb6fa8d4089c19110efc3a94b31799634bf0a40742003986b5f66"
     },
     {
-      "bytes": 12960,
+      "bytes": 14953,
       "path": "assets/js/home-news.js",
-      "sha256": "ba9439ae8aadc192f35ec8d2ade034e33d2d97e6ce8de5fbda5f776a341fb37e"
+      "sha256": "8eef7423c121fa296d0f9af093497b4d7c2d1014b0f93f2d6e6b212635bb1a8e"
     },
     {
       "bytes": 16992,
@@ -1032,9 +1037,9 @@
       "sha256": "af80cb62e0b50a8709b1dca92e3352077c4a0a061acc3b70ea5398a2417c98ac"
     },
     {
-      "bytes": 2199,
+      "bytes": 2489,
       "path": "layouts/partials/homepage-explore-hero.html",
-      "sha256": "e43dcf81c782e31c1ce685a06c23da71b801204b19c7f127b6778c6b9571dedf"
+      "sha256": "5b614d6b17a8a1dee980b9df438142e133ec3d612d55a8c65d8dedaec98d4a93"
     },
     {
       "bytes": 191,
@@ -1067,9 +1072,9 @@
       "sha256": "261d52b0e13ee0ef589a278f4672caf4179d945d3ae0c3c66cffdcf62f680d01"
     },
     {
-      "bytes": 1884,
+      "bytes": 2212,
       "path": "layouts/partials/news-latest.html",
-      "sha256": "695fceeca3a28dd8ab93fab20fb3ef40a599942f7eb9b117cbc9f84199e90405"
+      "sha256": "c98b9fffd9056cd0080390ed8430146bf521025dd5a59f472587710b30d19e00"
     },
     {
       "bytes": 3582,
@@ -2452,6 +2457,7 @@
       "sha256": "db295ade2d84f96e176ea6bc6acb39b5c25409ac3cfcc0b0aec34b5ab1f60e49"
     }
   ],
-  "sourceInputSnapshotSha256": "6c6b309213f431f55126d54e33debf0438ae1454b570608cc4e441fe52074f58",
-  "sourceManifestSha256": "0e1376b1d66826b070d4c8bf0eb2f1bae872ad19da2629ed4fd0dbfefb30dfa5"
+  "sourceInputSnapshotSha256": "d643c57e6c2cb29fd453855ed3eab5a04e3d502177db1a1f7ba786e99eb53437",
+  "sourceManifestSha256": "579a441dc58d2d0a433edbfce4ea9cd87eae91c1c82156523c4a5227f3ad381f",
+  "strictFourReviewGatePassed": false
 }

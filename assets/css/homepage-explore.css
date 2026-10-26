@@ -57,6 +57,10 @@
 .home-news-toggle {position:absolute;z-index:1;top:10px;left:18px;display:flex;align-items:center;gap:8px;min-height:44px;padding:0;border:0;border-radius:12px;background:transparent;color:var(--emt-ink);font:700 12px/1.5 Manrope,sans-serif;cursor:pointer}
 .home-news-toggle[hidden],.home-news-help[hidden] {display:none}
 .home-news-toggle:focus-visible {outline:3px solid var(--emt-action);outline-offset:4px}
+.home-news-direct {display:none;position:absolute;z-index:1;top:0;right:16px;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;border-radius:12px;color:var(--emt-ink);font:600 12px/1.5 Manrope,sans-serif;text-decoration:none;white-space:nowrap}
+.home-news-preview[data-enhanced][data-state="closed"] .home-news-direct,.home-news-preview[data-enhanced][data-state="closing"] .home-news-direct {display:inline-flex}
+.home-news-direct:hover {text-decoration:underline;text-underline-offset:3px}
+.home-news-direct:focus-visible {outline:3px solid var(--emt-action);outline-offset:4px}
 .home-news-preview[data-enhanced] [data-home-news-static] {visibility:hidden}
 .home-news-preview[data-state="closed"] .home-news-toggle {top:0;left:0;padding:0 16px;border:1px solid rgba(94,58,125,.12);background:rgba(255,254,250,.54);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 3px 12px rgba(38,18,56,.025)}
 .home-news-help {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
@@ -333,8 +337,6 @@
 }
 @media(forced-colors:active) {
   .home-explore .home-explore__card,
-  .home-news,
-  .home-news-toggle,
   .home-content__link {
     background:Canvas;
     color:LinkText;
@@ -349,8 +351,19 @@
     background:Canvas;
     backdrop-filter:none;
   }
-  .home-news,.home-news-preview[data-state="closed"] .home-news-toggle {backdrop-filter:none;-webkit-backdrop-filter:none;background:Canvas;color:LinkText;border-color:CanvasText}
+  .home-news {backdrop-filter:none;-webkit-backdrop-filter:none;background:Canvas;color:CanvasText;border-color:CanvasText}
+  .home-news a,.home-news-direct {color:LinkText}
+  .home-news-toggle,
+  .home-news-preview[data-state="closed"] .home-news-toggle {
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    background:ButtonFace;
+    color:ButtonText;
+    border-color:ButtonText;
+  }
   .home-explore .home-explore__card:focus-visible,
+  .home-explore .home-news-toggle:focus-visible,
+  .home-explore .home-news-direct:focus-visible,
   .home-content a:focus-visible {
     outline-color:Highlight;
   }

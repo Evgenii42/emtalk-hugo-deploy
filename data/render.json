@@ -57750,7 +57750,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Updated 25 October 2026."
+                          "Updated 27 October 2026."
                         ],
                         "void": false
                       },
@@ -58241,7 +58241,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Cloudflare handles and protects the website request, including a Turnstile security check that can process device and connection information to detect abuse. The submission passes through EmTalk's server-side endpoint to the company's n8n feedback workflow on a server in the Netherlands. EmTalk operates from Kazakhstan. These are separate locations from the result service described elsewhere in this policy; processing can cross borders. Technical connection records and provider or backup processing are separate from the active feedback store."
+                          "Cloudflare handles and protects the website request. If CAPTCHA protection is enabled, a Turnstile security check can process device and connection information to detect abuse. In CAPTCHA-free mode, the form does not load Turnstile; server-side origin, validation and rate controls still apply. The submission passes through EmTalk's server-side endpoint to the company's n8n feedback workflow on a server in the Netherlands. EmTalk operates from Kazakhstan. These are separate locations from the result service described elsewhere in this policy; processing can cross borders. Technical connection records and provider or backup processing are separate from the active feedback store."
                         ],
                         "void": false
                       },

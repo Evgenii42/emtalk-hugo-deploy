@@ -55,7 +55,6 @@ export function createInterestSecurity(dialog, configuration) {
     return scriptPromise;
   }
   function prepare(manual = false) {
-    panel.hidden = false;
     if (busy || task) return task;
     // Closing/reopening must not create a hidden retry loop after a failure.
     if (!manual && state !== 'idle') return Promise.resolve();
@@ -65,6 +64,18 @@ export function createInterestSecurity(dialog, configuration) {
     const pending = Promise.resolve().then(async () => {
       try {
         const config = await configuration();
+        if (current !== generation) return;
+        if (config.captchaMode === 'none') {
+          state = 'not-required';
+          panel.hidden = true;
+          notice.textContent = '';
+          retry.hidden = true;
+          retry.disabled = busy;
+          container.setAttribute('aria-busy', 'false');
+          return;
+        }
+        if (config.captchaMode !== undefined && config.captchaMode !== 'turnstile') throw Error('Unavailable mode');
+        panel.hidden = false;
         const turnstile = await loadScript();
         if (current !== generation) return;
         let terminal = false;
@@ -86,7 +97,7 @@ export function createInterestSecurity(dialog, configuration) {
         });
         if (state === 'loading') show('waiting');
       } catch {
-        if (current === generation) show('unavailable');
+        if (current === generation) { panel.hidden = false; show('unavailable'); }
       } finally {
         if (task === pending) task = null;
       }
@@ -108,6 +119,7 @@ export function createInterestSecurity(dialog, configuration) {
       catch { show('failed'); return ''; }
     },
     finishAttempt(requestIssued) {
+      if (state === 'not-required') return;
       // A submitted proof is single-use. Do not silently start another check.
       const next = !requestIssued && ['failed','expired','timeout','unsupported','unavailable'].includes(state) ? state : 'needed';
       discard();

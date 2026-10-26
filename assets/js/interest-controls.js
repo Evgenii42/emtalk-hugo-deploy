@@ -65,12 +65,15 @@ function initializeInterest(dialog) {
   // Only finite status/code pairs from our endpoint prove this attempt was
   // rejected before a write. An intermediary, malformed body or lost receipt
   // cannot establish that, even if it reports a familiar HTTP status.
-  function rejectionMessage(httpStatus, result) {
+  function rejectionMessage(httpStatus, result, captchaMode) {
     if (!result || result.ok !== false || typeof result.code !== 'string') return null;
+    const securityMessage = captchaMode === 'none'
+      ? 'This attempt was rejected before saving because the feedback service configuration changed. Copy your text, then reload this page or email info@emtalk.org. Your text is still here.'
+      : 'This attempt was rejected before saving. Complete the new security check, then send again. Your text is still here.';
     const messages = {
       '400:invalid_submission': 'This attempt was rejected before saving. Review the selected feature, email and comment, then send again. Your text is still here.',
-      '400:security_check_required': 'This attempt was rejected before saving. Complete the new security check, then send again. Your text is still here.',
-      '403:security_check_failed': 'This attempt was rejected before saving. Complete the new security check, then send again. Your text is still here.',
+      '400:security_check_required': securityMessage,
+      '403:security_check_failed': securityMessage,
       '403:origin_not_allowed': 'This attempt was rejected before saving because this website address is not supported. Reload the page at www.emtalk.org or email info@emtalk.org. Your text is still here.',
       '415:json_required': 'This attempt was rejected before saving because its format was not accepted. Reload this page or email info@emtalk.org. Your text is still here.',
       '429:too_many_requests': 'Too many attempts. This attempt was rejected before saving. Wait at least one minute before sending again. Your text is still here.',
@@ -117,8 +120,10 @@ function initializeInterest(dialog) {
           });
           if (!response.ok) throw Error('Unavailable');
           const value = await response.json();
-          if (value.enabled !== true || typeof value.sitekey !== 'string' || !value.sitekey) throw Error('Unavailable');
-          return value;
+          const captchaMode = value.captchaMode === undefined ? 'turnstile' : value.captchaMode;
+          if (value.enabled !== true || !['none', 'turnstile'].includes(captchaMode)
+              || (captchaMode === 'turnstile' && (typeof value.sitekey !== 'string' || !value.sitekey))) throw Error('Unavailable');
+          return {...value, captchaMode};
         } finally { deadline.dispose(); }
       })().catch(error => {configPromise = null; throw error;});
     }
@@ -175,13 +180,13 @@ function initializeInterest(dialog) {
     say('Preparing your feedback. Your text is kept here.' + (previousOutcome === 'uncertain' ? earlierUnconfirmed : ''));
     return previousOutcome;
   }
-  function unlockDispatch(requestIssued) {
+  function unlockDispatch(requestIssued, challengeRequired) {
     busy = false;
     dialog.querySelector('[data-interest-pending-note]').hidden = true;
     submit.disabled = false;
     for (const control of form.elements) control.disabled = false;
     security.setBusy(false);
-    if (requestIssued) security.finishAttempt(true);
+    if (requestIssued && challengeRequired) security.finishAttempt(true);
   }
   function preparePayload(token, previousOutcome) {
     const values = draftValues(), signature = JSON.stringify(values);
@@ -200,7 +205,8 @@ function initializeInterest(dialog) {
       measurement.newSubmission();
     }
     submittedFields = signature;
-    return {schemaVersion:1,submissionId,...values,privacyVersion:'interest-2026-10-23',turnstileToken:token};
+    return {schemaVersion:1,submissionId,...values,privacyVersion:'interest-2026-10-23',
+      ...(token ? {turnstileToken:token} : {})};
   }
   function matchingReceipt(response, result, payload) {
     return response.ok && result?.ok === true
@@ -252,21 +258,18 @@ function initializeInterest(dialog) {
       say('Please wait for the one-minute pause to finish, then send again. Your text is still here.' + (outcome==='uncertain' ? earlierUnconfirmed : ''));
       return;
     }
-    // Verification starts only when the visitor explicitly sends a valid form.
-    // Security verification keeps fields editable. During dispatch, values and
-    // delivery references are retained while controls are temporarily locked.
-    // Completion never sends automatically: a second explicit Send is required.
-    if (!security.token()) {
-      draftActive=true;
-      void security.prepare();
-      return;
-    }
+    // A server-selected CAPTCHA-free form sends on this explicit action.
+    // Turnstile mode still needs another explicit Send after its check finishes.
+    // Lock before the bounded config request so concurrent clicks cannot dispatch
+    // twice; fields become editable again while an optional widget is running.
     const previousOutcome=lockDispatch();
-    let requestIssued=false, attemptMeasurement, deadline;
+    let requestIssued=false, challengeRequired=false, needsChallenge=false, attemptMeasurement, deadline;
     try {
-      await configuration();
-      const token=security.token();
-      if (!token) {
+      const config = await configuration();
+      challengeRequired = config.captchaMode === 'turnstile';
+      const token = challengeRequired ? security.token() : '';
+      if (challengeRequired && !token) {
+        needsChallenge = true;
         preserveEarlierAttempt(previousOutcome, previousOutcome==='uncertain'?'Choose Retry security check if the check is missing or expired, complete it, then send again. Earlier delivery remains unconfirmed. Your text is still here.':'Choose Retry security check if the check is missing or expired, complete it, then send again. Your text is still here.');
         return;
       }
@@ -280,7 +283,7 @@ function initializeInterest(dialog) {
       attemptMeasurement=measurement.attempt();
       const response=await fetch(endpoint,requestOptions);
       const result=await responseResult(response);
-      const rejected=rejectionMessage(response.status,result);
+      const rejected=rejectionMessage(response.status,result,config.captchaMode);
       if (rejected) {
         setRejected(previousOutcome, response.status, rejected, attemptMeasurement);
         return;
@@ -290,7 +293,11 @@ function initializeInterest(dialog) {
     } catch {
       settleFailure(requestIssued, previousOutcome, attemptMeasurement);
     }
-    finally {deadline?.dispose();unlockDispatch(requestIssued);}
+    finally {
+      deadline?.dispose();
+      unlockDispatch(requestIssued, challengeRequired);
+      if (needsChallenge) void security.prepare();
+    }
   });
 }
 if (dialog) initializeInterest(dialog);

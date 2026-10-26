@@ -1,17 +1,17 @@
 {
   "branch": "interest032",
-  "buildReceiptSha256": "a9d3d962b236a9b52c4690be4b6b0a243f8de35f29f46ebf6face7d1c80431f9",
-  "canonicalSourceCommit": "b0d5193bca26a238fbc6cab68e644c13eb89747b",
+  "buildReceiptSha256": "79375b7dfaee09f2b50d391000ab1107f7b1371e96746b42ef0eddeffde8a7b6",
+  "canonicalSourceCommit": "a3886dcb76becb139d9b8eb22e7601a148614fce",
   "cleanExportRebuildPerformed": false,
   "defaultIntakeEnabled": false,
   "fourReleaseReviewsCertified": false,
   "fullReleaseAccepted": false,
   "outputCount": 348,
-  "outputSnapshotSha256": "7d39e07b82d1648317935f45bf8837be39355b9f7a1054d36b943e69d1f0c2af",
+  "outputSnapshotSha256": "67592cef5698bd923f57bc22508d2d3b3d4bd62098cbb610b0b4f454550d4f07",
   "routes": 48,
   "scope": "Controlled staging source publication only; not full release or intake acceptance",
   "serviceActivationChanged": false,
-  "sourceCapsuleManifestSha256": "1b804885872bf7866b84eb2a459d70a090897bf0663999ed6e6612e7a72c6550",
+  "sourceCapsuleManifestSha256": "c6d276be112576bc5e5716b57be6909e98287887891ddf66ddfa55174c4c2e65",
   "sourceCount": 486,
   "sourceFiles": [
     {
@@ -65,9 +65,9 @@
       "sha256": "da1d99422428d9c67b53cd6af837f5e37131f30ae14547c4fd19ea656e6ce44a"
     },
     {
-      "bytes": 13465,
+      "bytes": 13756,
       "path": "assets/css/homepage-explore.css",
-      "sha256": "c56a514997ea0156626044c5b951e9c0ead47bf4ea58b26528c7c6f249199718"
+      "sha256": "ca98ef1c3234a38ec3420ab7c4db15499fd9f85e96acf9380d745d67173a0281"
     },
     {
       "bytes": 1633,
@@ -2445,6 +2445,6 @@
       "sha256": "db295ade2d84f96e176ea6bc6acb39b5c25409ac3cfcc0b0aec34b5ab1f60e49"
     }
   ],
-  "sourceInputSnapshotSha256": "dc293bc377224575b65a63463ba16c2f72011c83529ba449693cecab45adab46",
-  "sourceManifestSha256": "88fcf4ccff88b3ac688fbf2bbb47df1fdc631566947a82591726f19243710fc9"
+  "sourceInputSnapshotSha256": "d643c57e6c2cb29fd453855ed3eab5a04e3d502177db1a1f7ba786e99eb53437",
+  "sourceManifestSha256": "579a441dc58d2d0a433edbfce4ea9cd87eae91c1c82156523c4a5227f3ad381f"
 }

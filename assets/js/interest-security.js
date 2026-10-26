@@ -4,11 +4,12 @@ export function createInterestSecurity(dialog, configuration) {
   const container = dialog.querySelector('[data-interest-challenge]');
   const notice = dialog.querySelector('[data-interest-security-status]');
   const retry = dialog.querySelector('[data-interest-security-retry]');
+  const panel = dialog.querySelector('[data-interest-security]');
   let widget, task, scriptPromise, state = 'idle', busy = false, generation = 0;
   const messages = {
-    loading: 'Loading the security check...',
-    waiting: 'Complete the security check below. If it does not appear, choose Retry security check.',
-    ready: 'Security check complete. You can send your feedback.',
+    loading: 'Loading the security check. Complete it, then choose Send feedback.',
+    waiting: 'Complete the security check below, then choose Send feedback. If it does not appear, choose Retry security check.',
+    ready: 'Security check complete. Choose Send feedback to send your message.',
     failed: 'The security check could not finish. Retry the security check, or use an up-to-date browser. Your draft is unchanged.',
     expired: 'The security check expired. Retry the security check before sending. Your draft is unchanged.',
     timeout: 'The security check timed out. Retry the security check before sending. Your draft is unchanged.',
@@ -54,6 +55,7 @@ export function createInterestSecurity(dialog, configuration) {
     return scriptPromise;
   }
   function prepare(manual = false) {
+    panel.hidden = false;
     if (busy || task) return task;
     // Closing/reopening must not create a hidden retry loop after a failure.
     if (!manual && state !== 'idle') return Promise.resolve();
@@ -98,7 +100,11 @@ export function createInterestSecurity(dialog, configuration) {
     setBusy(value) { busy = value; retry.disabled = busy || state === 'loading'; },
     token() {
       if (state !== 'ready' || widget === undefined) return '';
-      try { return window.turnstile?.getResponse(widget) || ''; }
+      try {
+        const response = window.turnstile?.getResponse(widget) || '';
+        if (!response) show('needed');
+        return response;
+      }
       catch { show('failed'); return ''; }
     },
     finishAttempt(requestIssued) {

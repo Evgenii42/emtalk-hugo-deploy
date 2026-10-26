@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
-from urllib.parse import urlsplit
+from news_content import validated_base_url
 
 import prepare_hugo
 from verify_build import verify
@@ -73,9 +73,10 @@ def cli(argv=None):
     try:
         return 0 if build(args.destination, args.base_url, args.mount_prefix, args.preview)['passed'] else 1
     except Exception as error:
-        # No command stdout/stderr or environment values are included in reports.
-        print(json.dumps({'passed': False, 'errors': [type(error).__name__ + ': ' +
-            ('External command failed' if isinstance(error, subprocess.CalledProcessError) else str(error))]}))
+        # Exception text can contain absolute paths or environment-derived input.
+        # Keep the public failure result finite, including OSError subclasses.
+        print(json.dumps({'passed': False, 'errors': [type(error).__name__ +
+            ': Build failed; check local inputs and the pinned toolchain']}))
         return 1
 
 
@@ -101,7 +102,9 @@ def snapshot_sources(root=None):
     sources += [root / name for name in sorted(backend)]
     sources += [root / name for name in ['hugo.toml', '.hugo-version', 'requirements-build.txt', 'wrangler.jsonc',
                 'inventory/media.json', 'scripts/prepare_hugo.py', 'scripts/prepare_public_content.py',
-                'scripts/build_site.py', 'scripts/build_cloudflare.py', 'scripts/verify_build.py']]
+                'scripts/build_site.py', 'scripts/build_cloudflare.py', 'scripts/verify_build.py', 'scripts/news_content.py']]
+    sources.append(root / 'scripts/source_roles.py')
+    sources += [root / name for name in ('scripts/verify_footer.py', 'scripts/verify_tapl.py')]
     if (root / 'data/seo.json').is_file():
         sources.append(root / 'scripts/verify_seo.py')
     if any(is_link(part) for path in sources for part in [path, *path.parents]
@@ -113,12 +116,8 @@ def snapshot_sources(root=None):
 
 def build(destination, base_url, prefix='', preview=False):
     destination = build_directory(destination)
-    base = urlsplit(base_url)
-    if base.scheme not in {'http', 'https'} or not base.hostname or base.username or base.password or base.query or base.fragment:
-        raise ValueError('Base URL must be a plain explicit origin/mount URL')
     expected_prefix = '/' + prefix.strip('/') if prefix.strip('/') else ''
-    if base.path.rstrip('/') != expected_prefix:
-        raise ValueError('Base URL path and explicit mount prefix differ')
+    base_url = validated_base_url(base_url, expected_prefix) + '/'
     if (ROOT / '.hugo-version').read_text(encoding='utf-8').strip() != PIN:
         raise ValueError('Hugo pin differs from .hugo-version')
     version = subprocess.check_output(['hugo', 'version'], cwd=ROOT, text=True).strip()
@@ -130,7 +129,7 @@ def build(destination, base_url, prefix='', preview=False):
     subprocess.run(['hugo', '--baseURL', base_url.rstrip('/') + '/', '--destination', str(destination), '--cleanDestinationDir'], cwd=ROOT, check=True)
     if snapshot_sources() != inputs:
         raise ValueError('Source inputs changed during build; output has no valid snapshot')
-    result = verify(destination, expected_prefix)
+    result = verify(destination, expected_prefix, base_url=base_url)
     result.update({'hugoVersion': version, 'sourceInputFiles': inputs, 'sourceInputSnapshotSha256': input_digest,
                    'gitHead': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                    'preview': preview, 'baseURL': base_url.rstrip('/') + '/',

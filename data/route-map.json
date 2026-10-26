@@ -170,6 +170,36 @@
       "path": "/bret/practice",
       "file": "bret/practice.html",
       "origin": "owned"
+    },
+    {
+      "path": "/news",
+      "file": "news.html",
+      "origin": "owned"
+    },
+    {
+      "path": "/news/tapl-in-development",
+      "file": "news/tapl-in-development.html",
+      "origin": "owned"
+    },
+    {
+      "path": "/news/reading-sleep-burnout",
+      "file": "news/reading-sleep-burnout.html",
+      "origin": "owned"
+    },
+    {
+      "path": "/news/news-from-emtalk",
+      "file": "news/news-from-emtalk.html",
+      "origin": "owned"
+    },
+    {
+      "path": "/news/decision-matrix-browser",
+      "file": "news/decision-matrix-browser.html",
+      "origin": "owned"
+    },
+    {
+      "path": "/news/bret-browser-practice",
+      "file": "news/bret-browser-practice.html",
+      "origin": "owned"
     }
   ],
   "excluded": [
@@ -598,6 +628,42 @@
     {
       "path": "/bret/practice",
       "exactSuffix": "/bret/practice",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news",
+      "exactSuffix": "/news",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news/tapl-in-development",
+      "exactSuffix": "/news/tapl-in-development",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news/reading-sleep-burnout",
+      "exactSuffix": "/news/reading-sleep-burnout",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news/news-from-emtalk",
+      "exactSuffix": "/news/news-from-emtalk",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news/decision-matrix-browser",
+      "exactSuffix": "/news/decision-matrix-browser",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news/bret-browser-practice",
+      "exactSuffix": "/news/bret-browser-practice",
       "origin": "owned",
       "sourceNoindex": false
     }

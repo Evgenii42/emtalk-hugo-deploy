@@ -8,12 +8,16 @@ Website content and tools can be explored without an account. Self-assessment qu
 
 BRET offers free browser-based breathing and relaxation practices. Decision Matrix offers local option comparison and pros-and-cons exercises. Decision Matrix AI features are available in the Android app and are planned for the website. Website AI, account synchronization, and subscriptions are not currently offered. TAPL is in development.
 
+News contains project updates, product development and reading highlights. Development notes do not imply working AI, paid programs or a marketplace.
+
 ## Explore
 
 - [Home](https://www.emtalk.org/): Choose a starting point.
 - [Understand myself](https://www.emtalk.org/understand-myself): Introduction to articles and questionnaires.
 - [Articles](https://www.emtalk.org/articles): Read or listen to articles about sleep and burnout.
 - [Tests](https://www.emtalk.org/tests): Find a self-assessment questionnaire.
+- [News](https://www.emtalk.org/news): Project updates and reading highlights.
+- [News RSS](https://www.emtalk.org/news/index.xml): Published news feed.
 - [About EmTalk](https://www.emtalk.org/about-us): The team and approach.
 
 ## Tools

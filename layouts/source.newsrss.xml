@@ -1,0 +1,37 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+{{- $base := strings.TrimSuffix "/" .Site.BaseURL -}}
+{{- $dateLayout := "Mon, 02 Jan 2006 15:04:05 -0700" -}}
+{{- $items := slice -}}
+{{- range hugo.Data.render.pages -}}
+  {{- with .newsEntry -}}
+    {{- if ne .kind "index" -}}
+      {{- $items = $items | append (merge . (dict "sortKey" (printf "%s|%s" .date .routeId))) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $ordered := sort $items "sortKey" "desc" -}}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>News from EmTalk</title>
+    <link>{{ printf "%s/news" $base | htmlEscape }}</link>
+    <atom:link href="{{ printf "%s/news/index.xml" $base | htmlEscape }}" rel="self" type="application/rss+xml" />
+    <description>Project updates, product development and reading highlights across EmTalk.</description>
+    <language>en</language>
+    <ttl>60</ttl>
+    {{- if $ordered -}}
+      {{- with index $ordered 0 -}}
+    <lastBuildDate>{{ time.Format $dateLayout (printf "%sT00:00:00+03:00" .date) }}</lastBuildDate>
+      {{- end -}}
+    {{- end -}}
+    {{- range $ordered -}}
+    <item>
+      <title>{{ .title | htmlEscape }}</title>
+      <link>{{ printf "%s%s" $base .routeId | htmlEscape }}</link>
+      <guid isPermaLink="true">{{ printf "%s%s" $base .routeId | htmlEscape }}</guid>
+      <pubDate>{{ time.Format $dateLayout (printf "%sT00:00:00+03:00" .date) }}</pubDate>
+      <category>{{ .kind | htmlEscape }}</category>
+      <description>{{ if eq .availability "in-development" }}In development. Illustrative sample, not a working service. {{ end }}{{ .summary | htmlEscape }}</description>
+    </item>
+    {{- end -}}
+  </channel>
+</rss>

@@ -1,21 +1,28 @@
 {{- $page := .page -}}
 {{- $features := index (index hugo.Data "interest-registry").pages $page.routeId -}}
 {{- $labels := (index hugo.Data "interest-registry").labels -}}
+{{- $audiences := (index hugo.Data "interest-registry").audiences -}}
 {{- if $features -}}
 <aside class="interest-entry" aria-label="Help shape EmTalk" data-analytics-ignore>
   <p>Help shape what comes next.</p>
   <button type="button" data-interest-open data-interest-feature="page">Share feedback or interest <span aria-hidden="true">↗</span></button>
   {{ if gt (len $features) 1 }}<details class="interest-entry__features"><summary>About a specific feature</summary><ul>{{ range $features }}{{ if ne . "page" }}<li><button type="button" data-interest-open data-interest-feature="{{ . }}">{{ index $labels . }}</button></li>{{ end }}{{ end }}</ul></details>{{ end }}
-  <noscript><p>Email <a href="mailto:info@emtalk.org">info@emtalk.org</a> with the page or feature you mean.</p></noscript>
+  <noscript><style>[data-interest-open],.interest-entry__features{display:none!important}</style><p>Email <a href="mailto:info@emtalk.org">info@emtalk.org</a> with the page or feature you mean.</p></noscript>
 </aside>
-<dialog class="interest-dialog" aria-labelledby="interest-title" data-interest-dialog data-analytics-ignore data-page-id="{{ $page.routeId }}" data-interest-endpoint="{{ hugo.Data.render.mountPrefix }}/api/interest">
+<dialog class="interest-dialog" aria-labelledby="interest-title" data-interest-dialog data-analytics-ignore data-page-id="{{ $page.routeId }}" data-interest-default-audience="{{ $audiences.default }}" data-interest-endpoint="{{ hugo.Data.render.mountPrefix }}/api/interest">
   <div class="interest-dialog__heading"><h2 id="interest-title">Help shape EmTalk</h2><button type="button" data-interest-close aria-label="Close feedback">×</button></div>
   <p>Tell us what would be useful, or what needs improving.</p>
   <p class="interest-dialog__note" data-interest-pending-note hidden>Closing this window does not cancel the request. Keep this page open to retain your draft and check the outcome.</p>
   <p class="interest-dialog__note" data-interest-receipt hidden>Last saved reference: <span data-interest-saved-reference></span><br>Keep this reference for privacy or deletion requests. It remains in this page only.</p>
   <form data-interest-form>
-    <label for="interest-feature">About</label>
+    <p class="interest-dialog__note">Page: <strong data-interest-page-label>{{ with $page.title }}{{ . }}{{ else }}Page not found{{ end }}</strong> <span class="interest-context-route">({{ $page.routeId }})</span></p>
+    <label for="interest-feature">Feature</label>
     <select id="interest-feature" name="featureId">{{ range $features }}<option value="{{ . }}">{{ index $labels . }}</option>{{ end }}</select>
+    {{ if $audiences }}
+    <label for="interest-audience">Who would this be for? <span>(optional)</span></label>
+    <select id="interest-audience" name="audience" aria-describedby="interest-audience-note">{{ range $audiences.options }}<option value="{{ .value }}"{{ if eq .value $audiences.default }} selected{{ end }}>{{ .label }}</option>{{ end }}</select>
+    <p id="interest-audience-note" class="interest-dialog__note">You can change this choice. We save it with your feedback to understand personal, team and client needs. No company or client details are needed.</p>
+    {{ end }}
     <label for="interest-intent">What would you like to share?</label>
     <select id="interest-intent" name="intent"><option value="interested">I'm interested in this</option><option value="feedback">An idea or suggestion</option><option value="problem">Something isn't working</option></select>
     <label for="interest-comment">Comment <span data-interest-comment-label>(optional)</span></label>
@@ -23,10 +30,10 @@
     <p id="interest-private-note" class="interest-dialog__note">Please leave out test answers, health details, private decisions and passwords.</p>
     <label for="interest-email">Email <span data-interest-email-label>(optional, if you'd like a reply)</span></label>
     <input id="interest-email" name="email" type="email" maxlength="254" autocomplete="email" inputmode="email">
-    <label class="interest-dialog__choice"><input name="updatesConsent" type="checkbox"> <span>Email me occasional updates about this feature. I can withdraw this choice by emailing info@emtalk.org.</span></label>
-    <div class="interest-dialog__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <label class="interest-dialog__choice"><input name="updatesConsent" type="checkbox"> <span>I would like occasional email updates about this feature. This is an optional preference, not a promise of a mailing schedule. I can withdraw it by emailing info@emtalk.org.</span></label>
+    <div class="interest-dialog__trap" aria-hidden="true" inert><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
     <p class="interest-dialog__note">EmTalk uses this submission to review feedback and, if you provide an email, respond to you. Feature updates are optional. See our <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy Policy</a>.</p>
-    <div class="interest-dialog__security" aria-labelledby="interest-security-title">
+    <div class="interest-dialog__security" aria-labelledby="interest-security-title" data-interest-security hidden>
       <p id="interest-security-title" class="interest-dialog__security-title">Security check</p>
       <p class="interest-dialog__note" role="status" aria-live="polite" data-interest-security-status></p>
       <div data-interest-challenge></div>

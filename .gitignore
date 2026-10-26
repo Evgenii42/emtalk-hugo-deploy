@@ -1,9 +1,7 @@
 /public/
-/resources/
 /tmp/
-/docs/audits/
-.hugo_build.lock
-__pycache__/
-*.py[cod]
-.env
-.env.*
+/resources/
+/.hugo_build.lock
+/.wrangler/
+/__pycache__/
+*.pyc

@@ -3,7 +3,7 @@
 const initialized = new WeakSet();
 // Hugo can bundle this helper into several independent entry modules. A shared
 // document guard, rather than only a module-local WeakSet, prevents duplicates.
-const publicEventsGuard = Symbol.for('emtalk.publicMeasurement003');
+const publicEventsGuard = Symbol.for('emtalk.publicMeasurement004');
 // A true result acknowledges the local consented queue only. Callers use it
 // to deduplicate within this document; it is never a Google delivery receipt.
 export function emitInterfaceEvent(name, parameters) {
@@ -19,6 +19,61 @@ export function analyticsEpoch() {
     const epoch = analytics?.canTrack() === true ? analytics.epoch() : null;
     return Number.isSafeInteger(epoch) && epoch >= 0 ? epoch : null;
   } catch { return null; }
+}
+
+// Explicit ports for the shared feedback controller. No form/receipt/reference
+// is accepted here. The caller announces factual transitions, never DOM text.
+export function createInterestMeasurement() {
+  let generation = 0, saved = false, placement = 'page_prompt';
+  const placements = ['page_prompt','feature_prompt','footer','tool_exit','news_cta'];
+  const clear = () => { generation += 1; saved = false; };
+  window.addEventListener('emtalk:analytics-consent', clear);
+  window.addEventListener('pagehide', clear);
+  const send = (state, surface) => {
+    try {
+      const product = window.EmTalkAnalytics?.product?.();
+      return emitInterfaceEvent('emtalk_interest_state', {state, surface, product});
+    } catch { return false; } // Measurement must never interrupt feedback delivery.
+  };
+  return Object.freeze({
+    opened(surface = 'page_prompt') {
+      if (!placements.includes(surface)) return false;
+      placement = surface;
+      return send('opened', placement);
+    },
+    newSubmission() { generation += 1; saved = false; },
+    attempt() {
+      const epoch = analyticsEpoch(), current = generation, surface = placement;
+      const armed = epoch !== null && send('submit_attempt', surface);
+      let settled = false;
+      const finish = state => {
+        if (settled) return false;
+        settled = true;
+        if (!armed || current !== generation || analyticsEpoch() !== epoch || (state === 'saved' && saved)) return false;
+        const accepted = send(state, surface);
+        if (accepted && state === 'saved') saved = true;
+        return accepted;
+      };
+      return Object.freeze({saved: () => finish('saved'), rejected: () => finish('rejected'), unconfirmed: () => finish('unconfirmed')});
+    },
+  });
+}
+
+// News UI owns whether a user selection actually changed the visible set.
+// This port rejects every other value and never reads a topic/search field.
+export function emitNewsFilter(group) {
+  if (!['all','project','product','reading'].includes(group)) return false;
+  return emitInterfaceEvent('emtalk_catalog_filter', {action:group === 'all' ? 'reset' : 'filter', filter_group:group});
+}
+
+// Only explicit Home preview actions are measured. Automatic preview timing,
+// restoration and initial state never call this port or replay after consent.
+export function emitNewsPreview(action) {
+  if (!['open', 'close'].includes(action)) return false;
+  try {
+    if (window.EmTalkAnalytics?.context?.() !== 'home') return false;
+    return emitInterfaceEvent('emtalk_news_preview', {action});
+  } catch { return false; }
 }
 
 // A player attempt is armed only by its explicit Play action after consent.
@@ -55,7 +110,13 @@ export function createAudioMeasurement() {
     error(kind) {
       if (!failed) { send('error', kind); failed = true; pausedByUser = false; }
     },
-    cancel() { clear(); },
+    // A lifecycle interruption clears consented latches but is not a new cycle.
+    suspend() { clear(); },
+    cancel() {
+      // Cancellation ends this attempt. Unlike consent/pagehide clearing, it
+      // permits a later explicit Play to arm a fresh cycle without replay.
+      clear(); ended = false; failed = false; cycleActuallyStarted = false;
+    },
   };
 }
 
@@ -74,7 +135,7 @@ function localPath(link) {
 function surface(link) {
   const value = link.closest('[data-analytics-surface]')?.getAttribute('data-analytics-surface');
   return ['header','footer','home_choices','public_cta','article_card','related_reading',
-    'tool_exit','catalog'].includes(value) ? value : 'public_cta';
+    'tool_exit','catalog','news_card','news_cta','ecosystem_step'].includes(value) ? value : 'public_cta';
 }
 
 function navigationRoutes() {
@@ -85,8 +146,8 @@ function navigationRoutes() {
     const policy = JSON.parse(nodes[0].textContent);
     const schema = policy.schemas?.emtalk_navigation;
     const contexts = schema?.properties?.page_context?.enum;
-    if (policy.version !== '003' || schema?.properties?.event_name?.const !== 'emtalk_navigation'
-        || schema?.properties?.contract_version?.const !== '003' || !Array.isArray(contexts)
+    if (policy.version !== '004' || schema?.properties?.event_name?.const !== 'emtalk_navigation'
+        || schema?.properties?.contract_version?.const !== '004' || !Array.isArray(contexts)
         || !policy.contexts || typeof policy.contexts !== 'object' || Array.isArray(policy.contexts)
         || !policy.routes || typeof policy.routes !== 'object' || Array.isArray(policy.routes)) return result;
     const entries = Object.entries(policy.routes);
@@ -111,7 +172,7 @@ function destination(link, routes) {
   const context = routes.get(path);
   if (path !== null && !context) return null;
   if (context === 'web_trial') return 'trial_entry';
-  if (context === 'bret_landing' || context === 'dm_landing') return 'app_landing';
+  if (context === 'bret_landing' || context === 'dm_landing' || context === 'tapl') return 'app_landing';
   // Only the category is sent, never the assessment/content route itself.
   if (context === 'assessment') return 'assessment_entry';
   if (context === 'documents') return 'documents';
@@ -163,7 +224,11 @@ export function initPublicMeasurement(root = document) {
       return;
     }
     const kind = destination(link, routes);
-    if (kind) emitInterfaceEvent('emtalk_navigation', {surface:surface(link), destination_kind:kind});
+    if (kind) {
+      const fixedProducts = {'/bret':'bret','/bret/practice':'bret','/dm':'dm','/dm/workspace':'dm','/tapl':'tapl'};
+      emitInterfaceEvent('emtalk_navigation', {surface:surface(link), destination_kind:kind,
+        destination_product:fixedProducts[localPath(link)] || 'not_applicable'});
+    }
   });
 
   for (const details of root.querySelectorAll('details[data-analytics-article-action="contents_open"]')) {

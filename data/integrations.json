@@ -2,7 +2,7 @@
   "analytics": {
     "enabledForProduction": true,
     "measurementId": "G-B579M2BRST",
-    "reviewedPolicy": "003",
+    "reviewedPolicy": "004",
     "providerGuardsReviewed": true,
     "tagManagerContainerId": "GTM-KF2D6PT5",
     "scope": "Canonical www only after explicit fresh optional-analytics opt-in. Legacy GTM inert. Authenticated enhanced-measurement hybrid and automatic user-data detection OFF saved/reopened on 2026-10-23. Actual SDK collection fields verified with locally intercepted requests; provider ingestion remains unverified. Preview/local never initialize Google."

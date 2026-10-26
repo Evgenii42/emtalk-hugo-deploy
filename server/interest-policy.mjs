@@ -3,7 +3,7 @@
 function validateInterest(body, registry, now = new Date()) {
   const failure = () => ({ valid: false, code: 'invalid_submission' });
   if (!body || typeof body !== 'object' || Array.isArray(body)) return failure();
-  const allowed = new Set(['schemaVersion', 'submissionId', 'pageId', 'featureId', 'intent', 'email', 'comment', 'updatesConsent', 'privacyVersion', 'website']);
+  const allowed = new Set(['schemaVersion', 'submissionId', 'pageId', 'featureId', 'intent', 'email', 'comment', 'updatesConsent', 'privacyVersion', 'website', 'audience']);
   if (Object.keys(body).some(key => !allowed.has(key))) return failure();
   let size = 0;
   for (const char of JSON.stringify(body)) {
@@ -14,6 +14,10 @@ function validateInterest(body, registry, now = new Date()) {
   if (body.schemaVersion !== 1 || body.privacyVersion !== 'interest-2026-10-23') return failure();
   if (typeof body.submissionId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.submissionId)) return failure();
   if (typeof body.pageId !== 'string' || typeof body.featureId !== 'string' || !Object.hasOwn(registry.pages, body.pageId) || !registry.pages[body.pageId].includes(body.featureId)) return failure();
+  const audiences = registry.audiences;
+  if (!audiences || !Array.isArray(audiences.options) || typeof audiences.default !== 'string') return failure();
+  const audience = Object.hasOwn(body, 'audience') ? body.audience : audiences.default;
+  if (typeof audience !== 'string' || !audiences.options.some(option => option.value === audience)) return failure();
   if (!['interested', 'feedback', 'problem'].includes(body.intent)) return failure();
   if (typeof body.email !== 'string' || typeof body.comment !== 'string' || typeof body.updatesConsent !== 'boolean' || body.website !== '') return failure();
   const email = body.email.trim();
@@ -24,7 +28,7 @@ function validateInterest(body, registry, now = new Date()) {
   if (body.intent !== 'interested' && !comment) return failure();
   return { valid: true, row: {
     submissionId: body.submissionId.toLowerCase(), schemaVersion: 1, pageId: body.pageId, featureId: body.featureId,
-    intent: body.intent, email, comment, updatesConsent: body.updatesConsent,
+    intent: body.intent, audience, email, comment, updatesConsent: body.updatesConsent,
     privacyVersion: body.privacyVersion, receivedAt: now.toISOString(),
     expiresAt: new Date(now.getTime() + 90 * 86400000).toISOString()
   } };

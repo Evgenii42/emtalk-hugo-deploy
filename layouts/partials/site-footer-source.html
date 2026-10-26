@@ -1,0 +1,28 @@
+{{- /* Only authored News/Tapl replacements may borrow the standard Home footer.
+     Select without mutating source nodes; the caller keeps its rendering order. */ -}}
+{{- $page := .page -}}
+{{- $primary := .classes.primaryFooter -}}
+{{- $selection := dict "fallback" false "nodes" (slice) -}}
+{{- if or (eq $page.routeId "/tapl") $page.newsEntry -}}
+  {{- $footers := slice -}}
+  {{- range $node := $page.body.children -}}
+    {{- if and (reflect.IsMap $node) (eq $node.tag "section") (eq (index $node.attributes "class") $primary) -}}
+      {{- $footers = $footers | append $node -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if eq (len $footers) 0 -}}
+    {{- $home := index hugo.Data.render.pages "/" -}}
+    {{- range $node := $home.body.children -}}
+      {{- if and (reflect.IsMap $node) (eq $node.tag "section") (eq (index $node.attributes "class") $primary) -}}
+        {{- $footers = $footers | append $node -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if ne (len $footers) 1 -}}
+      {{- errorf "Route %q requires exactly one standard Home footer; found %d" $page.routeId (len $footers) -}}
+    {{- end -}}
+    {{- $selection = dict "fallback" true "nodes" $footers -}}
+  {{- else if ne (len $footers) 1 -}}
+    {{- errorf "Route %q contains duplicate standard footers" $page.routeId -}}
+  {{- end -}}
+{{- end -}}
+{{- return $selection -}}

@@ -1,0 +1,21 @@
+{{ $page := .page }}{{ $entry := $page.newsEntry }}{{ $prefix := hugo.Data.render.mountPrefix }}
+<main id="emtalk-main" tabindex="-1" class="news-main" aria-labelledby="news-title">
+{{ if eq $entry.kind "index" }}
+  <p class="news-eyebrow">Across the EmTalk ecosystem</p><h1 id="news-title" tabindex="-1">{{ $entry.title }}</h1><p class="news-lead">{{ $entry.summary }}</p>
+  <div class="news-toplinks"><nav aria-label="News categories" data-news-filters><a {{ partial "native-link-focus.html" . }} href="#news-all" data-news-filter="all" aria-current="true">All</a><a {{ partial "native-link-focus.html" . }} href="#news-project" data-news-filter="project">Project</a><a {{ partial "native-link-focus.html" . }} href="#news-product" data-news-filter="product">Product</a><a {{ partial "native-link-focus.html" . }} href="#news-reading" data-news-filter="reading">Articles</a></nav><a {{ partial "native-link-focus.html" . }} href="{{ $prefix }}/news/index.xml">Follow with RSS <span aria-hidden="true">↗</span></a></div>
+  {{ $items := slice }}{{ range hugo.Data.render.pages }}{{ with .newsEntry }}{{ if ne .kind "index" }}{{ $items = $items | append (merge . (dict "sortKey" (printf "%s|%s" .date .routeId))) }}{{ end }}{{ end }}{{ end }}
+  <p class="news-count" role="status" data-news-count>{{ len $items }} published update{{ if ne (len $items) 1 }}s{{ end }} shown.</p>
+  <div id="news-all" class="news-list">{{ $seen := slice }}{{ range sort $items "sortKey" "desc" }}{{ if not (in $seen .kind) }}<span id="news-{{ .kind }}" class="news-anchor"></span>{{ $seen = $seen | append .kind }}{{ end }}{{ partial "news-card.html" (dict "entry" . "heading" "h2") }}{{ end }}</div>
+  {{ $emptyLabels := dict "project" "project" "product" "product" "reading" "article" }}{{ range slice "project" "product" "reading" }}{{ if not (in $seen .) }}<p id="news-{{ . }}" class="news-empty-category">No {{ index $emptyLabels . }} updates have been published yet.</p>{{ end }}{{ end }}
+  <noscript><p>All updates are available above. Category links take you to their first update or a note when none are published.</p></noscript>
+{{ else }}
+  <a {{ partial "native-link-focus.html" . }} class="news-back" href="{{ $prefix }}/news">← All news</a>
+  <p class="news-meta"><time datetime="{{ $entry.date }}">{{ time.Format "2 January 2006" $entry.date }}</time><span>{{ if eq $entry.kind "product" }}Product development{{ else if eq $entry.kind "reading" }}Reading{{ else }}Project news{{ end }}</span></p>
+  {{ if eq $entry.availability "in-development" }}<p class="news-status">In development · illustrative sample, not a working service</p>{{ else if eq $entry.availability "available" }}<p class="news-eyebrow">Available on EmTalk</p>{{ end }}
+  <h1 id="news-title" tabindex="-1">{{ $entry.title }}</h1><p class="news-lead">{{ $entry.summary }}</p>
+  <div class="news-body">{{ range $entry.bodyParagraphs }}<p>{{ . }}</p>{{ end }}</div>
+  <p data-analytics-surface="news_cta"><a {{ partial "native-link-focus.html" . }} class="news-action" href="{{ $prefix }}{{ $entry.relatedRoute }}">{{ $entry.ctaLabel }} <span aria-hidden="true">↗</span></a></p>
+  <p class="news-note">A question or idea about this update? <button class="news-text-button" type="button" data-interest-open data-interest-feature="news">Share thoughts or interest</button></p>
+  <noscript><style>.news-text-button{display:none}</style><p>Email <a {{ partial "native-link-focus.html" . }} href="mailto:info@emtalk.org">info@emtalk.org</a> and mention this update.</p></noscript>
+{{ end }}
+</main>

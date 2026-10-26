@@ -1,8 +1,6 @@
 {
-  "version": "003",
-  "preferenceVersion": 3,
-  "policySourceSha256": "0a2c33cc3e7363e5d3cb47c309a1b750c2f871cebb2ddc49cbbe3b61adcaf25a",
-  "coverageSourceSha256": "e63a45f7c009a112693aaed580d445d6c8e8304c56aa38a337c85c5c4448310b",
+  "version": "004",
+  "preferenceVersion": 4,
   "contexts": {
     "home": {
       "location": "https://www.emtalk.org/",
@@ -55,6 +53,14 @@
     "affirmations": {
       "location": "https://www.emtalk.org/_measurement/affirmations",
       "title": "EmTalk affirmations"
+    },
+    "news_catalog": {
+      "location": "https://www.emtalk.org/news",
+      "title": "EmTalk news"
+    },
+    "news_item": {
+      "location": "https://www.emtalk.org/_measurement/news_item",
+      "title": "EmTalk updates"
     }
   },
   "routes": {
@@ -69,7 +75,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/affirmations/af-01": {
@@ -78,7 +85,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/affirmations/af-02": {
@@ -87,7 +95,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/affirmations": {
@@ -96,7 +105,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": {
@@ -107,7 +117,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/burnout-prevention-vs-recovery": {
@@ -118,7 +129,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/how-to-know-if-you-are-burned-out": {
@@ -129,7 +141,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule": {
@@ -140,7 +153,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/the-chemistry-behind-a-good-nights-sleep": {
@@ -151,7 +165,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": {
@@ -162,7 +177,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/the-truth-about-how-much-sleep-you-need": {
@@ -173,7 +189,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": {
@@ -184,7 +201,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles/why-sleep-matters": {
@@ -195,7 +213,8 @@
         "emtalk_navigation",
         "emtalk_article_action",
         "emtalk_audio_state",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/articles": {
@@ -205,7 +224,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_catalog_filter",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/bret/practice": {
@@ -215,7 +235,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_trial_state"
+        "emtalk_trial_state",
+        "emtalk_interest_state"
       ]
     },
     "/bret": {
@@ -224,7 +245,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/dm/workspace": {
@@ -234,7 +256,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_trial_state"
+        "emtalk_trial_state",
+        "emtalk_interest_state"
       ]
     },
     "/dm": {
@@ -243,7 +266,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/bret-delete-your-account-and-associated-data-v1": {
@@ -252,7 +276,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/bret-delete-your-account-and-associated-data": {
@@ -261,7 +286,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/bret-privacy-policy-v1": {
@@ -270,7 +296,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/bret-privacy-policy": {
@@ -279,7 +306,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/bret-terms-and-conditions-of-use-v1": {
@@ -288,7 +316,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/bret-terms-and-conditions-of-use": {
@@ -297,7 +326,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/dm-delete-your-account-and-associated-data-v1": {
@@ -306,7 +336,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/dm-delete-your-account-and-associated-data": {
@@ -315,7 +346,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/dm-privacy-policy-v1": {
@@ -324,7 +356,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/dm-privacy-policy": {
@@ -333,7 +366,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/dm-terms-and-conditions-of-use-v1": {
@@ -342,7 +376,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/dm-terms-and-conditions-of-use": {
@@ -351,7 +386,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/emtalk-delete-your-account-and-associated-data": {
@@ -360,7 +396,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/emtalk-privacy-policy": {
@@ -369,7 +406,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/documents/emtalk-terms-and-conditions-of-use": {
@@ -378,7 +416,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/": {
@@ -387,7 +426,9 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state",
+        "emtalk_news_preview"
       ]
     },
     "/tapl": {
@@ -396,7 +437,8 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/tests/maslach-burnout-inventory": {
@@ -406,7 +448,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_assessment_state"
+        "emtalk_assessment_state",
+        "emtalk_interest_state"
       ]
     },
     "/tests/mobbing-test": {
@@ -416,7 +459,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_assessment_state"
+        "emtalk_assessment_state",
+        "emtalk_interest_state"
       ]
     },
     "/tests/motivation-test-by-gerchikov": {
@@ -426,7 +470,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_assessment_state"
+        "emtalk_assessment_state",
+        "emtalk_interest_state"
       ]
     },
     "/tests/social-phobia-inventory-spin": {
@@ -436,7 +481,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_assessment_state"
+        "emtalk_assessment_state",
+        "emtalk_interest_state"
       ]
     },
     "/tests/spielberger-state-trait-anxiety-inventory": {
@@ -446,7 +492,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_store_click",
-        "emtalk_assessment_state"
+        "emtalk_assessment_state",
+        "emtalk_interest_state"
       ]
     },
     "/tests": {
@@ -456,7 +503,8 @@
         "page_view",
         "emtalk_navigation",
         "emtalk_catalog_filter",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     },
     "/understand-myself": {
@@ -465,7 +513,69 @@
       "events": [
         "page_view",
         "emtalk_navigation",
-        "emtalk_store_click"
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
+    },
+    "/news": {
+      "context": "news_catalog",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_catalog_filter",
+        "emtalk_interest_state"
+      ]
+    },
+    "/news/news-from-emtalk": {
+      "context": "news_item",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
+    },
+    "/news/bret-browser-practice": {
+      "context": "news_item",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
+    },
+    "/news/decision-matrix-browser": {
+      "context": "news_item",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
+    },
+    "/news/reading-sleep-burnout": {
+      "context": "news_item",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
+    },
+    "/news/tapl-in-development": {
+      "context": "news_item",
+      "product": null,
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
       ]
     }
   },
@@ -477,7 +587,7 @@
           "const": "page_view"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -494,7 +604,9 @@
             "web_trial",
             "documents",
             "affirmations",
-            "tapl"
+            "tapl",
+            "news_catalog",
+            "news_item"
           ]
         }
       },
@@ -512,7 +624,7 @@
           "const": "emtalk_navigation"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -529,7 +641,9 @@
             "web_trial",
             "documents",
             "affirmations",
-            "tapl"
+            "tapl",
+            "news_catalog",
+            "news_item"
           ]
         },
         "surface": {
@@ -542,7 +656,10 @@
             "article_card",
             "related_reading",
             "tool_exit",
-            "catalog"
+            "catalog",
+            "news_card",
+            "news_cta",
+            "ecosystem_step"
           ]
         },
         "destination_kind": {
@@ -555,6 +672,15 @@
             "external_public",
             "documents"
           ]
+        },
+        "destination_product": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "bret",
+            "dm",
+            "tapl"
+          ]
         }
       },
       "required": [
@@ -562,7 +688,8 @@
         "contract_version",
         "page_context",
         "surface",
-        "destination_kind"
+        "destination_kind",
+        "destination_product"
       ],
       "additionalProperties": false
     },
@@ -573,13 +700,14 @@
           "const": "emtalk_catalog_filter"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
           "enum": [
             "articles_catalog",
-            "tests_catalog"
+            "tests_catalog",
+            "news_catalog"
           ]
         },
         "action": {
@@ -587,6 +715,15 @@
           "enum": [
             "filter",
             "reset"
+          ]
+        },
+        "filter_group": {
+          "type": "string",
+          "enum": [
+            "all",
+            "project",
+            "product",
+            "reading"
           ]
         }
       },
@@ -605,7 +742,7 @@
           "const": "emtalk_article_action"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -637,7 +774,7 @@
           "const": "emtalk_audio_state"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -708,7 +845,7 @@
           "const": "emtalk_store_click"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -725,7 +862,9 @@
             "web_trial",
             "documents",
             "affirmations",
-            "tapl"
+            "tapl",
+            "news_catalog",
+            "news_item"
           ]
         },
         "product": {
@@ -764,7 +903,7 @@
           "const": "emtalk_trial_state"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -863,7 +1002,7 @@
           "const": "emtalk_assessment_state"
         },
         "contract_version": {
-          "const": "003"
+          "const": "004"
         },
         "page_context": {
           "type": "string",
@@ -927,6 +1066,107 @@
           }
         }
       ]
+    },
+    "emtalk_interest_state": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_interest_state"
+        },
+        "contract_version": {
+          "const": "004"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "home",
+            "about",
+            "articles_catalog",
+            "bret_landing",
+            "dm_landing",
+            "understand_guide",
+            "tests_catalog",
+            "tapl",
+            "article",
+            "assessment",
+            "web_trial",
+            "documents",
+            "affirmations",
+            "news_catalog",
+            "news_item"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "opened",
+            "submit_attempt",
+            "saved",
+            "rejected",
+            "unconfirmed"
+          ]
+        },
+        "surface": {
+          "type": "string",
+          "enum": [
+            "page_prompt",
+            "feature_prompt",
+            "footer",
+            "tool_exit",
+            "news_cta"
+          ]
+        },
+        "product": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "emtalk",
+            "bret",
+            "dm",
+            "tapl"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "state",
+        "surface",
+        "product"
+      ],
+      "additionalProperties": false
+    },
+    "emtalk_news_preview": {
+      "type": "object",
+      "properties": {
+        "event_name": {
+          "const": "emtalk_news_preview"
+        },
+        "contract_version": {
+          "const": "004"
+        },
+        "page_context": {
+          "type": "string",
+          "enum": [
+            "home"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "open",
+            "close"
+          ]
+        }
+      },
+      "required": [
+        "event_name",
+        "contract_version",
+        "page_context",
+        "action"
+      ],
+      "additionalProperties": false
     }
   },
   "deferredProposalEvents": [
@@ -949,5 +1189,59 @@
     "https://search.yahoo.com": "yahoo",
     "https://yandex.ru": "yandex",
     "https://yandex.com": "yandex"
-  }
+  },
+  "feedbackProducts": {
+    "/": "emtalk",
+    "/about-us": "emtalk",
+    "/bret": "bret",
+    "/bret/practice": "bret",
+    "/dm": "dm",
+    "/dm/workspace": "dm",
+    "/tapl": "tapl",
+    "/404": "not_applicable",
+    "/affirmations/af-01": "not_applicable",
+    "/affirmations/af-02": "not_applicable",
+    "/affirmations": "not_applicable",
+    "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": "not_applicable",
+    "/articles/burnout-prevention-vs-recovery": "not_applicable",
+    "/articles/how-to-know-if-you-are-burned-out": "not_applicable",
+    "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule": "not_applicable",
+    "/articles/the-chemistry-behind-a-good-nights-sleep": "not_applicable",
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": "not_applicable",
+    "/articles/the-truth-about-how-much-sleep-you-need": "not_applicable",
+    "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": "not_applicable",
+    "/articles/why-sleep-matters": "not_applicable",
+    "/articles": "not_applicable",
+    "/documents/bret-delete-your-account-and-associated-data-v1": "not_applicable",
+    "/documents/bret-delete-your-account-and-associated-data": "not_applicable",
+    "/documents/bret-privacy-policy-v1": "not_applicable",
+    "/documents/bret-privacy-policy": "not_applicable",
+    "/documents/bret-terms-and-conditions-of-use-v1": "not_applicable",
+    "/documents/bret-terms-and-conditions-of-use": "not_applicable",
+    "/documents/dm-delete-your-account-and-associated-data-v1": "not_applicable",
+    "/documents/dm-delete-your-account-and-associated-data": "not_applicable",
+    "/documents/dm-privacy-policy-v1": "not_applicable",
+    "/documents/dm-privacy-policy": "not_applicable",
+    "/documents/dm-terms-and-conditions-of-use-v1": "not_applicable",
+    "/documents/dm-terms-and-conditions-of-use": "not_applicable",
+    "/documents/emtalk-delete-your-account-and-associated-data": "not_applicable",
+    "/documents/emtalk-privacy-policy": "not_applicable",
+    "/documents/emtalk-terms-and-conditions-of-use": "not_applicable",
+    "/tests/maslach-burnout-inventory": "not_applicable",
+    "/tests/mobbing-test": "not_applicable",
+    "/tests/motivation-test-by-gerchikov": "not_applicable",
+    "/tests/social-phobia-inventory-spin": "not_applicable",
+    "/tests/spielberger-state-trait-anxiety-inventory": "not_applicable",
+    "/tests": "not_applicable",
+    "/understand-myself": "not_applicable",
+    "/news": "not_applicable",
+    "/news/news-from-emtalk": "not_applicable",
+    "/news/bret-browser-practice": "not_applicable",
+    "/news/decision-matrix-browser": "not_applicable",
+    "/news/reading-sleep-burnout": "not_applicable",
+    "/news/tapl-in-development": "not_applicable"
+  },
+  "proposal003SourceSha256": "0a2c33cc3e7363e5d3cb47c309a1b750c2f871cebb2ddc49cbbe3b61adcaf25a",
+  "proposal003CoverageSha256": "e63a45f7c009a112693aaed580d445d6c8e8304c56aa38a337c85c5c4448310b",
+  "revisionScope": "004 adds exact published News paths, finite destination product and feedback lifecycle, and Home-only explicit preview open/close interface actions; no automatic preview events or metadata. Old003 consent is not migrated. page_view is queued once per active eligibility epoch, including a consent-valid BFcache revisit after pageshow; ordinary visible/focus refresh within the same active epoch does not duplicate it. CF browser RUM remains disabled pending withdrawal/URL-boundary verification."
 }

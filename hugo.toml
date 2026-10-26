@@ -1,5 +1,6 @@
 baseURL = "https://www.emtalk.org/"
 locale = "en"
+timeZone = "Europe/Moscow"
 title = "EmTalk"
 uglyURLs = true
 disableKinds = ["taxonomy", "term", "RSS", "sitemap", "section"]
@@ -20,4 +21,9 @@ buildDrafts = false
   isPlainText = true
   notAlternative = true
 [outputs]
-  home = ["HTML", "RouteSitemap"]
+  home = ["HTML", "RouteSitemap", "NewsRSS"]
+[outputFormats.NewsRSS]
+  mediaType = "application/rss+xml"
+  baseName = "news/index"
+  isPlainText = true
+  notAlternative = true

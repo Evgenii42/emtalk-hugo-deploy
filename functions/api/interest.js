@@ -48,6 +48,9 @@ export async function onRequest({request,env}) {
   if(typeof token!=='string'||token.length<1||token.length>2048)return reply(400,{ok:false,code:'security_check_required'});
   const validation=validateInterest(body,registry);
   if(!validation.valid)return reply(400,{ok:false,code:'invalid_submission'});
+  // Canonicalize the additive field for old clients too. Storage must acknowledge
+  // the actual chosen audience; accepting an id-only receipt would hide a drop.
+  body.audience=validation.row.audience;
   try {
     const allowed=await checkInterestRateLimit(env.INTEREST_LIMITER_SERVICE,request.headers.get('CF-Connecting-IP'));
     if(!allowed)return reply(429,{ok:false,code:'too_many_requests'});
@@ -60,7 +63,7 @@ export async function onRequest({request,env}) {
     const response=await fetch(destination.href,{method:'POST',headers:{'Content-Type':'application/json','X-EmTalk-Interest-Key':env.INTEREST_WEBHOOK_SECRET},body:JSON.stringify(body),redirect:'manual',signal:AbortSignal.timeout(15000)});
     if(!response.ok)return unavailable();
     const resultBody=await readBounded(response,2048);
-    if(resultBody.ok!==true||resultBody.submissionId!==body.submissionId.toLowerCase())return unavailable();
-    return reply(200,{ok:true,submissionId:body.submissionId});
+    if(resultBody.ok!==true||resultBody.submissionId!==body.submissionId.toLowerCase()||resultBody.audience!==body.audience)return unavailable();
+    return reply(200,{ok:true,submissionId:body.submissionId,audience:body.audience});
   } catch {return unavailable();}
 }

@@ -271,3 +271,10 @@ html[data-route-id="/"] .link-block-7:active { background: #e6d7f0; border-color
 
 /* Three legal links wrap rather than overflow narrow footer columns. */
 .section-30 .legal,.section-footer-dm .legal { flex-wrap:wrap; }
+
+/* Shared next steps and feedback route belong to the existing global sheet. */
+.ecosystem-next{box-sizing:border-box;font-family:Manrope,sans-serif;color:#281c37}
+.ecosystem-next :focus-visible{outline:3px solid #5e3a7d;outline-offset:4px}
+.ecosystem-next{padding:24px max(24px,calc((100% - 1144px)/2));background:#f5eef5;border-top:1px solid #e4d5e2;display:flex;gap:24px;align-items:center;justify-content:space-between}.ecosystem-next strong{font-size:15px}.ecosystem-next p{font-size:12px;line-height:1.6;margin:7px 0 0}.ecosystem-next nav{display:flex;gap:10px 22px;flex-wrap:wrap}.ecosystem-next a{display:block;min-height:44px;color:#512958;font-size:14px;line-height:1.6;text-underline-offset:3px}.ecosystem-next a span{display:block;font-size:12px;color:#5e4665}.interest-context-route{overflow-wrap:anywhere;font-weight:400}
+@media(max-width:700px){.ecosystem-next{display:block;padding:22px 20px}.ecosystem-next nav{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}}
+@media(prefers-reduced-motion:reduce){.ecosystem-next *{scroll-behavior:auto!important;transition:none!important}}

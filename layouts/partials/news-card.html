@@ -1,0 +1,5 @@
+{{ $entry := .entry }}{{ $prefix := hugo.Data.render.mountPrefix }}
+<article class="news-card" data-analytics-surface="news_card" data-news-card data-news-group="{{ $entry.kind }}" data-news-kind="{{ $entry.kind }}">
+  <p class="news-meta"><time datetime="{{ $entry.date }}">{{ time.Format "2 Jan 2006" $entry.date }}</time><span>{{ if eq $entry.kind "product" }}Product{{ else if eq $entry.kind "reading" }}Articles{{ else }}Project news{{ end }}</span>{{ if eq $entry.availability "in-development" }}<strong class="news-status">In development</strong>{{ else if eq $entry.availability "available" }}<span>Available</span>{{ end }}</p>
+  {{ if eq .heading "h3" }}<h3><a {{ partial "native-link-focus.html" . }} href="{{ $prefix }}{{ $entry.routeId }}">{{ $entry.title }}</a></h3>{{ else }}<h2><a {{ partial "native-link-focus.html" . }} href="{{ $prefix }}{{ $entry.routeId }}">{{ $entry.title }}</a></h2>{{ end }}<p>{{ $entry.summary }}</p>
+</article>

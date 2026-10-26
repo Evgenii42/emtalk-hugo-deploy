@@ -14,6 +14,7 @@ from urllib.parse import urlsplit, urljoin, unquote, quote
 
 from bs4 import BeautifulSoup, Comment, Doctype, ProcessingInstruction, Declaration, CData, NavigableString, Tag
 from prepare_public_content import repair_public_contact_links
+from source_roles import load_source_roles, validate_source_header_replacements
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {'/meditations', '/meditations/relax-short'}
@@ -190,6 +191,11 @@ def load_owned_pages(root, source_pages):
             or not isinstance(registry['pages'], dict)):
         raise ValueError('Invalid owned registry schema')
     entries = registry['pages']
+    from news_content import owned_news
+    news = owned_news(root, set(source_pages) | set(entries))
+    if set(news) & (set(source_pages) | set(entries)):
+        raise ValueError('News route collides with source or owned registry')
+    entries = {**entries, **news}
     filenames = {('index.html' if route == '/' else route.lstrip('/') + '.html').casefold(): route
                  for route in source_pages}
     required = {'mode', 'language', 'title', 'lead', 'sections', 'actions', 'indexable'}
@@ -256,6 +262,7 @@ def prepare(prefix='', preview=False):
     prefix = '/' + prefix.strip('/') if prefix.strip('/') else ''
     if not re.fullmatch(r'(?:/[A-Za-z0-9_-]+)*', prefix):
         raise ValueError('Mount prefix must be an explicit simple absolute path')
+    source_roles = load_source_roles(ROOT)
     # Hugo reads every authored data file, including unused fields/collections.
     # Regenerated render data may be replaced; the old route map is checked below
     # because its contents govern generated-page cleanup.
@@ -267,6 +274,9 @@ def prepare(prefix='', preview=False):
     for route in corpus['pages']:
         validate_route(route)
     owned = load_owned_pages(ROOT, corpus['pages'])
+    from news_content import load_news
+    authored_news = load_news(ROOT, set(corpus['pages']) | set(owned), include_drafts=True)
+    draft_news_routes = {row['routeId'] for row in authored_news if row['draft']}
     media = read('inventory/media.json')
     models = read('data/source-content-tests.json')['models']
     schema = read('data/source-content-schema.json')['articleCatalog']
@@ -666,7 +676,7 @@ def prepare(prefix='', preview=False):
             page = pages[route]
         else:
             content_path = ROOT / 'content' / (route.lstrip('/') + '.md')
-            if content_path.exists():
+            if content_path.exists() and not (route == '/news' or route.startswith('/news/')):
                 existing = parse_json(content_path.read_text(encoding='utf-8'))
                 if (not isinstance(existing, dict) or existing.get('managedBy') != 'prepare_hugo-owned'
                         or existing.get('routeId') != route or existing.get('layout') != 'source'):
@@ -677,10 +687,15 @@ def prepare(prefix='', preview=False):
                     'metadata': [], 'icons': copy.deepcopy(pages['/']['icons']), 'structuredData': [], 'testModel': None,
                     'audioMp3': '', 'css': 'css/intent-pages.css'}
             pages[route] = page
-            plan_json(content_path, {'title': entry['title'], 'routeId': route, 'layout': 'source',
-                                     'url': route + '.html', 'managedBy': 'prepare_hugo-owned'})
+            if not (route == '/news' or route.startswith('/news/')):
+                plan_json(content_path, {'title': entry['title'], 'routeId': route, 'layout': 'source',
+                                         'url': route + '.html', 'managedBy': 'prepare_hugo-owned'})
         page['ownedEntry'] = copy.deepcopy(entry)
         page['ownedHash'] = digest
+    for row in load_news(ROOT, set(pages)):
+        pages[row['routeId']]['newsEntry'] = row
+    # prepare_skip_target below owns every shared skip destination, including
+    # the authored News main. Do not assign a competing News-only target here.
     for page in pages.values():
         repair_public_contact_links(page['body'], page['routeId'], prefix)
         target = prepare_skip_target(page)
@@ -698,6 +713,8 @@ def prepare(prefix='', preview=False):
         if not isinstance(front, dict) or front.get('layout') != 'source' or front.get('routeId') != route:
             raise ValueError('Refusing to remove manually changed content: ' + route)
         if owned and front.get('managedBy') != 'prepare_hugo-owned':
+            if front.get('managedBy') == 'news033-author':
+                raise ValueError('Authored News route retired: remove its file or mark it draft: ' + route)
             raise ValueError('Refusing to remove manually changed owned content: ' + route)
         pending_deletions.add(path)
     # Only delete known generated pages, preserving author-owned content.
@@ -708,7 +725,9 @@ def prepare(prefix='', preview=False):
     if previous_map.exists():
         for old in read('data/route-map.json')['routes']:
             validate_route(old['path'])
-            if old['path'] in pages or old['path'] == '/':
+            # Authored News stays on disk when unpublished. A previous generated
+            # route map is not permission to delete a validated draft record.
+            if old['path'] in pages or old['path'] == '/' or old['path'] in draft_news_routes:
                 continue
             former = (ROOT / 'content' / (old['path'].lstrip('/') + '.md')).resolve()
             remove_generated_content(former, old['path'], owned=old.get('origin') == 'owned')
@@ -745,6 +764,7 @@ def prepare(prefix='', preview=False):
                 'excludedOwnerRoutes': sorted(EXCLUDED), 'sourceDefectDispositions': issues, 'status': 'build-input-prepared-not-parity-verified'})
     # Every route, serialization and cleanup precondition is valid before the
     # first mutation. This does not claim a transaction for filesystem I/O errors.
+    validate_source_header_replacements(pages, source_roles)
     for path, value in pending_writes.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(value, encoding='utf-8', newline='\n')

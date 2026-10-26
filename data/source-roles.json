@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "footer": {
+    "primaryFooter": "section-30",
+    "measuredFooterClasses": [
+      "section-30",
+      "section-footer-dm"
+    ]
+  },
+  "legacyHeaderClass": "header-clean",
+  "legacyHeaders": {
+    "/": [
+      [
+        0,
+        0,
+        2,
+        0
+      ]
+    ],
+    "/about-us": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles": [
+      [
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/burnout-prevention-vs-recovery": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/how-to-know-if-you-are-burned-out": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/lights-out-how-light-quietly-runs-your-sleep-schedule": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/the-chemistry-behind-a-good-nights-sleep": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/the-truth-about-how-much-sleep-you-need": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/articles/why-sleep-matters": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/bret": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/dm": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/bret-delete-your-account-and-associated-data": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/bret-delete-your-account-and-associated-data-v1": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/bret-privacy-policy": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/bret-privacy-policy-v1": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/bret-terms-and-conditions-of-use": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/bret-terms-and-conditions-of-use-v1": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/dm-delete-your-account-and-associated-data": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/dm-delete-your-account-and-associated-data-v1": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/dm-privacy-policy": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/dm-privacy-policy-v1": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/dm-terms-and-conditions-of-use": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/dm-terms-and-conditions-of-use-v1": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/emtalk-delete-your-account-and-associated-data": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/emtalk-privacy-policy": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/documents/emtalk-terms-and-conditions-of-use": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "/tests": [
+      [
+        0,
+        0
+      ]
+    ],
+    "/tests/maslach-burnout-inventory": [
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "/tests/mobbing-test": [
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "/tests/motivation-test-by-gerchikov": [
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "/tests/social-phobia-inventory-spin": [
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "/tests/spielberger-state-trait-anxiety-inventory": [
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  }
+}

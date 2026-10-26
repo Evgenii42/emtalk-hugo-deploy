@@ -2374,6 +2374,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -3960,6 +3972,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -6906,6 +6930,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -8617,6 +8653,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -10289,6 +10337,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -12019,6 +12079,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -13613,6 +13685,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -15152,6 +15236,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -16854,6 +16950,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -18416,6 +18524,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -20235,6 +20355,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -21762,6 +21894,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -24391,6 +24535,18 @@
                                 ],
                                 "void": false
                               }
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -27350,6 +27506,18 @@
                               }
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -28463,6 +28631,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -29449,6 +29629,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -31470,6 +31662,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -33486,6 +33690,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -37263,6 +37479,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -41037,6 +41265,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -42108,6 +42348,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -43176,6 +43428,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -44945,6 +45209,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -46709,6 +46985,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -51242,6 +51530,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -55772,6 +56072,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -56435,7 +56747,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Open Privacy choices to reject or withdraw optional Analytics. This stops EmTalk from sending new website Analytics events and attempts to remove known accessible Analytics cookies. Requests already dispatched or buffered by Google cannot be recalled. The separate rejection preference emtalk.privacy.v3 can remain for up to 180 days so that your choice is respected. Clearing it does not grant permission. Browser deletion cannot retrospectively remove data already received by Google or other services; contact ",
+                          "Open Privacy choices to reject or withdraw optional Analytics. This stops EmTalk from sending new website Analytics events and attempts to remove known accessible Analytics cookies. Requests already dispatched or buffered by Google cannot be recalled. The separate rejection preference emtalk.privacy.v4 can remain for up to 180 days so that your choice is respected. Clearing it does not grant permission. Browser deletion cannot retrospectively remove data already received by Google or other services; contact ",
                           {
                             "tag": "a",
                             "attributes": {
@@ -57028,6 +57340,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -57426,7 +57750,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Updated 23 October 2026."
+                          "Updated 25 October 2026."
                         ],
                         "void": false
                       },
@@ -57761,7 +58085,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Optional Google Analytics is off until you explicitly allow it in Privacy choices. Its purpose is to understand visits, navigation, reading and audio use, coarse self-assessment workflows, browser-tool use and app-store link activations, so we can identify broken flows and improve the website. Google receives these events and connection information, such as IP address and browser information, and uses Analytics identifiers after permission. These data are not claimed anonymous. We do not enable Google advertising signals or advertising personalisation. The old Google Tag Manager container is not run alongside the owned event emitter."
+                          "Optional Google Analytics is off until you explicitly allow it in Privacy choices. Its purpose is to understand visits, navigation, reading and audio use, coarse self-assessment workflows, browser-tool use, app-store link activations and coarse feedback interaction states, so we can identify broken flows and improve the website. Google receives these events and connection information, such as IP address and browser information, and uses Analytics identifiers after permission. These data are not claimed anonymous. We do not enable Google advertising signals or advertising personalisation. The old Google Tag Manager container is not run alongside the owned event emitter."
                         ],
                         "void": false
                       },
@@ -57770,7 +58094,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v3 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control keeps optional analytics off. Ordinary use is not permission; rejection does not remove any website feature."
+                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v4 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control keeps optional analytics off. Ordinary use is not permission; rejection does not remove any website feature."
                         ],
                         "void": false
                       },
@@ -57779,7 +58103,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "If you close Privacy choices without choosing, we keep only a policy-version marker (emtalk.privacy.dismissed.v1) in session storage so the panel stays closed during that browser tab session. This necessary interface state does not grant analytics permission and contains no answers, decision text or visitor identifiers. You can reopen Privacy choices at any time. To keep keyboard-focused controls visible, the panel may also minimize automatically when there is no room to scroll it out of the way. This does not change your analytics choice, and Privacy choices remains available."
+                          "If you close Privacy choices without choosing, we keep only a policy-version marker (emtalk.privacy.dismissed.v2) in session storage so the panel stays closed during that browser tab session. This necessary interface state does not grant analytics permission and contains no answers, decision text or visitor identifiers. You can reopen Privacy choices at any time. To keep keyboard-focused controls visible, the panel may also minimize automatically when there is no room to scroll it out of the way. This does not change your analytics choice, and Privacy choices remains available."
                         ],
                         "void": false
                       },
@@ -57788,7 +58112,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "The current optional Analytics purpose is described above. A new destination or materially different optional purpose requires a new explicit choice before it is enabled. You can withdraw the current choice through Privacy choices without losing access to website tools."
+                          "The current optional Analytics purpose is described above. A new destination or materially different optional purpose requires a new explicit choice before it is enabled. This update uses a new versioned choice; an earlier permission is not carried into the expanded measurement. An explicit rejection may also update a valid older local analytics choice to rejected so already-open older EmTalk tabs can stop their collection. It never creates an earlier-version permission. You can withdraw the current choice through Privacy choices without losing access to website tools."
                         ],
                         "void": false
                       },
@@ -57879,7 +58203,7 @@
                             ],
                             "void": false
                           },
-                          ", we receive the page and feature you select, whether you are expressing interest, sharing an idea or reporting a problem, and any comment and email address you provide. We also record a random submission reference, the receipt and expiry times, the notice version and your separate choice about feature updates. A comment is optional for interest and required for an idea or problem report. You do not need an account or an identity document to use this form."
+                          ", we receive the page and feature you select, whether you are expressing interest, sharing an idea or reporting a problem, the intended use you select (for yourself, a team or your clients), and any comment and email address you provide. Where the intended-use choice is offered, you may leave it unspecified. We also record a random submission reference, the receipt and expiry times, the notice version and your separate choice about feature updates. A comment is optional for interest and required for an idea or problem report. You do not need an account or an identity document to use this form."
                         ],
                         "void": false
                       },
@@ -57908,7 +58232,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Please leave out test answers, results, health details, private decision notes, passwords and other unnecessary personal information. The form does not read your test answers, DM notes or BRET practice records. Its email and comment fields are not sent to Google Analytics or an AI service. Feedback is separate from optional analytics, so rejecting analytics does not prevent you from using the form."
+                          "Please leave out test answers, results, health details, private decision notes, passwords and other unnecessary personal information. The form does not read your test answers, DM notes or BRET practice records. Its email and comment fields are not sent to Google Analytics or an AI service. If you separately allow optional analytics, we may measure the form opening, an actual send attempt and its acknowledged or unconfirmed outcome, using coarse page context, placement and a fixed public product category. We do not send your selected feature, intent, audience, update choice, reference, security token or response body to Analytics, and do not join Analytics identities to feedback records. Feedback is separate from optional analytics, so rejecting analytics does not prevent you from using the form."
                         ],
                         "void": false
                       },
@@ -58503,6 +58827,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -59577,6 +59913,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -61416,6 +61764,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -70766,6 +71126,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -77098,6 +77470,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -88076,6 +88460,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -96525,6 +96921,18 @@
                             },
                             "children": [
                               "Delete Account"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
                             ],
                             "void": false
                           }
@@ -110786,6 +111194,18 @@
                               "Delete Account"
                             ],
                             "void": false
+                          },
+                          {
+                            "tag": "a",
+                            "attributes": {
+                              "class": "link-3",
+                              "href": "/news",
+                              "tabindex": "0"
+                            },
+                            "children": [
+                              "News"
+                            ],
+                            "void": false
                           }
                         ],
                         "void": false
@@ -112859,6 +113279,382 @@
         ]
       },
       "ownedHash": "457620c1a7aa02421541a255c140decfc3abca994ea5990ab9c4d4bc74280d88",
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news": {
+      "routeId": "/news",
+      "title": "News from EmTalk",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "42f775cc92a94e9b4b5ef667f3af4334e53382827c70c2b6ad6ef451072ae093",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "News from EmTalk",
+        "lead": "Project updates, product development and reading highlights across EmTalk.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "42f775cc92a94e9b4b5ef667f3af4334e53382827c70c2b6ad6ef451072ae093",
+      "newsEntry": {
+        "title": "News from EmTalk",
+        "routeId": "/news",
+        "layout": "source",
+        "url": "/news.html",
+        "managedBy": "news033-author",
+        "summary": "Project updates, product development and reading highlights across EmTalk.",
+        "kind": "index",
+        "draft": false
+      },
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news/tapl-in-development": {
+      "routeId": "/news/tapl-in-development",
+      "title": "What we are exploring with TAPL",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "81fd21f61e4218689f0b6aa7dad36ee1d9939bc7a8aa2b7d6e810e4a7973983e",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "What we are exploring with TAPL",
+        "lead": "A planned tool for small steps, learning and gradual progress.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "81fd21f61e4218689f0b6aa7dad36ee1d9939bc7a8aa2b7d6e810e4a7973983e",
+      "newsEntry": {
+        "title": "What we are exploring with TAPL",
+        "routeId": "/news/tapl-in-development",
+        "layout": "source",
+        "url": "/news/tapl-in-development.html",
+        "managedBy": "news033-author",
+        "summary": "A planned tool for small steps, learning and gradual progress.",
+        "kind": "product",
+        "availability": "in-development",
+        "draft": false,
+        "date": "2026-10-26",
+        "bodyParagraphs": [
+          "TAPL is in development and is not available as a working service yet. We are exploring small steps, weekly reflection and flexible plans for personal goals, team learning and work with clients.",
+          "The walkthrough uses prepared sample stories. Its progress belongs to the sample, rather than your own goal. Live AI coaching, a program marketplace and paid access are not available through it."
+        ],
+        "relatedRoute": "/tapl",
+        "ctaLabel": "About TAPL"
+      },
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news/reading-sleep-burnout": {
+      "routeId": "/news/reading-sleep-burnout",
+      "title": "Read or listen: sleep and burnout",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "46440732e0d0e5931274386817bba9a6673eaee63e74b2bc9352b81b8d6502fc",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Read or listen: sleep and burnout",
+        "lead": "Explore nine articles, with an audio option on each article page.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "46440732e0d0e5931274386817bba9a6673eaee63e74b2bc9352b81b8d6502fc",
+      "newsEntry": {
+        "title": "Read or listen: sleep and burnout",
+        "routeId": "/news/reading-sleep-burnout",
+        "layout": "source",
+        "url": "/news/reading-sleep-burnout.html",
+        "managedBy": "news033-author",
+        "summary": "Explore nine articles, with an audio option on each article page.",
+        "kind": "reading",
+        "availability": "available",
+        "draft": false,
+        "date": "2026-10-26",
+        "bodyParagraphs": [
+          "The EmTalk library brings together six articles about sleep and three about burnout. Choose a topic, then read or listen at your own pace.",
+          "Reading and listening times in the library are approximate. You can return to the library whenever you want to explore another topic."
+        ],
+        "relatedRoute": "/articles",
+        "ctaLabel": "Browse articles"
+      },
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news/news-from-emtalk": {
+      "routeId": "/news/news-from-emtalk",
+      "title": "A place for news across EmTalk",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "8db3502928119ffd5020d83bcd2450345a3517ebf649e3bb7d6a795c105b3680",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "A place for news across EmTalk",
+        "lead": "A place for project updates, product development and reading highlights.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "8db3502928119ffd5020d83bcd2450345a3517ebf649e3bb7d6a795c105b3680",
+      "newsEntry": {
+        "title": "A place for news across EmTalk",
+        "routeId": "/news/news-from-emtalk",
+        "layout": "source",
+        "url": "/news/news-from-emtalk.html",
+        "managedBy": "news033-author",
+        "summary": "A place for project updates, product development and reading highlights.",
+        "kind": "project",
+        "availability": "project",
+        "draft": false,
+        "date": "2026-10-26",
+        "bodyParagraphs": [
+          "News from EmTalk brings together project updates, product development and reading highlights. Each note explains what you can explore now and what is still in development.",
+          "Start with what you need: understand a topic through articles and questionnaires, take a pause with BRET, or work through a choice with Decision Matrix. TAPL is our planned tool for gradual progress. You can choose a different direction at any time."
+        ],
+        "relatedRoute": "/",
+        "ctaLabel": "Explore EmTalk"
+      },
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news/decision-matrix-browser": {
+      "routeId": "/news/decision-matrix-browser",
+      "title": "Work through a choice with Decision Matrix",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "fc2b359baabe3dfe59d47df3e24f7a43de617bf38f4b58e55c9c517d337f4c22",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Work through a choice with Decision Matrix",
+        "lead": "Compare options and weigh your reasons in a guest workspace.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "fc2b359baabe3dfe59d47df3e24f7a43de617bf38f4b58e55c9c517d337f4c22",
+      "newsEntry": {
+        "title": "Work through a choice with Decision Matrix",
+        "routeId": "/news/decision-matrix-browser",
+        "layout": "source",
+        "url": "/news/decision-matrix-browser.html",
+        "managedBy": "news033-author",
+        "summary": "Compare options and weigh your reasons in a guest workspace.",
+        "kind": "product",
+        "availability": "available",
+        "draft": false,
+        "date": "2026-10-26",
+        "bodyParagraphs": [
+          "Use Decision Matrix to compare options, then work through pros and cons. Your entries and drafts stay in this browser; export a file if you want a separate copy.",
+          "The workspace needs JavaScript. Its scores reflect what you enter, rather than a guarantee about the right choice. Web AI assistance and account sync are not connected."
+        ],
+        "relatedRoute": "/dm/workspace",
+        "ctaLabel": "Open guest workspace"
+      },
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news/bret-browser-practice": {
+      "routeId": "/news/bret-browser-practice",
+      "title": "Make room for a short pause with BRET",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "c6d8bbd814565c8d6f8acabcb7a0c7732276e887038679ad95417d9cf313a3d3",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Make room for a short pause with BRET",
+        "lead": "Choose a breathing rhythm or a muscle-relaxation practice in your browser.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "c6d8bbd814565c8d6f8acabcb7a0c7732276e887038679ad95417d9cf313a3d3",
+      "newsEntry": {
+        "title": "Make room for a short pause with BRET",
+        "routeId": "/news/bret-browser-practice",
+        "layout": "source",
+        "url": "/news/bret-browser-practice.html",
+        "managedBy": "news033-author",
+        "summary": "Choose a breathing rhythm or a muscle-relaxation practice in your browser.",
+        "kind": "product",
+        "availability": "available",
+        "draft": false,
+        "date": "2026-10-26",
+        "bodyParagraphs": [
+          "BRET offers breathing rhythms, a custom rhythm and progressive muscle relaxation. The browser practice is free and needs no account.",
+          "The timed practice needs JavaScript. Stay within a comfortable range and stop if you feel uncomfortable."
+        ],
+        "relatedRoute": "/bret/practice",
+        "ctaLabel": "Open BRET practice"
+      },
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"

@@ -3,13 +3,16 @@
 {{- $apps := in (slice "/bret" "/bret/practice" "/dm" "/dm/workspace" "/tapl") $route -}}
 <header class="site-header" data-analytics-surface="header">
   {{/* Explicit0 keeps the shared navigation in native Tab order in WebKit, without positive tabindex values. */}}
-  {{ with .skipTarget }}<a class="site-header__skip" href="{{ .href }}" tabindex="0">Skip to content</a>{{ end }}
+  {{ with .skipTarget }}<a class="site-header__skip" href="{{ .href }}" {{ partial "native-link-focus.html" . }}>Skip to content</a>{{ end }}
   <div class="site-header__bar">
-    <a class="site-header__brand" href="{{ $prefix }}/" tabindex="0" aria-label="EmTalk home"{{ if eq $route "/" }} aria-current="page"{{ end }}><img src="{{ $prefix }}/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp" alt="" width="32" height="32"><span>EmTalk</span></a>
+    <a class="site-header__brand" href="{{ $prefix }}/" {{ partial "native-link-focus.html" . }} aria-label="EmTalk home"{{ if eq $route "/" }} aria-current="page"{{ end }}><img src="{{ $prefix }}/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp" alt="" width="32" height="32"><span>EmTalk</span></a>
     <div class="site-header__navs">
+    {{/* Both layouts represent one navigation. CSS exposes exactly one,
+         including retained-focus resizing; native keyboard checks cover this. */}}
     <nav class="site-header__desktop" aria-label="Main navigation">
       {{ partial "site-direct-link.html" (dict "route" $route "path" "/articles" "label" "Articles" "section" true) }}
       {{ partial "site-direct-link.html" (dict "route" $route "path" "/tests" "label" "Tests" "section" true) }}
+      {{ partial "site-direct-link.html" (dict "route" $route "path" "/news" "label" "News" "section" true) }}
       {{/* Apps marks only its product section. Generic mobile Menu keeps current-page semantics on its destination links. */ -}}
       <details class="site-header__disclosure"><summary{{ if $apps }} data-current="true" aria-current="location"{{ end }}>Apps <span aria-hidden="true">⌄</span></summary>
         <div class="site-header__panel" role="group" aria-label="Apps">
@@ -24,6 +27,7 @@
       <details class="site-header__disclosure"><summary>Menu <span aria-hidden="true">⌄</span></summary>
         <div class="site-header__panel site-header__panel--mobile">
           {{ partial "site-direct-link.html" (dict "route" $route "path" "/tests" "label" "Tests" "section" true) }}
+      {{ partial "site-direct-link.html" (dict "route" $route "path" "/news" "label" "News" "section" true) }}
           <div role="group" aria-label="Apps">
             <p>Apps</p>
             {{ partial "site-app-links.html" (dict "route" $route) }}

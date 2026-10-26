@@ -172,6 +172,30 @@ export default {
     ],
     "/404": [
       "page"
+    ],
+    "/news": [
+      "page",
+      "news"
+    ],
+    "/news/bret-browser-practice": [
+      "page",
+      "news"
+    ],
+    "/news/decision-matrix-browser": [
+      "page",
+      "news"
+    ],
+    "/news/news-from-emtalk": [
+      "page",
+      "news"
+    ],
+    "/news/reading-sleep-burnout": [
+      "page",
+      "news"
+    ],
+    "/news/tapl-in-development": [
+      "page",
+      "news"
     ]
   },
   "labels": {
@@ -194,6 +218,28 @@ export default {
     "audio": "Listening to an article",
     "programs": "Guided programs",
     "weekly-plan": "Weekly planning",
-    "progress": "Reviewing progress"
+    "progress": "Reviewing progress",
+    "news": "News and project updates"
+  },
+  "audiences": {
+    "default": "unspecified",
+    "options": [
+      {
+        "value": "unspecified",
+        "label": "Prefer not to say"
+      },
+      {
+        "value": "personal",
+        "label": "For myself"
+      },
+      {
+        "value": "business",
+        "label": "For my team or company"
+      },
+      {
+        "value": "partner",
+        "label": "For clients I support"
+      }
+    ]
   }
 };

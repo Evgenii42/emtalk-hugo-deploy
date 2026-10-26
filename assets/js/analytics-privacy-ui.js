@@ -16,6 +16,38 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   }
   const labels = openers.map(button => button.textContent || "Privacy choices");
   let opener = null, minimized = false, explicitlyOpened = false;
+  // Native pointer activation focuses before its click. Moving either page or
+  // panel in that focusin would retarget the pending click/tap. Keep the origin
+  // through the entire click task; keyboard focus still gets occlusion recovery.
+  const pointers = new Set();
+  let pointerFocusPending = false, pointerRelease = null;
+  let pointerSequence = 0, focusFrame = null, pendingFocus = null;
+  let pageActive = true, windowActive = document.hasFocus();
+  function cancelFocusCorrection() {
+    if (focusFrame !== null) window.cancelAnimationFrame(focusFrame);
+    focusFrame = null; pendingFocus = null;
+  }
+  function resetPointerOrigin() {
+    pointers.clear(); pointerFocusPending = false;
+    if (pointerRelease !== null) clearTimeout(pointerRelease);
+    pointerRelease = null;
+    pointerSequence += 1; cancelFocusCorrection();
+  }
+  function beginPointer(event) {
+    pointerSequence += 1; cancelFocusCorrection();
+    if (pointerRelease !== null) clearTimeout(pointerRelease);
+    pointerRelease = null; pointers.add(event.pointerId); pointerFocusPending = true;
+  }
+  function endPointer(event) { pointers.delete(event.pointerId); }
+  function cancelPointer(event) {
+    pointers.delete(event.pointerId);
+    if (pointers.size === 0) resetPointerOrigin();
+  }
+  function finishPointerClick() {
+    if (!pointerFocusPending || pointers.size) return;
+    if (pointerRelease !== null) clearTimeout(pointerRelease);
+    pointerRelease = setTimeout(resetPointerOrigin, 0);
+  }
   function setMinimized(value) {
     minimized = value;
     openers.forEach((button, index) => {
@@ -56,9 +88,12 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     const action = target.getBoundingClientRect();
     if (intersects(action, button.getBoundingClientRect())) button.classList.toggle("privacy-controls__opener--minimized-top", action.top > window.innerHeight / 2);
   }
-  function keepFocusedActionVisible(event) {
-    const target = event.target;
-    if (!target || target.tabIndex < 0 || typeof target.getBoundingClientRect !== "function") return;
+  function correctFocusedAction(target, sequence) {
+    // Only the latest keyboard-focused action may move. A pointer sequence,
+    // blur/pagehide, detached target or later focus invalidates queued work.
+    if (sequence !== pointerSequence || pointerFocusPending || pointers.size
+        || !pageActive || !windowActive || document.hidden
+        || document.activeElement !== target || !target.isConnected) return;
     if (minimized) { exposeMinimizedOpener(target); return; }
     if (panel.hidden || panel.contains(target)) return;
     const covered = () => intersects(target.getBoundingClientRect(), panel.getBoundingClientRect());
@@ -73,7 +108,31 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     panel.hidden = true; opener = null; setMinimized(true); render(); exposeMinimizedOpener(target);
     announcement.textContent = "Privacy choices were minimized to keep your focused control visible. Your analytics choice is unchanged. Use Privacy choices (minimized) to reopen them.";
   }
+  function keepFocusedActionVisible(event) {
+    const target = event.target;
+    if (pointerFocusPending || pointers.size || !target || target.tabIndex < 0
+        || typeof target.getBoundingClientRect !== "function") { cancelFocusCorrection(); return; }
+    pendingFocus = {target, sequence: pointerSequence};
+    // Rapid focusin events share one paint-time correction for the current
+    // action. Never scroll synchronously between pointerdown and native click.
+    if (focusFrame !== null) return;
+    focusFrame = window.requestAnimationFrame(() => {
+      focusFrame = null;
+      const current = pendingFocus; pendingFocus = null;
+      if (current) correctFocusedAction(current.target, current.sequence);
+    });
+  }
   function mount() {
+    document.addEventListener("pointerdown", beginPointer, true);
+    document.addEventListener("pointerup", endPointer, true);
+    document.addEventListener("pointercancel", cancelPointer, true);
+    document.addEventListener("click", finishPointerClick, true);
+    document.addEventListener("keydown", () => { if (!pointers.size) resetPointerOrigin(); }, true);
+    window.addEventListener("blur", () => { windowActive = false; resetPointerOrigin(); });
+    window.addEventListener("focus", () => { windowActive = true; });
+    window.addEventListener("pagehide", () => { pageActive = false; resetPointerOrigin(); });
+    window.addEventListener("pageshow", () => { pageActive = true; });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) cancelFocusCorrection(); });
     for (const button of openers) button.addEventListener("click", () => {
       onRefresh(); opener = button; explicitlyOpened = true; panel.classList.remove("privacy-controls--top"); setMinimized(false); panel.hidden = false; render(); nodes.heading.focus();
     });

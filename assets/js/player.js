@@ -161,7 +161,7 @@ function initPlayer(root, legacy = false) {
   let cancelledStart = false;
   let cancelStart;
   window.addEventListener?.('pagehide', event => {
-    cancelStart?.();
+    cancelStart?.(true);
     audio.pause();
     if (!event.persisted) {
       const cached = bufferedSources.get(audio);
@@ -192,10 +192,13 @@ function initPlayer(root, legacy = false) {
     let decodingBlob = false;
     const download = new AbortController();
     const failed = new Promise((_, reject) => { rejectLoad = reject; });
-    cancelStart = () => {
+    cancelStart = (preserveCycle = false) => {
       cancelled = true;
       cancelledStart = true;
-      measurement.cancel();
+      // Page lifecycle interruption preserves an existing factual audio cycle.
+      // Explicit cancel/source replacement still end the attempt for a new Play.
+      if (preserveCycle === true) measurement.suspend();
+      else measurement.cancel();
       download.abort();
       audio.pause();
       rejectLoad(new DOMException('Playback cancelled', 'AbortError'));

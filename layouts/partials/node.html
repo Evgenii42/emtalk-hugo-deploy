@@ -1,5 +1,9 @@
+{{/* Build through scripts/build_site.py (or build_cloudflare.py), never bare
+Hugo: prepare_hugo validates every legacy header route/child-index path before
+writing this AST. The class suppression below consumes that validated corpus. */}}
 {{- if reflect.IsMap . -}}
-  {{- if not (and (eq .tag "header") (in (split (index .attributes "class" | default "") " ") "header-clean")) -}}
+  {{- $legacyHeaderClass := index (index hugo.Data "source-roles") "legacyHeaderClass" -}}
+  {{- if not (and (eq .tag "header") (in (split (index .attributes "class" | default "") " ")  $legacyHeaderClass)) -}}
   {{- $localTag := replaceRE "^.*:" "" (lower .tag) -}}
   {{- if or (not (findRE "^[A-Za-z][A-Za-z0-9:-]*$" .tag)) (in (slice "script" "style" "iframe" "object" "embed" "base" "meta" "title") $localTag) -}}
     {{- errorf "Unsupported content tag %q" .tag -}}

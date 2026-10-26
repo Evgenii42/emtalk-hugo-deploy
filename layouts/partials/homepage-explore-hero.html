@@ -2,16 +2,24 @@
 {{- $hero := index hugo.Data "home-explore" -}}
 {{- if not $hero -}}{{- errorf "Missing home-explore data" -}}{{- end -}}
 {{- if ne (len $hero.cards) 4 -}}{{- errorf "Home hero requires four intent entries" -}}{{- end -}}
+{{- $news := slice -}}
+    {{- range hugo.Data.render.pages -}}{{- with .newsEntry -}}{{- if ne .kind "index" -}}
+      {{- $news = $news | append (merge . (dict "sortKey" (printf "%s|%s" .date .routeId))) -}}
+    {{- end -}}{{- end -}}{{- end -}}
+    {{- $latest := first 3 (sort $news "sortKey" "desc") -}}
 <section class="home-explore section-24" aria-labelledby="home-explore-title">
   <picture>
     {{ range $hero.scene.variants }}<source media="{{ .media }}" srcset="{{ $prefix }}/media/{{ .file }}">{{ end }}
     <img class="home-explore__art" src="{{ $prefix }}/media/{{ $hero.scene.file }}" alt="" width="1505" height="1045" fetchpriority="high">
   </picture>
   <div class="home-explore__content">
+    <div class="home-explore__top{{ if $latest }} home-explore__top--news{{ end }}">
     <div class="home-explore__intro">
       <p class="home-explore__eyebrow">{{ $hero.eyebrow }}</p>
       <h1 id="home-explore-title" tabindex="-1">{{ $hero.title }}</h1>
       <p class="home-explore__lead">{{ $hero.lead }}</p>
+    </div>
+    {{ partial "news-latest.html" (dict "mode" "hero" "items" $latest) }}
     </div>
     <div data-analytics-surface="home_choices" class="home-explore__choices" role="group" aria-label="{{ $hero.groupLabel }}">
       {{ range $hero.cards }}
@@ -22,3 +30,4 @@
     </div>
   </div>
 </section>
+{{ if $latest }}{{ $homeNewsJs := resources.Get "js/home-news.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}<script type="module" src="{{ $homeNewsJs.RelPermalink }}" integrity="{{ $homeNewsJs.Data.Integrity }}"></script>{{ end }}

@@ -1,5 +1,5 @@
-/* Shared metrics derive panel reserves. Retained desktop focus uses the
-   separately measured panel top when the no-JS bar wraps. */
+/* Shared metrics derive panel reserves. A retained desktop panel is positioned
+   below the actual bar box, including wrapping, without JavaScript measurement. */
 :root {
   --emt-header-top: 16px;
   --emt-header-inline-inset: 24px;
@@ -9,15 +9,7 @@
   --emt-header-panel-gap: 12px;
   --emt-header-panel-bottom: 20px;
   --emt-header-trailing-padding: 14px;
-  --emt-header-border: 1px;
-  /* Measured reserve for the retained desktop navigation after wrapping on
-     mobile. Reproduce with keyboard focus in Apps, resize 900 to390 and768
-     to320 (and reverse), then measure the open panel top and the wrapped bar.
-     The panel must stay below the bar and inside the viewport. Its132px top
-     is a conservative measured reserve, not the normal one-row bar height.
-     Any bar metric/font/padding change requires all48 JS/no-JS resize edges
-     in the native integration gate, including the320px inline alignment. */
-  --emt-header-retained-panel-top: 132px
+  --emt-header-border: 1px
 }
 html {
   scroll-padding-top: calc(var(--emt-header-top) + var(--emt-header-bar-height) + var(--emt-header-fragment-gap))
@@ -61,6 +53,7 @@ html[data-route-id^="/affirmations"] body {
   font-family: Manrope,sans-serif
 }
 .site-header__bar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -258,10 +251,8 @@ html[data-route-id^="/affirmations"] body {
     transition: none
   }
 }
-/* Panel metrics intentionally match the current bounded bar: mobile trailing
-   padding8px+border1px gives right:-9px; normal viewport reserve100px covers
-   top12+bar60+gap12+bottom16. The retained desktop focus layout uses132px panel
-   top and16px bottom reserve. Changes to bar geometry require resize QA.
+/* The retained panel's containing block is the actual bar. Its percentage top
+   and height reserve follow wrapping, fonts and padding in JS and no-JS modes.
    Preserve the focused navigation through viewport changes in both modes.
    Focus moves only through the visitor's next keyboard or pointer action. */
 @media(max-width:767px) {
@@ -276,13 +267,23 @@ html[data-route-id^="/affirmations"] body {
     padding: 10px 8px;
     font-size: 13px
   }
+  .site-header__desktop:focus-within .site-header__disclosure {
+    position: static
+  }
   .site-header__desktop:focus-within .site-header__panel {
-    position: fixed;
-    top: var(--emt-header-retained-panel-top);
-    inset-inline: var(--emt-header-inline-inset);
+    position: absolute;
+    top: calc(100% + var(--emt-header-panel-gap));
+    inset-inline: 0;
     width: auto;
-    max-height: calc(100vh - var(--emt-header-retained-panel-top) - var(--emt-header-panel-bottom));
-    max-height: calc(100svh - var(--emt-header-retained-panel-top) - var(--emt-header-panel-bottom))
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    max-height: calc(100vh - var(--emt-header-top) - 100% - var(--emt-header-panel-gap) - var(--emt-header-panel-bottom));
+    max-height: calc(100svh - var(--emt-header-top) - 100% - var(--emt-header-panel-gap) - var(--emt-header-panel-bottom))
+  }
+  .site-header__desktop:focus-within .site-header__panel a {
+    min-width: 0;
+    padding: 8px;
+    overflow-wrap: anywhere
   }
 }
 /* Preserve either native navigation when focus survives a viewport resize.

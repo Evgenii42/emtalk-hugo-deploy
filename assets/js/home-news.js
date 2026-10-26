@@ -195,6 +195,12 @@ if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
   const release = event => { pointers.delete(event.pointerId); sync(); };
   document.addEventListener('pointerup', release);
   document.addEventListener('pointercancel', release);
+  // A release outside this document may have no matching up/cancel here.
+  // A later observed move with no pressed buttons proves that same ID is free;
+  // unrelated IDs or a still-held pointer must not remove its protection.
+  document.addEventListener('pointermove', event => {
+    if (event.buttons === 0 && pointers.delete(event.pointerId)) sync();
+  }, {passive: true});
   preview.addEventListener('focusin', sync);
   preview.addEventListener('focusout', () => queueMicrotask(sync));
   document.addEventListener('visibilitychange', sync);

@@ -4,8 +4,9 @@
   "pages_build_output_dir": "./public",
   "compatibility_date": "2026-10-23",
   "vars": {
-    "INTEREST_ENABLED": "false",
-    "INTEREST_RELEASE_READY": "false",
+    "INTEREST_ENABLED": "true",
+    "INTEREST_RELEASE_READY": "true",
+    "INTEREST_WEBHOOK_URL": "https://contentfactory.emtalk.org/webhook/emtalk-interest032-private",
     "INTEREST_CAPTCHA_MODE": "none",
     "INTEREST_ALLOWED_ORIGIN": "https://www.emtalk.org",
     "EMTALK_SITE_ORIGIN": "https://www.emtalk.org/",

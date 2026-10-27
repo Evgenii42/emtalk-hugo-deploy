@@ -1,19 +1,48 @@
 {
   "branch": "main",
-  "buildReceiptSha256": "1016c280b8ed26cd1ac43c7bb3df5ca4dbae6f6e3821431a3cf640c7dfe2a5b1",
-  "canonicalSourceCommit": "2293fc2d643580a054ce08e90880da863fbcc5cb",
+  "buildReceiptSha256": "02351524146d3edc242ce715171b4e897d5e69ed6ed7d02999e829880c695188",
+  "canonicalSourceCommit": "ed9faead210945c0f6dceb19b6851421e78e1c34",
   "cleanExportRebuildPerformed": true,
-  "currentStaticIncrementAccepted": true,
-  "defaultIntakeEnabled": false,
-  "fourReleaseReviewsCertified": true,
+  "configurationOnlyProductionDeltaVerified": true,
+  "controlledPreviewDelivery": {
+    "allRawDeliveredBodiesExact": false,
+    "projectedExactHtmlBodies": 48,
+    "providerFutureCodeIdentityGuaranteed": false,
+    "rawExactBodies": 298,
+    "sriVerified": false
+  },
+  "controlledPreviewOutputContinuity": {
+    "all348OutputsExact": true,
+    "all485OtherSourcesExact": true,
+    "baselineBuildReceiptSha256": "ea3e7158cc670dfd160c249051f82c569224f76e8e3d9f4b2dce9e48eb02d7e0",
+    "entirePreviewEnvironmentExact": true,
+    "onlyThreeRootActivationVarsChange": true,
+    "outputSnapshotSha256": "dd26ea0bee86ebcec66253759abcbde63ca2a1ad9382124fedb62b66e59ceacf",
+    "stagingEvidenceIsFresh028Execution": false,
+    "stagingEvidenceSourceInputSnapshotSha256": "716b54d670029ba9811084967e47433b5644b68845e981e1d5ed58d88043d64d",
+    "stagingEvidenceSourceVersion": "027",
+    "targetSourceInputSnapshotSha256": "cdce492bf021ae11e3308d04a59d0852c165494215310909a66a7ab1bfb6ec13"
+  },
+  "currentIntakeConfigurationAcceptedByOwner": true,
+  "currentStaticIncrementAcceptedByOwner": true,
+  "defaultIntakeEnabled": true,
+  "existingPrivatePipelinePromoted": true,
+  "fourReleaseReviewsCertified": false,
+  "fourReviewGatePassed": false,
   "fullReleaseAccepted": false,
   "outputCount": 348,
-  "outputSnapshotSha256": "9d2200746ca05b1dfc0e27d31991f9c4297da63168aa008dc68592c78e32e928",
-  "reviewGateSha256": "8e33fcff4ac8ef458bcc32f84af0f36af9f2d6750666690d3c2e3ed727e46b11",
+  "outputSnapshotSha256": "dd26ea0bee86ebcec66253759abcbde63ca2a1ad9382124fedb62b66e59ceacf",
+  "ownerApprovalSha256": "f4cc51943d857c13376f163974e40951f016c749f1ad74c150989652e529c095",
+  "ownerLimitedActivationException": true,
+  "persistedRowVerified": false,
+  "reviewGatePassed": false,
+  "reviewGateSha256": "b9c40956d4c3ea38cac2a6867366829f060a611e0d77f3ac0d42e9e5e6754bfc",
   "routes": 48,
-  "scope": "Scoped CAPTCHA-free026 public source. Intake activation and real persistence remain separate.",
-  "serviceActivationChanged": false,
-  "sourceCapsuleManifestSha256": "dffcf21dc623b6f8645346f354c09a907f1b850cacf76bd00a1159bbc00056a6",
+  "runtimeActivationVerified": false,
+  "scope": "One-release owner-limited production activation028; strict four-review gate remains held and postrelease operational checks remain unverified.",
+  "serviceActivationChanged": true,
+  "sharedLimiterAcrossAliases": true,
+  "sourceCapsuleManifestSha256": "5cff6f18def67ae5615f120574c8e1a259b499e1a5ff2e8d9bcec429d32ad824",
   "sourceCaptchaMode": "none",
   "sourceCount": 486,
   "sourceFiles": [
@@ -68,9 +97,9 @@
       "sha256": "da1d99422428d9c67b53cd6af837f5e37131f30ae14547c4fd19ea656e6ce44a"
     },
     {
-      "bytes": 13756,
+      "bytes": 14325,
       "path": "assets/css/homepage-explore.css",
-      "sha256": "ca98ef1c3234a38ec3420ab7c4db15499fd9f85e96acf9380d745d67173a0281"
+      "sha256": "fef803947d1acb46f2189d8bda240d1b6a09071c070e4567ef223dff72c453ae"
     },
     {
       "bytes": 1633,
@@ -813,9 +842,9 @@
       "sha256": "5818b741b1b50d46c35754962f115df65e3f650360ba2a43bbf8996a8d410bce"
     },
     {
-      "bytes": 206859,
+      "bytes": 207349,
       "path": "data/cms/documents.json",
-      "sha256": "321423ec4079711522883a89eff1b61f780aaf3023a37f45bfd33428e8d766d8"
+      "sha256": "fe03e9b20ea1f342151c1f3588d7e866feca259ffc90d7f541a646058712575a"
     },
     {
       "bytes": 2773,
@@ -868,9 +897,9 @@
       "sha256": "8dee565eddcbe8dba93321f5bc648ea5a2951b95bc762bd94bd5ea0b6687624a"
     },
     {
-      "bytes": 5777720,
+      "bytes": 5778488,
       "path": "data/render.json",
-      "sha256": "77617cdcbb259196f570517b1afd292b8a52cf379aa8eae95983f9a10ce08fbf"
+      "sha256": "ae18ebf486250ff1ed095875de0a785ed1de135b30812277025fbd99eacd48f4"
     },
     {
       "bytes": 26506,
@@ -1063,9 +1092,9 @@
       "sha256": "261d52b0e13ee0ef589a278f4672caf4179d945d3ae0c3c66cffdcf62f680d01"
     },
     {
-      "bytes": 2212,
+      "bytes": 2262,
       "path": "layouts/partials/news-latest.html",
-      "sha256": "c98b9fffd9056cd0080390ed8430146bf521025dd5a59f472587710b30d19e00"
+      "sha256": "0938ef118120aced71c158d72d0872c9797f35c4c0c94308bdba7ba3c5d8b09f"
     },
     {
       "bytes": 3582,
@@ -1093,9 +1122,9 @@
       "sha256": "e7304ab388c6aa11e8e813ff2c6f7e40a293e4b60fc739099a132639a7c05625"
     },
     {
-      "bytes": 2490,
+      "bytes": 2635,
       "path": "layouts/partials/privacy-controls.html",
-      "sha256": "bff6b383ab0bf8d8c5dc7452e8a65b73c9b93887748af6aafe302b0a8da56261"
+      "sha256": "ebe5566389958d1fe363fe182a9d49288d48caf4892fd9b82426e1929f5f46dc"
     },
     {
       "bytes": 5954,
@@ -2443,13 +2472,18 @@
       "sha256": "dc908ec91710af94682e73476ab2a48b2f1a5308f117af24256e85ecfa68c81c"
     },
     {
-      "bytes": 1266,
+      "bytes": 1406,
       "path": "wrangler.jsonc",
-      "sha256": "19bf964d865c3a2a482f0efe6c237a27acc55780cba43ea20a586dc05c573c73"
+      "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "sourceInputSnapshotSha256": "ec6a35209effb159639685adb870b45fd2e325846292e8a1e728817712386a34",
-  "sourceManifestSha256": "763f9ebfa3224fd91e94b9a521ac84d93838a74685ecf980b742a00b888e2919",
+  "sourceInputSnapshotSha256": "cdce492bf021ae11e3308d04a59d0852c165494215310909a66a7ab1bfb6ec13",
+  "sourceManifestSha256": "a2fd3ce0e80ab3d241dfea7c0fa40c00765222d7dda355a1680310ffac82279f",
   "sourcePreviewIntakeEnabled": true,
-  "stagingAcceptanceSha256": "b0c6ea7660de84023beb4fb500966be86600040081a6891de7a676cf3998931a"
+  "sourceProductionIntakeEnabled": true,
+  "sourceProductionReleaseReady": true,
+  "stagingAcceptanceSha256": "3153731405a92b55d021135410dccf1d09c869d778d60c1ea3d95305ab205730",
+  "stagingEvidenceIsFresh028Execution": false,
+  "stagingEvidenceSourceInputSnapshotSha256": "716b54d670029ba9811084967e47433b5644b68845e981e1d5ed58d88043d64d",
+  "stagingEvidenceSourceVersion": "027"
 }

@@ -3,8 +3,10 @@
 {{- $latest := .items -}}
 {{- if $latest -}}
     <div class="home-news-preview" data-home-news-preview>
+    <div class="home-news-controls">
     <button class="home-news-toggle" type="button" data-home-news-toggle aria-expanded="true" aria-controls="home-news-panel" aria-describedby="home-news-help" hidden><span>Latest news</span><span data-home-news-icon aria-hidden="true">−</span></button>
     <a {{ partial "native-link-focus.html" . }} class="home-news-direct" data-home-news-direct data-analytics-surface="news_cta" href="{{ $prefix }}/news">All news <span aria-hidden="true">↗</span></a>
+    </div>
     <span class="home-news-help" id="home-news-help" data-home-news-help hidden>News starts collapsed. It can open once after 3.5 seconds of visible, quiet time at the top of this page, then fold after eight quiet seconds. Scrolling cancels the first reveal. With reduced motion, use Latest news to open it manually. Opening it yourself keeps it open. All news is always available beside this control.</span>
     <span class="home-news-help" data-home-news-status role="status" aria-live="polite" aria-atomic="true"></span>
     <nav class="home-news" id="home-news-panel" data-home-news-panel aria-label="Latest news" data-analytics-surface="news_cta">

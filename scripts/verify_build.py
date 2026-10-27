@@ -24,7 +24,11 @@ ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', 
 PAGES_ALIAS_HEADERS = (b'https://emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n\n'
                        b'https://:version.emtalk-hugo-deploy.pages.dev/*\n'
-                       b'  X-Robots-Tag: noindex\n')
+                       b'  X-Robots-Tag: noindex\n\n'
+                       b'/.well-known/ai-catalog.json\n'
+                       b'  Content-Type: application/ai-catalog+json; charset=utf-8\n\n'
+                       b'/ai-catalog.json\n'
+                       b'  Content-Type: application/ai-catalog+json; charset=utf-8\n')
 PAGES_INTEREST_ROUTES = b'{"version":1,"include":["/api/interest"],"exclude":[]}\n'
 PROVIDER_CONTROLS = {'_headers': PAGES_ALIAS_HEADERS, '_routes.json': PAGES_INTEREST_ROUTES}
 

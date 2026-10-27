@@ -1,4 +1,7 @@
 .privacy-controls-shell { padding: 1rem clamp(1rem,4vw,3rem); background: #281c37; color: #fffefa; font-family: Manrope,Arial,sans-serif; }
+.privacy-controls__invitation { margin:0 0 .65rem; max-width:55ch; color:#d7bed3; font:400 14px/1.45 Manrope,Arial,sans-serif; }
+.privacy-controls-shell .support-link { display:inline-flex; align-items:center; gap:.35em; min-height:44px; margin-inline-start:12px; padding:0 8px; color:inherit; text-decoration:underline; text-underline-offset:3px; font:inherit; }
+.privacy-controls-shell .support-link:focus-visible { outline-color:#fffefa; }
 .privacy-controls__announcement { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .privacy-controls-shell button { box-sizing: border-box; min-height: 44px; padding: .7rem 1rem; border: 2px solid #6e3c68; border-radius: 14px; background: #fee9fb; color: #281c37; font: inherit; line-height: 1.4; cursor: pointer; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 .privacy-controls-shell button:hover { background: #d7bed3; }
@@ -16,6 +19,8 @@
 .privacy-controls__actions button { flex:0 0 auto; min-height:44px; padding:9px 16px; border:1px solid #6e3c68; border-radius:10px; background:#fffaf5; font:600 13px/1.35 Manrope,Arial,sans-serif; }
 .privacy-controls__actions .privacy-controls__close { width:44px; padding:0; border-color:transparent; font-size:22px; font-weight:400; }
 .privacy-controls__details { grid-column:1/-1; margin:0; font-size:12px; }
+.privacy-controls__status { grid-column:1/-1; }
+.privacy-controls__status[hidden] { display:none !important; }
 .privacy-controls__details summary { width:fit-content; cursor:pointer; min-height:24px; padding:3px 0; line-height:1.5; }
 .privacy-controls__details[open] { padding-bottom:4px; }
 .privacy-controls__details[open] p { margin:8px 0 0; max-width:90ch; }
@@ -26,3 +31,4 @@
 .privacy-controls-shell > .privacy-controls__opener:not(.privacy-controls__opener--minimized) { background:transparent; color:inherit; border-color:#d7bed3; }
 .privacy-controls-shell > .privacy-controls__opener:not(.privacy-controls__opener--minimized):hover { background:#ffffff12; }
 .privacy-controls-shell > .privacy-controls__opener:not(.privacy-controls__opener--minimized):focus-visible { outline-color:#fffefa; }
+@media (forced-colors:active) { .privacy-controls-shell .support-link:focus-visible, .privacy-controls-shell > .privacy-controls__opener:not(.privacy-controls__opener--minimized):focus-visible { outline-color:Highlight; } }

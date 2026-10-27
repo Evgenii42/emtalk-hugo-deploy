@@ -29,6 +29,12 @@ News contains project updates, product development and reading highlights. Devel
 
 ## Optional
 
+- [Public resource descriptions](https://www.emtalk.org/ai/resources.json): Generated metadata for nine articles, five test descriptions and three products. No answers, scores or private workspace data.
+- [AI Catalog draft manifest](https://www.emtalk.org/.well-known/ai-catalog.json): Typed public-page references; not an MCP backend or AI model.
+- [ARD v0.91 manifest](https://www.emtalk.org/.well-known/ard.json): A separate proposal-format discovery document.
+
+Supporting browsers may expose three optional read-only WebMCP tools for these public descriptions. This does not provide website AI, personalized advice, an MCP server or guaranteed discovery by any search engine or assistant. Unsupported browsers retain the normal website.
+
 - [Privacy policy](https://www.emtalk.org/documents/emtalk-privacy-policy): Website privacy information.
 - [Terms of use](https://www.emtalk.org/documents/emtalk-terms-and-conditions-of-use): Website terms.
 - [Sitemap](https://www.emtalk.org/sitemap.xml): Indexable website URLs.

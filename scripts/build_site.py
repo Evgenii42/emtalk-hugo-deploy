@@ -107,6 +107,7 @@ def snapshot_sources(root=None):
     sources += [root / name for name in ('scripts/verify_footer.py', 'scripts/verify_tapl.py')]
     if (root / 'data/seo.json').is_file():
         sources.append(root / 'scripts/verify_seo.py')
+    sources.append(root / 'scripts/verify_agent_discovery.py')
     if any(is_link(part) for path in sources for part in [path, *path.parents]
            if part != root and part.is_relative_to(root)):
         raise ValueError('Linked source input is forbidden')
@@ -130,6 +131,11 @@ def build(destination, base_url, prefix='', preview=False):
     if snapshot_sources() != inputs:
         raise ValueError('Source inputs changed during build; output has no valid snapshot')
     result = verify(destination, expected_prefix, base_url=base_url)
+    from verify_agent_discovery import verify as verify_agent_discovery
+    discovery = verify_agent_discovery(destination, ROOT, expected_prefix, base_url)
+    result['agentDiscovery'] = discovery
+    result['errors'].extend(discovery['errors'])
+    result['passed'] = result['passed'] and discovery['passed']
     result.update({'hugoVersion': version, 'sourceInputFiles': inputs, 'sourceInputSnapshotSha256': input_digest,
                    'gitHead': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                    'preview': preview, 'baseURL': base_url.rstrip('/') + '/',

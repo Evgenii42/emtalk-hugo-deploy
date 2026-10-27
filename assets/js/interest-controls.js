@@ -76,7 +76,7 @@ function initializeInterest(dialog) {
       '403:security_check_failed': securityMessage,
       '403:origin_not_allowed': 'This attempt was rejected before saving because this website address is not supported. Reload the page at www.emtalk.org or email info@emtalk.org. Your text is still here.',
       '415:json_required': 'This attempt was rejected before saving because its format was not accepted. Reload this page or email info@emtalk.org. Your text is still here.',
-      '429:too_many_requests': 'Too many attempts. This attempt was rejected before saving. Your text is still here.',
+      '429:too_many_requests': 'Too many attempts. This attempt was rejected before saving. Your text is still here. This wait is shown in this tab. Reloading does not reset the sending limit.',
     };
     return messages[httpStatus + ':' + result.code] || null;
   }
@@ -142,8 +142,9 @@ function initializeInterest(dialog) {
     outcome = previousOutcome === 'uncertain' ? 'uncertain' : 'idle';
     say(message);
   }
-  // Accept a bounded seconds hint or canonical IMF-fixdate only. Unexpected
-  // intermediary values keep the existing one-minute fallback, never a retry.
+  // Accept seconds or a canonical IMF-fixdate. A past date has no remaining
+  // delay; valid waits are capped at one day. Malformed hints keep the existing
+  // one-minute fallback. None of these hints triggers an automatic retry.
   function retryAfterDelay(response, now) {
     const raw = response.headers.get('Retry-After');
     if (typeof raw !== 'string' || raw.length > 128) return 60000;
@@ -154,7 +155,7 @@ function initializeInterest(dialog) {
       const date = Date.parse(value);
       if (Number.isFinite(date) && new Date(date).toUTCString() === value) delay = date - now;
     }
-    return Number.isFinite(delay) && delay >= 0 && delay <= 86400000 ? Math.ceil(delay) : 60000;
+    return Number.isFinite(delay) ? Math.ceil(Math.max(0, Math.min(86400000, delay))) : 60000;
   }
   function remainingRetryTime(now = Date.now()) {
     const seconds = Math.max(0, Math.ceil((retryAt - now) / 1000));

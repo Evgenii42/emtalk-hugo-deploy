@@ -4,6 +4,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   const openers = Array.from(document.querySelectorAll("[data-privacy-open]"));
   const announcement = document.querySelector("[data-privacy-announcement]");
   const fallback = document.querySelector("[data-privacy-unavailable]");
+  const invitation = document.querySelector("[data-privacy-invitation]");
   const nodes = panel && Object.fromEntries(["status", "allow", "reject", "close", "heading"].map(name => [name, panel.querySelector("[data-privacy-" + name + "]")]));
   // Resolve and validate this contract once, before activation is possible.
   const ready = !!(panel && announcement && openers.length && nodes && Object.values(nodes).every(Boolean));
@@ -65,8 +66,12 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     if (state.notice) text += " " + state.notice;
     if (state.cleanupFailed) text += " Your browser did not allow cookie cleanup. Use browser settings to remove Analytics cookies.";
     if (nodes.status.textContent !== text) nodes.status.textContent = text;
+    // Exceptional restrictions and recovery must remain visible even when the
+    // optional disclosure is closed. Normal status stays out of the short copy.
+    nodes.status.hidden = !(state.gpc || state.notice || state.cleanupFailed);
     nodes.allow.hidden = !state.eligible; nodes.allow.disabled = state.gpc;
     nodes.reject.textContent = state.eligible ? "Reject analytics" : "Keep analytics off";
+    if (invitation) invitation.hidden = !state.eligible || state.gpc || preferences.valid(choice) || preferences.dismissed();
     for (const button of openers) button.setAttribute("aria-expanded", String(!panel.hidden));
   }
   function focusMain() {
@@ -136,6 +141,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     for (const button of openers) button.addEventListener("click", () => {
       onRefresh(); opener = button; explicitlyOpened = true; panel.classList.remove("privacy-controls--top"); setMinimized(false); panel.hidden = false; render(); nodes.heading.focus();
     });
+    for (const button of openers) button.disabled = false;
     nodes.allow.addEventListener("click", () => { if (onChoose(true)) close(); });
     nodes.reject.addEventListener("click", () => { if (onChoose(false)) close(); });
     nodes.close.addEventListener("click", close);
@@ -144,11 +150,11 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
       event.preventDefault(); event.stopPropagation(); close();
     });
     document.addEventListener("focusin", keepFocusedActionVisible);
-    const state = snapshot();
-    panel.hidden = !canonical || preferences.valid(state.choice) || state.gpc || preferences.dismissed(); render();
-    if (!panel.hidden) announcement.textContent = state.eligible
-      ? "Privacy choices are available. Optional analytics is off until you allow it. You can allow or reject analytics in Privacy choices."
-      : "Privacy choices are available. Optional analytics is currently off on this page.";
+    // Settings belong to an explicit visitor action, never to load, a timer,
+    // scrolling or focus. The quiet footer invitation is ordinary page content.
+    // Keeping the panel closed does not choose, dismiss or enable analytics.
+    panel.hidden = true;
+    render();
   }
   return Object.freeze({ ready: true, mount, render });
 }

@@ -3,3 +3,9 @@ https://emtalk-hugo-deploy.pages.dev/*
 
 https://:version.emtalk-hugo-deploy.pages.dev/*
   X-Robots-Tag: noindex
+
+/.well-known/ai-catalog.json
+  Content-Type: application/ai-catalog+json; charset=utf-8
+
+/ai-catalog.json
+  Content-Type: application/ai-catalog+json; charset=utf-8

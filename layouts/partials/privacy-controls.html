@@ -1,22 +1,25 @@
 <div class="privacy-controls-shell">
   <p class="privacy-controls__announcement" data-privacy-announcement role="status" aria-live="polite" aria-atomic="true"></p>
   <p data-privacy-unavailable hidden>Privacy controls are unavailable. Optional analytics remains off.</p>
-  <button type="button" class="privacy-controls__opener" data-privacy-open aria-controls="privacy-choices" aria-expanded="false">Privacy choices</button>
+  <p class="privacy-controls__invitation" data-privacy-invitation hidden>Help improve EmTalk with optional Google Analytics.</p>
+  <button type="button" class="privacy-controls__opener" data-privacy-open aria-controls="privacy-choices" aria-expanded="false" disabled>Privacy choices</button>
+  {{ partial "support-link.html" (dict "placement" "footer") }}
   <section id="privacy-choices" class="privacy-controls" data-privacy-controls aria-labelledby="privacy-choices-heading" hidden>
     <div class="privacy-controls__copy">
     <h2 id="privacy-choices-heading" data-privacy-heading tabindex="-1">Your privacy choices</h2>
-    <p>Google Analytics cookies help improve EmTalk, only if you allow them. Every feature works without them. Cloudflare separately provides aggregate visit and performance statistics without cookies; this choice does not control that measurement. <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy policy</a>.</p>
+    <p>Google Analytics is optional. Allow its cookies to help improve EmTalk, or keep it off. Every feature works either way. <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy policy</a>.</p>
     </div>
     <div class="privacy-controls__actions">
       <button type="button" data-privacy-reject>Reject</button>
       <button type="button" data-privacy-allow>Allow</button>
       <button type="button" class="privacy-controls__close" data-privacy-close aria-label="Close privacy choices">&times;</button>
     </div>
+    <p class="privacy-controls__status" data-privacy-status role="status" aria-live="polite" aria-atomic="true" hidden>Optional analytics is off.</p>
     <details class="privacy-controls__details">
       <summary>Details and settings</summary>
-      <p data-privacy-status role="status" aria-live="polite" aria-atomic="true">Optional analytics is off.</p>
+      <p>Cloudflare separately provides aggregate visit and performance statistics without cookies. These choices do not control that measurement.</p>
       <p>We measure visits, navigation, reading, audio use, test workflows, web tool use, app store link clicks, and whether feedback was opened, sent or acknowledged. We send coarse categories, not answers or scores, decision text, article topics, exact assessment and document addresses, or feedback contents. Google receives connection information when analytics is allowed. Google advertising cookies and advertising signals stay off.</p>
-      <p>Your versioned choice is stored separately for 180 days. This update asks for a fresh choice before the expanded measurement starts. Change it here at any time. Withdrawal stops EmTalk from sending new Google Analytics events on this page and attempts to remove known Analytics cookies. Requests already dispatched or buffered by Google's loaded service cannot be recalled. Withdrawal does not erase information already sent to Google or change your local drafts and saved decisions.</p>
+      <p>Your versioned choice is stored separately for 180 days. A new consent-policy version requires a fresh choice before optional measurement can resume. Change it here at any time. Withdrawal stops EmTalk from sending new Google Analytics events on this page and attempts to remove known Analytics cookies. Requests already dispatched or buffered by Google's loaded service cannot be recalled. Withdrawal does not erase information already sent to Google or change your local drafts and saved decisions.</p>
     </details>
   </section>
   <noscript><p>Optional analytics is off because JavaScript is disabled.</p></noscript>

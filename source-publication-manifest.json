@@ -1,21 +1,21 @@
 {
   "branch": "interest032",
-  "buildReceiptSha256": "64c392125bc323bbd364d424b0988e71da18588b6e9d9e88675aa6324036840b",
-  "canonicalSourceCommit": "9c2eac66e821dbba4170934bd39c1ebc0e02f076",
+  "buildReceiptSha256": "521bdbdc8d80007adb8663f8b0af0c40ba43a36a33560e52cafa3de51f164cb1",
+  "canonicalSourceCommit": "adf937ea51ed0dad1c19af95acf7b4101a9cdf5a",
   "cleanExportRebuildPerformed": false,
   "defaultIntakeEnabled": true,
   "existingPrivatePipelinePromoted": true,
   "fourReleaseReviewsCertified": false,
   "fullReleaseAccepted": false,
   "outputCount": 348,
-  "outputSnapshotSha256": "5e7fdd269a28e4a88272e6ed5026a7f15a932ed0f949ffc82a1b206ea3b5dc5f",
+  "outputSnapshotSha256": "33896c183468217b26fd30e8e29e0e0db1c7c65777c845080c0927551f3b01bb",
   "persistedRowVerified": false,
   "routes": 48,
   "runtimeActivationVerified": false,
-  "scope": "Retained production-intake settings;029 changes motion and429 retry guidance only; live029 proof is separate",
+  "scope": "Retained production-intake settings;032 keeps029 motion and adds bounded Retry-After feedback guidance, shared clock sample, and explicit forced-colors surface; live032 proof is separate",
   "serviceActivationChanged": false,
   "sharedLimiterAcrossAliases": true,
-  "sourceCapsuleManifestSha256": "b530388bb235e7ed04f933a4c075af63e72c38a9c808e0afffc1c2db4297419d",
+  "sourceCapsuleManifestSha256": "8f4afc46e4a903e3fe41ed73c7d44a8c127e73a9eec987032ffc758197534dd0",
   "sourceCaptchaMode": "none",
   "sourceCount": 486,
   "sourceFiles": [
@@ -70,9 +70,9 @@
       "sha256": "da1d99422428d9c67b53cd6af837f5e37131f30ae14547c4fd19ea656e6ce44a"
     },
     {
-      "bytes": 15704,
+      "bytes": 15698,
       "path": "assets/css/homepage-explore.css",
-      "sha256": "e847aa20ed6804c6af746b7536080447729ff83a40f9e95abb6fed71192c5e53"
+      "sha256": "b1d291ab813a00db9e90ff144f7e33726519b41e1b12439db786c4b7247ff3ba"
     },
     {
       "bytes": 1633,
@@ -465,9 +465,9 @@
       "sha256": "8be3c9b3c0f7ad4d393c13c4f60fc00d21b3686206fce4001a3e363a8f27b8a2"
     },
     {
-      "bytes": 17662,
+      "bytes": 18686,
       "path": "assets/js/interest-controls.js",
-      "sha256": "482c2f57487f27ba203e9d95cb244797dd23624abd0e1f27640760540b4e174d"
+      "sha256": "be3bf58d9f60c0cafb69a4987692fa98dba93df5df855be073333b0653a04691"
     },
     {
       "bytes": 6047,
@@ -2450,8 +2450,8 @@
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "sourceInputSnapshotSha256": "f457b54536690e818e5fe8429d52a589b5b22e294929067251c7bf10dc3482dc",
-  "sourceManifestSha256": "0810657d9d4f40dbf81f1b2a4762336d019ae07f7d552a73ce5010c9ae2f4d0b",
+  "sourceInputSnapshotSha256": "38ecbc55734652b19ead48d5712112174547d10ed484f36c29010bff1168040f",
+  "sourceManifestSha256": "cc6a32ac4a6a63892136c9bffe2385fbd973383744256045542f483eb98163db",
   "sourcePreviewIntakeEnabled": true,
   "sourceProductionIntakeEnabled": true,
   "sourceProductionReleaseReady": true

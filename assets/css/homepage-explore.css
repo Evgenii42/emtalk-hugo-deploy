@@ -387,7 +387,7 @@
   .home-news a,.home-news-direct {color:LinkText}
   .home-news-direct {border-color:CanvasText}
   .home-news-toggle,
-  .home-news-preview[data-state="closed"] .home-news-toggle {
+  .home-news-preview[data-enhanced] .home-news-toggle {
     backdrop-filter:none;
     -webkit-backdrop-filter:none;
     background:ButtonFace;

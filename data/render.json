@@ -58085,6 +58085,15 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
+                          "We use Cloudflare Web Analytics to understand aggregate visits, page addresses, referrers and page performance. Its browser beacon does not use cookies or local storage for analytics or fingerprint visitors. This measurement runs separately from Google Analytics. The Privacy choices controls below apply to Google Analytics; rejecting or withdrawing that choice does not turn off Cloudflare Web Analytics. Connection information needed to serve requests is described in section 5."
+                        ],
+                        "void": false
+                      },
+                      "\n",
+                      {
+                        "tag": "p",
+                        "attributes": {},
+                        "children": [
                           "Optional Google Analytics is off until you explicitly allow it in Privacy choices. Its purpose is to understand visits, navigation, reading and audio use, coarse self-assessment workflows, browser-tool use, app-store link activations and coarse feedback interaction states, so we can identify broken flows and improve the website. Google receives these events and connection information, such as IP address and browser information, and uses Analytics identifiers after permission. These data are not claimed anonymous. We do not enable Google advertising signals or advertising personalisation. The old Google Tag Manager container is not run alongside the owned event emitter."
                         ],
                         "void": false

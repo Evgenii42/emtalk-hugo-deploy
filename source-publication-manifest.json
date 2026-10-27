@@ -1,17 +1,21 @@
 {
   "branch": "interest032",
-  "buildReceiptSha256": "ea3e7158cc670dfd160c249051f82c569224f76e8e3d9f4b2dce9e48eb02d7e0",
-  "canonicalSourceCommit": "c786c844ba430cd1916363a6b5a38c09263825e2",
+  "buildReceiptSha256": "64c392125bc323bbd364d424b0988e71da18588b6e9d9e88675aa6324036840b",
+  "canonicalSourceCommit": "9c2eac66e821dbba4170934bd39c1ebc0e02f076",
   "cleanExportRebuildPerformed": false,
-  "defaultIntakeEnabled": false,
+  "defaultIntakeEnabled": true,
+  "existingPrivatePipelinePromoted": true,
   "fourReleaseReviewsCertified": false,
   "fullReleaseAccepted": false,
   "outputCount": 348,
-  "outputSnapshotSha256": "dd26ea0bee86ebcec66253759abcbde63ca2a1ad9382124fedb62b66e59ceacf",
+  "outputSnapshotSha256": "5e7fdd269a28e4a88272e6ed5026a7f15a932ed0f949ffc82a1b206ea3b5dc5f",
+  "persistedRowVerified": false,
   "routes": 48,
-  "scope": "Controlled staging source publication only; not full release or intake acceptance",
+  "runtimeActivationVerified": false,
+  "scope": "Retained production-intake settings;029 changes motion and429 retry guidance only; live029 proof is separate",
   "serviceActivationChanged": false,
-  "sourceCapsuleManifestSha256": "fc9e90891d6ddfd1da7f25e992fd75628c42e786de3ffbcb51feb44e007d887e",
+  "sharedLimiterAcrossAliases": true,
+  "sourceCapsuleManifestSha256": "b530388bb235e7ed04f933a4c075af63e72c38a9c808e0afffc1c2db4297419d",
   "sourceCaptchaMode": "none",
   "sourceCount": 486,
   "sourceFiles": [
@@ -66,9 +70,9 @@
       "sha256": "da1d99422428d9c67b53cd6af837f5e37131f30ae14547c4fd19ea656e6ce44a"
     },
     {
-      "bytes": 14325,
+      "bytes": 15704,
       "path": "assets/css/homepage-explore.css",
-      "sha256": "fef803947d1acb46f2189d8bda240d1b6a09071c070e4567ef223dff72c453ae"
+      "sha256": "e847aa20ed6804c6af746b7536080447729ff83a40f9e95abb6fed71192c5e53"
     },
     {
       "bytes": 1633,
@@ -456,9 +460,9 @@
       "sha256": "432b49f560beb6fa8d4089c19110efc3a94b31799634bf0a40742003986b5f66"
     },
     {
-      "bytes": 14953,
+      "bytes": 17184,
       "path": "assets/js/home-news.js",
-      "sha256": "8eef7423c121fa296d0f9af093497b4d7c2d1014b0f93f2d6e6b212635bb1a8e"
+      "sha256": "8be3c9b3c0f7ad4d393c13c4f60fc00d21b3686206fce4001a3e363a8f27b8a2"
     },
     {
       "bytes": 17662,
@@ -911,9 +915,9 @@
       "sha256": "1417530d486df84c569a743dd80515f9c5bfd5e1dd489c92732aa73336ff1474"
     },
     {
-      "bytes": 5502,
+      "bytes": 5551,
       "path": "functions/api/interest.js",
-      "sha256": "a5a9ff31a5216195d531122adf3b5e496f469a6dee6a74e2a900119a6ffb154d"
+      "sha256": "9760fc66955af7300317b6bb4dd635c8d1a5a0055634101e85c4f987e039e5c5"
     },
     {
       "bytes": 746,
@@ -1061,9 +1065,9 @@
       "sha256": "261d52b0e13ee0ef589a278f4672caf4179d945d3ae0c3c66cffdcf62f680d01"
     },
     {
-      "bytes": 2262,
+      "bytes": 2349,
       "path": "layouts/partials/news-latest.html",
-      "sha256": "0938ef118120aced71c158d72d0872c9797f35c4c0c94308bdba7ba3c5d8b09f"
+      "sha256": "8d25fcc2c2895b99a8014cd6d14887e6b47d24c0f8e276a87df9b28ffb38428d"
     },
     {
       "bytes": 3582,
@@ -2441,12 +2445,14 @@
       "sha256": "dc908ec91710af94682e73476ab2a48b2f1a5308f117af24256e85ecfa68c81c"
     },
     {
-      "bytes": 1266,
+      "bytes": 1406,
       "path": "wrangler.jsonc",
-      "sha256": "19bf964d865c3a2a482f0efe6c237a27acc55780cba43ea20a586dc05c573c73"
+      "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "sourceInputSnapshotSha256": "716b54d670029ba9811084967e47433b5644b68845e981e1d5ed58d88043d64d",
-  "sourceManifestSha256": "f79e00e5dc3337e87b2563ff2ee20bb0b36a159066abd189399939d37557bf68",
-  "sourcePreviewIntakeEnabled": true
+  "sourceInputSnapshotSha256": "f457b54536690e818e5fe8429d52a589b5b22e294929067251c7bf10dc3482dc",
+  "sourceManifestSha256": "0810657d9d4f40dbf81f1b2a4762336d019ae07f7d552a73ce5010c9ae2f4d0b",
+  "sourcePreviewIntakeEnabled": true,
+  "sourceProductionIntakeEnabled": true,
+  "sourceProductionReleaseReady": true
 }

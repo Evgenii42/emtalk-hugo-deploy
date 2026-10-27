@@ -2,7 +2,7 @@ import { validateInterest } from '../../server/interest-policy.mjs';
 import registry from '../../server/interest-registry.mjs';
 import { checkInterestRateLimit } from '../../server/interest-rate-limit.mjs';
 
-const reply = (status, body) => new Response(JSON.stringify(body), {status, headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});
+const reply = (status, body) => new Response(JSON.stringify(body), {status, headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer', ...(status === 429 ? {'Retry-After':'60'} : {})}});
 const unavailable = () => reply(503, {ok:false,code:'temporarily_unavailable'});
 const ALLOWED_ORIGINS = new Set(['https://www.emtalk.org','https://interest032.emtalk-hugo-deploy.pages.dev']);
 function allowedOrigin(env) {

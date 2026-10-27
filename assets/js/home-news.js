@@ -2,7 +2,7 @@ import { emitNewsPreview } from './analytics-events.js';
 
 // Transition table (one document, no saved visitor state):
 // closed intro +3500ms observed eligible hero time -> open reading phase.
-// open +8000ms observed eligible quiet time -> closing -> closed.
+// open + completed unfolding +8000ms observed eligible quiet time -> closing -> closed.
 // open + any blocker -> open with its remaining budget paused.
 // closed/closing + explicit toggle -> open, pinned (used=true).
 // open + explicit toggle/Escape -> closing, pinned; focus returns if needed.
@@ -12,12 +12,14 @@ import { emitNewsPreview } from './analytics-events.js';
 // A visible window also pauses on blur and resumes on focus; browser chrome or
 // another foreground window must not consume the visitor's quiet window.
 // `state` owns presentation; `used` is the one-way automatic-retreat latch.
-// hovered/pointers/inView/pageActive are observed blockers, not extra UI states.
+// hovered/pointers/inView/pageActive and active unfolding pause the quiet budget.
 const preview = document.querySelector('[data-home-news-preview]');
 const panel = preview?.querySelector('[data-home-news-panel]');
 const toggle = preview?.querySelector('[data-home-news-toggle]');
 const announcement = preview?.querySelector('[data-home-news-status]');
-if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
+const controls = preview?.querySelector('.home-news-controls');
+const surface = preview?.querySelector('[data-home-news-surface]');
+if (preview && panel && toggle && announcement && controls && surface && !preview.dataset.enhanced) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const desktop = matchMedia('(min-width: 1100px)');
   const icon = toggle.querySelector('[data-home-news-icon]');
@@ -82,24 +84,59 @@ if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
     panel.style.visibility = 'hidden';
     preview.dataset.state = 'closed';
   };
-  const retreat = () => {
-    if (!desktop.matches) return {x: 0, y: 4, scale: .98};
-    const href = panel.querySelector('.home-news__all')?.getAttribute('href');
-    const target = [...document.querySelectorAll('.site-header a[href]')].find(link => {
-      if (link.getAttribute('href') !== href) return false;
-      const rect = link.getBoundingClientRect();
-      return rect.width > 0 && rect.height > 0 && rect.top >= 0 && rect.bottom <= innerHeight
-        && getComputedStyle(link).visibility === 'visible';
-    });
-    if (!target) return {x: 0, y: 4, scale: .98};
-    const from = panel.getBoundingClientRect(), to = target.getBoundingClientRect();
-    return {x: to.left + to.width / 2 - from.left - from.width / 2,
-      y: to.top + to.height / 2 - from.top - from.height / 2, scale: .12};
+  // Fold the content into its own persistent header, never scale text or send
+  // it across the landscape. Only these transition boundaries measure boxes;
+  // there is no animation-frame layout loop.
+  const foldedClip = () => {
+    const content = panel.getBoundingClientRect(), header = controls.getBoundingClientRect();
+    const right = Math.max(0, content.width - header.width);
+    const bottom = Math.max(0, content.height - header.height);
+    return `inset(0px ${right}px ${bottom}px 0px round 14px)`;
+  };
+  const fullClip = 'inset(0px 0px 0px 0px round 20px)';
+  const currentFrame = () => {
+    const style = getComputedStyle(panel);
+    return {opacity: style.opacity, clipPath: style.clipPath === 'none' ? fullClip : style.clipPath};
+  };
+  const currentSurface = () => {
+    const style = getComputedStyle(surface);
+    return {width: style.width, height: style.height, borderRadius: style.borderRadius};
+  };
+  const surfaceTarget = open => {
+    const rect = (open ? preview : controls).getBoundingClientRect();
+    return {width: `${rect.width}px`, height: `${rect.height}px`, borderRadius: open ? '20px' : '14px'};
+  };
+  const animateDisclosure = (from, to, fromSurface, toSurface, duration, easing, onFinish) => {
+    const effects = [];
+    try {
+      // Two effects use the same document timeline, duration and curve. Unlike
+      // independently starting CSS/WAAPI effects, glass and content cannot drift.
+      const options = {duration, easing, fill: 'forwards'};
+      effects.push(surface.animate([fromSurface, toSurface], options));
+      effects.push(panel.animate([from, to], options));
+      const start = document.timeline.currentTime;
+      if (typeof start === 'number') effects.forEach(effect => { effect.startTime = start; });
+      motion = {cancel: () => effects.forEach(effect => effect.cancel()),
+        finished: Promise.all(effects.map(effect => effect.finished))};
+    } catch {
+      // Unsupported/failed animation is an immediate usable disclosure, not a
+      // half-hidden panel. Keep further transitions instant in this document.
+      preview.dataset.motionReady = 'false';
+      effects.forEach(effect => { effect.finished.catch(() => {}); effect.cancel(); });
+      motion = null; onFinish(); sync(); return;
+    }
+    const current = motion;
+    const settle = () => {
+      if (motion !== current) return;
+      // Set the final semantic/visibility state before dropping the effect.
+      onFinish(); cancelMotion(); sync();
+    };
+    current.finished.then(settle, settle);
   };
   const close = (explicit = false) => {
     if (state !== 'open') return;
     if (explicit) used = true;
-    stopTimer(); cancelMotion();
+    stopTimer();
     // Automatic closure is never allowed to hide focused or pressed content.
     if (!explicit) {
       inView = visible();
@@ -107,45 +144,41 @@ if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
       used = true;
     }
     if (panel.contains(document.activeElement)) toggle.focus({preventScroll: true});
-    const direction = retreat();
+    const from = currentFrame();
+    const fromSurface = currentSurface();
+    cancelMotion();
     mark(false); state = 'closing'; preview.dataset.state = 'closing';
     if (explicit) emitNewsPreview('close');
     // Automatic presentation changes stay silent: do not interrupt an AT user
     // elsewhere on the page. Native expanded/inert state always remains current.
     // Announce only a requested close; the permanent header News link is stable.
     if (explicit) announcement.textContent = 'Latest news preview collapsed. Use Latest news to reopen it.';
-    if (reduced.matches || typeof panel.animate !== 'function' || document.hidden) { finishClose(); return; }
-    motion = panel.animate([
-      {opacity: 1, transform: 'translate(0, 0) scale(1)'},
-      {opacity: 0, transform: `translate(${direction.x}px, ${direction.y}px) scale(${direction.scale})`},
-    ], {duration: 420, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards'});
-    const current = motion;
-    current.finished.then(() => {
-      if (motion !== current) return;
-      finishClose(); cancelMotion();
-    }).catch(() => {});
+    if (reduced.matches || preview.dataset.motionReady !== 'true' || document.hidden) { finishClose(); return; }
+    animateDisclosure(from, {opacity: 0, clipPath: foldedClip()}, fromSurface, surfaceTarget(false), 480,
+      'cubic-bezier(.4,0,.2,1)', finishClose);
   };
   const open = (explicit = true) => {
     if (state === 'open') return;
     if (explicit) used = true;
+    // Read the rendered frame before cancelling a partially completed fold.
+    const from = state === 'closing' && motion ? currentFrame() : {opacity: 0, clipPath: foldedClip()};
+    const fromSurface = currentSurface();
     stopTimer(); cancelMotion();
     phase = 'reading'; remaining = 8000;
     state = 'open'; panel.style.visibility = ''; mark(true);
     announcement.textContent = '';
     if (explicit) emitNewsPreview('open');
     // Manual reopening is pinned open for the remainder of this document.
-    if (!reduced.matches && typeof panel.animate === 'function') {
-      motion = panel.animate([{opacity: .8, transform: 'translateY(4px)'},
-        {opacity: 1, transform: 'translateY(0)'}], {duration: 240, easing: 'ease-out'});
-      const current = motion;
-      current.finished.then(() => { if (motion === current) motion = null; }).catch(() => {});
+    if (!reduced.matches && preview.dataset.motionReady === 'true') {
+      animateDisclosure(from, {opacity: 1, clipPath: fullClip}, fromSurface, surfaceTarget(true), 560,
+        'cubic-bezier(.2,.8,.2,1)', () => {});
     }
     sync();
   };
   // One predicate governs starting, deadline wake-up and automatic closure.
   // Observations update geometry/visibility; one timer spends the phase budget.
   const eligible = () => !used && state === (phase === 'intro' ? 'closed' : 'open')
-    && !reduced.matches && pageActive && windowActive && !document.hidden && inView
+    && !motion && !reduced.matches && pageActive && windowActive && !document.hidden && inView
     && !hoverBlocks() && pointers.size === 0 && !focusInside();
   function sync() {
     if (!eligible()) { stopTimer(); return; }
@@ -225,13 +258,23 @@ if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
   const layout = () => {
     // Measure the reserved preview box, never the animated panel's transform.
     // Observer/menu/focus notifications with identical geometry must not cut
-    // the420ms retreat short. A real scroll/resize safely ends stale motion.
+    // the current fold short. A real scroll/resize safely ends stale motion.
     const rect = preview.getBoundingClientRect(), edge = headerBottom();
     const next = [rect.top, rect.right, rect.bottom, rect.left, edge, innerWidth, innerHeight, desktop.matches];
     const moved = next.some((value, index) => value !== geometry[index]);
     geometry = next;
+    const closedWidth = Math.min(preview.clientWidth, controls.getBoundingClientRect().width);
+    const width = `${closedWidth}px`;
+    if (preview.style.getPropertyValue('--home-news-closed-width') !== width) {
+      preview.style.setProperty('--home-news-closed-width', width);
+    }
     observeVisibility(edge); inView = visible(rect, edge);
-    if (state === 'closing' && moved) { cancelMotion(); finishClose(); }
+    if (motion && moved) {
+      // A resize/scroll changes the target geometry. Settle into the current
+      // semantic state instead of finishing a stale-size surface or clip.
+      cancelMotion();
+      if (state === 'closing') finishClose();
+    }
     sync();
   };
   // Native details toggle does not bubble. Capture also observes .open changes
@@ -242,6 +285,7 @@ if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
   if (typeof ResizeObserver === 'function') {
     const resize = new ResizeObserver(layout);
     resize.observe(preview);
+    resize.observe(controls);
     if (header) resize.observe(header);
   }
   let awaitingReveal = document.documentElement.classList.contains('emt-page-pending');
@@ -274,4 +318,7 @@ if (preview && panel && toggle && announcement && !preview.dataset.enhanced) {
   const help = preview.querySelector('[data-home-news-help]');
   if (help) help.hidden = false;
   layout();
+  // First measure the compact header without a transition. Enabling motion
+  // afterwards avoids animating a guessed width during initial enhancement.
+  preview.dataset.motionReady = String(typeof panel.animate === 'function');
 }

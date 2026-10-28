@@ -4,8 +4,10 @@ const initialized = new WeakSet();
 // Hugo can bundle this helper into several independent entry modules. A shared
 // document guard, rather than only a module-local WeakSet, prevents duplicates.
 const publicEventsGuard = Symbol.for('emtalk.publicMeasurement004');
-// A true result acknowledges the local consented Google queue only. Umami
-// may discard this action while its SDK loads. Neither receipt is ingestion.
+// A true result acknowledges local acceptance by at least one consented transport,
+// not delivery. Umami keeps at most32 validated coarse actions while loading,
+// under the current consent epoch; revoke/load failure clears them. Neither
+// local queue acceptance nor SDK handoff acknowledges provider ingestion.
 // Callers use the local result
 // to deduplicate within this document; it is never a Google delivery receipt.
 export function emitInterfaceEvent(name, parameters) {

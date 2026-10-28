@@ -1,10 +1,10 @@
 // Google SDK lifetime is confined to a consent-created first-party document.
 // This is lifetime isolation, not a security sandbox for the trusted vendor.
-export function createAnalyticsTransport({ id, home, canonical, lifetime, window, document, canBoot, onFailure }) {
+export function createAnalyticsTransport({ id, home, canonical, lifetime, window, document, canBoot, googleScroll, onFailure }) {
   const disabledKey = "ga-disable-" + id;
   const denied = { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" };
   let layer = null, loader = null, frame = null, child = null, ready = false, failed = false, cleanupFailed = false;
-  let generation = 0, loadTimer = null, fields = null, scrollSent = false, teardownFailed = false, startChild = null;
+  let generation = 0, loadTimer = null, loadStage = null, fields = null, scrollSent = false, teardownFailed = false, startChild = null;
   let firstFrame = 0, secondFrame = 0, revealSignal = null;
   let configured = false, pageviewQueued = false, pageviewHandedOff = false;
   function command() { layer.push(arguments); }
@@ -54,7 +54,7 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
   function closeFrame() {
     const old = frame;
     generation += 1;
-    if (loadTimer !== null) clearTimeout(loadTimer); loadTimer = null;
+    if (loadTimer !== null) clearTimeout(loadTimer); loadTimer = null; loadStage = null;
     // Disable first, then block child network before teardown can flush queues.
     // No parent globals, CSP, fetch, sendBeacon or image methods are patched.
     if (child) {
@@ -115,17 +115,31 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
     const valid = () => owned() && canBoot();
     const failure = () => {
       if (!owned()) return;
-      if (!canBoot()) { loadTimer = null; return; }
-      failed = true; closeFrame(); onFailure();
+      if (!canBoot()) { if (loadTimer !== null) clearTimeout(loadTimer); loadTimer = null; loadStage = null; return; }
+      failed = true; closeFrame();
+      // The old child may have replaced Array.push during partial SDK load.
+      // Discard its queue/configuration; explicit retry builds a fresh layer.
+      // Keep only the per-document handed-off view latch, never replay it.
+      configured = false; layer = null; pageviewQueued = false;
+      onFailure();
     };
-    const armTimeout = () => {
-      if (loadTimer === null) loadTimer = setTimeout(failure, 15000);
+    const armTimeout = stage => {
+      // Repeated focus/boot callbacks cannot extend an active stage budget.
+      if (loadTimer !== null && loadStage === stage) return;
+      if (loadTimer !== null) clearTimeout(loadTimer);
+      loadStage = stage;
+      loadTimer = setTimeout(() => {
+        if (loadStage !== stage) return;
+        loadTimer = null; failure();
+      }, 15000);
     };
-    armTimeout(); node.onerror = failure;
+    armTimeout("frame"); node.onerror = failure;
     startChild = () => {
       if (!valid()) return;
-      armTimeout();
-      if (!child || loader) return;
+      if (!child) { armTimeout("frame"); return; }
+      if (loader) { armTimeout("sdk"); return; }
+      // The full SDK budget starts here, independent of frame download time.
+      armTimeout("sdk");
       const target = child;
       target[disabledKey] = false;
       target.document.title = fields.page_title;
@@ -139,7 +153,7 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
         // Actual withdrawal increments generation before this callback.
         if (owned() && loader === script) {
           ready = true; if (pageviewQueued) pageviewHandedOff = true;
-          if (loadTimer !== null) clearTimeout(loadTimer); loadTimer = null;
+          if (loadTimer !== null) clearTimeout(loadTimer); loadTimer = null; loadStage = null;
         }
       };
       script.onerror = failure;
@@ -186,7 +200,11 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
     if (scrollSent || !configured || !fields || !canBoot()) return;
     const height = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     if (height <= window.innerHeight || (window.scrollY + window.innerHeight) / height < 0.9) return;
-    if (queue("scroll", { percent_scrolled: 90 }, fields)) scrollSent = true;
+    const value = typeof googleScroll === "function" ? googleScroll() : null;
+    const descriptor = value && typeof value === "object" && !Array.isArray(value)
+      ? Object.getOwnPropertyDescriptor(value, "percent_scrolled") : null;
+    if (!descriptor || descriptor.value !== 90 || Object.keys(value).length !== 1) return;
+    if (queue("scroll", value, fields)) scrollSent = true;
   }, { passive: true });
   return Object.freeze({ activate, queue, pageviewStatus, requestBoot, cancelBoot, revoke,
     hasFailed: () => failed, resetFailure: () => { failed = false; }, cleanupFailed: () => cleanupFailed || teardownFailed });

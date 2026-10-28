@@ -17,7 +17,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   }
   const labels = openers.map(button => button.textContent || "Privacy choices");
   const invitationCopy = invitation?.textContent || "";
-  let announcedRecovery = "", explicitChoice = false;
+  let announcedRecovery = "", explicitChoice = false, savedAnnouncement = "";
   let opener = null, minimized = false, explicitlyOpened = false;
   // Native pointer activation focuses before its click. Moving either page or
   // panel in that focusin would retarget the pending click/tap. Keep the origin
@@ -61,7 +61,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   }
   function render() {
     const state = snapshot(), choice = state.choice;
-    let text = state.gpc ? "Global Privacy Control is enabled. Optional analytics is off." :
+    let text = state.dnt ? "Do Not Track is enabled. Optional analytics is off." : state.gpc ? "Global Privacy Control is enabled. Optional analytics is off." :
       !preferences.valid(choice) ? "Optional analytics is off. Choose whether to allow Google Analytics cookies." :
       choice.analytics ? "You allowed optional analytics." : "You rejected optional analytics. Analytics is off.";
     if (!state.eligible) text = "Optional analytics is currently off on this page. You can use every feature without allowing it.";
@@ -70,24 +70,23 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     if (nodes.status.textContent !== text) nodes.status.textContent = text;
     // Exceptional restrictions and recovery must remain visible even when the
     // optional disclosure is closed. Normal status stays out of the short copy.
-    nodes.status.hidden = !(state.gpc || state.notice || state.cleanupFailed);
-    nodes.allow.hidden = !state.eligible; nodes.allow.disabled = state.gpc;
+    nodes.status.hidden = !(state.gpc || state.dnt || state.notice || state.cleanupFailed);
+    nodes.allow.hidden = !state.eligible; nodes.allow.disabled = state.gpc || state.dnt;
     nodes.reject.textContent = state.eligible ? "Reject analytics" : "Keep analytics off";
     const recovery = [state.notice, state.cleanupFailed
       ? "Your browser did not allow cookie cleanup. Use browser settings to remove Analytics cookies." : ""].filter(Boolean).join(" ");
     if (invitation) {
       invitation.textContent = recovery || invitationCopy;
-      invitation.hidden = !recovery && (!state.eligible || state.gpc || preferences.valid(choice) || preferences.dismissed());
+      invitation.hidden = !recovery && (!state.eligible || state.gpc || state.dnt || preferences.valid(choice) || preferences.dismissed());
     }
     // A saved choice can hide the normal invitation. Keep exceptional recovery
     // perceivable after closing, without reopening settings or moving focus.
-    if (!recovery) {
-      if (announcedRecovery && announcement.textContent === announcedRecovery) announcement.textContent = "";
-      announcedRecovery = "";
-    }
-    else if (explicitChoice && panel.hidden && recovery !== announcedRecovery) {
-      announcement.textContent = recovery;
+    if (explicitChoice && panel.hidden) {
+      const message = [savedAnnouncement, recovery].filter(Boolean).join(" ");
+      if (announcement.textContent !== message) announcement.textContent = message;
       announcedRecovery = recovery;
+    } else if (!recovery && announcedRecovery) {
+      announcement.textContent = savedAnnouncement; announcedRecovery = "";
     }
     for (const button of openers) button.setAttribute("aria-expanded", String(!panel.hidden));
   }
@@ -156,14 +155,20 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     window.addEventListener("pageshow", () => { pageActive = true; });
     document.addEventListener("visibilitychange", () => { if (document.hidden) cancelFocusCorrection(); });
     for (const button of openers) button.addEventListener("click", () => {
-      onRefresh(); opener = button; explicitlyOpened = true; panel.classList.remove("privacy-controls--top"); setMinimized(false); panel.hidden = false; render(); nodes.heading.focus();
+      savedAnnouncement = ""; announcement.textContent = ""; onRefresh(); opener = button; explicitlyOpened = true; panel.classList.remove("privacy-controls--top"); setMinimized(false); panel.hidden = false; render(); nodes.heading.focus();
     });
     for (const button of openers) button.disabled = false;
     // A persisted Allow may load the SDK on a new visit. Its failure stays in
     // the quiet footer, without a startup live announcement. This flag records
     // only an explicit choice in this document, before any async SDK work.
-    nodes.allow.addEventListener("click", () => { explicitChoice = true; if (onChoose(true)) close(); });
-    nodes.reject.addEventListener("click", () => { explicitChoice = true; if (onChoose(false)) close(); });
+    const chooseAndClose = allow => {
+      explicitChoice = true;
+      if (!onChoose(allow)) return;
+      savedAnnouncement = allow ? "You allowed optional analytics." : "You rejected optional analytics. Analytics is off.";
+      close(); // render keeps this polite confirmation outside the hidden panel.
+    };
+    nodes.allow.addEventListener("click", () => chooseAndClose(true));
+    nodes.reject.addEventListener("click", () => chooseAndClose(false));
     nodes.close.addEventListener("click", close);
     panel.addEventListener("keydown", event => {
       if (event.key !== "Escape" || event.defaultPrevented || panel.hidden || !panel.contains(document.activeElement)) return;

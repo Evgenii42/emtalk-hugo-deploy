@@ -58103,7 +58103,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v5 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control keeps optional analytics off. Ordinary use is not permission; rejection does not remove any website feature."
+                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v5 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control and browser Do Not Track keep both optional analytics services off, even after Allow. Ordinary use is not permission; rejection does not remove any website feature."
                         ],
                         "void": false
                       },

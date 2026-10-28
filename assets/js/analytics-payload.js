@@ -5,7 +5,21 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
   const canonical = origin === "https://www.emtalk.org";
   const route = policy.routes?.[configuration.emtalkRoute];
   const context = route && policy.contexts?.[route.context];
-  const eligible = canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
+  // This schema belongs only to the private Google transport port. It is
+  // absent from public schemas/routes, so emit("scroll", ...) stays rejected
+  // and Umami never receives this Google-only standard threshold signal.
+  const scrollSchema = { provider: "google", eventName: "scroll", schema: { type: "object",
+    properties: { percent_scrolled: { type: "integer", const: 90 } },
+    required: ["percent_scrolled"], additionalProperties: false } };
+  const exact = (left, right) => {
+    if (left === right) return true;
+    if (!left || !right || typeof left !== "object" || typeof right !== "object" || Array.isArray(left) !== Array.isArray(right)) return false;
+    const keys = Object.keys(right);
+    return Object.keys(left).length === keys.length && keys.every(key => own(left, key) && exact(left[key], right[key]));
+  };
+  const scrollReady = exact(policy.transportOnly?.googleScroll, scrollSchema);
+  const googleScroll = () => scrollReady ? Object.freeze({ percent_scrolled: 90 }) : null;
+  const eligible = scrollReady && canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
     configuration.emtalkAnalyticsAllowed === "true" && configuration.emtalkProviderReviewed === "true" &&
     /^G-[A-Z0-9]+$/.test(id) && !!context && route.events.includes("page_view");
   function sourceFields() {
@@ -24,6 +38,7 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
     return ["emtalk", "bret", "dm", "tapl"].includes(value) ? value : "not_applicable";
   }
   function validate(name, params) {
+    if (name === "scroll") return null; // Private Google signal, never a public/Umami action.
     const schema = policy.schemas?.[name];
     if (!schema || !route?.events.includes(name) || !params || typeof params !== "object" || Array.isArray(params)) return null;
     const payload = { event_name: name, contract_version: "004", page_context: route.context };
@@ -59,5 +74,5 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
     }
     delete payload.event_name; return payload;
   }
-  return Object.freeze({ id, canonical, eligible, fields, validate, context: () => route?.context || null, product });
+  return Object.freeze({ id, canonical, eligible, fields, validate, googleScroll, context: () => route?.context || null, product });
 }

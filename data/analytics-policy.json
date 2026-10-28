@@ -1243,5 +1243,24 @@
   },
   "proposal003SourceSha256": "0a2c33cc3e7363e5d3cb47c309a1b750c2f871cebb2ddc49cbbe3b61adcaf25a",
   "proposal003CoverageSha256": "e63a45f7c009a112693aaed580d445d6c8e8304c56aa38a337c85c5c4448310b",
-  "revisionScope": "004 adds exact published News paths, finite destination product and feedback lifecycle, and Home-only explicit preview open/close interface actions; no automatic preview events or metadata. Old003 consent is not migrated. page_view is queued once per active eligibility epoch, including a consent-valid BFcache revisit after pageshow; ordinary visible/focus refresh within the same active epoch does not duplicate it. CF browser RUM remains disabled pending withdrawal/URL-boundary verification."
+  "revisionScope": "004 adds exact published News paths, finite destination product and feedback lifecycle, and Home-only explicit preview open/close interface actions; no automatic preview events or metadata. Old003 consent is not migrated. Each provider hands off page_view at most once per parent document, including consent-valid lifecycle restoration and explicit retry; a discarded pre-SDK Google queue can be rebuilt without repeating a handed-off view. Fresh explicit v5 consent, GPC and DNT gate both providers. Provider load failures pause only that provider until explicit Allow retry. Umami accepts at most32 validated coarse pre-ready custom actions for the current consent epoch; withdrawal, failure or stale epoch discards them. Local queue acceptance and SDK handoff do not acknowledge provider ingestion. Cloudflare managed beacon absence requires separate hosted readback after deployment.",
+  "transportOnly": {
+    "googleScroll": {
+      "provider": "google",
+      "eventName": "scroll",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "percent_scrolled": {
+            "type": "integer",
+            "const": 90
+          }
+        },
+        "required": [
+          "percent_scrolled"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
 }

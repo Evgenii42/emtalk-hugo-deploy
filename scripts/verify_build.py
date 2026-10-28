@@ -366,6 +366,72 @@ def verify_tapl_landing(build, prefix=''):
     return verify_tapl(build, prefix, root=ROOT)
 
 
+def verify_analytics_measurement_contract(expected_routes, *, root=None):
+    """Fail build on drift that would empty navigationRoutes() or alter private scroll.
+
+    Extra authored/draft policy routes remain allowed, as in feedback coverage,
+    but every descriptor must satisfy the same finite runtime map contract.
+    Every active rendered route must retain navigation and pageview permission.
+    """
+    root = Path(root) if root is not None else ROOT
+    errors = []
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError('Duplicate policy key')
+            result[key] = value
+        return result
+    try:
+        policy = json.loads((root / 'data/analytics-policy.json').read_text(encoding='utf-8'), object_pairs_hook=unique)
+        contexts, routes, schemas = policy['contexts'], policy['routes'], policy['schemas']
+        nav = schemas['emtalk_navigation']
+        vocabulary = nav['properties']['page_context']['enum']
+        if (policy['version'] != '004' or not isinstance(contexts, dict) or not contexts
+                or not isinstance(routes, dict) or not 1 <= len(routes) <= 500
+                or not isinstance(schemas, dict) or not isinstance(vocabulary, list)
+                or not vocabulary or any(not isinstance(value, str) for value in vocabulary)
+                or len(vocabulary) != len(set(vocabulary)) or set(vocabulary) != set(contexts)
+                or nav['properties']['event_name']['const'] != 'emtalk_navigation'
+                or nav['properties']['contract_version']['const'] != '004'):
+            raise ValueError('Navigation structure drift')
+        active = set(expected_routes)
+        if not (active | {'/404'}).issubset(routes):
+            errors.append('Analytics navigation contract: active route missing from policy')
+        for route, row in routes.items():
+            # Conservative ASCII URL pchar form: WHATWG URL.pathname must preserve
+            # every authored key byte-for-byte. Unicode/quotes/brackets that
+            # URL serializes must be explicitly percent-encoded; malformed
+            # percent escapes are rejected before the runtime map is built.
+            if (not isinstance(route, str)
+                    or not re.fullmatch(r"/(?:[A-Za-z0-9._~!$&'()*+,;=:@/\-]|%[0-9A-Fa-f]{2})*", route)
+                    or '//' in route
+                    or re.search(r'[?#\\\s\x00-\x1f\x7f]', route)
+                    or re.search(r'(?i)(?:^|/)(?:\.|%2e){1,2}(?:/|$)', route)
+                    or not isinstance(row, dict) or not {'context', 'product', 'events'}.issubset(row)
+                    or not isinstance(row.get('events'), list)):
+                raise ValueError('Navigation descriptor drift')
+            context, product, events = row.get('context'), row.get('product'), row['events']
+            if context is None and product is None and events == []:
+                if route in active:
+                    errors.append('Analytics navigation contract: active route cannot be disabled')
+                continue
+            if (not isinstance(context, str) or context not in vocabulary
+                    or 'page_view' not in events or 'emtalk_navigation' not in events
+                    or any(not isinstance(event, str) or event not in schemas for event in events)
+                    or len(events) != len(set(events))
+                    or (product not in {'bret', 'dm'} if context == 'web_trial' else product is not None)):
+                raise ValueError('Navigation context/event/product drift')
+        expected_scroll = {'provider': 'google', 'eventName': 'scroll', 'schema': {'type': 'object', 'properties': {'percent_scrolled': {'type': 'integer', 'const': 90}}, 'required': ['percent_scrolled'], 'additionalProperties': False}}
+        if policy.get('transportOnly') != {'googleScroll': expected_scroll}:
+            errors.append('Analytics private scroll contract: fixed Google-only schema required')
+        if 'scroll' in schemas or any('scroll' in row['events'] for row in routes.values()):
+            errors.append('Analytics private scroll contract: scroll must not be a public or Umami event')
+    except (OSError, ValueError, TypeError, KeyError, UnicodeError):
+        errors.append('Analytics navigation contract: invalid policy/map/schema structure')
+    return errors
+
+
 def verify_analytics_feedback_coverage(expected_routes, *, root=None):
     """Require an explicit feedback-product decision for every policy route.
 
@@ -468,6 +534,7 @@ def verify(build, prefix='', *, base_url=None):
         except (TypeError, ValueError):
             errors.append('Build expected base URL is invalid')
     errors.extend(verify_analytics_feedback_coverage(expected))
+    errors.extend(verify_analytics_measurement_contract(expected))
     if '/tapl' in expected:
         errors.extend(verify_tapl_landing(build, prefix))
     seo_enabled = (ROOT / 'data/seo.json').is_file()

@@ -27,6 +27,7 @@ PAGES_ALIAS_HEADERS = (b'https://emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n')
 PAGES_INTEREST_ROUTES = b'{"version":1,"include":["/api/interest"],"exclude":[]}\n'
 PROVIDER_CONTROLS = {'_headers': PAGES_ALIAS_HEADERS, '_routes.json': PAGES_INTEREST_ROUTES}
+INTERNAL_GOOGLE_RUNTIME = 'analytics/google-frame.html'
 
 
 class UrlContext(Enum):
@@ -226,6 +227,36 @@ def bret_contract_errors(build, prefix=''):
     return errors
 
 
+def internal_google_runtime_errors(body):
+    """One empty owned analytics lifetime document, never a content route."""
+    errors = []
+    source = ROOT / 'static' / INTERNAL_GOOGLE_RUNTIME
+    if not source.is_file() or body != source.read_bytes():
+        errors.append('Internal analytics runtime differs from owned static bytes')
+    soup = BeautifulSoup(body, 'html.parser')
+    expected_meta = [
+        {'charset': 'utf-8'},
+        {'name': 'viewport', 'content': 'width=device-width, initial-scale=1'},
+        {'name': 'robots', 'content': 'noindex, nofollow'},
+        {'name': 'referrer', 'content': 'no-referrer'},
+    ]
+    if len(soup.find_all('html')) != 1 or len(soup.find_all('head')) != 1 or len(soup.find_all('body')) != 1:
+        errors.append('Internal analytics runtime must have one document head and body')
+    if not soup.body or soup.body.contents:
+        errors.append('Internal analytics runtime body must be empty')
+    if len(soup.find_all('title')) != 1 or soup.title.get_text() != 'Optional analytics':
+        errors.append('Internal analytics runtime title is not fixed')
+    metas = soup.find_all('meta')
+    if [node.attrs for node in metas] != expected_meta or any(not node.find_parent('head') for node in metas):
+        errors.append('Internal analytics runtime privacy metadata is invalid')
+    for node in soup.find_all(True):
+        if node.name not in {'html', 'head', 'meta', 'title', 'body'}:
+            errors.append('Internal analytics runtime must contain no scripts or embedded content')
+        if node.name != 'meta' and node.attrs != ({'lang': 'en', 'data-emtalk-analytics-runtime': 'google-v1'} if node.name == 'html' else {}):
+            errors.append('Internal analytics runtime contains an unapproved attribute')
+    return errors
+
+
 def verify_home_shared_styles(build, prefix=''):
     """Inspect delivered Home CSS, preserving inline production and bundled preview delivery."""
     build = Path(build).resolve()
@@ -335,6 +366,72 @@ def verify_tapl_landing(build, prefix=''):
     return verify_tapl(build, prefix, root=ROOT)
 
 
+def verify_analytics_measurement_contract(expected_routes, *, root=None):
+    """Fail build on drift that would empty navigationRoutes() or alter private scroll.
+
+    Extra authored/draft policy routes remain allowed, as in feedback coverage,
+    but every descriptor must satisfy the same finite runtime map contract.
+    Every active rendered route must retain navigation and pageview permission.
+    """
+    root = Path(root) if root is not None else ROOT
+    errors = []
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError('Duplicate policy key')
+            result[key] = value
+        return result
+    try:
+        policy = json.loads((root / 'data/analytics-policy.json').read_text(encoding='utf-8'), object_pairs_hook=unique)
+        contexts, routes, schemas = policy['contexts'], policy['routes'], policy['schemas']
+        nav = schemas['emtalk_navigation']
+        vocabulary = nav['properties']['page_context']['enum']
+        if (policy['version'] != '004' or not isinstance(contexts, dict) or not contexts
+                or not isinstance(routes, dict) or not 1 <= len(routes) <= 500
+                or not isinstance(schemas, dict) or not isinstance(vocabulary, list)
+                or not vocabulary or any(not isinstance(value, str) for value in vocabulary)
+                or len(vocabulary) != len(set(vocabulary)) or set(vocabulary) != set(contexts)
+                or nav['properties']['event_name']['const'] != 'emtalk_navigation'
+                or nav['properties']['contract_version']['const'] != '004'):
+            raise ValueError('Navigation structure drift')
+        active = set(expected_routes)
+        if not (active | {'/404'}).issubset(routes):
+            errors.append('Analytics navigation contract: active route missing from policy')
+        for route, row in routes.items():
+            # Conservative ASCII URL pchar form: WHATWG URL.pathname must preserve
+            # every authored key byte-for-byte. Unicode/quotes/brackets that
+            # URL serializes must be explicitly percent-encoded; malformed
+            # percent escapes are rejected before the runtime map is built.
+            if (not isinstance(route, str)
+                    or not re.fullmatch(r"/(?:[A-Za-z0-9._~!$&'()*+,;=:@/\-]|%[0-9A-Fa-f]{2})*", route)
+                    or '//' in route
+                    or re.search(r'[?#\\\s\x00-\x1f\x7f]', route)
+                    or re.search(r'(?i)(?:^|/)(?:\.|%2e){1,2}(?:/|$)', route)
+                    or not isinstance(row, dict) or not {'context', 'product', 'events'}.issubset(row)
+                    or not isinstance(row.get('events'), list)):
+                raise ValueError('Navigation descriptor drift')
+            context, product, events = row.get('context'), row.get('product'), row['events']
+            if context is None and product is None and events == []:
+                if route in active:
+                    errors.append('Analytics navigation contract: active route cannot be disabled')
+                continue
+            if (not isinstance(context, str) or context not in vocabulary
+                    or 'page_view' not in events or 'emtalk_navigation' not in events
+                    or any(not isinstance(event, str) or event not in schemas for event in events)
+                    or len(events) != len(set(events))
+                    or (product not in {'bret', 'dm'} if context == 'web_trial' else product is not None)):
+                raise ValueError('Navigation context/event/product drift')
+        expected_scroll = {'provider': 'google', 'eventName': 'scroll', 'schema': {'type': 'object', 'properties': {'percent_scrolled': {'type': 'integer', 'const': 90}}, 'required': ['percent_scrolled'], 'additionalProperties': False}}
+        if policy.get('transportOnly') != {'googleScroll': expected_scroll}:
+            errors.append('Analytics private scroll contract: fixed Google-only schema required')
+        if 'scroll' in schemas or any('scroll' in row['events'] for row in routes.values()):
+            errors.append('Analytics private scroll contract: scroll must not be a public or Umami event')
+    except (OSError, ValueError, TypeError, KeyError, UnicodeError):
+        errors.append('Analytics navigation contract: invalid policy/map/schema structure')
+    return errors
+
+
 def verify_analytics_feedback_coverage(expected_routes, *, root=None):
     """Require an explicit feedback-product decision for every policy route.
 
@@ -437,6 +534,7 @@ def verify(build, prefix='', *, base_url=None):
         except (TypeError, ValueError):
             errors.append('Build expected base URL is invalid')
     errors.extend(verify_analytics_feedback_coverage(expected))
+    errors.extend(verify_analytics_measurement_contract(expected))
     if '/tapl' in expected:
         errors.extend(verify_tapl_landing(build, prefix))
     seo_enabled = (ROOT / 'data/seo.json').is_file()
@@ -546,13 +644,17 @@ def verify(build, prefix='', *, base_url=None):
             return
         if not candidate.is_file():
             errors.append(f'Missing local dependency: {source}: {url}')
+    if not (build / INTERNAL_GOOGLE_RUNTIME).is_file():
+        errors.append('Missing required internal analytics runtime: ' + INTERNAL_GOOGLE_RUNTIME)
     for path in sorted(build.rglob('*')):
         if not path.is_file():
             continue
         relative = path.relative_to(build).as_posix()
-        if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html'}:
+        if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html', INTERNAL_GOOGLE_RUNTIME}:
             errors.append(f'Unmapped HTML output: {relative}')
         body = path.read_bytes()
+        if relative == INTERNAL_GOOGLE_RUNTIME:
+            errors.extend(relative + ': ' + error for error in internal_google_runtime_errors(body))
         if relative in PROVIDER_CONTROLS:
             if body != PROVIDER_CONTROLS[relative]:
                 errors.append('Invalid Pages provider control policy: ' + relative)

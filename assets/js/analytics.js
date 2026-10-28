@@ -1,9 +1,10 @@
+import { createUmamiTransport } from "./analytics-umami.js";
 import { createAnalyticsPreferences } from "./analytics-preferences.js";
 import { createAnalyticsPayload } from "./analytics-payload.js";
 import { createAnalyticsTransport } from "./analytics-transport.js";
 import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
 
-// Coordinator owns only eligibility epochs, one-pageview latches and lifecycle.
+// Coordinator owns only eligibility epochs, once-per-document pageview latches and lifecycle.
 // Concern owners receive explicit ports; none can infer product/private contents.
 (() => {
   "use strict";
@@ -17,12 +18,15 @@ import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
   const preferences = createAnalyticsPreferences({ id: payload.id, now: () => Date.now(),
     readLocal: key => localStorage.getItem(key), writeLocal: (key, value) => localStorage.setItem(key, value),
     readSession: key => sessionStorage.getItem(key), writeSession: (key, value) => sessionStorage.setItem(key, value) });
-  let active = false, epoch = 0, pageEpoch = -1, suspended = false, choice = null, timer = null;
+  let active = false, epoch = 0, suspended = false, choice = null, timer = null;
   let ui = null, uiReady = false, notice = "";
   const gpc = () => navigator.globalPrivacyControl === true;
   const transport = createAnalyticsTransport({ id: payload.id, home: config.dataset.emtalkRoute === "/",
     canonical: payload.canonical, lifetime: preferences.lifetime, window, document, canBoot,
-    onFailure: () => { revoke(); notice = "Analytics could not load. Navigation and local tools still work. You can retry using Allow analytics."; render(); } });
+    onFailure: () => { revoke(); notice = "Analytics could not load. Navigation and local tools still work. Open Privacy choices and choose Allow to try again."; render(); } });
+  const umami = createUmamiTransport({ window, document, navigator,
+    enabled: config.dataset.emtalkUmamiAllowed === "true", payload, canSend: canTrack,
+    onFailure: () => { revoke(); notice = "Umami analytics could not load. Navigation and local tools still work. Open Privacy choices and choose Allow to try again."; render(); } });
   function changeActive(value) {
     if (active === value) return;
     active = value; epoch += 1;
@@ -32,7 +36,7 @@ import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
   function consented() {
     choice = preferences.read();
     return uiReady && payload.eligible && preferences.valid(choice) && choice.analytics &&
-      !gpc() && !transport.hasFailed() && !preferences.isBlocked();
+      !gpc() && !transport.hasFailed() && !umami.hasFailed() && !preferences.isBlocked();
   }
   function canTrack() {
     if (!active || suspended || !consented()) { if (active) { revoke(); schedule(); render(); } return false; }
@@ -43,18 +47,24 @@ import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
     if (!consented()) { revoke(); schedule(); render(); return false; } return true;
   }
   function emit(name, params = {}) {
-    if (!canTrack() || (name === "page_view" && pageEpoch === epoch)) return false;
+    if (!canTrack() || (name === "page_view" && transport.pageviewStatus() !== "none")) return false;
     let value; try { value = payload.validate(name, params); } catch { return false; }
     if (!value) return false;
-    if (name === "page_view") pageEpoch = epoch;
+    // Google owns queued versus SDK-handed-off pageview state. An erased
+    // pre-SDK queue can be rebuilt after new Allow without repeating a view
+    // already handed to a loaded SDK. Umami owns its separate ready-send latch.
+    umami.emit(name, value);
     transport.queue(name, value, payload.fields);
-    return true; // Validated and queued after consent, never provider acceptance.
+    return true; // Validated and accepted by the local Google queue only.
+    // Umami drops non-pageview actions while its SDK is loading; this result
+    // does not acknowledge Umami acceptance or either provider's ingestion.
   }
   Object.defineProperty(window, "EmTalkAnalytics", { value: Object.freeze({ emit, canTrack,
     epoch: () => epoch, context: payload.context, product: payload.product }), writable: false, configurable: false });
   function activate() {
     if (suspended || !consented()) return;
     if (!active) { transport.activate(payload.fields); changeActive(true); emit("page_view"); }
+    umami.request();
     transport.requestBoot();
   }
   function schedule() {
@@ -67,14 +77,18 @@ import { createAnalyticsPrivacyUI } from "./analytics-privacy-ui.js";
     schedule(); render();
   }
   function choose(allow) {
-    if (allow && (gpc() || !payload.eligible || !uiReady)) { render(); return false; }
+    if (allow && (gpc() || !payload.eligible || !uiReady)) {
+      notice = gpc() ? "Global Privacy Control is enabled. Optional analytics stays off." :
+        "Optional analytics is unavailable on this page. Every feature still works.";
+      render(); return false;
+    }
     if (!allow) revoke();
-    notice = ""; transport.resetFailure(); choice = preferences.save(allow);
+    notice = ""; transport.resetFailure(); umami.resetFailure(); choice = preferences.save(allow);
     if (!choice) {
       revoke(); notice = "Your browser could not save this choice. Optional analytics stays off. You can keep using the website.";
       schedule(); render(); return false;
     }
-    if (!allow && preferences.legacyRevocationFailed()) notice = "Analytics is off here. A previous-version choice could not be updated. Close or reload other EmTalk tabs to stop their older analytics.";
+    if (preferences.legacyRevocationFailed()) notice = "Your choice was saved on this page. Some older tabs could not be updated. Close or reload other EmTalk tabs to apply the current choice.";
     refresh(); return true;
   }
   function mount() {

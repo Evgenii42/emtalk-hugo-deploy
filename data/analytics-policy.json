@@ -1,6 +1,6 @@
 {
   "version": "004",
-  "preferenceVersion": 4,
+  "preferenceVersion": 5,
   "contexts": {
     "home": {
       "location": "https://www.emtalk.org/",

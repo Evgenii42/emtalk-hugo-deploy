@@ -3,7 +3,6 @@
 {{- $latest := .items -}}
 {{- if $latest -}}
     <div class="home-news-preview" data-home-news-preview>
-    <span class="home-news-surface" data-home-news-surface aria-hidden="true"></span>
     <div class="home-news-controls">
     <button class="home-news-toggle" type="button" data-home-news-toggle aria-expanded="true" aria-controls="home-news-panel" aria-describedby="home-news-help" hidden><span>Latest news</span><span data-home-news-icon aria-hidden="true">−</span></button>
     <a {{ partial "native-link-focus.html" . }} class="home-news-direct" data-home-news-direct data-analytics-surface="news_cta" href="{{ $prefix }}/news">All news <span aria-hidden="true">↗</span></a>

@@ -1,1 +1,0 @@
-{{ partial "agent-resources.html" . | jsonify | safeJS }}

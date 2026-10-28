@@ -1,5 +1,0 @@
-{{- $index := partial "agent-resources.html" . -}}{{- $entries := slice -}}
-{{- range $index.resources -}}
-  {{- $entries = $entries | append (dict "identifier" (printf "urn:air:emtalk.org:public:%s" .id) "displayName" .title "type" "text/html" "url" .url "description" .summary "tags" (slice .kind .topic)) -}}
-{{- end -}}
-{{- return (dict "specVersion" "1.0" "host" (dict "displayName" "EmTalk") "entries" $entries "extensions" (dict "org.emtalk.discovery" (dict "kind" "public-page-metadata" "resourceIndex" (printf "%s/ai/resources.json" (strings.TrimSuffix "/" .Site.BaseURL)) "webmcp" "Optional read-only browser tools, not an MCP server or an AI service."))) -}}

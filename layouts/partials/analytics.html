@@ -7,4 +7,4 @@
 {{- $css := resources.Get "css/privacy-controls.css" | minify -}}
 <style>{{ $css.Content | safeCSS }}</style>
 <script id="emtalk-analytics-policy" type="application/json">{{ $policy | jsonify | safeJS }}</script>
-<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-route="{{ .Params.routeId | default "/404" }}" data-emtalk-analytics-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-provider-reviewed="{{ if $analytics.providerGuardsReviewed }}true{{ else }}false{{ end }}"></script>
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-umami-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-route="{{ .Params.routeId | default "/404" }}" data-emtalk-analytics-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-provider-reviewed="{{ if $analytics.providerGuardsReviewed }}true{{ else }}false{{ end }}"></script>

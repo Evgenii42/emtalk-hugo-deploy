@@ -57750,7 +57750,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Updated 27 October 2026."
+                          "Updated 28 October 2026."
                         ],
                         "void": false
                       },
@@ -58085,7 +58085,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "We use Cloudflare Web Analytics to understand aggregate visits, page addresses, referrers and page performance. Its browser beacon does not use cookies or local storage for analytics or fingerprint visitors. This measurement runs separately from Google Analytics. The Privacy choices controls below apply to Google Analytics; rejecting or withdrawing that choice does not turn off Cloudflare Web Analytics. Connection information needed to serve requests is described in section 5."
+                          "We use Umami Cloud only after you choose Allow in Privacy choices. Umami receives coarse page categories and approved interface events, not answers, scores, decision text, feedback contents, query strings or URL fragments. We do not use its identity, session recording or heatmap features. Umami does not use analytics cookies; its service processes connection information including IP address to produce statistics. We selected its European Union data region and the current plan retains a six-month history. Rejecting or withdrawing the choice stops new EmTalk analytics sends to Umami and Google Analytics on this page; information already sent cannot be recalled. Cloudflare still hosts and protects the website but its separate Web Analytics browser counter is no longer used."
                         ],
                         "void": false
                       },
@@ -58103,7 +58103,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v4 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control keeps optional analytics off. Ordinary use is not permission; rejection does not remove any website feature."
+                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v5 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control keeps optional analytics off. Ordinary use is not permission; rejection does not remove any website feature."
                         ],
                         "void": false
                       },
@@ -58112,7 +58112,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "If you close Privacy choices without choosing, we keep only a policy-version marker (emtalk.privacy.dismissed.v2) in session storage so the panel stays closed during that browser tab session. This necessary interface state does not grant analytics permission and contains no answers, decision text or visitor identifiers. You can reopen Privacy choices at any time. To keep keyboard-focused controls visible, the panel may also minimize automatically when there is no room to scroll it out of the way. This does not change your analytics choice, and Privacy choices remains available."
+                          "If you close Privacy choices without choosing, we keep only a policy-version marker (emtalk.privacy.dismissed.v3) in session storage so the panel stays closed during that browser tab session. This necessary interface state does not grant analytics permission and contains no answers, decision text or visitor identifiers. You can reopen Privacy choices at any time. To keep keyboard-focused controls visible, the panel may also minimize automatically when there is no room to scroll it out of the way. This does not change your analytics choice, and Privacy choices remains available."
                         ],
                         "void": false
                       },

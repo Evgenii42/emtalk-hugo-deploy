@@ -76,7 +76,7 @@ function initializeInterest(dialog) {
       '403:security_check_failed': securityMessage,
       '403:origin_not_allowed': 'This attempt was rejected before saving because this website address is not supported. Reload the page at www.emtalk.org or email info@emtalk.org. Your text is still here.',
       '415:json_required': 'This attempt was rejected before saving because its format was not accepted. Reload this page or email info@emtalk.org. Your text is still here.',
-      '429:too_many_requests': 'Too many attempts. This attempt was rejected before saving. Your text is still here. This wait is shown in this tab. Reloading does not reset the sending limit.',
+      '429:too_many_requests': 'Too many attempts. This attempt was rejected before saving. Wait at least one minute before sending again. Your text is still here.',
     };
     return messages[httpStatus + ':' + result.code] || null;
   }
@@ -142,35 +142,9 @@ function initializeInterest(dialog) {
     outcome = previousOutcome === 'uncertain' ? 'uncertain' : 'idle';
     say(message);
   }
-  // Accept seconds or a canonical IMF-fixdate. A past date has no remaining
-  // delay; valid waits are capped at one day. Malformed hints keep the existing
-  // one-minute fallback. None of these hints triggers an automatic retry.
-  function retryAfterDelay(response, now) {
-    const raw = response.headers.get('Retry-After');
-    if (typeof raw !== 'string' || raw.length > 128) return 60000;
-    const value = raw.trim();
-    let delay = NaN;
-    if (/^\d+$/.test(value)) delay = Number(value) * 1000;
-    else if (/^[A-Z][a-z]{2}, \d{2} [A-Z][a-z]{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/.test(value)) {
-      const date = Date.parse(value);
-      if (Number.isFinite(date) && new Date(date).toUTCString() === value) delay = date - now;
-    }
-    return Number.isFinite(delay) ? Math.ceil(Math.max(0, Math.min(86400000, delay))) : 60000;
-  }
-  function remainingRetryTime(now = Date.now()) {
-    const seconds = Math.max(0, Math.ceil((retryAt - now) / 1000));
-    return [[Math.floor(seconds / 3600), 'hour'], [Math.floor(seconds % 3600 / 60), 'minute'], [seconds % 60, 'second']]
-      .filter(([count]) => count > 0)
-      .map(([count, unit]) => count + ' ' + unit + (count === 1 ? '' : 's')).join(' ');
-  }
-  function setRejected(previousOutcome, httpStatus, message, attemptMeasurement, response) {
+  function setRejected(previousOutcome, httpStatus, message, attemptMeasurement) {
     attemptMeasurement.rejected();
-    if (httpStatus === 429) {
-      const now = Date.now();
-      retryAt = now + retryAfterDelay(response, now);
-      const remaining = remainingRetryTime(now);
-      if (remaining) message += ' Please wait ' + remaining + ' before sending again.';
-    }
+    if (httpStatus === 429) retryAt = Date.now() + 60000;
     outcome = previousOutcome === 'uncertain' ? 'uncertain' : 'rejected';
     say(message + (previousOutcome === 'uncertain' ? earlierUnconfirmed : ''));
   }
@@ -280,9 +254,8 @@ function initializeInterest(dialog) {
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (busy || !form.reportValidity()) return;
-    const now = Date.now();
-    if (now < retryAt) {
-      say('Please wait ' + remainingRetryTime(now) + ' before sending again. Your text is still here.' + (outcome==='uncertain' ? earlierUnconfirmed : ''));
+    if (Date.now() < retryAt) {
+      say('Please wait for the one-minute pause to finish, then send again. Your text is still here.' + (outcome==='uncertain' ? earlierUnconfirmed : ''));
       return;
     }
     // A server-selected CAPTCHA-free form sends on this explicit action.
@@ -312,7 +285,7 @@ function initializeInterest(dialog) {
       const result=await responseResult(response);
       const rejected=rejectionMessage(response.status,result,config.captchaMode);
       if (rejected) {
-        setRejected(previousOutcome, response.status, rejected, attemptMeasurement, response);
+        setRejected(previousOutcome, response.status, rejected, attemptMeasurement);
         return;
       }
       if (!matchingReceipt(response, result, payload)) throw Error('Not confirmed');

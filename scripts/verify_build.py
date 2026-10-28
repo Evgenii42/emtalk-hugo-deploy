@@ -24,13 +24,10 @@ ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', 
 PAGES_ALIAS_HEADERS = (b'https://emtalk-hugo-deploy.pages.dev/*\n'
                        b'  X-Robots-Tag: noindex\n\n'
                        b'https://:version.emtalk-hugo-deploy.pages.dev/*\n'
-                       b'  X-Robots-Tag: noindex\n\n'
-                       b'/.well-known/ai-catalog.json\n'
-                       b'  Content-Type: application/ai-catalog+json; charset=utf-8\n\n'
-                       b'/ai-catalog.json\n'
-                       b'  Content-Type: application/ai-catalog+json; charset=utf-8\n')
+                       b'  X-Robots-Tag: noindex\n')
 PAGES_INTEREST_ROUTES = b'{"version":1,"include":["/api/interest"],"exclude":[]}\n'
 PROVIDER_CONTROLS = {'_headers': PAGES_ALIAS_HEADERS, '_routes.json': PAGES_INTEREST_ROUTES}
+INTERNAL_GOOGLE_RUNTIME = 'analytics/google-frame.html'
 
 
 class UrlContext(Enum):
@@ -227,6 +224,36 @@ def bret_contract_errors(build, prefix=''):
         path = audio / name
         if not path.is_file() or path.is_symlink() or path.stat().st_size == 0:
             errors.append('Missing, empty or linked BRET audio: ' + name)
+    return errors
+
+
+def internal_google_runtime_errors(body):
+    """One empty owned analytics lifetime document, never a content route."""
+    errors = []
+    source = ROOT / 'static' / INTERNAL_GOOGLE_RUNTIME
+    if not source.is_file() or body != source.read_bytes():
+        errors.append('Internal analytics runtime differs from owned static bytes')
+    soup = BeautifulSoup(body, 'html.parser')
+    expected_meta = [
+        {'charset': 'utf-8'},
+        {'name': 'viewport', 'content': 'width=device-width, initial-scale=1'},
+        {'name': 'robots', 'content': 'noindex, nofollow'},
+        {'name': 'referrer', 'content': 'no-referrer'},
+    ]
+    if len(soup.find_all('html')) != 1 or len(soup.find_all('head')) != 1 or len(soup.find_all('body')) != 1:
+        errors.append('Internal analytics runtime must have one document head and body')
+    if not soup.body or soup.body.contents:
+        errors.append('Internal analytics runtime body must be empty')
+    if len(soup.find_all('title')) != 1 or soup.title.get_text() != 'Optional analytics':
+        errors.append('Internal analytics runtime title is not fixed')
+    metas = soup.find_all('meta')
+    if [node.attrs for node in metas] != expected_meta or any(not node.find_parent('head') for node in metas):
+        errors.append('Internal analytics runtime privacy metadata is invalid')
+    for node in soup.find_all(True):
+        if node.name not in {'html', 'head', 'meta', 'title', 'body'}:
+            errors.append('Internal analytics runtime must contain no scripts or embedded content')
+        if node.name != 'meta' and node.attrs != ({'lang': 'en', 'data-emtalk-analytics-runtime': 'google-v1'} if node.name == 'html' else {}):
+            errors.append('Internal analytics runtime contains an unapproved attribute')
     return errors
 
 
@@ -550,13 +577,17 @@ def verify(build, prefix='', *, base_url=None):
             return
         if not candidate.is_file():
             errors.append(f'Missing local dependency: {source}: {url}')
+    if not (build / INTERNAL_GOOGLE_RUNTIME).is_file():
+        errors.append('Missing required internal analytics runtime: ' + INTERNAL_GOOGLE_RUNTIME)
     for path in sorted(build.rglob('*')):
         if not path.is_file():
             continue
         relative = path.relative_to(build).as_posix()
-        if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html'}:
+        if path.suffix.lower() == '.html' and relative not in {*expected.values(), '404.html', INTERNAL_GOOGLE_RUNTIME}:
             errors.append(f'Unmapped HTML output: {relative}')
         body = path.read_bytes()
+        if relative == INTERNAL_GOOGLE_RUNTIME:
+            errors.extend(relative + ': ' + error for error in internal_google_runtime_errors(body))
         if relative in PROVIDER_CONTROLS:
             if body != PROVIDER_CONTROLS[relative]:
                 errors.append('Invalid Pages provider control policy: ' + relative)

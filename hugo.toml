@@ -21,29 +21,9 @@ buildDrafts = false
   isPlainText = true
   notAlternative = true
 [outputs]
-  home = ["HTML", "RouteSitemap", "NewsRSS", "PublicResources", "AgentCatalog", "LegacyAgentCatalog", "AgentDiscovery"]
+  home = ["HTML", "RouteSitemap", "NewsRSS"]
 [outputFormats.NewsRSS]
   mediaType = "application/rss+xml"
   baseName = "news/index"
-  isPlainText = true
-  notAlternative = true
-[outputFormats.PublicResources]
-  mediaType = "application/json"
-  baseName = "ai/resources"
-  isPlainText = true
-  notAlternative = true
-[outputFormats.AgentCatalog]
-  mediaType = "application/json"
-  baseName = ".well-known/ai-catalog"
-  isPlainText = true
-  notAlternative = true
-[outputFormats.LegacyAgentCatalog]
-  mediaType = "application/json"
-  baseName = "ai-catalog"
-  isPlainText = true
-  notAlternative = true
-[outputFormats.AgentDiscovery]
-  mediaType = "application/json"
-  baseName = ".well-known/ard"
   isPlainText = true
   notAlternative = true

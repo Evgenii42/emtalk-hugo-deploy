@@ -113,7 +113,7 @@ Unchanged copy-node shapes do not require editing this template or its source id
     {{ range $number, $principle := $story.children }}{{ if gt $number 1 }}<article class="about-principle">{{ partial "about-principle-art.html" $number }}<h3>{{ partial "node.html" (index $principle.children 0) }}</h3><p>{{ range $line, $node := $principle.children }}{{ if gt $line 1 }}{{ partial "node.html" $node }}{{ end }}{{ end }}</p></article>{{ end }}{{ end }}
   </div>{{ partial "node.html" (index $inner.children 1) }}</div></section>
   {{ else }}{{ $accessibleSection := merge $section (dict "attributes" (merge $section.attributes (dict "tabindex" "-1"))) }}{{ partial "node.html" $accessibleSection }}{{ end }}{{ end }}{{ end }}
-  <section class="about-invitation" aria-labelledby="about-invitation-title"><div><p class="about-eyebrow">Start a conversation</p><h2 id="about-invitation-title">Find your way to be part of EmTalk.</h2><p>Want to contribute, share an idea, or give feedback? We would like to hear from you.</p><a class="about-button" href="mailto:info@emtalk.org" {{ partial "native-link-focus.html" . }}>Write to us <span aria-hidden="true">↗</span></a> {{ partial "support-link.html" (dict "placement" "about") }}</div></section>
+  <section class="about-invitation" aria-labelledby="about-invitation-title"><div><p class="about-eyebrow">Start a conversation</p><h2 id="about-invitation-title">Find your way to be part of EmTalk.</h2><p>Want to contribute, share an idea, or give feedback? We would like to hear from you.</p><a class="about-button" href="mailto:info@emtalk.org" {{ partial "native-link-focus.html" . }}>Write to us <span aria-hidden="true">↗</span></a></div></section>
 </main>
 
 {{- end -}}

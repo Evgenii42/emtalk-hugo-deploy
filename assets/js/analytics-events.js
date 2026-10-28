@@ -4,7 +4,9 @@ const initialized = new WeakSet();
 // Hugo can bundle this helper into several independent entry modules. A shared
 // document guard, rather than only a module-local WeakSet, prevents duplicates.
 const publicEventsGuard = Symbol.for('emtalk.publicMeasurement004');
-// A true result acknowledges the local consented queue only. Callers use it
+// A true result acknowledges the local consented Google queue only. Umami
+// may discard this action while its SDK loads. Neither receipt is ingestion.
+// Callers use the local result
 // to deduplicate within this document; it is never a Google delivery receipt.
 export function emitInterfaceEvent(name, parameters) {
   try {
@@ -100,6 +102,9 @@ export function createAudioMeasurement() {
     },
     playing() {
       cycleActuallyStarted = true;
+      // This latch records local playback, not successful measurement. An
+      // unarmed/failed start disarms the cycle, preventing mid-play opt-in
+      // from backfilling a start or its later completion.
       if (!started) { if (!send('start')) armed = false; started = true; }
       else if (pausedByUser) send('resume');
       pausedByUser = false;
@@ -218,7 +223,7 @@ export function initPublicMeasurement(root = document) {
     const product = storeProduct(link);
     if (product) {
       const placement = surface(link);
-      const route = document.documentElement.dataset.routeId;
+      const route = document.querySelector('script[data-emtalk-analytics]')?.dataset.emtalkRoute;
       emitInterfaceEvent('emtalk_store_click', {product, store:'google_play',
         surface: placement === 'tool_exit' ? 'tool_exit' : ['/bret','/dm'].includes(route) ? 'app_landing' : 'public_cta'});
       return;

@@ -2849,7 +2849,7 @@
                           "tabindex": "-1"
                         },
                         "children": [
-                          "We build tools for calm, clarity, and conscious growth."
+                          "Small steps toward a more meaningful life."
                         ],
                         "void": false
                       },
@@ -2859,7 +2859,7 @@
                           "class": "text-block-44"
                         },
                         "children": [
-                          "We’re a small independent team creating tools that help people slow down, understand their state, and move forward at their own pace."
+                          "We’re an independent team bringing articles, tests, and practical tools together to help you find calm, understand yourself, and take your next step."
                         ],
                         "void": false
                       },
@@ -2929,14 +2929,14 @@
                           "class": "text-block-44"
                         },
                         "children": [
-                          "Most tools try to push you forward.",
+                          "Daily life can leave little room to pause.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": [],
                             "void": true
                           },
-                          "EmTalk starts by helping you slow down."
+                          "EmTalk makes space to reflect, choose, and begin again."
                         ],
                         "void": false
                       },
@@ -2946,21 +2946,21 @@
                           "class": "text-block-44"
                         },
                         "children": [
-                          "EmTalk was born from real experience ",
+                          "Our mission is a life with more meaning, inspiration, and joy.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": [],
                             "void": true
                           },
-                          "when there were no resources, no roadmap, and no easy answers.",
+                          "We bring thoughtful content and practical tools together,",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": [],
                             "void": true
                           },
-                          "So we built what we needed ourselves."
+                          "so you can find your next step, at your own pace."
                         ],
                         "void": false
                       },
@@ -2976,21 +2976,21 @@
                             "children": [],
                             "void": true
                           },
-                          "A system, not a shortcut.",
+                          "Calm when you need a pause.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": [],
                             "void": true
                           },
-                          "Space before action.",
+                          "Clarity before a decision.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": [],
                             "void": true
                           },
-                          "Calm before decisions."
+                          "Progress at your own pace."
                         ],
                         "void": false
                       }
@@ -57750,7 +57750,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Updated 28 October 2026."
+                          "Updated 29 October 2026."
                         ],
                         "void": false
                       },
@@ -58085,7 +58085,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "We use Umami Cloud only after you choose Allow in Privacy choices. Umami receives coarse page categories and approved interface events, not answers, scores, decision text, feedback contents, query strings or URL fragments. We do not use its identity, session recording or heatmap features. Umami does not use analytics cookies; its service processes connection information including IP address to produce statistics. We selected its European Union data region and the current plan retains a six-month history. Rejecting or withdrawing the choice stops new EmTalk analytics sends to Umami and Google Analytics on this page; information already sent cannot be recalled. Cloudflare still hosts and protects the website but its separate Web Analytics browser counter is no longer used."
+                          "We use Umami Cloud to understand how the website is used. On eligible public pages, cookieless Umami measurement starts without waiting for a Google Analytics choice. It receives coarse page categories and approved interface events, not answers, scores, decision text, feedback contents, query strings or URL fragments. We do not use Umami identity, session recording or heatmap features. Its web tracker uses no analytics cookies. The service processes connection information, including your IP address, to produce statistics. We selected the European Union analytics data region and our current plan retains a six-month analytics history; this does not mean every infrastructure or support operation occurs in the EU or that every backup has the same retention. Rejecting or withdrawing Google Analytics does not stop this separate Umami measurement. When your browser exposes Do Not Track or Global Privacy Control, EmTalk keeps both measurement services off. Information already sent cannot be recalled. Cloudflare still hosts and protects the website, but its separate Web Analytics browser counter is not used."
                         ],
                         "void": false
                       },
@@ -58094,7 +58094,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Optional Google Analytics is off until you explicitly allow it in Privacy choices. Its purpose is to understand visits, navigation, reading and audio use, coarse self-assessment workflows, browser-tool use, app-store link activations and coarse feedback interaction states, so we can identify broken flows and improve the website. Google receives these events and connection information, such as IP address and browser information, and uses Analytics identifiers after permission. These data are not claimed anonymous. We do not enable Google advertising signals or advertising personalisation. The old Google Tag Manager container is not run alongside the owned event emitter."
+                          "Google Analytics is optional and stays off until you explicitly allow it in Privacy choices. It helps us understand visits, navigation, reading and audio use, coarse self-assessment workflows, browser-tool use, app-store link activations and coarse feedback interaction states, so we can identify broken flows and improve the website. Google receives these events and connection information, such as IP address and browser information, and uses Analytics identifiers after permission. These data are not claimed anonymous. We do not enable Google advertising signals or advertising personalisation. The old Google Tag Manager container is not run alongside the owned event emitter."
                         ],
                         "void": false
                       },
@@ -58103,7 +58103,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Open Privacy choices to allow or reject optional analytics, or withdraw a previous choice at any time. The preference emtalk.privacy.v5 contains your choice, its timestamp, policy version and Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, analytics remains off. Global Privacy Control and browser Do Not Track keep both optional analytics services off, even after Allow. Ordinary use is not permission; rejection does not remove any website feature."
+                          "Open Privacy choices to allow or reject Google Analytics, or withdraw a previous Google Analytics choice at any time. The versioned preference stores your choice, its timestamp, policy version and Google Analytics destination, with no answers or decision notes. It expires after 180 days. If this preference cannot be stored or read, Google Analytics remains off. Global Privacy Control and browser Do Not Track keep both measurement services off, even after Allow. Ordinary use is not Google Analytics permission; rejection does not remove any website feature or stop the separate cookieless Umami measurement."
                         ],
                         "void": false
                       },
@@ -58112,7 +58112,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "If you close Privacy choices without choosing, we keep only a policy-version marker (emtalk.privacy.dismissed.v3) in session storage so the panel stays closed during that browser tab session. This necessary interface state does not grant analytics permission and contains no answers, decision text or visitor identifiers. You can reopen Privacy choices at any time. To keep keyboard-focused controls visible, the panel may also minimize automatically when there is no room to scroll it out of the way. This does not change your analytics choice, and Privacy choices remains available."
+                          "If you close Privacy choices without choosing, we keep only a policy-version marker in session storage so the Google Analytics panel stays closed during that browser tab session. This necessary interface state does not grant Google Analytics permission and contains no answers, decision text or visitor identifiers. You can reopen Privacy choices at any time. To keep keyboard-focused controls visible, the panel may also minimize automatically when there is no room to scroll it out of the way. This does not change your Google Analytics choice. Closing or minimizing the panel does not stop the separate cookieless Umami measurement."
                         ],
                         "void": false
                       },
@@ -58121,7 +58121,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "The current optional Analytics purpose is described above. A new destination or materially different optional purpose requires a new explicit choice before it is enabled. This update uses a new versioned choice; an earlier permission is not carried into the expanded measurement. An explicit rejection may also update a valid older local analytics choice to rejected so already-open older EmTalk tabs can stop their collection. It never creates an earlier-version permission. You can withdraw the current choice through Privacy choices without losing access to website tools."
+                          "The optional Google Analytics purpose is described above. A new Google Analytics destination or materially different optional purpose requires a new explicit choice before it is enabled. A current choice is accepted only when its stored policy version and destination match the website configuration. Saving a new Google Analytics choice also attempts to invalidate earlier Google permissions in other open EmTalk tabs; this does not create or extend an Umami objection. You can withdraw Google Analytics through Privacy choices without losing access to website tools. This control does not opt out of the separately disclosed cookieless Umami measurement."
                         ],
                         "void": false
                       },
@@ -58130,7 +58130,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Withdrawal stops EmTalk from sending new Analytics events on this page and attempts to remove known accessible Analytics cookies. Requests already dispatched or buffered by Google cannot be recalled. It cannot erase records already received by Google. The consent preference and eligible Analytics cookies use a maximum 180-day lifetime in this website implementation. Our currently configured GA4 event retention is two months; user-data retention is fourteen months with reset on activity. The separate existing BigQuery export is in the United States and its tables currently expire after 60 days. These provider settings are distinct and are reviewed separately from browser deletion."
+                          "Withdrawing Google Analytics stops new EmTalk Google Analytics events on this page and attempts to remove known accessible Analytics cookies. Requests already dispatched cannot be recalled. Withdrawal cannot erase records already received by Google and does not stop separate cookieless Umami measurement. The Google Analytics preference and eligible Analytics cookies use a maximum 180-day lifetime in this website implementation. Our currently configured GA4 event retention is two months; user-data retention is fourteen months with reset on activity. The separate existing BigQuery export is in the United States and its tables currently expire after 60 days. These provider settings are distinct and are reviewed separately from browser deletion."
                         ],
                         "void": false
                       },
@@ -58139,7 +58139,16 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "The DM and BRET browser records in section 2 are separate from analytics preferences. Rejecting analytics does not delete your work or disable the requested tools. Their local storage supports the disclosed browser features; it is not used for advertising or tracking visitors across sites."
+                          "The DM and BRET browser records in section 2 are separate from measurement preferences. Rejecting Google Analytics does not delete your work or disable the requested tools. Their local storage supports the disclosed browser features; it is not used for advertising or tracking visitors across sites."
+                        ],
+                        "void": false
+                      },
+                      "\n",
+                      {
+                        "tag": "p",
+                        "attributes": {},
+                        "children": [
+                          "Your Google Analytics choice applies only to Google. If you previously rejected Google Analytics and Umami together, we keep that Umami objection for the original 180-day choice period. New Google choices do not erase or extend it. If we cannot read that earlier choice, Umami stays off until it can be checked. An earlier Google permission does not grant a new Google-only choice."
                         ],
                         "void": false
                       },
@@ -58241,7 +58250,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Please leave out test answers, results, health details, private decision notes, passwords and other unnecessary personal information. The form does not read your test answers, DM notes or BRET practice records. Its email and comment fields are not sent to Google Analytics or an AI service. If you separately allow optional analytics, we may measure the form opening, an actual send attempt and its acknowledged or unconfirmed outcome, using coarse page context, placement and a fixed public product category. We do not send your selected feature, intent, audience, update choice, reference, security token or response body to Analytics, and do not join Analytics identities to feedback records. Feedback is separate from optional analytics, so rejecting analytics does not prevent you from using the form."
+                          "Please leave out test answers, results, health details, private decision notes, passwords and other unnecessary personal information. The form does not read your test answers, DM notes or BRET practice records. Its email and comment fields are not sent to Google Analytics, Umami or an AI service. We may measure the form opening, an actual send attempt and its acknowledged or unconfirmed outcome through the separate cookieless Umami measurement, and through Google Analytics only if you allow it. These measurements use coarse page context, placement and a fixed public product category. We do not send your selected feature, intent, audience, update choice, reference, security token or response body to either measurement service, and do not join measurement identities to feedback records. Feedback is separate from both measurement services, so rejecting Google Analytics or enabling a supported privacy signal does not prevent you from using the form."
                         ],
                         "void": false
                       },
@@ -58353,7 +58362,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "You can manage optional analytics through Privacy choices and remove browser-tool data through the controls described above. Depending on applicable law, you may also be entitled to access, correct, delete or receive personal data, object to or restrict processing, withdraw consent where processing relies on it, and complain to the relevant privacy authority."
+                          "You can manage Google Analytics through Privacy choices. When exposed by your browser, Do Not Track or Global Privacy Control keep both Google Analytics and cookieless Umami measurement off on this page. You can remove browser-tool data through the controls described above. Depending on applicable law, you may also be entitled to access, correct, delete or receive personal data, object to or restrict processing, withdraw consent where processing relies on it, and complain to the relevant privacy authority."
                         ],
                         "void": false
                       },

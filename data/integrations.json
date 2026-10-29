@@ -4,6 +4,12 @@
     "measurementId": "G-B579M2BRST",
     "reviewedPolicy": "004",
     "providerGuardsReviewed": true,
-    "scope": "Canonical www only after explicit fresh optional-analytics opt-in. Legacy GTM inert. Authenticated enhanced-measurement hybrid and automatic user-data detection OFF saved/reopened on 2026-10-23. Actual SDK collection fields verified with locally intercepted requests; provider ingestion remains unverified. Preview/local never initialize Google."
+    "scope": "Canonical Google Analytics only after explicit fresh Google-only v6 choice; legacy GTM inert. Umami activation is independently reviewed and does not depend on this Google choice. Live provider ingestion is a separate verification.",
+    "umami": {
+      "enabledForProduction": true,
+      "reviewedPolicy": "004",
+      "providerGuardsReviewed": true,
+      "scope": "Immediate closed-payload cookieless measurement on eligible canonical public pages, independent of current Google choice/UI/preference storage. Valid historical v5 joint objections and unreadable legacy-choice storage conservatively pause it. GPC/DNT remain off switches. No identify, replay, analytics cookies or raw URLs."
+    }
   }
 }

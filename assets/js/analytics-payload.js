@@ -19,9 +19,16 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
   };
   const scrollReady = exact(policy.transportOnly?.googleScroll, scrollSchema);
   const googleScroll = () => scrollReady ? Object.freeze({ percent_scrolled: 90 }) : null;
-  const eligible = scrollReady && canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
-    configuration.emtalkAnalyticsAllowed === "true" && configuration.emtalkProviderReviewed === "true" &&
-    /^G-[A-Z0-9]+$/.test(id) && !!context && route.events.includes("page_view");
+  const routeEligible = canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
+    !!context && route.events.includes("page_view");
+  const eligible = scrollReady && routeEligible && configuration.emtalkAnalyticsAllowed === "true" &&
+    configuration.emtalkProviderReviewed === "true" && /^G-[A-Z0-9]+$/.test(id);
+  // Umami has an independently reviewed production gate. Google configuration,
+  // consent storage, consent UI and private Google scroll schema cannot grant or
+  // suppress this closed-payload cookieless transport.
+  const umamiEligible = routeEligible && policy.providerActivation?.umami?.mode === "immediate" &&
+    policy.providerActivation.umami.independentOfGoogleChoice === true && configuration.emtalkUmamiAllowed === "true" &&
+    configuration.emtalkUmamiReviewed === "true";
   function sourceFields() {
     const unknown = { page_referrer: "", campaign_source: "unknown", campaign_medium: "unknown" };
     try {
@@ -74,5 +81,5 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
     }
     delete payload.event_name; return payload;
   }
-  return Object.freeze({ id, canonical, eligible, fields, validate, googleScroll, context: () => route?.context || null, product });
+  return Object.freeze({ id, canonical, eligible, umamiEligible, fields, validate, googleScroll, context: () => route?.context || null, product });
 }

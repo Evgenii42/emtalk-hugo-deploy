@@ -16,7 +16,10 @@
     <div class="home-explore__top{{ if $latest }} home-explore__top--news{{ end }}">
     <div class="home-explore__intro">
       <p class="home-explore__eyebrow">{{ $hero.eyebrow }}</p>
-      <h1 id="home-explore-title" tabindex="-1">{{ $hero.title }}</h1>
+      <h1 id="home-explore-title" tabindex="-1">{{- with $hero.titleLines -}}
+        {{- if ne (delimit . " ") $hero.title -}}{{- errorf "Home headline lines must equal its plain headline" -}}{{- end -}}
+        {{- range $index, $line := . -}}{{- if $index -}}{{ " " }}{{- end -}}<span class="home-explore__title-line">{{ $line }}</span>{{- end -}}
+      {{- else -}}{{ $hero.title }}{{- end -}}</h1>
       <p class="home-explore__lead">{{ $hero.lead }}</p>
     </div>
     {{ partial "news-latest.html" (dict "mode" "hero" "items" $latest) }}

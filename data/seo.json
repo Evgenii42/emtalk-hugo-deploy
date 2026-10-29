@@ -3,7 +3,7 @@
   "site": {
     "name": "EmTalk",
     "productionOrigin": "https://www.emtalk.org",
-    "description": "Read and listen to articles on sleep and burnout, explore self-assessment questionnaires, and discover BRET and Decision Matrix.",
+    "description": "EmTalk brings together articles, tests, and practical tools for calm, self-understanding, clearer decisions, and steady progress on the web and in our apps.",
     "locale": "en_US",
     "language": "en",
     "organizationLogo": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
@@ -14,20 +14,20 @@
   },
   "pages": {
     "/": {
-      "title": "EmTalk: Tools for Calm, Clarity and Better Decisions",
-      "description": "Read or listen to EmTalk articles on sleep and burnout, explore self-assessment questionnaires, and discover BRET and Decision Matrix.",
+      "title": "EmTalk: Tools for a Meaningful and Joyful Life",
+      "description": "Find calm, understand yourself, and move toward your goals with articles, tests, and practical tools.",
       "indexable": true,
-      "headline": "Find your next step",
+      "headline": "A meaningful, joyful life. Make it yours.",
       "image": "/media/home-social.f8bd9ede0260.webp",
       "imageWidth": 1200,
       "imageHeight": 630,
       "imageAlt": "Illustrated pink and purple lake at sunrise, with mountains and a winding path"
     },
     "/about-us": {
-      "title": "About EmTalk: Tools for Calm and Clarity",
-      "description": "Learn about EmTalk and its independent team building tools for calm, clarity and decision-making.",
+      "title": "About EmTalk: Small Steps, Meaningful Progress",
+      "description": "Why we build EmTalk: more meaning, inspiration, and joy through articles, tests, and practical tools for calm, self-understanding, and your next step.",
       "indexable": true,
-      "headline": "We build tools for calm, clarity, and conscious growth."
+      "headline": "Small steps toward a more meaningful life."
     },
     "/affirmations": {
       "title": "Affirmations | EmTalk",

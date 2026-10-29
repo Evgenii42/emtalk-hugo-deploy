@@ -1,6 +1,5 @@
 {
   "version": "004",
-  "preferenceVersion": 5,
   "contexts": {
     "home": {
       "location": "https://www.emtalk.org/",
@@ -1243,7 +1242,7 @@
   },
   "proposal003SourceSha256": "0a2c33cc3e7363e5d3cb47c309a1b750c2f871cebb2ddc49cbbe3b61adcaf25a",
   "proposal003CoverageSha256": "e63a45f7c009a112693aaed580d445d6c8e8304c56aa38a337c85c5c4448310b",
-  "revisionScope": "004 adds exact published News paths, finite destination product and feedback lifecycle, and Home-only explicit preview open/close interface actions; no automatic preview events or metadata. Old003 consent is not migrated. Each provider hands off page_view at most once per parent document, including consent-valid lifecycle restoration and explicit retry; a discarded pre-SDK Google queue can be rebuilt without repeating a handed-off view. Fresh explicit v5 consent, GPC and DNT gate both providers. Provider load failures pause only that provider until explicit Allow retry. Umami accepts at most32 validated coarse pre-ready custom actions for the current consent epoch; withdrawal, failure or stale epoch discards them. Local queue acceptance and SDK handoff do not acknowledge provider ingestion. Cloudflare managed beacon absence requires separate hosted readback after deployment.",
+  "revisionScope": "004 closed public event schemas remain unchanged. Google uses explicit Google-only v6/006 consent without migrating older grants and cookie controls. Independently reviewed cookieless Umami starts immediately on eligible visible canonical public pages without waiting for current Google choice, consent UI or current Google preference storage. A separate read-only compatibility check preserves valid historical v5/005 joint rejection until its original 180-day expiry; a storage-access exception for the historical key pauses Umami conservatively. Missing, malformed, mismatched or expired saved values do not create a historical objection. New Google choices never overwrite that objection. GPC/DNT block both. Each provider hands off one page_view per parent document; Google changes do not reset Umami or public caller dedupe. Umami keeps at most 32 validated coarse pre-ready actions for its own eligibility epoch and has at most one automatic failed-load retry after 5 seconds; new documents retry independently. Serialization guards recheck current eligibility, generation and provider epoch before SDK fetch. Local acceptance is not ingestion. Managed Cloudflare beacon absence and live provider ingestion require separate hosted verification.",
   "transportOnly": {
     "googleScroll": {
       "provider": "google",
@@ -1261,6 +1260,40 @@
         ],
         "additionalProperties": false
       }
+    }
+  },
+  "providerActivation": {
+    "google": {
+      "mode": "explicit_consent",
+      "choiceKey": "emtalk.privacy.v6",
+      "choicePolicy": "006"
+    },
+    "umami": {
+      "mode": "immediate",
+      "independentOfGoogleChoice": true,
+      "privacySignals": [
+        "gpc",
+        "dnt"
+      ],
+      "maximumAutomaticFailureRetries": 1,
+      "retryDelayMs": 5000,
+      "maximumPendingActions": 32,
+      "legacyObjection": {
+        "key": "emtalk.privacy.v5",
+        "version": 5,
+        "policy": "005",
+        "lifetimeDays": 180,
+        "unreadable": "pause"
+      }
+    }
+  },
+  "providerTransport": {
+    "umami": {
+      "websiteId": "0f21c95c-7dbc-4464-84b5-1442ae7eeec6",
+      "scriptPath": "/vendor/umami-8104cfafda3cc828.js",
+      "hostUrl": "https://gateway.umami.is",
+      "hostname": "www.emtalk.org",
+      "integrity": "sha256-gQTPr9o8yChr5PY9bG6EHRY+mb+48eyi+Qaf7YgUFo0="
     }
   }
 }

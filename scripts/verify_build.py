@@ -1,5 +1,6 @@
 """Check exact rendered routes and static output isolation, not functional parity."""
 import argparse
+import base64
 import hashlib
 import json
 import re
@@ -395,6 +396,32 @@ def verify_analytics_measurement_contract(expected_routes, *, root=None):
                 or nav['properties']['event_name']['const'] != 'emtalk_navigation'
                 or nav['properties']['contract_version']['const'] != '004'):
             raise ValueError('Navigation structure drift')
+        # Provider activation is not a Google-consent alias. Freeze the exact
+        # reviewed immediate-Umami contract alongside its independent config.
+        expected_activation = {'google': {'mode': 'explicit_consent', 'choiceKey': 'emtalk.privacy.v6', 'choicePolicy': '006'}, 'umami': {'mode': 'immediate', 'independentOfGoogleChoice': True, 'privacySignals': ['gpc', 'dnt'], 'maximumAutomaticFailureRetries': 1, 'retryDelayMs': 5000, 'maximumPendingActions': 32, 'legacyObjection': {'key': 'emtalk.privacy.v5', 'version': 5, 'policy': '005', 'lifetimeDays': 180, 'unreadable': 'pause'}}}
+        if policy.get('providerActivation') != expected_activation:
+            errors.append('Analytics provider activation: exact independent Umami contract required')
+        # Active Google choice and read-only joint objection are separately
+        # versioned above. An ambiguous shared preferenceVersion is forbidden.
+        if 'preferenceVersion' in policy:
+            errors.append('Analytics preferences: use explicit providerActivation version contracts')
+        expected_transport = {'umami': {
+            'websiteId': '0f21c95c-7dbc-4464-84b5-1442ae7eeec6',
+            'scriptPath': '/vendor/umami-8104cfafda3cc828.js',
+            'hostUrl': 'https://gateway.umami.is', 'hostname': 'www.emtalk.org',
+            'integrity': 'sha256-gQTPr9o8yChr5PY9bG6EHRY+mb+48eyi+Qaf7YgUFo0='}}
+        if policy.get('providerTransport') != expected_transport:
+            errors.append('Analytics provider transport: reviewed identity/endpoint/SDK contract required')
+        else:
+            sdk = (root / 'static' / expected_transport['umami']['scriptPath'].lstrip('/')).read_bytes()
+            actual_integrity = 'sha256-' + base64.b64encode(hashlib.sha256(sdk).digest()).decode('ascii')
+            if actual_integrity != expected_transport['umami']['integrity']:
+                errors.append('Analytics provider transport: local SDK integrity differs from reviewed data')
+        integrations = json.loads((root / 'data/integrations.json').read_text(encoding='utf-8'), object_pairs_hook=unique)
+        umami = integrations['analytics']['umami']
+        if (umami.get('enabledForProduction') is not True or umami.get('providerGuardsReviewed') is not True
+                or umami.get('reviewedPolicy') != '004'):
+            errors.append('Analytics provider activation: independently enabled/reviewed Umami config required')
         active = set(expected_routes)
         if not (active | {'/404'}).issubset(routes):
             errors.append('Analytics navigation contract: active route missing from policy')

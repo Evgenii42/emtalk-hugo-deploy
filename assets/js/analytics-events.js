@@ -4,9 +4,9 @@ const initialized = new WeakSet();
 // Hugo can bundle this helper into several independent entry modules. A shared
 // document guard, rather than only a module-local WeakSet, prevents duplicates.
 const publicEventsGuard = Symbol.for('emtalk.publicMeasurement004');
-// A true result acknowledges local acceptance by at least one consented transport,
+// A true result acknowledges local acceptance by at least one currently eligible transport,
 // not delivery. Umami keeps at most32 validated coarse actions while loading,
-// under the current consent epoch; revoke/load failure clears them. Neither
+// under its own current eligibility epoch; its eligibility revocation/load failure clears them. Neither
 // local queue acceptance nor SDK handoff acknowledges provider ingestion.
 // Callers use the local result
 // to deduplicate within this document; it is never a Google delivery receipt.
@@ -31,7 +31,7 @@ export function createInterestMeasurement() {
   let generation = 0, saved = false, placement = 'page_prompt';
   const placements = ['page_prompt','feature_prompt','footer','tool_exit','news_cta'];
   const clear = () => { generation += 1; saved = false; };
-  window.addEventListener('emtalk:analytics-consent', clear);
+  window.addEventListener('emtalk:analytics-availability', clear);
   window.addEventListener('pagehide', clear);
   const send = (state, surface) => {
     try {
@@ -90,7 +90,7 @@ export function createAudioMeasurement() {
     // Preserve the factual cycle boundary across consent changes. Opting in
     // while an old unmeasured audio cycle is paused cannot manufacture a start.
   };
-  window.addEventListener('emtalk:analytics-consent', clear);
+  window.addEventListener('emtalk:analytics-availability', clear);
   window.addEventListener('pagehide', clear);
   const active = () => armed && epoch !== null && analyticsEpoch() === epoch;
   const send = (state, error_kind = 'not_applicable') =>
@@ -117,7 +117,7 @@ export function createAudioMeasurement() {
     error(kind) {
       if (!failed) { send('error', kind); failed = true; pausedByUser = false; }
     },
-    // A lifecycle interruption clears consented latches but is not a new cycle.
+    // A lifecycle interruption clears availability latches but is not a new cycle.
     suspend() { clear(); },
     cancel() {
       // Cancellation ends this attempt. Unlike consent/pagehide clearing, it

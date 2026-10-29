@@ -76,7 +76,7 @@ export function initTests() {
   var measuredRun = false;
   var measuredOutcome = false;
   function disarmMeasurement() { measuredRun = false; measuredEpoch = null; measuredOutcome = false; }
-  window.addEventListener('emtalk:analytics-consent', disarmMeasurement);
+  window.addEventListener('emtalk:analytics-availability', disarmMeasurement);
   window.addEventListener('pagehide', disarmMeasurement);
   function measurementActive(epoch = measuredEpoch) {
     return measuredRun && epoch !== null && epoch === measuredEpoch && analyticsEpoch() === epoch;

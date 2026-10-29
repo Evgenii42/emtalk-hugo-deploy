@@ -3,8 +3,11 @@
 {{- if not (reflect.IsMap $analytics) -}}{{- errorf "Missing analytics configuration" -}}{{- end -}}
 {{- if not (reflect.IsMap $policy) -}}{{- errorf "Missing analytics runtime policy" -}}{{- end -}}
 {{- $allowed := and $analytics.enabledForProduction (not hugo.Data.render.preview) (eq $analytics.reviewedPolicy "004") -}}
+{{- $umami := $analytics.umami -}}
+{{- if not (reflect.IsMap $umami) -}}{{- errorf "Missing independently reviewed Umami configuration" -}}{{- end -}}
+{{- $umamiAllowed := and $umami.enabledForProduction (not hugo.Data.render.preview) (eq $umami.reviewedPolicy "004") -}}
 {{- $script := resources.Get "js/analytics.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
 {{- $css := resources.Get "css/privacy-controls.css" | minify -}}
 <style>{{ $css.Content | safeCSS }}</style>
 <script id="emtalk-analytics-policy" type="application/json">{{ $policy | jsonify | safeJS }}</script>
-<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-umami-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-route="{{ .Params.routeId | default "/404" }}" data-emtalk-analytics-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-provider-reviewed="{{ if $analytics.providerGuardsReviewed }}true{{ else }}false{{ end }}"></script>
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-emtalk-umami-reviewed="{{ if $umami.providerGuardsReviewed }}true{{ else }}false{{ end }}" data-emtalk-umami-allowed="{{ if $umamiAllowed }}true{{ else }}false{{ end }}" data-emtalk-analytics="{{ $analytics.measurementId }}" data-emtalk-route="{{ .Params.routeId | default "/404" }}" data-emtalk-analytics-allowed="{{ if $allowed }}true{{ else }}false{{ end }}" data-emtalk-provider-reviewed="{{ if $analytics.providerGuardsReviewed }}true{{ else }}false{{ end }}"></script>

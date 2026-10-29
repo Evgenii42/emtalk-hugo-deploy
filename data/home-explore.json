@@ -1,7 +1,7 @@
 {
   "eyebrow": "Start where you are",
-  "title": "Find your next step",
-  "lead": "Breathing, articles, tests, and tools for clearer decisions.",
+  "title": "A meaningful, joyful life. Make it yours.",
+  "lead": "Find calm, understand yourself, and move toward your goals with articles, tests, and practical tools.",
   "groupLabel": "Explore EmTalk",
   "scene": {
     "file": "home-explore-lake.4c65a31e0d11.webp",
@@ -46,5 +46,9 @@
       "badge": "In development",
       "path": "/tapl"
     }
+  ],
+  "titleLines": [
+    "A meaningful, joyful life.",
+    "Make it yours."
   ]
 }

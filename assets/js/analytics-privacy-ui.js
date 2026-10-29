@@ -12,7 +12,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     if (panel) panel.hidden = true;
     for (const button of openers) { button.disabled = true; button.setAttribute("aria-expanded", "false"); }
     if (fallback) fallback.hidden = false;
-    if (announcement) announcement.textContent = "Privacy controls are unavailable. Optional analytics remains off.";
+    if (announcement) announcement.textContent = "Privacy controls are unavailable. Google Analytics remains off.";
     return Object.freeze({ ready: false, mount() {}, render() {} });
   }
   const labels = openers.map(button => button.textContent || "Privacy choices");
@@ -61,20 +61,22 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   }
   function render() {
     const state = snapshot(), choice = state.choice;
-    let text = state.dnt ? "Do Not Track is enabled. Optional analytics is off." : state.gpc ? "Global Privacy Control is enabled. Optional analytics is off." :
-      !preferences.valid(choice) ? "Optional analytics is off. Choose whether to allow Google Analytics cookies." :
-      choice.analytics ? "You allowed optional analytics." : "You rejected optional analytics. Analytics is off.";
-    if (!state.eligible) text = "Optional analytics is currently off on this page. You can use every feature without allowing it.";
+    const umamiStatus = panel.querySelector("[data-umami-status]");
+    if (umamiStatus) { umamiStatus.textContent = state.umamiNotice || ""; umamiStatus.hidden = !state.umamiNotice; }
+    let text = state.dnt ? "Do Not Track is enabled. Google Analytics and Umami are off." : state.gpc ? "Global Privacy Control is enabled. Google Analytics and Umami are off." :
+      !preferences.valid(choice) ? "Google Analytics is off. Choose whether to allow Google Analytics cookies." :
+      choice.analytics ? "You allowed Google Analytics." : "Google Analytics is off.";
+    if (!state.eligible) text = "Google Analytics is unavailable on this page. Every feature still works.";
     if (state.notice) text += " " + state.notice;
-    if (state.cleanupFailed) text += " Your browser did not allow cookie cleanup. Use browser settings to remove Analytics cookies.";
+    if (state.cleanupFailed) text += " Your browser did not allow Google Analytics cookie cleanup. Use browser settings to remove Analytics cookies.";
     if (nodes.status.textContent !== text) nodes.status.textContent = text;
     // Exceptional restrictions and recovery must remain visible even when the
     // optional disclosure is closed. Normal status stays out of the short copy.
     nodes.status.hidden = !(state.gpc || state.dnt || state.notice || state.cleanupFailed);
     nodes.allow.hidden = !state.eligible; nodes.allow.disabled = state.gpc || state.dnt;
-    nodes.reject.textContent = state.eligible ? "Reject analytics" : "Keep analytics off";
+    nodes.reject.textContent = state.eligible ? "Reject Google Analytics" : "Keep Google Analytics off";
     const recovery = [state.notice, state.cleanupFailed
-      ? "Your browser did not allow cookie cleanup. Use browser settings to remove Analytics cookies." : ""].filter(Boolean).join(" ");
+      ? "Your browser did not allow Google Analytics cookie cleanup. Use browser settings to remove Analytics cookies." : ""].filter(Boolean).join(" ");
     if (invitation) {
       invitation.textContent = recovery || invitationCopy;
       invitation.hidden = !recovery && (!state.eligible || state.gpc || state.dnt || preferences.valid(choice) || preferences.dismissed());
@@ -97,7 +99,15 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
   function close() {
     if (!preferences.valid(snapshot().choice)) preferences.dismissExplicitly();
     panel.hidden = true; explicitlyOpened = false; panel.classList.remove("privacy-controls--top"); setMinimized(false); render();
-    if (opener?.isConnected) opener.focus({ preventScroll: true }); else focusMain();
+    if (opener?.isConnected) {
+      opener.focus({ preventScroll: true });
+      // Recovery copy can move the footer opener below the viewport. Restore
+      // its full visible control only when needed, after the explicit close.
+      const rect = opener.getBoundingClientRect();
+      if (rect.top < 0 || rect.left < 0 || rect.bottom > window.innerHeight || rect.right > window.innerWidth) {
+        opener.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
+      }
+    } else focusMain();
     opener = null;
   }
   function intersects(left, right) {
@@ -127,7 +137,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     }
     // Automatic focus recovery is not an explicit dismissal or a consent choice.
     panel.hidden = true; opener = null; setMinimized(true); render(); exposeMinimizedOpener(target);
-    announcement.textContent = "Privacy choices were minimized to keep your focused control visible. Your analytics choice is unchanged. Use Privacy choices (minimized) to reopen them.";
+    announcement.textContent = "Privacy choices were minimized to keep your focused control visible. Your Google Analytics choice is unchanged. Use Privacy choices (minimized) to reopen them.";
   }
   function keepFocusedActionVisible(event) {
     const target = event.target;
@@ -162,9 +172,12 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     // the quiet footer, without a startup live announcement. This flag records
     // only an explicit choice in this document, before any async SDK work.
     const chooseAndClose = allow => {
-      explicitChoice = true;
+      // An attempted choice is not a saved choice. Clear an earlier success
+      // before retrying so a failed save cannot reuse its announcement state.
+      explicitChoice = false; savedAnnouncement = "";
       if (!onChoose(allow)) return;
-      savedAnnouncement = allow ? "You allowed optional analytics." : "You rejected optional analytics. Analytics is off.";
+      explicitChoice = true;
+      savedAnnouncement = allow ? "Google Analytics is allowed. Your choice was saved." : "Google Analytics is off. Your choice was saved.";
       close(); // render keeps this polite confirmation outside the hidden panel.
     };
     nodes.allow.addEventListener("click", () => chooseAndClose(true));
@@ -177,7 +190,7 @@ export function createAnalyticsPrivacyUI({ document, window, preferences, canoni
     document.addEventListener("focusin", keepFocusedActionVisible);
     // Settings belong to an explicit visitor action, never to load, a timer,
     // scrolling or focus. The quiet footer invitation is ordinary page content.
-    // Keeping the panel closed does not choose, dismiss or enable analytics.
+    // Keeping the panel closed does not choose, dismiss or enable Google Analytics.
     panel.hidden = true;
     render();
   }

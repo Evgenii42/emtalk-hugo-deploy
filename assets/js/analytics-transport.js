@@ -39,7 +39,8 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
   }
   function clearCookies() {
     if (!canonical) return;
-    cleanupFailed = false;
+    // A failed cleanup is a factual event for this document. Later automatic
+    // refreshes must not erase its notice merely because another attempt works.
     const names = ["_ga", "_ga_" + id.slice(2), "_gid", "_gat", "_gat_gtag_" + id.split("-").join("_")];
     for (const name of names) for (const domain of ["", "; Domain=www.emtalk.org", "; Domain=.emtalk.org"]) {
       try { document.cookie = name + "=; Path=/; Max-Age=0; SameSite=Lax; Secure" + domain; } catch { cleanupFailed = true; }
@@ -193,13 +194,18 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
       });
     });
   }
-  // Google cannot automatically observe parent scrolling. Preserve one fixed
+  // Google cannot automatically observe parent scrolling. This threshold signal
+  // is handed off at most once per parent document, including re-Allow/BFcache. Preserve one fixed
   // standard 90% parent threshold signal while consent is valid. A browser
   // focus restore can scroll too; this is not proof of intentional reading.
   window.addEventListener("scroll", () => {
-    if (scrollSent || !configured || !fields || !canBoot()) return;
+    if (scrollSent || !configured || !fields) return;
     const height = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     if (height <= window.innerHeight || (window.scrollY + window.innerHeight) / height < 0.9) return;
+    // Most scroll ticks are below the threshold. Avoid synchronous preference
+    // reads there, but never cache consent: the dispatch boundary still checks
+    // current storage and privacy signals after the geometry calculation.
+    if (!canBoot()) return;
     const value = typeof googleScroll === "function" ? googleScroll() : null;
     const descriptor = value && typeof value === "object" && !Array.isArray(value)
       ? Object.getOwnPropertyDescriptor(value, "percent_scrolled") : null;
@@ -207,6 +213,7 @@ export function createAnalyticsTransport({ id, home, canonical, lifetime, window
     if (queue("scroll", value, fields)) scrollSent = true;
   }, { passive: true });
   return Object.freeze({ activate, queue, pageviewStatus, requestBoot, cancelBoot, revoke,
+    hasConfiguration: () => configured,
     hasFailed: () => failed, resetFailure: () => { failed = false; }, cleanupFailed: () => cleanupFailed || teardownFailed });
 }
 

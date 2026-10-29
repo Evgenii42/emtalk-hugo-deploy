@@ -3473,7 +3473,7 @@
       "headings": [
         {
           "tag": "h1",
-          "text": "We build tools for calm, clarity, and conscious growth."
+          "text": "Small steps toward a more meaningful life."
         },
         {
           "tag": "h2",
@@ -3727,7 +3727,7 @@
             "section-hero"
           ],
           "sourceId": null,
-          "contentHtml": "\n\n\n\n\n<a href=\"/\"><img src=\"https://cdn.prod.website-files.com/6947c006ab488d10ad218168/699f41e3d7567d6efbb47cda_Large%20Icon%20Background.svg\" alt=\"EmTalk logo, go to homepage\"></a>\n<a href=\"/\">Home</a><a href=\"/bret\">Bret</a><a href=\"/dm\">Decision Matrix</a><a href=\"/tests\">Tests</a><a href=\"/articles\">Articles</a><a href=\"/about-us\">About Us</a>\n<a href=\"/#Journey\">Get Started <span>↗</span></a><span>☰</span><span>Menu</span>\n<a href=\"/\">Home</a><a href=\"/bret\">Bret</a><a href=\"/dm\">Decision Matrix</a><a href=\"/tests\">Tests</a><a href=\"/articles\">Articles</a><a href=\"/about-us\">About Us</a><a href=\"/#Journey\">Get Started ↗</a>\n\n\n\n\n<h1>We build tools for calm, clarity, and conscious growth.</h1>\nWe’re a small independent team creating tools that help people slow down, understand their state, and move forward at their own pace.\n<img src=\"https://cdn.prod.website-files.com//web-emtalk-prototype.design.webflow.com/b598d2bc-ebc8-46ee-bb73-1c30f0413688\" alt=\"\">\n<a href=\"#Why\">Scroll to learn more</a>\n\n"
+          "contentHtml": "\n\n\n\n\n<a href=\"/\"><img src=\"https://cdn.prod.website-files.com/6947c006ab488d10ad218168/699f41e3d7567d6efbb47cda_Large%20Icon%20Background.svg\" alt=\"EmTalk logo, go to homepage\"></a>\n<a href=\"/\">Home</a><a href=\"/bret\">Bret</a><a href=\"/dm\">Decision Matrix</a><a href=\"/tests\">Tests</a><a href=\"/articles\">Articles</a><a href=\"/about-us\">About Us</a>\n<a href=\"/#Journey\">Get Started <span>↗</span></a><span>☰</span><span>Menu</span>\n<a href=\"/\">Home</a><a href=\"/bret\">Bret</a><a href=\"/dm\">Decision Matrix</a><a href=\"/tests\">Tests</a><a href=\"/articles\">Articles</a><a href=\"/about-us\">About Us</a><a href=\"/#Journey\">Get Started ↗</a>\n\n\n\n\n<h1>Small steps toward a more meaningful life.</h1>\nWe’re an independent team bringing articles, tests, and practical tools together to help you find calm, understand yourself, and take your next step.\n<img src=\"https://cdn.prod.website-files.com//web-emtalk-prototype.design.webflow.com/b598d2bc-ebc8-46ee-bb73-1c30f0413688\" alt=\"\">\n<a href=\"#Why\">Scroll to learn more</a>\n\n"
         },
         {
           "sourceTag": "section",
@@ -3735,7 +3735,7 @@
             "section-why"
           ],
           "sourceId": "Why",
-          "contentHtml": "\n\n\n<h2>Why we are building EmTalk</h2>\nMost tools try to push you forward.<br>EmTalk starts by helping you slow down.\n\nEmTalk was born from real experience <br>when there were no resources, no roadmap, and no easy answers.<br>So we built what we needed ourselves.\n\n<br>A system, not a shortcut.<br>Space before action.<br>Calm before decisions.\n\n<a href=\"#How\">Scroll to learn more</a>\n\n"
+          "contentHtml": "\n\n\n<h2>Why we are building EmTalk</h2>\nDaily life can leave little room to pause.<br>EmTalk makes space to reflect, choose, and begin again.\n\nOur mission is a life with more meaning, inspiration, and joy.<br>We bring thoughtful content and practical tools together,<br>so you can find your next step, at your own pace.\n\n<br>Calm when you need a pause.<br>Clarity before a decision.<br>Progress at your own pace.\n\n<a href=\"#How\">Scroll to learn more</a>\n\n"
         },
         {
           "sourceTag": "section",
@@ -4107,7 +4107,7 @@
                           ]
                         },
                         "children": [
-                          "We build tools for calm, clarity, and conscious growth."
+                          "Small steps toward a more meaningful life."
                         ]
                       },
                       {
@@ -4118,7 +4118,7 @@
                           ]
                         },
                         "children": [
-                          "We’re a small independent team creating tools that help people slow down, understand their state, and move forward at their own pace."
+                          "We’re an independent team bringing articles, tests, and practical tools together to help you find calm, understand yourself, and take your next step."
                         ]
                       },
                       {
@@ -4194,13 +4194,13 @@
                           ]
                         },
                         "children": [
-                          "Most tools try to push you forward.",
+                          "Daily life can leave little room to pause.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": []
                           },
-                          "EmTalk starts by helping you slow down."
+                          "EmTalk makes space to reflect, choose, and begin again."
                         ]
                       },
                       {
@@ -4211,19 +4211,19 @@
                           ]
                         },
                         "children": [
-                          "EmTalk was born from real experience ",
+                          "Our mission is a life with more meaning, inspiration, and joy.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": []
                           },
-                          "when there were no resources, no roadmap, and no easy answers.",
+                          "We bring thoughtful content and practical tools together,",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": []
                           },
-                          "So we built what we needed ourselves."
+                          "so you can find your next step, at your own pace."
                         ]
                       },
                       {
@@ -4239,19 +4239,19 @@
                             "attributes": {},
                             "children": []
                           },
-                          "A system, not a shortcut.",
+                          "Calm when you need a pause.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": []
                           },
-                          "Space before action.",
+                          "Clarity before a decision.",
                           {
                             "tag": "br",
                             "attributes": {},
                             "children": []
                           },
-                          "Calm before decisions."
+                          "Progress at your own pace."
                         ]
                       }
                     ]

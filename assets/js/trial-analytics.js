@@ -22,7 +22,7 @@ export function createTrialAnalytics(product, host = globalThis) {
       run.epoch === token.epoch && !run.terminal;
   }
   const consentChanged = () => disarm();
-  host.addEventListener?.("emtalk:analytics-consent", consentChanged);
+  host.addEventListener?.("emtalk:analytics-availability", consentChanged);
   host.addEventListener?.("pagehide", consentChanged);
   return Object.freeze({
     capture, current, replacement,
@@ -74,7 +74,7 @@ export function createTrialAnalytics(product, host = globalThis) {
     },
     dispose() {
       disarm();
-      host.removeEventListener?.("emtalk:analytics-consent", consentChanged);
+      host.removeEventListener?.("emtalk:analytics-availability", consentChanged);
       host.removeEventListener?.("pagehide", consentChanged);
     },
   });

@@ -1,25 +1,27 @@
 <div class="privacy-controls-shell">
   <p class="privacy-controls__announcement" data-privacy-announcement role="status" aria-live="polite" aria-atomic="true"></p>
-  <p data-privacy-unavailable hidden>Privacy controls are unavailable. Optional analytics remains off.</p>
-  <p class="privacy-controls__invitation" data-privacy-invitation hidden>Help improve EmTalk with optional Google Analytics and Umami.</p>
+  <p data-privacy-unavailable hidden>Privacy controls are unavailable. Google Analytics remains off.</p>
+  <p class="privacy-controls__invitation" data-privacy-invitation hidden>Help improve EmTalk with optional Google Analytics.</p>
   <button type="button" class="privacy-controls__opener" data-privacy-open aria-controls="privacy-choices" aria-expanded="false" disabled>Privacy choices</button>
   <section id="privacy-choices" class="privacy-controls" data-privacy-controls aria-labelledby="privacy-choices-heading" hidden>
     <div class="privacy-controls__copy">
-    <h2 id="privacy-choices-heading" data-privacy-heading tabindex="-1">Your privacy choices</h2>
-    <p>Google Analytics and Umami are optional. Allow analytics to help improve EmTalk, including Google Analytics cookies, or keep both off. Every feature works either way. <a href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy policy</a>.</p>
+    <h2 id="privacy-choices-heading" data-privacy-heading tabindex="-1">Google Analytics choices</h2>
+    <p>Google Analytics is optional and uses cookies. Allow it to help improve EmTalk, or keep Google Analytics off. Every feature works either way. <a {{ partial "native-link-focus.html" . }} href="{{ hugo.Data.render.mountPrefix }}/documents/emtalk-privacy-policy">Privacy policy</a>.</p>
     </div>
     <div class="privacy-controls__actions">
-      <button type="button" data-privacy-reject>Reject</button>
-      <button type="button" data-privacy-allow>Allow</button>
+      <button type="button" data-privacy-reject>Reject Google Analytics</button>
+      <button type="button" data-privacy-allow>Allow Google Analytics</button>
       <button type="button" class="privacy-controls__close" data-privacy-close aria-label="Close privacy choices">&times;</button>
     </div>
-    <p class="privacy-controls__status" data-privacy-status role="status" aria-live="polite" aria-atomic="true" hidden>Optional analytics is off.</p>
+    <p class="privacy-controls__status" data-privacy-status role="status" aria-live="polite" aria-atomic="true" hidden>Google Analytics is off.</p>
     <details class="privacy-controls__details">
       <summary>Details and settings</summary>
-      <p>Umami runs only after Allow, uses no analytics cookies, and receives coarse page and event categories. Its data region is the European Union with a six-month history on our current plan. The provider processes connection information, including your IP address. When your browser exposes Do Not Track or Global Privacy Control, both optional analytics services stay off even after Allow.</p>
-      <p>We measure visits, navigation, reading, audio use, test workflows, web tool use, app store link clicks, and whether feedback was opened, sent or acknowledged. We send coarse categories, not answers or scores, decision text, article topics, exact assessment and document addresses, or feedback contents. Google receives connection information when analytics is allowed. Google advertising cookies and advertising signals stay off.</p>
-      <p>Your versioned choice is stored separately for 180 days. Either choice also denies known older v3/v4 analytics grants in other open EmTalk tabs; unknown legacy keys are not rewritten. A new consent-policy version requires a fresh choice before optional measurement can resume. Change it here at any time. Withdrawal stops EmTalk from sending new Google Analytics and Umami events on this page and attempts to remove known Analytics cookies. Requests already dispatched or buffered by Google's loaded service cannot be recalled. Withdrawal does not erase information already sent to either provider or change your local drafts and saved decisions.</p>
+      <p>We also use cookieless Umami statistics independently of your Google Analytics choice. It starts on eligible public pages without waiting for Allow and receives coarse page and interface-event categories. Its analytics data region is the European Union with a six-month history on our current plan. The provider processes connection information, including your IP address. Rejecting Google Analytics does not stop Umami. When your browser exposes Do Not Track or Global Privacy Control, both services stay off.</p>
+      <p>We measure coarse visits, navigation, reading and audio use, test workflows, web tool use, app-store link clicks and feedback interaction states. We do not send answers, scores, decision text, article topics, exact assessment or document addresses, or feedback contents to either service. Google receives measurement and connection information only after Allow. Google advertising cookies and advertising signals stay off.</p>
+      <p>Your versioned Google Analytics choice is stored for 180 days. Change it here at any time. Rejecting or withdrawing stops new Google Analytics events and attempts to remove known accessible Analytics cookies; it does not stop cookieless Umami. Already dispatched requests cannot be recalled. Neither choice deletes previously sent information or changes local drafts and saved decisions.</p>
+      <p>Your Google Analytics choice applies only to Google. If you previously rejected Google Analytics and Umami together, we keep that Umami objection for the original 180-day choice period. New Google choices do not erase or extend it. If your browser prevents access to that saved choice, Umami stays off until access returns. Only a valid earlier choice is retained. An earlier Google permission does not grant a new Google-only choice.</p>
+      <p data-umami-status hidden></p>
     </details>
   </section>
-  <noscript><p>Optional analytics is off because JavaScript is disabled.</p></noscript>
+  <noscript><p>Google Analytics and Umami are off because JavaScript is disabled.</p></noscript>
 </div>

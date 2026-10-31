@@ -1,5 +1,5 @@
 {
-  "title": "Make a little room to breathe.",
+  "title": "Breathing timer and muscle relaxation",
   "routeId": "/bret/practice",
   "layout": "source",
   "url": "/bret/practice.html",

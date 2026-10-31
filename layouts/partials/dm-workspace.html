@@ -1,4 +1,10 @@
 <main data-analytics-surface="tool_exit" id="emtalk-main" class="dm-workspace" tabindex="-1" aria-labelledby="dm-title">
+  {{- $entry := (index hugo.Data.render.pages "/dm/workspace").ownedEntry -}}
+  <!-- Intro and help deliberately share explanation spacing. The intro modifier separates future styling changes. The always-visible link uses the shared explicit Tab policy; the no-JS fallback link below is unchanged. -->
+  <div class="dm-workspace__explanation dm-workspace__intro">
+    <p>{{ $entry.lead }}</p>
+    {{ range $entry.actions }}<a href="{{ hugo.Data.render.mountPrefix }}{{ .path }}" {{ partial "native-link-focus.html" . }}>{{ .label }}</a>{{ end }}
+  </div>
   <noscript><h1>Decision Matrix</h1><p class="dm-workspace__notice">This exercise needs JavaScript for its local calculations. <a href="{{ hugo.Data.render.mountPrefix }}/dm">Read about Decision Matrix</a>.</p></noscript>
   <div data-dm-app hidden>
     <header class="dm-workspace__appbar">

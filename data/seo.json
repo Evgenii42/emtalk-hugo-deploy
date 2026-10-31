@@ -132,14 +132,14 @@
       "imageHeight": 1000
     },
     "/bret": {
-      "title": "BRET: Breathing and Relaxation App | EmTalk",
-      "description": "Explore BRET, EmTalk’s breathing and relaxation app, and its guided practices.",
+      "title": "BRET: Breathing App and Free Web Practice | EmTalk",
+      "description": "Explore the BRET breathing and relaxation app. Try five breathing rhythms, custom timing and progressive muscle relaxation free in your browser.",
       "indexable": true,
       "headline": "BRET"
     },
     "/dm": {
-      "title": "Decision Matrix: Prioritize and Compare Options | EmTalk",
-      "description": "Explore Decision Matrix, EmTalk’s tool for prioritizing tasks, comparing options and making decisions.",
+      "title": "Decision Matrix App: Compare Options | EmTalk",
+      "description": "Explore the Decision Matrix app and its free browser workspace. Compare options in pairs or weigh your pros and cons, with no web account needed.",
       "indexable": true,
       "image": "/media/ce2e0b92be190f17e1a1-69c432ae7918b4bbf56cbf1a_Open-Graph-Image-DM.webp",
       "headline": "Your Professional Prioritization Tool",
@@ -299,16 +299,16 @@
       "headline": "Understand myself"
     },
     "/dm/workspace": {
-      "title": "Decision Matrix Guest Workspace | EmTalk",
-      "description": "Compare your options and weigh pros and cons in a private, local browser workspace. Save or export your decision without an account.",
+      "title": "Pairwise Comparison and Pros and Cons Tool | EmTalk",
+      "description": "Compare options in pairs or weigh your pros and cons with Decision Matrix. Free local browser workspace, with no account needed.",
       "indexable": true,
-      "headline": "Make room for a clearer decision"
+      "headline": "Decision Matrix"
     },
     "/bret/practice": {
-      "title": "Free Breathing and Muscle Relaxation Practice | BRET by EmTalk",
-      "description": "Practise five breathing rhythms, create a custom rhythm, or follow progressive muscle relaxation. Free BRET practice in your browser, with no account needed.",
+      "title": "Free Breathing Timer and Muscle Relaxation | BRET",
+      "description": "Use a box breathing or 4-7-8 timer, create a custom rhythm, or follow progressive muscle relaxation. Free BRET web practice, with no account needed.",
       "indexable": true,
-      "headline": "Make a little room to breathe."
+      "headline": "Breathing timer and muscle relaxation"
     },
     "/news": {
       "title": "News from EmTalk | EmTalk",

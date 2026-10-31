@@ -1,0 +1,17 @@
+{
+  "retrievedAt": "2026-11-01",
+  "sources": [
+    {
+      "path": "ai-catalog.schema.json",
+      "url": "https://raw.githubusercontent.com/ards-project/ard-spec/main/spec/schemas/ai-catalog.schema.json",
+      "bytes": 8203,
+      "sha256": "c55238483a4738e08b250bdd6af1f4dc05a91afe882c649d224d09c19cd8fe09"
+    },
+    {
+      "path": "ard-entry.schema.json",
+      "url": "https://raw.githubusercontent.com/ards-project/ard-spec/main/spec/schemas/ard-entry.schema.json",
+      "bytes": 8472,
+      "sha256": "3032dad432607ddae0ec088db5759fa456f36308e0e9f340165aaed504d535f4"
+    }
+  ]
+}

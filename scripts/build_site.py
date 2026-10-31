@@ -105,6 +105,9 @@ def snapshot_sources(root=None):
                 'scripts/build_site.py', 'scripts/build_cloudflare.py', 'scripts/verify_build.py', 'scripts/news_content.py']]
     sources.append(root / 'scripts/source_roles.py')
     sources += [root / name for name in ('scripts/verify_footer.py', 'scripts/verify_tapl.py')]
+    sources.append(root / 'scripts/verify_agent_discovery.py')
+    reject_tree_links(root / 'scripts/schemas')
+    sources.extend(path for path in (root / 'scripts/schemas').glob('*.json') if path.is_file())
     if (root / 'data/seo.json').is_file():
         sources.append(root / 'scripts/verify_seo.py')
     if any(is_link(part) for path in sources for part in [path, *path.parents]

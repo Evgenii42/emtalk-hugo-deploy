@@ -1,0 +1,7 @@
+{{- $index := partial "agent-resources.html" . -}}{{- $entries := slice -}}
+{{/* The two discovery examples are derived only from existing public metadata.
+They are not personalized recommendations or a promise of search ranking. */}}
+{{- range $index.resources -}}
+  {{- $entries = $entries | append (dict "@context" "https://agenticresourcediscovery.org/context/v1" "identifier" (printf "urn:air:emtalk.org:public:%s" .id) "displayName" .title "type" "text/html" "url" .url "description" .summary "tags" (slice .kind .topic) "representativeQueries" (slice (printf "Find the public EmTalk page: %s" .title) (printf "Read EmTalk information about %s" .topic))) -}}
+{{- end -}}
+{{ dict "entries" $entries | jsonify | safeJS }}

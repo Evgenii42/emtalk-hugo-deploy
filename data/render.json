@@ -24749,18 +24749,18 @@
       "ownedEntry": {
         "mode": "augment",
         "language": "en",
-        "title": "Try BRET in your browser",
-        "lead": "Breathe with one of five rhythms, create your own, or try progressive muscle relaxation. Free to use, without an account.",
+        "title": "BRET breathing app and free web practice",
+        "lead": "Explore the BRET breathing and relaxation app, or try its free browser practice: five breathing rhythms, custom timing and progressive muscle relaxation. No web account needed.",
         "indexable": true,
         "sections": [],
         "actions": [
           {
-            "label": "Start a free practice",
+            "label": "Open free breathing practice",
             "path": "/bret/practice"
           }
         ]
       },
-      "ownedHash": "3bf0f4b6338384dc16aa2347b924c9611c552311f59b1712fb0523e3654ee81f",
+      "ownedHash": "69b8bd00b4ad4e04bf0fbcd0b9d1a53331bf21a20811db02f844993a3dcf1b62",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -27697,18 +27697,18 @@
       "ownedEntry": {
         "mode": "augment",
         "language": "en",
-        "title": "Try Decision Matrix in your browser",
-        "lead": "Compare your options and weigh pros and cons. The guest workspace runs locally and needs no account. AI assistance is available in the DM app; web support is coming later.",
+        "title": "Decision Matrix app and free comparison tool",
+        "lead": "Explore the Decision Matrix app, or compare options in the free browser workspace. With four or more options, compare pairs first; with up to three, weigh pros and cons. No web account needed.",
         "indexable": true,
         "sections": [],
         "actions": [
           {
-            "label": "Open guest workspace",
+            "label": "Open free comparison tool",
             "path": "/dm/workspace"
           }
         ]
       },
-      "ownedHash": "1a853908f7ab301c369c0bcc588822a852caca8e6ba8f21affb741d377c902bf",
+      "ownedHash": "0314f623b5882ff556bd68c20f9eeb2a53ddccaccb35570c593812943c11d837",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -113211,7 +113211,7 @@
       "language": "en",
       "family": "owned",
       "origin": "owned",
-      "sourceHash": "69e339aa9e617a9c30844279ab2f76077ebc49b9c1dc522d4587d9bf019b5041",
+      "sourceHash": "747373db195d1791893879d3373225954141e8185ad904775e18db229f8aeb3e",
       "body": {
         "tag": "body",
         "attributes": {
@@ -113240,12 +113240,17 @@
         "mode": "new",
         "language": "en",
         "title": "Decision Matrix guest workspace",
-        "lead": "Compare options and weigh pros and cons locally, without an account.",
+        "lead": "Compare up to eight options. With four or more, compare pairs first; with up to three, weigh pros and cons. Free to use, without an account.",
         "indexable": true,
         "sections": [],
-        "actions": []
+        "actions": [
+          {
+            "label": "About the Decision Matrix app",
+            "path": "/dm"
+          }
+        ]
       },
-      "ownedHash": "69e339aa9e617a9c30844279ab2f76077ebc49b9c1dc522d4587d9bf019b5041",
+      "ownedHash": "747373db195d1791893879d3373225954141e8185ad904775e18db229f8aeb3e",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -113253,11 +113258,11 @@
     },
     "/bret/practice": {
       "routeId": "/bret/practice",
-      "title": "Make a little room to breathe.",
+      "title": "Breathing timer and muscle relaxation",
       "language": "en",
       "family": "owned",
       "origin": "owned",
-      "sourceHash": "457620c1a7aa02421541a255c140decfc3abca994ea5990ab9c4d4bc74280d88",
+      "sourceHash": "859575ce7a1e7510a6df7059220e9291c0bb41e9ca427213e118ef67103ccf46",
       "body": {
         "tag": "body",
         "attributes": {
@@ -113285,8 +113290,8 @@
       "ownedEntry": {
         "mode": "new",
         "language": "en",
-        "title": "Make a little room to breathe.",
-        "lead": "Choose a breathing rhythm or relax one muscle group at a time. No account needed.",
+        "title": "Breathing timer and muscle relaxation",
+        "lead": "Use five breathing rhythms, including box breathing and 4-7-8, create a custom rhythm, or follow progressive muscle relaxation. Free to use, without an account.",
         "indexable": true,
         "sections": [],
         "actions": [
@@ -113296,7 +113301,7 @@
           }
         ]
       },
-      "ownedHash": "457620c1a7aa02421541a255c140decfc3abca994ea5990ab9c4d4bc74280d88",
+      "ownedHash": "859575ce7a1e7510a6df7059220e9291c0bb41e9ca427213e118ef67103ccf46",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"

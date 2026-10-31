@@ -1,0 +1,20 @@
+{{- $prefix := hugo.Data.render.mountPrefix -}}
+{{/* ard/ai-catalog are evolving draft discovery conventions, not registered
+standard relations or evidence of crawler adoption. Files are JSON documents.
+These public-metadata head links are intentionally site-wide, including pages
+where optional browser-tool bootstrap is excluded below. They expose no answers
+or workspace state. Keep exclusion logic synchronized with the actual-page
+checks in scripts/verify_agent_discovery.py. */}}
+<link rel="ard" type="application/json" href="{{ $prefix }}/.well-known/ard.json">
+<link rel="ai-catalog" type="application/json" href="{{ $prefix }}/.well-known/ai-catalog.json">
+<link rel="alternate" type="application/json" title="EmTalk public resource descriptions" href="{{ $prefix }}/ai/resources.json">
+{{- $route := .route -}}
+{{/* Catalog cardinality/topic changes require agent-resources.html, the runtime
+constants and verify_agent_discovery.py to agree. Route exclusions live here;
+the guard checks their actual output so sensitive pages never load the tools. */}}
+{{- $excluded := or (strings.HasPrefix $route "/tests/") (strings.HasPrefix $route "/documents/") (eq $route "/dm/workspace") (eq $route "/bret/practice") -}}
+{{- if not $excluded -}}
+  {{- $code := resources.Get "js/agent-discovery.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint -}}
+  {{/* Unsupported browsers do not request this module or its lazy metadata. */}}
+  <script data-emtalk-agent-bootstrap data-module="{{ $code.RelPermalink }}" data-integrity="{{ $code.Data.Integrity }}">(()=>{try{if(typeof document.modelContext?.registerTool!=="function")return;const c=document.currentScript,s=document.createElement("script");s.type="module";s.src=c.dataset.module;s.integrity=c.dataset.integrity;s.dataset.emtalkAgentDiscovery="";document.head.append(s)}catch{}})();</script>
+{{- end -}}

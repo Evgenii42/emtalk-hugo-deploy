@@ -685,7 +685,7 @@ def verify(build, prefix='', *, base_url=None):
         if relative in PROVIDER_CONTROLS:
             if body != PROVIDER_CONTROLS[relative]:
                 errors.append('Invalid Pages provider control policy: ' + relative)
-        elif any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or path.suffix.lower() not in ALLOWED_EXT:
+        elif any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or (path.suffix.lower() not in ALLOWED_EXT and relative != 'ai/index.md'):
             errors.append(f'Output allowlist violation: {relative}')
         if seo_enabled and path.suffix.lower() == '.html':
             errors.extend(relative + ': ' + error for error in document_metadata_errors(body))
@@ -826,9 +826,12 @@ def verify(build, prefix='', *, base_url=None):
         if not any(row['path'] == name for row in files):
             errors.append('Missing Pages provider control policy: ' + name)
     errors.extend(verify_news_if_expected(build, expected, prefix, base_url=base_url))
+    from verify_agent_discovery import verify as verify_agent_discovery
+    discovery = verify_agent_discovery(build, ROOT, prefix, expected_base or 'https://www.emtalk.org/')
+    errors.extend('Agent discovery: ' + error for error in discovery['errors'])
     snapshot = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     return {'schemaVersion': 1, 'scope': 'Static route/dependency/output checks; no functional parity claim',
-            'routeCount': len(expected), 'mountPrefix': prefix, 'outputSnapshotSha256': snapshot,
+            'agentDiscovery': discovery, 'routeCount': len(expected), 'mountPrefix': prefix, 'outputSnapshotSha256': snapshot,
             'files': files, 'errors': errors, 'passed': not errors,
             'providerControlPaths': [row['path'] for row in files if row['path'] in PROVIDER_CONTROLS],
             'publicArtifactCount': sum(row['path'] not in PROVIDER_CONTROLS for row in files),

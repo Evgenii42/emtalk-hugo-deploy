@@ -1,0 +1,22 @@
+{{/* Public metadata only. Source records remain owned by the existing catalogs. */}}
+{{- $root := strings.TrimSuffix "/" .Site.BaseURL -}}
+{{- $rows := slice -}}
+{{- $articles := (index hugo.Data "article-library").articles -}}
+{{- if ne (len $articles) 9 -}}{{- errorf "Agent discovery requires the approved nine public articles" -}}{{- end -}}
+{{- range $articles -}}
+  {{- $rows = $rows | append (dict "id" (printf "article:%s" (path.Base .route)) "kind" "article" "title" .title "summary" .summary "topic" .topic "url" (printf "%s%s" $root .route) "status" "published" "readingMinutes" .readingMinutes "listeningMinutes" .listeningMinutes) -}}
+{{- end -}}
+{{- $guide := index hugo.Data "test-experience" -}}{{- $testCount := 0 -}}
+{{- range $guide.groups -}}{{- $topic := .id -}}{{- range .tests -}}
+  {{- $cms := partial "test-cms.html" . -}}{{- $copy := index $guide.tests . -}}
+  {{- $model := index (index hugo.Data "source-content-tests").models (printf "/tests/%s" .) -}}
+  {{- $rows = $rows | append (dict "id" (printf "test:%s" .) "kind" "test" "title" (index $cms "test-title") "summary" $copy.summary "topic" $topic "url" (printf "%s/tests/%s" $root .) "status" "self_reflection_not_diagnosis" "questions" (len $model.questions) "minutes" (int (index $cms "time"))) -}}
+  {{- $testCount = add $testCount 1 -}}
+{{- end -}}{{- end -}}
+{{- if ne $testCount 5 -}}{{- errorf "Agent discovery requires the approved five test descriptions" -}}{{- end -}}
+{{- range slice "bret" "dm" "tapl" -}}
+  {{- $page := index (index hugo.Data "owned-pages").pages (printf "/%s" .) -}}
+  {{- $status := "guest_tools_available" -}}{{- if eq . "tapl" -}}{{- $status = "in_development" -}}{{- end -}}
+  {{- $rows = $rows | append (dict "id" (printf "product:%s" .) "kind" "product" "title" $page.title "summary" $page.lead "topic" . "url" (printf "%s/%s" $root .) "status" $status) -}}
+{{- end -}}
+{{- return (dict "version" 1 "resources" $rows "limitations" (slice "Public descriptions only, not personalized advice or questionnaire results." "DM AI is available in its Android app, not on this website. BRET has no AI features. Tapl is in development." "Optional browser tools require a supporting WebMCP implementation; these files do not provide an MCP backend or an AI model.")) -}}

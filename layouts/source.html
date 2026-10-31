@@ -65,6 +65,7 @@ Unexpected source content must be reconciled before it can be rendered. */}}
 {{ partial "page-loader-head.html" . }}
 {{ partial "analytics.html" . }}
 {{ partial "seo.html" (dict "page" $page "context" .) }}
+{{ partial "agent-discovery.html" (dict "route" $page.routeId) }}
 <link rel="alternate" type="application/rss+xml" title="News from EmTalk" href="{{ hugo.Data.render.mountPrefix }}/news/index.xml">
 {{ if $page.newsEntry }}
   {{/* This conditional also scopes ecosystem-news.css footer-current styling

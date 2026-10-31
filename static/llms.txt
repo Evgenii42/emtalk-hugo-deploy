@@ -32,3 +32,15 @@ News contains project updates, product development and reading highlights. Devel
 - [Privacy policy](https://www.emtalk.org/documents/emtalk-privacy-policy): Website privacy information.
 - [Terms of use](https://www.emtalk.org/documents/emtalk-terms-and-conditions-of-use): Website terms.
 - [Sitemap](https://www.emtalk.org/sitemap.xml): Indexable website URLs.
+## Machine-readable discovery
+
+- [Public page index](https://www.emtalk.org/ai/index.md): Current titles, descriptions and URLs of indexable public pages, generated from the website metadata.
+- [Public resource metadata](https://www.emtalk.org/ai/resources.json): Article summaries, test introductions and product descriptions. No personal answers or results.
+- [AI Catalog](https://www.emtalk.org/.well-known/ai-catalog.json): Schema-validated references to public HTML resources.
+- [ARD manifest](https://www.emtalk.org/.well-known/ard.json): Public resource discovery using the separately identified ARD draft.
+
+## Availability and scope
+
+Supporting browsers may expose read-only WebMCP tools for finding and reading public resource descriptions. Browsers without that experimental API retain normal navigation. This website does not expose a remote MCP server or an AI model. Tools do not submit questionnaires, retrieve personalized results, change privacy settings or access a personal workspace.
+
+This file and the catalogs supplement the public website. They do not replace full articles, establish medical advice or guarantee inclusion in any search or AI response.

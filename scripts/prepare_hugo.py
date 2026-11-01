@@ -735,6 +735,31 @@ def prepare(prefix='', preview=False):
     transitions = sorted({link['href'] for path, page in corpus['pages'].items() if path not in EXCLUDED
                           for link in page['links'] if urlsplit(link['href']).netloc
                           and urlsplit(link['href']).hostname not in {'www.emtalk.org', 'emtalk.org'}})
+    # Authored primary citations are navigation only. The explicit reviewed
+    # inventory supplements captured links; it never permits external resources.
+    citation_file = ROOT / 'data/article-reference-links.json'
+    if citation_file.exists():
+        citations = read('data/article-reference-links.json')
+        if (not isinstance(citations, dict) or set(citations) != {'version', 'routes'}
+                or type(citations['version']) is not int or citations['version'] != 1
+                or not isinstance(citations['routes'], dict)):
+            raise ValueError('Invalid article reference inventory')
+        for route, urls in citations['routes'].items():
+            fields = next((f for f in collections.get('articles', {}).values()
+                           if '/articles/' + f.get('slug', '') == route), None)
+            if route not in pages or not fields or not isinstance(urls, list) or not urls:
+                raise ValueError('Article references require a published CMS route')
+            anchors = {a.get('href') for a in BeautifulSoup(fields.get('article-content-2', ''), 'html.parser').select('a[href]')}
+            if any(not isinstance(url, str) for url in urls) or len(set(urls)) != len(urls):
+                raise ValueError('Article references must be unique URL strings')
+            for url in urls:
+                parsed = urlsplit(url)
+                if (url not in anchors or parsed.scheme != 'https' or not parsed.hostname
+                        or parsed.username or parsed.password or parsed.port
+                        or parsed.query or parsed.fragment or any(c.isspace() for c in url)
+                        or parsed.hostname in {'www.emtalk.org', 'emtalk.org'}):
+                    raise ValueError('Article reference must be an exact public HTTPS citation anchor')
+            transitions = sorted(set(transitions) | set(urls))
     # Explicit static app campaign URLs; never permit arbitrary outbound queries.
     transitions = sorted(set(transitions) | {
         'https://play.google.com/store/apps/details?id=' + package +

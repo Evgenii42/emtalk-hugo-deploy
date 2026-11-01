@@ -450,8 +450,18 @@ def verify_analytics_measurement_contract(expected_routes, *, root=None):
                     or (product not in {'bret', 'dm'} if context == 'web_trial' else product is not None)):
                 raise ValueError('Navigation context/event/product drift')
         expected_scroll = {'provider': 'google', 'eventName': 'scroll', 'schema': {'type': 'object', 'properties': {'percent_scrolled': {'type': 'integer', 'const': 90}}, 'required': ['percent_scrolled'], 'additionalProperties': False}}
-        if policy.get('transportOnly') != {'googleScroll': expected_scroll}:
-            errors.append('Analytics private scroll contract: fixed Google-only schema required')
+        # Acquisition is a private Umami enum-only signal, not a public event
+        # or a change to Google's reviewed organic-origin map or scroll port.
+        expected_acquisition = {'provider': 'umami', 'eventName': 'emtalk_acquisition', 'version': '001', 'origins': {'https://chatgpt.com': 'chatgpt', 'https://www.perplexity.ai': 'perplexity', 'https://claude.ai': 'claude', 'https://copilot.microsoft.com': 'copilot', 'https://copilot.com': 'copilot', 'https://gemini.google.com': 'gemini', 'https://www.google.com': 'google', 'https://www.google.ca': 'google', 'https://www.google.co.uk': 'google', 'https://www.google.de': 'google', 'https://www.google.fr': 'google', 'https://www.google.es': 'google', 'https://www.google.it': 'google', 'https://www.google.nl': 'google', 'https://www.google.kz': 'google', 'https://www.bing.com': 'bing', 'https://duckduckgo.com': 'duckduckgo', 'https://search.yahoo.com': 'yahoo', 'https://yandex.ru': 'yandex', 'https://yandex.com': 'yandex'}, 'channels': {'chatgpt': 'ai_referral', 'perplexity': 'ai_referral', 'claude': 'ai_referral', 'copilot': 'ai_referral', 'gemini': 'ai_referral', 'google': 'organic', 'bing': 'organic', 'duckduckgo': 'organic', 'yahoo': 'organic', 'yandex': 'organic'}}
+        if policy.get('transportOnly') != {'googleScroll': expected_scroll, 'umamiAcquisition': expected_acquisition}:
+            errors.append('Analytics private transport contract: exact Google scroll and Umami acquisition required')
+        expected_search = {origin: source for origin, source in expected_acquisition['origins'].items()
+                           if expected_acquisition['channels'][source] == 'organic'}
+        if policy.get('searchOrigins') != expected_search:
+            errors.append('Analytics organic attribution: original reviewed search-origin map required')
+        if ('emtalk_acquisition' in schemas
+                or any('emtalk_acquisition' in row['events'] for row in routes.values())):
+            errors.append('Analytics acquisition contract: private signal must not be exposed as a public event')
         if 'scroll' in schemas or any('scroll' in row['events'] for row in routes.values()):
             errors.append('Analytics private scroll contract: scroll must not be a public or Umami event')
     except (OSError, ValueError, TypeError, KeyError, UnicodeError):

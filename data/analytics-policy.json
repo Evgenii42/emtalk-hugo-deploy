@@ -1172,7 +1172,7 @@
     "emtalk_article_progress",
     "emtalk_audio_progress"
   ],
-  "referrerPolicy": "031 refinement: fixed reviewed HTTPS search-origin allowlist only; actual Google organic receipt unverified",
+  "referrerPolicy": "058 refinement: Google keeps its reviewed HTTPS search-origin map; Umami keeps an empty referrer and observes reviewed search/AI sources only as coarse document-entry categories; actual provider attribution receipt unverified",
   "searchOrigins": {
     "https://www.google.com": "google",
     "https://www.google.ca": "google",
@@ -1259,6 +1259,45 @@
           "percent_scrolled"
         ],
         "additionalProperties": false
+      }
+    },
+    "umamiAcquisition": {
+      "provider": "umami",
+      "eventName": "emtalk_acquisition",
+      "version": "001",
+      "origins": {
+        "https://chatgpt.com": "chatgpt",
+        "https://www.perplexity.ai": "perplexity",
+        "https://claude.ai": "claude",
+        "https://copilot.microsoft.com": "copilot",
+        "https://copilot.com": "copilot",
+        "https://gemini.google.com": "gemini",
+        "https://www.google.com": "google",
+        "https://www.google.ca": "google",
+        "https://www.google.co.uk": "google",
+        "https://www.google.de": "google",
+        "https://www.google.fr": "google",
+        "https://www.google.es": "google",
+        "https://www.google.it": "google",
+        "https://www.google.nl": "google",
+        "https://www.google.kz": "google",
+        "https://www.bing.com": "bing",
+        "https://duckduckgo.com": "duckduckgo",
+        "https://search.yahoo.com": "yahoo",
+        "https://yandex.ru": "yandex",
+        "https://yandex.com": "yandex"
+      },
+      "channels": {
+        "chatgpt": "ai_referral",
+        "perplexity": "ai_referral",
+        "claude": "ai_referral",
+        "copilot": "ai_referral",
+        "gemini": "ai_referral",
+        "google": "organic",
+        "bing": "organic",
+        "duckduckgo": "organic",
+        "yahoo": "organic",
+        "yandex": "organic"
       }
     }
   },

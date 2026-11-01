@@ -21,6 +21,7 @@ export function createUmamiTransport({ window, document, navigator, enabled, con
   const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
   let script = null, ready = false, failed = false, pageSent = false, generation = 0, loadTimer = null;
   let sdkApi = null, sdkTrack = null, compromised = false;
+  let acquisitionAttempted = false, acquisitionData = null;
   const ownedScripts = new WeakSet();
   const pending = [], capacity = 32;
   const clearPending = () => { pending.length = 0; };
@@ -58,6 +59,11 @@ export function createUmamiTransport({ window, document, navigator, enabled, con
     if (!hasOwn(name, 'value') || !data || !hasOwn(data, 'value') ||
         !Object.keys(value).every(key => hasOwn(fixed, key) || key === 'name' || key === 'data')) return false;
     if (!data.value || typeof data.value !== 'object' || Array.isArray(data.value)) return false;
+    // The private data object is issued only by acquisition() below. Matching
+    // caller-supplied fields are insufficient; the pinned SDK shallow-copies
+    // its outer payload but preserves this frozen data reference beforeSend.
+    if (name.value === 'emtalk_acquisition') return acquisitionData && data.value === acquisitionData ?
+      serializationGuard({ ...fixed, name: name.value, data: acquisitionData }) : false;
     const input = {}, reserved = {};
     for (const key of Object.keys(data.value)) {
       const descriptor = Object.getOwnPropertyDescriptor(data.value, key);
@@ -123,6 +129,29 @@ export function createUmamiTransport({ window, document, navigator, enabled, con
   }
   function pageview() {
     if (!pageSent && send(base())) pageSent = true;
+    if (!pageSent || acquisitionAttempted) return;
+    // One attempt per document, even if a fresh guard or serialization blocks
+    // it. Refresh/revoke/retry/BFCache never reset this latch or queue a replay.
+    acquisitionAttempted = true;
+    const port = Object.getOwnPropertyDescriptor(payload, 'umamiAcquisition');
+    if (!port || !hasOwn(port, 'value') || typeof port.value !== 'function') return;
+    let candidate; try { candidate = port.value(); } catch { return; }
+    if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) return;
+    const fields = ['contract_version', 'page_context', 'acquisition_version', 'channel', 'source'];
+    if (Reflect.ownKeys(candidate).length !== fields.length) return;
+    const data = {};
+    for (const key of fields) {
+      const descriptor = Object.getOwnPropertyDescriptor(candidate, key);
+      if (!descriptor || !hasOwn(descriptor, 'value') || typeof descriptor.value !== 'string') return;
+      data[key] = descriptor.value;
+    }
+    const channels = { chatgpt: 'ai_referral', perplexity: 'ai_referral', claude: 'ai_referral',
+      copilot: 'ai_referral', gemini: 'ai_referral', google: 'organic', bing: 'organic',
+      duckduckgo: 'organic', yahoo: 'organic', yandex: 'organic' };
+    if (data.contract_version !== '004' || data.acquisition_version !== '001' ||
+        data.page_context !== payload.context() || !hasOwn(channels, data.source) || channels[data.source] !== data.channel) return;
+    acquisitionData = Object.freeze(data);
+    send({ ...base(), name: 'emtalk_acquisition', data: acquisitionData });
   }
   function flush() {
     while (pending.length) {
@@ -169,7 +198,7 @@ export function createUmamiTransport({ window, document, navigator, enabled, con
     document.head.appendChild(script);
   }
   function emit(name, parameters) {
-    if (name === 'page_view' || failed || !allowed()) return false;
+    if (name === 'page_view' || name === 'emtalk_acquisition' || failed || !allowed()) return false;
     // Validate/copy before enqueueing. Only policy-owned coarse scalar fields
     // survive clean(); mutable caller objects, private text and arbitrary events
     // cannot enter this FIFO. Capacity rejects the newest action, never retries.

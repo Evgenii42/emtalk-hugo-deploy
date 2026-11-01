@@ -5673,7 +5673,7 @@
                                                       "class": "text-middle-copy"
                                                     },
                                                     "children": [
-                                                      "An exploration of how consistent sound, not silence, supports deeper sleep, backed by research on white noise with practical alternatives and tips for handling a noisy bed partner"
+                                                      "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone."
                                                     ],
                                                     "void": false
                                                   }
@@ -5711,7 +5711,7 @@
                                                           "class": "text-block-55"
                                                         },
                                                         "children": [
-                                                          "3"
+                                                          "4"
                                                         ],
                                                         "void": false
                                                       },
@@ -6207,7 +6207,7 @@
                                                       "class": "text-middle-copy"
                                                     },
                                                     "children": [
-                                                      "Rethink the 8-hour sleep myth and learn how to optimize your daily rest, including a simple 20-minute coffee nap trick for maximum mental alertness"
+                                                      "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps."
                                                     ],
                                                     "void": false
                                                   }
@@ -6245,7 +6245,7 @@
                                                           "class": "text-block-55"
                                                         },
                                                         "children": [
-                                                          "2"
+                                                          "3"
                                                         ],
                                                         "void": false
                                                       },
@@ -7095,7 +7095,7 @@
               "@id": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
               "url": "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal",
               "headline": "The sound of sleep: why silence isn't always the goal",
-              "description": "Perfect silence isn't the key to better sleep — consistency is. Discover what research says about white noise, plus alternatives to help you sleep better.",
+              "description": "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone.",
               "image": "/media/5ea887ea3c19775bc05d-6a9dd25263edcc1eecf7a83e_6a7f31601aeecc26bcf9ebd6_magnific_.-.-.-._CqHKmq4EEy.webp",
               "inLanguage": "en"
             },
@@ -7122,7 +7122,7 @@
               "@id": "/articles/the-truth-about-how-much-sleep-you-need",
               "url": "/articles/the-truth-about-how-much-sleep-you-need",
               "headline": "The Truth About How Much Sleep You Need",
-              "description": "Discover how many hours of sleep adults really need and learn how to use the “nappuccino” (coffee nap) to boost daytime focus and alertness",
+              "description": "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps.",
               "image": "/media/48e01e1b9c8462377b69--D1-80-D0-B8-D0-B7-D0-BE-D0-BD-D1-82-D0-B0-D0-BB-D1-8C-D0-BD-D0-B0-D1-8F-2016-D0-BA10.webp",
               "inLanguage": "en"
             },
@@ -15706,7 +15706,7 @@
                                       "class": "text-middle-white"
                                     },
                                     "children": [
-                                      "An exploration of how consistent sound, not silence, supports deeper sleep, backed by research on white noise with practical alternatives and tips for handling a noisy bed partner"
+                                      "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone."
                                     ],
                                     "void": false
                                   }
@@ -16171,7 +16171,7 @@
                                     "tag": "li",
                                     "attributes": {},
                                     "children": [
-                                      "What the Research Actually Found"
+                                      "Does white noise improve sleep?"
                                     ],
                                     "void": false
                                   },
@@ -16179,7 +16179,7 @@
                                     "tag": "li",
                                     "attributes": {},
                                     "children": [
-                                      "Building Your Nightly Soundscape"
+                                      "The sound of sleep: why silence isn't always the goal"
                                     ],
                                     "void": false
                                   },
@@ -16187,7 +16187,7 @@
                                     "tag": "li",
                                     "attributes": {},
                                     "children": [
-                                      "White Noise Isn't the Only Option"
+                                      "What the research actually found"
                                     ],
                                     "void": false
                                   },
@@ -16195,18 +16195,42 @@
                                     "tag": "li",
                                     "attributes": {},
                                     "children": [
-                                      "Beyond the Sound Itself"
+                                      "Building your nightly soundscape"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "White noise isn't the only option"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "Beyond the sound itself"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "The takeaway"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "Sources and evidence scope"
                                     ],
                                     "void": false
                                   }
-                                ],
-                                "void": false
-                              },
-                              {
-                                "tag": "p",
-                                "attributes": {},
-                                "children": [
-                                  "‍"
                                 ],
                                 "void": false
                               }
@@ -16235,6 +16259,59 @@
                             "tag": "h2",
                             "attributes": {},
                             "children": [
+                              "Does white noise improve sleep?"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "p",
+                            "attributes": {},
+                            "children": [
+                              "White noise is used to mask disruptive sounds, but research has not established a reliable sleep benefit for every adult. ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pubmed.ncbi.nlm.nih.gov/33007706/"
+                                },
+                                "children": [
+                                  "A systematic review of continuous noise"
+                                ],
+                                "void": false
+                              },
+                              " and ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pubmed.ncbi.nlm.nih.gov/34964434/"
+                                },
+                                "children": [
+                                  "a review of auditory stimulation"
+                                ],
+                                "void": false
+                              },
+                              " found mixed results and important limitations. Some people prefer background sound, while others prefer a quieter environment. The findings do not establish that continuous sound generally produces deeper sleep."
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "p",
+                            "attributes": {},
+                            "children": [
+                              {
+                                "tag": "em",
+                                "attributes": {},
+                                "children": [
+                                  "Evidence note checked 1 November 2026. Sound preferences and sleep difficulties vary; this article does not provide a personal treatment plan."
+                                ],
+                                "void": false
+                              }
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "h2",
+                            "attributes": {},
+                            "children": [
                               {
                                 "tag": "strong",
                                 "attributes": {},
@@ -16250,7 +16327,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "We tend to assume perfect sleep requires perfect silence. In reality, total silence can be just as disruptive as noise — every creak, distant car, or neighbor's footstep becomes jarring precisely because there's nothing else to mask it. The real goal isn't silence. It's a consistent soundscape your brain can stop paying attention to."
+                              "A sudden sound can disturb sleep, and masking it is one reason people try background sound. That does not make consistency the goal for everyone. A quieter setting may be preferable; individual circumstances and responses vary."
                             ],
                             "void": false
                           },
@@ -16273,7 +16350,18 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "A randomized controlled trial looked at older adults living independently and gave one group white-noise recordings to play for 30 nights straight, while a control group received only standard sleep-hygiene advice. The white-noise group showed significantly better sleep quality and reported less fatigue during the day. The researchers' conclusion was refreshingly simple: white noise is a low-cost, safe way to improve how well people sleep."
+                              "A ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://link.springer.com/article/10.1186/s12877-026-07311-2"
+                                },
+                                "children": [
+                                  "2026 randomized trial"
+                                ],
+                                "void": false
+                              },
+                              " studied 60 community-dwelling adults aged 65 or older in Mashhad, Iran. Both groups received sleep-hygiene education; one group also used preferred recordings over 30 nights. That group reported better sleep quality and less fatigue on questionnaires. These self-reported outcomes do not establish a change in deep-sleep stages, universal safety or the same effect in every age group and setting. The intervention included environmental recordings rather than one fixed broadband sound."
                             ],
                             "void": false
                           },
@@ -16281,7 +16369,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "Why would a steady hiss of sound help? Because unpredictable noise — a car alarm, a door slamming, a partner shifting in bed — triggers your brain's alertness system even while you're asleep. A constant, unchanging sound acts like a buffer, smoothing over those sudden spikes so they don't yank you out of deep sleep."
+                              "Masking sound is intended to make sudden noises less noticeable. The cited trial measured perceived sleep quality and fatigue, not sleep stages, so it cannot establish that a steady sound prevents waking from deep sleep."
                             ],
                             "void": false
                           },
@@ -16309,11 +16397,11 @@
                                 "tag": "strong",
                                 "attributes": {},
                                 "children": [
-                                  "Pick one steady source and stick with it."
+                                  "Background sound is optional."
                                 ],
                                 "void": false
                               },
-                              " A fan, a white-noise app, or a dedicated sound machine all work. Consistency matters more than the specific sound."
+                              " A fan, an app or a sound machine are examples of sources. These options are not proven equivalent, and no one sound is established as best for everyone."
                             ],
                             "void": false
                           },
@@ -16326,11 +16414,11 @@
                                 "tag": "strong",
                                 "attributes": {},
                                 "children": [
-                                  "Use it every night."
+                                  "A nightly routine is not a requirement."
                                 ],
                                 "void": false
                               },
-                              " Part of the benefit comes from your brain learning to associate that sound with sleep — a routine, not a one-off trick."
+                              " A familiar routine may suit some people, but the cited studies do not establish that everyone benefits from using sound nightly."
                             ],
                             "void": false
                           },
@@ -16360,11 +16448,11 @@
                                 "tag": "strong",
                                 "attributes": {},
                                 "children": [
-                                  "Check your bed neighbor."
+                                  "Consider shared-room noise."
                                 ],
                                 "void": false
                               },
-                              " A partner's snoring, restlessness, or late-night phone scrolling is one of the most common — and most overlooked — sources of disrupted sleep. It's worth an honest conversation about whether their habits or sleep patterns are quietly costing you rest, and whether something like earplugs, a separate blanket, or even adjusting bedtimes could help."
+                              " A partner's snoring, restlessness or late-night phone scrolling may disturb sleep. Discussing those sources is an option; the studies cited here do not compare ways of managing a partner's noise."
                             ],
                             "void": false
                           },
@@ -16387,7 +16475,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "White noise worked well in the study above, but it's far from the only tool that helps and it isn't universal. What actually helps you fall asleep is worth experimenting with, since the \"right\" sound is a personal fit as much as a scientific one. A few simple alternatives worth trying:"
+                              "The older-adult trial reported an improvement under its particular conditions. It did not compare all the alternatives below or establish which option is best for everyone. Examples of different ways people manage sound include:"
                             ],
                             "void": false
                           },
@@ -16450,7 +16538,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "The point isn't to find the \"correct\" sound — it's to find the one that actually helps you stop noticing your environment and drift off."
+                              "The question is whether a sound environment suits you, rather than whether you have found a scientifically established correct sound. Quieter surroundings are also an option."
                             ],
                             "void": false
                           },
@@ -16473,7 +16561,18 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "Noise isn't only physical. Racing thoughts and a busy mind create their own kind of internal \"noise\" that disrupts sleep just as much as an outside disturbance. If evening mental chatter is part of what's keeping you up, pairing your sound routine with a short breathing or grounding practice before bed can help settle both at once."
+                              "Racing thoughts can be part of an uncomfortable bedtime experience. The ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4407465/"
+                                },
+                                "children": [
+                                  "linked mindfulness study"
+                                ],
+                                "void": false
+                              },
+                              " tested a structured 6-week program in older adults, not white noise, one short breathing exercise or BRET. It does not establish that pairing background sound with a brief practice improves sleep."
                             ],
                             "void": false
                           },
@@ -16496,38 +16595,87 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "You're not chasing silence — you're chasing consistency. A steady, familiar sound each night can turn your bedroom into a space your brain recognizes as safe to fully switch off in."
+                              "Background sound is an option, not a requirement for sleep. The evidence does not identify one sound or routine that reliably helps everyone, and reported sleep quality is different from a measured change in deep-sleep stages."
                             ],
                             "void": false
                           },
                           {
-                            "tag": "p",
+                            "tag": "h2",
+                            "attributes": {},
+                            "children": [
+                              "Sources and evidence scope"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "ul",
                             "attributes": {},
                             "children": [
                               {
-                                "tag": "strong",
+                                "tag": "li",
                                 "attributes": {},
                                 "children": [
-                                  "Resources:"
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pubmed.ncbi.nlm.nih.gov/33007706/"
+                                    },
+                                    "children": [
+                                      "Riedy et al.: Noise as a sleep aid, systematic review (2021)"
+                                    ],
+                                    "void": false
+                                  }
                                 ],
                                 "void": false
                               },
-                              "  The effect of white noise on sleep quality and fatigue in community-dwelling older adults: a randomized controlled trial. https://pubmed.ncbi.nlm.nih.gov/42069540"
-                            ],
-                            "void": false
-                          },
-                          {
-                            "tag": "p",
-                            "attributes": {},
-                            "children": [
-                              "Mindfulness Meditation and Improvement in Sleep Quality and Daytime Impairment Among Older Adults With Sleep Disturbances. JAMA Internal Medicine (2015). ",
                               {
-                                "tag": "a",
-                                "attributes": {
-                                  "href": "https://pubmed.ncbi.nlm.nih.gov/25686304"
-                                },
+                                "tag": "li",
+                                "attributes": {},
                                 "children": [
-                                  "https://pubmed.ncbi.nlm.nih.gov/25686304"
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pubmed.ncbi.nlm.nih.gov/34964434/"
+                                    },
+                                    "children": [
+                                      "Capezuti et al.: auditory stimulation and sleep, systematic review (2022)"
+                                    ],
+                                    "void": false
+                                  }
+                                ],
+                                "void": false
+                              },
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://link.springer.com/article/10.1186/s12877-026-07311-2"
+                                    },
+                                    "children": [
+                                      "Mousavi et al.: sound recordings, sleep quality and fatigue in older adults (2026)"
+                                    ],
+                                    "void": false
+                                  }
+                                ],
+                                "void": false
+                              },
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4407465/"
+                                    },
+                                    "children": [
+                                      "Black et al.: a six-week mindfulness program in older adults (2015)"
+                                    ],
+                                    "void": false
+                                  }
                                 ],
                                 "void": false
                               }
@@ -17002,7 +17150,7 @@
           "charset": "utf-8"
         },
         {
-          "content": "Perfect silence isn't the key to better sleep — consistency is. Discover what research says about white noise, plus alternatives to help you sleep better.",
+          "content": "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone.",
           "name": "description"
         },
         {
@@ -17010,7 +17158,7 @@
           "property": "og:title"
         },
         {
-          "content": "Perfect silence isn't the key to better sleep — consistency is. Discover what research says about white noise, plus alternatives to help you sleep better.",
+          "content": "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone.",
           "property": "og:description"
         },
         {
@@ -17022,7 +17170,7 @@
           "name": "twitter:title"
         },
         {
-          "content": "Perfect silence isn't the key to better sleep — consistency is. Discover what research says about white noise, plus alternatives to help you sleep better.",
+          "content": "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone.",
           "name": "twitter:description"
         },
         {
@@ -17418,7 +17566,7 @@
                                       "class": "text-middle-white"
                                     },
                                     "children": [
-                                      "Rethink the 8-hour sleep myth and learn how to optimize your daily rest, including a simple 20-minute coffee nap trick for maximum mental alertness"
+                                      "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps."
                                     ],
                                     "void": false
                                   }
@@ -17876,26 +18024,41 @@
                             },
                             "children": [
                               {
-                                "tag": "li",
+                                "tag": "ul",
                                 "attributes": {},
                                 "children": [
-                                  "How Much Sleep Do Adults Really Need? "
-                                ],
-                                "void": false
-                              },
-                              {
-                                "tag": "li",
-                                "attributes": {},
-                                "children": [
-                                  "Signs You Are Getting Enough Rest "
-                                ],
-                                "void": false
-                              },
-                              {
-                                "tag": "li",
-                                "attributes": {},
-                                "children": [
-                                  "The Nappuccino: The Science of the Coffee Nap"
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "How much sleep do adults need?"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "The Truth About How Much Sleep You Need"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "The nappuccino and the holy power nap"
+                                    ],
+                                    "void": false
+                                  },
+                                  {
+                                    "tag": "li",
+                                    "attributes": {},
+                                    "children": [
+                                      "Sources and evidence scope"
+                                    ],
+                                    "void": false
+                                  }
                                 ],
                                 "void": false
                               }
@@ -17920,6 +18083,59 @@
                           "class": "rich-text-block-3 w-richtext"
                         },
                         "children": [
+                          {
+                            "tag": "h2",
+                            "attributes": {},
+                            "children": [
+                              "How much sleep do adults need?"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "p",
+                            "attributes": {},
+                            "children": [
+                              "For most adults, ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep"
+                                },
+                                "children": [
+                                  "7 to 9 hours a night"
+                                ],
+                                "void": false
+                              },
+                              " is a useful starting point. The ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4434546/"
+                                },
+                                "children": [
+                                  "AASM and Sleep Research Society consensus"
+                                ],
+                                "void": false
+                              },
+                              " recommends at least 7 hours regularly for adults aged 18 to 60. Sleep quality, timing, regularity and individual circumstances also matter. A coffee nap cannot replace adequate regular sleep."
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "p",
+                            "attributes": {},
+                            "children": [
+                              {
+                                "tag": "em",
+                                "attributes": {},
+                                "children": [
+                                  "Evidence note checked 1 November 2026. This is general information, not an assessment of your sleep needs."
+                                ],
+                                "void": false
+                              }
+                            ],
+                            "void": false
+                          },
                           {
                             "tag": "h2",
                             "attributes": {},
@@ -17955,7 +18171,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "Here's the honest answer: most adults need between 7 and 9 hours. Not as a suggestion, but as a biological requirement for full cognitive function, emotional regulation, immune health and metabolic balance."
+                              "Most adults are advised to get 7 to 9 hours of sleep, but this is population guidance rather than an exact personal requirement. Duration alone does not establish sleep health."
                             ],
                             "void": false
                           },
@@ -17963,7 +18179,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "The right amount of sleep is the amount that lets you wake without an alarm, feel alert within 20 minutes of rising, and sustain focus and emotional steadiness through the day."
+                              "The guidance cited here does not define adequate sleep by waking without an alarm or feeling alert within 20 minutes. Those observations alone do not establish your sleep need."
                             ],
                             "void": false
                           },
@@ -17986,7 +18202,56 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "Now for one of the most delightful and evidence-backed tools in the whole sleep world. It has a name that sounds like something from a movie: the nappuccino."
+                              {
+                                "tag": "strong",
+                                "attributes": {},
+                                "children": [
+                                  "Evidence note: sleep need and coffee naps."
+                                ],
+                                "void": false
+                              },
+                              " Coffee naps have been studied in small controlled experiments, including ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pubmed.ncbi.nlm.nih.gov/9401427/"
+                                },
+                                "children": [
+                                  "simulated driving"
+                                ],
+                                "void": false
+                              },
+                              " and ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pubmed.ncbi.nlm.nih.gov/14652086/"
+                                },
+                                "children": [
+                                  "short-term alertness tasks"
+                                ],
+                                "void": false
+                              },
+                              ". These results do not establish a guaranteed effect for everyone or advice to drive while sleepy. A 20-minute nap was one experimental condition, not a promise of light sleep. ",
+                              {
+                                "tag": "a",
+                                "attributes": {
+                                  "href": "https://pubmed.ncbi.nlm.nih.gov/24235903/"
+                                },
+                                "children": [
+                                  "Caffeine can also disturb later sleep"
+                                ],
+                                "void": false
+                              },
+                              "; the cited studies do not establish a universal afternoon clock-time cutoff."
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "p",
+                            "attributes": {},
+                            "children": [
+                              "Researchers have studied combining caffeine with a short nap as a possible short-term alertness aid. These small experiments do not make it a substitute for adequate regular sleep."
                             ],
                             "void": false
                           },
@@ -18011,7 +18276,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "Here's the mechanism: You drink a coffee or espresso. Then you immediately lie down and nap for 20 minutes. When you wake up, the caffeine, which takes about 20–25 minutes to be absorbed into your bloodstream is just starting to kick in."
+                              "In these experiments, participants received caffeine before a short nap. The studies measured short-term alertness or performance under specific conditions; they do not establish a universal timing protocol."
                             ],
                             "void": false
                           },
@@ -18019,16 +18284,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "The result? You wake from the nap feeling more alert and refreshed",
-                              {
-                                "tag": "strong",
-                                "attributes": {},
-                                "children": [
-                                  " "
-                                ],
-                                "void": false
-                              },
-                              "than either coffee or a nap alone would produce."
+                              "Some experimental results favored the combined approach on the measures tested. They do not show that everyone will wake more alert or refreshed than after coffee or a nap alone."
                             ],
                             "void": false
                           },
@@ -18036,7 +18292,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "But, and this matters enormously, the nap window is critical. Power naps should be:"
+                              "Two common timing rules need qualification:"
                             ],
                             "void": false
                           },
@@ -18048,7 +18304,7 @@
                                 "tag": "li",
                                 "attributes": {},
                                 "children": [
-                                  "20 minutes or less -to avoid entering deep sleep"
+                                  "A 20-minute nap was an experimental condition, not a guarantee of avoiding deep sleep."
                                 ],
                                 "void": false
                               },
@@ -18056,7 +18312,7 @@
                                 "tag": "li",
                                 "attributes": {},
                                 "children": [
-                                  "before 3pm if possible - later naps begin to interfere with night time sleep schedule"
+                                  "The cited studies do not establish 3pm as a universal cutoff; caffeine can affect subsequent sleep."
                                 ],
                                 "void": false
                               }
@@ -18067,16 +18323,7 @@
                             "tag": "p",
                             "attributes": {},
                             "children": [
-                              "The 20-minute sweet spot keeps you in light, restorative, not disorienting sleep. If you can't nap for different various reasons: open office, back-to-back calls, general social judgment, even lying down with your eyes closed for 10 minutes ",
-                              {
-                                "tag": "strong",
-                                "attributes": {},
-                                "children": [
-                                  " "
-                                ],
-                                "void": false
-                              },
-                              "offers partial cognitive restoration."
+                              "Sleep stages and post-nap alertness vary. The studies cited here do not establish that every 20-minute nap stays in light sleep, or that lying with closed eyes for 10 minutes gives a defined amount of cognitive restoration."
                             ],
                             "void": false
                           },
@@ -18104,6 +18351,106 @@
                                 "attributes": {},
                                 "children": [
                                   "The body doing nothing is still doing something."
+                                ],
+                                "void": false
+                              }
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "h2",
+                            "attributes": {},
+                            "children": [
+                              "Sources and evidence scope"
+                            ],
+                            "void": false
+                          },
+                          {
+                            "tag": "ul",
+                            "attributes": {},
+                            "children": [
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep"
+                                    },
+                                    "children": [
+                                      "NHLBI: How Much Sleep Is Enough? (2022)"
+                                    ],
+                                    "void": false
+                                  }
+                                ],
+                                "void": false
+                              },
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4434546/"
+                                    },
+                                    "children": [
+                                      "AASM and Sleep Research Society adult sleep consensus (2015)"
+                                    ],
+                                    "void": false
+                                  }
+                                ],
+                                "void": false
+                              },
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pubmed.ncbi.nlm.nih.gov/9401427/"
+                                    },
+                                    "children": [
+                                      "Reyner and Horne: caffeine and a short nap in simulated driving (1997)"
+                                    ],
+                                    "void": false
+                                  }
+                                ],
+                                "void": false
+                              },
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pubmed.ncbi.nlm.nih.gov/14652086/"
+                                    },
+                                    "children": [
+                                      "Hayashi et al.: alertness after a short daytime nap (2003)"
+                                    ],
+                                    "void": false
+                                  }
+                                ],
+                                "void": false
+                              },
+                              {
+                                "tag": "li",
+                                "attributes": {},
+                                "children": [
+                                  {
+                                    "tag": "a",
+                                    "attributes": {
+                                      "href": "https://pubmed.ncbi.nlm.nih.gov/24235903/"
+                                    },
+                                    "children": [
+                                      "Drake et al.: caffeine timing and subsequent sleep (2013)"
+                                    ],
+                                    "void": false
+                                  }
                                 ],
                                 "void": false
                               }
@@ -18578,7 +18925,7 @@
           "charset": "utf-8"
         },
         {
-          "content": "Discover how many hours of sleep adults really need and learn how to use the “nappuccino” (coffee nap) to boost daytime focus and alertness",
+          "content": "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps.",
           "name": "description"
         },
         {
@@ -18586,7 +18933,7 @@
           "property": "og:title"
         },
         {
-          "content": "Discover how many hours of sleep adults really need and learn how to use the “nappuccino” (coffee nap) to boost daytime focus and alertness",
+          "content": "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps.",
           "property": "og:description"
         },
         {
@@ -18598,7 +18945,7 @@
           "name": "twitter:title"
         },
         {
-          "content": "Discover how many hours of sleep adults really need and learn how to use the “nappuccino” (coffee nap) to boost daytime focus and alertness",
+          "content": "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps.",
           "name": "twitter:description"
         },
         {
@@ -57750,7 +58097,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "Updated 29 October 2026."
+                          "Updated 1 November 2026."
                         ],
                         "void": false
                       },
@@ -58085,7 +58432,7 @@
                         "tag": "p",
                         "attributes": {},
                         "children": [
-                          "We use Umami Cloud to understand how the website is used. On eligible public pages, cookieless Umami measurement starts without waiting for a Google Analytics choice. It receives coarse page categories and approved interface events, not answers, scores, decision text, feedback contents, query strings or URL fragments. We do not use Umami identity, session recording or heatmap features. Its web tracker uses no analytics cookies. The service processes connection information, including your IP address, to produce statistics. We selected the European Union analytics data region and our current plan retains a six-month analytics history; this does not mean every infrastructure or support operation occurs in the EU or that every backup has the same retention. Rejecting or withdrawing Google Analytics does not stop this separate Umami measurement. When your browser exposes Do Not Track or Global Privacy Control, EmTalk keeps both measurement services off. Information already sent cannot be recalled. Cloudflare still hosts and protects the website, but its separate Web Analytics browser counter is not used."
+                          "We use Umami Cloud to understand how the website is used. On eligible public pages, cookieless Umami measurement starts without waiting for a Google Analytics choice. It receives coarse page categories and approved interface events, not answers, scores, decision text, feedback contents, query strings or URL fragments. When the browser supplies a recognized search or AI-service referral, one approved Umami event may include only coarse source and channel labels. This event contains no referring address and creates no cross-page attribution identifier. We do not use Umami identity, session recording or heatmap features. Its web tracker uses no analytics cookies. The service processes connection information, including your IP address, to produce statistics. We selected the European Union analytics data region and our current plan retains a six-month analytics history; this does not mean every infrastructure or support operation occurs in the EU or that every backup has the same retention. Rejecting or withdrawing Google Analytics does not stop this separate Umami measurement. When your browser exposes Do Not Track or Global Privacy Control, EmTalk keeps both measurement services off. Information already sent cannot be recalled. Cloudflare still hosts and protects the website, but its separate Web Analytics browser counter is not used."
                         ],
                         "void": false
                       },

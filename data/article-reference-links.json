@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "routes": {
+    "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal": [
+      "https://link.springer.com/article/10.1186/s12877-026-07311-2",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4407465/",
+      "https://pubmed.ncbi.nlm.nih.gov/33007706/",
+      "https://pubmed.ncbi.nlm.nih.gov/34964434/"
+    ],
+    "/articles/the-truth-about-how-much-sleep-you-need": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4434546/",
+      "https://pubmed.ncbi.nlm.nih.gov/14652086/",
+      "https://pubmed.ncbi.nlm.nih.gov/24235903/",
+      "https://pubmed.ncbi.nlm.nih.gov/9401427/",
+      "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep"
+    ]
+  }
+}

@@ -129,7 +129,7 @@
         <p class="article-reader__eyebrow">Listen at your own pace</p>
         {{/* Preserve the published #single-player-example deep link from the original reader; not a JavaScript hook. */}}
         <span id="single-player-example" aria-hidden="true"></span>
-        {{ partial "node.html" ($slots.Get "player") }}
+        {{ partial "node.html" ($slots.Get "player") }}{{ if in (slice "/articles/the-truth-about-how-much-sleep-you-need" "/articles/the-sound-of-sleep-why-silence-isnt-always-the-goal") $page.routeId }}<p class="article-reader__audio-version">Original audio version. The text was updated on 1 November 2026 after this recording; the audio does not include the revisions or evidence notes.</p>{{ end }}
         <noscript><p>If the player does not start, you can <a href="{{ $page.audioMp3 }}" download>download the audio (MP3)</a>.</p></noscript>
         {{ partial "node.html" (partial "article-passive-legacy.html" ($slots.Get "legacy")) }}
       </section>

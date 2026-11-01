@@ -19,6 +19,24 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
   };
   const scrollReady = exact(policy.transportOnly?.googleScroll, scrollSchema);
   const googleScroll = () => scrollReady ? Object.freeze({ percent_scrolled: 90 }) : null;
+  // Private transport contract. Exact reviewed origins become enum labels only;
+  // no referring path, query, fragment or persistent attribution is retained.
+  const acquisitionContract = { provider: "umami", eventName: "emtalk_acquisition", version: "001",
+    origins: {
+      "https://chatgpt.com": "chatgpt", "https://www.perplexity.ai": "perplexity",
+      "https://claude.ai": "claude", "https://copilot.microsoft.com": "copilot",
+      "https://copilot.com": "copilot", "https://gemini.google.com": "gemini",
+      "https://www.google.com": "google", "https://www.google.ca": "google",
+      "https://www.google.co.uk": "google", "https://www.google.de": "google",
+      "https://www.google.fr": "google", "https://www.google.es": "google",
+      "https://www.google.it": "google", "https://www.google.nl": "google",
+      "https://www.google.kz": "google", "https://www.bing.com": "bing",
+      "https://duckduckgo.com": "duckduckgo", "https://search.yahoo.com": "yahoo",
+      "https://yandex.ru": "yandex", "https://yandex.com": "yandex"
+    },
+    channels: { chatgpt: "ai_referral", perplexity: "ai_referral", claude: "ai_referral",
+      copilot: "ai_referral", gemini: "ai_referral", google: "organic", bing: "organic",
+      duckduckgo: "organic", yahoo: "organic", yandex: "organic" } };
   const routeEligible = canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
     !!context && route.events.includes("page_view");
   const eligible = scrollReady && routeEligible && configuration.emtalkAnalyticsAllowed === "true" &&
@@ -29,6 +47,17 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
   const umamiEligible = routeEligible && policy.providerActivation?.umami?.mode === "immediate" &&
     policy.providerActivation.umami.independentOfGoogleChoice === true && configuration.emtalkUmamiAllowed === "true" &&
     configuration.emtalkUmamiReviewed === "true";
+  const acquisition = (() => {
+    if (!umamiEligible || !exact(policy.transportOnly?.umamiAcquisition, acquisitionContract) ||
+        typeof referrer !== "string" || referrer.length > 4096 || /[\x00-\x20\x7f]/.test(referrer)) return null;
+    try {
+      const url = new URL(referrer);
+      if (url.protocol !== "https:" || url.username || url.password || !own(acquisitionContract.origins, url.origin)) return null;
+      const source = acquisitionContract.origins[url.origin];
+      return Object.freeze({ contract_version: "004", page_context: route.context,
+        acquisition_version: "001", channel: acquisitionContract.channels[source], source });
+    } catch { return null; }
+  })();
   function sourceFields() {
     const unknown = { page_referrer: "", campaign_source: "unknown", campaign_medium: "unknown" };
     try {
@@ -45,7 +74,7 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
     return ["emtalk", "bret", "dm", "tapl"].includes(value) ? value : "not_applicable";
   }
   function validate(name, params) {
-    if (name === "scroll") return null; // Private Google signal, never a public/Umami action.
+    if (name === "scroll" || name === "emtalk_acquisition") return null; // Transport-owned signals, never public actions.
     const schema = policy.schemas?.[name];
     if (!schema || !route?.events.includes(name) || !params || typeof params !== "object" || Array.isArray(params)) return null;
     const payload = { event_name: name, contract_version: "004", page_context: route.context };
@@ -81,5 +110,6 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
     }
     delete payload.event_name; return payload;
   }
-  return Object.freeze({ id, canonical, eligible, umamiEligible, fields, validate, googleScroll, context: () => route?.context || null, product });
+  return Object.freeze({ id, canonical, eligible, umamiEligible, fields, validate, googleScroll,
+    umamiAcquisition: () => acquisition, context: () => route?.context || null, product });
 }

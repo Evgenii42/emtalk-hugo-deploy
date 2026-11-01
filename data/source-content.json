@@ -21323,8 +21323,14 @@
                                       ]
                                     },
                                     "children": [
-                                      "An exploration of how consistent sound, not silence, supports deeper sleep, backed by research on white noise with practical alternatives and tips for handling a noisy bed partner"
-                                    ]
+                                      "Explore quiet and background sound during sleep, what noise studies have measured, and why their findings do not establish one best sound for everyone."
+                                    ],
+                                    "binding": {
+                                      "collection": "articles",
+                                      "itemId": "6a77eaf138ffe76b49eae849",
+                                      "field": "short-description",
+                                      "type": "plainText"
+                                    }
                                   }
                                 ]
                               }
@@ -23463,8 +23469,14 @@
                                       ]
                                     },
                                     "children": [
-                                      "Rethink the 8-hour sleep myth and learn how to optimize your daily rest, including a simple 20-minute coffee nap trick for maximum mental alertness"
-                                    ]
+                                      "A guide to adult sleep-duration recommendations, individual differences, and what small studies can and cannot tell us about coffee naps."
+                                    ],
+                                    "binding": {
+                                      "collection": "articles",
+                                      "itemId": "6a6677a8e4be2e6501e79e5a",
+                                      "field": "short-description",
+                                      "type": "plainText"
+                                    }
                                   }
                                 ]
                               }

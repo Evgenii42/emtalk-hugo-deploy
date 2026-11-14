@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "relax-long",
+  "title": "Time to unwind",
+  "description": "A guided rest practice that moves attention through the body and invites you to imagine a calm river. Voice guidance, music and pauses accompany this time for yourself.",
+  "instructions": [
+    "Sit or lie down in a comfortable, supported position.",
+    "Choose a quiet place where you can rest. The guidance is in English.",
+    "Follow only what feels comfortable. You can keep your eyes open, breathe naturally or pause at any time."
+  ],
+  "durationMs": 448000,
+  "language": "en",
+  "audioUrl": "/media/bret/relax-long/audio-4c5f873af406231d.opus",
+  "backgroundImageUrl": "/media/bret/relax-long/playerBackground-dc5c6bd441d7748f.webp",
+  "thumbnailUrl": "/media/bret/relax-long/thumbnail-282af99ef7f3fd1d.webp",
+  "subtitlesUrl": "/media/bret/relax-long/subtitles-en-e5b9978870267a44.json",
+  "version": "80f065f2e039656a"
+}

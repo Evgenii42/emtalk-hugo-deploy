@@ -1,0 +1,493 @@
+{
+  "schemaVersion": "1.0",
+  "meditationId": "focus-long",
+  "locale": "en-US",
+  "audioSha256": "57724305daef2285fe7ba0ffe94ea027e954c8966bff712c22d4ffd8466e0974",
+  "timebase": "ms",
+  "reviewStatus": "needs_review",
+  "cues": [
+    {
+      "id": "focus-long-en-0001",
+      "startMs": 4190,
+      "endMs": 5330,
+      "text": "Welcome!",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0002",
+      "startMs": 5630,
+      "endMs": 7530,
+      "text": "This practice is designed for",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0003",
+      "startMs": 7530,
+      "endMs": 8930,
+      "text": "deep focus.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0004",
+      "startMs": 12490,
+      "endMs": 13750,
+      "text": "Sit upright,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0005",
+      "startMs": 15370,
+      "endMs": 17670,
+      "text": "feet steady on the ground,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0006",
+      "startMs": 20690,
+      "endMs": 22570,
+      "text": "shoulders relaxed.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0007",
+      "startMs": 24530,
+      "endMs": 26890,
+      "text": "Take a slow, full breath",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0008",
+      "startMs": 26890,
+      "endMs": 29010,
+      "text": "in through the nose.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0009",
+      "startMs": 32860,
+      "endMs": 35320,
+      "text": "Release it gently through the",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0010",
+      "startMs": 35320,
+      "endMs": 35940,
+      "text": "mouth.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0011",
+      "startMs": 40570,
+      "endMs": 42410,
+      "text": "Let your attention arrive fully",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0012",
+      "startMs": 42410,
+      "endMs": 43970,
+      "text": "in this moment.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0013",
+      "startMs": 48560,
+      "endMs": 50400,
+      "text": "Notice the weight of your",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0014",
+      "startMs": 50400,
+      "endMs": 52980,
+      "text": "body pressing into the chair.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0015",
+      "startMs": 52980,
+      "endMs": 54220,
+      "text": "your",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0016",
+      "startMs": 56710,
+      "endMs": 58530,
+      "text": "back supported,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0017",
+      "startMs": 63590,
+      "endMs": 66790,
+      "text": "your feet anchored to the",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0018",
+      "startMs": 66790,
+      "endMs": 67330,
+      "text": "floor.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0019",
+      "startMs": 72570,
+      "endMs": 75750,
+      "text": "With every breath distractions move",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0020",
+      "startMs": 75750,
+      "endMs": 77990,
+      "text": "further away like",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0021",
+      "startMs": 79200,
+      "endMs": 82520,
+      "text": "distant sounds fading into the",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0022",
+      "startMs": 82520,
+      "endMs": 83380,
+      "text": "background.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0023",
+      "startMs": 96520,
+      "endMs": 97880,
+      "text": "Follow the rhythm of your",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0024",
+      "startMs": 97880,
+      "endMs": 98520,
+      "text": "breath,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0025",
+      "startMs": 101390,
+      "endMs": 103210,
+      "text": "inhale through the nose,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0026",
+      "startMs": 109080,
+      "endMs": 110660,
+      "text": "exhale through the mouth.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0027",
+      "startMs": 128450,
+      "endMs": 130390,
+      "text": "Like the steady pulse of",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0028",
+      "startMs": 130390,
+      "endMs": 132990,
+      "text": "a mountain wind, your",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0029",
+      "startMs": 133720,
+      "endMs": 136940,
+      "text": "breath keeps moving forward,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0030",
+      "startMs": 139220,
+      "endMs": 139900,
+      "text": "clear,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0031",
+      "startMs": 141910,
+      "endMs": 142910,
+      "text": "consistent,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0032",
+      "startMs": 145030,
+      "endMs": 145930,
+      "text": "unstoppable.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0033",
+      "startMs": 167110,
+      "endMs": 169770,
+      "text": "Now imagine your mind is",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0034",
+      "startMs": 170060,
+      "endMs": 171440,
+      "text": "a calm lake.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0035",
+      "startMs": 184210,
+      "endMs": 185470,
+      "text": "At first there may be",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0036",
+      "startMs": 185470,
+      "endMs": 186250,
+      "text": "ripples,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0037",
+      "startMs": 188950,
+      "endMs": 191490,
+      "text": "small movements on the surface,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0038",
+      "startMs": 194910,
+      "endMs": 196490,
+      "text": "but with each breath",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0039",
+      "startMs": 197540,
+      "endMs": 199820,
+      "text": "the ripples soften,",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0040",
+      "startMs": 202990,
+      "endMs": 205230,
+      "text": "the water grows still,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0041",
+      "startMs": 207930,
+      "endMs": 209250,
+      "text": "reflecting clarity.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0042",
+      "startMs": 209250,
+      "endMs": 210270,
+      "text": "A",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0043",
+      "startMs": 224160,
+      "endMs": 226380,
+      "text": "single drop of water falls",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0044",
+      "startMs": 226380,
+      "endMs": 227920,
+      "text": "into the lake,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0045",
+      "startMs": 232660,
+      "endMs": 235700,
+      "text": "creating circles that expand outward,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0046",
+      "startMs": 239660,
+      "endMs": 242200,
+      "text": "each one carrying your attention",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0047",
+      "startMs": 242200,
+      "endMs": 243280,
+      "text": "further,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0048",
+      "startMs": 246520,
+      "endMs": 249460,
+      "text": "yet always connected to the",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0049",
+      "startMs": 249460,
+      "endMs": 250000,
+      "text": "center.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0050",
+      "startMs": 285280,
+      "endMs": 287220,
+      "text": "With this stillness,",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0051",
+      "startMs": 289900,
+      "endMs": 293380,
+      "text": "each breath sharpens your clarity,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0052",
+      "startMs": 296290,
+      "endMs": 298730,
+      "text": "like a mountain wind carving",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0053",
+      "startMs": 298730,
+      "endMs": 300150,
+      "text": "its path,",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0054",
+      "startMs": 302910,
+      "endMs": 306570,
+      "text": "like circles widening across water.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0055",
+      "startMs": 337060,
+      "endMs": 339040,
+      "text": "Take a deep breath in,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0056",
+      "startMs": 340460,
+      "endMs": 340940,
+      "text": "hold,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0057",
+      "startMs": 342270,
+      "endMs": 343830,
+      "text": "and release slowly.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0058",
+      "startMs": 352790,
+      "endMs": 355330,
+      "text": "I'm aware of the space",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0059",
+      "startMs": 355330,
+      "endMs": 356630,
+      "text": "around you,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0060",
+      "startMs": 359050,
+      "endMs": 361010,
+      "text": "the sounds in the room,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0061",
+      "startMs": 363910,
+      "endMs": 365590,
+      "text": "the air on your skin,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0062",
+      "startMs": 368260,
+      "endMs": 370540,
+      "text": "the light behind your closed",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0063",
+      "startMs": 370540,
+      "endMs": 371320,
+      "text": "eyes.",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0064",
+      "startMs": 374120,
+      "endMs": 375240,
+      "text": "When you are ready,",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0065",
+      "startMs": 376650,
+      "endMs": 379570,
+      "text": "open your eyes carry",
+      "needsReview": true
+    },
+    {
+      "id": "focus-long-en-0066",
+      "startMs": 381100,
+      "endMs": 384180,
+      "text": "this clear steady focus with",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0067",
+      "startMs": 384180,
+      "endMs": 385980,
+      "text": "you into",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0068",
+      "startMs": 388800,
+      "endMs": 391100,
+      "text": "your study, your work, your",
+      "needsReview": false
+    },
+    {
+      "id": "focus-long-en-0069",
+      "startMs": 391100,
+      "endMs": 392180,
+      "text": "next step.",
+      "needsReview": false
+    }
+  ]
+}

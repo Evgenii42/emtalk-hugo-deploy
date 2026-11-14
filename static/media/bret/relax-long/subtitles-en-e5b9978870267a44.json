@@ -1,0 +1,500 @@
+{
+  "schemaVersion": "1.0",
+  "meditationId": "relax-long",
+  "locale": "en-US",
+  "audioSha256": "4c5f873af406231dcfba661b839b0b7dae90a194caee310be05abaa1e4b55146",
+  "timebase": "ms",
+  "reviewStatus": "needs_review",
+  "cues": [
+    {
+      "id": "relax-long-en-0001",
+      "startMs": 3650,
+      "endMs": 4830,
+      "text": "Welcome,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0002",
+      "startMs": 5700,
+      "endMs": 7020,
+      "text": "you are here to rest",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0003",
+      "startMs": 7020,
+      "endMs": 8220,
+      "text": "and restore.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0004",
+      "startMs": 12030,
+      "endMs": 13970,
+      "text": "Find a comfortable position,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0005",
+      "startMs": 14770,
+      "endMs": 16530,
+      "text": "close your eyes,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0006",
+      "startMs": 20030,
+      "endMs": 22070,
+      "text": "breathe in deeply through the",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0007",
+      "startMs": 22070,
+      "endMs": 22670,
+      "text": "nose",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0008",
+      "startMs": 24550,
+      "endMs": 26510,
+      "text": "and let it out slowly",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0009",
+      "startMs": 26510,
+      "endMs": 28290,
+      "text": "through the mouth.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0010",
+      "startMs": 31280,
+      "endMs": 33400,
+      "text": "Let the outside world fade",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0011",
+      "startMs": 33400,
+      "endMs": 34100,
+      "text": "away.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0012",
+      "startMs": 47960,
+      "endMs": 50440,
+      "text": "Notice the surface beneath you,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0013",
+      "startMs": 53640,
+      "endMs": 56160,
+      "text": "solid, steady, safe.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0014",
+      "startMs": 61980,
+      "endMs": 64660,
+      "text": "Feel your back supported, your",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0015",
+      "startMs": 71730,
+      "endMs": 74750,
+      "text": "arms resting against your sides,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0016",
+      "startMs": 82340,
+      "endMs": 85240,
+      "text": "your legs heavy and secure.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0017",
+      "startMs": 96050,
+      "endMs": 98690,
+      "text": "The air moves softly around",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0018",
+      "startMs": 98690,
+      "endMs": 99690,
+      "text": "your skin.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0019",
+      "startMs": 101270,
+      "endMs": 103190,
+      "text": "Cool as you breathe in,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0020",
+      "startMs": 106320,
+      "endMs": 108220,
+      "text": "as you breathe out.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0021",
+      "startMs": 112100,
+      "endMs": 113800,
+      "text": "Bring your attention to your",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0022",
+      "startMs": 113800,
+      "endMs": 114360,
+      "text": "feet.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0023",
+      "startMs": 114880,
+      "endMs": 117320,
+      "text": "On the exhale, let them",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0024",
+      "startMs": 117320,
+      "endMs": 118160,
+      "text": "soften.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0025",
+      "startMs": 134100,
+      "endMs": 136240,
+      "text": "Each part melts as you",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0026",
+      "startMs": 136240,
+      "endMs": 137480,
+      "text": "breathe out",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0027",
+      "startMs": 143560,
+      "endMs": 146280,
+      "text": "move upward chest",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0028",
+      "startMs": 146280,
+      "endMs": 149580,
+      "text": "shoulders arms neck face",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0029",
+      "startMs": 149580,
+      "endMs": 152610,
+      "text": "all becoming lighter",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0030",
+      "startMs": 152760,
+      "endMs": 155480,
+      "text": "softer at",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0031",
+      "startMs": 155640,
+      "endMs": 157320,
+      "text": "ease imagine",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0032",
+      "startMs": 176390,
+      "endMs": 179030,
+      "text": "a calm river flowing beside",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0033",
+      "startMs": 179030,
+      "endMs": 180150,
+      "text": "you with",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0034",
+      "startMs": 181620,
+      "endMs": 183780,
+      "text": "every inhale the",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0035",
+      "startMs": 185120,
+      "endMs": 187180,
+      "text": "river brings in fresh",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0036",
+      "startMs": 188930,
+      "endMs": 191280,
+      "text": "soothing energy with",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0037",
+      "startMs": 192910,
+      "endMs": 194790,
+      "text": "every exhale it",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0038",
+      "startMs": 196290,
+      "endMs": 198830,
+      "text": "carries away the weight of",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0039",
+      "startMs": 198830,
+      "endMs": 199950,
+      "text": "the day the",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0040",
+      "startMs": 208230,
+      "endMs": 210770,
+      "text": "water glistens in the soft",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0041",
+      "startMs": 210770,
+      "endMs": 211510,
+      "text": "light,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0042",
+      "startMs": 212460,
+      "endMs": 213920,
+      "text": "moving steadily,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0043",
+      "startMs": 214860,
+      "endMs": 216200,
+      "text": "unhurried,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0044",
+      "startMs": 217470,
+      "endMs": 219170,
+      "text": "just like your breath.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0045",
+      "startMs": 220560,
+      "endMs": 222120,
+      "text": "The sound of water blends",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0046",
+      "startMs": 222120,
+      "endMs": 223780,
+      "text": "with your own rhythm of",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0047",
+      "startMs": 223780,
+      "endMs": 224520,
+      "text": "breathing.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0048",
+      "startMs": 284800,
+      "endMs": 286100,
+      "text": "With this image,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0049",
+      "startMs": 287730,
+      "endMs": 289230,
+      "text": "if thoughts appear,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0050",
+      "startMs": 290600,
+      "endMs": 292480,
+      "text": "let them float away,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0051",
+      "startMs": 293990,
+      "endMs": 295930,
+      "text": "like leaves drifting on the",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0052",
+      "startMs": 295930,
+      "endMs": 296570,
+      "text": "water.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0053",
+      "startMs": 298080,
+      "endMs": 301240,
+      "text": "Notice the stillness that",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0054",
+      "startMs": 301240,
+      "endMs": 302080,
+      "text": "remains.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0055",
+      "startMs": 340430,
+      "endMs": 342030,
+      "text": "Take a deep breath in,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0056",
+      "startMs": 342190,
+      "endMs": 344290,
+      "text": "hold for a moment, and",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0057",
+      "startMs": 344290,
+      "endMs": 345630,
+      "text": "slowly release.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0058",
+      "startMs": 368140,
+      "endMs": 370240,
+      "text": "Notice the lightness in your",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0059",
+      "startMs": 370240,
+      "endMs": 371820,
+      "text": "body become",
+      "needsReview": true
+    },
+    {
+      "id": "relax-long-en-0060",
+      "startMs": 373220,
+      "endMs": 375780,
+      "text": "aware again of the space",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0061",
+      "startMs": 375780,
+      "endMs": 377080,
+      "text": "around you,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0062",
+      "startMs": 378520,
+      "endMs": 380840,
+      "text": "the sounds in the room,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0063",
+      "startMs": 382680,
+      "endMs": 384820,
+      "text": "the air on your skin,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0064",
+      "startMs": 386820,
+      "endMs": 389680,
+      "text": "the surface supporting you.",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0065",
+      "startMs": 400040,
+      "endMs": 401600,
+      "text": "When you are ready, gently",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0066",
+      "startMs": 401600,
+      "endMs": 403800,
+      "text": "open your eyes,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0067",
+      "startMs": 405480,
+      "endMs": 407160,
+      "text": "or if it feels right,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0068",
+      "startMs": 408750,
+      "endMs": 411450,
+      "text": "stay resting here longer,",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0069",
+      "startMs": 412520,
+      "endMs": 415240,
+      "text": "letting the calm continue on",
+      "needsReview": false
+    },
+    {
+      "id": "relax-long-en-0070",
+      "startMs": 415240,
+      "endMs": 416160,
+      "text": "its own.",
+      "needsReview": false
+    }
+  ]
+}

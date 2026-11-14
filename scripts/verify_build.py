@@ -18,6 +18,11 @@ import tinycss2
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_HOSTS = ('website-files.com', 'webflow.com', 'webflow.io', 'fonts.googleapis.com', 'fonts.gstatic.com')
 FORBIDDEN_DIRS = {'docs', 'inventory', 'scripts', '.git', '.review', '.agents', '.codex', 'node_modules', 'data', 'content', 'functions', 'server', 'workers'}
+PUBLIC_MEDITATION_JSON = {
+    'content/bret/meditations/index.json',
+    'content/bret/meditations/focus-long.json',
+    'content/bret/meditations/relax-long.json',
+}
 ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.ttf', '.woff', '.woff2', '.opus', '.mp3', '.ogg', '.wav', '.mp4', '.avif', '.pdf'}
 
 
@@ -695,7 +700,7 @@ def verify(build, prefix='', *, base_url=None):
         if relative in PROVIDER_CONTROLS:
             if body != PROVIDER_CONTROLS[relative]:
                 errors.append('Invalid Pages provider control policy: ' + relative)
-        elif any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts) or (path.suffix.lower() not in ALLOWED_EXT and relative != 'ai/index.md'):
+        elif (relative not in PUBLIC_MEDITATION_JSON and any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts)) or (path.suffix.lower() not in ALLOWED_EXT and relative != 'ai/index.md'):
             errors.append(f'Output allowlist violation: {relative}')
         if seo_enabled and path.suffix.lower() == '.html':
             errors.extend(relative + ': ' + error for error in document_metadata_errors(body))

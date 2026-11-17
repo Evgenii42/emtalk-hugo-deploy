@@ -3,6 +3,7 @@
   "id": "focus-long",
   "title": "Clear focus",
   "description": "A guided practice with grounding, attention to the breath and quiet pauses. Make room to arrive in the present moment before returning to your next task.",
+  "categoryId": "focus",
   "instructions": [
     "Sit comfortably with your back supported and your feet on the floor.",
     "Set a comfortable volume. The guidance is in English.",
@@ -14,5 +15,5 @@
   "backgroundImageUrl": "/media/bret/focus-long/playerBackground-5038a141bb5c1211.webp",
   "thumbnailUrl": "/media/bret/focus-long/thumbnail-48183095d9c2a3b3.webp",
   "subtitlesUrl": "/media/bret/focus-long/subtitles-en-d96e2eca05677392.json",
-  "version": "039a9026fec7785b"
+  "version": "854f98dca8ba2302"
 }

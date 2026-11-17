@@ -1,6 +1,6 @@
 {
-  "scope": "SEO058 production baseline plus versioned static Bret meditation JSON and resources",
-  "baselineDeploymentCommit": "9922ee62024aa52155f9ab6ab19637c8df297a2c",
+  "scope": "SEO058 production baseline plus versioned Bret meditation content and UI categories",
+  "baselineDeploymentCommit": "499d3ac2067de2d9079a0d0134c324eb0cb63a89",
   "baselinePublication": {
     "baselineProductionCommit": "9f08e2a50fc65c0de53cbd911cffe96e1a856ab9",
     "canonicalCommit": "6028bf3498c4c462adf0525df463cb38b43e6816",
@@ -14,8 +14,8 @@
     "sourceCount": 505,
     "sourceInputSnapshotSha256": "54c52b2ca211af98af4daecaaadf1710d3b6663aa2b72f9d1ecfb2379fb02161"
   },
-  "canonicalMeditationCommit": "2340246",
-  "catalogVersion": "8c6f75fbbb01fa50",
+  "canonicalMeditationCommit": "c734a3c7643a69f4bcb15f75ff56ee4caba69c76",
+  "catalogVersion": "9199233e88ccb68a",
   "sourceCount": 516,
   "sourceFiles": [
     {
@@ -1665,18 +1665,18 @@
     },
     {
       "path": "static/content/bret/meditations/focus-long.json",
-      "bytes": 895,
-      "sha256": "7d9c0742f7a4f23472e2548d0605132db174387475f0a2c39e8bcae3db71e4fe"
+      "bytes": 920,
+      "sha256": "6745866f97bfd6abc2ff94cdfb7e6a3d0423e9591464365544322fc91a37ba7f"
     },
     {
       "path": "static/content/bret/meditations/index.json",
-      "bytes": 791,
-      "sha256": "953c349e18f87244a13831a4a558373054bd3e6c1d8eab74370ef5302fb064d8"
+      "bytes": 1045,
+      "sha256": "30cbf84707fb9d21447bcf71204bded97cfaf6a28b2da465a5d00e007e90801f"
     },
     {
       "path": "static/content/bret/meditations/relax-long.json",
-      "bytes": 927,
-      "sha256": "6c29352227625c3e2e1103e34748c9fcf78670c9dc3ab165cf1eb3880bfc88bc"
+      "bytes": 953,
+      "sha256": "ac9d2b791475d6792afe27db962c539b1d2a6ca49aa975ba504d8d7ab52e83b8"
     },
     {
       "path": "static/font-licenses/COPYRIGHT-NOTICES.txt",
@@ -2599,11 +2599,10 @@
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "sourceInputSnapshotSha256": "e062538f25ec9cc4f16d47ac57e8ae278156d086bf59f46cf943ef5fad62126b",
+  "sourceInputSnapshotSha256": "394374a4ba04e0fcec53f2722948c7cca25f9a551a8b47f115e701c6d933f172",
   "outputCount": 368,
-  "outputSnapshotSha256": "bc111999c1e16052e24dc3e9a08fe6acbc7c0b59033c2a5e5513323fc25c99f4",
+  "outputSnapshotSha256": "102801f7119f6c33d50496f5e5b0eb87f2611765968fb9c0cf7e41c33706abfe",
   "routes": 48,
-  "baselineOutputsUnchanged": true,
   "addedPublicFiles": [
     "content/bret/meditations/focus-long.json",
     "content/bret/meditations/index.json",
@@ -2618,5 +2617,12 @@
     "media/bret/relax-long/thumbnail-282af99ef7f3fd1d.webp"
   ],
   "published": false,
-  "note": "Build verified locally; hosting acceptance is recorded separately after GitHub push."
+  "note": "Build verified locally; hosting acceptance is recorded separately after GitHub push.",
+  "changedPublicFiles": [
+    "content/bret/meditations/focus-long.json",
+    "content/bret/meditations/index.json",
+    "content/bret/meditations/relax-long.json"
+  ],
+  "unrelatedOutputsUnchanged": true,
+  "unchangedOutputs": 365
 }

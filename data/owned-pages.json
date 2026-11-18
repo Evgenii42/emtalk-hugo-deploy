@@ -88,8 +88,16 @@
       "sections": [],
       "actions": [
         {
-          "label": "Open free breathing practice",
+          "label": "Open Bret",
+          "path": "/bret/app"
+        },
+        {
+          "label": "Start a free practice",
           "path": "/bret/practice"
+        },
+        {
+          "label": "Explore four games",
+          "path": "/bret/games"
         }
       ]
     },
@@ -106,6 +114,24 @@
           "path": "/bret"
         }
       ]
+    },
+    "/bret/app": {
+      "mode": "new",
+      "language": "en",
+      "title": "Bret",
+      "lead": "Breath, Physical, Meditation and Games.",
+      "indexable": false,
+      "sections": [],
+      "actions": []
+    },
+    "/bret/games": {
+      "mode": "new",
+      "language": "en",
+      "title": "Bret Games",
+      "lead": "Four little ways to play, at your pace.",
+      "indexable": false,
+      "sections": [],
+      "actions": []
     }
   }
 }

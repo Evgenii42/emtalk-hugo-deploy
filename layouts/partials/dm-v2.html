@@ -1,0 +1,22 @@
+<main id="emtalk-main" class="dm-v2" tabindex="-1" aria-labelledby="dm-v2-intro-title">
+<div class="page-intro"><div><p class="eyebrow">EMTALK / DECISION MATRIX</p><h1 id="dm-v2-intro-title">A little space to think.</h1><p>Explore your options. Find what matters. Take your next step.</p></div><span class="local-badge"><span></span> Private to this browser</span></div>
+  <div class="app-shell" id="app">
+    <section class="workspace" aria-label="Decision workspace">
+      <header class="appbar"><button class="icon-button" id="back" aria-label="Open navigation" data-action="menu"><span class="menu-lines" aria-hidden="true"></span></button><h2 id="app-title">Decision Matrix</h2><button class="icon-button" aria-label="Help with this step" data-action="help"><span class="question-icon" aria-hidden="true">?</span></button></header>
+      <div id="storage-warning" class="storage-warning" hidden role="status"></div>
+      <div id="screen" tabindex="-1"></div>
+    </section>
+    <aside class="context-panel" aria-label="Decision guide">
+      <div class="context-head"><span class="eyebrow">YOUR THINKING SPACE</span><button class="text-button" data-action="new">New decision <span aria-hidden="true">↗</span></button></div>
+      <div class="balance" aria-hidden="true"><div class="balance-beam"><img src="{{ hugo.Data.render.mountPrefix }}/dm-v2/assets/compare-ellipse2175.svg" alt=""><div class="balance-alternative"><img src="{{ hugo.Data.render.mountPrefix }}/dm-v2/assets/compare-ellipse2174.svg" alt=""><img class="balance-plus" src="{{ hugo.Data.render.mountPrefix }}/dm-v2/assets/compare-add-icon-medium.svg" alt=""></div></div><img class="balance-base" src="{{ hugo.Data.render.mountPrefix }}/dm-v2/assets/compare-polygon3.svg" alt=""></div>
+      <h2>Clarity comes<br>one choice at a time.</h2><p class="context-copy">You don’t have to hold every possibility in your head. Give each one a little room.</p>
+      <ol class="journey" id="journey"><li data-stage="options"><span>01</span><div><strong>Make room for your options</strong><small>Add up to eight possibilities.</small></div></li><li data-stage="compare"><span>02</span><div><strong>Explore what matters</strong><small>Compare pairs or weigh pros and cons.</small></div></li><li data-stage="results"><span>03</span><div><strong>See your choice more clearly</strong><small>Your perspective, brought together.</small></div></li></ol>
+      <div class="history-preview"><div class="section-label"><h3>Your recent decisions</h3><button class="text-button" data-action="history">View all <span aria-hidden="true">↗</span></button></div><div id="recent"></div></div>
+      <div class="context-footer"><span class="lock-icon" aria-hidden="true">◈</span><p>Your draft saves on this device.<br>No account needed.</p><button class="icon-button" aria-label="Files and privacy" data-action="files">···</button></div>
+    </aside>
+  </div>
+<dialog id="dialog" aria-labelledby="dialog-title"><form id="dialog-form" novalidate><div class="dialog-heading"><h2 id="dialog-title"></h2><button type="button" class="icon-button" data-action="close-dialog" aria-label="Close dialog">×</button></div><div id="dialog-body"></div><p id="dialog-error" role="alert"></p><div id="dialog-actions"></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <noscript><style>.dm-v2 .app-shell{display:none!important}</style><p class="noscript">Decision Matrix needs JavaScript to compare options. <a href="{{ hugo.Data.render.mountPrefix }}/dm">Read about the exercise</a>.</p></noscript>
+
+</main>

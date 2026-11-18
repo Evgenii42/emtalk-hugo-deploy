@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Topics &#194;&#183; toggle">
+<g id="Topics selected">
+<rect x="4" y="4" width="36" height="36" rx="18" fill="#715595"/>
+</g>
+<path id="Topics icon" d="M18 18H26M18 22H23M14 16C14 14.6667 14.6667 14 16 14H28C29.3333 14 30 14.6667 30 16V24C30 25.3333 29.3333 26 28 26H21L16 30V26C14.6667 26 14 25.3333 14 24V16Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+</g>
+</svg>

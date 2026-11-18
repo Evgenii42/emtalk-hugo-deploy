@@ -172,6 +172,16 @@
       "origin": "owned"
     },
     {
+      "path": "/bret/app",
+      "file": "bret/app.html",
+      "origin": "owned"
+    },
+    {
+      "path": "/bret/games",
+      "file": "bret/games.html",
+      "origin": "owned"
+    },
+    {
       "path": "/news",
       "file": "news.html",
       "origin": "owned"
@@ -639,6 +649,18 @@
       "exactSuffix": "/bret/practice",
       "origin": "owned",
       "sourceNoindex": false
+    },
+    {
+      "path": "/bret/app",
+      "exactSuffix": "/bret/app",
+      "origin": "owned",
+      "sourceNoindex": true
+    },
+    {
+      "path": "/bret/games",
+      "exactSuffix": "/bret/games",
+      "origin": "owned",
+      "sourceNoindex": true
     },
     {
       "path": "/news",

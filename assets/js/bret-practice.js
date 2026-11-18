@@ -119,6 +119,16 @@ function init(root, trial) {
       }
     }
   }
+  // Main-screen direction links select a practice without starting audio or
+  // overwriting saved preferences until the visitor explicitly starts.
+  const requestedMode = new URLSearchParams(location.search).get("mode");
+  if (["breathing", "pmr"].includes(requestedMode)) {
+    const query = new URLSearchParams(location.search);
+    const cycles = Number(query.get("cycles"));
+    prefs = preferences({ ...prefs, mode: requestedMode,
+      ...(requestedMode === "breathing" ? { preset: "4444" } : {}),
+      ...(Number.isInteger(cycles) && cycles >= 1 && cycles <= 99 ? { cycles } : {}) });
+  }
   const save = () => {
     try {
       if (!preferencesObserved) {

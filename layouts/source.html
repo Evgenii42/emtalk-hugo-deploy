@@ -99,8 +99,14 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   <link rel="stylesheet" href="{{ $entryCss.RelPermalink }}" integrity="{{ $entryCss.Data.Integrity }}">
 {{ end }}
 {{ if eq $page.routeId "/dm/workspace" }}
-  {{ $dmCss := resources.Get "css/dm-workspace.css" | fingerprint }}
+  {{ $dmCss := resources.Get "css/dm-v2.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $dmCss.RelPermalink }}" integrity="{{ $dmCss.Data.Integrity }}">
+{{ end }}
+{{ if in (slice "/bret/app" "/bret/games") $page.routeId }}
+  {{ range slice "app" "play" "directions" "home" }}
+    {{ $gameCss := resources.Get (printf "bret-games/%s.css" .) | resources.Copy (printf "bret/games/%s.css" .) | fingerprint }}
+    <link rel="stylesheet" href="{{ $gameCss.RelPermalink }}" integrity="{{ $gameCss.Data.Integrity }}">
+  {{ end }}
 {{ end }}
 {{ if eq $page.routeId "/bret/practice" }}
   {{ $bretCss := resources.Get "css/bret-practice.css" | fingerprint }}
@@ -144,6 +150,8 @@ Unexpected source content must be reconciled before it can be rendered. */}}
 {{ end }}
 {{ if $page.newsEntry }}
   {{ partial "news-page.html" (dict "page" $page "context" .) }}
+{{ else if in (slice "/bret/app" "/bret/games") $page.routeId }}
+  {{ partial "bret-games.html" . }}
 {{ else if eq $page.routeId "/bret/practice" }}
   {{ partial "bret-practice.html" . }}
 {{ else if eq $page.routeId "/bret" }}
@@ -151,7 +159,7 @@ Unexpected source content must be reconciled before it can be rendered. */}}
     {{ partial "bret-launch.html" . }}
   {{ end }}
 {{ else if eq $page.routeId "/dm/workspace" }}
-  {{ partial "dm-workspace.html" . }}
+  {{ partial "dm-v2.html" . }}
 {{ else if eq $page.routeId "/dm" }}
   {{ with $page.ownedEntry }}
     {{ partial "dm-launch.html" . }}
@@ -236,9 +244,13 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   </script>
 {{ end }}
 {{ if eq $page.routeId "/dm/workspace" }}
-  {{ $dmJs := resources.Get "js/dm-workspace.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}
+  {{ $dmJs := resources.Get "js/dm-v2.js" | js.Build (dict "minify" true "target" "es2022") | fingerprint }}
   <script type="module" src="{{ $dmJs.RelPermalink }}" integrity="{{ $dmJs.Data.Integrity }}">
   </script>
+{{ end }}
+{{ if in (slice "/bret/app" "/bret/games") $page.routeId }}
+  {{ $gameJs := resources.Get "bret-games/app.mjs" | js.Build (dict "targetPath" "js/bret-games.js" "minify" true "target" "es2022" "format" "esm") | fingerprint }}
+  <script type="module" src="{{ $gameJs.RelPermalink }}" integrity="{{ $gameJs.Data.Integrity }}"></script>
 {{ end }}
 {{ if eq $page.routeId "/bret/practice" }}
   {{ $bretJs := resources.Get "js/bret-practice.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}

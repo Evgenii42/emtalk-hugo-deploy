@@ -345,6 +345,18 @@
       "headline": "What we are exploring with TAPL",
       "description": "A planned tool for small steps, learning and gradual progress.",
       "indexable": true
+    },
+    "/bret/app": {
+      "title": "Bret | EmTalk",
+      "description": "Choose breathing, physical relaxation, upcoming meditation or four little games at your own pace.",
+      "headline": "Bret",
+      "indexable": false
+    },
+    "/bret/games": {
+      "title": "Bret Games | EmTalk",
+      "description": "Four little games for a moment of your own. Find a rhythm, guide a light, arrange a room or discover a pattern.",
+      "headline": "Play a little. Make a little space.",
+      "indexable": false
     }
   }
 }

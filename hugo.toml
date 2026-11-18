@@ -12,9 +12,15 @@ buildDrafts = false
   unsafe = false
 [module]
   [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static/bret/games"
+    target = "assets/bret-games"
+  [[module.mounts]]
     source = "static"
     target = "static"
-    files = ["! assets/*.css"]
+    files = ["! assets/*.css", "! bret/games/**"]
 [outputFormats.RouteSitemap]
   mediaType = "application/xml"
   baseName = "sitemap"

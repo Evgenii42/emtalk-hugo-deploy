@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="46.5328" height="44.6099" viewBox="0 0 46.5328 44.6099" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Polygon 3" filter="url(#filter0_d_0_151)">
+<path d="M19.9738 14.2257C21.4372 11.6911 25.0956 11.6911 26.559 14.2257L33.693 26.5822C35.1564 29.1168 33.3272 32.2851 30.4004 32.2851H16.1324C13.2056 32.2851 11.3764 29.1168 12.8398 26.5822L19.9738 14.2257Z" fill="#382A4A"/>
+</g>
+<defs>
+<filter id="filter0_d_0_151" x="2.38419e-07" y="2.38419e-07" width="46.5328" height="44.6099" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="2.21782" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_0_151"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="5.05347"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_151"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_151" result="shape"/>
+</filter>
+</defs>
+</svg>

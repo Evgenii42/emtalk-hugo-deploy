@@ -1,0 +1,7 @@
+{{- $p := hugo.Data.render.mountPrefix -}}
+<section class="bret-direction" data-direction hidden aria-labelledby="bret-direction-title">
+  <header class="bret-direction-heading"><h1 id="bret-direction-title" data-direction-title>Breathe</h1><p data-direction-copy>Close your eyes and focus on your breathing. Allow each exhale to release tension, and each inhale to fill your body with calmness and warmth.</p></header>
+  <div class="bret-direction-carousel" data-direction-carousel role="group" aria-roledescription="carousel" aria-label="Bret practices"><div class="bret-direction-track" data-direction-track></div></div>
+  <div class="bret-direction-controls"><span aria-hidden="true"></span><a class="bret-direction-play" data-direction-play href="{{ $p }}/bret/practice?mode=breathing" aria-label="Start Ground breathing"><img src="{{ $p }}/bret/main/play.svg" alt="" width="32" height="32"></a><button class="bret-direction-play bret-direction-unavailable" type="button" data-direction-unavailable disabled hidden aria-label="Relax Short is coming soon"><img src="{{ $p }}/bret/main/play.svg" alt="" width="32" height="32"></button><a class="bret-direction-settings" data-direction-settings href="{{ $p }}/bret/practice?mode=breathing" aria-label="Configure breathing practice"><img src="{{ $p }}/bret/main/settings.svg" alt="" width="24" height="24"></a></div>
+  <p class="bret-direction-announcement" data-direction-announcement role="status" aria-live="polite" aria-atomic="true"></p>
+</section>

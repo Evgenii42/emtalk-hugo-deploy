@@ -106,6 +106,7 @@ def snapshot_sources(root=None):
     sources.append(root / 'scripts/source_roles.py')
     sources += [root / name for name in ('scripts/verify_footer.py', 'scripts/verify_tapl.py')]
     sources.append(root / 'scripts/verify_agent_discovery.py')
+    sources.append(root / 'scripts/verify_dm_v2_fonts.py')
     reject_tree_links(root / 'scripts/schemas')
     sources.extend(path for path in (root / 'scripts/schemas').glob('*.json') if path.is_file())
     if (root / 'data/seo.json').is_file():

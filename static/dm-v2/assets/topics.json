@@ -1,0 +1,1165 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "work",
+      "label": "Work",
+      "topics": [
+        {
+          "id": "topic-1",
+          "title": "What truly motivates me at work?",
+          "options": [
+            "Earn financial stability",
+            "Work with great leader",
+            "Be better daily",
+            "Build strong reputation",
+            "Grow with purpose",
+            "Feel respected here",
+            "Achieve visible success",
+            "Prove my worth"
+          ]
+        },
+        {
+          "id": "topic-2",
+          "title": "Why doesn’t my job bring me joy anymore?",
+          "options": [
+            "Salary feels unfair",
+            "Team gossip grows",
+            "Culture turned toxic",
+            "No space growth",
+            "Manager lacks vision",
+            "Miss good leadership",
+            "Bored with routine",
+            "No recognition lately",
+            "Learning has stopped",
+            "Outgrown current role"
+          ]
+        },
+        {
+          "id": "topic-3",
+          "title": "What kind of environment helps me grow?",
+          "options": [
+            "Supportive open culture",
+            "Fair honest feedback",
+            "Leader who trusts",
+            "Freedom to create",
+            "Healthy team spirit",
+            "Clear growth path",
+            "Challenging meaningful tasks",
+            "Competitive salary base",
+            "Room for mistakes",
+            "Respect from colleagues"
+          ]
+        },
+        {
+          "id": "topic-4",
+          "title": "How do I define success for myself?",
+          "options": [
+            "Earning financial freedom",
+            "Feeling inner peace",
+            "Growing every year",
+            "Leading inspired people",
+            "Being proud daily",
+            "Making real impact",
+            "Staying mentally stable",
+            "Learning through challenges",
+            "Feeling respected widely",
+            "Balancing work life"
+          ]
+        },
+        {
+          "id": "topic-5",
+          "title": "Do I feel valued for what I do?",
+          "options": [
+            "Fair salary growth",
+            "Regular performance bonus",
+            "Public team praise",
+            "Recognition from manager",
+            "Respect from peers",
+            "Trusted with projects",
+            "Included in meetings",
+            "Appreciation through money",
+            "Visible career progress",
+            "Being seen better"
+          ]
+        },
+        {
+          "id": "topic-6",
+          "title": "What kind of people do I want to work with?",
+          "options": [
+            "Smarter than me",
+            "Reliable under pressure",
+            "Honest without gossip",
+            "Calm and confident",
+            "Supportive not jealous",
+            "People who teach",
+            "People who admire",
+            "Driven by results",
+            "Fun but focused",
+            "Challenging yet fair"
+          ]
+        },
+        {
+          "id": "topic-7",
+          "title": "Am I working on something meaningful to me?",
+          "options": [
+            "Creating visible impact",
+            "Making good money",
+            "Building something lasting",
+            "Learning from work",
+            "Helping real people",
+            "Doing what matters",
+            "Proud of results",
+            "Growing through purpose",
+            "Feeling personally needed",
+            "Working with vision"
+          ]
+        },
+        {
+          "id": "topic-8",
+          "title": "What would make my workday more fulfilling?",
+          "options": [
+            "Fewer pointless meetings",
+            "Fair daily pay",
+            "Respect from boss",
+            "Clear task goals",
+            "Quiet focus time",
+            "Friendly morning vibe",
+            "Recognition during day",
+            "Time for learning",
+            "Flexible work hours",
+            "Ending day proud"
+          ]
+        },
+        {
+          "id": "topic-9",
+          "title": "What skills do I want to develop next?",
+          "options": [
+            "Leading under pressure",
+            "Managing team conflict",
+            "Speaking with confidence",
+            "Negotiating for salary",
+            "Staying emotionally calm",
+            "Prioritizing what matters",
+            "Strengthening professional expertise",
+            "Managing my time",
+            "Thinking more strategically",
+            "Staying consistent daily"
+          ]
+        },
+        {
+          "id": "topic-10",
+          "title": "How do I measure personal growth at work?",
+          "options": [
+            "Higher monthly income",
+            "More trust earned",
+            "Confidence under pressure",
+            "Respect from peers",
+            "Mastery in role",
+            "Learning from feedback",
+            "Handling bigger projects",
+            "Staying emotionally stable",
+            "Balance with life",
+            "Feeling more capable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relationships",
+      "label": "Relationships",
+      "topics": [
+        {
+          "id": "topic-11",
+          "title": "Who makes me feel supported and safe?",
+          "options": [
+            "My closest friend",
+            "Family that listens",
+            "Partner who cares",
+            "Honest loyal colleague",
+            "Wise calm mentor",
+            "Manager who protects",
+            "Team that trusts",
+            "People who understand",
+            "Myself through strength",
+            "Home that grounds"
+          ]
+        },
+        {
+          "id": "topic-12",
+          "title": "How can I be a better listener?",
+          "options": [
+            "Focus without judging",
+            "Wait before replying",
+            "Notice body language",
+            "Ask deeper questions",
+            "Listen with empathy",
+            "Stay fully present",
+            "Reflect before speaking",
+            "Show real interest",
+            "Let silence speak",
+            "Avoid quick advice"
+          ]
+        },
+        {
+          "id": "topic-13",
+          "title": "What do I expect from close relationships?",
+          "options": [
+            "Honest open communication",
+            "Mutual emotional support",
+            "Respect for boundaries",
+            "Shared daily effort",
+            "Consistency over passion",
+            "Freedom without distance",
+            "Loyalty under stress",
+            "Appreciation through actions",
+            "Emotional stability together",
+            "Feeling truly seen"
+          ]
+        },
+        {
+          "id": "topic-14",
+          "title": "Do I express my emotions openly enough?",
+          "options": [
+            "Hiding behind humor",
+            "Afraid of judgment",
+            "Honest when calm",
+            "Sharing with trust",
+            "Bottling things up",
+            "Speaking from heart",
+            "Choosing safe moments",
+            "Crying without shame",
+            "Controlling words carefully",
+            "Showing feelings naturally"
+          ]
+        },
+        {
+          "id": "topic-15",
+          "title": "What do I avoid saying but should?",
+          "options": [
+            "My honest opinion",
+            "I need help",
+            "I disagree calmly",
+            "I feel hurt",
+            "Stop crossing boundaries",
+            "I want change",
+            "I feel tired",
+            "I deserve better",
+            "This isn’t working",
+            "Please listen fully"
+          ]
+        },
+        {
+          "id": "topic-16",
+          "title": "Who drains my energy and why?",
+          "options": [
+            "Constant complainers around",
+            "People who compare",
+            "Always negative coworkers",
+            "Emotionally needy friends",
+            "Unclear demanding managers",
+            "Fake polite talk",
+            "Endless small conflicts",
+            "Helping without limits",
+            "Guilt after saying no",
+            "Chasing others’ approval"
+          ]
+        },
+        {
+          "id": "topic-17",
+          "title": "How can I set healthier boundaries with others?",
+          "options": [
+            "Saying no kindly",
+            "Limiting constant contact",
+            "Protecting my time",
+            "Speaking needs clearly",
+            "Leaving toxic spaces",
+            "Ignoring small provocations",
+            "Accepting not pleasing everyone",
+            "Resting without guilt",
+            "Detaching from drama",
+            "Respecting my limits"
+          ]
+        },
+        {
+          "id": "topic-18",
+          "title": "What does love mean to me right now?",
+          "options": [
+            "Feeling emotionally safe",
+            "Growing together daily",
+            "Freedom with trust",
+            "Caring without control",
+            "Honest gentle touch",
+            "Support during weakness",
+            "Respect in silence",
+            "Shared simple joy",
+            "Choosing each other",
+            "Being fully seen"
+          ]
+        },
+        {
+          "id": "topic-19",
+          "title": "How can I reconnect with people who matter?",
+          "options": [
+            "Sending short message",
+            "Planning small meeting",
+            "Sharing honest update",
+            "Saying I miss you",
+            "Visiting this weekend",
+            "Starting real talk",
+            "Calling without reason",
+            "Remembering their birthday",
+            "Apologizing first calmly",
+            "Listening with presence"
+          ]
+        },
+        {
+          "id": "topic-20",
+          "title": "What relationships bring me peace?",
+          "options": [
+            "Honest without pressure",
+            "Kind steady presence",
+            "Mutual quiet trust",
+            "No need pretending",
+            "Respectful daily tone",
+            "Support without judgment",
+            "Consistent gentle care",
+            "Space yet closeness",
+            "Shared calm energy",
+            "Feeling safe together"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "self",
+      "label": "Self",
+      "topics": [
+        {
+          "id": "topic-21",
+          "title": "What kind of person do I want to become?",
+          "options": [
+            "Calm under pressure",
+            "Honest with myself",
+            "Confident yet humble",
+            "Consistent in actions",
+            "Emotionally stable daily",
+            "Open to change",
+            "Kind but firm",
+            "Responsible with words",
+            "Focused on growth",
+            "Balanced and grounded"
+          ]
+        },
+        {
+          "id": "topic-22",
+          "title": "What do I need to let go of?",
+          "options": [
+            "Fear of failure",
+            "Need for control",
+            "Guilt from past",
+            "Comparing with others",
+            "Unhealthy perfectionism",
+            "Holding old grudges",
+            "Fear of judgment",
+            "Overthinking every choice",
+            "Needing constant approval",
+            "Staying in comfort"
+          ]
+        },
+        {
+          "id": "topic-23",
+          "title": "What am I most proud of about myself?",
+          "options": [
+            "Getting through hardships",
+            "Staying kind always",
+            "Learning from pain",
+            "Supporting loved ones",
+            "Standing up again",
+            "Growing without guidance",
+            "Admitting my mistakes",
+            "Keeping promises daily",
+            "Staying true values",
+            "Choosing peace first"
+          ]
+        },
+        {
+          "id": "topic-24",
+          "title": "What do I fear losing?",
+          "options": [
+            "People I love",
+            "My inner peace",
+            "Health and energy",
+            "Sense of purpose",
+            "Financial stability",
+            "Trust from others",
+            "Respect I’ve earned",
+            "Myself in chaos",
+            "Motivation to grow",
+            "Hope for future"
+          ]
+        },
+        {
+          "id": "topic-25",
+          "title": "When do I feel most confident?",
+          "options": [
+            "After finishing tasks",
+            "When helping others",
+            "Speaking with clarity",
+            "Dressed with style",
+            "When plans succeed",
+            "Supported by team",
+            "Following my intuition",
+            "After morning routine",
+            "When learning fast",
+            "During honest talks"
+          ]
+        },
+        {
+          "id": "topic-26",
+          "title": "What makes me feel truly alive?",
+          "options": [
+            "Traveling spontaneous trips",
+            "Dancing without fear",
+            "Deep honest talks",
+            "Creating something new",
+            "Feeling nature’s power",
+            "Laughing with friends",
+            "Taking bold risks",
+            "Helping someone grow",
+            "Learning exciting things",
+            "Expressing myself freely"
+          ]
+        },
+        {
+          "id": "topic-27",
+          "title": "What habits help me grow?",
+          "options": [
+            "Waking up early",
+            "Reading every day",
+            "Reflecting before sleep",
+            "Moving my body",
+            "Setting small goals",
+            "Writing morning notes",
+            "Practicing gratitude daily",
+            "Tracking my progress",
+            "Limiting screen time",
+            "Learning from feedback"
+          ]
+        },
+        {
+          "id": "topic-28",
+          "title": "What habits hold me back?",
+          "options": [
+            "Scrolling before sleep",
+            "Overthinking simple things",
+            "Avoiding hard talks",
+            "Seeking quick comfort",
+            "Comparing with others",
+            "Delaying small tasks",
+            "Saying yes always",
+            "Ignoring body signals",
+            "Doubting my decisions",
+            "Working without breaks"
+          ]
+        },
+        {
+          "id": "topic-29",
+          "title": "How do I react to failure?",
+          "options": [
+            "Blaming myself instantly",
+            "Laughing to hide pain",
+            "Ignoring the lesson",
+            "Trying even harder",
+            "Asking what went wrong",
+            "Learning without shame",
+            "Doubting my worth",
+            "Sharing it openly",
+            "Accepting and moving",
+            "Comparing with others"
+          ]
+        },
+        {
+          "id": "topic-30",
+          "title": "When do I feel most like myself?",
+          "options": [
+            "Around honest people",
+            "Doing creative work",
+            "Speaking without fear",
+            "In quiet mornings",
+            "When helping others",
+            "Laughing without filter",
+            "Wearing what I like",
+            "Being outdoors alone",
+            "Talking with close friends",
+            "When feeling understood"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "well-being",
+      "label": "Well-being",
+      "topics": [
+        {
+          "id": "topic-31",
+          "title": "What usually triggers my stress?",
+          "options": [
+            "Tight unrealistic deadlines",
+            "Conflict with coworkers",
+            "Financial uncertainty",
+            "Lack of control",
+            "Constant noise around",
+            "Fear of mistakes",
+            "Too many messages",
+            "Feeling misunderstood",
+            "Poor sleep routine",
+            "Ignoring my needs"
+          ]
+        },
+        {
+          "id": "topic-32",
+          "title": "How do I calm myself down when I’m overwhelmed?",
+          "options": [
+            "Taking slow breaths",
+            "Going for walk",
+            "Listening to music",
+            "Sitting in silence",
+            "Talking to friend",
+            "Crying without shame",
+            "Turning off phone",
+            "Journaling few thoughts",
+            "Drinking warm tea",
+            "Doing small tasks"
+          ]
+        },
+        {
+          "id": "topic-33",
+          "title": "What brings me a sense of inner peace?",
+          "options": [
+            "Walking in nature",
+            "Finishing daily goals",
+            "Talking to myself kindly",
+            "Accepting what is",
+            "Slow quiet mornings",
+            "Faith in process",
+            "Feeling safe home",
+            "Helping someone else",
+            "Letting things go",
+            "Clean organized space"
+          ]
+        },
+        {
+          "id": "topic-34",
+          "title": "What do I need more of in my life?",
+          "options": [
+            "Time for rest",
+            "Honest deep talks",
+            "Laughter with friends",
+            "Quiet evening walks",
+            "Creative expression space",
+            "Feeling truly appreciated",
+            "Sleep without worry",
+            "Sunlight and movement",
+            "Moments without phone",
+            "Trust in myself"
+          ]
+        },
+        {
+          "id": "topic-35",
+          "title": "What do I need less of?",
+          "options": [
+            "Negative self-talk",
+            "Constant notifications",
+            "Drama and gossip",
+            "Fear of failure",
+            "Overthinking small things",
+            "Working late nights",
+            "People pleasing habits",
+            "Comparing my life",
+            "Clutter around me",
+            "Needing full control"
+          ]
+        },
+        {
+          "id": "topic-36",
+          "title": "How do I recharge emotionally?",
+          "options": [
+            "Spending time alone",
+            "Listening to music",
+            "Walking near water",
+            "Talking with friend",
+            "Writing my thoughts",
+            "Creating something small",
+            "Watching favorite movie",
+            "Getting enough sleep",
+            "Being in silence",
+            "Hugging someone close"
+          ]
+        },
+        {
+          "id": "topic-37",
+          "title": "What’s one thing that always lifts my mood?",
+          "options": [
+            "Morning coffee smell",
+            "Favorite upbeat song",
+            "Talking to friend",
+            "Watching funny videos",
+            "Feeling sunlight warm",
+            "Cooking comfort food",
+            "Seeing kind gestures",
+            "Finishing small task",
+            "Petting my cat",
+            "Laughing out loud"
+          ]
+        },
+        {
+          "id": "topic-38",
+          "title": "What makes me feel anxious lately?",
+          "options": [
+            "Unanswered messages piling",
+            "Financial uncertainty growing",
+            "Health news online",
+            "Fear of mistakes",
+            "Too many changes",
+            "Lack of direction",
+            "Upcoming big decisions",
+            "Silence from others",
+            "Pressure to perform",
+            "Losing daily structure"
+          ]
+        },
+        {
+          "id": "topic-39",
+          "title": "Do I allow myself enough rest?",
+          "options": [
+            "Working through weekends",
+            "Feeling guilty resting",
+            "Checking phone constantly",
+            "Sleeping too little",
+            "Ignoring tired signals",
+            "Saying yes always",
+            "Rewarding rest rarely",
+            "Rushing every morning",
+            "Feeling lazy shame",
+            "Forgetting slow moments"
+          ]
+        },
+        {
+          "id": "topic-40",
+          "title": "How do I take care of my mental health?",
+          "options": [
+            "Setting clear boundaries",
+            "Sleeping eight hours",
+            "Talking to therapist",
+            "Limiting social media",
+            "Spending time outdoors",
+            "Journaling my feelings",
+            "Practicing daily gratitude",
+            "Taking digital breaks",
+            "Saying no kindly",
+            "Asking for help"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meaning",
+      "label": "Meaning",
+      "topics": [
+        {
+          "id": "topic-41",
+          "title": "What gives my life meaning right now?",
+          "options": [
+            "Helping other people",
+            "Building something lasting",
+            "Feeling loved daily",
+            "Learning new things",
+            "Creating with purpose",
+            "Supporting my family",
+            "Growing through challenges",
+            "Sharing honest moments",
+            "Believing in change",
+            "Staying kind always"
+          ]
+        },
+        {
+          "id": "topic-42",
+          "title": "What legacy do I want to leave behind?",
+          "options": [
+            "Kindness toward others",
+            "Work that inspires",
+            "Family feeling proud",
+            "Helping people grow",
+            "Creating lasting memories",
+            "Living by values",
+            "Changing small worlds",
+            "Teaching through actions",
+            "Spreading calm energy",
+            "Leaving love traces"
+          ]
+        },
+        {
+          "id": "topic-43",
+          "title": "What am I avoiding that I know matters?",
+          "options": [
+            "Having honest talk",
+            "Starting new project",
+            "Facing my fears",
+            "Ending toxic habits",
+            "Asking for help",
+            "Making big decision",
+            "Setting clear boundaries",
+            "Saying what hurts",
+            "Taking real responsibility",
+            "Changing daily routine"
+          ]
+        },
+        {
+          "id": "topic-44",
+          "title": "What does “freedom” mean to me?",
+          "options": [
+            "Choosing my path",
+            "Saying no freely",
+            "Time without rush",
+            "Thinking for myself",
+            "Financial independence stable",
+            "Speaking truth calmly",
+            "Living without fear",
+            "Moving where I want",
+            "Expressing feelings openly",
+            "Being fully myself"
+          ]
+        },
+        {
+          "id": "topic-45",
+          "title": "What values guide my choices?",
+          "options": [
+            "Honesty over comfort",
+            "Kindness before judgment",
+            "Family comes first",
+            "Growth through learning",
+            "Loyalty and respect",
+            "Freedom with responsibility",
+            "Compassion toward others",
+            "Integrity in actions",
+            "Balance before ambition",
+            "Courage to change"
+          ]
+        },
+        {
+          "id": "topic-46",
+          "title": "How do I know when I’m on the right path?",
+          "options": [
+            "Feeling inner calm",
+            "Waking up excited",
+            "Seeing small progress",
+            "Getting honest feedback",
+            "Enjoying daily work",
+            "Meeting aligned people",
+            "Feeling time flow",
+            "Sleeping peacefully nights",
+            "Trusting my intuition",
+            "Smiling without reason"
+          ]
+        },
+        {
+          "id": "topic-47",
+          "title": "What do I want to experience more of?",
+          "options": [
+            "Traveling new places",
+            "Deep real connections",
+            "Joyful spontaneous moments",
+            "Creative flow daily",
+            "Nature and silence",
+            "Honest shared laughter",
+            "Learning new cultures",
+            "Feeling inner freedom",
+            "Love without fear",
+            "Beauty in details"
+          ]
+        },
+        {
+          "id": "topic-48",
+          "title": "How would my life look if I trusted myself fully?",
+          "options": [
+            "Making bold choices",
+            "Speaking without fear",
+            "Moving to dreams",
+            "Saying no easily",
+            "Taking needed risks",
+            "Believing my vision",
+            "Acting with clarity",
+            "Following gut feeling",
+            "Living without apology",
+            "Choosing peace first"
+          ]
+        },
+        {
+          "id": "topic-49",
+          "title": "What would I do if I weren’t afraid?",
+          "options": [
+            "Start my business",
+            "Speak truth openly",
+            "Move abroad alone",
+            "Change my career",
+            "Say I love you",
+            "Leave toxic people",
+            "Share my story",
+            "Show my real self",
+            "Take creative risk",
+            "Ask for more"
+          ]
+        },
+        {
+          "id": "topic-50",
+          "title": "What kind of future excites me?",
+          "options": [
+            "Creating meaningful work",
+            "Living near nature",
+            "Feeling financially secure",
+            "Traveling new countries",
+            "Leading inspiring team",
+            "Building warm home",
+            "Growing without pressure",
+            "Helping young minds",
+            "Learning endlessly daily",
+            "Loving without fear"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entertainment",
+      "label": "Entertainment",
+      "topics": [
+        {
+          "id": "topic-51",
+          "title": "What truly helps me relax?",
+          "options": [
+            "Long evening walks",
+            "Warm quiet bath",
+            "Watching favorite show",
+            "Turning phone off",
+            "Reading in bed",
+            "Stretching before sleep",
+            "Sitting near window",
+            "Drinking herbal tea",
+            "Listening to rain",
+            "Doing nothing peacefully"
+          ]
+        },
+        {
+          "id": "topic-52",
+          "title": "What hobbies make me lose track of time?",
+          "options": [
+            "Painting with music",
+            "Cooking new recipes",
+            "Playing musical instrument",
+            "Gardening in silence",
+            "Writing short stories",
+            "Building small things",
+            "Dancing without plan",
+            "Editing old photos",
+            "Playing board games",
+            "Learning new skill"
+          ]
+        },
+        {
+          "id": "topic-53",
+          "title": "When was the last time I had fun?",
+          "options": [
+            "Laughing with friends",
+            "Dancing late night",
+            "Singing in car",
+            "Traveling spontaneously",
+            "Playing silly games",
+            "Watching comedy show",
+            "Celebrating small win",
+            "Acting without plan",
+            "Forgetting daily worries",
+            "Smiling till tears"
+          ]
+        },
+        {
+          "id": "topic-54",
+          "title": "What kind of activities recharge me?",
+          "options": [
+            "Walking in nature",
+            "Swimming in sea",
+            "Reading good book",
+            "Doing light workout",
+            "Gardening quietly alone",
+            "Playing with pets",
+            "Cooking slow meal",
+            "Journaling my thoughts",
+            "Spending time offline",
+            "Listening to music"
+          ]
+        },
+        {
+          "id": "topic-55",
+          "title": "How often do I laugh freely?",
+          "options": [
+            "Every single day",
+            "Rarely without reason",
+            "When friends gather",
+            "During funny talks",
+            "Watching stand-up clips",
+            "Reading old messages",
+            "When I feel safe",
+            "Laughing at myself",
+            "Listening to jokes",
+            "Feeling pure joy"
+          ]
+        },
+        {
+          "id": "topic-56",
+          "title": "What new experiences excite me?",
+          "options": [
+            "Traveling new cities",
+            "Trying exotic food",
+            "Meeting new people",
+            "Learning foreign language",
+            "Taking creative class",
+            "Doing something scary",
+            "Starting new project",
+            "Attending live concert",
+            "Moving to new place",
+            "Exploring unknown culture"
+          ]
+        },
+        {
+          "id": "topic-57",
+          "title": "What type of entertainment brings me joy?",
+          "options": [
+            "Listening live music",
+            "Watching good movies",
+            "Reading inspiring stories",
+            "Playing video games",
+            "Visiting art museums",
+            "Going to theater",
+            "Hosting dinner nights",
+            "Attending local festivals",
+            "Watching sunset quietly",
+            "Dancing with friends"
+          ]
+        },
+        {
+          "id": "topic-58",
+          "title": "What helps me slow down?",
+          "options": [
+            "Breathing more slowly",
+            "Turning phone off",
+            "Taking longer walks",
+            "Watching sunset quietly",
+            "Reading without rush",
+            "Drinking tea mindfully",
+            "Saying no kindly",
+            "Listening to silence",
+            "Ending day early",
+            "Trusting time more"
+          ]
+        },
+        {
+          "id": "topic-59",
+          "title": "What does “fun” mean to me now?",
+          "options": [
+            "Laughing without fear",
+            "Feeling light again",
+            "Sharing small jokes",
+            "Doing nothing freely",
+            "Being fully present",
+            "Exploring new places",
+            "Creating without goal",
+            "Dancing for joy",
+            "Enjoying tiny moments",
+            "Forgetting about time"
+          ]
+        },
+        {
+          "id": "topic-60",
+          "title": "How do I balance pleasure and responsibility?",
+          "options": [
+            "Scheduling free days",
+            "Rewarding after tasks",
+            "Working with joy",
+            "Setting clear limits",
+            "Avoiding late guilt",
+            "Choosing what matters",
+            "Resting without shame",
+            "Planning playful time",
+            "Keeping goals visible",
+            "Listening to body"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mindset",
+      "label": "Mindset",
+      "topics": [
+        {
+          "id": "topic-61",
+          "title": "What beliefs limit me most?",
+          "options": [
+            "I’m not ready",
+            "I don’t deserve",
+            "People judge me",
+            "I must please everyone",
+            "Success needs struggle",
+            "I can’t change",
+            "Others know better",
+            "Failure defines worth",
+            "Happiness feels unsafe",
+            "It’s too late"
+          ]
+        },
+        {
+          "id": "topic-62",
+          "title": "What fears stop me from moving forward?",
+          "options": [
+            "Fear of failure",
+            "Fear of rejection",
+            "Losing what’s safe",
+            "Being judged harshly",
+            "Making wrong choice",
+            "Wasting my time",
+            "Outgrowing old life",
+            "Starting from zero",
+            "Hurting someone close",
+            "Facing unknown future"
+          ]
+        },
+        {
+          "id": "topic-63",
+          "title": "How do I usually make important decisions?",
+          "options": [
+            "Following gut feeling",
+            "Listing pros cons",
+            "Asking trusted friend",
+            "Waiting too long",
+            "Choosing familiar path",
+            "Researching everything deeply",
+            "Avoiding risky options",
+            "Acting under pressure",
+            "Overthinking small details",
+            "Listening to logic"
+          ]
+        },
+        {
+          "id": "topic-64",
+          "title": "When do I feel confident in my intuition?",
+          "options": [
+            "Seeing things clearly",
+            "Acting without doubt",
+            "Feeling inner signal",
+            "Calm in decision",
+            "Ignoring outside noise",
+            "Recognizing right timing",
+            "Following subtle pull",
+            "Feeling grounded deeply",
+            "Trusting first impulse",
+            "Listening with stillness"
+          ]
+        },
+        {
+          "id": "topic-65",
+          "title": "What patterns keep repeating in my life?",
+          "options": [
+            "Choosing same people",
+            "Ignoring red flags",
+            "Rushing new beginnings",
+            "Avoiding confrontation",
+            "Seeking external approval",
+            "Starting but quitting",
+            "Doubting my worth",
+            "Taking too much",
+            "Trusting too fast",
+            "Forgetting my needs"
+          ]
+        },
+        {
+          "id": "topic-66",
+          "title": "What helps me make clear choices?",
+          "options": [
+            "Writing thoughts down",
+            "Asking simple why",
+            "Sleeping before deciding",
+            "Listening to feelings",
+            "Reducing noise daily",
+            "Discussing with friend",
+            "Checking core values",
+            "Breathing before action",
+            "Accepting uncertainty",
+            "Focusing on essentials"
+          ]
+        },
+        {
+          "id": "topic-67",
+          "title": "How do I handle uncertainty?",
+          "options": [
+            "Planning next steps",
+            "Seeking reassurance quickly",
+            "Staying calm mindfully",
+            "Distracting with tasks",
+            "Overthinking outcomes",
+            "Trusting time flow",
+            "Asking for support",
+            "Taking small actions",
+            "Avoiding what’s unclear",
+            "Breathing through doubt"
+          ]
+        },
+        {
+          "id": "topic-68",
+          "title": "What do I need to let go of mentally?",
+          "options": [
+            "Regretting old choices",
+            "Wanting constant control",
+            "Blaming past self",
+            "Needing others’ approval",
+            "Expecting fast results",
+            "Holding imaginary scenarios",
+            "Worrying without reason",
+            "Living for perfection",
+            "Comparing my progress",
+            "Doubting my path"
+          ]
+        },
+        {
+          "id": "topic-69",
+          "title": "What kind of risks feel worth taking?",
+          "options": [
+            "Changing career path",
+            "Moving new city",
+            "Starting creative project",
+            "Confessing real feelings",
+            "Asking for raise",
+            "Traveling alone far",
+            "Sharing personal story",
+            "Investing in idea",
+            "Speaking truth publicly",
+            "Choosing unknown road"
+          ]
+        },
+        {
+          "id": "topic-70",
+          "title": "When do I overthink instead of acting?",
+          "options": [
+            "Before sending message",
+            "Starting new task",
+            "Making big plans",
+            "Talking to crush",
+            "Asking for help",
+            "During quiet nights",
+            "Writing public post",
+            "Facing confrontation",
+            "Trying something new",
+            "Choosing between options"
+          ]
+        }
+      ]
+    }
+  ]
+}

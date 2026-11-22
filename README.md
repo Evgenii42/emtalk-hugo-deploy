@@ -1,3 +1,3 @@
-# Superseded local Bret test candidate
+# Bret Games test candidate108
 
-Prepared b4095c3 source with583inputs/414outputs, retained for exact review106 provenance. External106 completed with literal overall7.5/minimum7, no blockers, so the numeric release gate did not pass. This candidate was not pushed or published. A newer452e8a5 revision is reviewed separately. Production main and DNS are unchanged.
+Prepared from c6e9949, exact source/output bound in source-publication-manifest.json. External review is running. No admission or publication claimed. Existing legacy DM remains active. Production main and DNS are outside this test increment.

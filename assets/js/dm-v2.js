@@ -55,11 +55,13 @@ let history = { schemaVersion: 1, entries: [] };
 let draftRaw = null;
 let historyRaw = null;
 let storageBlocked = false;
+let unreadableDraftRaw = null;
 let historyBlocked = false;
 let topicTab = 'popular';
 let topicsVisible = true;
 let topicsExpanded = false;
 let topics = [];
+let topicsStatus = 'loading';
 let resultTab = 'reasons';
 let choicePending = false;
 let choiceTimer;
@@ -84,17 +86,24 @@ function storageWarning(message) {
 function loadLocalData() {
   try {
     draftRaw = localStorage.getItem(DRAFT_KEY);
-    if (draftRaw) {
-      const draft = parseDraft(draftRaw);
-      state = draft.decision;
-      pairIndex = draft.pairIndex;
-      optionIndex = draft.optionIndex;
-      savedEntryId = draft.savedEntryId;
+    if (draftRaw !== null) {
+      try {
+        const draft = parseDraft(draftRaw);
+        state = draft.decision;
+        pairIndex = draft.pairIndex;
+        optionIndex = draft.optionIndex;
+        savedEntryId = draft.savedEntryId;
+      } catch {
+        unreadableDraftRaw = draftRaw;
+        throw new Error('Unreadable draft');
+      }
     }
   } catch {
     storageBlocked = true;
     storageWarning(
-      'This draft could not be restored. You can work in memory and export your decision from Files & privacy.',
+      unreadableDraftRaw !== null
+        ? 'This draft could not be restored. Its stored data has been kept. Open Files & privacy to export a backup or discard the unreadable draft. You can keep working in this tab.'
+        : 'Draft storage is unavailable. You can work in this tab and export your decision from Files & privacy.',
     );
   }
   try {
@@ -187,7 +196,9 @@ dialog.addEventListener('close', () => {
   if (dialog.open) return;
   dialogSubmit = null;
   dialogContext = null;
-  if (dialogTrigger?.isConnected) dialogTrigger.focus({ preventScroll: true });
+  (dialogTrigger?.isConnected ? dialogTrigger : screen).focus({
+    preventScroll: true,
+  });
 });
 
 $('#dialog-form').addEventListener('submit', (event) => {
@@ -230,9 +241,19 @@ function guideMarkup() {
 
 function topicRows() {
   const rows = topicTab === 'history' ? history.entries : topics;
-  const displayed = rows.slice(0, topicsExpanded ? 5 : 2);
+  const displayed = topicsExpanded ? rows : rows.slice(0, 2);
+  if (topicTab === 'popular') {
+    if (topicsStatus === 'loading')
+      return '<p class="history-empty" role="status">Loading Popular topics...</p>';
+    if (topicsStatus === 'failed')
+      return '<p class="history-empty">Popular topics could not load. You can add your own options.</p><button class="text-button" data-action="retry-topics">Try loading topics again</button>';
+    if (!displayed.length)
+      return '<p class="history-empty">No Popular topics are available yet. Add your own options to begin.</p>';
+  }
   if (!displayed.length)
-    return '<p class="history-empty">Your saved decisions will appear here. Try Popular for a starting point.</p>';
+    return historyBlocked
+      ? '<p class="history-empty">Saved decisions could not be read. Their stored data has been kept. You can still add your own options.</p>'
+      : '<p class="history-empty">Your saved decisions will appear here. Try Popular for a starting point.</p>';
   return displayed
     .map(
       (item) =>
@@ -636,8 +657,41 @@ function helpDialog() {
 function filesDialog() {
   openDialog({
     title: 'Files & privacy',
-    body: '<p>Your draft and saved decisions stay in this browser. Export a file to take a copy with you.</p><div class="file-actions"><button type="button" data-action="export">Export current decision · JSON</button><button type="button" data-action="csv">Export results · CSV</button><label>Import a decision · JSON<input class="file-input" type="file" id="import-file" accept="application/json,.json"></label></div><p class="dialog-note">This prototype uses local calculations. AI, sign-in and cloud sync are not connected. Draft and history storage are separate from the live EmTalk website.</p>',
+    body: `<p>Your draft and saved decisions stay in this browser. Export a file to take a copy with you.</p><div class="file-actions"><button type="button" data-action="export">Export current decision · JSON</button><button type="button" data-action="csv">Export results · CSV</button><label>Import a decision · JSON<input class="file-input" type="file" id="import-file" accept="application/json,.json"></label></div>${unreadableDraftRaw !== null ? '<section><h3>Unreadable draft</h3><p>Its original stored data has been kept. Export that data and your current decision before discarding it if you want backups. The unreadable backup may need repair before it can be imported.</p><div class="file-actions"><button type="button" data-action="export-unreadable-draft">Export unreadable draft · Original data</button><button type="button" data-action="discard-unreadable-draft">Discard unreadable draft</button></div><p class="dialog-note">Discarding removes only this unreadable draft and enables saving your current decision. Named saved decisions are kept. Before discarding, we check that the stored draft still matches the unreadable data.</p></section>' : ''}<p class="dialog-note">This prototype uses local calculations. AI, sign-in and cloud sync are not connected. Draft and history storage are separate from the live EmTalk website.</p>`,
   });
+}
+
+function discardUnreadableDraft() {
+  if (unreadableDraftRaw === null) return;
+  const expectedRaw = unreadableDraftRaw;
+  confirmAction(
+    'Discard this unreadable draft?',
+    'Export the original stored data and your current decision first if you need backups. Only the unreadable draft will be removed. Your current decision and named saved decisions will be kept.',
+    'Discard unreadable draft',
+    () => {
+      // No await or other work between the final exact-value check and removal.
+      // Reject a replacement observed when the user confirms the action.
+      if (localStorage.getItem(DRAFT_KEY) !== expectedRaw) {
+        storageBlocked = true;
+        storageWarning(
+          'The stored draft changed. It has not been discarded. Export your current decision before reloading to use the other version.',
+        );
+        throw new Error('The stored draft changed. Nothing was discarded.');
+      }
+      localStorage.removeItem(DRAFT_KEY);
+      draftRaw = null;
+      unreadableDraftRaw = null;
+      storageBlocked = false;
+      // persist performs its own exact-value check, protecting a new value
+      // written by another tab after removal instead of overwriting it.
+      const saved = persist();
+      if (saved) {
+        if (!historyBlocked) $('#storage-warning').hidden = true;
+        notify('Unreadable draft discarded. Your current decision is saved.');
+      } else notify('Unreadable draft discarded. Export your current decision to keep it.');
+      dialogTrigger = screen;
+    },
+  );
 }
 
 function download(contents, filename, type) {
@@ -735,6 +789,16 @@ function action(name, el) {
       });
     case 'files':
       return filesDialog();
+    case 'discard-unreadable-draft':
+      return discardUnreadableDraft();
+    case 'export-unreadable-draft':
+      if (unreadableDraftRaw !== null)
+        download(
+          unreadableDraftRaw,
+          `decision-matrix-unreadable-draft-${Date.now()}.json`,
+          'application/json',
+        );
+      return;
     case 'export':
       download(
         serializeDecision(state),
@@ -774,6 +838,7 @@ function action(name, el) {
             checkpoint();
           }
           render(false);
+          dialogTrigger = screen;
           notify('Saved copy deleted.');
         },
       );
@@ -788,6 +853,8 @@ function action(name, el) {
       return render(false);
     case 'topic':
       return applyTopic(el.dataset.id);
+    case 'retry-topics':
+      return loadTopics();
     case 'ai':
       return openDialog({
         title: 'A little help getting started',
@@ -966,17 +1033,22 @@ if (
   persist();
 }
 render(false);
-fetch(assetRoot + 'topics.json')
-  .then((response) => {
+loadTopics();
+
+async function loadTopics() {
+  topicsStatus = 'loading';
+  if (state.step === 'options') render(false);
+  try {
+    const response = await fetch(assetRoot + 'topics.json');
     if (!response.ok) throw new Error('Topics unavailable');
-    return response.json();
-  })
-  .then((data) => {
+    const data = await response.json();
     topics = data.categories.flatMap((category) =>
       category.topics.map((topic) => ({ ...topic, category: category.label })),
     );
-    if (state.step === 'options') render(false);
-  })
-  .catch(() => {
+    topicsStatus = 'ready';
+  } catch {
+    topicsStatus = 'failed';
     /* The manual decision flow remains available without examples. */
-  });
+  }
+  if (state.step === 'options') render(false);
+}

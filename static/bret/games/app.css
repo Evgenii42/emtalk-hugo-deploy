@@ -1,4 +1,20 @@
 /* Bret shell foundations; responsive rules below adjust layout, not tokens. */
+/* Same owned font bytes as the shared website, with URLs relative to this
+   fingerprinted sheet so both root and prefixed previews work independently. */
+@font-face {
+  font-family: Geologica;
+  src: url("../../media/d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Manrope;
+  src: url("../../media/db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
 .bret-games {
   --g-page: #e8def8;
   --g-card: #fff;
@@ -634,144 +650,9 @@
     height: 160px;
   }
 }
-/* Base responsive layout; the native-app mobile adaptation below intentionally
-   replaces card art height and card-bottom alignment at this same breakpoint. */
-@media (max-width: 760px) {
-  .games-main {
-    padding: 18px 20px 0;
-  }
-  .games-section-heading h2 {
-    font-size: 18px;
-  }
-  .games-grid {
-    gap: 16px;
-  }
-  .games-card-art {
-    height: 145px;
-  }
-  .games-card h3 {
-    font-size: 18px;
-  }
-  .games-card-copy > p {
-    font-size: 12px;
-  }
-  .games-card-tags {
-    font-size: 12px;
-    margin: 12px 0;
-  }
-  .games-card-copy {
-    padding: 16px;
-  }
-  .games-card-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  .games-card-bottom button {
-    width: 100%;
-    margin-top: 6px;
-  }
-  .games-card-badge {
-    left: 10px;
-    top: 10px;
-    font-size: 12px;
-  }
-  .games-states {
-    gap: 7px;
-  }
-  .games-states button {
-    font-size: 12px;
-    padding: 8px 12px;
-  }
-  .games-library-heading {
-    margin-top: 28px;
-  }
-  .games-player-header h1 {
-    font-size: 28px;
-  }
-  .games-setup-fields {
-    grid-template-columns: 1fr;
-  }
-  .games-setup-copy {
-    padding: 24px;
-  }
-  .games-setup-art {
-    height: 190px;
-  }
-  .games-player-header p:not(.games-eyebrow) {
-    font-size: 12px;
-  }
-  .games-session-bar {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .games-session-bar > div {
-    margin-left: auto;
-  }
-  .games-session-bar button {
-    padding: 8px 14px;
-    font-size: 12px;
-  }
-  .games-stage {
-    min-height: 400px;
-  }
-  .games-result {
-    padding: 22px 14px;
-  }
-  .games-result-metrics {
-    gap: 22px;
-  }
-  .games-result-metrics strong {
-    font-size: 23px;
-  }
-  .games-result-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .games-result-actions button {
-    width: 100%;
-  }
-  .games-result > div:first-child {
-    height: 150px;
-  }
-  .games-result h2 {
-    font-size: 26px;
-  }
-  .games-garden-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .games-garden h1 {
-    font-size: 30px;
-  }
-  .games-footer {
-    font-size: 12px;
-    flex-wrap: wrap;
-  }
-  .games-resume {
-    flex-wrap: wrap;
-  }
-  .games-resume > div {
-    flex-basis: 100%;
-  }
-  .games-time strong {
-    font-size: 23px;
-  }
-}
+
 @media (max-width: 390px) {
-  .games-grid {
-    grid-template-columns: 1fr;
-  }
-  .games-card-art {
-    height: 180px;
-  }
   .games-card-bottom {
-    flex-direction: row;
-    align-items: center;
-  }
-  .games-card-bottom button {
-    width: auto;
-    margin: 0;
-  }
-  .games-main {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -824,9 +705,101 @@
 .bret-games.is-evening .games-card-copy {
   background: var(--g-card);
 }
-/* Native-app mobile override layer. Card art height and card-bottom alignment
-   intentionally supersede the base responsive values above. */
+/* Mobile app layout has one owner; the narrower rule adds card padding only. */
 @media (max-width: 760px) {
+  .games-card h3 {
+    font-size: 18px;
+  }
+  .games-card-copy > p {
+    font-size: 12px;
+  }
+  .games-card-tags {
+    font-size: 12px;
+    margin: 12px 0;
+  }
+  .games-card-copy {
+    padding: 16px;
+  }
+  .games-card-badge {
+    left: 10px;
+    top: 10px;
+    font-size: 12px;
+  }
+  .games-states {
+    gap: 7px;
+  }
+  .games-states button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .games-library-heading {
+    margin-top: 28px;
+  }
+  .games-player-header h1 {
+    font-size: 28px;
+  }
+  .games-setup-fields {
+    grid-template-columns: 1fr;
+  }
+  .games-setup-copy {
+    padding: 24px;
+  }
+  .games-setup-art {
+    height: 190px;
+  }
+  .games-player-header p:not(.games-eyebrow) {
+    font-size: 12px;
+  }
+  .games-session-bar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .games-session-bar > div {
+    margin-left: auto;
+  }
+  .games-session-bar button {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .games-stage {
+    min-height: 400px;
+  }
+  .games-result {
+    padding: 22px 14px;
+  }
+  .games-result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .games-result-actions button {
+    width: 100%;
+  }
+  .games-result > div:first-child {
+    height: 150px;
+  }
+  .games-result h2 {
+    font-size: 26px;
+  }
+  .games-garden-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .games-garden h1 {
+    font-size: 30px;
+  }
+  .games-footer {
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .games-resume {
+    flex-wrap: wrap;
+  }
+  .games-resume > div {
+    flex-basis: 100%;
+  }
+  .games-time strong {
+    font-size: 23px;
+  }
+
   html[data-route-id="/bret/app"] .site-header,
   html[data-route-id="/bret/games"] .site-header {
     display: none;
@@ -844,6 +817,7 @@
     padding: 18px 10px;
   }
   .bret-games .games-grid {
+    gap: 16px;
     grid-template-columns: 1fr;
   }
   .bret-games .games-card-art {

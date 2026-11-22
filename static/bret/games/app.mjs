@@ -24,6 +24,7 @@ function initializationFailure(error) {
   for (const child of root.children)
     if (child !== notice && !child.contains(notice)) child.inert = true;
   notice.focus({ preventScroll: true });
+  root.dispatchEvent?.(new Event("bret:failed"));
 }
 async function initializeGames(root) {
 const $ = (s) => root.querySelector(s),
@@ -73,7 +74,7 @@ const GAMES = [
     tag: "Patterns & discovery",
     description:
       "Notice a changing pattern. Test your idea and uncover a landscape, one small discovery at a time.",
-    how: "Study the examples and choose what comes next. A pattern can rotate a shape, change the number of marks or alternate changes. The possible changes are shown in the game. One rule stays in place for all six discoveries.",
+    how: "Study the examples and choose what comes next. Click an answer or press its number key to choose it. A pattern can rotate a shape, change the number of marks or alternate changes. The possible changes are shown in the game. One rule stays in place for all six discoveries.",
     why: "Look for a changing pattern, test your idea, and uncover a scene. Take as much time as you need.",
     skill: "Notice & discover",
     time: "2-5 minutes",
@@ -304,7 +305,7 @@ function seeded() {
   return a[0];
 }
 let artworkCount = 0;
-function art(id, large = false) {
+function art(id) {
   const gradientId = `bret-sky-${++artworkCount}`;
   const base = `<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${gradientId}" x2="0" y2="1"><stop stop-color="${id === "firefly" ? "#b9acd1" : id === "moles" ? "#e5ebdb" : id === "order" ? "#f1e7dd" : "#ded8ed"}"/><stop offset="1" stop-color="${id === "firefly" ? "#e7d9e7" : "#f5eef7"}"/></linearGradient></defs><path fill="url(#${gradientId})" d="M0 0h480v240H0z"/><circle cx="372" cy="57" r="31" fill="#fff1cf"/>`;
   let body = "";
@@ -518,7 +519,7 @@ function renderGameHome() {
   const g = homeGame(),
     saved = validLast(db.last) && db.last.id === g.id ? db.last : null,
     prefs = saved || preferencesFor(g.id);
-  $("[data-game-home-art]").innerHTML = art(g.id, "home");
+  $("[data-game-home-art]").innerHTML = art(g.id);
   $("[data-game-home-name]").textContent = g.name;
   $("[data-game-home-category]").textContent = g.type;
   $("[data-game-home-copy]").textContent = HOME_COPY[g.id];
@@ -609,7 +610,7 @@ function openSetup(id) {
   $("[data-player-subtitle]").textContent = selected.description;
   $("[data-how]").textContent = selected.how;
   $("[data-why]").textContent = selected.why;
-  $("[data-setup-art]").innerHTML = art(id, true);
+  $("[data-setup-art]").innerHTML = art(id);
   $("[data-active-time]").textContent = "0:00";
   applySetupPreferences(id);
   $("[data-back]").textContent = "← Game settings";
@@ -688,7 +689,11 @@ function start(options) {
   saveElapsed = 0;
   checkpoint();
   scheduleFrame();
-  $("[data-pause]").focus({ preventScroll: true });
+  try {
+    controller.focus();
+  } catch {
+    runtimeFailure();
+  }
 }
 $("[data-setup-form]").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -715,11 +720,15 @@ function pause(reason = "manual") {
       ? "Your little time intention is complete."
       : reason === "background"
         ? "Paused while you were away."
-        : "Paused. Your place is kept.";
+        : reason === "resume"
+          ? "Your scene is ready."
+          : "Paused. Your place is kept.";
   $("[data-overlay-copy]").textContent =
     reason === "intention"
       ? "Finish for now, or stay with this scene a little longer. No need to hurry."
-      : "Take your time. Your active play time is paused too.";
+      : reason === "resume"
+        ? "Take a moment to find your place, then continue when you like. Active play time will start when you continue."
+        : "Take your time. Your active play time is paused too.";
   $("[data-continue]").focus({ preventScroll: true });
 }
 function resume() {
@@ -732,7 +741,11 @@ function resume() {
   lastFrame = 0;
   playing = true;
   scheduleFrame();
-  $("[data-pause]").focus({ preventScroll: true });
+  try {
+    controller.focus();
+  } catch {
+    runtimeFailure();
+  }
 }
 function finish(result = {}, completed = false) {
   if (!run || !controller) return;
@@ -758,7 +771,7 @@ function finish(result = {}, completed = false) {
   write();
   $("[data-session]").hidden = true;
   $("[data-result]").hidden = false;
-  $("[data-result-art]").innerHTML = art(run.id, true);
+  $("[data-result-art]").innerHTML = art(run.id);
   $("[data-result-title]").textContent =
     result.title ||
     (db.state === "sleep"
@@ -769,8 +782,8 @@ function finish(result = {}, completed = false) {
     (completed
       ? "Your scene is complete."
       : storage
-        ? "Your place is saved. You can return whenever you like."
-        : "Your place is kept for this visit. Browser saving is unavailable.");
+        ? "Your place is saved. Continue this scene to keep it, or replace this saved place with a new scene."
+        : "Your place is kept for this visit. Continue this scene to keep it, or replace this place with a new scene. Browser saving is unavailable.");
   $("[data-result-time]").textContent = fmt(run.activeMs);
   $("[data-result-xp]").textContent = `+${earnedTime + bonus} XP`;
   $("[data-result-level]").textContent = completed
@@ -781,7 +794,11 @@ function finish(result = {}, completed = false) {
       ? "Place saved"
       : "Kept this visit";
   $("[data-next]").textContent =
-    run.mode === "levels" && award.passed
+    !completed
+      ? storage
+        ? "Replace saved place with a new scene"
+        : "Replace this place with a new scene"
+      : run.mode === "levels" && award.passed
       ? `Next level · ${db.levels[run.id]}`
       : "A new scene, same pace";
   $("[data-retry]").textContent = completed
@@ -851,7 +868,7 @@ $("[data-resume-run]").addEventListener("click", () => {
   const saved = { ...db.last };
   openSetup(saved.id);
   start(saved);
-  pause("background");
+  pause("resume");
 });
 $("[data-discard-run]").addEventListener("click", () => {
   db.last = null;
@@ -883,9 +900,9 @@ function garden({ focus = true } = {}) {
   run = null;
   hideViews();
   $("[data-garden]").hidden = false;
-  $("[data-garden-art]").innerHTML = art("moles", true);
+  $("[data-garden-art]").innerHTML = art("moles");
   $("[data-garden-summary]").textContent =
-    `${Math.floor(db.totalMs / 60000)} minutes for yourself, ${xp()} XP and ${db.completed} completed scenes. Every comfortable pace counts.`;
+    `${Math.floor(db.totalMs / 60000)} minutes for yourself, ${xp()} XP and ${db.completed} scenes played. Every comfortable pace counts.`;
   $("[data-garden-stats]").replaceChildren();
   for (const g of GAMES) {
     const box = document.createElement("div");
@@ -1019,6 +1036,8 @@ else
     { notify: false },
   );
 await initializingProgress;
+root.dataset.gamesReady = "true";
 $("[data-games-load-error]").hidden = true;
+root.dispatchEvent(new Event("bret:ready"));
 }
 if (root) initializeGames(root).catch(initializationFailure);

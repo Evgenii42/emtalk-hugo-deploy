@@ -17,6 +17,24 @@ import {
 } from "./core.mjs";
 const names = ["Lamp", "Plant", "Book", "Cup", "Postcard", "Clock"];
 const shapes = ["circle", "leaf", "diamond"];
+const KEYBOARD_ENTRY = {
+  moles: {
+    target: "[data-hole]",
+    instruction: "Use Q W E, A S D, Z X C for the nine holes, or Tab and Enter or Space. Escape pauses the game.",
+  },
+  firefly: {
+    target: ".bg-flight",
+    instruction: "Use Left and Right arrows or A and D to steer. Escape pauses the game.",
+  },
+  order: {
+    target: "[data-object]",
+    instruction: "Use Tab or Shift+Tab to move between objects and places. Enter or Space selects. Escape pauses the game.",
+  },
+  landscape: {
+    target: "[data-answer]:not(:disabled)",
+    instruction: "Use the number keys to choose an answer, or Tab and Enter or Space. Escape pauses the game.",
+  },
+};
 const icon = (id) =>
   `<svg viewBox="0 0 80 80" aria-hidden="true" focusable="false">${
     {
@@ -59,9 +77,12 @@ export function mountGame(stage, options) {
     destroyed = false,
     emitted = false,
     holdPointer = null,
+    moleHoldSource = null,
     lastView = "",
     steering = new Map(),
-    dragPointer = null;
+    dragPointer = null,
+    flightView = [],
+    flightFly = null;
   if (s.done)
     throw Error("Completed scene cannot be resumed. Start a fresh scene.");
   const abort = new AbortController(),
@@ -89,6 +110,12 @@ export function mountGame(stage, options) {
   function feedback() {
     return `<p class="bg-feedback" data-bg-feedback role="status" aria-live="polite">${s.feedback}</p>`;
   }
+  function flightGateMarkup(g) {
+    const left = (g.center - g.width / 2) * 600,
+      right = (g.center + g.width / 2) * 600,
+      lightOffset = FLIGHT_PROFILES[tier].speed * 430 * 0.75;
+    return `<g data-bg-gate="${g.id}" display="none"><path d="M0 0H${left}M${right} 0H600" stroke="#f6e8c7" stroke-width="13" stroke-linecap="round"/><circle cx="${left}" cy="0" r="9" fill="#6c597e"/><circle cx="${right}" cy="0" r="9" fill="#6c597e"/>${g.light !== null ? `<g data-bg-light="${g.id}" transform="translate(${g.light * 600} ${lightOffset})"><circle r="15" fill="#f8e2a1" opacity=".4"/><circle r="6" fill="#fff8d9"/></g>` : ""}</g>`;
+  }
   function build() {
     if (id === "moles") {
       stage.innerHTML =
@@ -109,7 +136,7 @@ export function mountGame(stage, options) {
           if (!target) return;
           holdPointer = e.pointerId;
           b.setPointerCapture?.(e.pointerId);
-          if (target.hold) s.holding = { id: target.id, time: 0 };
+          if (target.hold) beginMoleHold(target, `pointer:${e.pointerId}`);
           else b.dataset.pressed = String(target.id);
         });
         on(b, "pointerup", (e) => {
@@ -123,28 +150,39 @@ export function mountGame(stage, options) {
             b.dataset.pressed
           )
             hitMole(s, +b.dataset.pressed);
-          s.holding = null;
+          releaseMoleHold(`pointer:${e.pointerId}`);
           holdPointer = null;
           delete b.dataset.pressed;
           render();
           save();
         });
-        on(b, "pointercancel", () => clearInput());
-        on(b, "lostpointercapture", () => clearInput());
+        const cancelPointer = (e) => {
+          if (holdPointer !== e.pointerId) return;
+          releaseMoleHold(`pointer:${e.pointerId}`);
+          holdPointer = null;
+          delete b.dataset.pressed;
+          render();
+          save();
+        };
+        on(b, "pointercancel", cancelPointer);
+        on(b, "lostpointercapture", cancelPointer);
         on(b, "keydown", (e) => {
-          if (![" ", "Enter"].includes(e.key) || e.repeat || s.done) return;
+          if (
+            ![" ", "Enter"].includes(e.key) || e.repeat || s.done ||
+            e.altKey || e.ctrlKey || e.metaKey
+          ) return;
           e.preventDefault();
           b.focus();
           const target = activeMoles(s).find((x) => x.hole === +b.dataset.hole);
           if (target) {
-            if (target.hold) s.holding = { id: target.id, time: 0 };
+            if (target.hold) beginMoleHold(target, keySource(e));
             else hitMole(s, target.id);
             render();
             save();
           }
         });
         on(b, "keyup", (e) => {
-          if ([" ", "Enter"].includes(e.key)) s.holding = null;
+          if ([" ", "Enter"].includes(e.key)) releaseMoleHold(keySource(e));
         });
       });
     } else if (id === "firefly") {
@@ -153,8 +191,18 @@ export function mountGame(stage, options) {
           "Follow the open space",
           "Steer through the gaps. A side light is optional: choose your line, then return to the open route.",
         ) +
-        `<div class="bg-flight" tabindex="0" role="group" aria-label="Flight field. Move with arrow keys or drag in the field."><svg viewBox="0 0 600 430" aria-hidden="true"><rect width="600" height="430" fill="#e6def0"/><circle cx="490" cy="60" r="45" fill="#f6dfb8"/><path d="M0 220Q120 80 240 200T600 160V430H0" fill="#b5a5c9"/><path d="M0 340Q130 185 300 300T600 245V430H0" fill="#8f80a6"/><path d="M0 430Q180 330 600 395V430" fill="#c4d9cf"/><g data-bg-gates></g><g data-bg-fly></g></svg><div class="bg-flight-wind" data-bg-wind></div></div><div class="bg-steer"><button type="button" data-bg-steer="-1" aria-label="Steer left">← <span>Left</span></button><span>Drag, point, or use A / D</span><button type="button" data-bg-steer="1" aria-label="Steer right"><span>Right</span> →</button></div><p class="bg-game-meta" data-bg-score></p>` +
+        `<div class="bg-flight" tabindex="0" role="group" aria-label="Flight field. Move with arrow keys or drag in the field."><svg viewBox="0 0 600 430" aria-hidden="true"><rect width="600" height="430" fill="#e6def0"/><circle cx="490" cy="60" r="45" fill="#f6dfb8"/><path d="M0 220Q120 80 240 200T600 160V430H0" fill="#b5a5c9"/><path d="M0 340Q130 185 300 300T600 245V430H0" fill="#8f80a6"/><path d="M0 430Q180 330 600 395V430" fill="#c4d9cf"/><g data-bg-gates>${s.gates.map(flightGateMarkup).join("")}</g><g data-bg-fly>${icon("firefly").replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg><div class="bg-flight-wind" data-bg-wind></div></div><div class="bg-steer"><button type="button" data-bg-steer="-1" aria-label="Steer left">← <span>Left</span></button><span>Drag, point, or use A / D</span><button type="button" data-bg-steer="1" aria-label="Steer right"><span>Right</span> →</button></div><p class="bg-game-meta" data-bg-score></p>` +
         feedback();
+      flightView = s.gates.map((gate) => ({
+        gate,
+        node: stage.querySelector(`[data-bg-gate="${gate.id}"]`),
+        light: gate.light === null
+          ? null
+          : stage.querySelector(`[data-bg-light="${gate.id}"]`),
+        visible: null,
+        collected: null,
+      }));
+      flightFly = stage.querySelector("[data-bg-fly]");
       const field = stage.querySelector(".bg-flight");
       const target = (e) => {
         if (destroyed || s.done) return;
@@ -196,6 +244,7 @@ export function mountGame(stage, options) {
         on(b, "pointercancel", (e) => releaseSteering(pointerSource(e)));
         on(b, "lostpointercapture", (e) => releaseSteering(pointerSource(e)));
         on(b, "keydown", (e) => {
+          if (e.altKey || e.ctrlKey || e.metaKey) return;
           if ([" ", "Enter"].includes(e.key)) {
             e.preventDefault();
             holdSteering(keySource(e), direction);
@@ -277,7 +326,7 @@ export function mountGame(stage, options) {
       stage.innerHTML =
         header(
           "Find the change. Uncover the scene.",
-          "Use one of the possible changes below. The same rule stays for all six predictions. No time limit.",
+          "Use one of the possible changes below. Click an answer or press its number key to choose it. The same rule stays for all six predictions. No time limit.",
         ) +
         `<div class="bg-landscape" data-bg-landscape></div><div class="bg-pattern-history" data-bg-history aria-label="Pattern examples"></div><p class="bg-next-label">What comes next?</p><div class="bg-pattern-choices" data-bg-choices></div><details class="bg-rule-guide"><summary>Possible changes</summary><p>${tier === 0 ? "One feature changes: a clockwise or counterclockwise quarter-turn, or the mark count moves +1, -1, or +2." : "A clockwise or counterclockwise quarter-turn; mark count +1, -1, or +2; a forward or reverse shape cycle; or alternating a clockwise quarter-turn and adding one mark."}${tier === 2 ? " A clockwise or counterclockwise quarter-turn and adding one mark may also happen together." : ""} Counts cycle 1, 2, 3, 4, then 1. The forward shape cycle is circle, leaf, diamond, then circle. The reverse cycle runs the other way. The direction pointer shows orientation.</p></details><p class="bg-game-meta" data-bg-score></p>` +
         feedback();
@@ -325,25 +374,35 @@ export function mountGame(stage, options) {
         `${s.hits} seeds · ${s.settled.length} / 50 helpers · Rhythm ${s.combo} · ${s.score} points`;
       progress(`${s.hits} seeds · ${s.settled.length}/50 helpers`);
     } else if (id === "firefly") {
-      const gates = stage.querySelector("[data-bg-gates]");
-      gates.innerHTML = s.gates
-        .filter((g) => g.at - s.elapsed > -0.4 && g.at - s.elapsed < 7)
-        .map((g) => {
-          const y =
-              340 - (g.at - s.elapsed) * FLIGHT_PROFILES[tier].speed * 430,
-            left = (g.center - g.width / 2) * 600,
-            right = (g.center + g.width / 2) * 600;
-          return `<g><path d="M0 ${y}H${left}M${right} ${y}H600" stroke="#f6e8c7" stroke-width="13" stroke-linecap="round"/><circle cx="${left}" cy="${y}" r="9" fill="#6c597e"/><circle cx="${right}" cy="${y}" r="9" fill="#6c597e"/>${g.light !== null && !s.collectedLights.includes(g.id) ? `<g transform="translate(${g.light * 600} ${y + FLIGHT_PROFILES[tier].speed * 430 * 0.75})"><circle r="15" fill="#f8e2a1" opacity=".4"/><circle r="6" fill="#fff8d9"/></g>` : ""}</g>`;
-        })
-        .join("");
-      stage.querySelector("[data-bg-fly]").innerHTML =
-        `<g transform="translate(${s.x * 600 - 22} 317) scale(.55)">${icon("firefly").replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g>`;
-      stage.querySelector("[data-bg-wind]").textContent =
+      for (const view of flightView) {
+        const offset = view.gate.at - s.elapsed,
+          visible = offset > -0.4 && offset < 7;
+        if (view.visible !== visible) {
+          view.node.setAttribute("display", visible ? "inline" : "none");
+          view.visible = visible;
+        }
+        if (!visible) continue;
+        const y = 340 - offset * FLIGHT_PROFILES[tier].speed * 430;
+        view.node.setAttribute("transform", `translate(0 ${y})`);
+        if (view.light) {
+          const collected = s.collectedLights.includes(view.gate.id);
+          if (view.collected !== collected) {
+            view.light.setAttribute("display", collected ? "none" : "inline");
+            view.collected = collected;
+          }
+        }
+      }
+      flightFly.setAttribute("transform", `translate(${s.x * 600 - 22} 317) scale(.55)`);
+      const wind =
         tier === 2
           ? `Wind ${s.gates.find((g) => g.at >= s.elapsed)?.wind > 0 ? "→" : "←"}`
           : "Steady pace";
-      stage.querySelector("[data-bg-score]").textContent =
+      const windNode = stage.querySelector("[data-bg-wind]");
+      if (windNode.textContent !== wind) windNode.textContent = wind;
+      const score =
         `${s.passed} gates passed · ${s.processed.length} / 15 visited · ${s.lights} optional lights`;
+      const scoreNode = stage.querySelector("[data-bg-score]");
+      if (scoreNode.textContent !== score) scoreNode.textContent = score;
       progress(`${s.processed.length}/15 gates · ${s.lights} lights`);
     } else if (id === "order") {
       const key = JSON.stringify([
@@ -419,16 +478,7 @@ export function mountGame(stage, options) {
           )
           .join("");
         stage.querySelectorAll("[data-answer]").forEach((b) =>
-          on(b, "click", () => {
-            choosePattern(s, +b.dataset.answer);
-            render();
-            if (!s.done)
-              stage
-                .querySelector("[data-answer]:not(:disabled)")
-                ?.focus({ preventScroll: true });
-            save();
-            end();
-          }),
+          on(b, "click", () => selectPattern(+b.dataset.answer)),
         );
       }
       stage.querySelector("[data-bg-score]").textContent =
@@ -441,6 +491,29 @@ export function mountGame(stage, options) {
   function keySource(e) {
     return `key:${e.code || e.key.toLowerCase()}`;
   }
+  function beginMoleHold(target, source) {
+    if (s.holding && moleHoldSource !== source) return;
+    moleHoldSource = source;
+    s.holding = { id: target.id, time: 0 };
+  }
+  function releaseMoleHold(source) {
+    if (moleHoldSource !== source) return;
+    moleHoldSource = null;
+    s.holding = null;
+  }
+  function selectPattern(index) {
+    if (
+      destroyed || s.done ||
+      !Number.isInteger(index) ||
+      index < 0 || index >= s.candidates.length || s.tried.includes(index)
+    ) return;
+    choosePattern(s, index);
+    render();
+    if (!s.done)
+      stage.querySelector("[data-answer]:not(:disabled)")?.focus({ preventScroll: true });
+    save();
+    end();
+  }
   function holdSteering(source, direction) {
     if (!destroyed && !s.done) steering.set(source, direction);
   }
@@ -452,6 +525,7 @@ export function mountGame(stage, options) {
     if (id === "firefly") s.target = s.x;
     s.holding = null;
     holdPointer = null;
+    moleHoldSource = null;
     steering.clear();
     dragPointer = null;
     stage
@@ -463,7 +537,7 @@ export function mountGame(stage, options) {
     if (document.hidden) clearInput();
   });
   on(stage, "keydown", (e) => {
-    if (s.done) return;
+    if (s.done || e.altKey || e.ctrlKey || e.metaKey) return;
     if (
       id === "firefly" &&
       ["ArrowLeft", "ArrowRight", "a", "A", "d", "D"].includes(e.key)
@@ -481,16 +555,18 @@ export function mountGame(stage, options) {
         b.focus();
         const target = activeMoles(s).find((x) => x.hole === index);
         if (target) {
-          if (target.hold) s.holding = { id: target.id, time: 0 };
+          if (target.hold) beginMoleHold(target, keySource(e));
           else hitMole(s, target.id);
           render();
           save();
         }
       }
     }
-    if (id === "landscape" && /^[1-4]$/.test(e.key)) {
-      const b = stage.querySelector(`[data-answer="${+e.key - 1}"]`);
-      b?.focus();
+    if (
+      id === "landscape" && !e.repeat && /^[1-4]$/.test(e.key)
+    ) {
+      e.preventDefault();
+      selectPattern(+e.key - 1);
     }
   });
   on(stage, "keyup", (e) => {
@@ -501,7 +577,7 @@ export function mountGame(stage, options) {
       )
     )
       releaseSteering(keySource(e));
-    if (id === "moles") s.holding = null;
+    if (id === "moles") releaseMoleHold(keySource(e));
   });
   try {
     build();
@@ -514,6 +590,14 @@ export function mountGame(stage, options) {
     throw error;
   }
   return {
+    focus() {
+      if (destroyed || s.done) return;
+      const entry = KEYBOARD_ENTRY[id], target = stage.querySelector(entry.target);
+      if (!target) throw Error("Missing playable game control");
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+      announce(entry.instruction);
+    },
     tick(dt) {
       if (destroyed || s.done || !Number.isFinite(dt) || dt <= 0) return;
       if (id === "moles") advanceMoles(s, dt);

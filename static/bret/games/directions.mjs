@@ -89,6 +89,7 @@ export function setupDirections(
     const d = DIRECTIONS[name],
       b = document.createElement(active ? "article" : "button");
     if (!active) b.type = "button";
+    else b.setAttribute("role", "group");
     b.className = "bret-direction-card" + (active ? " is-active" : "");
     b.dataset.directionCard = name;
     b.setAttribute(

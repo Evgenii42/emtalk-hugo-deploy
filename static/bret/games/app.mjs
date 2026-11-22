@@ -3,6 +3,9 @@ import { accrueTime, settleGoal } from "./session.mjs";
 import { setupDirections } from "./directions.mjs";
 import { createProgressStore } from "./persistence.mjs";
 import {
+  validTier, validMode, validDuration, tierLabel, modeLabel, durationRunLabel,
+} from "./options.mjs";
+import {
   getLastStartedGame,
   getGamePreferences,
   rememberGameStarted,
@@ -210,6 +213,7 @@ const progressStore = createProgressStore({
   locks: globalThis.navigator?.locks,
   onConflict: () => {
     storage = false;
+    syncAvailability();
     pause("background");
     notice(
       "Progress changed in another tab. Reload this tab before continuing.",
@@ -238,12 +242,20 @@ function canPlay() {
 function write() {
   return storeReady ? progressStore.write(JSON.stringify(db)) : { ok: false };
 }
+function syncAvailability() {
+  const writable = storeReady && progressStore.writable;
+  $$("[data-theme],[data-game-home-play],[data-resume-run],[data-discard-run],[data-state-choice],[data-cards] button,[data-setup-start]").forEach(
+    (button) => { button.disabled = !writable; },
+  );
+}
 async function beginProgress(restored = false) {
   storeReady = false;
+  syncAvailability();
   const state = await progressStore.begin();
   if (state.mode === "closed") return;
   hydrate(state.raw);
   storeReady = true;
+  syncAvailability();
   storage = state.writable && state.mode !== "memory";
   if (storage) {
     $("[data-storage]").hidden = true;
@@ -269,17 +281,13 @@ function validLast(x) {
     x &&
     x.version === 1 &&
     GAMES.some((g) => g.id === x.id) &&
-    Number.isInteger(x.tier) &&
-    x.tier >= 0 &&
-    x.tier <= 2 &&
+    validTier(x.tier) &&
     Number.isInteger(x.seed) &&
     Number.isFinite(x.activeMs) &&
     x.activeMs >= 0 &&
     x.activeMs < 1e10 &&
-    ["levels", "stable"].includes(x.mode) &&
-    Number.isFinite(x.duration) &&
-    x.duration >= 0 &&
-    x.duration <= 600 &&
+    validMode(x.mode) &&
+    validDuration(x.duration) &&
     x.snapshot &&
     typeof x.snapshot === "object" &&
     x.snapshot.done !== true
@@ -347,11 +355,13 @@ function theme() {
   root.classList.toggle("is-evening", Boolean(db.evening));
   $("[data-theme]").setAttribute("aria-pressed", String(Boolean(db.evening)));
 }
-$("[data-theme]").addEventListener("click", () => {
+function toggleTheme() {
+  if (!canPlay()) return;
   db.evening = !db.evening;
   theme();
   write();
-});
+}
+$("[data-theme]").addEventListener("click", toggleTheme);
 theme();
 function state() {
   return STATES.find((s) => s.id === db.state) || STATES[0];
@@ -369,6 +379,7 @@ function renderCatalog(focusState = null) {
     b.tabIndex = choice.id === s.id ? 0 : -1;
     b.dataset.stateChoice = choice.id;
     const choose = (id) => {
+      if (!canPlay()) return;
       db.state = id;
       if (id === "sleep") db.evening = true;
       theme();
@@ -403,15 +414,18 @@ function renderCatalog(focusState = null) {
     card.innerHTML = `<div class="games-card-art">${art(g.id)}<span class="games-card-badge">${g.id === s.pick ? "PICKED FOR YOU" : g.tag.toUpperCase()}</span></div><div class="games-card-copy"><h3>${g.name}</h3><p>${g.description}</p><div class="games-card-tags"><span>${g.skill}</span><span>${g.time.replace("-", " to ")}</span></div><div class="games-card-bottom"><span>Level ${db.levels[g.id]} · Your pace</span><button type="button" aria-label="Choose ${g.name}">Choose game <span aria-hidden="true">↗</span></button></div></div>`;
     card
       .querySelector("button")
-      .addEventListener("click", () => openSetup(g.id));
+      .addEventListener("click", () => {
+        if (canPlay()) openSetup(g.id);
+      });
     $("[data-cards]").append(card);
   }
   const resume = db.last;
   $("[data-resume]").hidden = !resume;
   if (resume)
     $("[data-resume-description]").textContent =
-      `${GAMES.find((g) => g.id === resume.id).name} · ${fmt(resume.activeMs)} of active play · ${["Gentle", "Balanced", "Curious"][resume.tier]}`;
+      `${GAMES.find((g) => g.id === resume.id).name} · ${fmt(resume.activeMs)} of active play · ${tierLabel(resume.tier)}`;
   totals();
+  syncAvailability();
   if (focusState)
     $$("[data-state-choice]")
       .find((button) => button.dataset.stateChoice === focusState)
@@ -528,14 +542,14 @@ function renderGameHome() {
       ? "Continue · " + fmt(saved.activeMs)
       : prefs.mode === "levels"
         ? "Level " + db.levels[g.id]
-        : "Steady pace") +
+        : modeLabel(prefs.mode)) +
     " · " +
-    ["Gentle", "Balanced", "Curious"][prefs.tier];
+    tierLabel(prefs.tier);
   $("[data-game-home-play]").setAttribute(
     "aria-label",
     (saved ? "Continue " : "Play ") + g.name,
   );
-  $("[data-game-home-play]").disabled = !storeReady || !progressStore.writable;
+  syncAvailability();
   $("[data-game-home-note]").textContent = saved
     ? "Your place is ready. Continue whenever you like."
     : db.lastStartedGameId
@@ -621,6 +635,10 @@ function openSetup(id) {
 }
 function start(options) {
   if (!canPlay()) return;
+  if (!validTier(options.tier) || !validMode(options.mode) || !validDuration(options.duration)) {
+    notice("Choose a challenge, pace and time from the game settings before starting.");
+    return;
+  }
   const game = selected;
   if (!game) return;
   destroy();
@@ -682,7 +700,7 @@ function start(options) {
   rememberGameStarted(db, run);
   $("[data-back]").textContent = "← Back to Games";
   $("[data-run-label]").textContent =
-    `${run.mode === "stable" ? "Steady pace" : `Level ${run.level}`} · ${["Gentle", "Balanced", "Curious"][run.tier]} · ${run.duration ? `${run.duration / 60} min intention` : "Free play"}`;
+    `${run.mode === "stable" ? modeLabel(run.mode) : `Level ${run.level}`} · ${tierLabel(run.tier)} · ${durationRunLabel(run.duration)}`;
   $("[data-active-time]").textContent = fmt(run.activeMs);
   playing = true;
   lastFrame = 0;
@@ -863,14 +881,16 @@ $("[data-retry]").addEventListener("click", () => {
       : { ...previous },
   );
 });
-$("[data-resume-run]").addEventListener("click", () => {
-  if (!db.last) return;
+function resumeSavedRun() {
+  if (!db.last || !canPlay()) return;
   const saved = { ...db.last };
   openSetup(saved.id);
   start(saved);
   pause("resume");
-});
+}
+$("[data-resume-run]").addEventListener("click", resumeSavedRun);
 $("[data-discard-run]").addEventListener("click", () => {
+  if (!canPlay()) return;
   db.last = null;
   write();
   renderCatalog();
@@ -1010,6 +1030,7 @@ renderGameHome();
 const initializingProgress = beginProgress();
 window.addEventListener("pagehide", () => {
   storeReady = false;
+  syncAvailability();
   progressStore.close();
 });
 window.addEventListener("pageshow", (e) => {

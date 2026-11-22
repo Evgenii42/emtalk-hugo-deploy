@@ -55,9 +55,9 @@ const icon = (id) =>
   }</svg>`;
 const landscape = (count = 6) =>
   `<svg viewBox="0 0 720 300" role="img" aria-label="A quiet lake and a light in a distant window"><rect width="720" height="300" fill="#ddd5eb"/><circle cx="560" cy="65" r="37" fill="#f5dfb6"/><path d="M0 164Q110 50 240 160T470 142T720 130V300H0" fill="#a29abb"/><path d="M0 214Q170 116 330 204T720 180V300H0" fill="#7c7296"/><path d="M0 248Q220 193 720 238V300H0" fill="#afc8c7"/><path d="M0 280Q145 214 260 256" fill="none" stroke="#edcda7" stroke-width="18"/><path d="M454 165v-45h54v45" fill="#665371"/><path d="M447 122l34-26 35 26" fill="#88768d"/><rect x="476" y="130" width="16" height="19" rx="2" fill="#f6df9b"/><path d="M87 204v-61m-20 22 20-46 21 46zm-13 26 13-37 15 37" fill="#677b72" stroke="#677b72" stroke-width="7"/><path d="M576 207v-65m-20 17 20-43 22 43zm-12 29 12-40 15 40" fill="#6b7d76" stroke="#6b7d76" stroke-width="7"/>${Array.from({ length: 6 }, (_, i) => (i < count ? "" : `<rect x="${i * 120}" width="121" height="300" fill="#eee8f3" opacity=".95"/>`)).join("")}</svg>`;
-function symbol(s, label = false) {
+function symbol(s, decorative = false) {
   const [turn, count, shape] = s;
-  return `<svg viewBox="0 0 100 100" role="img" aria-label="${turn * 90} degrees, ${count + 1} marks, ${shapes[shape]}"><g transform="rotate(${turn * 90} 50 50)"><path d="M50 5l-8 12h16z" fill="#6e548b"/>${shape === 0 ? '<circle cx="50" cy="50" r="27" fill="#c2b5d6" stroke="#6e548b" stroke-width="3"/>' : shape === 1 ? '<path d="M24 70Q15 18 76 24Q84 76 24 70" fill="#aec8b9" stroke="#54796a" stroke-width="3"/>' : '<path d="M50 19l31 31-31 31-31-31z" fill="#eac6b2" stroke="#a77e68" stroke-width="3"/>'}</g>${Array.from({ length: count + 1 }, (_, i) => `<circle cx="${50 - count * 7 + i * 14}" cy="90" r="4" fill="#5c496f"/>`).join("")}</svg>`;
+  return `<svg viewBox="0 0 100 100" ${decorative ? 'aria-hidden="true" focusable="false"' : `role="img" aria-label="${turn * 90} degrees, ${count + 1} marks, ${shapes[shape]}"`}><g transform="rotate(${turn * 90} 50 50)"><path d="M50 5l-8 12h16z" fill="#6e548b"/>${shape === 0 ? '<circle cx="50" cy="50" r="27" fill="#c2b5d6" stroke="#6e548b" stroke-width="3"/>' : shape === 1 ? '<path d="M24 70Q15 18 76 24Q84 76 24 70" fill="#aec8b9" stroke="#54796a" stroke-width="3"/>' : '<path d="M50 19l31 31-31 31-31-31z" fill="#eac6b2" stroke="#a77e68" stroke-width="3"/>'}</g>${Array.from({ length: count + 1 }, (_, i) => `<circle cx="${50 - count * 7 + i * 14}" cy="90" r="4" fill="#5c496f"/>`).join("")}</svg>`;
 }
 function clueText(c, cols = 3) {
   const [t, a, b] = c;
@@ -393,9 +393,10 @@ export function mountGame(stage, options) {
         }
       }
       flightFly.setAttribute("transform", `translate(${s.x * 600 - 22} 317) scale(.55)`);
+      const upcoming = s.gates.find((g) => g.at > s.elapsed);
       const wind =
-        tier === 2
-          ? `Wind ${s.gates.find((g) => g.at >= s.elapsed)?.wind > 0 ? "→" : "←"}`
+        tier === 2 && upcoming
+          ? `Wind ${upcoming.wind > 0 ? "→" : "←"}`
           : "Steady pace";
       const windNode = stage.querySelector("[data-bg-wind]");
       if (windNode.textContent !== wind) windNode.textContent = wind;
@@ -474,7 +475,7 @@ export function mountGame(stage, options) {
         stage.querySelector("[data-bg-choices]").innerHTML = s.candidates
           .map(
             (v, i) =>
-              `<button type="button" data-answer="${i}" ${s.tried.includes(i) || s.done ? "disabled" : ""} aria-label="Answer ${i + 1}: ${v[0] * 90} degrees, ${v[1] + 1} marks, ${shapes[v[2]]}">${symbol(v)}<span>${s.tried.includes(i) ? "Tested" : "Choose " + (i + 1)}</span></button>`,
+              `<button type="button" data-answer="${i}" ${s.tried.includes(i) || s.done ? "disabled" : ""} aria-label="Answer ${i + 1}: ${v[0] * 90} degrees, ${v[1] + 1} marks, ${shapes[v[2]]}">${symbol(v, true)}<span>${s.tried.includes(i) ? "Tested" : "Choose " + (i + 1)}</span></button>`,
           )
           .join("");
         stage.querySelectorAll("[data-answer]").forEach((b) =>

@@ -1,3 +1,3 @@
-# Superseded Bret Games candidate108
+# Bret Games test candidate109
 
-The exact c6e9949 source/output candidate was prepared and cold-built. External108 returned8/min7, below the project gate. No admission or publication. Findings are being resolved in the next revision.
+Prepared exact589inputs/418outputs fromebdc6c6. External109running, no admission/publication. CurrentlegacyDMretained. Onlyinterest032testtarget; no productionmain/DNSchanges.

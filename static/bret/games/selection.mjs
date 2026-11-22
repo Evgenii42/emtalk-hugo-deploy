@@ -2,8 +2,8 @@
  * Call rememberGameStarted only after a game mounts successfully. Browsing or
  * editing settings must use the pure getters and must not call that function.
  */
+import { DEFAULTS, validTier, validMode, validDuration } from "./options.mjs";
 const GAME_IDS = ["moles", "firefly", "order", "landscape"];
-const DEFAULTS = Object.freeze({ tier: 0, mode: "stable", duration: 120 });
 const record = (value) =>
   value !== null &&
   typeof value === "object" &&
@@ -14,10 +14,6 @@ const own = (value, key) =>
     ? Object.getOwnPropertyDescriptor(value, key)?.value
     : undefined;
 const validId = (id) => typeof id === "string" && GAME_IDS.includes(id);
-const validTier = (value) =>
-  Number.isInteger(value) && value >= 0 && value <= 2;
-const validMode = (value) => value === "stable" || value === "levels";
-const validDuration = (value) => [0, 120, 300, 600].includes(value);
 function preferences(value) {
   const tier = own(value, "tier"),
     mode = own(value, "mode"),

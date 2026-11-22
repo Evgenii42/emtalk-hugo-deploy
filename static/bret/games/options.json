@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "tiers": [
+    { "value": 0, "label": "Gentle" },
+    { "value": 1, "label": "Balanced" },
+    { "value": 2, "label": "Curious" }
+  ],
+  "modes": [
+    { "value": "stable", "label": "Steady pace" },
+    { "value": "levels", "label": "Levels" }
+  ],
+  "durations": [
+    { "value": 120, "label": "2 minutes", "runLabel": "2 min intention" },
+    { "value": 300, "label": "5 minutes", "runLabel": "5 min intention" },
+    { "value": 600, "label": "10 minutes", "runLabel": "10 min intention" },
+    { "value": 0, "label": "Free play", "runLabel": "Free play" }
+  ],
+  "defaults": { "tier": 0, "mode": "stable", "duration": 120 }
+}

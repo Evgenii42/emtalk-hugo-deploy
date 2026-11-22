@@ -1,5 +1,5 @@
-@font-face{font-family:Geologica;src:url(../dm-v2/assets/geologica-variable.woff2) format('woff2');font-weight:100 900;font-display:swap}
-@font-face{font-family:Manrope;src:url(../dm-v2/assets/manrope-variable.woff2) format('woff2');font-weight:200 800;font-display:swap}
+@font-face{font-family:Geologica;src:url(../fonts/shared/geologica-variable.woff2) format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:Manrope;src:url(../fonts/shared/manrope-variable.woff2) format('woff2');font-weight:200 800;font-display:swap}
 html[data-route-id="/bret"] body{margin:0;background:#f8f5fb}
 .bret-landing{--bret-bg:#f8f5fb;--bret-card:#fff;--bret-ink:#353438;--bret-muted:#62576d;--bret-primary:var(--emt-action,#5e3a7d);--bret-soft:#e8def8;--bret-line:#dfd5e9;--bret-radius:24px;--bret-heading:Geologica,Manrope,sans-serif;--bret-body:Manrope,sans-serif;background:var(--bret-bg);color:var(--bret-ink);font:400 16px/1.65 var(--bret-body);isolation:isolate}
 .bret-landing,.bret-landing *{box-sizing:border-box}

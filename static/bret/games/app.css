@@ -683,7 +683,7 @@
 .bret-games .games-card {
   border-color: #c4c3c6;
 }
-.bret-games:not([data-bret-section="games"]) .games-footer {
+.bret-games[data-bret-section]:not([data-bret-section="games"]) .games-footer {
   display: none;
 }
 .bret-games .games-library-heading {

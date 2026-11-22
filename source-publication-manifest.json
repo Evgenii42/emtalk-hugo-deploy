@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Prepared exact Bret-only113 test candidate; external static review running, unadmitted and unpublished",
+  "scope": "Prepared Bret113 candidate rejected by actual external static review; never admitted or published",
   "canonicalSourceCommit": "53c6474f2a1bc66188d28af31e824dea6be4e44b",
   "stageParentCommit": "7c1a214",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
@@ -2988,5 +2988,11 @@
   "reviewAdmission": false,
   "published": false,
   "dmScope": "Deployed legacy DM22-owner graph retained; new DM development separate",
-  "sourceRemotePush": "Unconfirmed connectivity; local Git and recovery bundle preserve work"
+  "sourceRemotePush": "Unconfirmed connectivity; local Git and recovery bundle preserve work",
+  "externalReview": {
+    "name": "audit-2026-11-23-113",
+    "overall": 8,
+    "minimumDimension": 7,
+    "numericGatePassed": false
+  }
 }

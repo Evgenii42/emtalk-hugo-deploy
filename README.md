@@ -1,1 +1,1 @@
-Prepared Bret Games113 test candidate. Four games, four directions, last launched card and game settings. Only approved test alias interest032.emtalk-hugo-deploy.pages.dev. External review running; no release admission or publication. Source and static output hashes in source-publication-manifest.json.
+Prepared Bret113 test candidate. External static review8/min7 failed the repository gate. Unadmitted and unpublished. Follow-up addresses saved-place replacement and restoration. No production changes.

@@ -1,3 +1,1 @@
-# Bret Games testcandidate111
-
-Exact590inputs/418outputs from0f4efd6. Threeindependentlocalreviewspass; actualexternal111running. No admission/publication. ExistinglegacyDM retained. Onlyinterest032testtarget, no productionmain/DNS.
+Prepared test candidate111. External review7.5/min6.5 failed the repository gate. Unadmitted and unpublished. Superseded by subsequent fixes; no production changes.

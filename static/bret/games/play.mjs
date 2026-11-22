@@ -84,6 +84,9 @@ export function mountGame(stage, options) {
     flightView = [],
     flightFly = null,
     inputFailure = null;
+  // A mount retains the same nine hole controls until destroy; cache only the
+  // strings successfully written to those controls, not simulation state.
+  const moleViews = new WeakMap();
   if (s.done)
     throw Error("Completed scene cannot be resumed. Start a fresh scene.");
   const abort = new AbortController(),
@@ -372,37 +375,48 @@ export function mountGame(stage, options) {
         life = MOLE_PROFILES[tier].life;
       stage.querySelectorAll("[data-hole]").forEach((b) => {
         const e = active.find((x) => x.hole === +b.dataset.hole);
+        let view = moleViews.get(b);
+        if (!view) {
+          view = {};
+          moleViews.set(b, view);
+        }
         b.classList.toggle("bg-present", !!e);
         b.classList.toggle("bg-hold", !!e?.hold);
-        b.setAttribute(
-          "aria-label",
-          e
-            ? `${e.hold ? "Hold" : "Tap"} helper at hole ${+b.dataset.hole + 1}`
-            : `Empty hole ${+b.dataset.hole + 1}`,
-        );
-        b.querySelector(".bg-gesture").textContent = e
+        const label = e
+          ? `${e.hold ? "Hold" : "Tap"} helper at hole ${+b.dataset.hole + 1}`
+          : `Empty hole ${+b.dataset.hole + 1}`;
+        if (view.label !== label) {
+          b.setAttribute("aria-label", label);
+          view.label = label;
+        }
+        const gesture = e
           ? e.hold
             ? "HOLD"
             : "TAP"
           : "";
-        b.querySelector(".bg-hole-ring").style.setProperty(
-          "--bg-life",
-          e ? String(clamp(1 - (s.elapsed - e.at) / life, 0, 1)) : "0",
-        );
-        b.style.setProperty(
-          "--bg-hold-progress",
-          s.holding && e && s.holding.id === e.id
-            ? String(s.holding.time / 0.55)
-            : "0",
-        );
+        const gestureNode = b.querySelector(".bg-gesture");
+        if (gestureNode.textContent !== gesture) gestureNode.textContent = gesture;
+        const remaining = e ? String(clamp(1 - (s.elapsed - e.at) / life, 0, 1)) : "0";
+        if (view.life !== remaining) {
+          b.querySelector(".bg-hole-ring").style.setProperty("--bg-life", remaining);
+          view.life = remaining;
+        }
+        const held = s.holding && e && s.holding.id === e.id
+          ? String(s.holding.time / 0.55)
+          : "0";
+        if (view.hold !== held) {
+          b.style.setProperty("--bg-hold-progress", held);
+          view.hold = held;
+        }
       });
       stage
         .querySelectorAll(".bg-sprout")
         .forEach((n, i) =>
           n.classList.toggle("bg-grown", s.hits >= (i + 1) * 5),
         );
-      stage.querySelector("[data-bg-score]").textContent =
-        `${s.hits} seeds · ${s.settled.length} / 50 helpers · Rhythm ${s.combo} · ${s.score} points`;
+      const score = `${s.hits} seeds · ${s.settled.length} / 50 helpers · Rhythm ${s.combo} · ${s.score} points`;
+      const scoreNode = stage.querySelector("[data-bg-score]");
+      if (scoreNode.textContent !== score) scoreNode.textContent = score;
       progress(`${s.hits} seeds · ${s.settled.length}/50 helpers`);
     } else if (id === "firefly") {
       for (const view of flightView) {

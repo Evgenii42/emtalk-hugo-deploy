@@ -1,16 +1,17 @@
 /* Bret shell foundations; responsive rules below adjust layout, not tokens. */
-/* Same owned font bytes as the shared website, with URLs relative to this
-   fingerprinted sheet so both root and prefixed previews work independently. */
+/* Lossless WOFF2 containers derived from the retained game-app TTF originals;
+   SFNT/glyph/metric parity is recorded in bret-woff2-provenance.json. Relative
+   URLs retain root and prefixed preview delivery without an npm dependency. */
 @font-face {
   font-family: Geologica;
-  src: url("../../media/d2f615dab8dfa51a6512-699f2a941a4989bbd54a9c73_Geologica.ttf") format("truetype");
+  src: url("../../fonts/shared/bret-geologica-variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: Manrope;
-  src: url("../../media/db177c81dc75ea8d5ad2-699f2b26ec73807bfeba56e8_Manrope-VariableFont_wght.ttf") format("truetype");
+  src: url("../../fonts/shared/bret-manrope-variable.woff2") format("woff2");
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;

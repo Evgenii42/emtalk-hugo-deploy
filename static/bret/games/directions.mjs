@@ -49,12 +49,34 @@ export function setupDirections(
   let current = "games",
     startX = null,
     lastSwipe = 0;
+  // These three template-owned controls intentionally survive carousel renders.
+  // render() moves them into the new active card before replacing the old track;
+  // never clone them or leave their ownership with a discarded card.
   const play = $("[data-direction-play]"),
     unavailable = $("[data-direction-unavailable]"),
     settings = $("[data-direction-settings]");
   const menu = $("[data-bret-menu]"),
     toggle = $("[data-bret-menu-toggle]");
   if (!menu || !toggle) throw Error("Missing Bret menu controls");
+  const abort = new AbortController();
+  let disposed = false, observer = null, cardAbort = new AbortController();
+  const on = (node, type, handler, signal = abort.signal) => {
+    try {
+      node?.addEventListener(type, handler, { signal });
+    } catch (error) {
+      dispose();
+      throw error;
+    }
+  };
+  function dispose() {
+    if (disposed) return;
+    disposed = true;
+    abort.abort();
+    cardAbort.abort();
+    observer?.disconnect();
+    startX = null;
+    closeMenu();
+  }
   function closeMenu(restore = false) {
     if (!menu || menu.hidden) return;
     menu.hidden = true;
@@ -62,7 +84,7 @@ export function setupDirections(
     toggle.setAttribute("aria-label", "Open Bret menu");
     if (restore) toggle.focus();
   }
-  toggle.addEventListener("click", () => {
+  on(toggle, "click", () => {
     const open = menu.hidden;
     menu.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
@@ -72,17 +94,17 @@ export function setupDirections(
     );
     if (open) menu.querySelector("a,button")?.focus();
   });
-  document.addEventListener("click", (e) => {
+  on(document, "click", (e) => {
     if (!menu?.hidden && !menu.contains(e.target) && !toggle.contains(e.target))
       closeMenu();
   });
-  document.addEventListener("keydown", (e) => {
+  on(document, "keydown", (e) => {
     if (e.key === "Escape" && !menu?.hidden) {
       e.preventDefault();
       closeMenu(true);
     }
   });
-  $("[data-bret-garden]")?.addEventListener("click", () => {
+  on($("[data-bret-garden]"), "click", () => {
     closeMenu();
     onGarden();
   });
@@ -127,13 +149,14 @@ export function setupDirections(
     }
     b.append(img);
     if (active) b.append(plate);
-    b.addEventListener("click", (e) => {
+    on(b, "click", (e) => {
       if (e.detail && performance.now() - lastSwipe < 350) return;
       if (current !== name) show(name);
-    });
+    }, cardAbort.signal);
     return b;
   }
   function alignTrack() {
+    if (disposed) return;
     const i = ORDER.indexOf(current),
       width = $("[data-direction-carousel]").clientWidth;
     if (i < 0 || width < 1) return;
@@ -153,6 +176,9 @@ export function setupDirections(
   }
 
   function render(name) {
+    // Replaced cards must not be retained by the page-lifetime abort signal.
+    cardAbort.abort();
+    cardAbort = new AbortController();
     const d = DIRECTIONS[name],
       i = ORDER.indexOf(name);
     $("[data-direction-title]").textContent = d.heading;
@@ -188,6 +214,7 @@ export function setupDirections(
     }
   }
   function show(name, { notify = true } = {}) {
+    if (disposed) return;
     if (name !== "games" && !DIRECTIONS[name]) name = "breath";
     closeMenu();
     current = name;
@@ -217,7 +244,7 @@ export function setupDirections(
     }
   }
   tabs.forEach((b) =>
-    b.addEventListener("click", () => show(b.dataset.bretTab)),
+    on(b, "click", () => show(b.dataset.bretTab)),
   );
   const carousel = $("[data-direction-carousel]");
   function adjacent(step) {
@@ -225,17 +252,17 @@ export function setupDirections(
       next = i + step;
     if (i >= 0 && next >= 0 && next < ORDER.length) show(ORDER[next]);
   }
-  carousel?.addEventListener("keydown", (e) => {
+  on(carousel, "keydown", (e) => {
     if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
       e.preventDefault();
       adjacent(e.key === "ArrowRight" ? 1 : -1);
       $("[data-direction-card].is-active")?.focus({ preventScroll: true });
     }
   });
-  carousel?.addEventListener("pointerdown", (e) => {
+  on(carousel, "pointerdown", (e) => {
     if (e.isPrimary) startX = e.clientX;
   });
-  carousel?.addEventListener("pointerup", (e) => {
+  on(carousel, "pointerup", (e) => {
     if (startX === null) return;
     const diff = e.clientX - startX;
     startX = null;
@@ -245,12 +272,17 @@ export function setupDirections(
       adjacent(diff < 0 ? 1 : -1);
     }
   });
-  carousel?.addEventListener("pointercancel", () => {
+  on(carousel, "pointercancel", () => {
     startX = null;
   });
-  if (typeof ResizeObserver === "function") {
-    const observer = new ResizeObserver(alignTrack);
-    observer.observe(carousel);
-  } else window.addEventListener("resize", alignTrack);
-  return { show };
+  try {
+    if (typeof ResizeObserver === "function") {
+      observer = new ResizeObserver(alignTrack);
+      observer.observe(carousel);
+    } else on(window, "resize", alignTrack);
+  } catch (error) {
+    dispose();
+    throw error;
+  }
+  return { show, dispose };
 }

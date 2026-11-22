@@ -3,6 +3,8 @@ import { accrueTime, settleGoal } from "./session.mjs";
 import { setupDirections } from "./directions.mjs";
 import { createProgressStore } from "./persistence.mjs";
 import { createViewHistory } from "./navigation.mjs";
+import { setTextIfChanged, playedTimeLabel, formatClock } from "./ui.mjs";
+import { normalizeProgress } from "./progress.mjs";
 import {
   validTier, validMode, validDuration, tierLabel, modeLabel, durationRunLabel,
 } from "./options.mjs";
@@ -30,6 +32,10 @@ function initializationFailure(error) {
   notice.focus({ preventScroll: true });
   root.dispatchEvent?.(new Event("bret:failed"));
 }
+// Host lifecycle callbacks use named declarations as an intentional internal
+// AST test boundary. Reusable rules/state/formatting live in directly imported
+// modules; update the lifecycle contract tests if moving or renaming callbacks.
+// The tests do not execute this browser bootstrap or certify native DOM/AT.
 async function initializeGames(root) {
 const $ = (s) => root.querySelector(s),
   $$ = (s) => [...root.querySelectorAll(s)];
@@ -134,15 +140,10 @@ const STATES = [
     note: "A familiar, gentle task with a clear ending. If playing makes you feel more awake, finish whenever you like.",
   },
 ];
-const empty = () => ({
-  version: 1,
-  totalMs: 0,
-  bonusXP: 0,
-  completed: 0,
-  levels: { moles: 1, firefly: 1, order: 1, landscape: 1 },
-  state: "settle",
-  evening: false,
-  last: null,
+const empty = () => normalizeProgress(null, {
+  gameIds: GAMES.map((game) => game.id),
+  stateIds: STATES.map((state) => state.id),
+  isValidCheckpoint: validLast,
 });
 let db = empty(),
   storage = true,
@@ -161,49 +162,13 @@ let checkpointRequest = null;
 let ticking = false,
   pendingCompletion = null;
 function hydrate(raw) {
-  db = empty();
-  try {
-    const x = JSON.parse(raw || "null");
-    if (
-      x &&
-      x.version === 1 &&
-      Number.isFinite(x.totalMs) &&
-      x.totalMs >= 0 &&
-      x.totalMs < 1e12 &&
-      Number.isFinite(x.bonusXP) &&
-      x.bonusXP >= 0
-    ) {
-      db = { ...db, ...x, levels: { ...db.levels, ...x.levels } };
-      db.bonusXP = Math.min(1e9, Math.floor(db.bonusXP));
-      if (!STATES.some((s) => s.id === db.state)) db.state = "settle";
-      for (const g of GAMES) {
-        if (
-          !Number.isInteger(db.levels[g.id]) ||
-          db.levels[g.id] < 1 ||
-          db.levels[g.id] > 99999
-        )
-          db.levels[g.id] = 1;
-      }
-    }
-  } catch {}
-  if (!validLast(db.last)) db.last = null;
-  if (!GAMES.some((g) => g.id === db.lastStartedGameId))
-    delete db.lastStartedGameId;
-  if (
-    !Number.isSafeInteger(db.completed) ||
-    db.completed < 0 ||
-    db.completed > 1e9
-  )
-    db.completed = 0;
-  const reflection = db.lastReflection;
-  if (
-    !reflection ||
-    !STATES.some((s) => s.id === reflection.state) ||
-    !GAMES.some((g) => g.id === reflection.game) ||
-    !["helpful", "same", "unhelpful"].includes(reflection.value)
-  )
-    delete db.lastReflection;
+  db = normalizeProgress(raw, {
+    gameIds: GAMES.map((game) => game.id),
+    stateIds: STATES.map((state) => state.id),
+    isValidCheckpoint: validLast,
+  });
 }
+
 let browserStorage;
 try {
   browserStorage = globalThis.localStorage;
@@ -216,20 +181,27 @@ const progressStore = createProgressStore({
     storage = false;
     syncAvailability();
     pause("background");
-    notice(
+    storageNotice(
       "Progress changed in another tab. Reload this tab before continuing.",
     );
   },
   onUnavailable: () => {
     storage = false;
-    notice(
+    storageNotice(
       "Saving is unavailable in this browser. You can keep playing; this visit will not be kept after closing.",
     );
   },
 });
 cleanupInitialization = () => {
-  destroy();
-  progressStore.close();
+  try {
+    destroy();
+  } finally {
+    try {
+      directions?.dispose?.();
+    } finally {
+      progressStore.close();
+    }
+  }
 };
 function canPlay() {
   if (storeReady && progressStore.writable) return true;
@@ -256,8 +228,8 @@ async function beginProgress(restored = false) {
   if (state.mode === "closed") return;
   hydrate(state.raw);
   storeReady = true;
-  syncAvailability();
   storage = state.writable && state.mode !== "memory";
+  syncAvailability();
   if (storage) {
     $("[data-storage]").hidden = true;
     $("[data-storage]").textContent = "";
@@ -266,14 +238,14 @@ async function beginProgress(restored = false) {
   renderCatalog();
   renderGameHome();
   if (state.mode === "memory")
-    notice(
+    storageNotice(
       "Saving is unavailable in this browser. You can keep playing; this visit will not be kept after closing.",
     );
   if (restored) viewHistory.restore({ force: true });
   else if (selected && !$("[data-setup]").hidden)
     applySetupPreferences(selected.id);
   if (!state.writable)
-    notice(
+    storageNotice(
       "Games are open in another tab. Close that tab and reload here to continue safely.",
     );
 }
@@ -295,17 +267,11 @@ function validLast(x) {
   );
 }
 if (!validLast(db.last)) db.last = null;
-const fmt = (ms) => {
-  const s = Math.floor(Math.max(0, ms) / 1000);
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-};
+const fmt = formatClock;
 const xp = () => Math.floor(db.totalMs / 15000) + db.bonusXP;
 function totals() {
-  $$("[data-total-xp]").forEach((n) => (n.textContent = `${xp()} XP`));
-  $$("[data-total-time]").forEach(
-    (n) =>
-      (n.textContent = `${Math.floor(db.totalMs / 60000)} minutes of play`),
-  );
+  $$("[data-total-xp]").forEach((node) => setTextIfChanged(node, `${xp()} XP`));
+  $$("[data-total-time]").forEach((node) => setTextIfChanged(node, playedTimeLabel(db.totalMs)));
 }
 function seeded() {
   const a = new Uint32Array(1);
@@ -456,13 +422,19 @@ function checkpoint() {
     runtimeFailure();
   }
 }
-// One shared status surface shows the latest actionable notice. Lock conflicts
-// also disable progress controls; canPlay and runtime recovery repeat the
-// required reload/memory warning, so a later notice cannot enable unsafe play.
-function notice(t) {
-  $("[data-storage]").hidden = false;
-  $("[data-storage]").textContent = t;
+// Storage safety is persistent and independent of transient validation/recovery
+// notices. Changing game views or showing a benign notice cannot erase it.
+function storageNotice(message) {
+  const node = $("[data-storage]");
+  node.hidden = !message;
+  setTextIfChanged(node, message);
 }
+function notice(message) {
+  const node = $("[data-notice]");
+  node.hidden = !message;
+  setTextIfChanged(node, message);
+}
+
 function stop() {
   playing = false;
   if (frameId) cancelAnimationFrame(frameId);
@@ -567,6 +539,7 @@ function hideViews() {
   );
 }
 function library({ focus = true } = {}) {
+  notice("");
   directions?.show("games", { notify: false });
   if (run && controller) checkpoint();
   destroy();
@@ -580,6 +553,7 @@ function library({ focus = true } = {}) {
   if (focus) $("[data-game-home] h1").focus({ preventScroll: true });
 }
 function gameSettings() {
+  notice("");
   directions?.show("games", { notify: false });
   if (run && controller) checkpoint();
   destroy();
@@ -610,6 +584,7 @@ function applySetupPreferences(id) {
   f.elements.duration.value = String(prefs.duration);
 }
 function openSetup(id) {
+  notice("");
   directions?.show("games", { notify: false });
   if (controller) {
     checkpoint();
@@ -706,7 +681,7 @@ function start(options) {
   $("[data-back]").textContent = "← Back to Games";
   $("[data-run-label]").textContent =
     `${run.mode === "stable" ? modeLabel(run.mode) : `Level ${run.level}`} · ${tierLabel(run.tier)} · ${durationRunLabel(run.duration)}`;
-  $("[data-active-time]").textContent = fmt(run.activeMs);
+  setTextIfChanged($("[data-active-time]"), fmt(run.activeMs));
   playing = true;
   lastFrame = 0;
   saveElapsed = 0;
@@ -734,7 +709,6 @@ function pause(reason = "manual") {
   checkpoint();
   if (!run || !controller) return;
   $("[data-play-progress]").setAttribute("aria-live", "polite");
-  $("[data-play-progress]").textContent = "Paused. " + progressText;
   $("[data-stage]").inert = true;
   $("[data-session-bar]").inert = true;
   $("[data-overlay]").hidden = false;
@@ -752,7 +726,15 @@ function pause(reason = "manual") {
       : reason === "resume"
         ? "Take a moment to find your place, then continue when you like. Active play time will start when you continue."
         : "Take your time. Your active play time is paused too.";
-  $("[data-continue]").focus({ preventScroll: true });
+  const title = $("[data-overlay-title]").textContent;
+  const explanation = $("[data-overlay-copy]").textContent;
+  const stopped = title.startsWith("Paused") ? "" : "Play is paused. ";
+  $("[data-play-progress]").textContent = `${title} ${stopped}${explanation} ${progressText}`.trim();
+  const continueButton = $("[data-continue]");
+  // The pause group spans the whole game. Reveal its focused control even when
+  // the Pause button or the current move sits far above the group centre.
+  continueButton.scrollIntoView?.({ block: "center", inline: "nearest", behavior: "instant" });
+  continueButton.focus({ preventScroll: true });
 }
 function resume() {
   if (!run || !controller || document.hidden || !canPlay()) return;
@@ -904,6 +886,7 @@ function discardSavedRun() {
 $("[data-discard-run]").addEventListener("click", discardSavedRun);
 $$("[data-feedback]").forEach((b) =>
   b.addEventListener("click", () => {
+    if (!canPlay()) return;
     $$("[data-feedback]").forEach((x) =>
       x.setAttribute("aria-pressed", String(x === b)),
     );
@@ -918,6 +901,7 @@ $$("[data-feedback]").forEach((b) =>
   }),
 );
 function garden({ focus = true } = {}) {
+  notice("");
   directions?.show("games", { notify: false });
   if (controller) {
     checkpoint();
@@ -992,7 +976,7 @@ function frame(now) {
           if (!playing || !run || !controller) return;
           accrueTime(db, run, dt);
           saveElapsed += dt;
-          $("[data-active-time]").textContent = fmt(run.activeMs);
+          setTextIfChanged($("[data-active-time]"), fmt(run.activeMs));
           if (
             playing &&
             run.duration &&
@@ -1020,6 +1004,7 @@ function frame(now) {
 }
 $("[data-bret-menu-toggle]").addEventListener("click", () => {
   if (playing) pause();
+  totals();
 });
 function renderView(view, { initial = false } = {}) {
   if (GAMES.some((game) => game.id === view)) openSetup(view);

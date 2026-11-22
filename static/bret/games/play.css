@@ -7,4 +7,85 @@
 .bg-landscape{max-width:740px;margin:auto;border-radius:24px;overflow:hidden;border:1px solid #ded1e9;line-height:0}.bg-landscape svg{display:block;width:100%}.bg-pattern-history{display:flex;gap:10px;max-width:720px;overflow-x:auto;margin:18px auto;padding:4px 2px 12px;scrollbar-width:thin}.bg-pattern-token{flex:0 0 84px;text-align:center;border:1px solid #dfd3e7;background:#faf7fc;border-radius:14px;padding:5px 5px 0}.bg-pattern-token small{font-size:10px;font-weight:600;color:#796585}.bg-pattern-token svg{display:block;width:80px;max-width:100%;height:80px}.bg-next-label{font-family:Geologica,Arial,sans-serif;font-size:16px;text-align:center;margin:14px 0}.bg-pattern-choices{display:flex;justify-content:center;gap:16px;max-width:600px;margin:auto}.bg-pattern-choices button{flex:1;max-width:125px;min-width:0;border:1px solid #d4c3e0;border-radius:18px;background:#f8f2fc;padding:9px 8px;font-size:11px;transition:background .15s,transform .15s}.bg-pattern-choices button:hover:not(:disabled){transform:translateY(-3px);background:#e7d8f3}.bg-pattern-choices button svg{width:100%;display:block}.bg-pattern-choices button span{display:block;margin:4px 0;font-weight:700}.bg-pattern-choices button:disabled{opacity:.5;background:#e7e1e9}.bg-rule-guide{max-width:720px;margin:22px auto 0;padding:13px 18px;border:1px solid #e1d5e9;border-radius:16px;font-size:12px;line-height:1.7;color:#6f587b}.bg-rule-guide summary{cursor:pointer;font-weight:700;min-height:24px}.bg-rule-guide p{margin:10px 0 2px}
 @media(max-width:650px){.bg-instructions{margin-bottom:16px}.bg-instructions strong{font-size:18px}.bg-instructions p{font-size:12px}.bg-mole-grid{gap:16px;padding:12px 10px}.bg-hole{min-height:78px}.bg-mole-body{inset:5% 10% 10%}.bg-garden{gap:8px;height:45px}.bg-order-layout{grid-template-columns:1fr;gap:16px}.bg-clues{padding:16px}.bg-clues ol{columns:2;column-gap:22px}.bg-clues li{break-inside:avoid;font-size:12px}.bg-room{max-width:460px;margin:auto}.bg-object-tray button{min-width:45px}.bg-object-tray button svg{width:44px}.bg-pattern-history{gap:7px}.bg-pattern-token{flex-basis:69px}.bg-pattern-token svg{height:65px}.bg-pattern-choices{gap:8px}.bg-pattern-choices button{padding:6px}.bg-flight{border-radius:20px}.bg-steer{gap:9px}.bg-steer button{min-width:86px;padding:8px 12px}.bg-steer>span{font-size:10px}.bg-game-meta{font-size:11px}.bg-feedback{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.bg-stage *{transition:none!important;scroll-behavior:auto!important}.bg-pattern-choices button:hover:not(:disabled){transform:none}}
+/* Evening owns stage surfaces as well as shell tokens. Scene-only paint below
+   leaves question shapes, object identities, timing and difficulty unchanged. */
+.bret-games.is-evening .bg-stage {
+  --bg-ink:#f2eaf8;
+  --bg-muted:#c3b5ce;
+  --bg-accent:#c5ade4;
+  --bg-on-accent:#2c203b;
+  --bg-soft:#493957;
+  --bg-line:#9b88ab;
+  --bg-paper:#332a40;
+  --bg-focus:#dfc5ff;
+}
+.bret-games.is-evening .bg-stage button:focus-visible,
+.bret-games.is-evening .bg-stage summary:focus-visible,
+.bret-games.is-evening .bg-flight:focus-visible {outline-color:var(--bg-focus)}
+.bret-games.is-evening .bg-feedback {color:#d5bedf}
+.bret-games.is-evening .bg-game-meta {color:var(--bg-muted)}
+.bret-games.is-evening .bg-action {color:var(--bg-on-accent)!important}
+.bret-games.is-evening .bg-order-actions button:not(.bg-action),
+.bret-games.is-evening .bg-steer button {background:#493957}
+.bret-games.is-evening .bg-steer button:active {background:#654b79}
+.bret-games.is-evening .bg-garden {border-color:#8a7687;background:radial-gradient(ellipse at bottom,#4a5144,transparent 72%)}
+.bret-games.is-evening .bg-sprout {background:#9b897c}
+.bret-games.is-evening .bg-grown {background:transparent}
+.bret-games.is-evening .bg-grown:before {background:#a3bb9b}
+.bret-games.is-evening .bg-grown:after,
+.bret-games.is-evening .bg-grown i {background:#90ad8d}
+.bret-games.is-evening .bg-mole-grid {background:radial-gradient(ellipse at center,#38323e,#44364e);border-color:#9b88ab}
+.bret-games.is-evening .bg-hole:after {background:#74616b;border-color:#9e8792}
+.bret-games.is-evening .bg-gesture {background:#e3cfaf;color:#493755}
+.bret-games.is-evening .bg-hold .bg-gesture {background:linear-gradient(90deg,#b69bd5 calc(var(--bg-hold-progress,0)*100%),#e2d1ef 0);color:#392449}
+.bret-games.is-evening .bg-hole kbd {opacity:1;color:#f0e3f5;background:#332a40;border-radius:4px;padding:1px 4px}
+.bret-games.is-evening .bg-hole-ring {background:#d9c2ed}
+.bret-games.is-evening .bg-hold .bg-hole-ring {background:#b99bd7}
+.bret-games.is-evening .bg-flight {background:#362c47;border-color:#9b88ab}
+.bret-games.is-evening .bg-flight-wind {background:#44344f;color:#f1dfc2;border-color:#a08caa}
+.bret-games.is-evening .bg-flight>svg>rect {fill:#362c47}
+.bret-games.is-evening .bg-flight>svg>circle {fill:#bfa775}
+.bret-games.is-evening .bg-flight>svg>path:nth-of-type(1) {fill:#655674}
+.bret-games.is-evening .bg-flight>svg>path:nth-of-type(2) {fill:#4f425e}
+.bret-games.is-evening .bg-flight>svg>path:nth-of-type(3) {fill:#627b73}
+.bret-games.is-evening .bg-room {background:linear-gradient(#393341 0 47%,#62536b 47% 49%,#49404e 49%);border-color:#9b88ab;border-bottom-color:#887285}
+.bret-games.is-evening .bg-room-rose {background:linear-gradient(#45333e 0 47%,#735563 47% 49%,#51404b 49%)}
+.bret-games.is-evening .bg-room-lavender {background:linear-gradient(#3d3349 0 47%,#6b567a 47% 49%,#4a4056 49%)}
+.bret-games.is-evening .bg-room:before {background:#baa784}
+/* Object wells retain enough lightness for the original labelled illustrations. */
+.bret-games.is-evening .bg-room-cell {background:#c0b3cb;border-color:#62516e}
+.bret-games.is-evening .bg-room-cell:hover {background:#d3c4df}
+.bret-games.is-evening .bg-room-cell.bg-selected {outline-color:#e7cffd}
+.bret-games.is-evening .bg-room-cell small,
+.bret-games.is-evening .bg-position {color:#30263f}
+.bret-games.is-evening .bg-position {opacity:1}
+.bret-games.is-evening .bg-object-tray button {background:#c0b3cb;color:#30263f;border-color:#9b88ab}
+.bret-games.is-evening .bg-object-tray button[aria-pressed=true] {background:#dac4ed;border-color:#573b6c;box-shadow:0 0 0 2px #573b6c}
+.bret-games.is-evening .bg-object-tray button.bg-placed:not([aria-pressed=true]) {background:#b3bcae}
+/* Retain each object's silhouette and fill hue with readable outline detail. */
+.bret-games.is-evening :is(.bg-room-cell,.bg-object-tray) svg [stroke] {stroke:#55445f}
+.bret-games.is-evening .bg-clues {background:#3d3348;border-color:#9b88ab}
+.bret-games.is-evening .bg-clues li {border-color:#75627f}
+.bret-games.is-evening .bg-clue-ok {color:#b1d6b4}
+.bret-games.is-evening .bg-clue-wrong {color:#efb6c8}
+.bret-games.is-evening .bg-clue-hint {background:#52405f}
+.bret-games.is-evening .bg-decor input {accent-color:#c5ade4}
+.bret-games.is-evening .bg-landscape {border-color:#9b88ab}
+.bret-games.is-evening .bg-landscape>svg>rect:first-child {fill:#362c47}
+.bret-games.is-evening .bg-landscape>svg>rect[opacity] {fill:#332a40}
+.bret-games.is-evening .bg-landscape>svg>circle {fill:#bfa775}
+.bret-games.is-evening .bg-landscape>svg>path:nth-of-type(1) {fill:#655674}
+.bret-games.is-evening .bg-landscape>svg>path:nth-of-type(2) {fill:#4f425e}
+.bret-games.is-evening .bg-landscape>svg>path:nth-of-type(3) {fill:#627b73}
+.bret-games.is-evening .bg-pattern-token,
+.bret-games.is-evening .bg-pattern-choices button {background:#40364a;border-color:#9b88ab}
+.bret-games.is-evening .bg-pattern-token small {color:#c3b5ce}
+.bret-games.is-evening .bg-pattern-choices button:hover:not(:disabled) {background:#574063}
+.bret-games.is-evening .bg-pattern-choices button:disabled {background:#302a38}
+/* Only orientation pointers and count marks become light; shape hues stay data-stable. */
+.bret-games.is-evening :is(.bg-pattern-token,.bg-pattern-choices) svg g>path:first-child,
+.bret-games.is-evening :is(.bg-pattern-token,.bg-pattern-choices) svg>circle {fill:#e4d3f1}
+.bret-games.is-evening .bg-rule-guide {background:#3d3348;color:#c3b5ce;border-color:#9b88ab}
+/* System-colour boundaries remain the final layer in both themes. */
 @media(forced-colors:active){.bg-stage button,.bg-clues,.bg-pattern-token,.bg-rule-guide,.bg-room{border:1px solid ButtonText}.bg-hole:after{background:Canvas;border-color:ButtonText}.bg-hole-ring{background:Highlight}.bg-present{outline:2px solid Highlight}.bg-room-cell{border:1px solid ButtonText}.bg-stage svg{forced-color-adjust:none}}
+@media(forced-colors:active){.bret-games.is-evening .bg-stage button,.bret-games.is-evening .bg-clues,.bret-games.is-evening .bg-pattern-token,.bret-games.is-evening .bg-rule-guide,.bret-games.is-evening .bg-room,.bret-games.is-evening .bg-room-cell{border-color:ButtonText}.bret-games.is-evening .bg-hole:after{background:Canvas;border-color:ButtonText}.bret-games.is-evening .bg-hole-ring{background:Highlight}.bret-games.is-evening .bg-stage button:focus-visible,.bret-games.is-evening .bg-stage summary:focus-visible,.bret-games.is-evening .bg-flight:focus-visible{outline-color:Highlight}}

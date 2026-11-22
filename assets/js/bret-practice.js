@@ -185,6 +185,8 @@ function init(root, trial) {
   }
   function showMode() {
     const mode = form.elements.mode.value;
+    const backToBret = $("[data-bret-return]");
+    if (backToBret) backToBret.href = (document.documentElement.dataset.mountPrefix || "") + "/bret/app#" + (mode === "pmr" ? "physical" : "breath");
     $("[data-standard]").hidden = mode !== "breathing";
     $("[data-custom]").hidden = mode !== "custom";
     $("[data-groups]").hidden = mode !== "pmr";

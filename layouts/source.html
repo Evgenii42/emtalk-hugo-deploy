@@ -132,6 +132,10 @@ Unexpected source content must be reconciled before it can be rendered. */}}
 {{ end }}
 {{ $interestCss := resources.Get "css/interest-controls.css" | fingerprint }}
 <link rel="stylesheet" href="{{ $interestCss.RelPermalink }}" integrity="{{ $interestCss.Data.Integrity }}">
+{{ if eq $page.routeId "/bret" }}
+  {{ $bretLandingCss := resources.Get "css/bret-landing.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $bretLandingCss.RelPermalink }}" integrity="{{ $bretLandingCss.Data.Integrity }}">
+{{ end }}
 {{ if eq $page.routeId "/tapl" }}
   {{ $taplCss := resources.Get "css/tapl.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $taplCss.RelPermalink }}" integrity="{{ $taplCss.Data.Integrity }}">
@@ -155,9 +159,8 @@ Unexpected source content must be reconciled before it can be rendered. */}}
 {{ else if eq $page.routeId "/bret/practice" }}
   {{ partial "bret-practice.html" . }}
 {{ else if eq $page.routeId "/bret" }}
-  {{ with $page.ownedEntry }}
-    {{ partial "bret-launch.html" . }}
-  {{ end }}
+  {{/* Owner-requested complete Bret landing replacement; source archives and footer remain preserved. */}}
+  {{ partial "bret-landing.html" . }}
 {{ else if eq $page.routeId "/dm/workspace" }}
   {{ partial "dm-v2.html" . }}
 {{ else if eq $page.routeId "/dm" }}
@@ -193,7 +196,13 @@ Unexpected source content must be reconciled before it can be rendered. */}}
     {{ partial "ecosystem-next.html" (dict "page" $page) }}
     {{ $ecosystemRendered = true }}
   {{ end }}
-  {{ if or $articlesExperience (eq $page.routeId "/tapl") (eq $page.routeId "/about-us") $testsExperience }}
+  {{ if eq $page.routeId "/bret" }}
+    {{/* Bret inherits section-footer-dm, not the primary Home footer. Keep the
+    original registered footer while replacing only the product body. */}}
+    {{ if and (reflect.IsMap $node) (eq $node.tag "section") (in $analyticsSourceClasses.measuredFooterClasses (index $node.attributes "class")) }}
+      {{ partial "node.html" $node }}
+    {{ end }}
+  {{ else if or $articlesExperience (eq $page.routeId "/tapl") (eq $page.routeId "/about-us") $testsExperience }}
     {{ if and (reflect.IsMap $node) (eq $node.tag "section") (eq (index $node.attributes "class") $analyticsSourceClasses.primaryFooter) }}
       {{ partial "node.html" $node }}
     {{ end }}

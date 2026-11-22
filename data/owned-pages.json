@@ -82,22 +82,14 @@
     "/bret": {
       "mode": "augment",
       "language": "en",
-      "title": "BRET breathing app and free web practice",
-      "lead": "Explore the BRET breathing and relaxation app, or try its free browser practice: five breathing rhythms, custom timing and progressive muscle relaxation. No web account needed.",
+      "title": "Bret: a little space for yourself",
+      "lead": "Breathing, body relaxation and little games, at your own pace. Try Bret on the web or get the Android app.",
       "indexable": true,
       "sections": [],
       "actions": [
         {
-          "label": "Open Bret",
+          "label": "Open Bret web app",
           "path": "/bret/app"
-        },
-        {
-          "label": "Start a free practice",
-          "path": "/bret/practice"
-        },
-        {
-          "label": "Explore four games",
-          "path": "/bret/games"
         }
       ]
     },

@@ -8,6 +8,24 @@ import {
   rememberGameStarted,
 } from "./selection.mjs";
 const root = document.querySelector("[data-games-root]");
+let cleanupInitialization = () => {};
+function initializationFailure(error) {
+  try {
+    cleanupInitialization();
+  } catch {
+    // Recovery stays available even when a partial initialization cannot clean up.
+  }
+  console.error("Bret could not initialize", error);
+  if (!root) return;
+  const notice = root.querySelector("[data-games-load-error]");
+  if (!notice) return;
+  notice.hidden = false;
+  // Keep the recovery link reachable while failed game controls are inert.
+  for (const child of root.children)
+    if (child !== notice && !child.contains(notice)) child.inert = true;
+  notice.focus({ preventScroll: true });
+}
+async function initializeGames(root) {
 const $ = (s) => root.querySelector(s),
   $$ = (s) => [...root.querySelectorAll(s)];
 const KEY = "bret-games-site-v1";
@@ -19,7 +37,7 @@ const GAMES = [
     tag: "Rhythm & reaction",
     description:
       "Meet the little seed keepers. Read the rhythm, choose your next move and bring a garden to life.",
-    how: "Tap a keeper to collect a seed. In the next profiles, a ring asks you to hold. Watch the time rings and choose which keeper to visit first. Collect at least 70% of a wave to complete it.",
+    how: "Tap a keeper to collect a seed. This is a visually timed game: keepers leave when their rings close. Gentle gives you more time and uses taps only; it still has timed misses. Balanced and Curious also ask you to hold. Collect at least 70% of a wave to complete it. For an untimed choice, try A Place for Everything or Hidden Seasons.",
     why: "A clear rhythm and immediate feedback give your attention a concrete task. Choose a pace that feels comfortable.",
     skill: "React & prioritise",
     time: "About 2 minutes",
@@ -134,6 +152,7 @@ let selected = null,
   directions = null,
   progressText = "";
 let frameId = 0;
+let checkpointRequest = null;
 let ticking = false,
   pendingCompletion = null;
 function hydrate(raw) {
@@ -150,6 +169,7 @@ function hydrate(raw) {
       x.bonusXP >= 0
     ) {
       db = { ...db, ...x, levels: { ...db.levels, ...x.levels } };
+      db.bonusXP = Math.min(1e9, Math.floor(db.bonusXP));
       if (!STATES.some((s) => s.id === db.state)) db.state = "settle";
       for (const g of GAMES) {
         if (
@@ -201,6 +221,10 @@ const progressStore = createProgressStore({
     );
   },
 });
+cleanupInitialization = () => {
+  destroy();
+  progressStore.close();
+};
 function canPlay() {
   if (storeReady && progressStore.writable) return true;
   notice(
@@ -392,6 +416,17 @@ function renderCatalog(focusState = null) {
       .find((button) => button.dataset.stateChoice === focusState)
       ?.focus({ preventScroll: true });
 }
+function queueCheckpoint() {
+  if (!run || !controller || runResult?.completed) return;
+  const owner = run;
+  if (checkpointRequest?.owner === owner) return;
+  const request = { owner };
+  checkpointRequest = request;
+  setTimeout(() => {
+    if (checkpointRequest === request) checkpointRequest = null;
+    if (run === owner && playing) checkpoint();
+  }, 1000);
+}
 function checkpoint() {
   if (!run || !controller || runResult?.completed) return;
   try {
@@ -512,7 +547,7 @@ function hideViews() {
     (n) => (n.hidden = true),
   );
 }
-function library() {
+function library({ focus = true } = {}) {
   directions?.show("games", { notify: false });
   if (run && controller) checkpoint();
   destroy();
@@ -523,6 +558,7 @@ function library() {
   renderGameHome();
   history.replaceState(null, "", "#games");
   window.scrollTo({ top: 0, behavior: "instant" });
+  if (focus) $("[data-game-home] h1").focus({ preventScroll: true });
 }
 function gameSettings() {
   directions?.show("games", { notify: false });
@@ -610,6 +646,7 @@ function start(options) {
   $("[data-session]").hidden = false;
   $("[data-overlay]").hidden = true;
   $("[data-stage]").inert = false;
+  $("[data-session-bar]").inert = false;
   progressText = "";
   $("[data-play-progress]").textContent = "";
   $("[data-play-progress]").setAttribute("aria-live", "off");
@@ -627,7 +664,7 @@ function start(options) {
         if (node.textContent !== t) node.textContent = t;
       },
       onComplete: completeScene,
-      onCheckpoint: () => checkpoint(),
+      onCheckpoint: () => queueCheckpoint(),
     });
   } catch (e) {
     console.error("Bret game initialization failed", e);
@@ -671,6 +708,7 @@ function pause(reason = "manual") {
   $("[data-play-progress]").setAttribute("aria-live", "polite");
   $("[data-play-progress]").textContent = "Paused. " + progressText;
   $("[data-stage]").inert = true;
+  $("[data-session-bar]").inert = true;
   $("[data-overlay]").hidden = false;
   $("[data-overlay-title]").textContent =
     reason === "intention"
@@ -687,6 +725,7 @@ function pause(reason = "manual") {
 function resume() {
   if (!run || !controller || document.hidden || !canPlay()) return;
   $("[data-stage]").inert = false;
+  $("[data-session-bar]").inert = false;
   $("[data-overlay]").hidden = true;
   $("[data-play-progress]").setAttribute("aria-live", "off");
   $("[data-play-progress]").textContent = progressText;
@@ -835,7 +874,7 @@ $$("[data-feedback]").forEach((b) =>
     write();
   }),
 );
-function garden() {
+function garden({ focus = true } = {}) {
   directions?.show("games", { notify: false });
   if (controller) {
     checkpoint();
@@ -859,8 +898,8 @@ function garden() {
   }
   history.replaceState(null, "", "#garden");
   window.scrollTo({ top: 0, behavior: "instant" });
+  if (focus) $("[data-garden] h1").focus({ preventScroll: true });
 }
-$$("[data-open-garden]").forEach((b) => b.addEventListener("click", garden));
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) pause("background");
 });
@@ -951,7 +990,7 @@ directions = setupDirections(root, {
 });
 renderCatalog();
 renderGameHome();
-beginProgress();
+const initializingProgress = beginProgress();
 window.addEventListener("pagehide", () => {
   storeReady = false;
   progressStore.close();
@@ -962,20 +1001,24 @@ window.addEventListener("pageshow", (e) => {
     run = null;
     runResult = null;
     selected = null;
-    beginProgress(true);
+    beginProgress(true).catch(initializationFailure);
   }
 });
 const deep = location.hash.slice(1);
 if (GAMES.some((g) => g.id === deep)) openSetup(deep);
-else if (deep === "garden") garden();
+else if (deep === "garden") garden({ focus: false });
 else if (deep === "game-settings") gameSettings();
 else if (
   deep === "games" ||
   document.documentElement.dataset.routeId === "/bret/games"
 )
-  library();
+  library({ focus: false });
 else
   directions.show(
     ["breath", "physical", "meditation"].includes(deep) ? deep : "breath",
     { notify: false },
   );
+await initializingProgress;
+$("[data-games-load-error]").hidden = true;
+}
+if (root) initializeGames(root).catch(initializationFailure);

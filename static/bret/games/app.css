@@ -634,6 +634,8 @@
     height: 160px;
   }
 }
+/* Base responsive layout; the native-app mobile adaptation below intentionally
+   replaces card art height and card-bottom alignment at this same breakpoint. */
 @media (max-width: 760px) {
   .games-main {
     padding: 18px 20px 0;
@@ -822,6 +824,8 @@
 .bret-games.is-evening .games-card-copy {
   background: var(--g-card);
 }
+/* Native-app mobile override layer. Card art height and card-bottom alignment
+   intentionally supersede the base responsive values above. */
 @media (max-width: 760px) {
   html[data-route-id="/bret/app"] .site-header,
   html[data-route-id="/bret/games"] .site-header {
@@ -884,4 +888,47 @@
 }
 .games-empty p {
   margin: 12px 0;
+}
+
+/* The mobile app hides the website header. Keep an independent keyboard entry
+   to the app content; the Bret menu supplies About Bret and site navigation. */
+.bret-app-skip {
+  position: fixed;
+  left: 16px;
+  top: -200px;
+  z-index: 1000;
+  padding: 12px 18px;
+  border: 2px solid var(--g-ink);
+  border-radius: 12px;
+  background: var(--g-card);
+  color: var(--g-ink);
+}
+.bret-app-skip:focus {
+  top: 12px;
+}
+@media (forced-colors: active) {
+  .bret-games,
+  .bret-games .games-card,
+  .bret-games .games-card-copy,
+  .bret-games .games-setup,
+  .bret-games .games-result,
+  .bret-games .games-pause-overlay,
+  .bret-games .games-pause-overlay > div,
+  .bret-games .games-garden,
+  .bret-games .games-empty,
+  .bret-games .games-resume {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+  .bret-games button,
+  .bret-games select,
+  .bret-app-skip {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+  .bret-games a { color: LinkText; }
+  .bret-games :focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
+  .bret-games .games-card-art svg { forced-color-adjust: auto; }
 }

@@ -156,7 +156,7 @@ export function validateDecision(value) {
     requireValue(
       /^(0|[1-9][0-9]*)$/.test(key) &&
         Number(key) < value.pairs.length &&
-        (winner === null || value.pairs[Number(key)].includes(winner)),
+        value.pairs[Number(key)].includes(winner),
     );
   requireValue(
     Array.isArray(value.selected) &&

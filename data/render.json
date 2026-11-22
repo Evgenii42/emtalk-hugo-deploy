@@ -25088,26 +25088,18 @@
       "ownedEntry": {
         "mode": "augment",
         "language": "en",
-        "title": "BRET breathing app and free web practice",
-        "lead": "Explore the BRET breathing and relaxation app, or try its free browser practice: five breathing rhythms, custom timing and progressive muscle relaxation. No web account needed.",
+        "title": "Bret: a little space for yourself",
+        "lead": "Breathing, body relaxation and little games, at your own pace. Try Bret on the web or get the Android app.",
         "indexable": true,
         "sections": [],
         "actions": [
           {
-            "label": "Open Bret",
+            "label": "Open Bret web app",
             "path": "/bret/app"
-          },
-          {
-            "label": "Start a free practice",
-            "path": "/bret/practice"
-          },
-          {
-            "label": "Explore four games",
-            "path": "/bret/games"
           }
         ]
       },
-      "ownedHash": "5a9e112a7772e38edc51554f22455f677a294d77a7a89570672af8ff8d2747f2",
+      "ownedHash": "5b984ed0c31e535de72d63827f12a9065730f51d40b3927a6f96c6e325262ee1",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"

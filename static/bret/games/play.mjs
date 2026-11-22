@@ -346,47 +346,58 @@ export function mountGame(stage, options) {
         `${s.passed} gates passed · ${s.processed.length} / 15 visited · ${s.lights} optional lights`;
       progress(`${s.processed.length}/15 gates · ${s.lights} lights`);
     } else if (id === "order") {
-      stage.querySelectorAll("[data-object]").forEach((b) => {
-        b.setAttribute(
-          "aria-pressed",
-          String(s.selected === +b.dataset.object),
-        );
-        b.classList.toggle("bg-placed", s.positions[+b.dataset.object] >= 0);
-      });
-      stage.querySelectorAll("[data-cell]").forEach((b) => {
-        const i = s.positions.indexOf(+b.dataset.cell),
-          slot = b.querySelector("[data-bg-object]");
-        slot.innerHTML =
-          i >= 0
-            ? icon(names[i].toLowerCase()) + `<small>${names[i]}</small>`
+      const key = JSON.stringify([
+        s.positions,
+        s.selected,
+        s.checked,
+        s.decor,
+        s.history.length,
+        s.done,
+      ]);
+      if (key !== lastView) {
+        lastView = key;
+        stage.querySelectorAll("[data-object]").forEach((b) => {
+          b.setAttribute(
+            "aria-pressed",
+            String(s.selected === +b.dataset.object),
+          );
+          b.classList.toggle("bg-placed", s.positions[+b.dataset.object] >= 0);
+        });
+        stage.querySelectorAll("[data-cell]").forEach((b) => {
+          const i = s.positions.indexOf(+b.dataset.cell),
+            slot = b.querySelector("[data-bg-object]");
+          slot.innerHTML =
+            i >= 0
+              ? icon(names[i].toLowerCase()) + `<small>${names[i]}</small>`
+              : "";
+          b.setAttribute(
+            "aria-label",
+            `Place ${String.fromCharCode(65 + +b.dataset.cell)}${i >= 0 ? ", " + names[i] : ", empty"}`,
+          );
+          b.classList.toggle("bg-selected", i >= 0 && i === s.selected);
+        });
+        stage.querySelectorAll("[data-clue]").forEach((n) => {
+          const value = predicate(
+            s.puzzle.clues[+n.dataset.clue],
+            s.positions,
+            s.puzzle.cols,
+          );
+          n.classList.toggle("bg-clue-ok", s.checked && value === true);
+          n.classList.toggle("bg-clue-wrong", s.checked && value === false);
+          n.querySelector("span").textContent = s.checked
+            ? value === null
+              ? "Pending"
+              : value
+                ? "Fits"
+                : "Revisit"
             : "";
-        b.setAttribute(
-          "aria-label",
-          `Place ${String.fromCharCode(65 + +b.dataset.cell)}${i >= 0 ? ", " + names[i] : ", empty"}`,
+        });
+        stage.querySelector("[data-bg-undo]").disabled =
+          s.history.length === 0 || s.done;
+        progress(
+          `${s.positions.filter((p) => p >= 0).length}/${s.puzzle.n} objects placed`,
         );
-        b.classList.toggle("bg-selected", i >= 0 && i === s.selected);
-      });
-      stage.querySelectorAll("[data-clue]").forEach((n) => {
-        const value = predicate(
-          s.puzzle.clues[+n.dataset.clue],
-          s.positions,
-          s.puzzle.cols,
-        );
-        n.classList.toggle("bg-clue-ok", s.checked && value === true);
-        n.classList.toggle("bg-clue-wrong", s.checked && value === false);
-        n.querySelector("span").textContent = s.checked
-          ? value === null
-            ? "Pending"
-            : value
-              ? "Fits"
-              : "Revisit"
-          : "";
-      });
-      stage.querySelector("[data-bg-undo]").disabled =
-        s.history.length === 0 || s.done;
-      progress(
-        `${s.positions.filter((p) => p >= 0).length}/${s.puzzle.n} objects placed`,
-      );
+      }
     } else {
       const key = s.correct + ":" + s.tried.join(",");
       if (key !== lastView) {

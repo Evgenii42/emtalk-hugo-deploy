@@ -38,7 +38,7 @@ const DIRECTIONS = Object.freeze({
 const ORDER = ["breath", "physical", "meditation"];
 export function setupDirections(
   root,
-  { onGames = () => {}, onLeave = () => {}, onGarden = () => {} } = {},
+  { onGames = () => {}, onLeave = () => {}, onGarden = () => {}, onView = () => {} } = {},
 ) {
   const $ = (s) => root.querySelector(s),
     $$ = (s) => [...root.querySelectorAll(s)],
@@ -54,6 +54,7 @@ export function setupDirections(
     settings = $("[data-direction-settings]");
   const menu = $("[data-bret-menu]"),
     toggle = $("[data-bret-menu-toggle]");
+  if (!menu || !toggle) throw Error("Missing Bret menu controls");
   function closeMenu(restore = false) {
     if (!menu || menu.hidden) return;
     menu.hidden = true;
@@ -61,7 +62,7 @@ export function setupDirections(
     toggle.setAttribute("aria-label", "Open Bret menu");
     if (restore) toggle.focus();
   }
-  toggle?.addEventListener("click", () => {
+  toggle.addEventListener("click", () => {
     const open = menu.hidden;
     menu.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
@@ -199,7 +200,6 @@ export function setupDirections(
       panel.hidden = true;
       if (notify) {
         onGames();
-        history.replaceState(null, "", "#games");
       }
       return;
     }
@@ -210,7 +210,7 @@ export function setupDirections(
     panel.hidden = false;
     render(name);
     if (notify) {
-      history.replaceState(null, "", "#" + name);
+      onView(name);
       $("[data-direction-announcement]").textContent =
         DIRECTIONS[name].heading + " selected.";
       window.scrollTo({ top: 0, behavior: "instant" });

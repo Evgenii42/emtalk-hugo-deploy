@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "scope": "Superseded unadmitted109candidate, validexternal1098/min8",
-  "canonicalSourceCommit": "ebdc6c6da52956b3a0a2c17e744db0fad41c98e6",
-  "stageParentCommit": "a1d4912ebd2df65460f3932943c00f03ec2e90a2",
+  "scope": "Prepared exactBret-only111testcandidate; actualexternalreviewrunning; noadmission/publication",
+  "canonicalSourceCommit": "0f4efd65bbf0f126a6e20938cc552fa61c23b4a5",
+  "stageParentCommit": "e72c985979052f31eaad18ac262e5a6356fe81a0",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
-  "sourceInputSnapshotSha256": "de0852855c9ddca8f0b9925e9ae2ba91ef252f72c750061b35c3a685661705ae",
-  "outputSnapshotSha256": "0e96a5c3c87d6535201fab844d3e542921a428bb3970580a9da993810338e37b",
-  "sourceCount": 589,
+  "sourceInputSnapshotSha256": "c2638bc59535836569d4a7f8316bbbc9a95d00681e9704294b9e9ab532633cae",
+  "outputSnapshotSha256": "77a6ef96056cfbf2ba22797d4a337379568767eaa8059b57b756835c61af30ae",
+  "sourceCount": 590,
   "outputCount": 418,
   "sourceFiles": [
     {
@@ -1751,13 +1751,13 @@
     },
     {
       "path": "static/bret/games/app.css",
-      "bytes": 18453,
-      "sha256": "5e01fbc47732adfd685bd2af77a9988512901dd7cabbaf8ff9fad7b207f48cc3"
+      "bytes": 18767,
+      "sha256": "7efd87d2d21c11e9d6f99f09aa7d0c81179cf9738ca282dad7b13ae61c7f76c0"
     },
     {
       "path": "static/bret/games/app.mjs",
-      "bytes": 37255,
-      "sha256": "ee695b18d41e8e3fc7a2dbb61e213b780c3b968d963d62bb1487901fdd9b7594"
+      "bytes": 38058,
+      "sha256": "33c6e2654d03dc8810e2c33a61876629e13b8cbade212bdd637ddc4eb3fb0420"
     },
     {
       "path": "static/bret/games/core.mjs",
@@ -1771,13 +1771,18 @@
     },
     {
       "path": "static/bret/games/directions.mjs",
-      "bytes": 8685,
-      "sha256": "ca6b9cb6b04304e28840aeeb75e5f61c994ac82e0f71b7d79cdd49855a5db579"
+      "bytes": 8690,
+      "sha256": "1ebe36b0be6421469e856e52be31313f738dd34098a216ea97667a55f839f86b"
     },
     {
       "path": "static/bret/games/home.css",
       "bytes": 2274,
       "sha256": "ae6ddc87b5ad63da91330d398133a9b63930b83e1758af9d9af2a6a7115f2674"
+    },
+    {
+      "path": "static/bret/games/navigation.mjs",
+      "bytes": 2253,
+      "sha256": "437f68e1626e7416118693a6495d97edfcf02a14fd0a41661a09416fa455cd9f"
     },
     {
       "path": "static/bret/games/options.json",
@@ -1801,8 +1806,8 @@
     },
     {
       "path": "static/bret/games/play.mjs",
-      "bytes": 31197,
-      "sha256": "20c24bbf993c7d196620c4d17ac89abfac48e151753cbeec2953f89654cb1caf"
+      "bytes": 32749,
+      "sha256": "a4899953c29d0308fa8f6ac0dc4ecf3d99f64ec46be9be68278ffd31ab2bf245"
     },
     {
       "path": "static/bret/games/selection.mjs",
@@ -2957,13 +2962,6 @@
   ],
   "reviewAdmission": false,
   "published": false,
-  "dmScope": "Deployed legacyDM22owner baseline retained; DMv2 remainsinactive anddevelopedseparately",
-  "sourceRemotePush": "Unconfirmed; finalSSH/HTTPSconnecttimeouts, localGitandbundlepreservework",
-  "externalReview": {
-    "attempt": "audit-2026-11-23-109",
-    "overall": 8,
-    "minimumDimension": 8,
-    "blockers": [],
-    "gatePassed": false
-  }
+  "dmScope": "DeployedlegacyDM22owner graphretained;newDMdevelopmentseparate",
+  "sourceRemotePush": "Unconfirmedconnectivity;localGithistoryandverifiedbundlepreservework"
 }

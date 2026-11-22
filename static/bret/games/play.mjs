@@ -82,12 +82,20 @@ export function mountGame(stage, options) {
     steering = new Map(),
     dragPointer = null,
     flightView = [],
-    flightFly = null;
+    flightFly = null,
+    inputFailure = null;
   if (s.done)
     throw Error("Completed scene cannot be resumed. Start a fresh scene.");
   const abort = new AbortController(),
     on = (node, type, fn) =>
-      node.addEventListener(type, fn, { signal: abort.signal });
+      node.addEventListener(type, (event) => {
+        if (destroyed || inputFailure) return;
+        try {
+          fn(event);
+        } catch (error) {
+          failInput(error);
+        }
+      }, { signal: abort.signal });
   stage.classList.add("bg-stage");
   stage.dataset.game = id;
   const progress = (text) => options.onProgress?.(text),
@@ -97,6 +105,29 @@ export function mountGame(stage, options) {
     const p = stage.querySelector("[data-bg-feedback]");
     if (p) p.textContent = text;
   };
+  function failInput(error) {
+    if (inputFailure || destroyed) return;
+    inputFailure = error instanceof Error ? error : new Error("Game input failed", { cause: error });
+    try {
+      clearInput();
+    } catch {
+      // A DOM failure must not prevent listener cleanup or host recovery.
+    }
+    abort.abort();
+    if (typeof options.onError === "function") {
+      try {
+        options.onError(inputFailure);
+      } catch (recoveryError) {
+        console.error("Bret game recovery failed", recoveryError);
+      }
+    } else {
+      try {
+        announce("This scene stopped unexpectedly. Return to Games to try again.");
+      } catch {
+        // A later guarded host call also receives the stored failure.
+      }
+    }
+  }
   const end = () => {
     if (s.done && !emitted) {
       emitted = true;
@@ -125,7 +156,7 @@ export function mountGame(stage, options) {
             ? "Tap a helper before its ring runs out. Empty holes never cost you points."
             : "Tap the seed symbol. Hold the ring symbol for half a second. Pick the helper leaving soonest.",
         ) +
-        `<div class="bg-garden" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<span class="bg-sprout ${s.hits >= 5 * (i + 1) ? "bg-grown" : ""}"><i></i></span>`).join("")}</div><div class="bg-mole-grid" role="group" aria-label="Nine garden holes">${Array.from({ length: 9 }, (_, i) => `<button type="button" class="bg-hole" data-hole="${i}" aria-label="Empty hole ${i + 1}"><span class="bg-mole-body">${icon("mole")}<span class="bg-gesture"></span></span><span class="bg-hole-ring"></span><kbd>${"QWEASDZXC"[i]}</kbd></button>`).join("")}</div><p class="bg-game-meta" data-bg-score></p>` +
+        `<p id="bg-seed-timing" hidden>This is a visually timed game. Keepers leave when their rings close. Tap before a ring closes; HOLD needs half a second. Gentle uses taps only and gives more time, but still has timed misses. For untimed play, choose A Place for Everything or Hidden Seasons.</p><div class="bg-garden" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<span class="bg-sprout ${s.hits >= 5 * (i + 1) ? "bg-grown" : ""}"><i></i></span>`).join("")}</div><div class="bg-mole-grid" role="group" aria-label="Nine garden holes" aria-describedby="bg-seed-timing">${Array.from({ length: 9 }, (_, i) => `<button type="button" class="bg-hole" data-hole="${i}" aria-label="Empty hole ${i + 1}"><span class="bg-mole-body">${icon("mole")}<span class="bg-gesture"></span></span><span class="bg-hole-ring"></span><kbd>${"QWEASDZXC"[i]}</kbd></button>`).join("")}</div><p class="bg-game-meta" data-bg-score></p>` +
         feedback();
       stage.querySelectorAll("[data-hole]").forEach((b) => {
         on(b, "pointerdown", (e) => {
@@ -592,7 +623,9 @@ export function mountGame(stage, options) {
   }
   return {
     focus() {
-      if (destroyed || s.done) return;
+      if (destroyed) return;
+      if (inputFailure) throw inputFailure;
+      if (s.done) return;
       const entry = KEYBOARD_ENTRY[id], target = stage.querySelector(entry.target);
       if (!target) throw Error("Missing playable game control");
       target.focus({ preventScroll: true });
@@ -600,7 +633,9 @@ export function mountGame(stage, options) {
       announce(entry.instruction);
     },
     tick(dt) {
-      if (destroyed || s.done || !Number.isFinite(dt) || dt <= 0) return;
+      if (destroyed) return;
+      if (inputFailure) throw inputFailure;
+      if (s.done || !Number.isFinite(dt) || dt <= 0) return;
       if (id === "moles") advanceMoles(s, dt);
       else if (id === "firefly") {
         if (steering.size) {
@@ -615,14 +650,19 @@ export function mountGame(stage, options) {
       end();
     },
     snapshot() {
+      if (inputFailure) throw inputFailure;
       return saveState(s);
     },
     pause() {
+      if (destroyed) return;
+      if (inputFailure) throw inputFailure;
       clearInput();
       save();
     },
     hint() {
-      if (destroyed || s.done) return;
+      if (destroyed) return;
+      if (inputFailure) throw inputFailure;
+      if (s.done) return;
       s.hints++;
       s.assisted = true;
       if (id === "moles") {

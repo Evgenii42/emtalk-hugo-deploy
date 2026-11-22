@@ -2,6 +2,7 @@ import { mountGame } from "./play.mjs";
 import { accrueTime, settleGoal } from "./session.mjs";
 import { setupDirections } from "./directions.mjs";
 import { createProgressStore } from "./persistence.mjs";
+import { createViewHistory } from "./navigation.mjs";
 import {
   validTier, validMode, validDuration, tierLabel, modeLabel, durationRunLabel,
 } from "./options.mjs";
@@ -268,7 +269,7 @@ async function beginProgress(restored = false) {
     notice(
       "Saving is unavailable in this browser. You can keep playing; this visit will not be kept after closing.",
     );
-  if (restored) library();
+  if (restored) viewHistory.restore({ force: true });
   else if (selected && !$("[data-setup]").hidden)
     applySetupPreferences(selected.id);
   if (!state.writable)
@@ -455,6 +456,9 @@ function checkpoint() {
     runtimeFailure();
   }
 }
+// One shared status surface shows the latest actionable notice. Lock conflicts
+// also disable progress controls; canPlay and runtime recovery repeat the
+// required reload/memory warning, so a later notice cannot enable unsafe play.
 function notice(t) {
   $("[data-storage]").hidden = false;
   $("[data-storage]").textContent = t;
@@ -571,7 +575,7 @@ function library({ focus = true } = {}) {
   hideViews();
   $("[data-game-home]").hidden = false;
   renderGameHome();
-  history.replaceState(null, "", "#games");
+  recordView("games");
   window.scrollTo({ top: 0, behavior: "instant" });
   if (focus) $("[data-game-home] h1").focus({ preventScroll: true });
 }
@@ -584,7 +588,7 @@ function gameSettings() {
   hideViews();
   $("[data-catalog]").hidden = false;
   renderCatalog();
-  history.replaceState(null, "", "#game-settings");
+  recordView("game-settings");
   window.scrollTo({ top: 0, behavior: "instant" });
   $("[data-catalog] h1").focus({ preventScroll: true });
 }
@@ -628,7 +632,7 @@ function openSetup(id) {
   $("[data-active-time]").textContent = "0:00";
   applySetupPreferences(id);
   $("[data-back]").textContent = "← Game settings";
-  history.replaceState(null, "", `#${id}`);
+  recordView(id);
   window.scrollTo({ top: 0, behavior: "instant" });
   $("[data-player-title]").setAttribute("tabindex", "-1");
   $("[data-player-title]").focus({ preventScroll: true });
@@ -683,6 +687,7 @@ function start(options) {
         if (node.textContent !== t) node.textContent = t;
       },
       onComplete: completeScene,
+      onError: runtimeFailure,
       onCheckpoint: () => queueCheckpoint(),
     });
   } catch (e) {
@@ -889,13 +894,14 @@ function resumeSavedRun() {
   pause("resume");
 }
 $("[data-resume-run]").addEventListener("click", resumeSavedRun);
-$("[data-discard-run]").addEventListener("click", () => {
+function discardSavedRun() {
   if (!canPlay()) return;
   db.last = null;
   write();
   renderCatalog();
   $("[data-catalog] h1").focus({ preventScroll: true });
-});
+}
+$("[data-discard-run]").addEventListener("click", discardSavedRun);
 $$("[data-feedback]").forEach((b) =>
   b.addEventListener("click", () => {
     $$("[data-feedback]").forEach((x) =>
@@ -933,7 +939,7 @@ function garden({ focus = true } = {}) {
     box.append(title, level);
     $("[data-garden-stats]").append(box);
   }
-  history.replaceState(null, "", "#garden");
+  recordView("garden");
   window.scrollTo({ top: 0, behavior: "instant" });
   if (focus) $("[data-garden] h1").focus({ preventScroll: true });
 }
@@ -1015,8 +1021,34 @@ function frame(now) {
 $("[data-bret-menu-toggle]").addEventListener("click", () => {
   if (playing) pause();
 });
+function renderView(view, { initial = false } = {}) {
+  if (GAMES.some((game) => game.id === view)) openSetup(view);
+  else if (view === "game-settings") gameSettings();
+  else if (view === "garden") garden({ focus: !initial });
+  else if (view === "games") library({ focus: !initial });
+  else directions.show(view, { notify: !initial });
+}
+const viewHistory = createViewHistory({
+  history,
+  location,
+  views: ["breath", "physical", "meditation", "games", "game-settings", "garden", ...GAMES.map((game) => game.id)],
+  onNavigate: renderView,
+});
+function recordView(view) {
+  viewHistory.record(view);
+}
+function restoreNavigation() {
+  try {
+    viewHistory.restore();
+  } catch {
+    runtimeFailure();
+  }
+}
+window.addEventListener("popstate", restoreNavigation);
+window.addEventListener("hashchange", restoreNavigation);
 directions = setupDirections(root, {
   onGames: library,
+  onView: recordView,
   onLeave: () => {
     if (run && controller) checkpoint();
     destroy();
@@ -1042,20 +1074,9 @@ window.addEventListener("pageshow", (e) => {
     beginProgress(true).catch(initializationFailure);
   }
 });
-const deep = location.hash.slice(1);
-if (GAMES.some((g) => g.id === deep)) openSetup(deep);
-else if (deep === "garden") garden({ focus: false });
-else if (deep === "game-settings") gameSettings();
-else if (
-  deep === "games" ||
-  document.documentElement.dataset.routeId === "/bret/games"
-)
-  library({ focus: false });
-else
-  directions.show(
-    ["breath", "physical", "meditation"].includes(deep) ? deep : "breath",
-    { notify: false },
-  );
+viewHistory.start(
+  document.documentElement.dataset.routeId === "/bret/games" ? "games" : "breath",
+);
 await initializingProgress;
 root.dataset.gamesReady = "true";
 $("[data-games-load-error]").hidden = true;

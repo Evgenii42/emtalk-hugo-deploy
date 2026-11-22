@@ -658,6 +658,10 @@
   }
 }
 
+/* Scoped app-shell layer: deliberately overrides the reusable base .games-*
+   layout above (main width, heading metrics, card border/copy, footer and stage
+   padding). Keep these shell values together; mobile changes live only in the
+   single760px block below. This layer does not alter the game rules. */
 .bret-games .games-main {
   margin: 0 auto;
   flex: 1;

@@ -1,3 +1,3 @@
-# Superseded Bret candidate109
+# Bret Games testcandidate111
 
-External109 returned8/min8. No admission or publication. New changedsource isreviewedseparately.
+Exact590inputs/418outputs from0f4efd6. Threeindependentlocalreviewspass; actualexternal111running. No admission/publication. ExistinglegacyDM retained. Onlyinterest032testtarget, no productionmain/DNS.

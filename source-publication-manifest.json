@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Prepared exact Bret-only test candidate; external review running; no admission or publication",
+  "scope": "Superseded unadmitted Bret-only108 candidate; valid external108 returned8/min7",
   "canonicalSourceCommit": "c6e9949f4276be890f48934febece0c7bfc8ccc7",
   "stageParentCommit": "d0f9793fddd03033147be05af3246371631dda04",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
@@ -2933,5 +2933,12 @@
   "reviewAdmission": false,
   "published": false,
   "dmScope": "Preserved deployed legacy DM dependencies; new DM development is deferred to separate chat",
-  "sourceRemotePush": "Forgejo unavailable; local history and recovery bundle pending"
+  "sourceRemotePush": "Forgejo unavailable; local history and recovery bundle pending",
+  "externalReview": {
+    "attempt": "audit-2026-11-23-108",
+    "overall": 8,
+    "minimumDimension": 7,
+    "blockers": [],
+    "gatePassed": false
+  }
 }

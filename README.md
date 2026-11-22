@@ -1,3 +1,3 @@
-# Bret Games test candidate108
+# Superseded Bret Games candidate108
 
-Prepared from c6e9949, exact source/output bound in source-publication-manifest.json. External review is running. No admission or publication claimed. Existing legacy DM remains active. Production main and DNS are outside this test increment.
+The exact c6e9949 source/output candidate was prepared and cold-built. External108 returned8/min7, below the project gate. No admission or publication. Findings are being resolved in the next revision.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Prepared exact Bret-only109 test candidate; externalreview109running; no admission or publication",
+  "scope": "Superseded unadmitted109candidate, validexternal1098/min8",
   "canonicalSourceCommit": "ebdc6c6da52956b3a0a2c17e744db0fad41c98e6",
   "stageParentCommit": "a1d4912ebd2df65460f3932943c00f03ec2e90a2",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
@@ -2958,5 +2958,12 @@
   "reviewAdmission": false,
   "published": false,
   "dmScope": "Deployed legacyDM22owner baseline retained; DMv2 remainsinactive anddevelopedseparately",
-  "sourceRemotePush": "Unconfirmed; finalSSH/HTTPSconnecttimeouts, localGitandbundlepreservework"
+  "sourceRemotePush": "Unconfirmed; finalSSH/HTTPSconnecttimeouts, localGitandbundlepreservework",
+  "externalReview": {
+    "attempt": "audit-2026-11-23-109",
+    "overall": 8,
+    "minimumDimension": 8,
+    "blockers": [],
+    "gatePassed": false
+  }
 }

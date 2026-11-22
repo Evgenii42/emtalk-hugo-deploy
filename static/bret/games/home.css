@@ -1,15 +1,10 @@
-.bret-games .games-main:has(> [data-game-home]:not([hidden])) {
-  padding: 0;
-  width: 100%;
-  max-width: 1260px;
-}
 .bret-game-home-carousel {
   display: flex;
   justify-content: center;
   padding: 14px 16px;
 }
 .bret-games .bret-game-home-card {
-  width: 312px;
+  width: var(--g-feature-card-narrow);
   max-width: 100%;
   height: 400px;
   flex: none;
@@ -39,7 +34,7 @@
   display: grid;
   place-items: center;
   padding: 23px;
-  background: rgb(255 255 255 / 0.48);
+  background: var(--g-play-overlay);
 }
 .bret-game-play > img {
   width: 32px;
@@ -99,7 +94,7 @@
     padding: 16px 24px;
   }
   .bret-games .bret-game-home-card {
-    width: 440px;
+    width: var(--g-feature-card-wide);
   }
 }
 @media (forced-colors: active) {

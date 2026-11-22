@@ -263,6 +263,7 @@ export function setupDirections(
     if (e.isPrimary) startX = e.clientX;
   });
   on(carousel, "pointerup", (e) => {
+    if (e.isPrimary === false) return;
     if (startX === null) return;
     const diff = e.clientX - startX;
     startX = null;
@@ -273,6 +274,11 @@ export function setupDirections(
     }
   });
   on(carousel, "pointercancel", () => {
+    startX = null;
+  });
+  // No pointer capture: nested Play/settings controls retain native activation.
+  // A release outside the carousel must not finish an abandoned later gesture.
+  on(carousel, "pointerleave", () => {
     startX = null;
   });
   try {

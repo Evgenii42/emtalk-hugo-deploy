@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "scope": "Prepared Bret113 candidate rejected by actual external static review; never admitted or published",
-  "canonicalSourceCommit": "53c6474f2a1bc66188d28af31e824dea6be4e44b",
-  "stageParentCommit": "7c1a214",
+  "scope": "Prepared exact Bret-only116 test candidate; unadmitted and unpublished pending final external review",
+  "canonicalSourceCommit": "f727e9f44dd02cefe350237ccfb2576f18ad77d9",
+  "stageParentCommit": "e8c1695",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
-  "sourceInputSnapshotSha256": "258ebf3bc7436f5a6e098dc62e4ea3fa0e61bef7cdd86c2ceb8dd8dabde8225b",
-  "outputSnapshotSha256": "eab29ec463b191904d2108593780b3815ddb2fb4b0f0a9b4ba552274d4b9d58c",
+  "sourceInputSnapshotSha256": "2e64eeec265099d72abd019582f7fc6cc1f404739d6f9caa28376b7e88921db4",
+  "outputSnapshotSha256": "69214ffbcc0f869243d005c6bc2fefb67a86ea542d86d537e432eefab844c880",
   "sourceCount": 595,
   "outputCount": 421,
   "sourceFiles": [
@@ -376,8 +376,8 @@
     },
     {
       "path": "assets/js/bret-copy.js",
-      "bytes": 4495,
-      "sha256": "d4b47c7a1cb663d770f59704289bf3070c9efd2b384cde394555a0e494971773"
+      "bytes": 4661,
+      "sha256": "b8eaf20a6b944c23bb8ad2aea0aed1c86086c985930f0e9438ecae6737b4e264"
     },
     {
       "path": "assets/js/bret-cues.js",
@@ -401,8 +401,8 @@
     },
     {
       "path": "assets/js/bret-practice.js",
-      "bytes": 23756,
-      "sha256": "b028b2ec046af0e03750154e23340e2fb7435f5e44d4f4f7d6c136cc1c9a2e62"
+      "bytes": 23643,
+      "sha256": "ed0da1fd202f4a03ba2db3bf8d37cc429d2137dc2040332d74297fcd8a6983c7"
     },
     {
       "path": "assets/js/bret-startup.js",
@@ -541,8 +541,8 @@
     },
     {
       "path": "assets/js/scroll.js",
-      "bytes": 5796,
-      "sha256": "8e4ebc6515e4d0f9f21f89747ae2a9e7cd8b1098ee263f01792fc7442a8f7510"
+      "bytes": 6189,
+      "sha256": "4f8252ef46d651da03dc683f3d6588fa7ab64efb110600d75cfe6df9e7b61757"
     },
     {
       "path": "assets/js/site-navigation.js",
@@ -1076,8 +1076,8 @@
     },
     {
       "path": "layouts/partials/bret-games.html",
-      "bytes": 7814,
-      "sha256": "4cfb6d83d505e3680dbc38fca0bae06b776ab2a652834b7e5ac857754c3894ed"
+      "bytes": 8023,
+      "sha256": "0e9372b5f7c3d5193c2893d8527e4cbfe907b58f87b2e7bab50715c64fa97d55"
     },
     {
       "path": "layouts/partials/bret-landing-game-art.html",
@@ -1751,33 +1751,33 @@
     },
     {
       "path": "static/bret/games/app.css",
-      "bytes": 18781,
-      "sha256": "1b0ca540f7f9a93547b4ff670cae78ad43a1d4c3f80b42020355220fabe2c808"
+      "bytes": 19771,
+      "sha256": "71d7af5b75623bf77cc25f8deafb0ac0a7e93ffbde6fb69ed33481139309a677"
     },
     {
       "path": "static/bret/games/app.mjs",
-      "bytes": 38109,
-      "sha256": "281f9f927c4a9c35a5d2ce110a3a373800c50bc635965b4b49308772bd08aef3"
+      "bytes": 39781,
+      "sha256": "5b57b1a125e7997a5b38ba076ca7413df5913675c8aadfdcb47b8b068facf3f5"
     },
     {
       "path": "static/bret/games/core.mjs",
-      "bytes": 14665,
-      "sha256": "612fd8be027ec877c3ea17bc192add97595276fdd43c22d5bcde4f0f2efd910c"
+      "bytes": 15135,
+      "sha256": "77c41fd497c07a51b650a256e49a6fd2e2e55e32f6e44cbe4448bf2cfddd576a"
     },
     {
       "path": "static/bret/games/directions.css",
-      "bytes": 8933,
-      "sha256": "2c2aa6db4358bfad7244e45327cbb09d45921143d0f1ba6c489d4f92e72475ce"
+      "bytes": 8474,
+      "sha256": "b8b7c5a2b8bc51e7cc8bee1971067720a6f9dc033e0e8185d4481b637c8a5a10"
     },
     {
       "path": "static/bret/games/directions.mjs",
-      "bytes": 9554,
-      "sha256": "e79fc9a89cabbe83b7f83342c7614f7931be8fcfe5f4feb70c466a029538e93f"
+      "bytes": 9818,
+      "sha256": "292c161b6606db7c3b2ff62647766fd2a6e064095ff57c2881dddbc937009553"
     },
     {
       "path": "static/bret/games/home.css",
-      "bytes": 2274,
-      "sha256": "ae6ddc87b5ad63da91330d398133a9b63930b83e1758af9d9af2a6a7115f2674"
+      "bytes": 2200,
+      "sha256": "0550afdb4c99bef2ad598f2917fcd32e44bc2e4a0888122366041703b5e84063"
     },
     {
       "path": "static/bret/games/navigation.mjs",
@@ -1806,8 +1806,8 @@
     },
     {
       "path": "static/bret/games/play.mjs",
-      "bytes": 33495,
-      "sha256": "10729f6de184fe0710e7505f8d7f16e8c1246eb620a15f53a29a5b25933034f5"
+      "bytes": 34255,
+      "sha256": "71976fe8c079b0f6fe0bca62953cbd2bd6148f61aef7a90b35d8b71454fe41c2"
     },
     {
       "path": "static/bret/games/progress.mjs",
@@ -2988,11 +2988,5 @@
   "reviewAdmission": false,
   "published": false,
   "dmScope": "Deployed legacy DM22-owner graph retained; new DM development separate",
-  "sourceRemotePush": "Unconfirmed connectivity; local Git and recovery bundle preserve work",
-  "externalReview": {
-    "name": "audit-2026-11-23-113",
-    "overall": 8,
-    "minimumDimension": 7,
-    "numericGatePassed": false
-  }
+  "sourceRemotePush": "Unconfirmed connectivity; local Git and recovery bundle preserve work"
 }

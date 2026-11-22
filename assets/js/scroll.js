@@ -81,7 +81,13 @@ export function initScroll() {
         // entry. These synchronous scrolls have no intervening rendered frame.
         const x = scrollX, y = scrollY;
         scrollTo(pending.x, pending.y);
-        history.pushState({ hash: url.hash }, '', url.hash);
+        // Same-document anchors also belong to embedded app history. Keep its
+        // entry metadata: pushState emits no hashchange for the app to repair it.
+        const previousState = history.state;
+        const anchorState = previousState && typeof previousState === 'object' && !Array.isArray(previousState)
+          ? { ...previousState, hash: url.hash }
+          : { hash: url.hash };
+        history.pushState(anchorState, '', url.hash);
         scrollTo(x, y);
       }
       const previous = target.getAttribute('tabindex');

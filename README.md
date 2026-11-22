@@ -1,1 +1,1 @@
-Prepared Bret113 test candidate. External static review8/min7 failed the repository gate. Unadmitted and unpublished. Follow-up addresses saved-place replacement and restoration. No production changes.
+Prepared Bret Games116 test candidate. Only approved test alias interest032.emtalk-hugo-deploy.pages.dev. Final external review required; unadmitted and unpublished. Exact source/output hashes in source-publication-manifest.json. No production changes.

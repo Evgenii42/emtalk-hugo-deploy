@@ -48,7 +48,7 @@ const GAMES = [
     tag: "Rhythm & reaction",
     description:
       "Meet the little seed keepers. Read the rhythm, choose your next move and bring a garden to life.",
-    how: "Tap a keeper to collect a seed. This is a visually timed game: keepers leave when their rings close. Gentle gives you more time and uses taps only; it still has timed misses. Balanced and Curious also ask you to hold. Collect at least 70% of a wave to complete it. For an untimed choice, try A Place for Everything or Hidden Seasons.",
+    how: "Tap a keeper to collect a seed. This is a visually timed game: keepers leave when their rings close. Gentle gives you more time and uses taps only; it still has timed misses. Balanced and Curious also ask you to hold. A wave ends after 50 helpers. Collect at least 70% to meet its goal. For an untimed choice, try A Place for Everything or Hidden Seasons.",
     why: "A clear rhythm and immediate feedback give your attention a concrete task. Choose a pace that feels comfortable.",
     skill: "React & prioritise",
     time: "About 2 minutes",
@@ -242,8 +242,10 @@ async function beginProgress(restored = false) {
       "Saving is unavailable in this browser. You can keep playing; this visit will not be kept after closing.",
     );
   if (restored) viewHistory.restore({ force: true });
-  else if (selected && !$("[data-setup]").hidden)
+  else if (selected && !$("[data-setup]").hidden) {
     applySetupPreferences(selected.id);
+    showReplacementChoice();
+  }
   if (!state.writable)
     storageNotice(
       "Games are open in another tab. Close that tab and reload here to continue safely.",
@@ -552,7 +554,7 @@ function library({ focus = true } = {}) {
   window.scrollTo({ top: 0, behavior: "instant" });
   if (focus) $("[data-game-home] h1").focus({ preventScroll: true });
 }
-function gameSettings() {
+function gameSettings({ focus = true } = {}) {
   notice("");
   directions?.show("games", { notify: false });
   if (run && controller) checkpoint();
@@ -564,7 +566,7 @@ function gameSettings() {
   renderCatalog();
   recordView("game-settings");
   window.scrollTo({ top: 0, behavior: "instant" });
-  $("[data-catalog] h1").focus({ preventScroll: true });
+  if (focus) $("[data-catalog] h1").focus({ preventScroll: true });
 }
 function playHomeGame() {
   if (!canPlay()) return;
@@ -583,7 +585,7 @@ function applySetupPreferences(id) {
   f.elements.tier.value = String(prefs.tier);
   f.elements.duration.value = String(prefs.duration);
 }
-function openSetup(id) {
+function openSetup(id, { focus = true } = {}) {
   notice("");
   directions?.show("games", { notify: false });
   if (controller) {
@@ -606,13 +608,23 @@ function openSetup(id) {
   $("[data-setup-art]").innerHTML = art(id);
   $("[data-active-time]").textContent = "0:00";
   applySetupPreferences(id);
+  showReplacementChoice();
   $("[data-back]").textContent = "← Game settings";
   recordView(id);
   window.scrollTo({ top: 0, behavior: "instant" });
   $("[data-player-title]").setAttribute("tabindex", "-1");
-  $("[data-player-title]").focus({ preventScroll: true });
+  if (focus) $("[data-player-title]").focus({ preventScroll: true });
 }
-function start(options) {
+function showReplacementChoice() {
+  const saved = validLast(db.last) ? db.last : null;
+  const note = $("[data-replace-note]");
+  note.hidden = !saved;
+  note.textContent = saved
+    ? `Starting a fresh scene replaces your paused ${GAMES.find((g) => g.id === saved.id).name} at ${fmt(saved.activeMs)}. Your total play time and XP stay.`
+    : "";
+  $("[data-setup-start]").textContent = saved ? "Replace paused scene and play" : "Let's play";
+}
+function start(options, { replaceSaved = false } = {}) {
   if (!canPlay()) return;
   if (!validTier(options.tier) || !validMode(options.mode) || !validDuration(options.duration)) {
     notice("Choose a challenge, pace and time from the game settings before starting.");
@@ -620,6 +632,12 @@ function start(options) {
   }
   const game = selected;
   if (!game) return;
+  if (!options.snapshot && db.last && validLast(db.last) && !replaceSaved) {
+    openSetup(game.id);
+    notice("Your paused scene is still kept. Review the replacement note before starting a fresh scene.");
+    return;
+  }
+  notice("");
   destroy();
   if (selected !== game) return;
   run = {
@@ -668,13 +686,13 @@ function start(options) {
   } catch (e) {
     console.error("Bret game initialization failed", e);
     destroy();
-    if (options.snapshot && db.last?.id === game.id) db.last = null;
-    write();
-    $("[data-session]").hidden = true;
-    $("[data-setup]").hidden = false;
-    notice(
-      "This scene could not be opened. Choose your pace to try a fresh scene.",
-    );
+    // A failed restore/mount never consumes the saved slot. Only an explicit
+    // replacement action may replace it after the player sees the warning.
+    run = null;
+    openSetup(game.id);
+    notice(e?.code === "BRET_INVALID_CHECKPOINT"
+      ? "Your saved scene could not be restored. It is still kept. Start a fresh scene below to replace it; your total play time and XP stay."
+      : "This scene could not be opened. Any paused scene is still kept. Choose your pace to try a fresh scene.");
     return;
   }
   rememberGameStarted(db, run);
@@ -700,7 +718,7 @@ $("[data-setup-form]").addEventListener("submit", (e) => {
     tier: Number(f.elements.tier.value),
     mode: f.elements.mode.value,
     duration: Number(f.elements.duration.value),
-  });
+  }, { replaceSaved: !$("[data-replace-note]").hidden });
 });
 function pause(reason = "manual") {
   if (!run || !controller || !playing) return;
@@ -717,6 +735,8 @@ function pause(reason = "manual") {
       ? "Your little time intention is complete."
       : reason === "background"
         ? "Paused while you were away."
+        : reason === "focus"
+          ? "Paused for a change of focus."
         : reason === "resume"
           ? "Your scene is ready."
           : "Paused. Your place is kept.";
@@ -725,7 +745,9 @@ function pause(reason = "manual") {
       ? "Finish for now, or stay with this scene a little longer. No need to hurry."
       : reason === "resume"
         ? "Take a moment to find your place, then continue when you like. Active play time will start when you continue."
-        : "Take your time. Your active play time is paused too.";
+        : reason === "focus"
+          ? "The window lost focus. Your active play time is paused too. Continue when ready."
+          : "Take your time. Your active play time is paused too.";
   const title = $("[data-overlay-title]").textContent;
   const explanation = $("[data-overlay-copy]").textContent;
   const stopped = title.startsWith("Paused") ? "" : "Play is paused. ";
@@ -851,7 +873,7 @@ $("[data-next]").addEventListener("click", () => {
     mode: previous.mode,
     duration: previous.duration,
     level: nextLevel,
-  });
+  }, { replaceSaved: true });
 });
 $("[data-retry]").addEventListener("click", () => {
   if (!run) return;
@@ -912,7 +934,7 @@ function garden({ focus = true } = {}) {
   $("[data-garden]").hidden = false;
   $("[data-garden-art]").innerHTML = art("moles");
   $("[data-garden-summary]").textContent =
-    `${Math.floor(db.totalMs / 60000)} minutes for yourself, ${xp()} XP and ${db.completed} scenes played. Every comfortable pace counts.`;
+    `${playedTimeLabel(db.totalMs)}, ${xp()} XP and ${db.completed} scenes played. Every comfortable pace counts.`;
   $("[data-garden-stats]").replaceChildren();
   for (const g of GAMES) {
     const box = document.createElement("div");
@@ -930,17 +952,22 @@ function garden({ focus = true } = {}) {
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) pause("background");
 });
-window.addEventListener("blur", () => pause("background"));
+window.addEventListener("blur", () => pause("focus"));
 window.addEventListener("pagehide", () => {
   if (playing) pause("background");
   else if (run && controller) checkpoint();
 });
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && playing) {
+function handlePauseKey(e) {
+  if (e.key !== "Escape" || e.repeat || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  if (playing) {
     e.preventDefault();
     pause();
+  } else if (run && controller && !$("[data-overlay]").hidden && $("[data-overlay]").contains(e.target)) {
+    e.preventDefault();
+    resume();
   }
-});
+}
+document.addEventListener("keydown", handlePauseKey);
 function scheduleFrame() {
   if (playing && !frameId) frameId = requestAnimationFrame(frame);
 }
@@ -1007,8 +1034,8 @@ $("[data-bret-menu-toggle]").addEventListener("click", () => {
   totals();
 });
 function renderView(view, { initial = false } = {}) {
-  if (GAMES.some((game) => game.id === view)) openSetup(view);
-  else if (view === "game-settings") gameSettings();
+  if (GAMES.some((game) => game.id === view)) openSetup(view, { focus: !initial });
+  else if (view === "game-settings") gameSettings({ focus: !initial });
   else if (view === "garden") garden({ focus: !initial });
   else if (view === "games") library({ focus: !initial });
   else directions.show(view, { notify: !initial });

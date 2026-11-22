@@ -1,5 +1,5 @@
 import {
-  restoreState,
+  restoreCheckpoint,
   saveState,
   activeMoles,
   hitMole,
@@ -15,6 +15,13 @@ import {
   FLIGHT_PROFILES,
   clamp,
 } from "./core.mjs";
+export class InvalidCheckpointError extends Error {
+  constructor(message = "The saved scene could not be restored. Choose a new scene to replace it.") {
+    super(message);
+    this.name = "InvalidCheckpointError";
+    this.code = "BRET_INVALID_CHECKPOINT";
+  }
+}
 const names = ["Lamp", "Plant", "Book", "Cup", "Postcard", "Clock"];
 const shapes = ["circle", "leaf", "diamond"];
 const KEYBOARD_ENTRY = {
@@ -73,7 +80,11 @@ function clueText(c, cols = 3) {
 }
 export function mountGame(stage, options) {
   const { id, tier = 0, seed = 1, resume = null } = options;
-  let s = restoreState(resume, id, tier, seed),
+  const restored = restoreCheckpoint(resume, id, tier, seed);
+  if (restored.state.done)
+    throw new InvalidCheckpointError("Completed scene cannot be resumed. Start a fresh scene.");
+  if (resume !== null && !restored.accepted) throw new InvalidCheckpointError();
+  let s = restored.state,
     destroyed = false,
     emitted = false,
     holdPointer = null,
@@ -87,8 +98,6 @@ export function mountGame(stage, options) {
   // A mount retains the same nine hole controls until destroy; cache only the
   // strings successfully written to those controls, not simulation state.
   const moleViews = new WeakMap();
-  if (s.done)
-    throw Error("Completed scene cannot be resumed. Start a fresh scene.");
   const abort = new AbortController(),
     on = (node, type, fn) =>
       node.addEventListener(type, (event) => {
@@ -157,9 +166,9 @@ export function mountGame(stage, options) {
           "One seed at a time",
           tier === 0
             ? "Tap a helper before its ring runs out. Empty holes never cost you points."
-            : "Tap the seed symbol. Hold the ring symbol for half a second. Pick the helper leaving soonest.",
+            : "Tap the seed symbol. Hold the ring symbol for about half a second. Pick the helper leaving soonest.",
         ) +
-        `<p id="bg-seed-timing" hidden>This is a visually timed game. Keepers leave when their rings close. Tap before a ring closes; HOLD needs half a second. Gentle uses taps only and gives more time, but still has timed misses. For untimed play, choose A Place for Everything or Hidden Seasons.</p><div class="bg-garden" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<span class="bg-sprout ${s.hits >= 5 * (i + 1) ? "bg-grown" : ""}"><i></i></span>`).join("")}</div><div class="bg-mole-grid" role="group" aria-label="Nine garden holes" aria-describedby="bg-seed-timing">${Array.from({ length: 9 }, (_, i) => `<button type="button" class="bg-hole" data-hole="${i}" aria-label="Empty hole ${i + 1}"><span class="bg-mole-body">${icon("mole")}<span class="bg-gesture"></span></span><span class="bg-hole-ring"></span><kbd>${"QWEASDZXC"[i]}</kbd></button>`).join("")}</div><p class="bg-game-meta" data-bg-score></p>` +
+        `<p id="bg-seed-timing" hidden>This is a visually timed game. Keepers leave when their rings close. Tap before a ring closes; HOLD needs about half a second. Gentle uses taps only and gives more time, but still has timed misses. For untimed play, choose A Place for Everything or Hidden Seasons.</p><div class="bg-garden" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<span class="bg-sprout ${s.hits >= 5 * (i + 1) ? "bg-grown" : ""}"><i></i></span>`).join("")}</div><div class="bg-mole-grid" role="group" aria-label="Nine garden holes" aria-describedby="bg-seed-timing">${Array.from({ length: 9 }, (_, i) => `<button type="button" class="bg-hole" data-hole="${i}" aria-label="Empty hole ${i + 1}"><span class="bg-mole-body">${icon("mole")}<span class="bg-gesture"></span></span><span class="bg-hole-ring"></span><kbd>${"QWEASDZXC"[i]}</kbd></button>`).join("")}</div><p class="bg-game-meta" data-bg-score></p>` +
         feedback();
       stage.querySelectorAll("[data-hole]").forEach((b) => {
         on(b, "pointerdown", (e) => {
@@ -642,8 +651,15 @@ export function mountGame(stage, options) {
       if (s.done) return;
       const entry = KEYBOARD_ENTRY[id], target = stage.querySelector(entry.target);
       if (!target) throw Error("Missing playable game control");
-      target.focus({ preventScroll: true });
-      target.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+      if (id === "moles") {
+        const board = stage.querySelector(".bg-mole-grid");
+        if (!board) throw Error("Missing playable game board");
+        board.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+        target.focus({ preventScroll: true });
+      } else {
+        target.focus({ preventScroll: true });
+        target.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+      }
       announce(entry.instruction);
     },
     tick(dt) {
@@ -683,7 +699,7 @@ export function mountGame(stage, options) {
         announce(
           tier === 0
             ? "Watch the shrinking ring. Tap the helper before it closes."
-            : "A TAP needs one click. A HOLD needs half a second. Start with the ring that is closing first.",
+            : "A TAP needs one click. A HOLD needs about half a second. Start with the ring that is closing first.",
         );
       } else if (id === "firefly") {
         announce(

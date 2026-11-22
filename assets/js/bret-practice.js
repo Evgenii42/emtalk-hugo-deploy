@@ -366,7 +366,7 @@ function init(root, trial) {
       introState = "idle";
       silentAll();
       view("finish");
-      $("[data-summary]").textContent = "The practice could not continue because of a browser timing error. This practice was not completed. Choose another practice to try again.";
+      $("[data-summary]").textContent = copy.runtimeFailureSummary;
       focusHeading("#bret-finish-heading");
     } catch {
       const notice = $("[data-bret-load-error]");

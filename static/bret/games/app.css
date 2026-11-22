@@ -17,11 +17,43 @@
   font-display: swap;
 }
 .bret-games {
-  --g-page: #e8def8;
-  --g-card: #fff;
-  --g-ink: #353438;
+  --g-day-page: #e8def8;
+  --g-day-ink: #353438;
+  --g-day-purple: #715595;
+  --g-white: #fff;
+  --g-main-width: 1100px;
+  --g-view-width: 1260px;
+  --g-main-inset: 54px;
+  --g-feature-card-narrow: 312px;
+  --g-feature-card-wide: 440px;
+  --g-card-line: #c4c3c6;
+  --g-on-primary: var(--g-white);
+  --g-primary-hover: #5c447b;
+  --g-pause-background: #f7f2fbef;
+  --g-pause-copy: #635570;
+  --g-badge-background: #ffffffed;
+  --g-badge-ink: #5f477b;
+  --g-direction-ink: var(--g-day-ink);
+  --g-menu-background: #fffdfef5;
+  --g-menu-hover: #eee5f8;
+  --g-menu-muted: #736a7f;
+  --g-menu-shadow: 0 12px 40px #43314b1a;
+  --g-evening-wash: #30263f;
+  --g-play-overlay: rgb(255 255 255 / .48);
+  --g-glass-white: rgb(255 255 255 / .64);
+  --g-tabs-background: var(--g-glass-white);
+  --g-tabs-line: rgb(196 195 198 / .35);
+  --g-tabs-ink: var(--g-day-purple);
+  --g-tabs-on-active: var(--g-white);
+  --g-tabs-hover: #f0e8f8;
+  --g-tabs-active-hover: #60477f;
+  --g-chip-line: #ecebed;
+  --g-coming-soon: #bb59b5;
+  --g-page: var(--g-day-page);
+  --g-card: var(--g-white);
+  --g-ink: var(--g-day-ink);
   --g-muted: #62576d;
-  --g-purple: #715595;
+  --g-purple: var(--g-day-purple);
   --g-soft: #eee5f8;
   --g-line: #c9c2d5;
   --g-surface: #f4eff8;
@@ -97,27 +129,34 @@
 }
 .bret-games .games-primary {
   background: var(--g-purple);
-  color: #fff;
+  color: var(--g-on-primary);
   border-color: var(--g-purple);
   font-weight: 700;
   padding: 13px 25px;
   min-height: 48px;
 }
 .bret-games .games-primary:hover {
-  background: #5c447b;
-  color: #fff;
+  background: var(--g-primary-hover);
+  color: var(--g-on-primary);
 }
 .bret-games .games-text-button {
   border-color: transparent;
   background: transparent;
   color: var(--g-purple);
 }
-.games-main {
-  max-width: 1260px;
+.bret-games .games-main {
+  max-width: var(--g-main-width);
   width: 100%;
-  margin: auto;
-  padding: 22px 54px 0;
+  margin: 0 auto;
+  flex: 1;
+  padding: 0 var(--g-main-inset);
   min-width: 0;
+}
+/* Views select tokens; the main owns its width and padding in one place. */
+.bret-games .games-main:has(> [data-game-home]:not([hidden])),
+.bret-games .games-main:has(> [data-direction]:not([hidden])) {
+  --g-main-width: var(--g-view-width);
+  --g-main-inset: 0px;
 }
 .games-eyebrow {
   font-size: 12px;
@@ -162,7 +201,7 @@
   min-height: 20px;
 }
 .games-library-heading {
-  margin-top: 36px;
+  margin-top: 28px;
 }
 .games-library-heading .games-eyebrow {
   font-size: 12px;
@@ -174,7 +213,7 @@
   gap: 24px;
 }
 .games-card {
-  border: 1px solid var(--g-line);
+  border: 1px solid var(--g-card-line);
   border-radius: 24px;
   overflow: hidden;
   background: var(--g-card);
@@ -196,15 +235,16 @@
   position: absolute;
   left: 16px;
   top: 14px;
-  background: #ffffffed;
+  background: var(--g-badge-background);
   padding: 4px 10px;
   border-radius: 20px;
-  color: #5f477b;
+  color: var(--g-badge-ink);
   font-size: 12px;
   font-weight: 750;
   letter-spacing: 0.4px;
 }
 .games-card-copy {
+  background: var(--g-card);
   padding: 22px 24px 24px;
   display: flex;
   flex-direction: column;
@@ -274,6 +314,7 @@
   gap: 18px;
   padding: 22px 0;
   margin-top: 30px;
+  margin-bottom: 20px;
   font-size: 12px;
   color: var(--g-muted);
 }
@@ -308,7 +349,8 @@
 }
 .games-player-header h1 {
   font-size: 34px;
-  letter-spacing: -0.8px;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 .games-player-header .games-eyebrow {
   margin-bottom: 9px !important;
@@ -426,15 +468,16 @@
   overflow: hidden;
   background: var(--g-card);
 }
-.games-stage {
+.bret-games .games-stage {
   min-height: 430px;
+  padding: 20px 16px;
 }
 .games-pause-overlay {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  background: #f7f2fbef;
+  background: var(--g-pause-background);
   z-index: 4;
   text-align: center;
   padding: 24px;
@@ -454,7 +497,7 @@
 }
 .games-pause-overlay p {
   font-size: 13px;
-  color: #635570;
+  color: var(--g-pause-copy);
 }
 .games-progress {
   min-height: 30px;
@@ -611,36 +654,28 @@
   --g-soft: #493957;
   --g-line: #51445d;
   --g-surface: #40314e;
-}
-.bret-games.is-evening .games-primary {
-  background: #c5ade4;
-  color: #2c203b;
-  border-color: #c5ade4;
-}
-.bret-games.is-evening .games-pause-overlay {
-  background: #30243ded;
-}
-.bret-games.is-evening .games-pause-overlay p {
-  color: #ded1e9;
-}
-.bret-games.is-evening .games-card-badge {
-  background: #352a42f5;
-  color: #e5d4fa;
+  --g-on-primary: #2c203b;
+  --g-primary-hover: var(--g-purple);
+  --g-pause-background: #30243ded;
+  --g-pause-copy: #ded1e9;
+  --g-badge-background: #352a42f5;
+  --g-badge-ink: #e5d4fa;
+  --g-direction-ink: #f6effc;
+  --g-tabs-background: rgb(57 43 72 / .94);
+  --g-tabs-ink: #e1c9f7;
+  --g-tabs-hover: var(--g-card);
+  --g-tabs-on-active: var(--g-evening-wash);
+  --g-tabs-active-hover: var(--g-purple);
 }
 
 @media (min-width: 1700px) {
-  .games-main {
-    padding-left: 72px;
-    padding-right: 72px;
-  }
+  .bret-games { --g-main-inset: 72px; }
   .games-card-art {
     height: 215px;
   }
 }
 @media (max-width: 1100px) {
-  .games-main {
-    padding: 22px 28px 0;
-  }
+  .bret-games { --g-main-inset: 28px; }
   .games-card-copy {
     padding: 18px;
   }
@@ -659,16 +694,6 @@
   }
 }
 
-/* Scoped app-shell layer: deliberately overrides the reusable base .games-*
-   layout above (main width, heading metrics, card border/copy, footer and stage
-   padding). Keep these shell values together; mobile changes live only in the
-   single760px block below. This layer does not alter the game rules. */
-.bret-games .games-main {
-  margin: 0 auto;
-  flex: 1;
-  max-width: 1100px;
-  padding-top: 0;
-}
 .bret-games .games-heading {
   padding: 16px 0 28px;
   max-width: 680px;
@@ -685,39 +710,15 @@
     400 14px/20px Manrope,
     sans-serif;
 }
-.bret-games .games-card {
-  border-color: #c4c3c6;
-}
 .bret-games[data-bret-section]:not([data-bret-section="games"]) .games-footer {
   display: none;
-}
-.bret-games .games-library-heading {
-  margin-top: 28px;
-}
-.bret-games .games-footer {
-  margin-bottom: 20px;
-}
-.bret-games .games-player-header h1 {
-  font-weight: 500;
-  letter-spacing: 0;
-}
-.bret-games .games-stage {
-  padding: 20px 16px;
-}
-.bret-games .games-card-copy {
-  background: #fff;
-}
-.bret-games.is-evening .games-card-copy {
-  background: var(--g-card);
 }
 /* Mobile app layout has one owner; the narrower rule adds card padding only. */
 @media (max-width: 760px) {
   .games-card h3 {
     font-size: 18px;
   }
-  .games-card-copy > p {
-    font-size: 12px;
-  }
+
   .games-card-tags {
     font-size: 12px;
     margin: 12px 0;
@@ -737,9 +738,7 @@
     font-size: 12px;
     padding: 8px 12px;
   }
-  .games-library-heading {
-    margin-top: 28px;
-  }
+
   .games-player-header h1 {
     font-size: 28px;
   }
@@ -766,8 +765,9 @@
     padding: 8px 14px;
     font-size: 12px;
   }
-  .games-stage {
+  .bret-games .games-stage {
     min-height: 400px;
+    padding: 18px 10px;
   }
   .games-result {
     padding: 22px 14px;
@@ -810,17 +810,12 @@
     display: none;
   }
   .bret-games {
+    --g-main-inset: 16px;
     padding-top: 0;
   }
-  .bret-games .games-main {
-    padding: 0 16px;
-  }
-  .bret-games .games-heading {
-    padding-top: 16px;
-  }
-  .bret-games .games-stage {
-    padding: 18px 10px;
-  }
+
+
+
   .bret-games .games-grid {
     gap: 16px;
     grid-template-columns: 1fr;
@@ -839,9 +834,7 @@
   .bret-games .games-section-heading h2 {
     font-size: 18px;
   }
-  .bret-games .games-state-note {
-    font-size: 12px;
-  }
+
   .bret-games .games-result-metrics {
     gap: 18px;
   }
@@ -886,6 +879,19 @@
   top: 12px;
 }
 @media (forced-colors: active) {
+  /* System pairs must reach hover/focus rules as well as their default state.
+     Equal evening specificity keeps the system tokens authoritative. */
+  .bret-games,
+  .bret-games.is-evening {
+    --g-purple: Highlight;
+    --g-on-primary: HighlightText;
+    --g-primary-hover: Highlight;
+    --g-tabs-background: Canvas;
+    --g-tabs-ink: ButtonText;
+    --g-tabs-hover: ButtonFace;
+    --g-tabs-on-active: HighlightText;
+    --g-tabs-active-hover: Highlight;
+  }
   .bret-games,
   .bret-games .games-card,
   .bret-games .games-card-copy,

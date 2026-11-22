@@ -24,6 +24,7 @@ export const BRET_COPY = Object.freeze({
   resetStoppedFailure: "Practice stopped. Defaults are active; saved settings could not be removed in this browser.",
   reset: "Settings reset.",
   resetFailure: "Defaults are active. Saved settings could not be removed in this browser.",
+  runtimeFailureSummary: "The practice could not continue because of a browser timing error. This practice was not completed. Choose another practice to try again.",
   vibrationAvailable: "Vibration depends on your device and browser.",
   vibrationUnavailable: "Vibration is unavailable in this browser; the visible guidance works normally.",
   introPaused: "Introduction paused",

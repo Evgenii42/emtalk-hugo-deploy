@@ -152,7 +152,7 @@ export function setupMeditation(root) {
       image($("background"), detail.backgroundImageUrl, detailUrl, token, signal, detail.version);
     } catch {
       if (!valid(token)) return;
-      notice("This practice could not be loaded. Check your connection and try Retry practice.");
+      notice("This practice could not be loaded. Try Retry practice, or use Back to meditations to refresh the library.");
       $("detail-retry").hidden = false;
     }
   }

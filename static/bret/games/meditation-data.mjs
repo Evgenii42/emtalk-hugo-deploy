@@ -17,6 +17,11 @@ export function checkIndex(v, base) {
     contentUrl(m.jsonUrl, base); contentUrl(m.thumbnailUrl, base);
   }
   if (v.categories !== undefined && (!Array.isArray(v.categories) || v.categories.length > 50 || v.categories.some(c => !record(c) || !str(c.id) || !str(c.title)) || new Set(v.categories.map(c => c.id)).size !== v.categories.length)) throw Error("Invalid categories");
+  if (v.categories !== undefined) {
+    const categoryIds = new Set(v.categories.map(c => c.id));
+    // Missing fields in legacy v1 caches still permit the unfiltered catalogue.
+    if (v.meditations.some(m => m.categoryId !== undefined && (!str(m.categoryId) || !categoryIds.has(m.categoryId)))) throw Error("Unknown meditation category");
+  }
   return v;
 }
 export function checkDetail(v, item, base) {

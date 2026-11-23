@@ -233,7 +233,7 @@ export function setupDirections(
     if (notify) {
       onView(name);
       $("[data-direction-announcement]").textContent =
-        DIRECTIONS[name].heading + " selected.";
+        name === "meditation" ? "" : DIRECTIONS[name].heading + " selected.";
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   }

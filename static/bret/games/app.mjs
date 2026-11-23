@@ -661,7 +661,7 @@ function showReplacementChoice() {
   note.textContent = saved
     ? `Starting a fresh scene replaces your paused ${GAMES.find((g) => g.id === saved.id).name} at ${fmt(saved.activeMs)}. Your total play time and XP stay.`
     : "";
-  $("[data-setup-start]").textContent = saved ? "Replace paused scene and play" : "Let's play";
+  $("[data-setup-start-label]").textContent = saved ? "Replace paused scene and play" : "Let's play";
 }
 function start(options, { replaceSaved = false } = {}) {
   if (!canPlay()) return;

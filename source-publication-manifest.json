@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "scope": "Prepared exact integrated Bret meditation212 R4 UTF-8 test candidate. Review admission and publication are separate; neither is claimed.",
-  "sourceBaseCommit": "bc387b5520509cfa6155972df8dbf2ef4835ee62",
+  "scope": "Prepared exact integrated Bret meditation213 R5 test candidate. Review admission and publication are separate; neither is claimed.",
+  "sourceBaseCommit": "c27416044dac9df443f185ad7f09c36d25d6f8da",
   "sourceFrozenUncommitted": true,
-  "stageParentCommit": "ca145c37359c1c9b51d35f939fcfafec2cce450d",
-  "reviewedReceiptSha256": "a31639af2a9d3318caf1da1ca1e49818a4c3d85921b2adeac32a1737f19f3c06",
+  "stageParentCommit": "9047b988af6453f095c48eb4b1d6346f3d337cd4",
+  "reviewedReceiptSha256": "cc0609742e3d9f862a9ea1c36e29e38b1300f5871bc9fd52462bcfe6de7c2ba9",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
-  "sourceInputSnapshotSha256": "c3f898847798847a9e16f8fd5705b573f6798f4cbe49c41671a3ed3f790dfcc9",
-  "outputSnapshotSha256": "ecd0ccf345ef544be45831fe5c8dbc18a901a19803878facd6e0fb0568d14263",
+  "sourceInputSnapshotSha256": "0baf6ff625a6671ce00c64a82a158fa21adff2baedc1e7228f9117fb4b175345",
+  "outputSnapshotSha256": "5d105a7e5df4ce1a7c9eecdb754d46edc4ef26b991a5463233c8cd8f2cb203e2",
   "sourceCount": 606,
   "outputCount": 428,
   "sourceFiles": [
@@ -1078,8 +1078,8 @@
     },
     {
       "path": "layouts/partials/bret-games.html",
-      "bytes": 9274,
-      "sha256": "4f0549dbad6cb554341f224061f686ed14479fce2fa64d1cf5750e0ae8a0ba50"
+      "bytes": 9268,
+      "sha256": "06f78c1c8842cc30052ff2ea012bbcd9f8e8e04ec7dcfc532e7f1b126ada4598"
     },
     {
       "path": "layouts/partials/bret-landing-game-art.html",
@@ -1763,8 +1763,8 @@
     },
     {
       "path": "static/bret/games/app.mjs",
-      "bytes": 42129,
-      "sha256": "50ce236f45e5f1a49913e1e64af16ff542716d3d0e6e20e16b91143f1b25fa6c"
+      "bytes": 42239,
+      "sha256": "b13dd49dec1d6ad9f19d03edd5ae9f8dc2247e2f098527f99bae086ec168bcd9"
     },
     {
       "path": "static/bret/games/core.mjs",
@@ -1778,8 +1778,8 @@
     },
     {
       "path": "static/bret/games/directions.mjs",
-      "bytes": 10141,
-      "sha256": "a97e6e675b5def14be72013fa4a07e18b2f94be3526b7b3a9bd7900313e07879"
+      "bytes": 10240,
+      "sha256": "90decc36aa16db6fb2920752de7a7411bf852506c869ec0252c7a6e66e3fdfee"
     },
     {
       "path": "static/bret/games/home.css",
@@ -1788,18 +1788,18 @@
     },
     {
       "path": "static/bret/games/meditation-data.mjs",
-      "bytes": 15140,
-      "sha256": "350a75d0884a1f9dcf40e24614e1303a98bdf09dae4f6255ce76ad93c82ac20e"
+      "bytes": 15159,
+      "sha256": "b036b109d323e3ecdc64a6b32421a666e090a543613c0306ab130c0b88c9a46b"
     },
     {
       "path": "static/bret/games/meditation.css",
-      "bytes": 10960,
-      "sha256": "bcd3a2cda85cefcf4896c0e16b666f51b3f9b68f4d1b4181b80f2bd0dd2647f5"
+      "bytes": 11510,
+      "sha256": "ea0bd63a16f2bc1c3ceb4d0d5506d7ff9abf44eb2647d097aebb4adede123d44"
     },
     {
       "path": "static/bret/games/meditation.mjs",
-      "bytes": 20922,
-      "sha256": "d6a9eb20b387d9c6274a20f09f5d14918b72f875bebd515033244f56ba080a9c"
+      "bytes": 21368,
+      "sha256": "4f3876e5a974dea630fe8391934b506e6de03e38d9792f6b23a31293b669140f"
     },
     {
       "path": "static/bret/games/navigation.mjs",
@@ -1828,8 +1828,8 @@
     },
     {
       "path": "static/bret/games/play.mjs",
-      "bytes": 34255,
-      "sha256": "71976fe8c079b0f6fe0bca62953cbd2bd6148f61aef7a90b35d8b71454fe41c2"
+      "bytes": 34404,
+      "sha256": "e8f0c2959f37a634adc95f75ef55a15b533d0d4061495d1660110fefecc71829"
     },
     {
       "path": "static/bret/games/progress.mjs",

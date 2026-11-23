@@ -97,7 +97,7 @@ export function setupDirections(
       closeMenu();
   });
   on(document, "keydown", (e) => {
-    if (e.key === "Escape" && !menu?.hidden) {
+    if (e.key === "Escape" && !e.defaultPrevented && !e.repeat && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey && menu?.hidden === false) {
       e.preventDefault();
       closeMenu(true);
     }

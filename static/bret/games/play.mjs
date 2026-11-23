@@ -110,8 +110,10 @@ export function mountGame(stage, options) {
       }, { signal: abort.signal });
   stage.classList.add("bg-stage");
   stage.dataset.game = id;
+  // Internal notification only: the host coalesces requests and reads snapshot()
+  // once when persisting. No engine snapshot payload is consumed by the host.
   const progress = (text) => options.onProgress?.(text),
-    save = () => options.onCheckpoint?.(saveState(s));
+    save = () => options.onCheckpoint?.();
   const announce = (text) => {
     s.feedback = text;
     const p = stage.querySelector("[data-bg-feedback]");

@@ -119,3 +119,8 @@ html.bret-meditation-playing .site-header { display:none; }
  .meditation :is(.med-controls,.med-caption,.med-detail-card,.med-session-header) { background:Canvas; color:CanvasText; border:1px solid CanvasText; }
  .meditation .med-toggle { forced-color-adjust:none; }
 }
+
+/* Keep a visible loading cue while the single complete audio file arrives. */
+.meditation [data-med-state][data-loading=true]::before { content:""; display:inline-block; width:14px; height:14px; margin-right:8px; vertical-align:-2px; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; animation:med-loading-turn 1s linear infinite; }
+@keyframes med-loading-turn { to { transform:rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .meditation [data-med-state][data-loading=true]::before { animation:none; } }

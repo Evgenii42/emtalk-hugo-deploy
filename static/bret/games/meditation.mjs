@@ -5,7 +5,8 @@ export function setupMeditation(root) {
   const $ = name => panel.querySelector(`[data-med-${name}]`);
   const prefix = document.documentElement.dataset.mountPrefix || "";
   const indexUrl = new URL(prefix + "/content/bret/meditations/index.json", location.origin).href;
-  // Contract URLs are rooted at the origin of their JSON.
+  // Contract URLs stay at the JSON origin root. Path-mounted HTML previews
+  // require the same contract files at origin root; Cloudflare uses root hosting.
   const cacheFailures = new Set();
   function cacheFailed(key = "storage") { cacheFailures.add(key); $("cache-note").hidden = false; }
   function cacheSaved(key = "storage") { cacheFailures.delete(key); $("cache-note").hidden = cacheFailures.size === 0; }
@@ -61,6 +62,13 @@ export function setupMeditation(root) {
     objectUrl = null;
     for (const url of imageUrls.values()) URL.revokeObjectURL(url);
     imageUrls.clear(); cues = []; captions = false; seeking = false;
+    $("state").dataset.loading = "false";
+  }
+  function hide() {
+    if (!active) return;
+    cleanup(); active = false; view = "library"; panel.hidden = true;
+    delete root.dataset.medView; delete panel.dataset.medView;
+    document.documentElement.classList.remove("bret-meditation-playing");
   }
   function begin() { cleanup(); request = new AbortController(); return { token: generation, signal: request.signal }; }
   const valid = token => active && token === generation;
@@ -244,7 +252,7 @@ export function setupMeditation(root) {
     cues = []; captions = false; seeking = false; wanted = true; setView("player");
     playbackOptions(false);
     $("preparation").hidden = true; $("start").hidden = true; $("restart").hidden = true; $("resume").hidden = true;
-    $("player").hidden = false; $("state").textContent = "Loading audio. You can leave at any time.";
+    $("player").hidden = false; $("state").dataset.loading = "true"; $("state").textContent = "Loading audio. You can leave at any time.";
     $("duration").textContent = clock(detail.durationMs / 1000); $("elapsed").textContent = clock(seconds);
     $("audio-retry").hidden = true; $("caption").hidden = true; $("captions").disabled = true;
     $("captions").setAttribute("aria-pressed", "false"); $("toggle-label").textContent = "Play";
@@ -263,6 +271,7 @@ export function setupMeditation(root) {
       a.hidden = true; a.dataset.medAudio = ""; $("player").append(a);
       a.addEventListener("loadedmetadata", () => {
         if (!valid(token)) return;
+        $("state").dataset.loading = "false";
         a.currentTime = Math.min(seconds, Math.max(0, a.duration - 0.1)); lastSaved = a.currentTime;
         for (const n of panel.querySelectorAll("[data-med-seek],[data-med-toggle],[data-med-skip]")) n.disabled = false;
         $("state").textContent = "Ready. Press Play to begin."; update();
@@ -277,13 +286,13 @@ export function setupMeditation(root) {
       });
       a.addEventListener("error", () => {
         if (!valid(token)) return;
-        wanted = false; $("state").textContent = "This browser could not play the Opus audio. Try Retry audio or another browser.";
+        wanted = false; $("state").dataset.loading = "false"; $("state").textContent = "This browser could not play the Opus audio. Try Retry audio or another browser.";
         $("audio-retry").hidden = false;
       });
       a.src = objectUrl; a.load();
     } catch {
       if (!valid(token)) return;
-      $("state").textContent = "Audio could not be loaded. Check your connection and retry."; $("audio-retry").hidden = false;
+      $("state").dataset.loading = "false"; $("state").textContent = "Audio could not be loaded. Check your connection and retry."; $("audio-retry").hidden = false;
     }
   }
   $("refresh").addEventListener("click", () => library());
@@ -323,19 +332,20 @@ export function setupMeditation(root) {
   for (const event of ["pointerup", "pointercancel", "lostpointercapture", "blur"]) $("seek").addEventListener(event, finishSeek);
   for (const b of panel.querySelectorAll("[data-med-skip]")) b.addEventListener("click", () => seek((audio?.currentTime || 0) + Number(b.dataset.medSkip)));
   function onVisibilityChange() { if (active && view === "player" && document.hidden) pause("Paused while you were away. Press Play when you are ready."); }
-  function onPageHide() { if (!active) return; pause(); ++generation; request?.abort(); }
+  function onPageHide() { if (active) hide(); }
   document.addEventListener("visibilitychange", onVisibilityChange);
   window.addEventListener("pagehide", onPageHide);
-  window.addEventListener("pageshow", e => { if (e.persisted && active) library(); });
+  // The host restores the selected direction after BFCache progress hydration.
   root.querySelector("[data-bret-menu-toggle]")?.addEventListener("click", () => { if (active && view === "player") pause(); });
   function onKeydown(e) {
-    if (!active || view !== "player" || e.key !== "Escape") return;
+    if (!active || view !== "player" || e.key !== "Escape" || e.defaultPrevented || e.repeat || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (root.querySelector("[data-bret-menu]")?.hidden === false) return;
     if (!$("options").hidden) { e.preventDefault(); playbackOptions(false, true); }
     else pause();
   }
   document.addEventListener("keydown", onKeydown);
   return {
     show({ focus = false } = {}) { active = true; panel.hidden = false; library({ focus }); },
-    hide() { if (!active) return; cleanup(); active = false; view = "library"; panel.hidden = true; delete root.dataset.medView; delete panel.dataset.medView; document.documentElement.classList.remove("bret-meditation-playing"); },
+    hide,
   };
 }

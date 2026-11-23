@@ -224,7 +224,7 @@ function write() {
 }
 function syncAvailability() {
   const writable = storeReady && progressStore.writable;
-  $$("[data-theme],[data-game-home-play],[data-resume-run],[data-discard-run],[data-feedback],[data-state-choice],[data-cards] button,[data-setup-start]").forEach(
+  $$("[data-theme],[data-game-home-play],[data-resume-run],[data-discard-run],[data-feedback],[data-state-choice],[data-cards] button,[data-setup-start],[data-setup-form] select").forEach(
     (button) => { button.disabled = !writable; },
   );
 }
@@ -1004,6 +1004,7 @@ window.addEventListener("pagehide", () => {
 });
 function handlePauseKey(e) {
   if (e.key !== "Escape" || e.repeat || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  if (root.dataset.bretSection !== "games" || !$("[data-bret-menu]").hidden) return;
   if (playing) {
     e.preventDefault();
     pause();

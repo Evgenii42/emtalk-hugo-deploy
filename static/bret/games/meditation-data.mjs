@@ -251,7 +251,7 @@ export function createMeditationRepository({ fetcher = globalThis.fetch.bind(glo
         });
         controller.signal.throwIfAborted();
         if (saved) {
-          notify(onCacheSuccess, cacheKey); return saved.value;
+          if (saved.durable) notify(onCacheSuccess, cacheKey); return saved.value;
         }
         const response = await network(url, controller.signal), blob = await response.clone().blob();
         controller.signal.throwIfAborted();

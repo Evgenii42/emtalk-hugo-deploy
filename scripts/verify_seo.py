@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from PIL import Image
 from prepare_hugo import EXCLUDED, load_owned_pages, owned_entry_hash, source_indexable
+from bret_journey_delivery import public_path, owned_metadata
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTROLLED = ['description', 'robots', 'og:site_name', 'og:title', 'og:description', 'og:type',
@@ -147,7 +148,7 @@ def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
         for name in CONTROLLED:
             if len(meta.get(name, [])) != 1 or not meta.get(name, [''])[0].strip():
                 fail(route, 'Missing, duplicate or empty metadata ' + name)
-        expected_canonical = base + route
+        expected_canonical = base + public_path(route)
         links = soup.select('link[rel~="canonical"]')
         if len(links) != 1 or links[0].get('href') != expected_canonical:
             fail(route, 'Canonical does not preserve exact route')
@@ -155,7 +156,7 @@ def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
             original = source['pages'][route]
             indexable = source_indexable(original)
         elif route in owned and owned[route]['mode'] == 'new':
-            original = {'metadata': []}
+            original = {'metadata': owned_metadata(route)}
             indexable = owned[route]['indexable']
             if render['pages'][route].get('origin') != 'owned' or render['pages'][route].get('sourceHash') != owned_entry_hash(owned[route]):
                 fail(route, 'Owned source identity differs from authored registry')
@@ -288,7 +289,7 @@ def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
     namespace = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
     sitemap = ET.parse(build / 'sitemap.xml')
     actual_sitemap = [node.findtext('s:loc', namespaces=namespace) for node in sitemap.findall('s:url', namespace)]
-    expected_sitemap = [] if preview else [base + r['path'] for r in routes if pages[r['path']]['indexable']]
+    expected_sitemap = [] if preview else [base + public_path(r['path']) for r in routes if pages[r['path']]['indexable']]
     if actual_sitemap != expected_sitemap:
         errors.append('Sitemap includes noindex/preview routes or has missing, duplicate or incorrect canonical URLs')
     if sitemap.findall('.//s:lastmod', namespace):

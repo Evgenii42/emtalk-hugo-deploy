@@ -227,6 +227,16 @@
         "emtalk_interest_state"
       ]
     },
+    "/bret/journey": {
+      "context": "web_trial",
+      "product": "bret",
+      "events": ["page_view", "emtalk_navigation", "emtalk_trial_state"]
+    },
+    "/bret/journey/characters": {
+      "context": "web_trial",
+      "product": "bret",
+      "events": ["page_view", "emtalk_navigation"]
+    },
     "/bret/practice": {
       "context": "web_trial",
       "product": "bret",
@@ -1214,6 +1224,8 @@
     "/about-us": "emtalk",
     "/bret": "bret",
     "/bret/practice": "bret",
+    "/bret/journey": "bret",
+    "/bret/journey/characters": "bret",
     "/dm": "dm",
     "/dm/workspace": "dm",
     "/tapl": "tapl",

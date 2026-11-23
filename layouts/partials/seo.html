@@ -8,7 +8,7 @@
 {{- $organizationLogoPath := $config.site.organizationLogo -}}
 {{- if ne (printf "%T" $organizationLogoPath) "string" -}}{{- errorf "Organization logo requires a configured owned media path" -}}{{- end -}}
 {{- if not (findRE "^/media/[A-Za-z0-9][A-Za-z0-9._-]*[.](png|jpg|jpeg|gif|webp|svg|avif)$" $organizationLogoPath) -}}{{- errorf "Organization logo requires a bounded owned image path" -}}{{- end -}}
-{{- $canonical := printf "%s%s" $base $page.routeId -}}
+{{- $canonical := printf "%s%s" $base (default $page.routeId $page.publicPath) -}}
 {{- $article := strings.HasPrefix $page.routeId "/articles/" -}}
 {{- $imagePath := default $config.site.defaultImage $seo.image -}}
 {{- if ne (printf "%T" $imagePath) "string" -}}{{- errorf "SEO image requires a configured owned media path" -}}{{- end -}}

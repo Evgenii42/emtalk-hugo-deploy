@@ -98,7 +98,7 @@
       "language": "en",
       "title": "Breathing timer and custom rhythms",
       "lead": "Use five breathing rhythms, including box breathing and 4-7-8, or create a custom rhythm. Physical practices are coming soon. Free to use, without an account.",
-      "indexable": true,
+      "indexable": false,
       "sections": [],
       "actions": [
         {
@@ -112,6 +112,24 @@
       "language": "en",
       "title": "Bret",
       "lead": "Breath, Physical, Meditation and Games.",
+      "indexable": false,
+      "sections": [],
+      "actions": []
+    },
+    "/bret/journey": {
+      "mode": "new",
+      "language": "en",
+      "title": "Bret breathing journey",
+      "lead": "Follow your chosen breathing rhythm along a moving landscape.",
+      "indexable": false,
+      "sections": [],
+      "actions": []
+    },
+    "/bret/journey/characters": {
+      "mode": "new",
+      "language": "en",
+      "title": "Choose your Bret character",
+      "lead": "Compare three palettes of the same runner for every landscape.",
       "indexable": false,
       "sections": [],
       "actions": []

@@ -18,6 +18,9 @@ buildDrafts = false
     source = "static/bret/games"
     target = "assets/bret-games"
   [[module.mounts]]
+    source = "tmp/bret-journey-public"
+    target = "static/bret/journey"
+  [[module.mounts]]
     source = "static"
     target = "static"
     files = ["! assets/*.css", "! bret/games/**", "! bret/main/breath.png", "! bret/main/physical.png", "! bret/main/meditation.png", "! bret/main/background.png"]

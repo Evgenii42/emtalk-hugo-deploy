@@ -11,6 +11,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
+from bret_journey_delivery import ROUTES as JOURNEY_ROUTES, public_path
 
 from bs4 import BeautifulSoup
 import tinycss2
@@ -180,7 +181,10 @@ def document_metadata_errors(body):
     if len(charset_ends) != 1 or charset_ends[0] > 1024:
         errors.append('UTF-8 charset must be completely within the first 1024 bytes')
     viewports = soup.find_all('meta', attrs={'name': re.compile('^viewport$', re.I)})
-    if len(viewports) != 1 or viewports[0].get('content') != 'width=device-width, initial-scale=1' or not viewports[0].find_parent('head'):
+    viewport_values = {'width=device-width, initial-scale=1'}
+    if soup.html and soup.html.get('data-route-id') in JOURNEY_ROUTES:
+        viewport_values.add('width=device-width, initial-scale=1, viewport-fit=cover')
+    if len(viewports) != 1 or viewports[0].get('content') not in viewport_values or not viewports[0].find_parent('head'):
         errors.append('Missing, duplicate or incorrect mobile viewport')
     return errors
 
@@ -571,6 +575,7 @@ def verify(build, prefix='', *, base_url=None):
     prefix = '/' + prefix.strip('/') if prefix.strip('/') else ''
     routes = json.loads((ROOT / 'data/route-map.json').read_text(encoding='utf-8'))
     expected = {r['path']: r['file'] for r in routes['routes']}
+    public_files = {public_path(route): file for route, file in expected.items()}
     errors, files = [], []
     expected_base = None
     if base_url is not None:
@@ -680,7 +685,7 @@ def verify(build, prefix='', *, base_url=None):
                 errors.append(f'Missing explicit preview prefix: {source}: {url}')
                 return
             path = path[len(prefix):] or '/'
-        if policy.resolves_routes and path in expected:
+        if policy.resolves_routes and (path in expected or path in public_files):
             return
         candidate = build / path.lstrip('/')
         if path == '/':
@@ -704,7 +709,7 @@ def verify(build, prefix='', *, base_url=None):
         if relative in PROVIDER_CONTROLS:
             if body != PROVIDER_CONTROLS[relative]:
                 errors.append('Invalid Pages provider control policy: ' + relative)
-        elif (relative not in PUBLIC_MEDITATION_JSON and any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts)) or (path.suffix.lower() not in ALLOWED_EXT and relative != 'ai/index.md'):
+        elif (relative not in PUBLIC_MEDITATION_JSON and any(part.casefold() in FORBIDDEN_DIRS for part in Path(relative).parts)) or (path.suffix.lower() not in ALLOWED_EXT and relative != 'ai/index.md' and not (relative.startswith('bret/journey/') and path.suffix.lower() == '.mjs')):
             errors.append(f'Output allowlist violation: {relative}')
         if seo_enabled and path.suffix.lower() == '.html':
             errors.extend(relative + ': ' + error for error in document_metadata_errors(body))
@@ -722,7 +727,7 @@ def verify(build, prefix='', *, base_url=None):
                 route = soup.html.get('data-route-id') if soup.html else None
                 if (parsed.scheme not in {'http', 'https'} or not host or parsed.username or parsed.password
                         or parsed.query or parsed.fragment or any(host == h or host.endswith('.' + h) for h in FORBIDDEN_HOSTS)
-                        or (route in expected and parsed.path != prefix + (route if route != '/' or seo_enabled else ''))):
+                        or (route in expected and parsed.path != prefix + (public_path(route) if route != '/' or seo_enabled else ''))):
                     errors.append(f'Invalid canonical origin/path contract: {relative}')
             for node in soup.find_all(True):
                 if node.name in {'object', 'embed', 'applet', 'iframe'}:
@@ -803,6 +808,9 @@ def verify(build, prefix='', *, base_url=None):
             errors.append(f'Owner excluded route accidentally published: {excluded}')
     if '/bret/practice' in expected:
         errors.extend(bret_contract_errors(build, prefix))
+    if set(JOURNEY_ROUTES) & set(expected):
+        from verify_bret_journey_delivery import verify as verify_journey
+        errors.extend(verify_journey(build, ROOT, prefix))
     preview = None
     render_path = ROOT / 'data/render.json'
     if render_path.is_file():
@@ -829,7 +837,7 @@ def verify(build, prefix='', *, base_url=None):
                       for row in sitemap.findall('s:url', ns)]
             if seo_enabled:
                 seo_config = json.loads((ROOT / 'data/seo.json').read_text(encoding='utf-8'))
-                source = [] if preview else [(prefix + row['path'], '') for row in routes['routes'] if seo_config['pages'][row['path']]['indexable']]
+                source = [] if preview else [(prefix + public_path(row['path']), '') for row in routes['routes'] if seo_config['pages'][row['path']]['indexable']]
             else:
                 source = [(prefix + row['exactSuffix'], row.get('lastmod', '')) for row in routes['sitemap']]
             if actual != source:

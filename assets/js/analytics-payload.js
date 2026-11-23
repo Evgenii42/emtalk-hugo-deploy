@@ -1,4 +1,10 @@
 // Pure route, schema and redaction owner. No queues, DOM writes or storage.
+// Journey is the sole directory-style app route. Keep the logical policy ID
+// separate from its exact public URL; every legacy leaf still matches exactly.
+export function analyticsPublicPath(route) {
+  return route === "/bret/journey" ? "/bret/journey/" : route;
+}
+
 export function createAnalyticsPayload({ policy, configuration, origin, pathname, referrer }) {
   const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   const id = configuration.emtalkAnalytics || "";
@@ -37,7 +43,7 @@ export function createAnalyticsPayload({ policy, configuration, origin, pathname
     channels: { chatgpt: "ai_referral", perplexity: "ai_referral", claude: "ai_referral",
       copilot: "ai_referral", gemini: "ai_referral", google: "organic", bing: "organic",
       duckduckgo: "organic", yahoo: "organic", yandex: "organic" } };
-  const routeEligible = canonical && configuration.emtalkRoute === pathname && policy.version === "004" &&
+  const routeEligible = canonical && analyticsPublicPath(configuration.emtalkRoute) === pathname && policy.version === "004" &&
     !!context && route.events.includes("page_view");
   const eligible = scrollReady && routeEligible && configuration.emtalkAnalyticsAllowed === "true" &&
     configuration.emtalkProviderReviewed === "true" && /^G-[A-Z0-9]+$/.test(id);

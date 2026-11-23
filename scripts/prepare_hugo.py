@@ -15,6 +15,7 @@ from urllib.parse import urlsplit, urljoin, unquote, quote
 from bs4 import BeautifulSoup, Comment, Doctype, ProcessingInstruction, Declaration, CData, NavigableString, Tag
 from prepare_public_content import repair_public_contact_links
 from source_roles import load_source_roles, validate_source_header_replacements
+from bret_journey_delivery import ROUTES as JOURNEY_ROUTES, route_file, public_path, route_layout, owned_metadata
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {'/meditations', '/meditations/relax-short'}
@@ -196,12 +197,12 @@ def load_owned_pages(root, source_pages):
     if set(news) & (set(source_pages) | set(entries)):
         raise ValueError('News route collides with source or owned registry')
     entries = {**entries, **news}
-    filenames = {('index.html' if route == '/' else route.lstrip('/') + '.html').casefold(): route
+    filenames = {route_file(route).casefold(): route
                  for route in source_pages}
     required = {'mode', 'language', 'title', 'lead', 'sections', 'actions', 'indexable'}
     for route, entry in entries.items():
         validate_route(route, root)
-        filename = ('index.html' if route == '/' else route.lstrip('/') + '.html').casefold()
+        filename = route_file(route).casefold()
         if (route in EXCLUDED or filename == '404.html' or not isinstance(entry, dict)
                 or not required <= set(entry) or set(entry) - required - {'eyebrow'}):
             raise ValueError('Invalid owned page record on ' + route)
@@ -679,7 +680,7 @@ def prepare(prefix='', preview=False):
             if content_path.exists() and not (route == '/news' or route.startswith('/news/')):
                 existing = parse_json(content_path.read_text(encoding='utf-8'))
                 if (not isinstance(existing, dict) or existing.get('managedBy') != 'prepare_hugo-owned'
-                        or existing.get('routeId') != route or existing.get('layout') != 'source'):
+                        or existing.get('routeId') != route or existing.get('layout') != route_layout(route)):
                     raise ValueError('Refusing to replace manually authored owned content: ' + route)
             page = {'routeId': route, 'title': entry['title'], 'language': entry['language'],
                     'family': 'owned', 'origin': 'owned', 'sourceHash': digest,
@@ -688,10 +689,14 @@ def prepare(prefix='', preview=False):
                     'audioMp3': '', 'css': 'css/intent-pages.css'}
             pages[route] = page
             if not (route == '/news' or route.startswith('/news/')):
-                plan_json(content_path, {'title': entry['title'], 'routeId': route, 'layout': 'source',
-                                         'url': route + '.html', 'managedBy': 'prepare_hugo-owned'})
+                plan_json(content_path, {'title': entry['title'], 'routeId': route, 'layout': route_layout(route),
+                                         'url': '/' + route_file(route), 'managedBy': 'prepare_hugo-owned'})
         page['ownedEntry'] = copy.deepcopy(entry)
         page['ownedHash'] = digest
+        if route in JOURNEY_ROUTES:
+            page['publicPath'] = public_path(route)
+            page['journeySource'] = JOURNEY_ROUTES[route]['source']
+            page['metadata'] = owned_metadata(route)
     for row in load_news(ROOT, set(pages)):
         pages[row['routeId']]['newsEntry'] = row
     # prepare_skip_target below owns every shared skip destination, including
@@ -710,7 +715,7 @@ def prepare(prefix='', preview=False):
             front = parse_json(path.read_text(encoding='utf-8'))
         except (ValueError, UnicodeDecodeError) as error:
             raise ValueError('Refusing to remove manually changed content: ' + route) from error
-        if not isinstance(front, dict) or front.get('layout') != 'source' or front.get('routeId') != route:
+        if not isinstance(front, dict) or front.get('layout') != route_layout(route) or front.get('routeId') != route:
             raise ValueError('Refusing to remove manually changed content: ' + route)
         if owned and front.get('managedBy') != 'prepare_hugo-owned':
             if front.get('managedBy') == 'news033-author':
@@ -766,6 +771,8 @@ def prepare(prefix='', preview=False):
         '&referrer=utm_source%3Demtalk_web%26utm_medium%3Dwebsite%26utm_campaign%3Dsite_v003_' + product
         for product, package in [('bret', 'com.bret'), ('dm', 'org.emtalk.dm')]
     })
+    if set(JOURNEY_ROUTES) & set(pages):
+        transitions = sorted(set(transitions) | {'https://vector.game/'})
     def semantic_urls(value):
         if isinstance(value, dict):
             return {url for child in value.values() for url in semantic_urls(child)}
@@ -775,11 +782,12 @@ def prepare(prefix='', preview=False):
     reference_urls = sorted({url for path, page in corpus['pages'].items() if path not in EXCLUDED
                              for value in page['structuredData']
                              for url in semantic_urls(parse_json(value) if isinstance(value, str) else value)})
-    plan_json(ROOT / 'data/route-map.json', {'routes': [dict({'path': p, 'file': 'index.html' if p == '/' else p.lstrip('/') + '.html'},
+    plan_json(ROOT / 'data/route-map.json', {'routes': [dict({'path': p, 'file': route_file(p)},
+                **({'publicPath': public_path(p)} if public_path(p) != p else {}),
                 **({'origin': 'owned'} if pages[p].get('origin') == 'owned' else {})) for p in pages],
                'excluded': sorted(EXCLUDED), 'externalTransitions': transitions, 'semanticReferenceUrls': reference_urls,
                'sitemap': [row for row in source_sitemap['routes'] if row['path'] in pages]
-                          + [{'path': route, 'exactSuffix': route, 'origin': 'owned',
+                          + [{'path': route, 'exactSuffix': public_path(route), 'origin': 'owned',
                               'sourceNoindex': not entry['indexable']}
                              for route, entry in owned.items() if entry['mode'] == 'new']})
     plan_json(ROOT / 'docs/audits/hugo-preparation.json', {'schemaVersion': 1, 'sourceCorpusSha256': hashlib.sha256((ROOT / 'data/source-content.json').read_bytes()).hexdigest(),

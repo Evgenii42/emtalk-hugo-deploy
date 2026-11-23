@@ -202,13 +202,12 @@ export function setupDirections(
     settings.hidden = !available;
     if (available) {
       const url =
-        prefix +
-        "/bret/practice?mode=" +
-        d.mode +
-        (name === "breath" ? "&cycles=15" : "");
+        name === "breath"
+          ? prefix + "/bret/journey/?mode=breathing&cycles=15"
+          : prefix + "/bret/practice?mode=" + d.mode;
       play.href = url;
       play.setAttribute("aria-label", d.playLabel);
-      settings.href = url;
+      settings.href = name === "breath" ? url + "#settings" : url;
       settings.setAttribute("aria-label", d.settingsLabel);
     } else {
       play.removeAttribute("href");

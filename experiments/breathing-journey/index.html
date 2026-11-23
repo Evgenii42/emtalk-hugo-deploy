@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="light">
+  <title>Bret · Breathing Journey</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%238260AF'/%3E%3Cpath d='M13 10v20m0-10c12-9 17 15 0 9' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css?v=jacket4">
+  <script defer src="./vendor/lottie-5.13.0.min.js"></script>
+  <script type="module">
+    import('./app.mjs?v=jacket4').catch(()=>{
+      for(const control of document.querySelectorAll('button,input,select'))control.disabled=true;
+      document.getElementById('practice-load-error').hidden=false;
+    });
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#practice">Skip to breathing practice</a>
+  <header class="site-header"><a class="brand" href="../app#breath" aria-label="Bret home">Bret</a></header>
+  <p id="practice-load-error" role="alert" hidden>Could not load the journey. <a href="">Try again</a></p>
+  <main class="workspace">
+    <section id="practice" class="practice" aria-label="Breathing journey" tabindex="-1">
+      <div class="scene text-mode" data-scene="0">
+        <div class="scenery" aria-hidden="true"><img class="scene-fallback" src="./art/poster-0.svg?v=jacket4" alt="" width="360" height="800"><script>
+          // Validated, local pre-paint preference. No clock or user data output.
+          try{const saved=JSON.parse(localStorage.getItem('emtalk.bret.journey.preferences.v1')||'null'),requested=new URL(location.href).searchParams.get('character'),keys=['sport','soft','silhouette'];const key=keys.includes(requested)?requested:keys.includes(saved?.character)?saved.character:'sport';document.currentScript.previousElementSibling.src='./art/poster-0-'+key+'.svg?v=jacket4';}catch{}
+        </script><div data-animation="background"></div><div data-animation="road"></div></div>
+        <div class="scene-top"><p class="eyebrow">A MOMENT FOR YOU</p><h1>Quiet Trail</h1><p class="scene-caption">Morning Hills</p><a class="icon-button exit" data-home href="../app#breath" aria-label="Back to Breath" title="Back to Breath"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a><button type="button" class="icon-button exit" data-stop aria-label="End journey" title="End journey" hidden><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+        <div class="journey-progress"><div><span data-progress-label>At the start</span><span data-percent>0%</span></div><progress max="1" value="0" aria-label="Session progress"></progress></div>
+        <div class="breath-guide">
+          <div class="breath-indicator"><p data-phase-name>Inhale</p><div class="lungs-wrap"><div data-animation="lungs" aria-hidden="true"></div><svg class="lungs-fallback" viewBox="0 0 120 120" aria-hidden="true"><path d="M53 38C25 28 19 64 19 77c0 18 34 14 34 2ZM67 38c28-10 34 26 34 39 0 18-34 14-34 2Z"/><path class="airway" d="M60 21v22l-8 11m8-11 8 11"/></svg></div><span class="countdown" data-countdown role="timer" aria-live="off" aria-label="Seconds left in this phase">4</span><span class="seconds-caption">sec.</span></div>
+          <div class="guide-card"><span class="guide-kicker" data-state-label>YOUR RHYTHM</span><h2 data-instruction>Breathe in gently</h2><p data-hint>Let a little space open up around you.</p><span class="cycle-label" data-cycle>10 cycles at your own pace</span></div>
+        </div>
+        <div class="scene-bottom"><p class="path-caption" data-path-caption>A small pause. Just you and the trail.</p><div class="phase-chips" role="group" aria-label="Breathing phases"></div><div class="controls"><button class="icon-button sound" type="button" data-sound aria-label="Turn music on" aria-pressed="false" title="Music"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Zm5 4 5 6m0-6-5 6"/></svg></button><button class="main-control" type="button" data-main disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><span>Start</span></button><button class="icon-button" type="button" data-settings aria-label="Journey settings" title="Settings"><svg viewBox="0 0 24 24"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1"/><circle cx="12" cy="12" r="5"/></svg></button></div><p class="active-time" data-active-time>You can stop at any time</p></div>
+      </div>
+      <p class="sr-only" role="status" data-announcement aria-atomic="true"></p>
+      <noscript><style>.controls,.breath-guide,.phase-chips,.journey-progress,.active-time,.settings-form{display:none!important}</style><p class="notice">Enable JavaScript to use the timer and practice controls.</p></noscript>
+    </section>
+  </main>
+  <p class="feedback" role="status" data-feedback hidden></p>
+  <dialog class="settings-dialog" aria-labelledby="settings-title"><div class="settings-content"><div class="dialog-header"><h2 id="settings-title">Journey settings</h2><button class="text-button" type="button" data-close-settings>Done</button></div><form id="settings-form" class="settings-form"><div class="rhythm-settings"><fieldset data-rhythm-fields><legend>Breathing rhythm</legend><label class="sr-only" for="rhythm">Breathing pattern</label><select id="rhythm" name="preset"><option value="4444">4 · 4 · 4 · 4</option><option value="478">4 · 7 · 8</option><option value="464">4 · 6 · 4</option><option value="343">3 · 4 · 3</option><option value="575">5 · 7 · 5</option><option value="custom">Custom rhythm</option></select><p class="field-help">Inhale · hold · exhale · hold</p><div class="custom-fields" hidden><label>Inhale<input type="number" name="inhale" min="1" max="10" value="4" required></label><label>Hold<input type="number" name="holdIn" aria-label="Hold after inhale" min="0" max="10" value="2" required></label><label>Exhale<input type="number" name="exhale" min="1" max="10" value="4" required></label><label>Hold<input type="number" name="holdOut" aria-label="Hold after exhale" min="0" max="10" value="2" required></label><p class="field-help">0 seconds skips the hold.</p></div><div class="cycles-row"><label for="cycles">Number of cycles</label><input id="cycles" name="cycles" type="number" min="1" max="99" value="10" required></div></fieldset>
+      <div class="duration-card"><span>Session length</span><strong data-estimate>2:40</strong></div>
+      <label class="motion-choice"><input type="checkbox" name="still"> Keep the scene still</label>
+      <p class="settings-note" data-settings-note>The animation follows your chosen breathing pattern.</p>
+      </div><div class="appearance-settings">
+      <fieldset class="character-choice"><legend>Character for every landscape</legend><label class="sr-only" for="character">Character</label><select id="character" name="character"><option value="sport">Graphite</option><option value="soft">Ink</option><option value="silhouette">Contrast</option></select><a href="./characters.html" data-compare>Compare them in motion</a></fieldset>
+      <fieldset class="landscapes"><legend>Your landscape</legend><div class="landscape-options"></div></fieldset>
+      </div><fieldset data-site-sound hidden><legend>Sound and cues</legend>
+        <label class="motion-choice"><input type="checkbox" name="music">Background music</label>
+        <label class="motion-choice"><input type="checkbox" name="voice">Spoken phase cues</label>
+        <label class="motion-choice"><input type="checkbox" name="metronome">Metronome</label>
+        <label class="motion-choice"><input type="checkbox" name="vibration">Vibration where supported</label>
+        <label class="motion-choice"><input type="checkbox" name="mute">Mute all sound</label>
+        <div class="sound-choice"><label for="background-sound">Background sound</label><select name="backgroundSound" id="background-sound"><option value="pattern">Pattern music</option><option value="rain">Rain</option><option value="sunrise">Sunrise</option><option value="wind">Wind</option></select></div>
+        <button type="button" class="text-button" data-reset>Reset saved settings</button>
+      </fieldset>
+      <p class="comfort">Breathe comfortably. You can pause, return to your normal breathing, or end the journey at any time.</p>
+    </form></div></dialog>
+  <dialog class="finish-dialog" aria-labelledby="finish-title"><p class="eyebrow">A MOMENT FOR YOU</p><h2 id="finish-title" tabindex="-1">You made time for yourself.</h2><p data-finish-copy></p><dl class="finish-stats"><div><dt>Active time</dt><dd data-finish-time></dd></div><div><dt>Completed cycles</dt><dd data-finish-cycles></dd></div></dl><button type="button" class="finish-button" data-again>Back to the trail</button> <a class="back-link" href="../app#breath">Back to Breath</a></dialog>
+</body>
+</html>

@@ -18,7 +18,14 @@ import {
 } from "./bret-transitions.js";
 
 const root = document.querySelector("[data-bret-practice]");
-if (root) {
+// The former circular breathing screen is a compatibility entry. Physical
+// retains its own destination and never initializes a breathing practice.
+if (root?.dataset.journeyUrl && new URLSearchParams(location.search).get("mode") !== "pmr") {
+  const target = new URL(root.dataset.journeyUrl, location.href);
+  target.search = location.search;
+  target.hash = location.hash;
+  location.replace(target.href);
+} else if (root) {
   const trial = createTrialAnalytics("bret");
   try {
     init(root, trial);

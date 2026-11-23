@@ -196,7 +196,7 @@ def verify(build, root, prefix='', base_url='https://www.emtalk.org/'):
             route = soup.html.get('data-route-id', '')
             # Keep exclusions synchronized with layouts/partials/agent-discovery.html.
             # Public metadata links are site-wide; only browser tool bootstrap is excluded.
-            excluded = route.startswith(('/tests/', '/documents/')) or route in {'/dm/workspace', '/bret/practice'}
+            excluded = route.startswith(('/tests/', '/documents/')) or route in {'/dm/workspace', '/bret/practice', '/bret/journey', '/bret/journey/characters'}
             boot = soup.select('script[data-emtalk-agent-bootstrap]')
             if len(boot) != (0 if excluded else 1):
                 errors.append('Agent bootstrap route exclusion differs: ' + route)

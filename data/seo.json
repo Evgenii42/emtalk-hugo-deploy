@@ -307,7 +307,7 @@
     "/bret/practice": {
       "title": "Free Breathing Timer and Custom Rhythms | BRET",
       "description": "Use a box breathing or 4-7-8 timer, or create a custom rhythm. Physical practices are coming soon. Free BRET web practice, with no account needed.",
-      "indexable": true,
+      "indexable": false,
       "headline": "Breathing timer and custom rhythms"
     },
     "/news": {
@@ -350,6 +350,18 @@
       "title": "Bret | EmTalk",
       "description": "Choose breathing, guided meditation or four little games at your own pace. Physical practices are coming soon.",
       "headline": "Bret",
+      "indexable": false
+    },
+    "/bret/journey": {
+      "title": "Bret Breathing Journey | EmTalk",
+      "description": "Follow a moving landscape at your selected breathing rhythm, with a clear phase timer, pauses and comfortable settings.",
+      "headline": "Quiet Trail",
+      "indexable": false
+    },
+    "/bret/journey/characters": {
+      "title": "Choose Your Bret Journey Character | EmTalk",
+      "description": "Compare Graphite, Ink and Contrast in motion and choose one character palette for every Bret breathing landscape.",
+      "headline": "A new running silhouette.",
       "indexable": false
     },
     "/bret/games": {

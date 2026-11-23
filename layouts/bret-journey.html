@@ -1,0 +1,12 @@
+{{- $page := index hugo.Data.render.pages .Params.routeId -}}
+{{- if not $page.journeySource -}}{{- errorf "Missing Journey source for %q" .Params.routeId -}}{{- end -}}
+{{- $bridge := resources.Get "js/bret-journey-support.js" -}}
+{{- if not $bridge -}}{{- errorf "Missing site Journey support bridge" -}}{{- end -}}
+{{- $bridge = $bridge | js.Build (dict "targetPath" "js/bret-journey-support.js" "format" "esm" "target" "es2020" "minify" true) | fingerprint -}}
+{{- $head := partial "seo.html" (dict "page" $page "context" .) -}}
+{{- $head = printf "%s\n%s\n%s\n<link rel=\"modulepreload\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\">" $head (partial "analytics.html" .) (partial "agent-discovery.html" (dict "route" $page.routeId)) $bridge.RelPermalink $bridge.Data.Integrity -}}
+{{- $document := readFile (printf "tmp/bret-journey-html/%s" $page.journeySource) -}}
+{{- $document = replace $document "<!-- BRET_SITE_HEAD -->" $head -}}
+{{- $document = replace $document "__BRET_SITE_BRIDGE__" $bridge.RelPermalink -}}
+{{- $document = replace $document "</body>" (printf "%s</body>" (partial "privacy-controls.html" .)) -}}
+{{- $document | safeHTML -}}

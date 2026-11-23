@@ -113609,7 +113609,7 @@
       "language": "en",
       "family": "owned",
       "origin": "owned",
-      "sourceHash": "109e848ce22545d184258ed73b745dd3742a8c414ac7064101d3465637fb9a29",
+      "sourceHash": "e162eadd3a6027aee0a8a2f3624df6f1f4190b509063f96556488579016b1708",
       "body": {
         "tag": "body",
         "attributes": {
@@ -113639,7 +113639,7 @@
         "language": "en",
         "title": "Breathing timer and custom rhythms",
         "lead": "Use five breathing rhythms, including box breathing and 4-7-8, or create a custom rhythm. Physical practices are coming soon. Free to use, without an account.",
-        "indexable": true,
+        "indexable": false,
         "sections": [],
         "actions": [
           {
@@ -113648,7 +113648,7 @@
           }
         ]
       },
-      "ownedHash": "109e848ce22545d184258ed73b745dd3742a8c414ac7064101d3465637fb9a29",
+      "ownedHash": "e162eadd3a6027aee0a8a2f3624df6f1f4190b509063f96556488579016b1708",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -113695,6 +113695,107 @@
         "actions": []
       },
       "ownedHash": "33f732e10aace68121c3190e6c70b789ab56ec8d0e9c48269bea3293aa163eec",
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/bret/journey": {
+      "routeId": "/bret/journey",
+      "title": "Bret breathing journey",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "369825e006277afb9ad08defb9e928cfba6ea41ff97693087cb94d1e8bba670a",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [
+        {
+          "name": "color-scheme",
+          "content": "light"
+        }
+      ],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Bret breathing journey",
+        "lead": "Follow your chosen breathing rhythm along a moving landscape.",
+        "indexable": false,
+        "sections": [],
+        "actions": []
+      },
+      "ownedHash": "369825e006277afb9ad08defb9e928cfba6ea41ff97693087cb94d1e8bba670a",
+      "publicPath": "/bret/journey/",
+      "journeySource": "index.html",
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/bret/journey/characters": {
+      "routeId": "/bret/journey/characters",
+      "title": "Choose your Bret character",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "7cf3dac0f6516c37edbe5483b414d86a81055ad67b49b317c34e7150d3cf2fbc",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Choose your Bret character",
+        "lead": "Compare three palettes of the same runner for every landscape.",
+        "indexable": false,
+        "sections": [],
+        "actions": []
+      },
+      "ownedHash": "7cf3dac0f6516c37edbe5483b414d86a81055ad67b49b317c34e7150d3cf2fbc",
+      "publicPath": "/bret/journey/characters",
+      "journeySource": "characters.html",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"

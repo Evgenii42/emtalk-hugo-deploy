@@ -1,8 +1,8 @@
 {{- $entry := (index hugo.Data.render.pages "/bret/practice").ownedEntry -}}
-<main data-analytics-surface="tool_exit" id="emtalk-main" class="bret-practice" tabindex="-1" data-bret-practice data-audio-root="{{ hugo.Data.render.mountPrefix }}/bret/audio/">
+<main data-analytics-surface="tool_exit" id="emtalk-main" class="bret-practice" tabindex="-1" data-bret-practice data-journey-url="{{ hugo.Data.render.mountPrefix }}/bret/journey/" data-audio-root="{{ hugo.Data.render.mountPrefix }}/bret/audio/">
   <div class="bret-intro"><p class="bret-eyebrow">BRET / FREE WEB PRACTICE</p><h1>{{ $entry.title }}</h1><p>{{ $entry.lead }}</p><a data-bret-return href="{{ hugo.Data.render.mountPrefix }}/bret/app" {{ partial "native-link-focus.html" . }}>Back to Bret</a></div>
-  <noscript><p class="bret-notice">This timed practice needs JavaScript. BRET offers five breathing rhythms and custom timing. Physical practices are coming soon. You can return to Bret using the link above.</p></noscript>
-  <p data-bret-load-error class="bret-notice" role="status" hidden>The practice could not load. Please reload this page to try again. You can still return to Bret using the link above.</p>
+  <noscript><p class="bret-notice">This timed practice needs JavaScript. BRET offers five breathing rhythms and custom timing. Physical practices are coming soon. <a href="{{ hugo.Data.render.mountPrefix }}/bret/journey/">Open the breathing journey</a> or return to Bret using the link above.</p></noscript>
+  <p data-bret-load-error class="bret-notice" role="status" hidden>The practice could not load. Please reload this page to try again. <a href="{{ hugo.Data.render.mountPrefix }}/bret/journey/">Open the breathing journey</a> or return to Bret using the link above.</p>
   <p data-bret-physical-soon class="bret-notice" role="status" hidden>Physical practices are coming soon. You can return to Bret or <a href="{{ hugo.Data.render.mountPrefix }}/bret/practice?mode=breathing">try breathing instead</a>.</p>
   <div data-bret-app hidden>
     <p class="bret-notice">Stay within a comfortable range. Breathe normally or stop if you feel uncomfortable. This is a relaxation practice, not medical treatment.</p>

@@ -177,6 +177,17 @@
       "origin": "owned"
     },
     {
+      "path": "/bret/journey",
+      "file": "bret/journey/index.html",
+      "publicPath": "/bret/journey/",
+      "origin": "owned"
+    },
+    {
+      "path": "/bret/journey/characters",
+      "file": "bret/journey/characters.html",
+      "origin": "owned"
+    },
+    {
       "path": "/bret/games",
       "file": "bret/games.html",
       "origin": "owned"
@@ -233,6 +244,7 @@
     "https://pubmed.ncbi.nlm.nih.gov/42263407",
     "https://pubmed.ncbi.nlm.nih.gov/9401427/",
     "https://t.me/EmTalk_inc",
+    "https://vector.game/",
     "https://www.facebook.com/emtalkinc/",
     "https://www.instagram.com/emtalk.inc/",
     "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep"
@@ -648,11 +660,23 @@
       "path": "/bret/practice",
       "exactSuffix": "/bret/practice",
       "origin": "owned",
-      "sourceNoindex": false
+      "sourceNoindex": true
     },
     {
       "path": "/bret/app",
       "exactSuffix": "/bret/app",
+      "origin": "owned",
+      "sourceNoindex": true
+    },
+    {
+      "path": "/bret/journey",
+      "exactSuffix": "/bret/journey/",
+      "origin": "owned",
+      "sourceNoindex": true
+    },
+    {
+      "path": "/bret/journey/characters",
+      "exactSuffix": "/bret/journey/characters",
       "origin": "owned",
       "sourceNoindex": true
     },

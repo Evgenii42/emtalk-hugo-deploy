@@ -1,5 +1,6 @@
 // Optional, coarse public interface measurement. The owned emitter is the only
 // transport and validates route/context/payload again. Nothing is queued here.
+import { analyticsPublicPath } from './analytics-payload.js';
 const initialized = new WeakSet();
 // Hugo can bundle this helper into several independent entry modules. A shared
 // document guard, rather than only a module-local WeakSet, prevents duplicates.
@@ -168,7 +169,7 @@ function navigationRoutes() {
           || !row.events.includes('page_view') || !row.events.every(event =>
             typeof event === 'string' && Object.prototype.hasOwnProperty.call(policy.schemas, event))) return new Map();
       if (row.context === 'web_trial' ? !['bret','dm'].includes(row.product) : row.product !== null) return new Map();
-      result.set(path, row.context);
+      result.set(analyticsPublicPath(path), row.context);
     }
   } catch { return new Map(); }
   return result;
@@ -232,7 +233,7 @@ export function initPublicMeasurement(root = document) {
     }
     const kind = destination(link, routes);
     if (kind) {
-      const fixedProducts = {'/bret':'bret','/bret/practice':'bret','/dm':'dm','/dm/workspace':'dm','/tapl':'tapl'};
+      const fixedProducts = {'/bret':'bret','/bret/practice':'bret',[analyticsPublicPath('/bret/journey')]:'bret','/bret/journey/characters':'bret','/dm':'dm','/dm/workspace':'dm','/tapl':'tapl'};
       emitInterfaceEvent('emtalk_navigation', {surface:surface(link), destination_kind:kind,
         destination_product:fixedProducts[localPath(link)] || 'not_applicable'});
     }

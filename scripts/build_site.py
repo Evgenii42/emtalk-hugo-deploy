@@ -9,6 +9,7 @@ import subprocess
 from news_content import validated_base_url
 
 import prepare_hugo
+from bret_journey_delivery import prepare_delivery, source_paths as journey_source_paths
 from verify_build import verify
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -117,6 +118,9 @@ def snapshot_sources(root=None):
     sources += [root / name for name in ('scripts/verify_footer.py', 'scripts/verify_tapl.py')]
     sources.append(root / 'scripts/verify_agent_discovery.py')
     sources.append(root / 'scripts/verify_dm_v2_fonts.py')
+    if (root / 'experiments/breathing-journey/index.html').is_file():
+        sources += [root / name for name in journey_source_paths(root)]
+        sources += [root / 'scripts/bret_journey_delivery.py', root / 'scripts/verify_bret_journey_delivery.py']
     sources.append(root / 'scripts/bret_delivery.py')
     reject_tree_links(root / 'scripts/schemas')
     sources.extend(path for path in (root / 'scripts/schemas').glob('*.json') if path.is_file())
@@ -139,6 +143,8 @@ def build(destination, base_url, prefix='', preview=False):
     if not pinned_stable_version(version):
         raise ValueError('Install pinned Hugo ' + PIN + ' before building')
     prepare_hugo.prepare(expected_prefix, preview)
+    if (ROOT / 'experiments/breathing-journey/index.html').is_file():
+        prepare_delivery(ROOT, expected_prefix)
     inputs = snapshot_sources()
     input_digest = digest(json.dumps(inputs, sort_keys=True, separators=(',', ':')).encode())
     subprocess.run(['hugo', '--baseURL', base_url.rstrip('/') + '/', '--destination', str(destination), '--cleanDestinationDir'], cwd=ROOT, check=True)

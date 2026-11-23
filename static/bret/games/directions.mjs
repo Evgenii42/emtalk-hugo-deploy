@@ -209,6 +209,7 @@ export function setupDirections(
     if (disposed) return;
     if (name !== "games" && !DIRECTIONS[name]) name = "breath";
     closeMenu();
+    $("[data-direction-announcement]").textContent = "";
     onDirectionChange();
     current = name;
     root.dataset.bretSection = name;

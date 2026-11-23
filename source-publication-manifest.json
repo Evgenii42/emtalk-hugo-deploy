@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen r2 archive only. HELD: a subsequent shared-status transition finding requires r3. No admission or publication.",
+  "scope": "Prepared exact integrated Bret meditation211 r3 test candidate. Review admission and publication are separate; neither is claimed.",
   "sourceBaseCommit": "e476235f15f2f13ec844b80494732d252f78f9e6",
   "sourceFrozenUncommitted": true,
-  "stageParentCommit": "0c8d63e7d06add37e749b112fcea4b70c100650f",
-  "reviewedReceiptSha256": "5a0be58dc8448e44dfb3721f200ad75be0e50cfbf96f784a0490693d64095326",
+  "stageParentCommit": "34439392ddb0f90658c5b75875579e04f2b9cb96",
+  "reviewedReceiptSha256": "a8e0472c258e283685b820b8d3e2ab8f1bf603fcaea8aadce547d3b1905d1667",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
-  "sourceInputSnapshotSha256": "ebaac1b90cec5cc46d27cf5718d24b8a45046c2e01743f86f8903b396ed95ff9",
-  "outputSnapshotSha256": "d27b07e01c25cd31972a84f13571f44cedb84e7b23df325cfae24c4a945bade3",
+  "sourceInputSnapshotSha256": "d516cddb894e42e2d25910780a2ad11089bb41a63a40416153b37916925466cf",
+  "outputSnapshotSha256": "2958ade7bf4d291964a30f46cd2bbfba0a5d4116790e763b8adae0d20d98743e",
   "sourceCount": 606,
   "outputCount": 428,
   "sourceFiles": [
@@ -1778,8 +1778,8 @@
     },
     {
       "path": "static/bret/games/directions.mjs",
-      "bytes": 9920,
-      "sha256": "00e2063fc1bbd653744bb99f3720ebdac8335047aefd8eee261cb92230cf43ef"
+      "bytes": 9977,
+      "sha256": "124295aed1a553f8a3fbf1be3637b5dc0f2798082d4f81550822331ac46b61c7"
     },
     {
       "path": "static/bret/games/home.css",
@@ -3161,7 +3161,7 @@
     {
       "path": "bret/app.html",
       "bytes": 64415,
-      "sha256": "599aa008262c0457b1c9472177b1c0369a1acf34aab5e1d22d4377f1d97213e1"
+      "sha256": "9884cdef0715fe3dcf5e8d93f90f38b1a79dc75093887b8c6e5610657b6de1f3"
     },
     {
       "path": "bret/audio/delay_first.mp3",
@@ -3481,7 +3481,7 @@
     {
       "path": "bret/games.html",
       "bytes": 64507,
-      "sha256": "2de3e69c6fd2bdf322c22c2e06c843e5323d88b787b96e4a10134bfaa742d949"
+      "sha256": "42976c02f6eed71abe5d277dd0939d62a79ccf93173c157144202864e5008fe3"
     },
     {
       "path": "bret/main/background.png",
@@ -4199,9 +4199,9 @@
       "sha256": "e3e68f94206e0236447bf6fcf1b206776047b3b133be359520c727d4c838b1f7"
     },
     {
-      "path": "js/bret-games.afacb81f36168fbde7e949f5fd364f0a59586a695c6a755493c1c4f08615fb66.js",
-      "bytes": 92005,
-      "sha256": "afacb81f36168fbde7e949f5fd364f0a59586a695c6a755493c1c4f08615fb66"
+      "path": "js/bret-games.8d8903cbbb7d3dce1bc9444b5601efd7a7cf734e90bac72ccb2749dfe9bf2780.js",
+      "bytes": 92055,
+      "sha256": "8d8903cbbb7d3dce1bc9444b5601efd7a7cf734e90bac72ccb2749dfe9bf2780"
     },
     {
       "path": "js/bret-practice.d9d0da721ee8ca7f9d8e755e1722928e59c174ebaa96db782ddbe452dccd4afc.js",
@@ -5185,6 +5185,5 @@
     }
   ],
   "reviewAdmission": false,
-  "published": false,
-  "holdReason": "Root reported a subsequent shared-status transition finding; r3 source and fresh review are pending."
+  "published": false
 }

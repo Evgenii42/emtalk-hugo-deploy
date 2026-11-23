@@ -60,8 +60,8 @@ export function setupMeditation(root) {
     if (audio) { save(); audio.pause(); audio.removeAttribute("src"); audio.load(); audio.remove(); audio = null; }
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     objectUrl = null;
-    for (const url of imageUrls.values()) URL.revokeObjectURL(url);
-    imageUrls.clear(); cues = []; captions = false; seeking = false;
+    for (const img of imageUrls.keys()) releaseImage(img);
+    cues = []; captions = false; seeking = false;
     $("state").dataset.loading = "false";
   }
   function hide() {
@@ -76,22 +76,25 @@ export function setupMeditation(root) {
   function node(tag, text, className) {
     const n = document.createElement(tag); if (text) n.textContent = text; if (className) n.className = className; return n;
   }
+  function releaseImage(img) {
+    const url = imageUrls.get(img);
+    img.onerror = null; img.hidden = true; img.removeAttribute("src");
+    if (url) URL.revokeObjectURL(url);
+    imageUrls.delete(img);
+  }
   async function image(img, path, base, token, signal, version) {
-    img.hidden = true;
+    releaseImage(img);
     try {
       const blob = await repo.blob(contentUrl(path, base), signal, false, version);
       if (!valid(token) || !img.isConnected) return;
-      const previous = imageUrls.get(img);
-      if (previous) URL.revokeObjectURL(previous);
-      const url = URL.createObjectURL(blob); imageUrls.set(img, url); img.src = url; img.hidden = false;
-      img.onerror = () => { img.hidden = true; };
+      const url = URL.createObjectURL(blob); imageUrls.set(img, url);
+      img.onerror = () => { if (imageUrls.get(img) === url) releaseImage(img); };
+      img.hidden = false; img.src = url;
     } catch { /* Keep readable copy when artwork is unavailable. */ }
   }
   function clearCards() {
     for (const img of $("cards").querySelectorAll("img")) {
-      const url = imageUrls.get(img);
-      if (url) URL.revokeObjectURL(url);
-      imageUrls.delete(img);
+      releaseImage(img);
     }
     $("cards").replaceChildren();
   }
@@ -115,6 +118,8 @@ export function setupMeditation(root) {
     const categories = catalogue.categories && catalogue.meditations.every(m => typeof m.categoryId === "string") ? catalogue.categories : [];
     if (!categories.some(c => c.id === category)) category = "all";
     $("categories").replaceChildren();
+    // Native filter buttons keep focus and expose the active filter with pressed
+    // state. They filter one catalogue rather than selecting separate tab panels.
     for (const c of [{ id: "all", title: "All" }, ...categories]) {
       const b = node("button", c.title); b.type = "button"; b.setAttribute("aria-pressed", String(category === c.id));
       b.addEventListener("click", () => {
@@ -137,8 +142,15 @@ export function setupMeditation(root) {
       notice(result.offline ? "Using your saved library. Connect and refresh for updates." : "");
     } catch {
       if (!valid(token)) return;
-      clearCards(); $("categories").replaceChildren();
-      notice("The library could not be loaded. Check your connection and try Refresh library.");
+      if (catalogue) {
+        // Rebind handlers and artwork to this live request after begin() aborted
+        // the previous generation. Validated last-good metadata stays usable.
+        filters(token, signal); cards(token, signal);
+        notice("Could not refresh. Showing your last loaded library. Try Refresh library when connected.");
+      } else {
+        clearCards(); $("categories").replaceChildren();
+        notice("The library could not be loaded. Check your connection and try Refresh library.");
+      }
     } finally { if (valid(token)) $("refresh").disabled = false; }
   }
   async function openDetail(item) {

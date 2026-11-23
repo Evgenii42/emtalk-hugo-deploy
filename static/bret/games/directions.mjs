@@ -241,7 +241,9 @@ export function setupDirections(
     }
   }
   tabs.forEach((b) =>
-    on(b, "click", () => show(b.dataset.bretTab)),
+    on(b, "click", () => {
+      if (b.dataset.bretTab !== current) show(b.dataset.bretTab);
+    }),
   );
   const carousel = $("[data-direction-carousel]");
   function adjacent(step) {

@@ -438,7 +438,7 @@ function renderCatalog(focusState = null) {
       ?.focus({ preventScroll: true });
 }
 function queueCheckpoint() {
-  if (!run || !controller || runResult?.completed) return;
+  if (!run || !controller || runResult?.completed || runResult?.readOnly) return;
   const owner = run;
   if (checkpointRequest?.owner === owner) return;
   const request = { owner };
@@ -449,7 +449,7 @@ function queueCheckpoint() {
   }, 1000);
 }
 function checkpoint() {
-  if (!run || !controller || runResult?.completed) return;
+  if (!run || !controller || runResult?.completed || runResult?.readOnly) return;
   try {
     const snapshot = controller.snapshot();
     // The host settles terminal scenes; they are never resumable checkpoints.
@@ -816,11 +816,7 @@ function resume() {
   }
 }
 function finish(result = {}, completed = false) {
-  if (!run || !controller) return;
-  if (!canPlay()) {
-    library();
-    return;
-  }
+  if (!run || !controller || runResult) return;
   stop();
   if (!run || !controller) return;
   let snap;
@@ -830,13 +826,22 @@ function finish(result = {}, completed = false) {
     runtimeFailure();
     return;
   }
-  const award = settleGoal(db, run, result, completed);
-  runResult = { ...result, completed, passed: award.passed };
+  let writable = canPlay();
+  // A conflict must not discard the result or alter the store owner's progress.
+  // Preview the same accounting on copies; only the current visit displays it.
+  const resultDb = writable ? db : { ...db, levels: { ...db.levels } };
+  const award = settleGoal(resultDb, writable ? run : { ...run }, result, completed);
+  runResult = { ...result, completed, passed: award.passed, readOnly: !writable };
   const earnedTime = award.earnedXP,
     bonus = award.bonus;
   run.snapshot = snap;
-  db.last = completed ? null : { ...run };
-  write();
+  if (writable) {
+    db.last = completed ? null : { ...run };
+    write();
+    // The guarded write can discover an ownership conflict synchronously.
+    writable = canPlay();
+    runResult.readOnly = !writable;
+  }
   $("[data-session]").hidden = true;
   $("[data-result]").hidden = false;
   $("[data-result-art]").innerHTML = art(run.id);
@@ -846,15 +851,17 @@ function finish(result = {}, completed = false) {
       ? "A little moment, then rest."
       : "A little space, made by you.");
   $("[data-result-detail]").textContent =
-    result.detail ||
-    (completed
+    !writable
+      ? (result.detail ? result.detail + " " : "") + "Your result is kept for this visit only. Saved progress was not changed. Reload this tab before starting another scene."
+      : result.detail || (completed
       ? "Your scene is complete."
       : storage
         ? "Your place is saved. Continue this scene to keep it, or replace this saved place with a new scene."
         : "Your place is kept for this visit. Continue this scene to keep it, or replace this place with a new scene. Browser saving is unavailable.");
   $("[data-result-time]").textContent = fmt(run.activeMs);
   $("[data-result-xp]").textContent = `+${earnedTime + bonus} XP`;
-  $("[data-result-level]").textContent = completed
+  $("[data-result-xp] + span").textContent = writable ? "added to your total" : "earned this visit";
+  $("[data-result-level]").textContent = !writable ? "Kept this visit" : completed
     ? award.passed
       ? "Goal complete"
       : "Scene played"
@@ -866,12 +873,14 @@ function finish(result = {}, completed = false) {
       ? storage
         ? "Replace saved place with a new scene"
         : "Replace this place with a new scene"
-      : run.mode === "levels" && award.passed
+      : writable && run.mode === "levels" && award.passed
       ? `Next level · ${db.levels[run.id]}`
       : "A new scene, same pace";
   $("[data-retry]").textContent = completed
     ? "Replay this scene"
     : "Continue this scene";
+  $("[data-next]").disabled = !writable;
+  $("[data-retry]").disabled = !writable;
   $("[data-next]").classList.toggle("games-primary", db.state !== "sleep");
   $("[data-done]").classList.toggle("games-primary", db.state === "sleep");
   $$("[data-feedback]").forEach((b) => b.setAttribute("aria-pressed", "false"));

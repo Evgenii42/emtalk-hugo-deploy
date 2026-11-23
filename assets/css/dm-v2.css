@@ -379,7 +379,8 @@ to{opacity:1;transform:translateY(0)}}
 }
 
 /* Keep the existing outward focus ring clear of adjacent earlier-data text. */
-.dm-v2 .earlier-data button { margin-block: 8px; }
+.dm-v2 .earlier-data button,
+.dm-v2 .earlier-data summary { margin-block: 8px; }
 
 /* Preserve accepted long decision text while wrapping it within this panel. */
 .dm-v2 .earlier-data { overflow-wrap: anywhere; }

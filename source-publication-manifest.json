@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "scope": "Prepared exact integrated Bret meditation214 R6 test candidate. Review admission and publication are separate; neither is claimed.",
-  "sourceBaseCommit": "a3ead12de026fa6661ed0f072ba47e74e89f0dc0",
-  "sourceFrozenUncommitted": true,
+  "scope": "Owner-directed reviewed Bret meditation R6 TEST preview. Strict numeric review gate not passed: external overall9, maintainability8, four low findings and no blockers retained. Hosting acceptance is separate.",
+  "sourceBaseCommit": "315ccaa10f67b710f4b0ef55c33e63a313e7f773",
+  "sourceFrozenUncommitted": false,
   "stageParentCommit": "17c34dfc1c795839e8515371934744de6e63ee69",
   "reviewedReceiptSha256": "7bc11cbaeac73e855cf115a6cb3fddacf19f2e7086e146a812555199da87a9f2",
   "previewBaseURL": "https://interest032.emtalk-hugo-deploy.pages.dev/",
@@ -5185,5 +5185,10 @@
     }
   ],
   "reviewAdmission": false,
-  "published": false
+  "published": false,
+  "reviewedBuildBaseCommit": "a3ead12de026fa6661ed0f072ba47e74e89f0dc0",
+  "reviewedBuildHadUncommittedSource": true,
+  "strictReviewGatePassed": false,
+  "externalOverall": 9,
+  "remainingLowFindings": 4
 }

@@ -25,6 +25,32 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   {{- end -}}
 {{- end -}}
 {{- $homeHeroIndex := -1 -}}
+{{/* BRET-SOURCE-RECONCILIATION-START
+These guest routes have an approved empty source body. Their authored app or
+practice and the shared ecosystem footer are rendered separately. New imported
+content, including a source footer, requires explicit reconciliation first. */}}
+{{- if and (in (slice "/bret/app" "/bret/games" "/bret/practice") $page.routeId) (ne (len $page.body.children) 0) -}}
+  {{- errorf "Bret authored replacement requires an empty source body for %q; reconcile unexpected AST children" $page.routeId -}}
+{{- end -}}
+{{/* The owner-authorized landing retires exactly seven known legacy sections,
+not an empty source body. Only its registered section-footer-dm is rendered.
+Keep the complete approved sequence explicit so a new imported source section
+cannot be silently omitted beneath the authored landing. */}}
+{{- if eq $page.routeId "/bret" -}}
+  {{- $approvedBretSections := slice "section-6" "section-10" "section-11" "section-9" "section-8" "section-7" "section-6" "section-footer-dm" -}}
+  {{- $actualBretSections := slice -}}
+  {{- range $node := $page.body.children -}}
+    {{- if not (and (reflect.IsMap $node) (eq $node.tag "section")) -}}
+      {{- errorf "Bret landing source requires its approved section sequence; reconcile unexpected AST children" -}}
+    {{- else -}}
+      {{- $actualBretSections = $actualBretSections | append (index $node.attributes "class") -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if ne (delimit $actualBretSections "|") (delimit $approvedBretSections "|") -}}
+    {{- errorf "Bret landing source section sequence changed; reconcile the explicit authored replacement" -}}
+  {{- end -}}
+{{- end -}}
+{{/* BRET-SOURCE-RECONCILIATION-END */}}
 {{- $ecosystemRendered := false -}}
 {{- if eq $page.routeId "/" -}}
   {{- $homeHeroCount := 0 -}}
@@ -103,7 +129,8 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   <link rel="stylesheet" href="{{ $dmCss.RelPermalink }}" integrity="{{ $dmCss.Data.Integrity }}">
 {{ end }}
 {{ if in (slice "/bret/app" "/bret/games") $page.routeId }}
-  {{ range slice "app" "play" "directions" "home" }}
+  {{/* View styles precede the shared shell, which owns navigation positioning. */}}
+  {{ range slice "app" "play" "directions" "home" "meditation" "shell" }}
     {{ $gameCss := resources.Get (printf "bret-games/%s.css" .) | resources.Copy (printf "bret/games/%s.css" .) | fingerprint }}
     <link rel="stylesheet" href="{{ $gameCss.RelPermalink }}" integrity="{{ $gameCss.Data.Integrity }}">
   {{ end }}

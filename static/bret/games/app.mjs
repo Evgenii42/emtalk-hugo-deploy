@@ -1,6 +1,8 @@
 import { mountGame } from "./play.mjs";
 import { accrueTime, settleGoal } from "./session.mjs";
 import { setupDirections } from "./directions.mjs";
+import { setupMeditation } from "./meditation.mjs";
+import { setupBretShell } from "./shell.mjs";
 import { createProgressStore } from "./persistence.mjs";
 import { createViewHistory } from "./navigation.mjs";
 import { setTextIfChanged, playedTimeLabel, formatClock } from "./ui.mjs";
@@ -147,7 +149,8 @@ const empty = () => normalizeProgress(null, {
 });
 let db = empty(),
   storage = true,
-  storeReady = false;
+  storeReady = false,
+  progressPhase = "starting";
 let selected = null,
   controller = null,
   run = null,
@@ -156,6 +159,7 @@ let selected = null,
   saveElapsed = 0,
   runResult = null,
   directions = null,
+  meditation = null,
   progressText = "";
 let frameId = 0;
 let checkpointRequest = null;
@@ -197,6 +201,7 @@ cleanupInitialization = () => {
     destroy();
   } finally {
     try {
+      meditation?.hide();
       directions?.dispose?.();
     } finally {
       progressStore.close();
@@ -206,7 +211,9 @@ cleanupInitialization = () => {
 function canPlay() {
   if (storeReady && progressStore.writable) return true;
   notice(
-    storeReady
+    progressPhase === "closed"
+      ? "Saved progress is closed. Reload this tab before continuing."
+      : storeReady
       ? "Games are open in another tab. Close that tab and reload here to continue safely."
       : "Preparing your saved progress. Please try again in a moment.",
   );
@@ -217,17 +224,25 @@ function write() {
 }
 function syncAvailability() {
   const writable = storeReady && progressStore.writable;
-  $$("[data-theme],[data-game-home-play],[data-resume-run],[data-discard-run],[data-state-choice],[data-cards] button,[data-setup-start]").forEach(
+  $$("[data-theme],[data-game-home-play],[data-resume-run],[data-discard-run],[data-feedback],[data-state-choice],[data-cards] button,[data-setup-start]").forEach(
     (button) => { button.disabled = !writable; },
   );
 }
 async function beginProgress(restored = false) {
   storeReady = false;
   syncAvailability();
+  progressPhase = "starting";
   const state = await progressStore.begin();
-  if (state.mode === "closed") return;
+  if (state.mode === "closed") {
+    progressPhase = "closed";
+    storage = false;
+    notice("Saved progress is closed. Reload this tab before continuing.");
+    if (!$("[data-garden]").hidden) garden({ focus: false });
+    return;
+  }
   hydrate(state.raw);
   storeReady = true;
+  progressPhase = "ready";
   storage = state.writable && state.mode !== "memory";
   syncAvailability();
   if (storage) {
@@ -242,6 +257,7 @@ async function beginProgress(restored = false) {
       "Saving is unavailable in this browser. You can keep playing; this visit will not be kept after closing.",
     );
   if (restored) viewHistory.restore({ force: true });
+  else if (!$("[data-garden]").hidden) garden({ focus: false });
   else if (selected && !$("[data-setup]").hidden) {
     applySetupPreferences(selected.id);
     showReplacementChoice();
@@ -331,11 +347,31 @@ function toggleTheme() {
   write();
 }
 $("[data-theme]").addEventListener("click", toggleTheme);
-theme();
 function state() {
   return STATES.find((s) => s.id === db.state) || STATES[0];
 }
+function updateCatalogSelection(focusState) {
+  const s = state();
+  $("[data-state-note]").textContent = s.note;
+  for (const button of $$("[data-state-choice]")) {
+    const selected = button.dataset.stateChoice === s.id;
+    button.setAttribute("aria-checked", String(selected));
+    button.tabIndex = selected ? 0 : -1;
+    if (button.dataset.stateChoice === focusState) button.focus({ preventScroll: true });
+  }
+  // State changes affect recommendations, not game artwork or progress copy.
+  // Move the existing cards so focusable controls and SVG nodes stay intact.
+  const cards = [...$("[data-cards]").children];
+  const ordered = [...GAMES].sort((a, b) => Number(b.id === s.pick) - Number(a.id === s.pick));
+  for (const game of ordered) {
+    const card = cards.find(node => node.dataset.gameCard === game.id);
+    if (!card) continue;
+    card.querySelector(".games-card-badge").textContent = game.id === s.pick ? "PICKED FOR YOU" : game.tag.toUpperCase();
+    $("[data-cards]").append(card);
+  }
+}
 function renderCatalog(focusState = null) {
+  if (!storeReady) return;
   const s = state();
   $("[data-state-note]").textContent = s.note;
   $("[data-states]").replaceChildren();
@@ -353,7 +389,7 @@ function renderCatalog(focusState = null) {
       if (id === "sleep") db.evening = true;
       theme();
       write();
-      renderCatalog(id);
+      updateCatalogSelection(id);
     };
     b.addEventListener("click", () => choose(choice.id));
     b.addEventListener("keydown", (event) => {
@@ -380,6 +416,7 @@ function renderCatalog(focusState = null) {
   for (const g of ordered) {
     const card = document.createElement("article");
     card.className = "games-card";
+    card.dataset.gameCard = g.id;
     card.innerHTML = `<div class="games-card-art">${art(g.id)}<span class="games-card-badge">${g.id === s.pick ? "PICKED FOR YOU" : g.tag.toUpperCase()}</span></div><div class="games-card-copy"><h3>${g.name}</h3><p>${g.description}</p><div class="games-card-tags"><span>${g.skill}</span><span>${g.time.replace("-", " to ")}</span></div><div class="games-card-bottom"><span>Level ${db.levels[g.id]} · Your pace</span><button type="button" aria-label="Choose ${g.name}">Choose game <span aria-hidden="true">↗</span></button></div></div>`;
     card
       .querySelector("button")
@@ -508,6 +545,7 @@ function preferencesFor(id) {
   });
 }
 function renderGameHome() {
+  if (!storeReady) return;
   const g = homeGame(),
     saved = validLast(db.last) && db.last.id === g.id ? db.last : null,
     prefs = saved || preferencesFor(g.id);
@@ -536,6 +574,7 @@ function renderGameHome() {
   totals();
 }
 function hideViews() {
+  meditation?.hide();
   $$("[data-game-home],[data-catalog],[data-player],[data-garden]").forEach(
     (n) => (n.hidden = true),
   );
@@ -630,8 +669,10 @@ function start(options, { replaceSaved = false } = {}) {
     notice("Choose a challenge, pace and time from the game settings before starting.");
     return;
   }
-  const game = selected;
-  if (!game) return;
+  const game = options.id === undefined ? selected : GAMES.find(g => g.id === options.id);
+  if (!game) { notice("Choose an available game before starting."); return; }
+  if (selected !== game) openSetup(game.id, { focus: false });
+  if (selected !== game) return;
   if (!options.snapshot && db.last && validLast(db.last) && !replaceSaved) {
     openSetup(game.id);
     notice("Your paused scene is still kept. Review the replacement note before starting a fresh scene.");
@@ -833,7 +874,7 @@ function finish(result = {}, completed = false) {
     : "Continue this scene";
   $("[data-next]").classList.toggle("games-primary", db.state !== "sleep");
   $("[data-done]").classList.toggle("games-primary", db.state === "sleep");
-  $$("[data-feedback]").forEach((b) => b.removeAttribute("aria-pressed"));
+  $$("[data-feedback]").forEach((b) => b.setAttribute("aria-pressed", "false"));
   $("[data-feedback-status]").textContent = "";
   $("[data-result-title]").focus({ preventScroll: true });
   totals();
@@ -933,18 +974,22 @@ function garden({ focus = true } = {}) {
   hideViews();
   $("[data-garden]").hidden = false;
   $("[data-garden-art]").innerHTML = art("moles");
-  $("[data-garden-summary]").textContent =
-    `${playedTimeLabel(db.totalMs)}, ${xp()} XP and ${db.completed} scenes played. Every comfortable pace counts.`;
   $("[data-garden-stats]").replaceChildren();
-  for (const g of GAMES) {
-    const box = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = g.name;
-    const level = document.createElement("span");
-    level.textContent = `Level ${db.levels[g.id]}`;
-    box.append(title, level);
-    $("[data-garden-stats]").append(box);
-  }
+  if (storeReady) {
+    $("[data-garden-summary]").textContent =
+      `${playedTimeLabel(db.totalMs)}, ${xp()} XP and ${db.completed} scenes played. Every comfortable pace counts.`;
+    for (const g of GAMES) {
+      const box = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = g.name;
+      const level = document.createElement("span");
+      level.textContent = `Level ${db.levels[g.id]}`;
+      box.append(title, level);
+      $("[data-garden-stats]").append(box);
+    }
+  } else $("[data-garden-summary]").textContent = progressPhase === "closed"
+    ? "Saved progress is closed. Reload this tab to see your garden."
+    : "Loading your saved garden...";
   recordView("garden");
   window.scrollTo({ top: 0, behavior: "instant" });
   if (focus) $("[data-garden] h1").focus({ preventScroll: true });
@@ -1058,7 +1103,11 @@ function restoreNavigation() {
 }
 window.addEventListener("popstate", restoreNavigation);
 window.addEventListener("hashchange", restoreNavigation);
+meditation = setupMeditation(root);
+setupBretShell(root);
 directions = setupDirections(root, {
+  onMeditation: options => meditation.show(options),
+  onDirectionChange: () => meditation.hide(),
   onGames: library,
   onView: recordView,
   onLeave: () => {
@@ -1069,12 +1118,11 @@ directions = setupDirections(root, {
   },
   onGarden: garden,
 });
-renderCatalog();
-renderGameHome();
 const initializingProgress = beginProgress();
 window.addEventListener("pagehide", () => {
   storeReady = false;
   syncAvailability();
+  progressPhase = "closed";
   progressStore.close();
 });
 window.addEventListener("pageshow", (e) => {

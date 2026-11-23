@@ -1,1 +1,1 @@
-Prepared Bret Games116 test candidate. Only approved test alias interest032.emtalk-hugo-deploy.pages.dev. Final external review required; unadmitted and unpublished. Exact source/output hashes in source-publication-manifest.json. No production changes.
+Prepared integrated Bret meditation209 test candidate. Only the existing test alias interest032.emtalk-hugo-deploy.pages.dev is selected. Review admission and publication are separate and are not claimed here. Exact public input/output hashes are in source-publication-manifest.json. No production changes.

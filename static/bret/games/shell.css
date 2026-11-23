@@ -1,0 +1,44 @@
+/* Shared Bret shell owns app navigation and menu positioning. Content layers
+   may hide the chrome in an immersive practice, but do not re-position it. */
+.bret-games { padding-bottom:0; }
+.bret-games .bret-tabs {
+  position:sticky; z-index:30; bottom:0; width:100%; flex-shrink:0;
+  margin-top:auto; display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:4px; padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+  border-radius:24px 24px 0 0; border-top:1px solid var(--g-tabs-line);
+  background:var(--g-tabs-background); backdrop-filter:blur(16px);
+}
+.bret-games .bret-tabs>button { width:100%; min-width:0; min-height:44px; padding:8px 6px; border:0; border-radius:24px; background:transparent; color:var(--g-tabs-ink); font:500 12px/16px Manrope,sans-serif; white-space:nowrap; }
+.bret-games .bret-tabs>button[aria-current=page] { background:var(--g-purple); color:var(--g-tabs-on-active); }
+.bret-games .bret-tabs>button:hover { background:var(--g-tabs-hover); }
+.bret-games .bret-tabs>button[aria-current=page]:hover { background:var(--g-tabs-active-hover); }
+/* Preserve a keyboard user's focused navigation while the site footer appears. */
+.bret-games.has-site-footer .bret-tabs:not(:focus-within) { visibility:hidden; }
+@media(min-width:768px) {
+  .bret-games .bret-tabs { width:600px; max-width:calc(100% - 40px); align-self:center; bottom:20px; margin-bottom:20px; border-radius:24px; padding:10px 12px; }
+}
+@media(prefers-reduced-motion:reduce) { .bret-tabs { backdrop-filter:none; } }
+
+/* App menu. */
+.bret-games .bret-app-menu{position:absolute;z-index:40;top:54px;left:12px;width:min(300px,calc(100% - 24px));padding:8px;border:1px solid var(--g-card-line);border-radius:20px;background:var(--g-menu-background);box-shadow:var(--g-menu-shadow);display:grid;gap:4px}
+.bret-app-menu>a,.bret-games .bret-app-menu>button{display:flex;align-items:center;text-align:left;min-height:44px;padding:10px 14px;border:0;border-radius:12px;background:transparent;color:var(--g-day-ink);font:500 14px/20px Manrope,sans-serif;text-decoration:none}
+.bret-app-menu>a:hover,.bret-games .bret-app-menu>button:hover{background:var(--g-menu-hover)}
+.bret-menu-progress{border-top:1px solid var(--g-day-page);display:flex;justify-content:space-between;gap:12px;align-items:center;margin:6px 8px 0;padding:12px 6px 8px;color:var(--g-menu-muted);font:400 12px/16px Manrope,sans-serif}
+.bret-menu-progress strong{font-size:13px;color:var(--g-day-purple)}
+.bret-games.is-evening .bret-menu-toggle>img{filter:brightness(0) invert(1)}
+
+/* Bret and the shared site navigation use mobile <=767px, desktop >=768px.
+   Desktop has the shared website header above Bret. Mirror the app's existing
+   header offset and align the menu with its centered appbar toggle. */
+@media(min-width:768px) {
+  .bret-games .bret-app-menu {
+    top:calc(var(--emt-header-top,16px) + var(--emt-header-bar-height,64px) + 16px + 54px);
+    left:max(26px,calc((100% - 1260px) / 2 + 26px));
+  }
+}
+
+@media(forced-colors:active) {
+  .bret-games .bret-tabs,.bret-games .bret-app-menu { background:Canvas; color:CanvasText; border:1px solid CanvasText; }
+  .bret-games .bret-tabs>button { color:ButtonText; }
+  .bret-games .bret-tabs>button[aria-current=page] { background:Highlight; color:HighlightText; forced-color-adjust:none; }
+}

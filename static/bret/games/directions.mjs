@@ -26,11 +26,10 @@ const DIRECTIONS = Object.freeze({
   meditation: {
     heading: "Meditation",
     copy: "Make a little space between you and the noise. Choose a short guided practice or explore the library.",
-    name: "Relax Short",
-    category: "6 MIN",
-    description: "A quick ambient session to ease tension and bring back calm.",
-    chip: "6 min",
-    badge: "COMING SOON",
+    name: "Meditation library",
+    category: "GUIDED PRACTICES",
+    description: "Choose a guided practice for your moment.",
+    chip: "Explore",
     image: "meditation.png",
     mode: null,
   },
@@ -38,7 +37,7 @@ const DIRECTIONS = Object.freeze({
 const ORDER = ["breath", "physical", "meditation"];
 export function setupDirections(
   root,
-  { onGames = () => {}, onLeave = () => {}, onGarden = () => {}, onView = () => {} } = {},
+  { onGames = () => {}, onLeave = () => {}, onGarden = () => {}, onView = () => {}, onMeditation = () => {}, onDirectionChange = () => {} } = {},
 ) {
   const $ = (s) => root.querySelector(s),
     $$ = (s) => [...root.querySelectorAll(s)],
@@ -53,7 +52,6 @@ export function setupDirections(
   // render() moves them into the new active card before replacing the old track;
   // never clone them or leave their ownership with a discarded card.
   const play = $("[data-direction-play]"),
-    unavailable = $("[data-direction-unavailable]"),
     settings = $("[data-direction-settings]");
   const menu = $("[data-bret-menu]"),
     toggle = $("[data-bret-menu-toggle]");
@@ -141,17 +139,14 @@ export function setupDirections(
       s.textContent = text;
       plate.append(s);
     }
-    if (d.badge) {
-      const badge = document.createElement("span");
-      badge.className = "bret-direction-card-badge";
-      badge.textContent = d.badge;
-      plate.append(badge);
-    }
     b.append(img);
     if (active) b.append(plate);
     on(b, "click", (e) => {
       if (e.detail && performance.now() - lastSwipe < 350) return;
-      if (current !== name) show(name);
+      if (current !== name) {
+        show(name);
+        if (!panel.hidden) $("[data-direction-card].is-active")?.focus({ preventScroll: true });
+      }
     }, cardAbort.signal);
     return b;
   }
@@ -172,24 +167,22 @@ export function setupDirections(
       total <= width ? (width - total) / 2 : target - active.offsetLeft;
     track.style.left = offset + "px";
     track.style.transform = "none";
-    track.dataset.activeIndex = String(i);
   }
 
   function render(name) {
     // Replaced cards must not be retained by the page-lifetime abort signal.
     cardAbort.abort();
     cardAbort = new AbortController();
-    const d = DIRECTIONS[name],
-      i = ORDER.indexOf(name);
+    const d = DIRECTIONS[name];
     $("[data-direction-title]").textContent = d.heading;
     $("[data-direction-copy]").textContent = d.copy;
     $("[data-direction-carousel]").setAttribute(
       "aria-label",
-      d.heading + " practices. Use left and right arrow keys to explore.",
+      d.heading + " practices. Use arrow keys, Home or End to explore.",
     );
     const active = card(name, true),
       plate = active.querySelector(".bret-direction-card-plate");
-    active.append(play, unavailable);
+    active.append(play);
     plate.append(settings);
     $("[data-direction-track]").replaceChildren(
       ...ORDER.map((direction) =>
@@ -200,7 +193,6 @@ export function setupDirections(
     const available = Boolean(d.mode);
     play.hidden = !available;
     settings.hidden = !available;
-    unavailable.hidden = available;
     if (available) {
       const url =
         prefix +
@@ -217,6 +209,7 @@ export function setupDirections(
     if (disposed) return;
     if (name !== "games" && !DIRECTIONS[name]) name = "breath";
     closeMenu();
+    onDirectionChange();
     current = name;
     root.dataset.bretSection = name;
     for (const b of tabs) {
@@ -234,8 +227,9 @@ export function setupDirections(
     $$("[data-game-home],[data-catalog],[data-player],[data-garden]").forEach(
       (n) => (n.hidden = true),
     );
-    panel.hidden = false;
-    render(name);
+    panel.hidden = name === "meditation";
+    if (name === "meditation") onMeditation({ focus: notify });
+    else render(name);
     if (notify) {
       onView(name);
       $("[data-direction-announcement]").textContent =
@@ -253,10 +247,13 @@ export function setupDirections(
     if (i >= 0 && next >= 0 && next < ORDER.length) show(ORDER[next]);
   }
   on(carousel, "keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (step !== undefined || e.key === "Home" || e.key === "End") {
       e.preventDefault();
-      adjacent(e.key === "ArrowRight" ? 1 : -1);
-      $("[data-direction-card].is-active")?.focus({ preventScroll: true });
+      if (e.key === "Home") show(ORDER[0]);
+      else if (e.key === "End") show(ORDER.at(-1));
+      else adjacent(step);
+      if (!panel.hidden) $("[data-direction-card].is-active")?.focus({ preventScroll: true });
     }
   });
   on(carousel, "pointerdown", (e) => {

@@ -63,6 +63,7 @@
     15px/1.65 Manrope,
     sans-serif;
   display: flex;
+  min-height: 100vh;
   min-height: 100svh;
   width: 100%;
   isolation: isolate;
@@ -714,7 +715,7 @@
   display: none;
 }
 /* Mobile app layout has one owner; the narrower rule adds card padding only. */
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .games-card h3 {
     font-size: 18px;
   }

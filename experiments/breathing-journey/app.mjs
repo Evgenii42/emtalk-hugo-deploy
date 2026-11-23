@@ -1,9 +1,11 @@
 import {Journey,sanitize,landscapeForCycle} from './model.mjs?v=jacket4';
-import {JourneyScene} from './scene.mjs?v=jacket4';
+import {JourneyScene,createVisualPacer} from './scene.mjs?v=jacket4';
 import {sitePreferences} from './site-preferences.mjs';
 import {MODEL_STYLES} from './runner-character.mjs?v=jacket4';
 
 let fatal=false,stopFailedMedia=null;
+function updateText(node,value){const text=String(value);if(node.textContent!==text)node.textContent=text;}
+function updateAttribute(node,name,value){const text=String(value);if(node.getAttribute(name)!==text)node.setAttribute(name,text);}
 function offerReload(text='The practice did not start. Select Try again to reload it.'){
  fatal=true;
  try{stopFailedMedia?.();}catch{}
@@ -31,6 +33,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 let preferences=sanitize(),journey,renderKey='',frameHandle=0,announcement='',soundToken=0;
 let settingsOpener=null,feedbackTimer=0,mountToken=0,recovering=false;
 const sceneAttempts=new Map();
+const visualPacer=createVisualPacer();
 function feedback(text,transient=false){
  if(fatal)return;
  clearTimeout(feedbackTimer);const el=$('[data-feedback]');el.replaceChildren(document.createTextNode(text));el.hidden=!text;
@@ -160,39 +163,41 @@ function paint(s=journey.snapshot()){
   const paused=s.state==='paused',running=s.state==='running';
   const idle=s.state==='idle';
   updateScene(s);
-  sceneRoot.dataset.state=s.state;sceneRoot.dataset.phase=s.phase;sceneRoot.dataset.elapsed=Math.round(s.elapsed);
-  $('[data-phase-name]').textContent=paused?'Paused':phaseNames[s.phase];
-  $('[data-countdown]').textContent=Math.ceil(s.remaining/1000);
-  $('[data-state-label]').textContent=paused?'JUST BREATHE COMFORTABLY':idle?'YOUR RHYTHM':'AT YOUR OWN PACE';
-  $('[data-instruction]').textContent=paused?'Take a moment':instructions[s.phase];
-  $('[data-hint]').textContent=paused?'Breathe in a way that feels comfortable. Continue when you are ready.':hints[s.phase];
-  $('[data-cycle]').textContent=idle?`${s.cycles} ${plural(s.cycles,['cycle','cycles'])} at your own pace`:`Cycle ${s.cycle} of ${s.cycles}`;
-  $('[data-percent]').textContent=`${Math.floor(s.progress*100)}%`;
-  $('[data-progress-label]').textContent=paused?'The trail can wait':s.state==='completed'?'Journey complete':idle?'At the start':'Your journey';
-  $('progress').value=s.progress;
-  $('[data-active-time]').textContent=idle?'You can stop at any time':`${paused?'Paused · ':''}${clock(s.elapsed)} for you`;
-  $('[data-path-caption]').textContent=paused?'There is no need to hurry here.':idle?'Inhale uphill. Exhale downhill.':s.phase===0?'Inhale: running uphill.':s.phase===2?'Exhale: a gentle descent.':'Hold: a level stretch.';
+  updateAttribute(sceneRoot,'data-state',s.state);updateAttribute(sceneRoot,'data-phase',s.phase);updateAttribute(sceneRoot,'data-elapsed',Math.round(s.elapsed));
+  updateText($('[data-phase-name]'),paused?'Paused':phaseNames[s.phase]);
+  updateText($('[data-countdown]'),Math.ceil(s.remaining/1000));
+  updateText($('[data-state-label]'),paused?'JUST BREATHE COMFORTABLY':idle?'YOUR RHYTHM':'AT YOUR OWN PACE');
+  updateText($('[data-instruction]'),paused?'Take a moment':instructions[s.phase]);
+  updateText($('[data-hint]'),paused?'Breathe in a way that feels comfortable. Continue when you are ready.':hints[s.phase]);
+  updateText($('[data-cycle]'),idle?`${s.cycles} ${plural(s.cycles,['cycle','cycles'])} at your own pace`:`Cycle ${s.cycle} of ${s.cycles}`);
+  updateText($('[data-percent]'),`${Math.floor(s.progress*100)}%`);
+  updateText($('[data-progress-label]'),paused?'The trail can wait':s.state==='completed'?'Journey complete':idle?'At the start':'Your journey');
+  if($('progress').value!==s.progress)$('progress').value=s.progress;
+  updateText($('[data-active-time]'),idle?'You can stop at any time':`${paused?'Paused · ':''}${clock(s.elapsed)} for you`);
+  updateText($('[data-path-caption]'),paused?'There is no need to hurry here.':idle?'Inhale uphill. Exhale downhill.':s.phase===0?'Inhale: running uphill.':s.phase===2?'Exhale: a gentle descent.':'Hold: a level stretch.');
   if(main.dataset.state!==s.state){
     main.innerHTML=running?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6Zm8 0h4v14h-4Z"/></svg><span>Pause</span>':`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg><span>${paused?'Continue':'Start'}</span>`;
     main.dataset.state=s.state;
   }
-  main.setAttribute('aria-label',running?'Pause journey':paused?'Continue journey':'Start journey');
-  $('[data-stop]').hidden=!isLive();
-  $('[data-compare]').hidden=isLive();
-  $('[data-home]').hidden=isLive();
-  if(site)$('[data-reset]').textContent=isLive()?'End journey and reset saved settings':'Reset saved settings';
-  $('[data-rhythm-fields]').disabled=isLive();
-  $('[data-estimate]').textContent=clock(journey.total);
-  $('[data-settings-note]').textContent=reduced.matches?'Reduced motion is enabled on this device. The landscape stays still.':preferences.still?'The landscape stays still. The phase labels and timer guide your practice.':isLive()?'Your rhythm stays fixed for this session. A new landscape appears every two cycles.':'The running pace follows your chosen pattern. Landscapes change along the way.';
+  updateAttribute(main,'aria-label',running?'Pause journey':paused?'Continue journey':'Start journey');
+  const live=isLive();
+  if($('[data-stop]').hidden!==!live)$('[data-stop]').hidden=!live;
+  if($('[data-compare]').hidden!==live)$('[data-compare]').hidden=live;
+  if($('[data-home]').hidden!==live)$('[data-home]').hidden=live;
+  if(site)updateText($('[data-reset]'),live?'End journey and reset saved settings':'Reset saved settings');
+  if($('[data-rhythm-fields]').disabled!==live)$('[data-rhythm-fields]').disabled=live;
+  updateText($('[data-estimate]'),clock(journey.total));
+  updateText($('[data-settings-note]'),reduced.matches?'Reduced motion is enabled on this device. The landscape stays still.':preferences.still?'The landscape stays still. The phase labels and timer guide your practice.':live?'Your rhythm stays fixed for this session. A new landscape appears every two cycles.':'The running pace follows your chosen pattern. Landscapes change along the way.');
   const sound=$('[data-sound]'), enabled=site?!site.settings.mute:preferences.sound;
   const action=site?(enabled?'Mute sound':'Unmute sound'):(enabled?'Turn music off':'Turn music on');
-  sound.setAttribute('aria-pressed',String(enabled));sound.setAttribute('aria-label',action);sound.title=action;
+  updateAttribute(sound,'aria-pressed',enabled);updateAttribute(sound,'aria-label',action);if(sound.title!==action)sound.title=action;
   if(sound.dataset.on!==String(enabled)){
     sound.innerHTML=enabled?'<svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Zm5 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg>':'<svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Zm5 4 5 6m0-6-5 6"/></svg>';
     sound.dataset.on=String(enabled);
   }
-  document.querySelectorAll('[data-chip]').forEach(el=>el.classList.toggle('active',Number(el.dataset.chip)===s.phase));
-  scene.render(s,reduced.matches||preferences.still);
+  document.querySelectorAll('[data-chip]').forEach(el=>{const active=Number(el.dataset.chip)===s.phase;if(el.classList.contains('active')!==active)el.classList.toggle('active',active);});
+  // A failed optional SVG renderer must not pause or fail the breathing clock.
+  try{scene.render(s,reduced.matches||preferences.still);}catch{scene.disable();feedback(animationUnavailable);}
   const seconds=s.phaseDuration/1000;
   announce(s.state==='completed'?'Journey complete. You reached the end of the trail.':s.state==='stopped'?'Journey ended. You made time for yourself.':paused?'The journey is paused. Breathe in a way that feels comfortable.':idle?'Choose a landscape and select Start.':`${phaseNames[s.phase]}, ${seconds} ${plural(seconds,['second','seconds'])}. Cycle ${s.cycle} of ${s.cycles}.`);
 }
@@ -202,7 +207,8 @@ function animate(now){
   // A screen lock can suspend frames without a visibility event. Preserve the
   // last observed active instant rather than counting the unobserved gap.
   if(now-journey.last>2000){journey.pause(journey.last);pauseMusic();render();announce('The animation was interrupted. Your journey is paused. Continue when you are ready.');return;}
-  const snapshot=journey.update(now);support?.update();render(snapshot);
+  const snapshot=journey.update(now);support?.update();
+  if(visualPacer.due(now,`${snapshot.state}:${snapshot.phase}:${snapshot.cycle}`))render(snapshot);
   if(journey.session.state==='completed'){finish();return;}
   if(journey.session.state==='running')frameHandle=requestAnimationFrame(animate);
   }catch{
@@ -227,7 +233,7 @@ function start(){
     if(!form.checkValidity()){openSettings();form.reportValidity();return;}
     preferences=readForm();save();refreshIdle();
   }
-  journey.start(performance.now());support?.start();playMusic();render();if(fatal)return;cancelAnimationFrame(frameHandle);frameHandle=requestAnimationFrame(animate);
+  journey.start(performance.now());visualPacer.reset();support?.start();playMusic();render();if(fatal)return;cancelAnimationFrame(frameHandle);frameHandle=requestAnimationFrame(animate);
 }
 function finish(){
   if(fatal)return;

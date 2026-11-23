@@ -196,6 +196,10 @@ export default {
     "/news/tapl-in-development": [
       "page",
       "news"
+    ],
+    "/news/bret-journey-games": [
+      "page",
+      "news"
     ]
   },
   "labels": {

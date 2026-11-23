@@ -233,7 +233,7 @@ export function initPublicMeasurement(root = document) {
     }
     const kind = destination(link, routes);
     if (kind) {
-      const fixedProducts = {'/bret':'bret','/bret/practice':'bret',[analyticsPublicPath('/bret/journey')]:'bret','/bret/journey/characters':'bret','/dm':'dm','/dm/workspace':'dm','/tapl':'tapl'};
+      const fixedProducts = {'/bret':'bret','/bret/app':'bret','/bret/games':'bret','/bret/practice':'bret',[analyticsPublicPath('/bret/journey')]:'bret','/bret/journey/characters':'bret','/dm':'dm','/dm/workspace':'dm','/tapl':'tapl'};
       emitInterfaceEvent('emtalk_navigation', {surface:surface(link), destination_kind:kind,
         destination_product:fixedProducts[localPath(link)] || 'not_applicable'});
     }

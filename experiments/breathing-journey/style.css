@@ -177,16 +177,17 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
 @media (max-width: 760px) {
   .site-header { display: none; }
   .workspace { display: flex; padding: 0px; min-height: 100svh; align-items: center; justify-content: center; }
-  .practice { width: min(100%, 0.45 * max(640px, 100svh)); margin: 0px auto; }
-  .scene { height: auto; min-height: 0px; aspect-ratio: 9 / 20; border-radius: 0px; box-shadow: none; }
-  .scene-top { top: max(26px,env(safe-area-inset-top)); left: 26px; }
-  .scene-bottom { bottom: max(22px,env(safe-area-inset-bottom)); left: 25px; right: 25px; }
-  .breath-guide { top: 22%; left: 23px; right: 23px; grid-template-columns: 98px 1fr; gap: 15px; }
+  .practice { width: 100%; margin: 0px; }
+  .scene { height: auto; min-height: 640px; min-height: max(640px,100vh); min-height: max(640px,100svh); aspect-ratio: auto; border-radius: 0px; box-shadow: none; }
+  .scene-top { top: max(26px,env(safe-area-inset-top)); left: max(26px,env(safe-area-inset-left)); right: max(24px,env(safe-area-inset-right)); }
+  .journey-progress { top: calc(122px + max(0px,env(safe-area-inset-top) - 26px)); }
+  .scene-bottom { bottom: max(22px,env(safe-area-inset-bottom)); left: max(25px,env(safe-area-inset-left)); right: max(25px,env(safe-area-inset-right)); }
+  .scene .breath-guide { top: calc(max(170px,21.8%) + max(0px,env(safe-area-inset-top) - 26px)); left: max(23px,env(safe-area-inset-left)); right: max(23px,env(safe-area-inset-right)); grid-template-columns: 98px 1fr; gap: 15px; }
   .guide-card { padding: 20px 18px; }
   .guide-card h2 { font-size: 18px; }
   .guide-card p { font-size: 11px; }
   .scene h1 { font-size: 20px; }
-  .breath-indicator { min-height: 200px; }
+  .breath-indicator { min-height: 200px; backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,249,252,.86); }
   .lungs-wrap { height: 83px; }
   .phase-chip { font-size: 10px; }
   .path-caption { font-size: 11px; }
@@ -201,7 +202,7 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
   .lab-toolbar { align-items: flex-start; }
   .lab-toolbar p { margin: 0px; }
   .feedback { top: max(10px,env(safe-area-inset-top)); bottom: auto; left: calc((100vw - var(--practice-width))/2 + 12px); transform: none; max-width: calc(var(--practice-width) - 88px); padding: 10px 12px; }
-  body { --practice-width: min(100vw,calc(max(640px,100svh)*.45)); }
+  body { --practice-width: 100vw; min-width: 0px; }
 }
 
 @media (min-width: 761px) and (max-height: 820px) {
@@ -213,11 +214,11 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
 }
 
 @media (max-width: 350px) {
-  .breath-guide { left: 15px; right: 15px; gap: 9px; grid-template-columns: 89px 1fr; }
+  .breath-guide { left: max(15px,env(safe-area-inset-left)); right: max(15px,env(safe-area-inset-right)); gap: 9px; grid-template-columns: 89px 1fr; }
   .guide-card { padding: 17px 13px; }
   .guide-card h2 { font-size: 16px; }
   .guide-card p { font-size: 10px; }
-  .scene-bottom { left: 18px; right: 18px; }
+  .scene-bottom { left: max(18px,env(safe-area-inset-left)); right: max(18px,env(safe-area-inset-right)); }
   .controls { padding: 8px; }
   .main-control { min-width: 125px; }
   .phase-chip { font-size: 9px; }
@@ -234,17 +235,17 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
 }
 
 @media (max-width: 760px) and (max-height: 780px), (max-width: 350px) {
-  .scene-top { top: 12px; }
+  .scene-top { top: max(12px,env(safe-area-inset-top)); }
   .scene-top .eyebrow { display: none; }
   .scene h1 { font-size: 20px; }
-  .journey-progress { top: 77px; }
-  .scene .breath-guide { top: 112px; }
+  .journey-progress { top: max(77px,calc(env(safe-area-inset-top) + 65px)); }
+  .scene .breath-guide { top: max(112px,calc(env(safe-area-inset-top) + 100px)); }
   .scene .guide-card { padding: 14px 13px; }
   .scene .guide-card p { display: none; }
   .scene .path-caption { display: none; }
   .scene .guide-card h2 { font-size: 18px; line-height: 24px; margin: 7px 0px; }
   .scene .cycle-label { margin-top: 8px; }
-  .scene-bottom { left: 15px; right: 15px; }
+  .scene-bottom { left: max(15px,env(safe-area-inset-left)); right: max(15px,env(safe-area-inset-right)); }
   .phase-chips { gap: 3px; }
   .phase-chip { white-space: nowrap; }
   .controls { padding: 8px; }

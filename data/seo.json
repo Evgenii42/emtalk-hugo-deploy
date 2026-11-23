@@ -27,7 +27,11 @@
       "title": "About EmTalk: Small Steps, Meaningful Progress",
       "description": "Why we build EmTalk: more meaning, inspiration, and joy through articles, tests, and practical tools for calm, self-understanding, and your next step.",
       "indexable": true,
-      "headline": "Small steps toward a more meaningful life."
+      "headline": "Small steps toward a more meaningful life.",
+      "image": "/media/social-about.a863a1bcf5f8.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Connected circles and a small path for the story behind EmTalk"
     },
     "/affirmations": {
       "title": "Affirmations | EmTalk",
@@ -48,7 +52,11 @@
       "title": "Articles on Sleep and Burnout | EmTalk",
       "description": "Read or listen to nine articles about sleep and burnout. Explore sleep habits, work-related exhaustion and the ideas discussed on EmTalk.",
       "indexable": true,
-      "headline": "Mental Wellness Articles for Calm and Clarity"
+      "headline": "Mental Wellness Articles for Calm and Clarity",
+      "image": "/media/social-articles.6dcc54bf655c.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "A stack of open books and a leaf for the EmTalk article collection"
     },
     "/articles/body-position-and-sleep-why-how-you-lie-down-matters-as-much-as-how-long": {
       "title": "Body Position: Why How You Lie Down Matters | EmTalk",
@@ -135,16 +143,21 @@
       "title": "Bret: Breathing, Relaxation and Games | EmTalk",
       "description": "Try Bret breathing, guided meditations and four little games on the web. Physical practices are coming soon. Or get Bret on Android.",
       "indexable": true,
-      "headline": "Make a little space for yourself."
+      "headline": "Make a little space for yourself.",
+      "image": "/media/social-bret.417874ecbd3d.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Breathing rings and a leaf, with the Bret title on a lavender background"
     },
     "/dm": {
       "title": "Decision Matrix App: Compare Options | EmTalk",
       "description": "Explore the Decision Matrix app and its free browser workspace. Compare options in pairs or weigh your pros and cons, with no web account needed.",
       "indexable": true,
-      "image": "/media/ce2e0b92be190f17e1a1-69c432ae7918b4bbf56cbf1a_Open-Graph-Image-DM.webp",
+      "image": "/media/social-decision-matrix.a2e2cafd242f.webp",
       "headline": "Your Professional Prioritization Tool",
       "imageWidth": 1200,
-      "imageHeight": 630
+      "imageHeight": 630,
+      "imageAlt": "Overlapping angled option tiles and weighted dots for Decision Matrix"
     },
     "/documents/bret-delete-your-account-and-associated-data": {
       "title": "BRET Account and Data Deletion | EmTalk",
@@ -245,7 +258,11 @@
       "title": "Self-Assessment Tests for Anxiety and Work | EmTalk",
       "description": "Explore five questionnaires about anxiety, burnout, workplace motivation and mobbing. Read about each test and its scope on EmTalk.",
       "indexable": true,
-      "headline": "Discover yourself through gentle tests"
+      "headline": "Discover yourself through gentle tests",
+      "image": "/media/social-tests.8d1252a67be7.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Question marks and abstract response choices for self-assessment tests"
     },
     "/tests/maslach-burnout-inventory": {
       "title": "Maslach Burnout Inventory | EmTalk",
@@ -296,13 +313,21 @@
       "title": "Understand Yourself: Articles and Tests | EmTalk",
       "description": "Read or listen to EmTalk articles about sleep and burnout, or explore five questionnaire pages about anxiety, motivation, burnout and related topics.",
       "indexable": true,
-      "headline": "Understand myself"
+      "headline": "Understand myself",
+      "image": "/media/social-understand.8a3c7b269d55.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "An illustrated mirror and leaf for self-understanding articles and tests"
     },
     "/dm/workspace": {
       "title": "Pairwise Comparison and Pros and Cons Tool | EmTalk",
       "description": "Compare options in pairs or weigh your pros and cons with Decision Matrix. Free local browser workspace, with no account needed.",
       "indexable": true,
-      "headline": "Decision Matrix"
+      "headline": "Decision Matrix",
+      "image": "/media/social-dm-workspace.df414181cd1f.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "An illustrated balance of weighted options for the Decision Matrix workspace"
     },
     "/bret/practice": {
       "title": "Free Breathing Timer and Custom Rhythms | BRET",
@@ -314,37 +339,61 @@
       "title": "News from EmTalk | EmTalk",
       "headline": "News from EmTalk",
       "description": "Project updates, product development and reading highlights across EmTalk.",
-      "indexable": true
+      "indexable": true,
+      "image": "/media/social-news.5e379dc905fd.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Layered publication sheets and a purple accent for EmTalk News"
     },
     "/news/bret-browser-practice": {
       "title": "Make room for a short pause with BRET | EmTalk",
       "headline": "Make room for a short pause with BRET",
       "description": "Choose a breathing rhythm in your browser. Physical practices are coming soon.",
-      "indexable": true
+      "indexable": true,
+      "image": "/media/social-news-bret-practice.3a5f2768c6d5.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "An illustrated pause and expanding breathing circle for Bret browser practice"
     },
     "/news/decision-matrix-browser": {
       "title": "Work through a choice with Decision Matrix | EmTalk",
       "headline": "Work through a choice with Decision Matrix",
       "description": "Compare options and weigh your reasons in a guest workspace.",
-      "indexable": true
+      "indexable": true,
+      "image": "/media/social-news-decision-matrix.376649a037ac.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Two option shapes linked by comparison arrows for Decision Matrix news"
     },
     "/news/news-from-emtalk": {
       "title": "A Place for News Across EmTalk | EmTalk",
       "headline": "A place for news across EmTalk",
       "description": "A place for project updates, product development and reading highlights.",
-      "indexable": true
+      "indexable": true,
+      "image": "/media/social-news-emtalk.a6a181909a16.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "A publication signal and small stars for news across EmTalk"
     },
     "/news/reading-sleep-burnout": {
       "title": "Read or listen: sleep and burnout | EmTalk",
       "headline": "Read or listen: sleep and burnout",
       "description": "Explore nine articles, with an audio option on each article page.",
-      "indexable": true
+      "indexable": true,
+      "image": "/media/social-news-reading.74226559b294.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "An open book, moon and headphones for articles about sleep and burnout"
     },
     "/news/tapl-in-development": {
       "title": "What we are exploring with TAPL | EmTalk",
       "headline": "What we are exploring with TAPL",
       "description": "A planned tool for small steps, learning and gradual progress.",
-      "indexable": true
+      "indexable": true,
+      "image": "/media/social-news-tapl.a85e815488d4.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Illustrated steps and a sprout, labelled TAPL in development"
     },
     "/bret/app": {
       "title": "Bret | EmTalk",
@@ -369,6 +418,16 @@
       "description": "Four little games for a moment of your own. Find a rhythm, guide a light, arrange a room or discover a pattern.",
       "headline": "Play a little. Make a little space.",
       "indexable": false
+    },
+    "/news/bret-journey-games": {
+      "title": "Bret Breathing Journey, Games and Meditation | EmTalk",
+      "headline": "A new Bret: breathing journeys, games and guided moments",
+      "description": "Explore Bret's breathing journey, four little games and two English guided meditations on the web. Physical practices are coming soon.",
+      "indexable": true,
+      "image": "/media/social-news-bret-journey.65ba1a171925.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "A seed-keeper character, breathing orbit and path for the new Bret news"
     }
   }
 }

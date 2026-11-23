@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "origin": "https://www.emtalk.org",
+  "endpoint": "https://api.indexnow.org/indexnow",
+  "keyFile": "/237d7c252f14412a9b3b1a75ee101e37.txt",
+  "maxUrls": 100
+}

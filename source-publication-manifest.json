@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen unadmitted unpublished production135 candidate; strict reviews and live acceptance remain required.",
+  "scope": "Frozen unadmitted unpublished production136 candidate; strict reviews and live acceptance remain required.",
   "admitted": false,
   "published": false,
-  "canonicalSourceCommit": "e95c31bf7564f3c593466b13ac76f9836bca0aa9",
-  "stageParentCommit": "1f071072db970c56e0a385e7ae8812e63fdd8d30",
+  "canonicalSourceCommit": "52c66faeb59c418cb481fdff002ef5e6ff0f1fe7",
+  "stageParentCommit": "f1e4bfb0e343565fd3c4ad4efbf43cecce5b9fca",
   "productionBaseURL": "https://www.emtalk.org/",
-  "frozenReceiptSha256": "6a5a91409ce637ce458c16095937a5197706040aa20d9f169d30e023112af63c",
-  "sourceInputSnapshotSha256": "1ba83f893642a4ae289aefb4fc9e431f1624be0841dc2bbecbc16fef2ba33503",
-  "outputSnapshotSha256": "a63f774c325dc565deda833fa6e5c505796439a6fa2aacd0688e081600d49625",
+  "frozenReceiptSha256": "f5cccd430a912fc69826dc0fb4c57c438709635a9d457f5e435621183d65952f",
+  "sourceInputSnapshotSha256": "e5605a5defcd3837d5d83407e22d3f96a10d9982e48111d13df9f435a4fe4971",
+  "outputSnapshotSha256": "59aaba57b66b7ef8e55492773106e27b6cf83f3dfa83cd5c8764a026d112d6a2",
   "sourceFiles": [
     {
       "path": ".hugo-version",
@@ -47,8 +47,8 @@
     },
     {
       "path": "assets/css/bret-landing.css",
-      "bytes": 12394,
-      "sha256": "60c96c7173ecd0544a73035672804aed2e1a8acf9c48a39c2a2d55cd789ee5a4"
+      "bytes": 12444,
+      "sha256": "c7d7faa27c76822830eb0b13568d14730a11d255ab23f50d470d58a9ea7c21d8"
     },
     {
       "path": "assets/css/bret-practice.css",
@@ -322,8 +322,8 @@
     },
     {
       "path": "assets/js/analytics-events.js",
-      "bytes": 13758,
-      "sha256": "c83703a09bdb0a67a6b1a082bafed224226accc1932fede00d53758c5a79ad5f"
+      "bytes": 13798,
+      "sha256": "a77bcca47cd60024a19da10f406eb9aa058034158769fdcf56b6b4b8f12bcf09"
     },
     {
       "path": "assets/js/analytics-payload.js",
@@ -576,6 +576,76 @@
       "sha256": "eae6b7f7108c87142ec0161396de816882004981180326acf13ef0fd6bfca875"
     },
     {
+      "path": "assets/social136/about.svg",
+      "bytes": 1857,
+      "sha256": "02a45d6eb6ad6177d4b24f6702612171b21b45af18526d7922fbc9ff1ac4f080"
+    },
+    {
+      "path": "assets/social136/articles.svg",
+      "bytes": 2671,
+      "sha256": "c0fb520a853bb748229b96136f7f8f2c9233438918d0f64bab77289acd58401d"
+    },
+    {
+      "path": "assets/social136/bret.svg",
+      "bytes": 2313,
+      "sha256": "c5a80c8d05f390d9020fc6bb8734a774adc47bacee76a0aa27eb019ae73b9359"
+    },
+    {
+      "path": "assets/social136/decision-matrix.svg",
+      "bytes": 1722,
+      "sha256": "1406b3a611c51d2d462c3940feac475455161cf687616677ab3dadc36d0adc29"
+    },
+    {
+      "path": "assets/social136/dm-workspace.svg",
+      "bytes": 2228,
+      "sha256": "041691f62efb117798080dfc756801289b272f4ac89b01ce822c05bb04f24cb5"
+    },
+    {
+      "path": "assets/social136/news-bret-journey.svg",
+      "bytes": 3016,
+      "sha256": "54b1c21201ea995c172c06e382091457675db41a197dba088427c2f8758e7403"
+    },
+    {
+      "path": "assets/social136/news-bret-practice.svg",
+      "bytes": 2096,
+      "sha256": "b592351929c1e85eea5273aff890b3556d37b7307af05f419a5f5f0225d2c4ae"
+    },
+    {
+      "path": "assets/social136/news-decision-matrix.svg",
+      "bytes": 1804,
+      "sha256": "4d87c1abe6931d72b120b6591caecf876e79f1b477e2d0bd87cae6f619cd0bd2"
+    },
+    {
+      "path": "assets/social136/news-emtalk.svg",
+      "bytes": 2025,
+      "sha256": "11774d988cbc09c50e1073050d5b88ea9653722b80b0ac8b9e0b49a8b370bc2a"
+    },
+    {
+      "path": "assets/social136/news-reading.svg",
+      "bytes": 2834,
+      "sha256": "2a519d8536fb2b452e7eaee5376ac25a7a08faf9c67c4caeeb2c5df65e49d54c"
+    },
+    {
+      "path": "assets/social136/news-tapl.svg",
+      "bytes": 2006,
+      "sha256": "0642118b87bd373f9a5b9b17d454e63959178180cd0df6d22e2bea4f1b1d3c00"
+    },
+    {
+      "path": "assets/social136/news.svg",
+      "bytes": 2057,
+      "sha256": "40b17458595cd71c8ab7aa8660499a24e648058cfabf8387d85800e3a4e151b4"
+    },
+    {
+      "path": "assets/social136/tests.svg",
+      "bytes": 2195,
+      "sha256": "b73e64e0fcec3e1918f77b014f4f23ff3fbd3bab75cad099d4a74bbad7d1e9b3"
+    },
+    {
+      "path": "assets/social136/understand.svg",
+      "bytes": 2164,
+      "sha256": "cb4c78e578483a1c62a47bee6423570e031c5b57a84793e8316dfd94a169e12d"
+    },
+    {
       "path": "content/_index.md",
       "bytes": 124,
       "sha256": "62bd958f7044c472f1c1051c63ba603bf04b9fdcf7d7fc3be026fd8ae9f4f01f"
@@ -771,6 +841,11 @@
       "sha256": "a20b3fe078b377012c8160271e916356c3439396d3d31a39ae3a0d004e39f4d8"
     },
     {
+      "path": "content/news/bret-journey-games.md",
+      "bytes": 3197,
+      "sha256": "30368851e91a7502f5817876b7ff3cf71f838ee29fca6aaf7d4917f0c403496d"
+    },
+    {
       "path": "content/news/decision-matrix-browser.md",
       "bytes": 823,
       "sha256": "102d5489f01d707fa3855089cdbbb88a0c46b18fcf5321286f02f369f335953b"
@@ -837,8 +912,8 @@
     },
     {
       "path": "data/analytics-policy.json",
-      "bytes": 37253,
-      "sha256": "3be1bcbd7d327dce4ee57b171a56882d25d149f5e4c06ebd9f688a9628939935"
+      "bytes": 37546,
+      "sha256": "4e3d90dff8fad7356b9770b3f66419d9d0765dbc8b1efa1571d58ba4d66ef271"
     },
     {
       "path": "data/article-library.json",
@@ -926,14 +1001,19 @@
       "sha256": "87ecfcd527c17eb14a857823d4725c190d6d0213343b57098e200d3d2c75fb44"
     },
     {
+      "path": "data/indexing.json",
+      "bytes": 186,
+      "sha256": "e2275b867f3b9d856b002ad919a6a238eb3284ca5fa1f62a11d6cfd9970966ab"
+    },
+    {
       "path": "data/integrations.json",
       "bytes": 891,
       "sha256": "9d1127859cdc5460d7fc3098f952a39e2043cc8fee69f011172f5c9507d3f605"
     },
     {
       "path": "data/interest-registry.json",
-      "bytes": 5148,
-      "sha256": "47bd4fd48660ae07919ab0482fd0a21baa0265825279ce4312a359d49f739202"
+      "bytes": 5216,
+      "sha256": "1e9fc45a99dd58d328d3d64235a60bc69c90b680bbed0e3ab7d54f7d53b643d2"
     },
     {
       "path": "data/owned-pages.json",
@@ -942,18 +1022,18 @@
     },
     {
       "path": "data/render.json",
-      "bytes": 5803235,
-      "sha256": "b3df09ef0ef97631045465a71dc55a4438e097a80b716f6efaf1280fc2e3d98a"
+      "bytes": 5808107,
+      "sha256": "91427109d96827ba0c735799a8c2215dfe6bcdb3c9c337da3823573e4afaea44"
     },
     {
       "path": "data/route-map.json",
-      "bytes": 28037,
-      "sha256": "005a75e30c1cdafa809ca2c1c5d173ccf87683fa844e543ea2660922621eae36"
+      "bytes": 28320,
+      "sha256": "de3f0b061600862bf632fa44d780fa2b1b14777b284b54246d4d3921ee337208"
     },
     {
       "path": "data/seo.json",
-      "bytes": 19991,
-      "sha256": "7aec5c01588838d26eca8aa942cd0b3ff6658dec0c9d58a2cfe869b986a44056"
+      "bytes": 23132,
+      "sha256": "74ee111f785ea7e793a5b3321eaafcb88673ff380c042bdc7f7192544a239ec5"
     },
     {
       "path": "data/source-content-schema.json",
@@ -1057,8 +1137,8 @@
     },
     {
       "path": "experiments/breathing-journey/app.mjs",
-      "bytes": 20454,
-      "sha256": "b40379dac22e1dc371f048ec66bd1ce7f421100d53b29d26e7497b92da091afd"
+      "bytes": 21319,
+      "sha256": "b9cee178051e73ac63cd845e46c6c596ef359ab0cf49921d5dc25a28e6a18679"
     },
     {
       "path": "experiments/breathing-journey/art/1714-13991.svg",
@@ -1337,8 +1417,8 @@
     },
     {
       "path": "experiments/breathing-journey/load-local.mjs",
-      "bytes": 1565,
-      "sha256": "b0b266833044b493875acec6021cc7a5539d85c6cb24eb9151777063f8a6db59"
+      "bytes": 2903,
+      "sha256": "72f68fcb38203e5a6f9283905ab2fd3f6d9ff7cdb1ea2df62913a864d3bd214a"
     },
     {
       "path": "experiments/breathing-journey/model.mjs",
@@ -1357,8 +1437,8 @@
     },
     {
       "path": "experiments/breathing-journey/scene.mjs",
-      "bytes": 8346,
-      "sha256": "32f2338d9bbb91effd9bc09e1297d4859a0c1dd651189ae6a64a4ec7b37f4fad"
+      "bytes": 9368,
+      "sha256": "7da90d1ec3bf53868e515ffd71580338c3e982f47d831b33a954b5656cfa9a98"
     },
     {
       "path": "experiments/breathing-journey/site-preferences.mjs",
@@ -1367,8 +1447,8 @@
     },
     {
       "path": "experiments/breathing-journey/style.css",
-      "bytes": 28380,
-      "sha256": "dc3105467b42bf926ef1566d9a6eaf68b95c44bbb7746d8f1af515b34ddd46d8"
+      "bytes": 29138,
+      "sha256": "4e549a9348795e92d33deb00f0efc353f18ffe4f691b3ec5278bc6929d69eda2"
     },
     {
       "path": "experiments/breathing-journey/vendor/lottie-5.13.0.min.js",
@@ -1472,8 +1552,8 @@
     },
     {
       "path": "layouts/partials/attributes.html",
-      "bytes": 1916,
-      "sha256": "3c590ad477435feb51d2469e15a124395db04ae46e2463634da24d82e91ad559"
+      "bytes": 2514,
+      "sha256": "78c5d260b372bc01c17a351116fa9d5555b7492e55eaca4ed5ae90000be29d6e"
     },
     {
       "path": "layouts/partials/bret-appbar.html",
@@ -1496,6 +1576,11 @@
       "sha256": "f19d4612a5d910d5f6d1e698ad487edfe92219a37481061cd7ed6acce00759b6"
     },
     {
+      "path": "layouts/partials/bret-landing-art.html",
+      "bytes": 1330,
+      "sha256": "1231df46cb4758810ef86d72499e7604890a32b8d74aa3f51c1531f06a77dab3"
+    },
+    {
       "path": "layouts/partials/bret-landing-game-art.html",
       "bytes": 1171,
       "sha256": "745f98e4f39bdc85614b23dae8a3c7df9935d36cc2f020e123683a402791aab0"
@@ -1507,8 +1592,8 @@
     },
     {
       "path": "layouts/partials/bret-landing.html",
-      "bytes": 8811,
-      "sha256": "bf8f3b551b2fcda2e9eb22e767b4803b078af2bcdcf2068ec8ee55c4456e70f9"
+      "bytes": 8648,
+      "sha256": "f20d3d87b5446c1686d2df23c606a82261154956d33d982a64bca120aa3082d2"
     },
     {
       "path": "layouts/partials/bret-launch.html",
@@ -1817,8 +1902,8 @@
     },
     {
       "path": "scripts/verify_footer.py",
-      "bytes": 14335,
-      "sha256": "b1d24feb2b734a427ffd1695e2b6ae551c3bd6876c456e77b21b6ed4305beb28"
+      "bytes": 14723,
+      "sha256": "40783b751c2ae2c50ae6a963731471181d830bbe3a5af012ad1e8d73aa7a20b0"
     },
     {
       "path": "scripts/verify_seo.py",
@@ -1842,8 +1927,13 @@
     },
     {
       "path": "server/interest-registry.mjs",
-      "bytes": 5409,
-      "sha256": "013fe4e9423195e0cc42f32631d179d373246ed741c41330b8a44fd1bf3bc21a"
+      "bytes": 5481,
+      "sha256": "994c25752d570659dedef0c5bf685413d73f062292fd4f10e8f6cf6f3f8a2aa8"
+    },
+    {
+      "path": "static/237d7c252f14412a9b3b1a75ee101e37.txt",
+      "bytes": 32,
+      "sha256": "c8054d86c281e774184cec863506e2bed7083f7338c27797704be16984c78b93"
     },
     {
       "path": "static/_headers",
@@ -2321,6 +2411,111 @@
       "sha256": "ddf1f5e96508d7ea2bdb79b6670ba82b6654c9170424fafaddff83541dba845a"
     },
     {
+      "path": "static/bret/landing/breath-portrait-216.webp",
+      "bytes": 3714,
+      "sha256": "108c21952bfde82c4f136ce5616153d6b6d5552d13ebb5b3b98f11cadd3983d6"
+    },
+    {
+      "path": "static/bret/landing/breath-portrait-324.webp",
+      "bytes": 6484,
+      "sha256": "03c0a188d192ddaf5f9a5f0efbf033cfff8fceaebdb92b73bfaba554ef8eeb9b"
+    },
+    {
+      "path": "static/bret/landing/breath-portrait-432.webp",
+      "bytes": 9156,
+      "sha256": "e371a035ba8d68dd6035f1a90892225c831053db185c9762f173049c1b0ea2a6"
+    },
+    {
+      "path": "static/bret/landing/breath-portrait-540.webp",
+      "bytes": 11754,
+      "sha256": "f0fbefa4b174e58d2702272bd860614d6e03de25849c83e738428f0c0650e9ed"
+    },
+    {
+      "path": "static/bret/landing/breath-wide-480.webp",
+      "bytes": 8768,
+      "sha256": "71868006b0e48ffdf7991185cf8fd932e18510752cb2a8aec116270bfab252c2"
+    },
+    {
+      "path": "static/bret/landing/breath-wide-768.webp",
+      "bytes": 16200,
+      "sha256": "3b5e6e8b5392636a1fdbee3b62138a3d953c58fc2733cbe643e0d0862d88d7c6"
+    },
+    {
+      "path": "static/bret/landing/breath-wide-960.webp",
+      "bytes": 21464,
+      "sha256": "5544e5b84160fdef4cc7b2b1a399a808b5cea05a9d36e30d2935ef7c3c9b299c"
+    },
+    {
+      "path": "static/bret/landing/meditation-portrait-216.webp",
+      "bytes": 2720,
+      "sha256": "a93cd0f335b07cdeffb9b34cfe3f23d150a491feb1ee319ca864bf199077e4df"
+    },
+    {
+      "path": "static/bret/landing/meditation-portrait-324.webp",
+      "bytes": 4550,
+      "sha256": "441b12d2c67af1656a8f9043fca30c7f484644850c1bca97e38f8d3cb7a0a5b1"
+    },
+    {
+      "path": "static/bret/landing/meditation-portrait-432.webp",
+      "bytes": 6398,
+      "sha256": "3c65b8a809ec512b9085315b5e80db8356066d24645676747413c777778d8fad"
+    },
+    {
+      "path": "static/bret/landing/meditation-portrait-540.webp",
+      "bytes": 8404,
+      "sha256": "976b1bb17db2f1be2e969a34061854b50f295ca13dbbc3ddba76caf51b910ad1"
+    },
+    {
+      "path": "static/bret/landing/meditation-wide-480.webp",
+      "bytes": 7126,
+      "sha256": "39e66995b48877add27a0e5f4dc93a5bba2c795f6e8bfb7f5028d114aaa7f04b"
+    },
+    {
+      "path": "static/bret/landing/meditation-wide-768.webp",
+      "bytes": 13110,
+      "sha256": "03103cbe82e26ecad6f369d807ce361d66eedc03c42482af376ea182479b212b"
+    },
+    {
+      "path": "static/bret/landing/meditation-wide-960.webp",
+      "bytes": 16784,
+      "sha256": "c254c285ff5b5a76332463d243598c612315e0fc9d56803cad70574e1e30fc22"
+    },
+    {
+      "path": "static/bret/landing/physical-portrait-216.webp",
+      "bytes": 2578,
+      "sha256": "5716d6d48050c6351faddd46571f111da9ff135c26b014f1adb39790a4fb5356"
+    },
+    {
+      "path": "static/bret/landing/physical-portrait-324.webp",
+      "bytes": 4530,
+      "sha256": "3fd7df6e5f8a4cbf8b8eaa0c932625b933e1ee1ed43fb8c7c5969c8da1c41aef"
+    },
+    {
+      "path": "static/bret/landing/physical-portrait-432.webp",
+      "bytes": 6736,
+      "sha256": "1384c386472128ce8f60617a70b5249c38d93bde6b350f6d10a8a377d6231075"
+    },
+    {
+      "path": "static/bret/landing/physical-portrait-540.webp",
+      "bytes": 9384,
+      "sha256": "77551edb32e68715f39ca12ce3e43021c24ba2502a905846ef271d0b3212daa2"
+    },
+    {
+      "path": "static/bret/landing/physical-wide-480.webp",
+      "bytes": 5484,
+      "sha256": "a178663d22f5946d94fe11f0d398c6a4f4f86f1a54886c830151bd05ae3d274e"
+    },
+    {
+      "path": "static/bret/landing/physical-wide-768.webp",
+      "bytes": 10746,
+      "sha256": "9892cfb00dfb3d420f197d8ba520be9b39468ae2b90964a83d46950d0e9b16c1"
+    },
+    {
+      "path": "static/bret/landing/physical-wide-960.webp",
+      "bytes": 14686,
+      "sha256": "9c689d31cfcf01cfdc7de460b0c147e5a9e00a4c61769991e2341e899347be90"
+    },
+    {
       "path": "static/bret/main/background.png",
       "bytes": 1355143,
       "sha256": "ce96e3a43f14209f3c3c35b5f136d1db9f9235584a11c5a819c435e4c552516f"
@@ -2662,8 +2857,8 @@
     },
     {
       "path": "static/llms.txt",
-      "bytes": 3281,
-      "sha256": "821aff85b019069502c821177cccdaed126d88c3bbdd3ba34a4bb0db71739e68"
+      "bytes": 3473,
+      "sha256": "fa9f975bcf67ddd2c8a929d956d80663737f2b55f30af4cff368747a24f59251"
     },
     {
       "path": "static/media/01c03a9b2a8db29cac67-6966c5e750a519b527bf07df_Instargam.svg",
@@ -3441,6 +3636,76 @@
       "sha256": "b86815c73b9f407bf79d41ed7ab0ce72381096a67867f525d46b593431a042a3"
     },
     {
+      "path": "static/media/social-about.a863a1bcf5f8.webp",
+      "bytes": 24718,
+      "sha256": "a863a1bcf5f83cd9147671239189d4129b906f7f5e34e1cd4c64d48cfad510eb"
+    },
+    {
+      "path": "static/media/social-articles.6dcc54bf655c.webp",
+      "bytes": 24084,
+      "sha256": "6dcc54bf655cc50e551b3df8601ce50b99557fdd52be8820384a989dadb604c5"
+    },
+    {
+      "path": "static/media/social-bret.417874ecbd3d.webp",
+      "bytes": 22462,
+      "sha256": "417874ecbd3d7f5ba4f9913ecd7ed21a27329e79184437d17ba0d20351bb26a8"
+    },
+    {
+      "path": "static/media/social-decision-matrix.a2e2cafd242f.webp",
+      "bytes": 26088,
+      "sha256": "a2e2cafd242f2d86a4a81f81fdf10ee68d8c15a83ce9cbe1a93d869d2c8690d4"
+    },
+    {
+      "path": "static/media/social-dm-workspace.df414181cd1f.webp",
+      "bytes": 27330,
+      "sha256": "df414181cd1f0e64dcc6b3c5784edebd1ca0429f5521dc9c0deac69eaf863b49"
+    },
+    {
+      "path": "static/media/social-news-bret-journey.65ba1a171925.webp",
+      "bytes": 26608,
+      "sha256": "65ba1a171925f7afd401c5c3394db3029766d6ec6db8428783a1b36baba67876"
+    },
+    {
+      "path": "static/media/social-news-bret-practice.3a5f2768c6d5.webp",
+      "bytes": 22276,
+      "sha256": "3a5f2768c6d59f815048a1260c8c245baa7c8a58eb361fb3bc08530b86fbb108"
+    },
+    {
+      "path": "static/media/social-news-decision-matrix.376649a037ac.webp",
+      "bytes": 25430,
+      "sha256": "376649a037ac1bda6b30399a9f792843e9bc24ba5e558dd67780adc5c0d3de61"
+    },
+    {
+      "path": "static/media/social-news-emtalk.a6a181909a16.webp",
+      "bytes": 21522,
+      "sha256": "a6a181909a16ec9a9328a3fb8ff4be2c4ad25ff012a6ac942d276292f2c7a654"
+    },
+    {
+      "path": "static/media/social-news-reading.74226559b294.webp",
+      "bytes": 24770,
+      "sha256": "74226559b29445ba81cd58e5f43669e765e7f67702a9b4455aa816dae281c480"
+    },
+    {
+      "path": "static/media/social-news-tapl.a85e815488d4.webp",
+      "bytes": 24416,
+      "sha256": "a85e815488d483295b1ff1ac1d8b7d1841b4cebc4646a4083cb9307276271990"
+    },
+    {
+      "path": "static/media/social-news.5e379dc905fd.webp",
+      "bytes": 21282,
+      "sha256": "5e379dc905fd246eee2a2b725e4d9854c19efa18626ed1554b877ca1962cf783"
+    },
+    {
+      "path": "static/media/social-tests.8d1252a67be7.webp",
+      "bytes": 24696,
+      "sha256": "8d1252a67be7eb05bd32c1ec67ae5d9d8d7c02bfde182189d9a315b83aea67f4"
+    },
+    {
+      "path": "static/media/social-understand.8a3c7b269d55.webp",
+      "bytes": 24886,
+      "sha256": "8a3c7b269d55429d10b5632e876f43001669b203194eec4af915046e7703768b"
+    },
+    {
       "path": "static/media/tapl/calendar-icon.svg",
       "bytes": 1107,
       "sha256": "1b40b49114a21456c0b84be246ed9a6cd05de2d13451b08f8d910c9be2d13c72"
@@ -3521,5 +3786,5 @@
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "rollbackDeploymentId": "3cb3b1ed-4646-47bc-ba09-da8c46c74e96"
+  "rollbackDeploymentId": "a7c2c7fb-a075-4c6d-8c4b-32ec74ccd1b9"
 }

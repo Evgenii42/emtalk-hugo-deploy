@@ -6,7 +6,7 @@ Canonical website: https://www.emtalk.org/
 
 Website content and tools can be explored without an account. Self-assessment questionnaires support reflection; their results are not a diagnosis.
 
-BRET offers free browser-based breathing and relaxation practices. Decision Matrix offers local option comparison and pros-and-cons exercises. Decision Matrix AI features are available in the Android app and are planned for the website. Website AI, account synchronization, and subscriptions are not currently offered. TAPL is in development.
+BRET offers a breathing journey with selectable rhythms, guided meditation and four little games in its free browser app. Physical practices are coming soon on the web. Decision Matrix offers local option comparison and pros-and-cons exercises. Decision Matrix AI features are available in the Android app and are planned for the website. Website AI, account synchronization, and subscriptions are not currently offered. TAPL is in development.
 
 News contains project updates, product development and reading highlights. Development notes do not imply working AI, paid programs or a marketplace.
 
@@ -22,8 +22,8 @@ News contains project updates, product development and reading highlights. Devel
 
 ## Tools
 
-- [BRET](https://www.emtalk.org/bret): Breathing and relaxation tools.
-- [BRET web practice](https://www.emtalk.org/bret/practice): Try a free practice in the browser.
+- [BRET](https://www.emtalk.org/bret): Breathing, guided meditation and little games at your own pace.
+- [BRET web app](https://www.emtalk.org/bret/app): Choose a breathing journey, guided meditation or one of four games. Physical practices are coming soon.
 - [Decision Matrix](https://www.emtalk.org/dm): How structured option comparison works.
 - [Decision Matrix workspace](https://www.emtalk.org/dm/workspace): Compare options and explore reasons locally in the browser.
 

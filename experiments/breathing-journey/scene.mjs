@@ -2,10 +2,20 @@ import {lungFrame} from './model.mjs?v=jacket4';
 import {terrainPose} from './runner-pose.mjs?v=jacket4';
 import {loadJSON,loadRunner,createAnimation} from './load-local.mjs?v=jacket4';
 function discard(player){try{player.destroy();}catch{}player.journeyContainer?.remove();}
+function transform(node,value){if(node.getAttribute('transform')!==value)node.setAttribute('transform',value);}
+// Session and cues still observe every RAF. Expensive SVG/DOM paints have a
+// finite cadence, with immediate phase/state changes and no catch-up burst.
+export function createVisualPacer(){
+  let last=null,phaseKey=null;
+  return {reset(){last=null;phaseKey=null;},due(now,key){
+    if(last!==null&&key===phaseKey&&now-last<1000/30-.01)return false;
+    last=now;phaseKey=key;return true;
+  }};
+}
 export function sceneFrames(snapshot,still=false,periods=[7200,720]){return still?[0,0,0]:[snapshot.distance%periods[0],snapshot.distance%periods[1],lungFrame(snapshot.phase,snapshot.offset/snapshot.phaseDuration)];}
 export class JourneyScene {
   constructor(root,onError){
-    this.root=root;this.onError=onError;this.version=0;this.players=[];this.pending=[];this.last=null;
+    this.root=root;this.onError=onError;this.version=0;this.players=[];this.pending=[];this.last=null;this.playerFrames=new WeakMap();
     this.stage=root.querySelector('.scenery');
     if(typeof ResizeObserver==='function'){
       this.observer=new ResizeObserver(()=>this.frameLandscape());this.observer.observe(this.stage);
@@ -36,7 +46,7 @@ export class JourneyScene {
     if(!this.players.length)this.root.classList.add('text-mode');
     let staged=[],containers=[];
     try{
-      const [background,road,lung,model]=await Promise.all([loadJSON(`./animations/scene-${scene}-background.json`),loadJSON(`./animations/scene-${scene}-road.json`),loadJSON('./animations/lungs.json'),loadRunner(character)]);
+      const [background,road,lung,model]=await Promise.all([loadJSON(`./animations/scene-${scene}-background.json`),loadJSON(`./animations/scene-${scene}-road.json`),loadJSON('./animations/lungs.json'),loadRunner(character,{isCurrent:()=>version===this.version&&!this.unavailable})]);
       if(version!==this.version)return false;
       if(!globalThis.lottie)throw Error('Lottie unavailable');
       const periods=[background,road].map(data=>{const p=data.runner?.period;if(!Number.isFinite(p)||p<=0||p!==data.op-1)throw Error('Invalid animation period');return p;});
@@ -108,17 +118,24 @@ export class JourneyScene {
   render(snapshot,still){
     this.last=[snapshot,still];if(this.players.length!==3)return;
     const frames=sceneFrames(snapshot,still,this.periods);
-    this.players.forEach((player,i)=>{player.goToAndStop(frames[i],true);player.journeyContainer.dataset.frame=player.currentFrame.toFixed(3);});
+    this.players.forEach((player,i)=>{
+      // Holds and still mode have an unchanged lung/world frame. Lottie would
+      // otherwise walk and redraw their SVG graph again on every paint.
+      if(this.playerFrames.get(player)===frames[i])return;
+      player.goToAndStop(frames[i],true);this.playerFrames.set(player,frames[i]);
+      player.journeyContainer.dataset.frame=player.currentFrame.toFixed(3);
+    });
     const pose=terrainPose(snapshot,still);
     for(const {outer,counter} of this.players[1].slopeBindings){
-      outer.setAttribute('transform',`translate(0 ${pose.elevation}) rotate(${pose.angle} 160 558)`);
+      transform(outer,`translate(0 ${pose.elevation}) rotate(${pose.angle} 160 558)`);
       if(counter){
         const hipY=pose.hipY+pose.bob;
-        counter.setAttribute('transform',`translate(160 ${hipY}) rotate(${-pose.angle+pose.bodyLean}) translate(-160 ${-hipY})`);
+        transform(counter,`translate(160 ${hipY}) rotate(${-pose.angle+pose.bodyLean}) translate(-160 ${-hipY})`);
       }
     }
-    this.players[0].journeyContainer.style.transform=this.wide?'':`translateY(${pose.elevation*.2}px)`;
-    this.root.dataset.worldDistance=still?0:snapshot.distance.toFixed(3);
-    this.root.dataset.grade=pose.angle.toFixed(3);this.root.dataset.elevation=pose.elevation.toFixed(3);
+    const skyTransform=this.wide?'':`translateY(${pose.elevation*.2}px)`;
+    if(this.players[0].journeyContainer.style.transform!==skyTransform)this.players[0].journeyContainer.style.transform=skyTransform;
+    const metadata={worldDistance:still?'0':snapshot.distance.toFixed(3),grade:pose.angle.toFixed(3),elevation:pose.elevation.toFixed(3)};
+    for(const [key,value] of Object.entries(metadata))if(this.root.dataset[key]!==value)this.root.dataset[key]=value;
   }
 }

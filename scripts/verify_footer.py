@@ -69,6 +69,11 @@ def source_footer_projection(node, footer_classes, prefix, route):
         if attrs.get('src') in social_sources:
             attrs.setdefault('width', '48')
             attrs.setdefault('height', '48')
+        if (attrs.get('src') == prefix + '/media/586e98cda9e501a634a5-6974076e12ef5dc9244f3bf3_Bret-Icon.webp'
+                and attrs.get('class') == 'image-7'):
+            if attrs.get('style'):
+                raise ValueError('Changed Bret footer mark styling requires reconciliation')
+            attrs.update(width='60', height='60', style='height:60px;object-fit:contain')
         if attrs.get('href') in store_campaigns:
             attrs['href'] += '&referrer=utm_source%3Demtalk_web%26utm_medium%3Dwebsite%26utm_campaign%3Dsite_v003_' + store_campaigns[attrs['href']]
         if not attrs.get('data-analytics-surface') and footer_classes.intersection(attrs.get('class', '').split()):

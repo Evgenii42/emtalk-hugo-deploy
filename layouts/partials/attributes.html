@@ -10,6 +10,12 @@ string attributes, social dimensions, surface or store URLs need both layers. */
   {{- if not (isset $attributes "width") -}}{{- $attributes = merge $attributes (dict "width" "48") -}}{{- end -}}
   {{- if not (isset $attributes "height") -}}{{- $attributes = merge $attributes (dict "height" "48") -}}{{- end -}}
 {{- end -}}
+{{/* The inherited Bret footer mark is a verified240px square, shown at60px.
+     Reserve a square and prevent the footer flex row from stretching it. */}}
+{{- if and (eq (index $attributes "src" | default "") (printf "%s/media/586e98cda9e501a634a5-6974076e12ef5dc9244f3bf3_Bret-Icon.webp" $prefix)) (eq (index $attributes "class" | default "") "image-7") -}}
+  {{- if index $attributes "style" -}}{{- errorf "Reconcile changed Bret footer mark styling" -}}{{- end -}}
+  {{- $attributes = merge $attributes (dict "width" "60" "height" "60" "style" "height:60px;object-fit:contain") -}}
+{{- end -}}
 {{- range $name, $value := $attributes -}}
   {{- if ne (printf "%T" $value) "string" -}}{{- errorf "HTML attribute %q requires a string value" $name -}}{{- end -}}
   {{- if eq $name "href" -}}{{- $value = partial "store-campaign-url.html" $value -}}{{- end -}}

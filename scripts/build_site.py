@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import stat
 import subprocess
 from news_content import validated_base_url
 
@@ -21,7 +22,16 @@ def pinned_stable_version(version):
 
 
 def is_link(path):
-    return path.is_symlink() or getattr(path, 'is_junction', lambda: False)()
+    if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
+        return True
+    # lstat checks the entry itself. Windows exposed reparse attributes before
+    # pathlib gained is_junction; reject every reparse point without following it.
+    try:
+        metadata = path.lstat()
+    except (FileNotFoundError, NotADirectoryError):
+        return False
+    return bool(getattr(metadata, 'st_file_attributes', 0)
+                & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0x400))
 
 
 def reject_tree_links(directory):
@@ -106,6 +116,8 @@ def snapshot_sources(root=None):
     sources.append(root / 'scripts/source_roles.py')
     sources += [root / name for name in ('scripts/verify_footer.py', 'scripts/verify_tapl.py')]
     sources.append(root / 'scripts/verify_agent_discovery.py')
+    sources.append(root / 'scripts/verify_dm_v2_fonts.py')
+    sources.append(root / 'scripts/bret_delivery.py')
     reject_tree_links(root / 'scripts/schemas')
     sources.extend(path for path in (root / 'scripts/schemas').glob('*.json') if path.is_file())
     if (root / 'data/seo.json').is_file():

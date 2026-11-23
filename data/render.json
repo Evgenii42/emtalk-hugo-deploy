@@ -25096,18 +25096,18 @@
       "ownedEntry": {
         "mode": "augment",
         "language": "en",
-        "title": "BRET breathing app and free web practice",
-        "lead": "Explore the BRET breathing and relaxation app, or try its free browser practice: five breathing rhythms, custom timing and progressive muscle relaxation. No web account needed.",
+        "title": "Bret: a little space for yourself",
+        "lead": "Breathing, guided meditation and little games, at your own pace. Physical practices are coming soon on the web. Try Bret here or get the Android app.",
         "indexable": true,
         "sections": [],
         "actions": [
           {
-            "label": "Open free breathing practice",
-            "path": "/bret/practice"
+            "label": "Open Bret web app",
+            "path": "/bret/app"
           }
         ]
       },
-      "ownedHash": "69b8bd00b4ad4e04bf0fbcd0b9d1a53331bf21a20811db02f844993a3dcf1b62",
+      "ownedHash": "5d6459e493bb033b834d9ac3c2e66eeb55fc978e2d4b63777d3676046868c3ed",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -113605,11 +113605,11 @@
     },
     "/bret/practice": {
       "routeId": "/bret/practice",
-      "title": "Breathing timer and muscle relaxation",
+      "title": "Breathing timer and custom rhythms",
       "language": "en",
       "family": "owned",
       "origin": "owned",
-      "sourceHash": "859575ce7a1e7510a6df7059220e9291c0bb41e9ca427213e118ef67103ccf46",
+      "sourceHash": "109e848ce22545d184258ed73b745dd3742a8c414ac7064101d3465637fb9a29",
       "body": {
         "tag": "body",
         "attributes": {
@@ -113637,8 +113637,8 @@
       "ownedEntry": {
         "mode": "new",
         "language": "en",
-        "title": "Breathing timer and muscle relaxation",
-        "lead": "Use five breathing rhythms, including box breathing and 4-7-8, create a custom rhythm, or follow progressive muscle relaxation. Free to use, without an account.",
+        "title": "Breathing timer and custom rhythms",
+        "lead": "Use five breathing rhythms, including box breathing and 4-7-8, or create a custom rhythm. Physical practices are coming soon. Free to use, without an account.",
         "indexable": true,
         "sections": [],
         "actions": [
@@ -113648,7 +113648,99 @@
           }
         ]
       },
-      "ownedHash": "859575ce7a1e7510a6df7059220e9291c0bb41e9ca427213e118ef67103ccf46",
+      "ownedHash": "109e848ce22545d184258ed73b745dd3742a8c414ac7064101d3465637fb9a29",
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/bret/app": {
+      "routeId": "/bret/app",
+      "title": "Bret",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "33f732e10aace68121c3190e6c70b789ab56ec8d0e9c48269bea3293aa163eec",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Bret",
+        "lead": "Breath, Physical, Meditation and Games.",
+        "indexable": false,
+        "sections": [],
+        "actions": []
+      },
+      "ownedHash": "33f732e10aace68121c3190e6c70b789ab56ec8d0e9c48269bea3293aa163eec",
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/bret/games": {
+      "routeId": "/bret/games",
+      "title": "Bret Games",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "69bdeca076e154103af945250e66d0c7687cf784c853b677bb515ea1c24da3c5",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "Bret Games",
+        "lead": "Four little ways to play, at your pace.",
+        "indexable": false,
+        "sections": [],
+        "actions": []
+      },
+      "ownedHash": "69bdeca076e154103af945250e66d0c7687cf784c853b677bb515ea1c24da3c5",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -113972,7 +114064,7 @@
       "language": "en",
       "family": "owned",
       "origin": "owned",
-      "sourceHash": "c6d8bbd814565c8d6f8acabcb7a0c7732276e887038679ad95417d9cf313a3d3",
+      "sourceHash": "3d432d082a1ae834b176c2e50f99a1334e2eb5875df7b5c8115d73242bde31a3",
       "body": {
         "tag": "body",
         "attributes": {
@@ -114001,25 +114093,25 @@
         "mode": "new",
         "language": "en",
         "title": "Make room for a short pause with BRET",
-        "lead": "Choose a breathing rhythm or a muscle-relaxation practice in your browser.",
+        "lead": "Choose a breathing rhythm in your browser. Physical practices are coming soon.",
         "sections": [],
         "actions": [],
         "indexable": true
       },
-      "ownedHash": "c6d8bbd814565c8d6f8acabcb7a0c7732276e887038679ad95417d9cf313a3d3",
+      "ownedHash": "3d432d082a1ae834b176c2e50f99a1334e2eb5875df7b5c8115d73242bde31a3",
       "newsEntry": {
         "title": "Make room for a short pause with BRET",
         "routeId": "/news/bret-browser-practice",
         "layout": "source",
         "url": "/news/bret-browser-practice.html",
         "managedBy": "news033-author",
-        "summary": "Choose a breathing rhythm or a muscle-relaxation practice in your browser.",
+        "summary": "Choose a breathing rhythm in your browser. Physical practices are coming soon.",
         "kind": "product",
         "availability": "available",
         "draft": false,
         "date": "2026-10-26",
         "bodyParagraphs": [
-          "BRET offers breathing rhythms, a custom rhythm and progressive muscle relaxation. The browser practice is free and needs no account.",
+          "BRET offers breathing rhythms and a custom rhythm. Physical practices are coming soon. The browser practice is free and needs no account.",
           "The timed practice needs JavaScript. Stay within a comfortable range and stop if you feel uncomfortable."
         ],
         "relatedRoute": "/bret/practice",

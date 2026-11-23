@@ -132,10 +132,10 @@
       "imageHeight": 1000
     },
     "/bret": {
-      "title": "BRET: Breathing App and Free Web Practice | EmTalk",
-      "description": "Explore the BRET breathing and relaxation app. Try five breathing rhythms, custom timing and progressive muscle relaxation free in your browser.",
+      "title": "Bret: Breathing, Relaxation and Games | EmTalk",
+      "description": "Try Bret breathing, guided meditations and four little games on the web. Physical practices are coming soon. Or get Bret on Android.",
       "indexable": true,
-      "headline": "BRET"
+      "headline": "Make a little space for yourself."
     },
     "/dm": {
       "title": "Decision Matrix App: Compare Options | EmTalk",
@@ -305,10 +305,10 @@
       "headline": "Decision Matrix"
     },
     "/bret/practice": {
-      "title": "Free Breathing Timer and Muscle Relaxation | BRET",
-      "description": "Use a box breathing or 4-7-8 timer, create a custom rhythm, or follow progressive muscle relaxation. Free BRET web practice, with no account needed.",
+      "title": "Free Breathing Timer and Custom Rhythms | BRET",
+      "description": "Use a box breathing or 4-7-8 timer, or create a custom rhythm. Physical practices are coming soon. Free BRET web practice, with no account needed.",
       "indexable": true,
-      "headline": "Breathing timer and muscle relaxation"
+      "headline": "Breathing timer and custom rhythms"
     },
     "/news": {
       "title": "News from EmTalk | EmTalk",
@@ -319,7 +319,7 @@
     "/news/bret-browser-practice": {
       "title": "Make room for a short pause with BRET | EmTalk",
       "headline": "Make room for a short pause with BRET",
-      "description": "Choose a breathing rhythm or a muscle-relaxation practice in your browser.",
+      "description": "Choose a breathing rhythm in your browser. Physical practices are coming soon.",
       "indexable": true
     },
     "/news/decision-matrix-browser": {
@@ -345,6 +345,18 @@
       "headline": "What we are exploring with TAPL",
       "description": "A planned tool for small steps, learning and gradual progress.",
       "indexable": true
+    },
+    "/bret/app": {
+      "title": "Bret | EmTalk",
+      "description": "Choose breathing, guided meditation or four little games at your own pace. Physical practices are coming soon.",
+      "headline": "Bret",
+      "indexable": false
+    },
+    "/bret/games": {
+      "title": "Bret Games | EmTalk",
+      "description": "Four little games for a moment of your own. Find a rhythm, guide a light, arrange a room or discover a pattern.",
+      "headline": "Play a little. Make a little space.",
+      "indexable": false
     }
   }
 }

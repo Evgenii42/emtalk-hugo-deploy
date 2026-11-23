@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="&#208;&#156;&#208;&#190;&#209;&#130;&#208;&#184;&#208;&#178; &#209;&#141;&#209;&#130;&#208;&#176;&#208;&#191;&#208;&#176; &#194;&#183; priority" opacity="0.88">
+<circle id="Lower weight" opacity="0.35" cx="7.96875" cy="24.4375" r="3.1875" fill="#715595"/>
+<circle id="Middle weight" opacity="0.68" cx="17.2656" cy="18.8594" r="4.51562" fill="#715595"/>
+<circle id="Higher weight" cx="27.0938" cy="10.0938" r="4.78125" fill="#715595"/>
+<path id="Baseline" opacity="0.6" d="M5.3125 30.0156C5.3125 29.5755 5.66927 29.2188 6.10938 29.2188H30.0156C30.4557 29.2188 30.8125 29.5755 30.8125 30.0156V30.0156C30.8125 30.4557 30.4557 30.8125 30.0156 30.8125H6.10938C5.66927 30.8125 5.3125 30.4557 5.3125 30.0156V30.0156Z" fill="#353438"/>
+</g>
+</svg>

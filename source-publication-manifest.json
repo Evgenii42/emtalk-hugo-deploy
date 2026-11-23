@@ -1,22 +1,14 @@
 {
-  "scope": "SEO058 production baseline plus versioned Bret meditation content and UI categories",
-  "baselineDeploymentCommit": "499d3ac2067de2d9079a0d0134c324eb0cb63a89",
-  "baselinePublication": {
-    "baselineProductionCommit": "9f08e2a50fc65c0de53cbd911cffe96e1a856ab9",
-    "canonicalCommit": "6028bf3498c4c462adf0525df463cb38b43e6816",
-    "canonicalSourceCommit": "6028bf3498c4c462adf0525df463cb38b43e6816",
-    "outputCount": 357,
-    "outputSnapshotSha256": "0dd6ec39bd6e4abd93e83268c5c41424f961cf02f18439129f72b2052fcf2def",
-    "published": false,
-    "receiptSha256": "4adecfeec9d605c7ddaae5cd5db6d4ed38b55d28dd989fe72337f6a1a60865b9",
-    "routes": 48,
-    "scope": "Exact bounded SEO058 source; hosting acceptance is separate",
-    "sourceCount": 505,
-    "sourceInputSnapshotSha256": "54c52b2ca211af98af4daecaaadf1710d3b6663aa2b72f9d1ecfb2379fb02161"
-  },
-  "canonicalMeditationCommit": "c734a3c7643a69f4bcb15f75ff56ee4caba69c76",
-  "catalogVersion": "9199233e88ccb68a",
-  "sourceCount": 516,
+  "schemaVersion": 1,
+  "scope": "Frozen unadmitted unpublished production134 candidate; strict reviews and live acceptance remain required.",
+  "admitted": false,
+  "published": false,
+  "canonicalSourceCommit": "df0721205f4007c7a53d5acf60678a98a4262c81",
+  "stageParentCommit": "51d1d3aadd80ec5cdb6ca8efee16cc2bfe2dc3aa",
+  "productionBaseURL": "https://www.emtalk.org/",
+  "frozenReceiptSha256": "45d66a32906a2db605c2aa76a5e02485ffb567d41a54b8430ac628d32f72388e",
+  "sourceInputSnapshotSha256": "23e64ccdbd8ff47d6f85cdddb04cf447478494c14c80a53d735a2b72b9f55d00",
+  "outputSnapshotSha256": "5532f14f82a68377b9d393d3bea643c5f44d98a737d75ef5acde986218da9f32",
   "sourceFiles": [
     {
       "path": ".hugo-version",
@@ -54,9 +46,19 @@
       "sha256": "a29524695498ddf722009f8e18c3145772f87983871b17cd5d1a33e4d48028e7"
     },
     {
+      "path": "assets/css/bret-landing.css",
+      "bytes": 12394,
+      "sha256": "60c96c7173ecd0544a73035672804aed2e1a8acf9c48a39c2a2d55cd789ee5a4"
+    },
+    {
       "path": "assets/css/bret-practice.css",
       "bytes": 7105,
       "sha256": "89ce0c731cbd10f122460d39365a4bac2ea8cdb39dd1c07241c7c5d1d16c789d"
+    },
+    {
+      "path": "assets/css/dm-v2.css",
+      "bytes": 30593,
+      "sha256": "d6d96301d2f4cacf29865570dcc9148bbb7ac5dcdd7846ad164db2468d9c4e94"
     },
     {
       "path": "assets/css/dm-workspace.css",
@@ -375,8 +377,8 @@
     },
     {
       "path": "assets/js/bret-copy.js",
-      "bytes": 4495,
-      "sha256": "d4b47c7a1cb663d770f59704289bf3070c9efd2b384cde394555a0e494971773"
+      "bytes": 4661,
+      "sha256": "b8eaf20a6b944c23bb8ad2aea0aed1c86086c985930f0e9438ecae6737b4e264"
     },
     {
       "path": "assets/js/bret-cues.js",
@@ -400,8 +402,13 @@
     },
     {
       "path": "assets/js/bret-practice.js",
-      "bytes": 22957,
-      "sha256": "8f19605aa00345d7bc935d50946034e6f71ba99ddd646a2b977d787f853a7af6"
+      "bytes": 24976,
+      "sha256": "094c589b96652955f93dcb236823ecef31f293abab14a00cfbbf40fb4efa8bf2"
+    },
+    {
+      "path": "assets/js/bret-startup.js",
+      "bytes": 1119,
+      "sha256": "936763e39ba4d73bb3caef7d856b2737a42d98f2dad61aefd35b87442228a92c"
     },
     {
       "path": "assets/js/bret-transitions.js",
@@ -410,8 +417,8 @@
     },
     {
       "path": "assets/js/bret-view.js",
-      "bytes": 6346,
-      "sha256": "420d33e5ea621a52a55120d1e02214eb84f7a1d6cbc0da13574307ca6e67ce97"
+      "bytes": 6532,
+      "sha256": "73aa0d738aa6d731e23f8a42c81bd16964d3ac9740780a62e8c8065dbf66e28e"
     },
     {
       "path": "assets/js/dm-dialog.js",
@@ -432,6 +439,21 @@
       "path": "assets/js/dm-topics.js",
       "bytes": 3143,
       "sha256": "19a103aa0bcf72ed6b95463d071da0be0a03d569112593d1217d26fb5a024fb6"
+    },
+    {
+      "path": "assets/js/dm-v2-id.js",
+      "bytes": 1023,
+      "sha256": "f046f01b9d844fb51f77e10b69329f315a83eec6597df400589ca98dfccee5ff"
+    },
+    {
+      "path": "assets/js/dm-v2-model.js",
+      "bytes": 12155,
+      "sha256": "0763d0ac5a192ac34222c688491804dec969b4a3d47f154b77fbbeaa183164d3"
+    },
+    {
+      "path": "assets/js/dm-v2.js",
+      "bytes": 45370,
+      "sha256": "13820963f13a68f26a2f0ffb7283495fd1a17c1381d5b93e184b4d373a1b05b7"
     },
     {
       "path": "assets/js/dm-workspace-dom.js",
@@ -520,8 +542,8 @@
     },
     {
       "path": "assets/js/scroll.js",
-      "bytes": 5796,
-      "sha256": "8e4ebc6515e4d0f9f21f89747ae2a9e7cd8b1098ee263f01792fc7442a8f7510"
+      "bytes": 6235,
+      "sha256": "3073114a9f2f8e83e222d3a2ba0495331c079970a5b7fe66c550a5a8cd07af73"
     },
     {
       "path": "assets/js/site-navigation.js",
@@ -545,8 +567,8 @@
     },
     {
       "path": "assets/js/trial-analytics.js",
-      "bytes": 3559,
-      "sha256": "48940af66ad5de144aa73160051ee7e6210b1e3c55b3222dbc034efc2fc4cdb2"
+      "bytes": 3712,
+      "sha256": "eae6b7f7108c87142ec0161396de816882004981180326acf13ef0fd6bfca875"
     },
     {
       "path": "content/_index.md",
@@ -624,9 +646,19 @@
       "sha256": "50d5d9affdc0cdab676d00e56ef67cab10e68460baf661acc23b3151fa4e5bdd"
     },
     {
+      "path": "content/bret/app.md",
+      "bytes": 134,
+      "sha256": "f940c8ca8e3a088671aebd63898589d825a0f9d52d0df2b8074ebc2aeb2118bf"
+    },
+    {
+      "path": "content/bret/games.md",
+      "bytes": 144,
+      "sha256": "8024cf4397ebb0930e503f17d685a4056008203dcd974dc02dbc20a5af640c38"
+    },
+    {
       "path": "content/bret/practice.md",
-      "bytes": 177,
-      "sha256": "f76abfd0f406b6471f20337cd6599a5058286e84c748f570486c6901f242da22"
+      "bytes": 174,
+      "sha256": "ff6680cd488f4989f514fad65b1b97a81878ae208ed88cae9b62a8d5acb218a0"
     },
     {
       "path": "content/bret.md",
@@ -720,8 +752,8 @@
     },
     {
       "path": "content/news/bret-browser-practice.md",
-      "bytes": 734,
-      "sha256": "811da57f986065eef4e5ced016bd1994382fa5ab3e3c5a2101666f69a0f562b3"
+      "bytes": 743,
+      "sha256": "a20b3fe078b377012c8160271e916356c3439396d3d31a39ae3a0d004e39f4d8"
     },
     {
       "path": "content/news/decision-matrix-browser.md",
@@ -790,8 +822,8 @@
     },
     {
       "path": "data/analytics-policy.json",
-      "bytes": 36353,
-      "sha256": "e358c1da72df9fa823e543509e572556189c9f7ddad7cd952d0852bd76f4a092"
+      "bytes": 36867,
+      "sha256": "e54557744786fbf65b5733fbb7e41516bb917c8a126bb9175751284c5034d9b8"
     },
     {
       "path": "data/article-library.json",
@@ -864,9 +896,14 @@
       "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
     },
     {
+      "path": "data/dm-v2-font-provenance.json",
+      "bytes": 414,
+      "sha256": "84ff896eaa4dfbc5b05aa4c41ed8bca2e95958c65b13d93d11c5dfbef1fabf57"
+    },
+    {
       "path": "data/home-content.json",
-      "bytes": 2767,
-      "sha256": "532165acf1505fd4f5a266d6823f82d757a84e7f71a9840533c97ff35ef71d7c"
+      "bytes": 2717,
+      "sha256": "0a07960834f3df022705b7ed28316acafb8aedb5327fa7a42930026286e8a53c"
     },
     {
       "path": "data/home-explore.json",
@@ -885,23 +922,23 @@
     },
     {
       "path": "data/owned-pages.json",
-      "bytes": 3769,
-      "sha256": "5d0ee97eb37fa693d62e330a8afca65b654da9e9169ffbd1c010d690890c4ae4"
+      "bytes": 4178,
+      "sha256": "be1e6aa0e75f1fcade3617b17d6d97e765beabce289d354ad83043b7fc80abe2"
     },
     {
       "path": "data/render.json",
-      "bytes": 5797685,
-      "sha256": "52836dc11035376dc9516b49fe0f4a4691cffbc665946175fa45530e84120208"
+      "bytes": 5800236,
+      "sha256": "e23ac0407c9e9288f8046a9f84a29ba9c4fb4b4c7401194b0573946eed608c55"
     },
     {
       "path": "data/route-map.json",
-      "bytes": 26993,
-      "sha256": "b9c1877ee14df86de3f58362a7fe067c70a2630ff43948c85dc38739a6649082"
+      "bytes": 27445,
+      "sha256": "4126f3a750ad30ce2108e4a4976b552e2a7fbacb282b67d91bef2940f78d76c7"
     },
     {
       "path": "data/seo.json",
-      "bytes": 18834,
-      "sha256": "2988125eacfcbb97a5c0436f3bcd2ffa3e04edca98532b81e0721d041e0d20f3"
+      "bytes": 19383,
+      "sha256": "8b57728ee79a1a4942c00e42807e33c2a806a59d582fa3fa26589b93438341a7"
     },
     {
       "path": "data/source-content-schema.json",
@@ -940,8 +977,8 @@
     },
     {
       "path": "hugo.toml",
-      "bytes": 1492,
-      "sha256": "a55615fdf4692f2ee769788edab0c83cd20c9bbbd660a7d7334193b6909672ff"
+      "bytes": 1775,
+      "sha256": "7dec13abb5cd1505939d0f621bfbe9761eeae31a9f420d459774e4e6c252ec1b"
     },
     {
       "path": "inventory/media.json",
@@ -1024,19 +1061,69 @@
       "sha256": "3c590ad477435feb51d2469e15a124395db04ae46e2463634da24d82e91ad559"
     },
     {
+      "path": "layouts/partials/bret-appbar.html",
+      "bytes": 1342,
+      "sha256": "4bc3e95812ab78aa57452692797282b3f51ceb604944c035ec2cb3075604dba6"
+    },
+    {
+      "path": "layouts/partials/bret-directions.html",
+      "bytes": 1245,
+      "sha256": "fdcdee81e743387d804af4b7e162d9958cb65d07d867f41f76b77bd1df4d45b8"
+    },
+    {
+      "path": "layouts/partials/bret-game-home.html",
+      "bytes": 1632,
+      "sha256": "9e7fcba1fdd6f0582eab33c13cdb9fb3ad26d02873e369383195cd63ed3f0ccb"
+    },
+    {
+      "path": "layouts/partials/bret-games.html",
+      "bytes": 9846,
+      "sha256": "f19d4612a5d910d5f6d1e698ad487edfe92219a37481061cd7ed6acce00759b6"
+    },
+    {
+      "path": "layouts/partials/bret-landing-game-art.html",
+      "bytes": 1171,
+      "sha256": "745f98e4f39bdc85614b23dae8a3c7df9935d36cc2f020e123683a402791aab0"
+    },
+    {
+      "path": "layouts/partials/bret-landing-platform-icon.html",
+      "bytes": 627,
+      "sha256": "2c0363e642cf584b90b14d69922e8b1f0117a5220251b1c38dcc51a2565d4117"
+    },
+    {
+      "path": "layouts/partials/bret-landing.html",
+      "bytes": 8811,
+      "sha256": "bf8f3b551b2fcda2e9eb22e767b4803b078af2bcdcf2068ec8ee55c4456e70f9"
+    },
+    {
       "path": "layouts/partials/bret-launch.html",
       "bytes": 376,
       "sha256": "70f701f091375bc82482222fc222629d15ca0f634bd6009a4ceafb9c66eaa71c"
     },
     {
+      "path": "layouts/partials/bret-meditation.html",
+      "bytes": 5636,
+      "sha256": "6178a59c56038e90bcbac99c58e060a990c07d83aafc37d77b23d30c9cef2d14"
+    },
+    {
       "path": "layouts/partials/bret-practice.html",
-      "bytes": 7874,
-      "sha256": "a12dd24b365088d197ca438b08cf9790fd765cab5bd581e2184d8aad6b15f683"
+      "bytes": 8167,
+      "sha256": "ab25bd63228caa07bfc30628f312e76b58d00cd0ec9cc0960c8419444e369e3c"
+    },
+    {
+      "path": "layouts/partials/bret-tabs.html",
+      "bytes": 307,
+      "sha256": "d79db5dd5bcfda792e1d0cdcb5eb551c657ffce3c7ad2fc5f0495ac86dd75d46"
     },
     {
       "path": "layouts/partials/dm-launch.html",
       "bytes": 659,
       "sha256": "ee4917b98d38d106429188d37f735f6f9c7315ffe01ec51463fc35e27f16f266"
+    },
+    {
+      "path": "layouts/partials/dm-v2.html",
+      "bytes": 3621,
+      "sha256": "04cf58f76da27a164eee8225f900459b0609c855bd8bb95b5146814b5661be10"
     },
     {
       "path": "layouts/partials/dm-workspace.html",
@@ -1045,8 +1132,8 @@
     },
     {
       "path": "layouts/partials/ecosystem-next.html",
-      "bytes": 878,
-      "sha256": "48e6e4de41ebd3ea698bcb5817c578e04aa55f25320bd9de2eac1b18b7bcb5bf"
+      "bytes": 904,
+      "sha256": "2d66648671ef6f2b3a62207f7bb016b938f586f707be96a0437dcf11442cc65e"
     },
     {
       "path": "layouts/partials/footer-route-state.html",
@@ -1140,8 +1227,8 @@
     },
     {
       "path": "layouts/partials/site-app-links.html",
-      "bytes": 671,
-      "sha256": "e40e4ce8d51bee48f76d186ab58c81c9a9ac731fd8a1e583cb8cc79dc528e484"
+      "bytes": 700,
+      "sha256": "2bda05836d9c378cbcf7f93823c73b483b9e6ef07083ece41572a91f2d894e03"
     },
     {
       "path": "layouts/partials/site-direct-link.html",
@@ -1155,8 +1242,8 @@
     },
     {
       "path": "layouts/partials/site-header.html",
-      "bytes": 3125,
-      "sha256": "a8ea50ccd63759cfe7f80c9459b80895f17ced1abd536703688c7adb434286ae"
+      "bytes": 3192,
+      "sha256": "0c709e2f0bf32adfdd20f832ccf9c8e2a50e106eef27bc090b516c95a573b78c"
     },
     {
       "path": "layouts/partials/store-campaign-url.html",
@@ -1205,8 +1292,8 @@
     },
     {
       "path": "layouts/source.html",
-      "bytes": 15927,
-      "sha256": "e1cf6c46c7558d02c9dc6db809f961cf2b4373b0eb5ba38dc6647d753738eced"
+      "bytes": 19897,
+      "sha256": "8349a5ededdae82c11474212c098bfa36c2ed9fc0d784ca9fe8a48023feaaec1"
     },
     {
       "path": "layouts/source.legacyagentcatalog.json",
@@ -1239,14 +1326,19 @@
       "sha256": "c1225cbc69d7a76226b695e1316969e17636560151a5b4da057b3fa9d3798449"
     },
     {
+      "path": "scripts/bret_delivery.py",
+      "bytes": 2903,
+      "sha256": "d28535796665e0cadd08b21d38571caea2094aa505d97b53be455ab228f06ef6"
+    },
+    {
       "path": "scripts/build_cloudflare.py",
       "bytes": 4331,
       "sha256": "fa4e2e5bdf2142c5549b3910e861967731c4f749c427eff367832236d2ed9a79"
     },
     {
       "path": "scripts/build_site.py",
-      "bytes": 7756,
-      "sha256": "72759ddb5c4b15e60a7b8e5d38e21d9456e4e72f2de5d71a4e6d36d3743f2a08"
+      "bytes": 8466,
+      "sha256": "5681658bf027cb02d668600fd131349ebb6a3d4e80c97d5fe989d6d1c9af78e6"
     },
     {
       "path": "scripts/news_content.py",
@@ -1290,8 +1382,13 @@
     },
     {
       "path": "scripts/verify_build.py",
-      "bytes": 53153,
-      "sha256": "0c9fa7ba622b34cd0db83abf17fef91730685f821038d7979b07692a411b6470"
+      "bytes": 53536,
+      "sha256": "8ad4aeecbc1e68a3f6ad284990e2602c9cb543b22ece520d99f4bb2f17affec8"
+    },
+    {
+      "path": "scripts/verify_dm_v2_fonts.py",
+      "bytes": 5172,
+      "sha256": "0786640bcbbf6a1f6d36921cba2aa6dc1d04d46faebb0c906c55af74a0edf895"
     },
     {
       "path": "scripts/verify_footer.py",
@@ -1664,6 +1761,226 @@
       "sha256": "f6b69577dfbca1f04256896da35dac43e53c7bd3759786fcb6a7cd7108401357"
     },
     {
+      "path": "static/bret/games/app.css",
+      "bytes": 21171,
+      "sha256": "e67a03a89dbbfb4622b299d9e745005a24a91ad7f40d4119f61abfb75edd88c4"
+    },
+    {
+      "path": "static/bret/games/app.mjs",
+      "bytes": 37463,
+      "sha256": "93b0b9d7e607a4b14184e82e0c978a24291b048fd126962b7fa47b56624c80b3"
+    },
+    {
+      "path": "static/bret/games/catalog.mjs",
+      "bytes": 4649,
+      "sha256": "b1e48349befe225089cdffeecf7737bc335f687e9be45d84c4b1a3daa8518ae2"
+    },
+    {
+      "path": "static/bret/games/core.mjs",
+      "bytes": 23430,
+      "sha256": "faf42fe556fe0d90d87992a12cd0f451953067db471405db8e6c3e252ef0e3cd"
+    },
+    {
+      "path": "static/bret/games/directions.css",
+      "bytes": 5819,
+      "sha256": "6bcb71583188b68717fa6f2deca2502138e7f87c84483c3c16e1d704abd99189"
+    },
+    {
+      "path": "static/bret/games/directions.mjs",
+      "bytes": 10830,
+      "sha256": "4f9a0055756ff53506822060847e08d5b227b890d48d85098b719d41bb00e985"
+    },
+    {
+      "path": "static/bret/games/home.css",
+      "bytes": 2200,
+      "sha256": "0550afdb4c99bef2ad598f2917fcd32e44bc2e4a0888122366041703b5e84063"
+    },
+    {
+      "path": "static/bret/games/host-contracts.mjs",
+      "bytes": 1676,
+      "sha256": "d7fe4e0fb4d2d067752eda6abc97deade2e94d345e9b838d04da324ca89680e0"
+    },
+    {
+      "path": "static/bret/games/host-pause.mjs",
+      "bytes": 4119,
+      "sha256": "d218b9834916ca10a9963b1b657926383dd5c5501c84f0f2558b3bc066d49fb9"
+    },
+    {
+      "path": "static/bret/games/host-result.mjs",
+      "bytes": 2891,
+      "sha256": "a06ef34101956986e911166d2adeb75de822310998eeb9804f06be701317ef65"
+    },
+    {
+      "path": "static/bret/games/ids.mjs",
+      "bytes": 381,
+      "sha256": "1f4f36e8575ae561ab29d89c3ade35258542267801d61af3f433d55811e7dc25"
+    },
+    {
+      "path": "static/bret/games/illustrations.mjs",
+      "bytes": 4071,
+      "sha256": "ec644521c4ba313b42b448900a57cd7c1c22f5e20bfdd453983ad2565aa0581b"
+    },
+    {
+      "path": "static/bret/games/meditation-data.mjs",
+      "bytes": 19830,
+      "sha256": "2f3c3c24f207b7bfd2452c701ff566bab52d11be5b8aac3039b1197b49df44a6"
+    },
+    {
+      "path": "static/bret/games/meditation.css",
+      "bytes": 12102,
+      "sha256": "c95442c22da37e1e9c16975715123ee6ffc8cf04c3f62a60a75f28c817a0c627"
+    },
+    {
+      "path": "static/bret/games/meditation.mjs",
+      "bytes": 29277,
+      "sha256": "d4511ad69c198a2fdce55f584e8b65ebbc76e7cebfb4cb124d0c4b0df68e262e"
+    },
+    {
+      "path": "static/bret/games/navigation.mjs",
+      "bytes": 2253,
+      "sha256": "437f68e1626e7416118693a6495d97edfcf02a14fd0a41661a09416fa455cd9f"
+    },
+    {
+      "path": "static/bret/games/options.json",
+      "bytes": 1140,
+      "sha256": "39062a15d0ee2b5449e7d471f23cf8c007995a979ea7d627fa1e795ecefb88b8"
+    },
+    {
+      "path": "static/bret/games/options.mjs",
+      "bytes": 1054,
+      "sha256": "361a7c00effdba5aa985dfc74d8b77b7fa729f9feaf2ca8e795727935d049df8"
+    },
+    {
+      "path": "static/bret/games/persistence.mjs",
+      "bytes": 5239,
+      "sha256": "a883611495fa1dc80701ea10d28545d3dabeee3e940be3927d64cb0fdd7c2c80"
+    },
+    {
+      "path": "static/bret/games/play.css",
+      "bytes": 16643,
+      "sha256": "5e9519fc242f69644bfc06ed236d393254deb6057852c52981f7ba929af9198b"
+    },
+    {
+      "path": "static/bret/games/play.mjs",
+      "bytes": 41197,
+      "sha256": "c2b3e34c491e342e13726450053e0d46dde967e85be482871550639b7d0d9822"
+    },
+    {
+      "path": "static/bret/games/progress.mjs",
+      "bytes": 6153,
+      "sha256": "fec34e757a6c4231bf6d1ba712593f12917a1c046efee48e94f60b990f0dd369"
+    },
+    {
+      "path": "static/bret/games/selection.mjs",
+      "bytes": 3553,
+      "sha256": "63a847da9c280bc013ae34f8836f18aa798b79ca0f805cefdbc30ff83b8c6952"
+    },
+    {
+      "path": "static/bret/games/session.mjs",
+      "bytes": 2139,
+      "sha256": "519eefe11507b3091f2981ca857c9141205cf4bf0a06b1cb4d6a657afd18ec0e"
+    },
+    {
+      "path": "static/bret/games/shell.css",
+      "bytes": 3415,
+      "sha256": "5f91fa23d87d3e053e9fd75d0715ebcff74996af19dafd05ebf7a361b28c3b53"
+    },
+    {
+      "path": "static/bret/games/storage-notice.mjs",
+      "bytes": 624,
+      "sha256": "2f209842923246a74bf1d0ba41a9e93e2e2c6c2bb93b714322fcc20923b076a5"
+    },
+    {
+      "path": "static/bret/games/ui.mjs",
+      "bytes": 720,
+      "sha256": "ddf1f5e96508d7ea2bdb79b6670ba82b6654c9170424fafaddff83541dba845a"
+    },
+    {
+      "path": "static/bret/main/background.png",
+      "bytes": 1355143,
+      "sha256": "ce96e3a43f14209f3c3c35b5f136d1db9f9235584a11c5a819c435e4c552516f"
+    },
+    {
+      "path": "static/bret/main/background.webp",
+      "bytes": 44536,
+      "sha256": "011eee42f704d5e9377bd5ab408c1e8f9f1d1fc222fcc2366944327c84031715"
+    },
+    {
+      "path": "static/bret/main/breath.png",
+      "bytes": 1533331,
+      "sha256": "d48fd2ebf2f43e8223e5edab6ab12961c25cb22e3fe170faf582d69e75ea92bf"
+    },
+    {
+      "path": "static/bret/main/breath.webp",
+      "bytes": 77784,
+      "sha256": "09ec58475e7c613207a1f1171a0555f418ba92fbde9e1291f9999b53beff16b1"
+    },
+    {
+      "path": "static/bret/main/glow.svg",
+      "bytes": 1023,
+      "sha256": "5558592a29066ec53aae592f42386f69e4cd9fbd090146d256bfc47eea1f1ecd"
+    },
+    {
+      "path": "static/bret/main/meditation.png",
+      "bytes": 1331351,
+      "sha256": "96f4e84c765b74c53d6c3cf851c1593da0e55612847063299028b60d02e20c43"
+    },
+    {
+      "path": "static/bret/main/meditation.webp",
+      "bytes": 57058,
+      "sha256": "3fc1e20574b2c37ad0f02a5cf9a4b4e2ea682d27510bebdb609a089c23c7e71f"
+    },
+    {
+      "path": "static/bret/main/menu.svg",
+      "bytes": 588,
+      "sha256": "d944b198dbdfa37c4947b20e7d83196c764ed2da20d02cb1917f75aef7e7846a"
+    },
+    {
+      "path": "static/bret/main/physical.png",
+      "bytes": 1770822,
+      "sha256": "bed6be596bc3de73fa10b35c5a858bc916aa8cb6e6bfd2da683e253c98e02464"
+    },
+    {
+      "path": "static/bret/main/physical.webp",
+      "bytes": 65402,
+      "sha256": "d28c5bc774e40be07bc580e903d5dcaadae8109e06f70c80ac0097443435de3e"
+    },
+    {
+      "path": "static/bret/main/play.svg",
+      "bytes": 598,
+      "sha256": "0dada40d1453ed5b9d47559d65af6950fa0482d5a414cd41fa1c9de831099b89"
+    },
+    {
+      "path": "static/bret/main/settings.svg",
+      "bytes": 6810,
+      "sha256": "89ef5123ecd7a611d9f65507a58ef9f2873dc8098b9356024523fccd141eb186"
+    },
+    {
+      "path": "static/bret/meditation/icons/back.svg",
+      "bytes": 1157,
+      "sha256": "0678b1c255b71e8cabea3209fba59cda9a3c1a81a786a28d145831ef730670f0"
+    },
+    {
+      "path": "static/bret/meditation/icons/play.svg",
+      "bytes": 611,
+      "sha256": "43e78f46f2836189899b03bd7230c36c9d47905ed00f9ed764a0d1e5620e3515"
+    },
+    {
+      "path": "static/bret/meditation/icons/settings.svg",
+      "bytes": 7105,
+      "sha256": "0035cb9f72ce1c9b0bc42b1b03c5e6a300f1211796cce33f4a601357e48b0f0b"
+    },
+    {
+      "path": "static/bret/meditation/icons/subtitles.svg",
+      "bytes": 985,
+      "sha256": "bc395aaca182840dbdf78edbc0f5f6f998babb1b175d3a3cd3f9ea4b7d8ad951"
+    },
+    {
+      "path": "static/bret/meditation/icons/volume.svg",
+      "bytes": 2364,
+      "sha256": "b7d885ebee57f561a7df2ad37d4cb5570afc35eb424dd0fc4d9063489ff6d075"
+    },
+    {
       "path": "static/content/bret/meditations/focus-long.json",
       "bytes": 920,
       "sha256": "6745866f97bfd6abc2ff94cdfb7e6a3d0423e9591464365544322fc91a37ba7f"
@@ -1677,6 +1994,156 @@
       "path": "static/content/bret/meditations/relax-long.json",
       "bytes": 953,
       "sha256": "ac9d2b791475d6792afe27db962c539b1d2a6ca49aa975ba504d8d7ab52e83b8"
+    },
+    {
+      "path": "static/dm-v2/assets/compare-add-icon-medium.svg",
+      "bytes": 701,
+      "sha256": "5e682b3b526f2c214d8262d84fa4d9980957aebda9152b3877b5e4a97af5f895"
+    },
+    {
+      "path": "static/dm-v2/assets/compare-close-small.svg",
+      "bytes": 739,
+      "sha256": "94577eabcdbd3396da34fcc8f8e00ddea16af584829297f5851b8d8baa4f0a04"
+    },
+    {
+      "path": "static/dm-v2/assets/compare-ellipse2174.svg",
+      "bytes": 311,
+      "sha256": "3528ad945077d3e29a23b3a1a58376b4c80f82e620315929c81d2841dc84aafc"
+    },
+    {
+      "path": "static/dm-v2/assets/compare-ellipse2175.svg",
+      "bytes": 277,
+      "sha256": "832262b723ab978dc2b3adb94a4bff5a1096415bf27eaa9e4ad1984ff3ff5d0e"
+    },
+    {
+      "path": "static/dm-v2/assets/compare-help-outline.svg",
+      "bytes": 269,
+      "sha256": "03656fa49ff13ec5f2964d491b830761d671f550a7756547688c4a632e41091c"
+    },
+    {
+      "path": "static/dm-v2/assets/compare-polygon3.svg",
+      "bytes": 1307,
+      "sha256": "2b7f4d467020f1b474be87cd85adfc470d2e004c1103f21f9ba266081e35fac1"
+    },
+    {
+      "path": "static/dm-v2/assets/emtalk-logo.webp",
+      "bytes": 4220,
+      "sha256": "6f42a1fb5d39958b3b7ff561491d1d5d2ca70847e711c4747863c5e01e7bb6d0"
+    },
+    {
+      "path": "static/dm-v2/assets/Geologica-OFL.txt",
+      "bytes": 4493,
+      "sha256": "ba761950dfd6ab9e9c4ef81cf338daae56963f8493845717eb69aff11e913972"
+    },
+    {
+      "path": "static/dm-v2/assets/geologica-variable.woff2",
+      "bytes": 119228,
+      "sha256": "be83b404bc028dc3fdc7e5efba12bc4685b84de660aa040ecbd0ca5725a1e4fe"
+    },
+    {
+      "path": "static/dm-v2/assets/home-dm-welcome-motif-choices.svg",
+      "bytes": 912,
+      "sha256": "bfca2b9b61edaa2ae31d6c711bc7a259d5222293c81e79d623aa5d14a2f62d20"
+    },
+    {
+      "path": "static/dm-v2/assets/home-help-outline.svg",
+      "bytes": 269,
+      "sha256": "03656fa49ff13ec5f2964d491b830761d671f550a7756547688c4a632e41091c"
+    },
+    {
+      "path": "static/dm-v2/assets/home-ic-ai.svg",
+      "bytes": 3301,
+      "sha256": "6f9f007897a4d04975a0a67d57255e4e6a69b4ff2300ac4cec9d388017c18e67"
+    },
+    {
+      "path": "static/dm-v2/assets/home-ic-arrows.svg",
+      "bytes": 1164,
+      "sha256": "87b8b8750e9fdf7c5c60767d4d0b5406d472f25903a2ce764cffa686a1c5faff"
+    },
+    {
+      "path": "static/dm-v2/assets/home-ic-clock.svg",
+      "bytes": 974,
+      "sha256": "b25b9db13f345813bda48d41174837a108dcbfdd9455e9525f2ea97bbf1bdfb6"
+    },
+    {
+      "path": "static/dm-v2/assets/home-ic-plus.svg",
+      "bytes": 532,
+      "sha256": "8134ec6f81debc6de50c6b4be70cdd068c922b3b4c3324f0111ede08ade0d37a"
+    },
+    {
+      "path": "static/dm-v2/assets/home-step-symbol.svg",
+      "bytes": 423,
+      "sha256": "e4597a3a92565c478c10efeec58f3a345616c1f26084a60b698640d483190f06"
+    },
+    {
+      "path": "static/dm-v2/assets/home-step-symbol1.svg",
+      "bytes": 443,
+      "sha256": "b6ec4b477715f15749f76ac1ac9b4dce24984a1bc1fa43bc39b0808db2e1fc49"
+    },
+    {
+      "path": "static/dm-v2/assets/home-step-symbol2.svg",
+      "bytes": 432,
+      "sha256": "c94dbeb940fa579843a7fcc9320476d4e874abe71946eb69670f638e0c1ce1e6"
+    },
+    {
+      "path": "static/dm-v2/assets/home-topics-toggle.svg",
+      "bytes": 587,
+      "sha256": "c8aef5efcf97ac02b222695833f3873e29c5f099e600fcfe5f405af4e662e227"
+    },
+    {
+      "path": "static/dm-v2/assets/home-uil-arrow-growth1.svg",
+      "bytes": 3239,
+      "sha256": "bdae46e68667d2af71a64ab21d4ad00c13f92baee713f2ed7034e2f4904ec5eb"
+    },
+    {
+      "path": "static/dm-v2/assets/Manrope-OFL.txt",
+      "bytes": 4477,
+      "sha256": "e178bfe7c691e41a2a106ce56f285f079355593dc78e918d30b39cf0714c70d3"
+    },
+    {
+      "path": "static/dm-v2/assets/manrope-variable.woff2",
+      "bytes": 54320,
+      "sha256": "2d65cb231c2dd56cb8de01c856f56a72c5fefeeb86bdf71f81b6d09bda531b3f"
+    },
+    {
+      "path": "static/dm-v2/assets/pros-help-outline.svg",
+      "bytes": 269,
+      "sha256": "03656fa49ff13ec5f2964d491b830761d671f550a7756547688c4a632e41091c"
+    },
+    {
+      "path": "static/dm-v2/assets/pros-ic-ai.svg",
+      "bytes": 3301,
+      "sha256": "6f9f007897a4d04975a0a67d57255e4e6a69b4ff2300ac4cec9d388017c18e67"
+    },
+    {
+      "path": "static/dm-v2/assets/pros-ic-arrows.svg",
+      "bytes": 1164,
+      "sha256": "87b8b8750e9fdf7c5c60767d4d0b5406d472f25903a2ce764cffa686a1c5faff"
+    },
+    {
+      "path": "static/dm-v2/assets/pros-ic-plus.svg",
+      "bytes": 532,
+      "sha256": "8134ec6f81debc6de50c6b4be70cdd068c922b3b4c3324f0111ede08ade0d37a"
+    },
+    {
+      "path": "static/dm-v2/assets/pros-priority.svg",
+      "bytes": 921,
+      "sha256": "05353199b4e479058302b7c8b5fbd394311629a1073b119dfb17632c71455072"
+    },
+    {
+      "path": "static/dm-v2/assets/result-ic-ai.svg",
+      "bytes": 3301,
+      "sha256": "6f9f007897a4d04975a0a67d57255e4e6a69b4ff2300ac4cec9d388017c18e67"
+    },
+    {
+      "path": "static/dm-v2/assets/result-ic-arrows.svg",
+      "bytes": 1164,
+      "sha256": "87b8b8750e9fdf7c5c60767d4d0b5406d472f25903a2ce764cffa686a1c5faff"
+    },
+    {
+      "path": "static/dm-v2/assets/topics.json",
+      "bytes": 36867,
+      "sha256": "8f11d7dec1e60879aff9fdff54c19cb52d2a11e5c4e3eb7cf12a5065b370cef4"
     },
     {
       "path": "static/font-licenses/COPYRIGHT-NOTICES.txt",
@@ -1737,6 +2204,36 @@
       "path": "static/fonts/home/manrope-variable.woff2",
       "bytes": 54320,
       "sha256": "2d65cb231c2dd56cb8de01c856f56a72c5fefeeb86bdf71f81b6d09bda531b3f"
+    },
+    {
+      "path": "static/fonts/shared/bret-geologica-variable.woff2",
+      "bytes": 124292,
+      "sha256": "389e830149ff5420a372078456062ddeedced35eb57d5b016cdf33226fbadb08"
+    },
+    {
+      "path": "static/fonts/shared/bret-manrope-variable.woff2",
+      "bytes": 59968,
+      "sha256": "afa910d834e251c1b95f8b2656aa7f807b2333fbf177f7af22fc2469645a27ba"
+    },
+    {
+      "path": "static/fonts/shared/bret-roboto-regular.woff2",
+      "bytes": 73408,
+      "sha256": "aaff6175f1b3a02e452ee496f14d83ee0fe7592f0e79574911a914e882984f8f"
+    },
+    {
+      "path": "static/fonts/shared/geologica-variable.woff2",
+      "bytes": 119228,
+      "sha256": "be83b404bc028dc3fdc7e5efba12bc4685b84de660aa040ecbd0ca5725a1e4fe"
+    },
+    {
+      "path": "static/fonts/shared/manrope-variable.woff2",
+      "bytes": 54320,
+      "sha256": "2d65cb231c2dd56cb8de01c856f56a72c5fefeeb86bdf71f81b6d09bda531b3f"
+    },
+    {
+      "path": "static/fonts/shared/roboto-regular.ttf",
+      "bytes": 168260,
+      "sha256": "4e147ab64b9fdf6d89d01f6b8c3ca0b3cddc59d608a8e2218f9a2504b5c98e14"
     },
     {
       "path": "static/llms.txt",
@@ -2599,30 +3096,5 @@
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "sourceInputSnapshotSha256": "394374a4ba04e0fcec53f2722948c7cca25f9a551a8b47f115e701c6d933f172",
-  "outputCount": 368,
-  "outputSnapshotSha256": "102801f7119f6c33d50496f5e5b0eb87f2611765968fb9c0cf7e41c33706abfe",
-  "routes": 48,
-  "addedPublicFiles": [
-    "content/bret/meditations/focus-long.json",
-    "content/bret/meditations/index.json",
-    "content/bret/meditations/relax-long.json",
-    "media/bret/focus-long/audio-57724305daef2285.opus",
-    "media/bret/focus-long/playerBackground-5038a141bb5c1211.webp",
-    "media/bret/focus-long/subtitles-en-d96e2eca05677392.json",
-    "media/bret/focus-long/thumbnail-48183095d9c2a3b3.webp",
-    "media/bret/relax-long/audio-4c5f873af406231d.opus",
-    "media/bret/relax-long/playerBackground-dc5c6bd441d7748f.webp",
-    "media/bret/relax-long/subtitles-en-e5b9978870267a44.json",
-    "media/bret/relax-long/thumbnail-282af99ef7f3fd1d.webp"
-  ],
-  "published": false,
-  "note": "Build verified locally; hosting acceptance is recorded separately after GitHub push.",
-  "changedPublicFiles": [
-    "content/bret/meditations/focus-long.json",
-    "content/bret/meditations/index.json",
-    "content/bret/meditations/relax-long.json"
-  ],
-  "unrelatedOutputsUnchanged": true,
-  "unchangedOutputs": 365
+  "rollbackDeploymentId": "c7822137-4d60-4b94-8cfa-b1a8c9c5f1f5"
 }

@@ -1,0 +1,71 @@
+{{- $p := hugo.Data.render.mountPrefix -}}
+{{- $product := index (where (index hugo.Data "home-content").products "id" "bret") 0 -}}
+<main class="bret-landing" id="emtalk-main" tabindex="-1" aria-labelledby="bret-hero-title">
+  <section class="bret-landing__hero">
+    <div class="bret-landing__container bret-landing__hero-grid">
+      <div class="bret-landing__hero-copy">
+        <p class="bret-landing__eyebrow"><span class="bret-landing__brand-mark" aria-hidden="true">✦</span> BRET BY EMTALK</p>
+        <h1 id="bret-hero-title">Make a little space for yourself.</h1>
+        <p class="bret-landing__lead">A pause for your breath, your body, or a busy mind. Gentle practices and little games, at your own pace.</p>
+        <a class="bret-landing__button" href="#try-bret">Try Bret</a>
+        <p class="bret-landing__hero-note">Choose the web preview or the Android app.</p>
+      </div>
+      <figure class="bret-landing__preview">
+        <div class="bret-landing__preview-halo" aria-hidden="true"></div>
+        <div class="bret-landing__app-preview" aria-hidden="true">
+          <div class="bret-landing__preview-bar"><span>☰</span><strong>Bret</strong><span>✦</span></div>
+          <div class="bret-landing__preview-heading">Breathe</div>
+          <p>Take a moment. Find your own rhythm.</p>
+          <div class="bret-landing__practice-card">
+            <div class="bret-landing__practice-art"><img src="{{ $p }}/bret/main/breath.webp" width="1448" height="1086" alt="" loading="eager" decoding="async" fetchpriority="high"><span class="bret-landing__preview-play"><img src="{{ $p }}/bret/main/play.svg" width="26" height="26" alt=""></span></div>
+            <div class="bret-landing__practice-copy"><span>GROUNDING · 4 MIN</span><strong>Ground</strong><p>Relax physically and mentally</p><small>4 · 4 · 4 · 4</small></div>
+          </div>
+          <div class="bret-landing__preview-tabs"><span class="is-current">Breath</span><span>Physical</span><span>Meditation</span><span>Games</span></div>
+        </div>
+        <figcaption>A familiar place for a small pause.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bret-landing__section" aria-labelledby="bret-ways-title">
+    <div class="bret-landing__container">
+      <div class="bret-landing__section-heading"><p class="bret-landing__eyebrow">START WITH WHAT YOU NEED</p><h2 id="bret-ways-title">Your moment. Your way.</h2><p>Choose a practice or a little challenge. There is no required order, and no perfect way to begin.</p></div>
+      <div class="bret-landing__ways">
+        <article class="bret-landing__way"><div class="bret-landing__way-art"><img src="{{ $p }}/bret/main/breath.webp" alt="" width="1448" height="1086" loading="lazy" decoding="async"></div><div class="bret-landing__way-copy"><span class="bret-landing__way-number">BREATH</span><h3>Find your rhythm.</h3><p>Five breathing patterns and custom timing. Follow a rhythm that feels comfortable for you.</p><span class="bret-landing__availability">Ready to try on the web</span></div></article>
+        <article class="bret-landing__way"><div class="bret-landing__way-art bret-landing__way-art--physical"><img src="{{ $p }}/bret/main/physical.webp" alt="" width="1448" height="1086" loading="lazy" decoding="async"></div><div class="bret-landing__way-copy"><span class="bret-landing__way-number">PHYSICAL</span><h3>Give your body a pause.</h3><p>Guided body practices are on their way. A gentle way to release tension, at your own pace.</p><span class="bret-landing__availability">Coming soon on the web</span></div></article>
+        <article class="bret-landing__way"><div class="bret-landing__way-art"><img src="{{ $p }}/bret/main/meditation.webp" alt="" width="1448" height="1086" loading="lazy" decoding="async"></div><div class="bret-landing__way-copy"><span class="bret-landing__way-number">MEDITATION</span><h3>A quieter kind of moment.</h3><p>Choose from two guided practices, with English audio and optional draft subtitles.</p><span class="bret-landing__availability">Available on the web</span></div></article>
+        <article class="bret-landing__way"><div class="bret-landing__way-art bret-landing__way-art--games">{{ partial "bret-landing-game-art.html" . }}</div><div class="bret-landing__way-copy"><span class="bret-landing__way-number">GAMES</span><h3>A little play. A little space.</h3><p>Follow a rhythm, guide a light, arrange a corner or spot a changing pattern. Four different ways to play.</p><span class="bret-landing__availability">Available in the web preview</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bret-landing__section bret-landing__pace" aria-labelledby="bret-pace-title">
+    <div class="bret-landing__container bret-landing__pace-grid">
+      <div><p class="bret-landing__eyebrow">A LITTLE STRUCTURE. PLENTY OF CHOICE.</p><h2 id="bret-pace-title">Less to keep up with.<br>More room for you.</h2><p class="bret-landing__section-lead">Bret gives you a starting point. You decide what comes next.</p></div>
+      <div class="bret-landing__principles">
+        <article><div><h3>Your pace comes first.</h3><p>Choose a breathing rhythm, a guided meditation, or a game with levels or a steady pace. Practice settings let you adjust sound and spoken guidance.</p></div></article>
+        <article><div><h3>Pause whenever you need.</h3><p>Take a break or finish for now. In Games, paused and background time do not count as active play.</p></div></article>
+        <article><div><h3>A place to return to.</h3><p>When browser storage is available, the web preview saves your settings and game progress here. No daily streak to protect.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="try-bret" class="bret-landing__section bret-landing__try" tabindex="-1" aria-labelledby="bret-try-title">
+    <div class="bret-landing__container">
+      <div class="bret-landing__section-heading"><p class="bret-landing__eyebrow">TAKE YOUR NEXT SMALL STEP</p><h2 id="bret-try-title">Try Bret, your way.</h2><p>Open a little space right here, or keep Bret close on your Android phone.</p></div>
+      <div class="bret-landing__platforms">
+        <article class="bret-landing__platform bret-landing__platform--web"><span class="bret-landing__platform-icon" aria-hidden="true">{{ partial "bret-landing-platform-icon.html" "web" }}</span><p class="bret-landing__eyebrow">ON THE WEB</p><h3>A pause, right here.</h3><p>Try breathing, guided meditations and four little games in your browser. Physical practices are coming soon. No installation or account needed.</p><a class="bret-landing__button" data-bret-platform="web" href="{{ $p }}/bret/app">Open web app</a><small>Games and meditations are available here. Android availability differs.</small></article>
+        <article class="bret-landing__platform"><span class="bret-landing__platform-icon" aria-hidden="true">{{ partial "bret-landing-platform-icon.html" "android" }}</span><p class="bret-landing__eyebrow">ON ANDROID</p><h3>Keep Bret close.</h3><p>Get the Bret app for your Android phone. See the current mobile features and availability on Google Play.</p><a class="bret-landing__button bret-landing__button--outline" data-bret-platform="android" href="{{ $product.storeUrl }}" target="_blank" rel="noopener noreferrer">Get Android app<span class="bret-landing__sr-only"> (opens Google Play in a new tab)</span></a><small>Features in the Android app and web preview may differ.</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bret-landing__section bret-landing__faq" aria-labelledby="bret-faq-title">
+    <div class="bret-landing__container bret-landing__faq-grid"><div><p class="bret-landing__eyebrow">A FEW LITTLE DETAILS</p><h2 id="bret-faq-title">Before you begin.</h2></div><div>
+      <details><summary>Can I try Bret without installing anything?</summary><p>Yes. Choose Open web app above to use the browser preview. You do not need a web account.</p></details>
+      <details><summary>What can I play?</summary><p>Seed Keepers is about rhythm and reaction. Lantern Drift is about steering and exploration. A Place for Everything combines clues and arranging. Hidden Seasons asks you to spot changing patterns.</p></details>
+      <details><summary>Can I choose how challenging a game is?</summary><p>Yes. Open game settings to choose your game, goal and pace. Try levels, or keep the same difficulty with Steady pace.</p></details>
+      <details><summary>Where does my web progress go?</summary><p>It stays in this browser when browser storage is available. Web progress does not sync to the Android app. If saving is unavailable, Bret tells you.</p></details>
+    </div></div>
+  </section>
+</main>

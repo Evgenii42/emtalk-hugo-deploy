@@ -7,12 +7,12 @@
     {
       "id": "bret",
       "name": "BRET",
-      "purpose": "Breathing and relaxation",
-      "description": "Choose a breathing pattern or follow progressive muscle relaxation. Make room for a short pause, at your own pace.",
+      "purpose": "Practices and little games",
+      "description": "Choose breathing, guided meditation or one of four little games. Physical practices are coming soon. A moment at your own pace.",
       "image": "be47f36bc0e62d97c12c-6972929d2ad38b3691266514_Bret-Screen.webp",
       "imageAlt": "BRET breathing practice screens",
-      "path": "/bret/practice",
-      "linkLabel": "Try BRET free",
+      "path": "/bret/app",
+      "linkLabel": "Open Bret free",
       "storeUrl": "https://play.google.com/store/apps/details?id=com.bret",
       "storeLabel": "BRET on Google Play"
     },

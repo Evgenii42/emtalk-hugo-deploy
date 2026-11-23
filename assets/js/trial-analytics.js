@@ -67,6 +67,8 @@ export function createTrialAnalytics(product, host = globalThis) {
       run.terminal = true; resumeEligible = false; send("stopped");
     },
     failed(kind, token) {
+      // Late failures from completed/replaced/revoked runs are intentionally
+      // dropped: they must not report against or terminate a newer run.
       if (!["initialization_failed", "runtime_failed", "required_capability_failed"].includes(kind)) return;
       if (token ? !live(token) : !active()) return;
       if (run) run.terminal = true;

@@ -119,9 +119,11 @@ export class PracticeView {
     this.$("[data-body-guide]").dataset.muscle = String(s.step || "");
     // Phase identity is observable without implying a [data-phase] CSS rule.
     this.$("[data-orbit]").dataset.phase = String(s.phase ?? 2);
-    this.$("[data-countdown]").textContent = Number.isFinite(remaining)
+    const countdown = Number.isFinite(remaining)
       ? String(Math.ceil(remaining / 1000))
       : copy.listenAtPace;
+    if (this.$("[data-countdown]").textContent !== countdown)
+      this.$("[data-countdown]").textContent = countdown;
     if (s.kind === "breath") {
       const p = Math.min(1, offset / s.duration),
         scale =
@@ -138,12 +140,14 @@ export class PracticeView {
     this.$("[data-progress]").value =
       index +
       (Number.isFinite(s.duration) ? offset / s.duration : 0);
-    this.$("[data-metrics]").textContent =
+    const metrics =
       s.kind === "preparation"
         ? copy.preparation
         : practiceClock(elapsed) +
           (mode === "pmr"
             ? copy.stepMetric(s.number, stepCount)
             : copy.cycleMetric(s.cycle, cycles));
+    if (this.$("[data-metrics]").textContent !== metrics)
+      this.$("[data-metrics]").textContent = metrics;
   }
 }

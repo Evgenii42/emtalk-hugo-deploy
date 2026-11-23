@@ -31,6 +31,15 @@ if (root) {
   }
 }
 function init(root, trial) {
+  // Keep the legacy URL, but do not initialise media or a session for a body
+  // practice while this web direction is being prepared.
+  const requestedMode = new URLSearchParams(location.search).get("mode");
+  if (requestedMode === "pmr") {
+    root.querySelector("[data-bret-physical-soon]").hidden = false;
+    const back = root.querySelector("[data-bret-return]");
+    if (back) back.href = (document.documentElement.dataset.mountPrefix || "") + "/bret/app#physical";
+    return;
+  }
   const $ = (s) => root.querySelector(s),
     all = (s) => [...root.querySelectorAll(s)];
   const config = JSON.parse($("#bret-practice-data").textContent);
@@ -119,6 +128,23 @@ function init(root, trial) {
       }
     }
   }
+  // Direction links select this visit's practice without starting audio or
+  // writing preferences. A later explicit settings change or Start saves the
+  // visible choices, including link-provided rhythm and cycles.
+  if (prefs.mode === "pmr") {
+    prefs = preferences({ ...prefs, mode: "breathing" });
+    $("[data-bret-physical-soon]").hidden = false;
+  }
+  if (requestedMode === "breathing") {
+    const query = new URLSearchParams(location.search);
+    const cycles = Number(query.get("cycles"));
+    prefs = preferences({ ...prefs, mode: requestedMode,
+      ...(requestedMode === "breathing" ? { preset: "4444" } : {}),
+      ...(Number.isInteger(cycles) && cycles >= 1 && cycles <= 99 ? { cycles } : {}) });
+  }
+  // Preferences use an intentional compare-before-write check, not the games
+  // progress lock: independent tabs may view settings, but a changed stored
+  // value rejects this save and keeps the explicit conflict/recovery message.
   const save = () => {
     try {
       if (!preferencesObserved) {
@@ -175,6 +201,8 @@ function init(root, trial) {
   }
   function showMode() {
     const mode = form.elements.mode.value;
+    const backToBret = $("[data-bret-return]");
+    if (backToBret) backToBret.href = (document.documentElement.dataset.mountPrefix || "") + "/bret/app#" + (mode === "pmr" ? "physical" : "breath");
     $("[data-standard]").hidden = mode !== "breathing";
     $("[data-custom]").hidden = mode !== "custom";
     $("[data-groups]").hidden = mode !== "pmr";
@@ -298,8 +326,12 @@ function init(root, trial) {
     schedule();
   }
   function start() {
-    if (!readForm()) return;
+    // A new attempt can fail while reading settings, before creating a session.
     runtimeRecoveryShown = false;
+    if (!readForm()) return;
+    // Only a fresh accepted start replaces narration; intro completion uses begin.
+    cancelVoice();
+    introState = "idle";
     runToken = trial.request();
     sessionToken = null;
     feedback.reset();
@@ -354,7 +386,7 @@ function init(root, trial) {
       introState = "idle";
       silentAll();
       view("finish");
-      $("[data-summary]").textContent = "The practice could not continue because of a browser timing error. This practice was not completed. Choose another practice to try again.";
+      $("[data-summary]").textContent = copy.runtimeFailureSummary;
       focusHeading("#bret-finish-heading");
     } catch {
       const notice = $("[data-bret-load-error]");
@@ -455,6 +487,8 @@ function init(root, trial) {
         introState = "playing";
         presentation.intro(false);
         media.resumeNarration();
+        // A pending completion can synchronously begin the timed practice.
+        if (introState !== "playing") return;
         playMusic();
         announceInstruction();
       } else begin(true);
@@ -503,7 +537,11 @@ function init(root, trial) {
     focusHeading("#bret-finish-heading");
     if (stopped) trial.stopped(runToken);
     else if (session?.state === "completed") trial.completed(sessionToken);
-    } catch (error) { trial.failed("runtime_failed", runToken); throw error; }
+    } catch (error) {
+      // Recover a partial finish before preserving the original diagnostics.
+      runtimeFailure();
+      console.error("BRET practice could not finish.", error);
+    }
   }
   form.addEventListener("change", () => {
     showMode();
@@ -512,7 +550,10 @@ function init(root, trial) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     if (form.reportValidity()) {
-      try { start(); } catch (error) { trial.failed("runtime_failed", runToken); throw error; }
+      try { start(); } catch (error) {
+        runtimeFailure();
+        console.error("BRET practice could not start.", error);
+      }
     }
   });
   $("[data-pause]").addEventListener("click", () =>

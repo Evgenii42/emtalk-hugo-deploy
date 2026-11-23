@@ -1,0 +1,18 @@
+{{- $p := hugo.Data.render.mountPrefix -}}
+<section class="bret-game-home bret-direction" data-game-home hidden aria-labelledby="bret-game-home-title">
+  <header class="bret-direction-heading"><h1 id="bret-game-home-title" tabindex="-1">Games</h1><p>A little play, at your pace. Return to your last game, or choose another in settings.</p></header>
+  <div class="bret-game-home-carousel">
+    <article class="bret-direction-card is-active bret-game-home-card" aria-labelledby="bret-game-title">
+      <div class="bret-game-home-art" data-game-home-art aria-hidden="true"></div>
+      <button type="button" class="bret-direction-play bret-game-play" data-game-home-play aria-label="Play your last game"><img src="{{ $p }}/bret/main/play.svg" alt="" width="32" height="32"></button>
+      <div class="bret-direction-card-plate">
+        <span class="bret-direction-card-category" data-game-home-category>AT YOUR PACE</span>
+        <h2 class="bret-direction-card-title" id="bret-game-title" data-game-home-name>Seed Keepers</h2>
+        <p class="bret-direction-card-copy" data-game-home-copy>Meet the little seed keepers and find a comfortable rhythm.</p>
+        <span class="bret-direction-card-chip" data-game-home-chip>Gentle · 2 min</span>
+        <button type="button" class="bret-direction-settings bret-game-settings" data-game-settings aria-label="Game settings: choose a game and your pace"><img src="{{ $p }}/bret/main/settings.svg" alt="" width="24" height="24"></button>
+      </div>
+    </article>
+  </div>
+  <p class="bret-game-home-note" data-game-home-note>Your last launched game will appear here.</p>
+</section>

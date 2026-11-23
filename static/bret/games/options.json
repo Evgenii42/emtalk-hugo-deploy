@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "tiers": [
+    { "value": 0, "label": "Gentle" },
+    { "value": 1, "label": "Balanced" },
+    { "value": 2, "label": "Curious" }
+  ],
+  "modes": [
+    { "value": "stable", "label": "Steady pace" },
+    { "value": "levels", "label": "Levels" }
+  ],
+  "durations": [
+    { "value": 120, "label": "2 minutes", "runLabel": "2 min intention" },
+    { "value": 300, "label": "5 minutes", "runLabel": "5 min intention" },
+    { "value": 600, "label": "10 minutes", "runLabel": "10 min intention" },
+    { "value": 0, "label": "Free play", "runLabel": "Free play" }
+  ],
+  "seedKeepersUnhurried": {"label":"Unhurried turns","description":"Keepers wait for your choice, one at a time, for all 50 helpers. No expiry or timed misses. HOLD: keep the key or pointer pressed for about half a second, until the seed is collected. A quick release leaves it waiting and costs nothing. Assistive button activation starts collection with one activation. Target text names each hole, action and key. Active play time and XP count as usual.","enabledByDefault":false},
+  "defaults": { "tier": 0, "mode": "stable", "duration": 120 }
+}

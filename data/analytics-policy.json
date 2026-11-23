@@ -576,6 +576,26 @@
         "emtalk_store_click",
         "emtalk_interest_state"
       ]
+    },
+    "/bret/app": {
+      "context": "web_trial",
+      "product": "bret",
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
+    },
+    "/bret/games": {
+      "context": "web_trial",
+      "product": "bret",
+      "events": [
+        "page_view",
+        "emtalk_navigation",
+        "emtalk_store_click",
+        "emtalk_interest_state"
+      ]
     }
   },
   "schemas": {
@@ -1238,7 +1258,9 @@
     "/news/bret-browser-practice": "not_applicable",
     "/news/decision-matrix-browser": "not_applicable",
     "/news/reading-sleep-burnout": "not_applicable",
-    "/news/tapl-in-development": "not_applicable"
+    "/news/tapl-in-development": "not_applicable",
+    "/bret/app": "bret",
+    "/bret/games": "bret"
   },
   "proposal003SourceSha256": "0a2c33cc3e7363e5d3cb47c309a1b750c2f871cebb2ddc49cbbe3b61adcaf25a",
   "proposal003CoverageSha256": "e63a45f7c009a112693aaed580d445d6c8e8304c56aa38a337c85c5c4448310b",

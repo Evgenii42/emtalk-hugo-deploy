@@ -1,0 +1,53 @@
+<section class="meditation" data-meditation hidden aria-labelledby="meditation-heading">
+  <header class="med-heading"><p class="games-eyebrow">A LITTLE SPACE</p><h1 id="meditation-heading" tabindex="-1">Meditation</h1><p>Make a little space between you and the noise.</p></header>
+  <p class="med-notice" data-med-notice role="status"></p>
+  <p class="med-note" data-med-cache-note hidden>Offline storage is unavailable for some content. You can still listen while connected.</p>
+  <p class="med-note" data-med-progress-note hidden>Your place cannot be saved in this browser. You can still listen.</p>
+  <div data-med-library>
+    <div class="med-categories" data-med-categories role="group" aria-label="Meditation categories"></div>
+    <h2 class="med-library-title">Explore</h2>
+    <p class="med-note">Guided practices in English. Choose the moment that suits you.</p>
+    <div class="med-cards" data-med-cards></div>
+    <button type="button" data-med-refresh>Refresh library</button>
+  </div>
+  <article data-med-detail hidden aria-labelledby="med-title">
+    <div class="med-scene">
+      <img class="med-background" data-med-background alt="" hidden>
+      <header class="med-session-header">
+        <button type="button" class="med-session-back" data-med-back aria-label="Back to meditations"><img src="{{ hugo.Data.render.mountPrefix }}/bret/meditation/icons/back.svg" width="24" height="24" alt=""><span>Back to meditations</span></button>
+        <h1 id="med-player-title" class="med-session-title" data-med-player-title></h1><span class="med-session-balance" aria-hidden="true"></span>
+      </header>
+      <div class="med-detail-card">
+        <p class="med-tag" data-med-meta></p><h2 id="med-title" tabindex="-1" data-med-title></h2>
+        <div data-med-preparation><p data-med-description></p><h3>Before you begin</h3><ul data-med-instructions></ul><p class="med-note">One mix of guidance and music. Set a comfortable volume.</p><p class="med-note" data-med-foreground-note>Keep this tab open and your screen awake. Playback pauses when the page is hidden; press Play when you return.</p></div>
+        <button type="button" data-med-detail-retry hidden>Retry practice</button>
+        <p class="med-note" data-med-resume hidden></p>
+        <button class="games-primary" type="button" data-med-start>Start meditation</button>
+        <button type="button" data-med-restart hidden>Start from the beginning</button>
+      </div>
+      <div class="med-player" data-med-player hidden>
+        {{/* Captions remain readable in the accessibility tree. Do not have a
+        screen reader speak over the same audible guidance on every cue. */}}
+        <p class="med-caption" data-med-caption hidden aria-live="off"></p>
+        <div class="med-controls">
+          <div class="med-controls-heading"><p class="med-tag" data-med-player-meta></p><button type="button" class="med-icon-button" data-med-settings aria-label="Playback settings" aria-expanded="false" aria-controls="med-playback-options"><img src="{{ hugo.Data.render.mountPrefix }}/bret/meditation/icons/settings.svg" alt=""></button></div>
+          <p class="med-state" data-med-state role="status" tabindex="-1">Ready</p>
+          <label class="med-seek-label"><span class="med-sr-only">Playback position</span><input type="range" min="0" max="1" step="1" value="0" data-med-seek disabled></label>
+          <div class="med-times"><span data-med-elapsed>0:00</span><span data-med-duration>0:00</span></div>
+          <div class="med-transport">
+            <button type="button" class="med-icon-button" data-med-volume-toggle aria-label="Volume" aria-expanded="false" aria-controls="med-playback-options"><img src="{{ hugo.Data.render.mountPrefix }}/bret/meditation/icons/volume.svg" width="24" height="24" alt=""></button>
+            <button type="button" class="med-skip-button" data-med-skip="-15" aria-label="Back 15 seconds" disabled>−15</button>
+            <button type="button" class="games-primary med-toggle" data-med-toggle aria-label="Play" data-state="paused" disabled><img src="{{ hugo.Data.render.mountPrefix }}/bret/meditation/icons/play.svg" width="32" height="32" alt=""><span class="med-pause-symbol" aria-hidden="true">Ⅱ</span></button>
+            <button type="button" class="med-skip-button" data-med-skip="15" aria-label="Forward 15 seconds" disabled>+15</button>
+            <button type="button" class="med-icon-button" data-med-captions aria-label="Subtitles (draft)" title="English subtitles (draft)" aria-pressed="false" disabled><img src="{{ hugo.Data.render.mountPrefix }}/bret/meditation/icons/subtitles.svg" width="40" height="40" alt=""></button>
+          </div>
+          <section class="med-options" data-med-options id="med-playback-options" aria-label="Playback settings" hidden><label>Volume<input type="range" min="0" max="1" step="0.05" value="0.7" aria-valuetext="70 percent" data-med-volume></label><p class="med-note">Guidance and music play as one mix.</p><p class="med-note">English subtitles are a draft awaiting review.</p><div class="med-privacy-access" data-med-privacy-slot></div><button type="button" data-med-options-close>Done</button></section>
+          <p class="med-note med-draft-note" data-med-caption-note hidden>English subtitles are a draft awaiting review.</p>
+          <p class="med-note" data-med-caption-error hidden>Subtitles could not be loaded.</p>
+          <button type="button" data-med-caption-retry hidden>Retry subtitles</button>
+          <button type="button" data-med-audio-retry hidden>Retry audio</button>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

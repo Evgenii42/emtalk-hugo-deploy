@@ -71,7 +71,7 @@ export function initScroll() {
       if (Number.isFinite(value) && value >= 0) multiplier = value;
     });
     // Preserve the published Webflow distance curve, including data-scroll-time.
-    const duration = reduced.matches || anchor.classList.contains('site-header__skip') ? 0 : (publishedScrollCurve.logarithmScale * Math.log(Math.abs(from - to) + publishedScrollCurve.distanceOffset) - publishedScrollCurve.durationOffset) * multiplier;
+    const duration = reduced.matches || anchor.classList.contains('site-header__skip') || anchor.classList.contains('bret-app-skip') ? 0 : (publishedScrollCurve.logarithmScale * Math.log(Math.abs(from - to) + publishedScrollCurve.distanceOffset) - publishedScrollCurve.durationOffset) * multiplier;
     const begin = performance.now();
     const finish = () => {
       const pending = pendingNavigation;
@@ -81,7 +81,13 @@ export function initScroll() {
         // entry. These synchronous scrolls have no intervening rendered frame.
         const x = scrollX, y = scrollY;
         scrollTo(pending.x, pending.y);
-        history.pushState({ hash: url.hash }, '', url.hash);
+        // Same-document anchors also belong to embedded app history. Keep its
+        // entry metadata: pushState emits no hashchange for the app to repair it.
+        const previousState = history.state;
+        const anchorState = previousState && typeof previousState === 'object' && !Array.isArray(previousState)
+          ? { ...previousState, hash: url.hash }
+          : { hash: url.hash };
+        history.pushState(anchorState, '', url.hash);
         scrollTo(x, y);
       }
       const previous = target.getAttribute('tabindex');

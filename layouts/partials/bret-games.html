@@ -1,0 +1,49 @@
+{{- $p := hugo.Data.render.mountPrefix -}}
+{{- $gameOptions := readFile "static/bret/games/options.json" | transform.Unmarshal -}}
+<main id="emtalk-main" class="bret-games" tabindex="-1" data-games-root>
+  {{/* Hosting CSP must allow this exact rendered inline block by hash or nonce.
+       External module SRI does not authorize it. Recheck the final built hash
+       when changing this block; see the browser delivery contract. */}}
+  <script data-bret-theme-prepaint>
+  (() => {
+    // Theme only: match normalizeProgress accounting acceptance; it clamps XP
+    // after accepting the record. Startup timing remains in bret-startup.js.
+    try {
+      const value = JSON.parse(localStorage.getItem("bret-games-site-v1") || "null");
+      if (value?.version === 1 && Number.isFinite(value.totalMs) && value.totalMs >= 0 && value.totalMs < 1e12 && Number.isFinite(value.bonusXP) && value.bonusXP >= 0 && typeof value.evening === "boolean") document.currentScript.parentElement.classList.toggle("is-evening", value.evening);
+    } catch { /* Optional preferences never prevent startup. */ }
+  })();
+  </script>
+  <a class="bret-app-skip" href="#bret-app-content">Skip to Bret content</a>
+  <p class="games-empty" data-games-load-error role="status" tabindex="-1" hidden><span data-games-load-copy>Bret is taking longer to open. Reload this page to try again. You can still </span><a href="{{ $p }}/bret">read about Bret</a>.</p>
+  {{ partial "bret-appbar.html" . }}
+  {{/* assets/js/scroll.js consumes data-scroll-time for the shared skip target. */}}
+  <div class="games-main" id="bret-app-content" tabindex="-1" data-scroll-time="0">
+    <p class="bret-direction-announcement" data-direction-announcement role="status" aria-live="polite" aria-atomic="true"></p>
+    {{ partial "bret-directions.html" . }}
+    {{ partial "bret-meditation.html" . }}
+    <p class="games-storage" data-storage role="status" hidden></p>
+    <p class="games-storage" data-notice role="status" hidden></p>
+    {{ partial "bret-game-home.html" . }}
+    <noscript><div class="games-empty"><h1>Play a little. Make a little space.</h1><p>The Bret web app needs JavaScript for its practices, meditation audio and four games. You can read about Bret and choose the Android app on the product page.</p><a href="{{ $p }}/bret">Read about Bret</a></div></noscript>
+    <section data-catalog hidden aria-labelledby="games-heading">
+      <button type="button" class="games-back bret-game-settings-back" data-library>← Back to Games</button>
+      <header class="games-heading"><h1 id="games-heading" tabindex="-1">Game settings</h1><p>Choose a game, then set your pace. The main card remembers the last game you launch.</p></header>
+      <section class="games-intent" aria-labelledby="games-state-title"><div class="games-section-heading"><h2 id="games-state-title">What brings you here?</h2><span>Start with you</span></div><div class="games-states" data-states role="radiogroup" aria-labelledby="games-state-title"></div><p class="games-state-note" data-state-note aria-live="polite" aria-atomic="true"></p><p class="games-state-note">These suggestions help you choose. Your saved pace stays yours; adjust it before you play.</p></section>
+      <div class="games-resume" data-resume hidden><div><strong>Your little journey is ready to continue.</strong><p data-resume-description></p><p>Start fresh removes this saved place. Your total play time and XP stay.</p></div><button type="button" class="games-primary" data-resume-run disabled>Continue</button><button type="button" class="games-text-button" data-discard-run>Start fresh</button></div>
+      <div class="games-section-heading games-library-heading"><div><p class="games-eyebrow">CHOOSE A GAME</p><h2>What would you like to play?</h2></div><span>Levels or a steady pace</span></div>
+      <div class="games-grid" data-cards></div>
+      <section class="games-philosophy"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><div><h3>Something to play, without something to prove.</h3><p>Try a challenge or keep a familiar pace. Your time counts either way. Pause, switch or finish whenever you need.</p></div></section>
+    </section>
+    <section data-player hidden aria-labelledby="games-player-title">
+      <button type="button" class="games-back" data-back>← Back to Games</button>
+      <header class="games-player-header"><div><p class="games-eyebrow" data-player-category></p><h1 id="games-player-title" data-player-title></h1><p data-player-subtitle></p></div><div class="games-time"><strong data-active-time>0:00</strong><span>active play</span></div></header>
+      <section class="games-setup" data-setup><div class="games-setup-art" data-setup-art aria-hidden="true"></div><div class="games-setup-copy"><h2>A little orientation</h2><p data-how></p><div class="games-why"><strong>Why try it?</strong><p data-why></p></div><form data-setup-form><div class="games-setup-fields"><label>Play your way<select name="mode">{{ range $gameOptions.modes }}<option value="{{ .value }}">{{ .label }}</option>{{ end }}</select></label><label>Challenge<select name="tier">{{ range $gameOptions.tiers }}<option value="{{ .value }}">{{ .label }}</option>{{ end }}</select></label><label>Make time for<select name="duration">{{ range $gameOptions.durations }}<option value="{{ .value }}">{{ .label }}</option>{{ end }}</select></label></div><div data-unhurried-setting hidden><label><input type="checkbox" name="unhurried" aria-describedby="game-unhurried-copy" disabled> {{ $gameOptions.seedKeepersUnhurried.label }}</label><p class="games-setup-note" id="game-unhurried-copy">{{ $gameOptions.seedKeepersUnhurried.description }}</p></div><p class="games-setup-note">A time intention, without a countdown to failure. In steady pace, difficulty stays the same.</p><p class="games-setup-note" id="game-replace-note" data-replace-note role="status" hidden></p><button class="games-primary" type="submit" data-setup-start aria-describedby="game-replace-note" disabled><span data-setup-start-label>Let's play</span> <span aria-hidden="true">→</span></button></form></div></section>
+      <div class="games-session" data-session hidden><div class="games-session-bar" data-session-bar><span data-run-label></span><div><button type="button" data-hint>Hint</button><button type="button" data-pause>Pause</button><button type="button" data-finish>Finish</button></div></div><div class="games-stage-wrap"><div class="games-stage" data-stage></div><div class="games-pause-overlay" data-overlay hidden role="group" aria-labelledby="game-pause-title" aria-describedby="game-pause-copy game-pause-navigation"><div><p class="games-eyebrow">A LITTLE SPACE</p><h2 id="game-pause-title" data-overlay-title>Paused. Your place is kept.</h2><p id="game-pause-copy" data-overlay-copy>Take your time. Your active play time is paused too.</p><p id="game-pause-navigation">Navigation remains available while paused. Choose Continue playing when you are ready.</p><button type="button" class="games-primary" data-continue aria-describedby="game-pause-title game-pause-copy">Continue playing</button><button type="button" class="games-text-button" data-save-exit>Finish for now</button><button type="button" class="games-text-button" data-library>Back to Games</button></div></div></div><p class="games-progress" data-play-progress aria-live="off"></p><p class="games-input-note">Pause with Escape. The game also pauses when you switch tabs or leave this window. Hints are always available.</p></div>
+      <section class="games-result" data-result hidden aria-labelledby="games-result-title"><div data-result-art aria-hidden="true"></div><p class="games-eyebrow">A MOMENT WELL SPENT</p><h2 id="games-result-title" tabindex="-1" data-result-title></h2><p data-result-detail></p><div class="games-result-metrics"><div><strong data-result-time></strong><span>active play</span></div><div><strong data-result-xp></strong><span>earned in this scene</span></div><div><strong data-result-level></strong><span>your journey</span></div></div><p class="games-input-note">Active time carries across games: every 15 seconds adds 1 XP. Meeting a scene goal adds a 25% bonus, rounded down to whole XP.</p><fieldset class="games-feedback"><legend>How did this moment feel?</legend><button type="button" data-feedback="helpful" aria-pressed="false">Helpful</button><button type="button" data-feedback="same" aria-pressed="false">About the same</button><button type="button" data-feedback="unhelpful" aria-pressed="false">Not for me right now</button></fieldset><p data-feedback-status role="status"></p><div class="games-result-actions"><button type="button" class="games-primary" data-next>Another little journey</button><button type="button" data-retry>Replay this scene</button><button type="button" class="games-text-button" data-done>Finish for now</button></div></section>
+    </section>
+    <section class="games-garden" data-garden hidden aria-labelledby="games-garden-heading"><button type="button" class="games-back" data-library>← All games</button><p class="games-eyebrow">YOUR TIME ADDS UP</p><h1 id="games-garden-heading" tabindex="-1">A garden of little moments.</h1><div data-garden-art aria-hidden="true"></div><p data-garden-summary></p><div class="games-garden-stats" data-garden-stats></div><p>Progress stays in this browser. No daily streak to protect, and no hurry to grow.</p><button type="button" class="games-primary" data-library>Find a game</button></section>
+    <footer class="games-footer"><span>Make room for yourself.</span><span>Your pace · No account needed</span></footer>
+  </div>
+  {{ partial "bret-tabs.html" . }}
+</main>

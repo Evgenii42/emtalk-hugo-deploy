@@ -1,0 +1,108 @@
+.bret-game-home-carousel {
+  display: flex;
+  justify-content: center;
+  padding: 14px 16px;
+}
+.bret-games .bret-game-home-card {
+  width: var(--g-feature-card-narrow);
+  max-width: 100%;
+  height: 400px;
+  flex: none;
+}
+.bret-game-home-art {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 276px;
+  overflow: hidden;
+}
+.bret-game-home-art > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.bret-games .bret-game-home-card > .bret-game-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  min-height: 80px;
+  border: 1px solid var(--g-purple);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 23px;
+  background: var(--g-play-overlay);
+}
+.bret-game-play > img {
+  width: 32px;
+  height: 32px;
+  max-width: none;
+}
+.bret-games .bret-game-home-card .bret-game-settings {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+}
+.bret-game-settings > img {
+  width: 24px;
+  height: 24px;
+  max-width: none;
+}
+.bret-games .bret-game-home-card .bret-direction-card-title {
+  font:
+    500 20px/24px Geologica,
+    sans-serif;
+  margin: 0;
+  color: inherit;
+}
+.bret-games .bret-game-home-card .bret-direction-card-copy {
+  font:
+    400 12px/16px Manrope,
+    sans-serif;
+  margin: 0;
+  color: inherit;
+}
+.bret-game-home-note {
+  font:
+    400 12px/18px Manrope,
+    sans-serif;
+  text-align: center;
+  margin: 10px 24px 0 !important;
+  color: var(--g-muted);
+}
+.bret-game-settings-back {
+  margin-bottom: 18px;
+}
+.games-heading > h1:focus-visible {
+  outline: 3px solid var(--g-purple);
+  outline-offset: 5px;
+}
+@media (min-width: 768px) {
+  .bret-game-home-carousel {
+    padding: 16px 24px;
+  }
+  .bret-games .bret-game-home-card {
+    width: var(--g-feature-card-wide);
+  }
+}
+@media (forced-colors: active) {
+  .bret-games .bret-game-home-card .bret-direction-card-title,
+  .bret-games .bret-game-home-card .bret-direction-card-copy {
+    color: CanvasText;
+  }
+  .bret-game-play {
+    forced-color-adjust: auto;
+  }
+}

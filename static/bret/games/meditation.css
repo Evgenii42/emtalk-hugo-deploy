@@ -1,0 +1,133 @@
+.bret-games .meditation {
+  --med-ink:#353438;
+  --med-primary:#715595;
+  --med-glass:rgb(255 255 255 / .64);
+  --med-line:rgb(255 255 255 / .72);
+  width:100%; max-width:920px; margin:0 auto; color:var(--med-ink); font-size:1rem;
+}
+.meditation .med-heading { margin:8px 0 24px; }
+.meditation .med-heading h1 { margin:4px 0 12px; font-size:clamp(1.75rem,4vw,2.5rem); }
+.meditation p { margin:0 0 12px; }
+.meditation button { font:inherit; cursor:pointer; border:1px solid #c9c2d5; background:#fff; color:var(--med-primary); border-radius:24px; padding:10px 18px; min-height:44px; }
+.meditation button:disabled { cursor:default; opacity:.65; }
+.meditation :is(button,input):focus-visible { outline:3px solid var(--med-primary); outline-offset:4px; }
+.meditation .games-primary { background:var(--med-primary); color:#fff; border-color:var(--med-primary); }
+.meditation .games-primary:hover { background:#5a4477; }
+.meditation .med-categories { display:flex; flex-wrap:wrap; gap:4px; width:fit-content; max-width:100%; border-radius:28px; background:var(--med-glass); padding:4px; margin-bottom:28px; }
+.meditation .med-categories button { border-color:transparent; background:transparent; padding:8px 22px; }
+.meditation .med-categories [aria-pressed=true] { background:var(--med-primary); color:#fff; }
+.meditation .med-library-title { font-size:1.25rem; margin:0 0 4px; }
+.meditation .med-note { font-size:.875rem; line-height:1.6; }
+.meditation .med-notice:empty { display:none; }
+.meditation .med-notice,.meditation [data-med-cache-note],.meditation [data-med-progress-note] { padding:12px 16px; border-radius:12px; background:var(--med-glass); }
+.meditation .med-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:20px 0; }
+.meditation .med-card { display:flex; gap:16px; justify-content:space-between; align-items:center; padding:12px; text-align:left; border:1px solid var(--med-line); border-radius:20px; background:var(--med-glass); color:var(--med-ink); width:100%; }
+.meditation .med-card:hover { border-color:var(--med-primary); }
+.meditation .med-card-copy { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.meditation .med-tag { display:block; font:400 .75rem/1.3333 BretCategory,Roboto,sans-serif; color:var(--med-primary); }
+.meditation .med-card-title { font:500 1.25rem/1.3 Geologica,sans-serif; }
+.meditation .med-card-description { font-size:.875rem; line-height:1.5; }
+.meditation .med-card img { width:96px; height:112px; object-fit:cover; border-radius:12px; flex:none; }
+.meditation .med-empty { grid-column:1/-1; padding:24px; background:var(--med-glass); border-radius:16px; }
+.meditation .med-scene { position:relative; isolation:isolate; min-height:630px; border-radius:24px; overflow:hidden; margin:16px 0; padding:24px; display:flex; flex-direction:column; gap:24px; background:linear-gradient(155deg,#e8def8,#f6e4e4); }
+.meditation .med-background { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; }
+.meditation .med-session-header { display:flex; align-items:center; flex-shrink:0; }
+.meditation .med-session-back { display:flex; align-items:center; gap:8px; background:var(--med-glass); }
+.meditation .med-session-back img { display:block; filter:brightness(0); }
+.meditation .med-session-title,.meditation .med-session-balance { display:none; }
+.meditation .med-detail-card,.meditation .med-controls,.meditation .med-caption { background:var(--med-glass); border:1px solid var(--med-line); border-radius:20px; padding:24px; width:100%; max-width:520px; margin-left:auto; margin-right:auto; backdrop-filter:blur(16px); color:var(--med-ink); }
+.meditation .med-detail-card h2 { font-size:1.5rem; margin:6px 0 12px; }
+.meditation .med-detail-card h3 { font-size:1rem; margin:20px 0 8px; }
+.meditation .med-detail-card ul { padding-left:22px; margin:0 0 16px; }
+.meditation .med-detail-card li { margin-bottom:10px; }
+.meditation .med-detail-card button { margin:8px 6px 0 0; }
+.meditation .med-player { display:flex; flex-direction:column; justify-content:flex-end; gap:12px; margin-top:auto; width:100%; }
+.meditation .med-caption { min-height:56px; margin-bottom:0; font:500 1.25rem/1.2 Geologica,sans-serif; color:var(--med-primary); padding:16px; }
+.meditation .med-controls { padding:16px; }
+.meditation .med-controls-heading { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.meditation .med-controls-heading .med-tag { margin:0; padding:4px 10px; background:rgb(255 255 255 / .6); border-radius:16px; }
+.meditation .med-state { font-size:.875rem; line-height:1.4; margin:4px 0 8px; }
+.meditation .med-controls input { display:block; width:100%; min-height:32px; accent-color:var(--med-primary); cursor:pointer; }
+.meditation .med-controls label { font-size:.875rem; }
+.meditation .med-times { display:flex; justify-content:space-between; font:400 .875rem/1.4 BretCategory,Roboto,sans-serif; font-variant-numeric:tabular-nums; }
+.meditation .med-transport { display:flex; justify-content:space-between; align-items:center; gap:0; margin:16px 0 0; }
+.meditation .med-transport button,.meditation .med-icon-button { flex:none; display:grid; place-items:center; width:44px; height:44px; min-height:44px; padding:0; border:0; background:transparent; }
+.meditation .med-skip-button { font-size:.875rem; white-space:nowrap; }
+.meditation .med-icon-button img { display:block; max-width:none; }
+.meditation .med-transport .med-toggle { width:60px; height:60px; min-width:60px; min-height:60px; border-radius:50%; background:var(--med-primary); color:#fff; }
+.meditation .med-toggle img { display:block; }
+.meditation .med-pause-symbol { display:none; width:5px; height:24px; margin-right:9px; border-radius:1px; background:currentColor; box-shadow:9px 0 currentColor; font-size:0; }
+.meditation .med-toggle[data-state=playing] img { display:none; }
+.meditation .med-toggle[data-state=playing] .med-pause-symbol { display:block; }
+.meditation .med-options { margin-top:16px; padding-top:16px; border-top:1px solid #a79bad; }
+.meditation .med-options label { display:block; margin-bottom:12px; }
+.meditation .med-options button { width:100%; }
+.meditation .med-privacy-access { margin:12px 0; }
+.meditation .med-draft-note { margin:12px 0 0; }
+.meditation .med-transport [aria-pressed=true] { background:rgb(113 85 149 / .14); border-radius:12px; }
+.med-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+
+/* The active practice is the screen. Controls sit at its lower edge. */
+/* Keep the existing consent panel available while its opener lives in settings. */
+/* Body contract: #emtalk-main owns the player; .privacy-controls-shell owns
+   consent. Other top-level site UI is intentionally hidden during playback.
+   A new banner/toast/widget must declare whether it belongs inside the player
+   or must remain available, then update this exclusion and its focus tests. */
+html.bret-meditation-playing body > :not(#emtalk-main):not(.privacy-controls-shell):not(script):not(style):not(link) { display:none; }
+html.bret-meditation-playing .privacy-controls-shell { display:contents; }
+html.bret-meditation-playing .privacy-controls-shell > :not([data-privacy-controls]):not([data-privacy-announcement]) { display:none; }
+html.bret-meditation-playing .site-header { display:none; }
+.bret-games[data-med-view=player] { padding-top:0; }
+.bret-games[data-med-view=player] > :is(.bret-appbar,.bret-tabs) { display:none; }
+.bret-games[data-med-view=player] > .games-main { width:100%; max-width:none; padding:0; display:flex; flex-direction:column; }
+.bret-games[data-med-view=player] > .games-main > :not([data-meditation]) { display:none; }
+.bret-games .meditation[data-med-view=player] { max-width:none; display:flex; flex-direction:column; flex:1; }
+.meditation[data-med-view=player] > .med-heading { display:none; }
+.meditation[data-med-view=player] [data-med-detail] { display:flex; flex-direction:column; flex:1; }
+.meditation[data-med-view=player] .med-detail-card { display:none; }
+.meditation[data-med-view=player] .med-scene { flex:1; min-height:100vh; min-height:100svh; border-radius:0; margin:0; padding:16px max(16px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left)); gap:24px; }
+.meditation[data-med-view=player] .med-session-header { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; gap:8px; margin:-16px -16px 0; padding:12px 16px; background:rgb(255 255 255 / .68); backdrop-filter:blur(16px); }
+.meditation[data-med-view=player] .med-session-back { border:0; border-radius:50%; width:44px; padding:10px; background:transparent; }
+.meditation[data-med-view=player] .med-session-back span { display:none; }
+.meditation[data-med-view=player] .med-session-title { display:block; margin:0; color:var(--med-ink); text-align:center; font:500 1.25rem/1.2 Geologica,sans-serif; }
+.meditation[data-med-view=player] .med-session-balance { display:block; }
+.meditation[data-med-view=player] .med-background { object-position:center 55%; }
+.meditation[data-med-view=player] .med-player { padding-top:clamp(80px,12svh,160px); }
+
+/* Evening is an explicit alternative; the unselected base palette is light. */
+.bret-games.is-evening .meditation { --med-ink:#f3edf9; --med-primary:#e1c9f7; --med-glass:rgb(48 38 63 / .9); --med-line:#715595; }
+.bret-games.is-evening .meditation button { background:#392b48; color:var(--med-primary); border-color:#9c83b9; }
+.bret-games.is-evening .meditation :is(.games-primary,[aria-pressed=true]) { background:#c5ade4; color:#30263f; }
+.bret-games.is-evening .meditation .med-card { background:var(--med-glass); color:var(--med-ink); }
+.bret-games.is-evening .meditation .med-categories button { background:transparent; }
+.bret-games.is-evening .meditation .med-categories [aria-pressed=true] { background:#c5ade4; color:#30263f; }
+.bret-games.is-evening .meditation .med-transport :is(.med-icon-button,.med-skip-button) { background:transparent; color:#f3edf9; }
+.bret-games.is-evening .meditation .med-icon-button img { filter:brightness(0) invert(1); }
+.bret-games.is-evening .meditation .med-controls-heading .med-tag { background:rgb(48 38 63 / .7); }
+.bret-games.is-evening .meditation .med-session-back img { filter:brightness(0) invert(1); }
+.bret-games.is-evening .meditation[data-med-view=player] .med-session-header { background:rgb(48 38 63 / .72); }
+.bret-games.is-evening .meditation .med-toggle img { filter:brightness(0); }
+
+@media(max-width:767px) {
+ .bret-games[data-med-view] > .games-main { padding:8px 16px 28px; }
+ .meditation .med-cards { grid-template-columns:1fr; }
+ .meditation .med-categories { width:100%; }
+ .meditation .med-categories button { flex:1; padding:8px; font-size:.875rem; }
+ .meditation .med-scene { padding:16px; min-height:580px; margin-left:-8px; margin-right:-8px; }
+ .meditation .med-detail-card { padding:18px; }
+ .bret-games[data-med-view=player] > .games-main { padding:0; }
+}
+@media(max-height:600px) and (min-width:600px) {
+ .meditation[data-med-view=player] .med-player { padding-top:16px; }
+ .meditation[data-med-view=player] .med-scene { gap:12px; }
+}
+@media(prefers-reduced-motion:reduce) { .meditation * { scroll-behavior:auto; } }
+@media(forced-colors:active) {
+ .meditation :is(.med-controls,.med-caption,.med-detail-card,.med-session-header) { background:Canvas; color:CanvasText; border:1px solid CanvasText; }
+ .meditation .med-toggle { forced-color-adjust:none; }
+}
+
+/* Keep a visible loading cue while the single complete audio file arrives. */
+.meditation [data-med-state][data-loading=true]::before { content:""; display:inline-block; width:14px; height:14px; margin-right:8px; vertical-align:-2px; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; animation:med-loading-turn 1s linear infinite; }
+@keyframes med-loading-turn { to { transform:rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .meditation [data-med-state][data-loading=true]::before { animation:none; } }

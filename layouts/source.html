@@ -25,6 +25,31 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   {{- end -}}
 {{- end -}}
 {{- $homeHeroIndex := -1 -}}
+{{/* BRET-SOURCE-RECONCILIATION-START
+These guest routes have an approved empty source body. Their authored app or
+practice and the shared ecosystem footer are rendered separately. New imported
+content, including a source footer, requires explicit reconciliation first. */}}
+{{- if and (in (slice "/bret/app" "/bret/games" "/bret/practice") $page.routeId) (ne (len $page.body.children) 0) -}}
+  {{- errorf "Bret authored replacement requires an empty source body for %q; reconcile unexpected AST children" $page.routeId -}}
+{{- end -}}
+{{/* Bret replaces only the approved product sections below. Keep every
+source top-level node in this ordered contract so new content, wrappers or text
+cannot disappear behind the authored landing. The inherited footer still renders. */}}
+{{- if eq $page.routeId "/bret" -}}
+  {{- $bretSourceSections := slice -}}
+  {{- range $node := $page.body.children -}}
+    {{- if and (reflect.IsMap $node) (eq $node.tag "section") (reflect.IsMap $node.attributes) -}}
+      {{- $bretSourceSections = $bretSourceSections | append (printf "%s#%s" (index $node.attributes "class") (index $node.attributes "id" | default "")) -}}
+    {{- else -}}
+      {{- errorf "Bret authored replacement rejects unexpected top-level AST children; reconcile the approved source sequence" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $approvedBretSections := slice "section-6#" "section-10#" "section-11#" "section-9#" "section-8#" "section-7#" "section-6#Section-Pre-footer" "section-footer-dm#" -}}
+  {{- if ne (delimit $bretSourceSections "|") (delimit $approvedBretSections "|") -}}
+    {{- errorf "Bret source section order or identity changed; reconcile the approved authored replacement" -}}
+  {{- end -}}
+{{- end -}}
+{{/* BRET-SOURCE-RECONCILIATION-END */}}
 {{- $ecosystemRendered := false -}}
 {{- if eq $page.routeId "/" -}}
   {{- $homeHeroCount := 0 -}}
@@ -102,6 +127,13 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   {{ $dmCss := resources.Get "css/dm-workspace.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $dmCss.RelPermalink }}" integrity="{{ $dmCss.Data.Integrity }}">
 {{ end }}
+{{ if in (slice "/bret/app" "/bret/games") $page.routeId }}
+  {{/* View styles precede the shared shell, which owns navigation positioning. */}}
+  {{ range slice "app" "play" "directions" "home" "meditation" "shell" }}
+    {{ $gameCss := resources.Get (printf "bret-games/%s.css" .) | resources.Copy (printf "bret/games/%s.css" .) | fingerprint }}
+    <link rel="stylesheet" href="{{ $gameCss.RelPermalink }}" integrity="{{ $gameCss.Data.Integrity }}">
+  {{ end }}
+{{ end }}
 {{ if eq $page.routeId "/bret/practice" }}
   {{ $bretCss := resources.Get "css/bret-practice.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $bretCss.RelPermalink }}" integrity="{{ $bretCss.Data.Integrity }}">
@@ -126,6 +158,10 @@ Unexpected source content must be reconciled before it can be rendered. */}}
 {{ end }}
 {{ $interestCss := resources.Get "css/interest-controls.css" | fingerprint }}
 <link rel="stylesheet" href="{{ $interestCss.RelPermalink }}" integrity="{{ $interestCss.Data.Integrity }}">
+{{ if eq $page.routeId "/bret" }}
+  {{ $bretLandingCss := resources.Get "css/bret-landing.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $bretLandingCss.RelPermalink }}" integrity="{{ $bretLandingCss.Data.Integrity }}">
+{{ end }}
 {{ if eq $page.routeId "/tapl" }}
   {{ $taplCss := resources.Get "css/tapl.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $taplCss.RelPermalink }}" integrity="{{ $taplCss.Data.Integrity }}">
@@ -144,12 +180,13 @@ Unexpected source content must be reconciled before it can be rendered. */}}
 {{ end }}
 {{ if $page.newsEntry }}
   {{ partial "news-page.html" (dict "page" $page "context" .) }}
+{{ else if in (slice "/bret/app" "/bret/games") $page.routeId }}
+  {{ partial "bret-games.html" . }}
 {{ else if eq $page.routeId "/bret/practice" }}
   {{ partial "bret-practice.html" . }}
 {{ else if eq $page.routeId "/bret" }}
-  {{ with $page.ownedEntry }}
-    {{ partial "bret-launch.html" . }}
-  {{ end }}
+  {{/* Owner-requested complete Bret landing replacement; source archives and footer remain preserved. */}}
+  {{ partial "bret-landing.html" . }}
 {{ else if eq $page.routeId "/dm/workspace" }}
   {{ partial "dm-workspace.html" . }}
 {{ else if eq $page.routeId "/dm" }}
@@ -185,7 +222,13 @@ Unexpected source content must be reconciled before it can be rendered. */}}
     {{ partial "ecosystem-next.html" (dict "page" $page) }}
     {{ $ecosystemRendered = true }}
   {{ end }}
-  {{ if or $articlesExperience (eq $page.routeId "/tapl") (eq $page.routeId "/about-us") $testsExperience }}
+  {{ if eq $page.routeId "/bret" }}
+    {{/* Bret inherits section-footer-dm, not the primary Home footer. Keep the
+    original registered footer while replacing only the product body. */}}
+    {{ if and (reflect.IsMap $node) (eq $node.tag "section") (in $analyticsSourceClasses.measuredFooterClasses (index $node.attributes "class")) }}
+      {{ partial "node.html" $node }}
+    {{ end }}
+  {{ else if or $articlesExperience (eq $page.routeId "/tapl") (eq $page.routeId "/about-us") $testsExperience }}
     {{ if and (reflect.IsMap $node) (eq $node.tag "section") (eq (index $node.attributes "class") $analyticsSourceClasses.primaryFooter) }}
       {{ partial "node.html" $node }}
     {{ end }}
@@ -239,6 +282,12 @@ Unexpected source content must be reconciled before it can be rendered. */}}
   {{ $dmJs := resources.Get "js/dm-workspace.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}
   <script type="module" src="{{ $dmJs.RelPermalink }}" integrity="{{ $dmJs.Data.Integrity }}">
   </script>
+{{ end }}
+{{ if in (slice "/bret/app" "/bret/games") $page.routeId }}
+  {{ $startupJs := resources.Get "js/bret-startup.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}
+  <script type="module" src="{{ $startupJs.RelPermalink }}" integrity="{{ $startupJs.Data.Integrity }}"></script>
+  {{ $gameJs := resources.Get "bret-games/app.mjs" | js.Build (dict "targetPath" "js/bret-games.js" "minify" true "target" "es2022" "format" "esm") | fingerprint }}
+  <script type="module" data-bret-games-module src="{{ $gameJs.RelPermalink }}" integrity="{{ $gameJs.Data.Integrity }}"></script>
 {{ end }}
 {{ if eq $page.routeId "/bret/practice" }}
   {{ $bretJs := resources.Get "js/bret-practice.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}

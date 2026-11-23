@@ -14,6 +14,7 @@ import xml.etree.ElementTree as ET
 
 from bs4 import BeautifulSoup
 import tinycss2
+from bret_delivery import bret_app_delivery_errors
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_HOSTS = ('website-files.com', 'webflow.com', 'webflow.io', 'fonts.googleapis.com', 'fonts.gstatic.com')
@@ -323,6 +324,9 @@ def verify_dm_font_delivery(build, prefix=''):
     }
     try:
         soup = BeautifulSoup((Path(build) / 'dm/workspace.html').read_bytes(), 'html.parser')
+        if soup.select_one('main.dm-v2') is not None:
+            from verify_dm_v2_fonts import verify_dm_v2_font_delivery
+            return verify_dm_v2_font_delivery(build, prefix, root=ROOT)
         links = [urlsplit(n['href']) for n in soup.select('link[rel~="stylesheet"][href]')]
         owned = [u.path for u in links if not u.scheme and not u.netloc and u.path.startswith(prefix + '/css/dm-workspace.') and u.path.endswith('.css')]
         if len(owned) != 1:
@@ -792,6 +796,8 @@ def verify(build, prefix='', *, base_url=None):
         soup = BeautifulSoup(target.read_bytes(), 'html.parser')
         if not soup.html or soup.html.get('data-route-id') != route:
             errors.append(f'Route identity mismatch / false success: {route}')
+        if route in {'/bret/app', '/bret/games'}:
+            errors.extend(bret_app_delivery_errors(build, route, prefix, soup))
     for excluded in routes['excluded']:
         if (build / (excluded.lstrip('/') + '.html')).exists():
             errors.append(f'Owner excluded route accidentally published: {excluded}')

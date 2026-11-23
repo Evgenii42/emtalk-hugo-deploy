@@ -12,7 +12,8 @@
 {{- $article := strings.HasPrefix $page.routeId "/articles/" -}}
 {{- $imagePath := default $config.site.defaultImage $seo.image -}}
 {{- if ne (printf "%T" $imagePath) "string" -}}{{- errorf "SEO image requires a configured owned media path" -}}{{- end -}}
-{{- if not (findRE "^/media/[A-Za-z0-9][A-Za-z0-9._-]*[.](png|jpg|jpeg|gif|webp|svg|avif)$" $imagePath) -}}{{- errorf "SEO image requires a bounded owned image path for route %q" $page.routeId -}}{{- end -}}
+{{- $dosSocial := and (in (slice "/dm" "/dm/workspace") $page.routeId) (eq $imagePath "/dos/dos-social.png") (eq $seo.imageWidth 1200) (eq $seo.imageHeight 630) -}}
+{{- if and (not $dosSocial) (not (findRE "^/media/[A-Za-z0-9][A-Za-z0-9._-]*[.](png|jpg|jpeg|gif|webp|svg|avif)$" $imagePath)) -}}{{- errorf "SEO image requires a bounded owned image path for route %q" $page.routeId -}}{{- end -}}
 {{- if and $seo.image (or (not $seo.imageWidth) (not $seo.imageHeight)) -}}{{- errorf "Custom SEO image requires explicit dimensions for route %q" $page.routeId -}}{{- end -}}
 {{- $image := printf "%s%s" $base $imagePath -}}
 {{- $imageAlt := $config.site.defaultImageAlt -}}

@@ -89,7 +89,7 @@ def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
             if not path.startswith(prefix + '/'):
                 return None
             path = path[len(prefix):]
-        if not path.startswith('/media/') or re.search(r'%(?![0-9a-fA-F]{2})', path):
+        if (not path.startswith('/media/') and path != '/dos/dos-social.png') or re.search(r'%(?![0-9a-fA-F]{2})', path):
             return None
         try:
             local = build / unquote(path.lstrip('/'), errors='strict')
@@ -187,7 +187,10 @@ def verify(build, root=ROOT, prefix='', preview=None, base_url=None):
         if meta.get('google-site-verification', []) != original_verification:
             fail(route, 'Existing Google verification tag changed or unexpected tag added')
         article = route.startswith('/articles/')
-        expected_image = base + entry.get('image', config['site']['defaultImage'])
+        selected_image = entry.get('image', config['site']['defaultImage'])
+        if selected_image == '/dos/dos-social.png' and (route not in {'/dm', '/dm/workspace'} or entry.get('imageWidth') != 1200 or entry.get('imageHeight') != 630):
+            fail(route, 'DOS social image requires an exact DOS route and1200x630 configuration')
+        expected_image = base + selected_image
         dimensions = [entry.get('imageWidth', config['site']['defaultImageWidth']),
                       entry.get('imageHeight', config['site']['defaultImageHeight'])]
         if entry.get('image') and not all(key in entry for key in ('imageWidth', 'imageHeight')):

@@ -10,6 +10,11 @@ compound classes with those gates before changing which source nodes render. */}
 {{- $articleReader := strings.HasPrefix $page.routeId "/articles/" -}}
 {{- $articleCatalog := eq $page.routeId "/articles" -}}
 {{- $articlesExperience := or $articleReader $articleCatalog -}}
+{{/* Decision Matrix replaces an approved empty source body. Reconcile new
+source content explicitly before it can render below the authored workspace. */}}
+{{- if and (eq $page.routeId "/dm/workspace") (ne (len $page.body.children) 0) -}}
+  {{- errorf "Decision Matrix authored replacement requires an empty source body; reconcile unexpected AST children for %q" $page.routeId -}}
+{{- end -}}
 {{/* Tapl is an authored replacement for an approved empty source body. Any new
 source node must be reconciled explicitly, never silently filtered away. */}}
 {{- if and (eq $page.routeId "/tapl") (ne (len $page.body.children) 0) -}}
@@ -22,6 +27,20 @@ Unexpected source content must be reconciled before it can be rendered. */}}
     {{- if not (and (reflect.IsMap $node) (eq $node.tag "section") (eq (index $node.attributes "class") $analyticsSourceClasses.primaryFooter)) -}}
       {{- errorf "News authored replacement rejects unexpected non-footer AST children for %q" $page.routeId -}}
     {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{/* DOS replaces exactly the approved legacy DM product sections. Keep its
+registered footer; refuse new, missing or reordered source sections. */}}
+{{- if eq $page.routeId "/dm" -}}
+  {{- $dosSourceSections := slice -}}
+  {{- range $node := $page.body.children -}}
+    {{- if not (and (reflect.IsMap $node) (eq $node.tag "section")) -}}
+      {{- errorf "DOS landing source body changed; reconcile non-section content" -}}
+    {{- end -}}
+    {{- $dosSourceSections = $dosSourceSections | append (index $node.attributes "class") -}}
+  {{- end -}}
+  {{- if ne (delimit $dosSourceSections "|") "hero-dm|section-17|section-18|section-19|section-20|section-21|section-8|section-15|section-13|section-footer-dm" -}}
+    {{- errorf "DOS landing source section order changed; reconcile the authored replacement" -}}
   {{- end -}}
 {{- end -}}
 {{- $homeHeroIndex := -1 -}}
@@ -125,7 +144,7 @@ cannot be silently omitted beneath the authored landing. */}}
   <link rel="stylesheet" href="{{ $entryCss.RelPermalink }}" integrity="{{ $entryCss.Data.Integrity }}">
 {{ end }}
 {{ if eq $page.routeId "/dm/workspace" }}
-  {{ $dmCss := resources.Get "css/dm-workspace.css" | fingerprint }}
+  {{ $dmCss := resources.Get "css/dm-v2.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $dmCss.RelPermalink }}" integrity="{{ $dmCss.Data.Integrity }}">
 {{ end }}
 {{ if in (slice "/bret/app" "/bret/games") $page.routeId }}
@@ -163,6 +182,10 @@ cannot be silently omitted beneath the authored landing. */}}
   {{ $bretLandingCss := resources.Get "css/bret-landing.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $bretLandingCss.RelPermalink }}" integrity="{{ $bretLandingCss.Data.Integrity }}">
 {{ end }}
+{{ if eq $page.routeId "/dm" }}
+  {{ $dosCss := resources.Get "css/dos-landing.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $dosCss.RelPermalink }}" integrity="{{ $dosCss.Data.Integrity }}">
+{{ end }}
 {{ if eq $page.routeId "/tapl" }}
   {{ $taplCss := resources.Get "css/tapl.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $taplCss.RelPermalink }}" integrity="{{ $taplCss.Data.Integrity }}">
@@ -189,11 +212,9 @@ cannot be silently omitted beneath the authored landing. */}}
   {{/* Owner-requested complete Bret landing replacement; source archives and footer remain preserved. */}}
   {{ partial "bret-landing.html" . }}
 {{ else if eq $page.routeId "/dm/workspace" }}
-  {{ partial "dm-workspace.html" . }}
+  {{ partial "dm-v2.html" . }}
 {{ else if eq $page.routeId "/dm" }}
-  {{ with $page.ownedEntry }}
-    {{ partial "dm-launch.html" . }}
-  {{ end }}
+  {{ partial "dos-landing.html" . }}
 {{ else if eq $page.routeId "/tapl" }}
   {{ partial "tapl-launch.html" . }}
 {{ else }}
@@ -227,6 +248,10 @@ cannot be silently omitted beneath the authored landing. */}}
     {{/* Bret inherits section-footer-dm, not the primary Home footer. Keep the
     original registered footer while replacing only the product body. */}}
     {{ if and (reflect.IsMap $node) (eq $node.tag "section") (in $analyticsSourceClasses.measuredFooterClasses (index $node.attributes "class")) }}
+      {{ partial "node.html" $node }}
+    {{ end }}
+  {{ else if eq $page.routeId "/dm" }}
+    {{ if and (reflect.IsMap $node) (eq $node.tag "section") (eq (index $node.attributes "class") "section-footer-dm") }}
       {{ partial "node.html" $node }}
     {{ end }}
   {{ else if or $articlesExperience (eq $page.routeId "/tapl") (eq $page.routeId "/about-us") $testsExperience }}
@@ -280,7 +305,7 @@ cannot be silently omitted beneath the authored landing. */}}
   </script>
 {{ end }}
 {{ if eq $page.routeId "/dm/workspace" }}
-  {{ $dmJs := resources.Get "js/dm-workspace.js" | js.Build (dict "minify" true "target" "es2020") | fingerprint }}
+  {{ $dmJs := resources.Get "js/dm-v2.js" | js.Build (dict "minify" true "target" "es2022") | fingerprint }}
   <script type="module" src="{{ $dmJs.RelPermalink }}" integrity="{{ $dmJs.Data.Integrity }}">
   </script>
 {{ end }}

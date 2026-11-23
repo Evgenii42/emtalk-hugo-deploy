@@ -1,10 +1,12 @@
-<main id="emtalk-main" class="dm-v2" tabindex="-1" aria-labelledby="dm-v2-intro-title">
-<div class="page-intro"><div><p class="eyebrow">EMTALK / DECISION MATRIX</p><h1 id="dm-v2-intro-title">A little space to think.</h1><p>Explore your options. Find what matters. Take your next step.</p></div><span class="local-badge"><span></span> Private to this browser</span></div>
-  <div class="app-shell" id="app">
+<main lang="en" id="emtalk-main" class="dm-v2" tabindex="-1" aria-label="DOS: Decision Operating System">
+<div class="page-intro"><div><p class="eyebrow">DOS / DECISION OPERATING SYSTEM</p><h1 id="dm-v2-intro-title">A little space to think.</h1><p>Explore your options. Find what matters. Take your next step.</p></div><span class="local-badge"><span></span> Private to this browser</span></div>
+  <p class="startup-note" id="dm-startup-status" role="status"><span id="dm-startup-copy">Loading DOS. If this message stays, reload this page or update your browser.</span> <a href="{{ hugo.Data.render.mountPrefix }}/dm" {{ partial "native-link-focus.html" . }}>Read about the exercise</a>.</p>
+  <div class="app-shell" id="app" hidden>
     <section class="workspace" aria-label="Decision workspace">
-      <header class="appbar"><button class="icon-button" id="back" aria-label="Open navigation" data-action="menu"><span class="menu-lines" aria-hidden="true"></span></button><h2 id="app-title">Decision Matrix</h2><button class="icon-button" aria-label="Help with this step" data-action="help"><span class="question-icon" aria-hidden="true">?</span></button></header>
+      <header class="appbar"><button class="icon-button" id="back" aria-label="Open navigation" data-action="menu"><span class="menu-lines" aria-hidden="true"></span></button><h2 id="app-title">DOS</h2><button class="icon-button" aria-label="Help with this step" data-action="help"><span class="question-icon" aria-hidden="true">?</span></button></header>
       <div id="storage-warning" class="storage-warning" hidden role="status"></div>
-      <div id="screen" tabindex="-1"></div>
+      <div id="screen" tabindex="-1" role="region" aria-labelledby="app-title"></div>
+      <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
     </section>
     <aside class="context-panel" aria-label="Decision guide">
       <div class="context-head"><span class="eyebrow">YOUR THINKING SPACE</span><button class="text-button" data-action="new">New decision <span aria-hidden="true">↗</span></button></div>
@@ -15,8 +17,7 @@
       <div class="context-footer"><span class="lock-icon" aria-hidden="true">◈</span><p>Your draft saves on this device.<br>No account needed.</p><button class="icon-button" aria-label="Files and privacy" data-action="files">···</button></div>
     </aside>
   </div>
-<dialog id="dialog" aria-labelledby="dialog-title"><form id="dialog-form" novalidate><div class="dialog-heading"><h2 id="dialog-title"></h2><button type="button" class="icon-button" data-action="close-dialog" aria-label="Close dialog">×</button></div><div id="dialog-body"></div><p id="dialog-error" role="alert"></p><div id="dialog-actions"></div></form></dialog>
-  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-  <noscript><style>.dm-v2 .app-shell{display:none!important}</style><p class="noscript">Decision Matrix needs JavaScript to compare options. <a href="{{ hugo.Data.render.mountPrefix }}/dm">Read about the exercise</a>.</p></noscript>
+<dialog id="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-error"><form id="dialog-form" novalidate><div class="dialog-heading"><h2 id="dialog-title"></h2><button type="button" class="icon-button" data-action="close-dialog" aria-label="Close dialog">×</button></div><div id="dialog-body"></div><p id="dialog-error" role="alert"></p><p id="dialog-status" role="status" aria-live="polite" aria-atomic="true"></p><div id="dialog-actions"></div></form></dialog>
+  <noscript><style>.dm-v2 .app-shell,.dm-v2 #dm-startup-status{display:none!important}</style><p class="noscript">DOS needs JavaScript to compare options. <a href="{{ hugo.Data.render.mountPrefix }}/dm" {{ partial "native-link-focus.html" . }}>Read about the exercise</a>.</p></noscript>
 
 </main>

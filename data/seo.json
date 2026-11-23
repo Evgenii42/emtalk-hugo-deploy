@@ -138,13 +138,14 @@
       "headline": "Make a little space for yourself."
     },
     "/dm": {
-      "title": "Decision Matrix App: Compare Options | EmTalk",
-      "description": "Explore the Decision Matrix app and its free browser workspace. Compare options in pairs or weigh your pros and cons, with no web account needed.",
+      "title": "DOS: Decision Operating System | EmTalk",
+      "description": "Work through a decision with DOS. Compare options, weigh pros and cons, and keep local copies in a free browser workspace. No account needed.",
       "indexable": true,
-      "image": "/media/ce2e0b92be190f17e1a1-69c432ae7918b4bbf56cbf1a_Open-Graph-Image-DM.webp",
-      "headline": "Your Professional Prioritization Tool",
+      "image": "/dos/dos-social.png",
+      "headline": "DOS: Decision Operating System",
       "imageWidth": 1200,
-      "imageHeight": 630
+      "imageHeight": 630,
+      "imageAlt": "DOS: Decision Operating System"
     },
     "/documents/bret-delete-your-account-and-associated-data": {
       "title": "BRET Account and Data Deletion | EmTalk",
@@ -299,10 +300,14 @@
       "headline": "Understand myself"
     },
     "/dm/workspace": {
-      "title": "Pairwise Comparison and Pros and Cons Tool | EmTalk",
-      "description": "Compare options in pairs or weigh your pros and cons with Decision Matrix. Free local browser workspace, with no account needed.",
+      "title": "DOS Workspace: Compare Options and Reasons | EmTalk",
+      "description": "Compare options in pairs or weigh your pros and cons with DOS. A free local browser workspace, with no account needed.",
       "indexable": true,
-      "headline": "Decision Matrix"
+      "headline": "DOS workspace",
+      "image": "/dos/dos-social.png",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "DOS: Decision Operating System"
     },
     "/bret/practice": {
       "title": "Free Breathing Timer and Muscle Relaxation | BRET",

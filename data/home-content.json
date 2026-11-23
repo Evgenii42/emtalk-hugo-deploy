@@ -18,15 +18,15 @@
     },
     {
       "id": "dm",
-      "name": "Decision Matrix",
-      "purpose": "A clearer view of your options",
+      "name": "DOS",
+      "purpose": "Decision Operating System",
       "description": "Compare your options, then weigh the reasons for and against. A structured way to think through a choice.",
-      "image": "08dcf216799159f0bc9e-6973e87b80258fd84132badc_Dm-Screen.webp",
-      "imageAlt": "Decision Matrix option comparison screen",
+      "image": "/dos/dos-preview.svg",
+      "imageAlt": "Illustrative DOS workspace with fictional options",
       "path": "/dm/workspace",
-      "linkLabel": "Try Decision Matrix free",
+      "linkLabel": "Open DOS free",
       "storeUrl": "https://play.google.com/store/apps/details?id=org.emtalk.dm",
-      "storeLabel": "Decision Matrix on Google Play"
+      "storeLabel": "Android app on Google Play"
     },
     {
       "id": "tapl",

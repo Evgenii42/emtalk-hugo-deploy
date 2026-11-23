@@ -19,4 +19,4 @@
   {{- $status := "guest_tools_available" -}}{{- if eq . "tapl" -}}{{- $status = "in_development" -}}{{- end -}}
   {{- $rows = $rows | append (dict "id" (printf "product:%s" .) "kind" "product" "title" $page.title "summary" $page.lead "topic" . "url" (printf "%s/%s" $root .) "status" $status) -}}
 {{- end -}}
-{{- return (dict "version" 1 "resources" $rows "limitations" (slice "Public descriptions only, not personalized advice or questionnaire results." "DM AI is available in its Android app, not on this website. BRET has no AI features. Tapl is in development." "Optional browser tools require a supporting WebMCP implementation; these files do not provide an MCP backend or an AI model.")) -}}
+{{- return (dict "version" 1 "resources" $rows "limitations" (slice "Public descriptions only, not personalized advice or questionnaire results." "DOS comparisons run locally in this browser; AI, sign-in and cloud sync are not connected. BRET has no AI features. TAPL is in development." "Optional browser tools require a supporting WebMCP implementation; these files do not provide an MCP backend or an AI model.")) -}}

@@ -13,6 +13,7 @@ WebKit HTMLAnchorElement.cpp gates ordinary link focus on tabsToLinks:
 https://github.com/WebKit/WebKit/blob/main/Source/WebCore/html/HTMLAnchorElement.cpp
 The exact packaged revision2370 ChromeClient preference remains unconfirmed;
 no upstream bug ticket is assumed. Recheck native controls on engine upgrades.
+Profile inventory and mandatory upgrade checks: docs/dm-recovery/QA-PROFILES.md.
 The guest-practice help explains the explicit link Tab order to users.
 This shared attribute keeps the compatibility policy in one place. */ -}}
 {{- return (`tabindex="0"` | safeHTMLAttr) -}}

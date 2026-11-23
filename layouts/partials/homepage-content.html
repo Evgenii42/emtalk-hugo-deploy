@@ -12,7 +12,14 @@
     <div class="home-products">
       {{ range $index, $product := $content.products }}
       <article class="home-product" aria-labelledby="home-product-{{ $product.id }}">
-        <div class="home-product__image"><img src="{{ $prefix }}/media/{{ $product.image }}" alt="{{ $product.imageAlt }}" loading="lazy" width="400" height="832"></div>
+        {{- $productImage := printf "%s/media/%s" $prefix $product.image -}}
+        {{- $imageWidth := 400 -}}{{- $imageHeight := 832 -}}
+        {{- if eq $product.id "dm" -}}
+          {{- if ne $product.image "/dos/dos-preview.svg" -}}{{- errorf "DOS Home preview requires its reviewed local illustration" -}}{{- end -}}
+          {{- $productImage = printf "%s%s" $prefix $product.image -}}
+          {{- $imageWidth = 600 -}}{{- $imageHeight = 760 -}}
+        {{- end -}}
+        <div class="home-product__image"><img src="{{ $productImage }}" alt="{{ $product.imageAlt }}" loading="lazy" width="{{ $imageWidth }}" height="{{ $imageHeight }}"></div>
         <div class="home-product__copy">
           {{ with $product.status }}<p class="home-product__status">{{ . }}</p>{{ end }}
           <h3 id="home-product-{{ $product.id }}">{{ $product.name }}</h3>

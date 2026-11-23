@@ -6,7 +6,10 @@ export function setupMeditation(root) {
   const prefix = document.documentElement.dataset.mountPrefix || "";
   const indexUrl = new URL(prefix + "/content/bret/meditations/index.json", location.origin).href;
   // Contract URLs are rooted at the origin of their JSON.
-  const repo = createMeditationRepository({ onCacheFailure: () => { $("cache-note").hidden = false; } });
+  const cacheFailures = new Set();
+  function cacheFailed(key = "storage") { cacheFailures.add(key); $("cache-note").hidden = false; }
+  function cacheSaved(key = "storage") { cacheFailures.delete(key); $("cache-note").hidden = cacheFailures.size === 0; }
+  const repo = createMeditationRepository({ onCacheFailure: cacheFailed, onCacheSuccess: cacheSaved });
   let catalogue, selected, detail, category = "all", active = false, generation = 0;
   let request, audio, objectUrl, cues = [], captions = false, wanted = false, lastSaved = 0;
   const imageUrls = new Map();
@@ -43,8 +46,12 @@ export function setupMeditation(root) {
       if (clear || audio.ended) {
         localStorage.removeItem(key);
         // Clear only this practice's legacy slot; another practice remains resumable.
-        try { if (JSON.parse(localStorage.getItem(progressKey))?.id === detail.id) localStorage.removeItem(progressKey); } catch { /* Ignore old corrupt data. */ }
+        const legacy = localStorage.getItem(progressKey);
+        let legacyId;
+        try { legacyId = JSON.parse(legacy)?.id; } catch { /* Ignore old corrupt data. */ }
+        if (legacyId === detail.id) localStorage.removeItem(progressKey);
       } else localStorage.setItem(key, JSON.stringify({ id: detail.id, version: detail.version, seconds: audio.currentTime }));
+      $("progress-note").hidden = true;
     } catch { $("progress-note").hidden = false; }
   }
   function cleanup() {
@@ -218,6 +225,16 @@ export function setupMeditation(root) {
   }
   async function start(seconds = resumeAt, reload = false) {
     if (!detail) return;
+    const candidate = typeof Audio === "function" ? new Audio() : null;
+    if (!candidate?.canPlayType?.('audio/ogg; codecs="opus"')) {
+      cleanup(); setView("detail");
+      $("preparation").hidden = false; $("player").hidden = true;
+      $("start").hidden = false; $("start").disabled = false;
+      $("restart").hidden = !resumeAt; $("resume").hidden = !resumeAt;
+      notice("This browser does not support the Opus audio used by these practices. Open Bret in an up-to-date browser with Ogg Opus support, or use Back to meditations to choose another moment.");
+      focusTitle();
+      return;
+    }
     requestedPosition = seconds;
     // Keep detail artwork while replacing only the audio session.
     ++generation; request?.abort(); request = new AbortController();
@@ -235,12 +252,6 @@ export function setupMeditation(root) {
     for (const n of panel.querySelectorAll("[data-med-seek],[data-med-toggle],[data-med-skip]")) n.disabled = true;
     notice("");
     if (!document.hidden) { window.scrollTo({ top: 0, behavior: "instant" }); $("state").focus({ preventScroll: true }); }
-    const candidate = new Audio();
-    if (!candidate.canPlayType('audio/ogg; codecs="opus"')) {
-      wanted = false;
-      $("state").textContent = "This browser does not support the Opus audio used by these practices. Use Back to meditations to return, or open Bret in an up-to-date browser with Ogg Opus support.";
-      return;
-    }
     subtitles(token, signal);
     // Retry artwork if Start interrupted its previous download.
     image($("background"), detail.backgroundImageUrl, indexUrl, token, signal, detail.version);
@@ -311,17 +322,20 @@ export function setupMeditation(root) {
   $("seek").addEventListener("keyup", e => { if (seekKeys.has(e.key)) finishSeek(); });
   for (const event of ["pointerup", "pointercancel", "lostpointercapture", "blur"]) $("seek").addEventListener(event, finishSeek);
   for (const b of panel.querySelectorAll("[data-med-skip]")) b.addEventListener("click", () => seek((audio?.currentTime || 0) + Number(b.dataset.medSkip)));
-  document.addEventListener("visibilitychange", () => { if (document.hidden) pause("Paused while you were away. Press Play when you are ready."); });
-  window.addEventListener("pagehide", () => { pause(); ++generation; request?.abort(); });
+  function onVisibilityChange() { if (active && view === "player" && document.hidden) pause("Paused while you were away. Press Play when you are ready."); }
+  function onPageHide() { if (!active) return; pause(); ++generation; request?.abort(); }
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  window.addEventListener("pagehide", onPageHide);
   window.addEventListener("pageshow", e => { if (e.persisted && active) library(); });
   root.querySelector("[data-bret-menu-toggle]")?.addEventListener("click", () => { if (active && view === "player") pause(); });
-  panel.addEventListener("keydown", e => {
-    if (e.key !== "Escape") return;
+  function onKeydown(e) {
+    if (!active || view !== "player" || e.key !== "Escape") return;
     if (!$("options").hidden) { e.preventDefault(); playbackOptions(false, true); }
     else pause();
-  });
+  }
+  document.addEventListener("keydown", onKeydown);
   return {
     show({ focus = false } = {}) { active = true; panel.hidden = false; library({ focus }); },
-    hide() { if (!active) return; cleanup(); active = false; panel.hidden = true; delete root.dataset.medView; delete panel.dataset.medView; document.documentElement.classList.remove("bret-meditation-playing"); },
+    hide() { if (!active) return; cleanup(); active = false; view = "library"; panel.hidden = true; delete root.dataset.medView; delete panel.dataset.medView; document.documentElement.classList.remove("bret-meditation-playing"); },
   };
 }

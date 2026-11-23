@@ -67,10 +67,13 @@
 .med-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 
 /* The active practice is the screen. Controls sit at its lower edge. */
+/* A practice temporarily owns the page; Back restores the site footer and privacy controls. */
+html.bret-meditation-playing body > :not(#emtalk-main):not(script):not(style):not(link) { display:none; }
 html.bret-meditation-playing .site-header { display:none; }
 .bret-games[data-med-view=player] { padding-top:0; }
 .bret-games[data-med-view=player] > :is(.bret-appbar,.bret-tabs) { display:none; }
 .bret-games[data-med-view=player] > .games-main { width:100%; max-width:none; padding:0; display:flex; flex-direction:column; }
+.bret-games[data-med-view=player] > .games-main > :not([data-meditation]) { display:none; }
 .bret-games .meditation[data-med-view=player] { max-width:none; display:flex; flex-direction:column; flex:1; }
 .meditation[data-med-view=player] > .med-heading { display:none; }
 .meditation[data-med-view=player] [data-med-detail] { display:flex; flex-direction:column; flex:1; }

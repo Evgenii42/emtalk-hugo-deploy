@@ -140,6 +140,8 @@ export function setupDirections(
       plate.append(s);
     }
     b.append(img);
+    // Adjacent cards are artwork previews; selecting one reveals its detail plate.
+    // Their accessible button names identify the section during exploration.
     if (active) b.append(plate);
     on(b, "click", (e) => {
       if (e.detail && performance.now() - lastSwipe < 350) return;

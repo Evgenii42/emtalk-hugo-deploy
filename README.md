@@ -1,1 +1,1 @@
-Prepared integrated Bret meditation211 r3 test candidate. Only interest032.emtalk-hugo-deploy.pages.dev is selected. Review admission and publication remain separate and are not claimed. Exact source/output hashes are in source-publication-manifest.json. No production changes.
+Prepared integrated Bret meditation212 R4 UTF-8 test candidate. Only interest032.emtalk-hugo-deploy.pages.dev is selected. Review admission and publication remain separate and are not claimed. Exact source/output hashes are in source-publication-manifest.json. No production changes.

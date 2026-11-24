@@ -25,7 +25,7 @@ PUBLIC_MEDITATION_JSON = {
     'content/bret/meditations/focus-long.json',
     'content/bret/meditations/relax-long.json',
 }
-ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.ttf', '.woff', '.woff2', '.opus', '.mp3', '.ogg', '.wav', '.mp4', '.avif', '.pdf'}
+ALLOWED_EXT = {'.html', '.txt', '.xml', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.ttf', '.woff', '.woff2', '.opus', '.mp3', '.ogg', '.wav', '.mp4', '.webm', '.avif', '.pdf'}
 
 
 # Provider-consumed control file, not a public route or a general extensionless exception.

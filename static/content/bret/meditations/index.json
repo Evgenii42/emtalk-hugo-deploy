@@ -17,7 +17,7 @@
   "meditations": [
     {
       "id": "focus-long",
-      "version": "854f98dca8ba2302",
+      "version": "7aad543f3bc6a2cd",
       "title": "Clear focus",
       "description": "Settle distractions and bring your attention back to one thing.",
       "categoryId": "focus",
@@ -27,7 +27,7 @@
     },
     {
       "id": "relax-long",
-      "version": "549ca8f7dc9e219f",
+      "version": "2fa8de3778ef8f96",
       "title": "Time to unwind",
       "description": "Let your body settle and make room for rest.",
       "categoryId": "stress",
@@ -36,5 +36,5 @@
       "jsonUrl": "/content/bret/meditations/relax-long.json"
     }
   ],
-  "version": "9199233e88ccb68a"
+  "version": "0313a18094ded171"
 }

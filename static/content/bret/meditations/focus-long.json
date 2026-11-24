@@ -15,5 +15,16 @@
   "backgroundImageUrl": "/media/bret/focus-long/playerBackground-5038a141bb5c1211.webp",
   "thumbnailUrl": "/media/bret/focus-long/thumbnail-48183095d9c2a3b3.webp",
   "subtitlesUrl": "/media/bret/focus-long/subtitles-en-d96e2eca05677392.json",
-  "version": "854f98dca8ba2302"
+  "version": "7aad543f3bc6a2cd",
+  "backgroundVideo": {
+    "url": "/media/bret/focus-long/backgroundVideo-c07c4a5211609e67.webm",
+    "mimeType": "video/webm",
+    "codecs": "vp9",
+    "posterImageUrl": "/media/bret/focus-long/playerBackground-5038a141bb5c1211.webp",
+    "width": 1024,
+    "height": 1536,
+    "durationMs": 16000,
+    "bytes": 1089575,
+    "sha256": "c07c4a5211609e679650413727ffe88a7453cb638d7bdbe8ca5a81fcd5fe5bf4"
+  }
 }

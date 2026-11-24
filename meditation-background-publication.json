@@ -1,0 +1,57 @@
+{
+  "scope": "Meditation image/video contract overlay only; no whole site replacement or native player implementation.",
+  "canonicalSourceCommit": "fe77ffe9abf7442f6004a03fa4e7873e252d6678",
+  "parentDeploymentCommit": "33ef2342cce91c0f3e85da099d998bcf07d3f4ca",
+  "authority": "Owner requested upload and gradual application contract on24November2026; temporary internal SDD policy.",
+  "externalReviewInvoked": false,
+  "published": false,
+  "files": [
+    {
+      "path": "static/bret/meditation/background-media-v1.txt",
+      "bytes": 10638,
+      "sha256": "67f6ad3e61f070509b4e9e44e64579949a524e0bdb4b3ae1852fd6a587ecaa68"
+    },
+    {
+      "path": "static/bret/meditation/background-video.schema.json",
+      "bytes": 1452,
+      "sha256": "a4775929db845be06cfadb0d9d763da59884dd22476fb4c3c372d15cee6a89a5"
+    },
+    {
+      "path": "static/content/bret/meditations/focus-long.json",
+      "bytes": 1328,
+      "sha256": "b2f7621a49da9f8269af19e19170b260ab2376e549eff4470c51c158ec510cc4"
+    },
+    {
+      "path": "static/content/bret/meditations/index.json",
+      "bytes": 1045,
+      "sha256": "3e4953428ae8f855577fa8b219f6340e1558e53286762061071883d216c57883"
+    },
+    {
+      "path": "static/content/bret/meditations/relax-long.json",
+      "bytes": 1356,
+      "sha256": "07e402d4dc267c085809325e5bd002ec4c934c43e3738febe822724062f5dc22"
+    },
+    {
+      "path": "static/media/bret/focus-long/backgroundVideo-c07c4a5211609e67.webm",
+      "bytes": 1089575,
+      "sha256": "c07c4a5211609e679650413727ffe88a7453cb638d7bdbe8ca5a81fcd5fe5bf4"
+    },
+    {
+      "path": "static/media/bret/relax-long/backgroundVideo-5ea02fcf34e2587c.webm",
+      "bytes": 1001958,
+      "sha256": "5ea02fcf34e2587cc2ac01f2189a1ec12d94d4d6295d2c4fa2f601586a66d021"
+    },
+    {
+      "path": "static/media/bret/relax-long/videoPoster-48adfafa71c9edb1.webp",
+      "bytes": 1307076,
+      "sha256": "48adfafa71c9edb11804c7e2e1703d84b4f2fd6d44b9ac1fea5a7c8a46deacc8"
+    },
+    {
+      "path": "scripts/verify_build.py",
+      "bytes": 54219,
+      "sha256": "a751d4c8dd70cf3227aa482ae7c8ed55aa10dc2fde285ff31b16708560b85cd4",
+      "scope": "Only add WebM extension to existing output guard"
+    }
+  ],
+  "rollback": "New normal commit restoring only three previous JSON files from parent; retain immutable media and concurrent site changes."
+}

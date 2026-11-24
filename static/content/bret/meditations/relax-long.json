@@ -15,5 +15,16 @@
   "backgroundImageUrl": "/media/bret/relax-long/playerBackground-dc5c6bd441d7748f.webp",
   "thumbnailUrl": "/media/bret/relax-long/thumbnail-282af99ef7f3fd1d.webp",
   "subtitlesUrl": "/media/bret/relax-long/subtitles-en-e5b9978870267a44.json",
-  "version": "549ca8f7dc9e219f"
+  "version": "2fa8de3778ef8f96",
+  "backgroundVideo": {
+    "url": "/media/bret/relax-long/backgroundVideo-5ea02fcf34e2587c.webm",
+    "mimeType": "video/webm",
+    "codecs": "vp9",
+    "posterImageUrl": "/media/bret/relax-long/videoPoster-48adfafa71c9edb1.webp",
+    "width": 1024,
+    "height": 1536,
+    "durationMs": 16000,
+    "bytes": 1001958,
+    "sha256": "5ea02fcf34e2587cc2ac01f2189a1ec12d94d4d6295d2c4fa2f601586a66d021"
+  }
 }

@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen unadmitted unpublished production137 candidate; strict reviews and live acceptance remain required.",
+  "scope": "Frozen unadmitted unpublished production138 candidate; strict reviews and live acceptance remain required.",
   "admitted": false,
   "published": false,
-  "canonicalSourceCommit": "a226588521591d8ca4ba4254e478503176a0583e",
-  "stageParentCommit": "aa5b73a99c8b470da9be7e1df1fac39781767ecf",
+  "canonicalSourceCommit": "17baf069964d0bd440881b86fa050362f041a672",
+  "stageParentCommit": "daaee93a1f28f81d697eda8179e0426c4a2ceb09",
   "productionBaseURL": "https://www.emtalk.org/",
-  "frozenReceiptSha256": "2192642be5c52bda2aea7bafeae1e1c90647e50f3ce24d78842c06aaed440cb9",
-  "sourceInputSnapshotSha256": "5fe1f496530826dbd80d433c162f5643104709db0bb8937ca9dff22ffae322d7",
-  "outputSnapshotSha256": "0548586ec1e2d9c4f6aff75efc2a9cb8b38d0d13cb28ab279a85b8ccd1b9bdb8",
+  "frozenReceiptSha256": "9c7a41ca24859353bde5b816c849ab290d13a3620b606e9f931fee7a06a70704",
+  "sourceInputSnapshotSha256": "456f8dafc6b963d104ed9d0aef6eecfbc791f6cab8629cdd7505dcf6a1d28ccb",
+  "outputSnapshotSha256": "88bfcf8aed3d638ba5a51cf21ecc48282e21691a41485d3a34b2c98737779034",
   "sourceFiles": [
     {
       "path": ".hugo-version",
@@ -892,8 +892,8 @@
     },
     {
       "path": "content/news/bret-journey-games.md",
-      "bytes": 3197,
-      "sha256": "30368851e91a7502f5817876b7ff3cf71f838ee29fca6aaf7d4917f0c403496d"
+      "bytes": 3517,
+      "sha256": "690149933624efc6a9dbfa03f43d5fbf29f929c0364fa69014bec1285d081548"
     },
     {
       "path": "content/news/decision-matrix-browser.md",
@@ -1077,8 +1077,8 @@
     },
     {
       "path": "data/render.json",
-      "bytes": 5807377,
-      "sha256": "edae9a0fb8a58e453e694e8cc8f27d52ad25e83e66fa4408393c68306898fe0b"
+      "bytes": 5807679,
+      "sha256": "195dab453c0dd81b82ca3482341ebdb6c7205236d464ea6cd1ed8d856647cd53"
     },
     {
       "path": "data/route-map.json",
@@ -1467,8 +1467,8 @@
     },
     {
       "path": "experiments/breathing-journey/index.html",
-      "bytes": 9066,
-      "sha256": "ed91a9cd9cf433381054400984ca5203e56d9efbe3d78b931d6df7810b0a9d7c"
+      "bytes": 9073,
+      "sha256": "7d2e80e273745e6d866b27a11ed2581c3e3768d3cd8ba9bec31b2c16e979a077"
     },
     {
       "path": "experiments/breathing-journey/load-local.mjs",
@@ -1492,8 +1492,8 @@
     },
     {
       "path": "experiments/breathing-journey/scene.mjs",
-      "bytes": 9368,
-      "sha256": "7da90d1ec3bf53868e515ffd71580338c3e982f47d831b33a954b5656cfa9a98"
+      "bytes": 9322,
+      "sha256": "17aa078689d1088107a6e1ae4710acdfdc4a0835b15d912d47088d34e138cc58"
     },
     {
       "path": "experiments/breathing-journey/site-preferences.mjs",
@@ -1502,8 +1502,8 @@
     },
     {
       "path": "experiments/breathing-journey/style.css",
-      "bytes": 29138,
-      "sha256": "4e549a9348795e92d33deb00f0efc353f18ffe4f691b3ec5278bc6929d69eda2"
+      "bytes": 29158,
+      "sha256": "5c324adfd7d86276f360e962724096647f4e1093c01523c25c536b51b4e9c4f9"
     },
     {
       "path": "experiments/breathing-journey/vendor/lottie-5.13.0.min.js",
@@ -3866,5 +3866,5 @@
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "rollbackDeploymentId": "d0e862e6-10e1-43d5-99e8-71abf6941283"
+  "rollbackDeploymentId": "eeae782f-e289-4e96-8b82-33e724546f97"
 }

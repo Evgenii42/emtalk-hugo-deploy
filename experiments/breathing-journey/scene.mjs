@@ -26,16 +26,16 @@ export class JourneyScene {
     const wide=matchMedia('(min-width: 761px)').matches;
     const ratio=this.stage.clientWidth/Math.max(1,this.stage.clientHeight);
     this.wide=wide;
-    if(wide)this.camera.world[0].svg.parentElement.style.transform='';
-    const w=wide?Math.min(900,ratio*465):360,h=wide?w/ratio:800;
-    const x=wide?160-w*.56:0,y=wide?558-h*.7:0;
+    this.camera.world[0].svg.parentElement.style.transform='';
+    const h=wide?Math.min(900,ratio*465)/ratio:Math.max(400,360/ratio),w=h*ratio;
+    const x=160-w*(wide?.56:.44),y=558-h*(wide?.7:.82);
     for(const {svg,clip} of this.camera.world){
       svg.setAttribute('viewBox',[x,y,w,h].join(' '));
       if(clip)for(const [key,n] of Object.entries({x,y,width:w,height:h}))clip.setAttribute(key,n);
     }
-    this.camera.sky?.setAttribute('transform',wide?`translate(${x-2} 0) scale(${(w+4)/360} 1)`:'');
+    this.camera.sky?.setAttribute('transform',`translate(${x-2} 0) scale(${(w+4)/360} 1)`);
     if(this.camera.sun){const {wrapper,cx,cy}=this.camera.sun;
-      wrapper.setAttribute('transform',wide?`translate(${x+w*.78-cx} ${y+h*.19-cy})`:'');
+      wrapper.setAttribute('transform',`translate(${x+w*.78-cx} ${y+h*.19-cy})`);
     }
   }
   async mount(scene,character='sport'){
@@ -133,7 +133,7 @@ export class JourneyScene {
         transform(counter,`translate(160 ${hipY}) rotate(${-pose.angle+pose.bodyLean}) translate(-160 ${-hipY})`);
       }
     }
-    const skyTransform=this.wide?'':`translateY(${pose.elevation*.2}px)`;
+    const skyTransform='';
     if(this.players[0].journeyContainer.style.transform!==skyTransform)this.players[0].journeyContainer.style.transform=skyTransform;
     const metadata={worldDistance:still?'0':snapshot.distance.toFixed(3),grade:pose.angle.toFixed(3),elevation:pose.elevation.toFixed(3)};
     for(const [key,value] of Object.entries(metadata))if(this.root.dataset[key]!==value)this.root.dataset[key]=value;

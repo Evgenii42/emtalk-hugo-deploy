@@ -176,33 +176,59 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
 
 @media (max-width: 760px) {
   .site-header { display: none; }
-  .workspace { display: flex; padding: 0px; min-height: 100svh; align-items: center; justify-content: center; }
-  .practice { width: 100%; margin: 0px; }
-  .scene { height: auto; min-height: 640px; min-height: max(640px,100vh); min-height: max(640px,100svh); aspect-ratio: auto; border-radius: 0px; box-shadow: none; }
-  .scene-top { top: max(26px,env(safe-area-inset-top)); left: max(26px,env(safe-area-inset-left)); right: max(24px,env(safe-area-inset-right)); }
-  .journey-progress { top: calc(122px + max(0px,env(safe-area-inset-top) - 26px)); }
-  .scene-bottom { bottom: max(22px,env(safe-area-inset-bottom)); left: max(25px,env(safe-area-inset-left)); right: max(25px,env(safe-area-inset-right)); }
-  .scene .breath-guide { top: calc(max(170px,21.8%) + max(0px,env(safe-area-inset-top) - 26px)); left: max(23px,env(safe-area-inset-left)); right: max(23px,env(safe-area-inset-right)); grid-template-columns: 98px 1fr; gap: 15px; }
-  .guide-card { padding: 20px 18px; }
-  .guide-card h2 { font-size: 18px; }
-  .guide-card p { font-size: 11px; }
-  .scene h1 { font-size: 20px; }
-  .breath-indicator { min-height: 200px; backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,249,252,.86); }
-  .lungs-wrap { height: 83px; }
-  .phase-chip { font-size: 10px; }
-  .path-caption { font-size: 11px; }
-  .active-time { font-size: 10px; }
-  .main-control { font-size: 13px; min-width: 140px; }
+  body { --practice-width: 100vw; min-width: 0; }
+  .workspace { display: block; padding: 0; }
+  .practice { width: 100%; margin: 0; }
+  /* Content rows reserve their own space above and below the moving world. */
+  .workspace .scene {
+    display: grid; grid-template-rows: auto auto auto minmax(max(200px, 40vw), 1fr) auto;
+    height: auto; min-height: 100vh; min-height: 100svh; aspect-ratio: auto;
+    border-radius: 0; box-shadow: none; gap: 8px;
+    padding: max(10px, env(safe-area-inset-top)) 0 max(10px, env(safe-area-inset-bottom));
+  }
+  .scene .scene-top { position: relative; inset: auto; grid-row: 1;
+    margin: 0 max(18px, env(safe-area-inset-right)) 0 max(18px, env(safe-area-inset-left));
+    padding: 8px 48px 8px 12px; min-width: 0; }
+  .scene .scene-top::before { inset: 0; }
+  .scene-top .eyebrow { display: none; }
+  .scene h1 { font-size: 20px; margin-bottom: 2px; }
+  .scene .exit { top: 5px; right: 2px; }
+  .scene .journey-progress { position: relative; inset: auto; grid-row: 2;
+    margin: 0 max(18px, env(safe-area-inset-right)) 0 max(18px, env(safe-area-inset-left)); padding: 5px 12px; }
+  .scene .journey-progress::before { inset: 0; }
+  .scene .journey-progress > div { margin-bottom: 4px; }
+  .scene .breath-guide { position: relative; inset: auto; grid-row: 3;
+    margin: 0 max(18px, env(safe-area-inset-right)) 0 max(18px, env(safe-area-inset-left));
+    display: block; }
+  .scene .breath-indicator { display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 8px 12px; min-height: 60px; border-radius: 20px;
+    backdrop-filter: none; -webkit-backdrop-filter: none; background: #f7f0f8; }
+  .scene .breath-indicator > p { margin: 0; min-width: 44px; }
+  .scene .lungs-wrap { width: 46px; height: 44px; margin: 0; }
+  .scene .countdown { border: 0; width: auto; height: auto; margin: 0;
+    font-size: 26px; line-height: 30px; }
+  .scene .seconds-caption { margin: 0; }
+  .scene .scenery { position: relative; inset: auto; grid-row: 4; z-index: 0; height: 100%; aspect-ratio: auto; }
+  .scene .scene-fallback { object-fit: cover; object-position: center 65%; }
+  .scene .scene-bottom { position: relative; inset: auto; grid-row: 5;
+    margin: 0 max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left)); }
+  .scene .path-caption { display: none; }
+  .scene .phase-chips { gap: 5px; margin-bottom: 8px; }
+  .scene .phase-chip { font-size: 12px; line-height: 16px; padding: 7px 2px; white-space: nowrap; }
+  .scene .controls { min-height: 64px; padding: 6px 10px; border-radius: 22px; }
+  .scene .main-control { font-size: 14px; min-width: 140px; height: 48px; }
+  .scene .active-time { margin-top: 6px; font-size: 12px; }
   .settings-dialog .settings-form { display: block; }
+  .settings-dialog .settings-content { padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+  .settings-dialog .settings-content .dialog-header { padding-top: max(18px, env(safe-area-inset-top)); }
   .character-lab { padding: 24px 20px 40px; }
   .characters-page .site-header { height: 70px; padding: 15px 20px; }
   .model-cards { grid-template-columns: 1fr; }
   .character-preview { height: 300px; }
-  .model-card > p { min-height: 0px; }
+  .model-card > p { min-height: 0; }
   .lab-toolbar { align-items: flex-start; }
-  .lab-toolbar p { margin: 0px; }
-  .feedback { top: max(10px,env(safe-area-inset-top)); bottom: auto; left: calc((100vw - var(--practice-width))/2 + 12px); transform: none; max-width: calc(var(--practice-width) - 88px); padding: 10px 12px; }
-  body { --practice-width: 100vw; min-width: 0px; }
+  .lab-toolbar p { margin: 0; }
+  .feedback { top: max(10px, env(safe-area-inset-top)); bottom: auto; left: 12px; transform: none; max-width: calc(100vw - 88px); padding: 10px 12px; }
 }
 
 @media (min-width: 761px) and (max-height: 820px) {
@@ -213,17 +239,6 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
   .comfort { margin-top: 10px; padding-top: 10px; }
 }
 
-@media (max-width: 350px) {
-  .breath-guide { left: max(15px,env(safe-area-inset-left)); right: max(15px,env(safe-area-inset-right)); gap: 9px; grid-template-columns: 89px 1fr; }
-  .guide-card { padding: 17px 13px; }
-  .guide-card h2 { font-size: 16px; }
-  .guide-card p { font-size: 10px; }
-  .scene-bottom { left: max(18px,env(safe-area-inset-left)); right: max(18px,env(safe-area-inset-right)); }
-  .controls { padding: 8px; }
-  .main-control { min-width: 125px; }
-  .phase-chip { font-size: 9px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: auto ease 0s 1 normal none running none !important; }
   ::before { scroll-behavior: auto !important; transition: none !important; animation: auto ease 0s 1 normal none running none !important; }
@@ -232,28 +247,6 @@ html:not(.journey-ready) :is([data-countdown], [data-cycle], [data-estimate], .p
 
 @media (min-width: 761px) and (max-height: 820px) {
   .feedback { left: auto; right: 20px; bottom: 20px; transform: none; width: 320px; max-width: calc(100vw - 40px); }
-}
-
-@media (max-width: 760px) and (max-height: 780px), (max-width: 350px) {
-  .scene-top { top: max(12px,env(safe-area-inset-top)); }
-  .scene-top .eyebrow { display: none; }
-  .scene h1 { font-size: 20px; }
-  .journey-progress { top: max(77px,calc(env(safe-area-inset-top) + 65px)); }
-  .scene .breath-guide { top: max(112px,calc(env(safe-area-inset-top) + 100px)); }
-  .scene .guide-card { padding: 14px 13px; }
-  .scene .guide-card p { display: none; }
-  .scene .path-caption { display: none; }
-  .scene .guide-card h2 { font-size: 18px; line-height: 24px; margin: 7px 0px; }
-  .scene .cycle-label { margin-top: 8px; }
-  .scene-bottom { left: max(15px,env(safe-area-inset-left)); right: max(15px,env(safe-area-inset-right)); }
-  .phase-chips { gap: 3px; }
-  .phase-chip { white-space: nowrap; }
-  .controls { padding: 8px; }
-  .scene .main-control { min-width: 125px; }
-}
-
-@media (max-width: 760px) and (max-height: 639px) {
-  .workspace { align-items: flex-start; }
 }
 
 /* Settings is a dedicated, history-addressable screen at every viewport. */

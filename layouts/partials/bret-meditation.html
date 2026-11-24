@@ -13,10 +13,16 @@
   <article data-med-detail hidden aria-labelledby="med-title">
     <div class="med-scene">
       <img class="med-background" data-med-background alt="" hidden>
+      <img class="med-background-poster" data-med-background-poster alt="" decoding="async" hidden>
+      <video class="med-background-video" data-med-background-video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback hidden></video>
       <header class="med-session-header">
         <button type="button" class="med-session-back" data-med-back aria-label="Back to meditations"><img src="{{ hugo.Data.render.mountPrefix }}/bret/meditation/icons/back.svg" width="24" height="24" alt=""><span>Back to meditations</span></button>
         <h1 id="med-player-title" class="med-session-title" data-med-player-title></h1><span class="med-session-balance" aria-hidden="true"></span>
       </header>
+      <div class="med-background-options" data-med-animation-controls>
+        <button type="button" data-med-animation aria-describedby="med-animation-note" aria-pressed="false" hidden>Start animation</button>
+        <p class="med-note" id="med-animation-note" data-med-animation-note></p>
+      </div>
       <div class="med-detail-card">
         <p class="med-tag" data-med-meta></p><h2 id="med-title" tabindex="-1" data-med-title></h2>
         <div data-med-preparation><p data-med-description></p><h3>Before you begin</h3><ul data-med-instructions></ul><p class="med-note">One mix of guidance and music. Set a comfortable volume.</p><p class="med-note" data-med-foreground-note>Keep this tab open and your screen awake. Playback pauses when the page is hidden; press Play when you return.</p></div>

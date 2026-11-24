@@ -1,8 +1,10 @@
 import { checkIndex, checkDetail, checkCaptions, contentUrl, cueAt, clock, createMeditationRepository, MEDITATION_MEDIA_LIMITS } from "./meditation-data.mjs";
+import { createMeditationBackground } from "./meditation-background.mjs";
 
 export function setupMeditation(root) {
   const panel = root.querySelector("[data-meditation]");
   const $ = name => panel.querySelector(`[data-med-${name}]`);
+  const background = createMeditationBackground(panel);
   const prefix = document.documentElement.dataset.mountPrefix || "";
   const indexUrl = new URL(prefix + "/content/bret/meditations/index.json", location.origin).href;
   // Contract URLs stay at the JSON origin root. Path-mounted HTML previews
@@ -92,6 +94,7 @@ export function setupMeditation(root) {
   }
   function cleanup() {
     ++generation; ++playAttempt; request?.abort(); request = null; wanted = false;
+    background?.clear();
     if (audio) save();
     retireAudio();
     for (const img of imageUrls.keys()) releaseImage(img);
@@ -237,6 +240,7 @@ export function setupMeditation(root) {
       $("resume").textContent = resumeAt ? "Your place is saved in this browser." : ""; $("resume").hidden = !resumeAt;
       notice(result.offline ? "Using a saved practice. Audio is available offline only after it has fully loaded once." : "");
       image($("background"), detail.backgroundImageUrl, detailUrl, token, signal, detail.version);
+      background?.prepare(detail, detailUrl);
     } catch (error) {
       if (!valid(token)) return;
       notice(error?.code === "JSON_TOO_LARGE"
@@ -266,6 +270,7 @@ export function setupMeditation(root) {
   }
   function pause(message = "Paused. Your place is kept.") {
     wanted = false; seeking = false; ++playAttempt;
+    background?.pause();
     if (!audio) {
       if (view === "player" && $("state").dataset.loading === "true") $("state").textContent = message + " Audio is loading.";
       return;
@@ -278,15 +283,17 @@ export function setupMeditation(root) {
     if (document.hidden) { pause("Paused while you were away. Press Play when you are ready."); return; }
     const currentAudio = audio, token = generation, attempt = ++playAttempt;
     wanted = true;
-    if (currentAudio.ended) currentAudio.currentTime = 0;
+    const restarting = currentAudio.ended;
+    if (restarting) currentAudio.currentTime = 0;
     try {
       await currentAudio.play();
       if (!valid(token) || !wanted || document.hidden) { currentAudio.pause(); return; }
       if (attempt !== playAttempt) return;
       $("state").textContent = "Playing"; $("audio-retry").hidden = true; update();
+      background?.play({ restart: restarting });
     } catch (error) {
       if (!valid(token) || attempt !== playAttempt) return;
-      wanted = false; currentAudio.pause();
+      wanted = false; currentAudio.pause(); background?.pause();
       if (error?.name === "NotAllowedError") {
         $("state").textContent = "Ready. Press Play to begin.";
         $("audio-retry").hidden = true; update(); return;
@@ -368,17 +375,17 @@ export function setupMeditation(root) {
         if (wanted) play();
       });
       a.addEventListener("timeupdate", () => { if (ownsAudio()) update(); });
-      a.addEventListener("pause", () => { if (ownsAudio()) update(); });
+      a.addEventListener("pause", () => { if (ownsAudio()) { background?.pause(); update(); } });
       a.addEventListener("ended", () => {
         if (!ownsAudio()) return;
-        wanted = false; save(true); update(); $("state").textContent = "Practice complete. Take a moment before you return.";
+        wanted = false; background?.finish(); save(true); update(); $("state").textContent = "Practice complete. Take a moment before you return.";
       });
       a.addEventListener("error", () => {
         if (!ownsAudio()) return;
         const beforeReady = awaitingMetadata;
         stopMetadataWait();
         if (beforeReady) { ++playAttempt; retireAudio(); }
-        wanted = false; $("state").dataset.loading = "false"; $("state").textContent = "This browser could not play the Opus audio. Try Retry audio or another browser.";
+        wanted = false; background?.pause(); $("state").dataset.loading = "false"; $("state").textContent = "This browser could not play the Opus audio. Try Retry audio or another browser.";
         $("audio-retry").hidden = false;
       });
       signal.addEventListener("abort", stopMetadataWait, { once: true });
@@ -386,7 +393,7 @@ export function setupMeditation(root) {
       // that accepts the full Blob but never reports either metadata or error.
       metadataTimer = setTimeout(() => {
         if (!ownsAudio() || !awaitingMetadata) return;
-        stopMetadataWait(); wanted = false; ++playAttempt; retireAudio();
+        stopMetadataWait(); wanted = false; ++playAttempt; retireAudio(); background?.pause();
         $("state").dataset.loading = "false";
         $("state").textContent = "Audio took too long to become ready. Choose Retry audio or try another browser.";
         $("audio-retry").hidden = false;
@@ -396,7 +403,7 @@ export function setupMeditation(root) {
       catch (error) { stopMetadataWait(); throw error; }
     } catch (error) {
       if (!valid(token)) return;
-      wanted = false; ++playAttempt; retireAudio();
+      wanted = false; ++playAttempt; retireAudio(); background?.pause();
       if (!playerPrepared) {
         recoverStartFailure();
         return;
@@ -482,6 +489,7 @@ export function setupMeditation(root) {
       disposed = true;
       try { hide(); }
       finally {
+        background?.dispose?.();
         document.removeEventListener("visibilitychange", onVisibilityChange);
         window.removeEventListener("pagehide", onPageHide);
         document.removeEventListener("keydown", onKeydown);

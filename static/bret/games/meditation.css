@@ -131,3 +131,12 @@ html.bret-meditation-playing .site-header { display:none; }
 .meditation [data-med-state][data-loading=true]::before { content:""; display:inline-block; width:14px; height:14px; margin-right:8px; vertical-align:-2px; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; animation:med-loading-turn 1s linear infinite; }
 @keyframes med-loading-turn { to { transform:rotate(360deg); } }
 @media(prefers-reduced-motion:reduce) { .meditation [data-med-state][data-loading=true]::before { animation:none; } }
+
+/* Optional motion shares the original still framing and never covers controls. */
+.meditation :is(.med-background-video,.med-background-poster) { position:absolute; z-index:-1; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none; }
+.meditation[data-med-view=player] :is(.med-background-video,.med-background-poster) { object-position:center 55%; }
+.meditation .med-background-options { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; flex-shrink:0; }
+.meditation .med-background-options button { background:var(--med-glass); border-color:var(--med-line); color:var(--med-ink); }
+.meditation .med-background-options .med-note { margin:0; padding:4px 8px; border-radius:8px; background:var(--med-glass); max-width:38ch; }
+.meditation .med-background-options .med-note:empty { display:none; }
+@media(forced-colors:active) { .meditation .med-background-options :is(button,p) { background:Canvas; color:CanvasText; border:1px solid CanvasText; } }

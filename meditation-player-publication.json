@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "0ff434146c3ec403c0054619ae2058f611293e75",
+  "parentDeploymentCommit": "01e65f8b461fdc0067ae40b655ab972bc85477c5",
+  "files": [
+    {
+      "path": "layouts/partials/bret-meditation.html",
+      "bytes": 6242,
+      "sha256": "bdd2f9f2cae4d9377bd46578a6088674c5bd6337611548ed6b968a8d23cc0e5e"
+    },
+    {
+      "path": "static/bret/games/meditation.css",
+      "bytes": 13083,
+      "sha256": "5f208f9fb89b58666be1e2a8e73958842ed3735ba736d5ae5f0bcefd5bf78b5a"
+    },
+    {
+      "path": "static/bret/games/meditation.mjs",
+      "bytes": 29751,
+      "sha256": "05064f0b26998e9d13ac6e87e85f5642fbf300fe413d7cbb46f16c52a1357ea0"
+    },
+    {
+      "path": "static/bret/games/meditation-background.mjs",
+      "bytes": 8982,
+      "sha256": "326e65b3fc8fa76b9f8f38c7f8f9d7b7ce981770939036e1d8b86bbf9f78e474"
+    }
+  ],
+  "externalReviewInvoked": false,
+  "authority": "Owner publication and temporary internal SDD instruction; actual main player MED-MEDIA-2",
+  "rollback": "Normal commit restoring only four owned player paths from parent, preserving concurrent changes."
+}

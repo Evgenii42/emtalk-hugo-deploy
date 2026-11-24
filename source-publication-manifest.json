@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen unadmitted unpublished production138 candidate; strict reviews and live acceptance remain required.",
+  "scope": "Frozen unadmitted unpublished production140 candidate; strict reviews and live acceptance remain required.",
   "admitted": false,
   "published": false,
-  "canonicalSourceCommit": "17baf069964d0bd440881b86fa050362f041a672",
-  "stageParentCommit": "daaee93a1f28f81d697eda8179e0426c4a2ceb09",
+  "canonicalSourceCommit": "6cfc789b2d6bcaac9c15217e7628dd8099743c8b",
+  "stageParentCommit": "44e7e74ad10c3203efd62785b608e29008b526c6",
   "productionBaseURL": "https://www.emtalk.org/",
-  "frozenReceiptSha256": "9c7a41ca24859353bde5b816c849ab290d13a3620b606e9f931fee7a06a70704",
-  "sourceInputSnapshotSha256": "456f8dafc6b963d104ed9d0aef6eecfbc791f6cab8629cdd7505dcf6a1d28ccb",
-  "outputSnapshotSha256": "88bfcf8aed3d638ba5a51cf21ecc48282e21691a41485d3a34b2c98737779034",
+  "frozenReceiptSha256": "7b7065aef11a356ec5e9c2251d997c46fc8fffbd68c91aac80fe4b6417baa781",
+  "sourceInputSnapshotSha256": "896c3485d3a97c17b8be6be0c8c45516635b2bef16c1d5ff6e3b1025919866a1",
+  "outputSnapshotSha256": "e8ae8dcaf8614fb8761af427d635cee9d2f0708c45f15ecdf03895b5ac66e2ba",
   "sourceFiles": [
     {
       "path": ".hugo-version",
@@ -892,8 +892,8 @@
     },
     {
       "path": "content/news/bret-journey-games.md",
-      "bytes": 3517,
-      "sha256": "690149933624efc6a9dbfa03f43d5fbf29f929c0364fa69014bec1285d081548"
+      "bytes": 3618,
+      "sha256": "c879847a816a1eb19bf8521104f6dd53b1625998e853cd9a4c654e380803cd72"
     },
     {
       "path": "content/news/decision-matrix-browser.md",
@@ -1077,8 +1077,8 @@
     },
     {
       "path": "data/render.json",
-      "bytes": 5807679,
-      "sha256": "195dab453c0dd81b82ca3482341ebdb6c7205236d464ea6cd1ed8d856647cd53"
+      "bytes": 5807780,
+      "sha256": "420725c8863a51445b09651bf141860bc3e5681cdc9ef84146c6d0429d72e058"
     },
     {
       "path": "data/route-map.json",
@@ -1467,8 +1467,8 @@
     },
     {
       "path": "experiments/breathing-journey/index.html",
-      "bytes": 9073,
-      "sha256": "7d2e80e273745e6d866b27a11ed2581c3e3768d3cd8ba9bec31b2c16e979a077"
+      "bytes": 9085,
+      "sha256": "7e7c5b47998312bb127c4cfbac54bbe570516ae62160416c67ac2584d4ddf2a1"
     },
     {
       "path": "experiments/breathing-journey/load-local.mjs",
@@ -1502,8 +1502,8 @@
     },
     {
       "path": "experiments/breathing-journey/style.css",
-      "bytes": 29158,
-      "sha256": "5c324adfd7d86276f360e962724096647f4e1093c01523c25c536b51b4e9c4f9"
+      "bytes": 30142,
+      "sha256": "010db39f178aef2d45d833aae01a964863505f26631ee9fae5502cbc585718ea"
     },
     {
       "path": "experiments/breathing-journey/vendor/lottie-5.13.0.min.js",
@@ -1957,8 +1957,8 @@
     },
     {
       "path": "scripts/verify_build.py",
-      "bytes": 54210,
-      "sha256": "4dacad1edd5f5435a0c5c1b14062c725b1961d13f67987714ee82f4fdf5cd0bd"
+      "bytes": 54219,
+      "sha256": "a751d4c8dd70cf3227aa482ae7c8ed55aa10dc2fde285ff31b16708560b85cd4"
     },
     {
       "path": "scripts/verify_dm_v2_fonts.py",
@@ -2641,6 +2641,16 @@
       "sha256": "89ef5123ecd7a611d9f65507a58ef9f2873dc8098b9356024523fccd141eb186"
     },
     {
+      "path": "static/bret/meditation/background-media-v1.txt",
+      "bytes": 10638,
+      "sha256": "67f6ad3e61f070509b4e9e44e64579949a524e0bdb4b3ae1852fd6a587ecaa68"
+    },
+    {
+      "path": "static/bret/meditation/background-video.schema.json",
+      "bytes": 1443,
+      "sha256": "4cfe7528cba4db8b8311a646ed768d09b123f9e14b20d2186b53c49ed8257aed"
+    },
+    {
       "path": "static/bret/meditation/icons/back.svg",
       "bytes": 1157,
       "sha256": "0678b1c255b71e8cabea3209fba59cda9a3c1a81a786a28d145831ef730670f0"
@@ -2667,18 +2677,18 @@
     },
     {
       "path": "static/content/bret/meditations/focus-long.json",
-      "bytes": 920,
-      "sha256": "6745866f97bfd6abc2ff94cdfb7e6a3d0423e9591464365544322fc91a37ba7f"
+      "bytes": 1328,
+      "sha256": "b2f7621a49da9f8269af19e19170b260ab2376e549eff4470c51c158ec510cc4"
     },
     {
       "path": "static/content/bret/meditations/index.json",
       "bytes": 1045,
-      "sha256": "30cbf84707fb9d21447bcf71204bded97cfaf6a28b2da465a5d00e007e90801f"
+      "sha256": "3e4953428ae8f855577fa8b219f6340e1558e53286762061071883d216c57883"
     },
     {
       "path": "static/content/bret/meditations/relax-long.json",
-      "bytes": 953,
-      "sha256": "ac9d2b791475d6792afe27db962c539b1d2a6ca49aa975ba504d8d7ab52e83b8"
+      "bytes": 1356,
+      "sha256": "07e402d4dc267c085809325e5bd002ec4c934c43e3738febe822724062f5dc22"
     },
     {
       "path": "static/dm-v2/assets/compare-add-icon-medium.svg",
@@ -3416,6 +3426,11 @@
       "sha256": "57724305daef2285fe7ba0ffe94ea027e954c8966bff712c22d4ffd8466e0974"
     },
     {
+      "path": "static/media/bret/focus-long/backgroundVideo-c07c4a5211609e67.webm",
+      "bytes": 1089575,
+      "sha256": "c07c4a5211609e679650413727ffe88a7453cb638d7bdbe8ca5a81fcd5fe5bf4"
+    },
+    {
       "path": "static/media/bret/focus-long/playerBackground-5038a141bb5c1211.webp",
       "bytes": 106992,
       "sha256": "5038a141bb5c1211e18c23aadece9f431bf29d8d32a6b3dce9c23a0dad7ec31a"
@@ -3436,6 +3451,11 @@
       "sha256": "4c5f873af406231dcfba661b839b0b7dae90a194caee310be05abaa1e4b55146"
     },
     {
+      "path": "static/media/bret/relax-long/backgroundVideo-5ea02fcf34e2587c.webm",
+      "bytes": 1001958,
+      "sha256": "5ea02fcf34e2587cc2ac01f2189a1ec12d94d4d6295d2c4fa2f601586a66d021"
+    },
+    {
       "path": "static/media/bret/relax-long/playerBackground-dc5c6bd441d7748f.webp",
       "bytes": 70914,
       "sha256": "dc5c6bd441d7748f69283c4bff4180b91d45c5b0c1b4a777e69546e602dc0e62"
@@ -3449,6 +3469,11 @@
       "path": "static/media/bret/relax-long/thumbnail-282af99ef7f3fd1d.webp",
       "bytes": 2810,
       "sha256": "282af99ef7f3fd1db8c6ddefc96c1a790d809e380cb90fa23126e810bcad5614"
+    },
+    {
+      "path": "static/media/bret/relax-long/videoPoster-48adfafa71c9edb1.webp",
+      "bytes": 1307076,
+      "sha256": "48adfafa71c9edb11804c7e2e1703d84b4f2fd6d44b9ac1fea5a7c8a46deacc8"
     },
     {
       "path": "static/media/c061a05042997de7adc2-696ec4091609ee52b62aa2eb_image_454.webp",
@@ -3866,5 +3891,5 @@
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
   ],
-  "rollbackDeploymentId": "eeae782f-e289-4e96-8b82-33e724546f97"
+  "rollbackDeploymentId": "baa90284-cff0-4a9b-96af-87e635f5997d"
 }

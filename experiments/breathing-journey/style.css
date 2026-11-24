@@ -28,6 +28,17 @@ button svg, .icon-button svg { width: 24px; height: 24px; fill: none; stroke: cu
 .scene-fallback { position: absolute; inset: 0px; width: 100%; height: 100%; }
 .scene:not(.text-mode) .scene-fallback { visibility: hidden; }
 .scene.text-mode [data-animation] { visibility: hidden; }
+/* The portrait poster is an error fallback, not the loading frame. */
+.scene.text-mode .scenery { background: linear-gradient(165deg, #f8f0fa, #d7c4e8 54%, #b99ecf); }
+.scene.loading-art .scene-fallback { visibility: hidden; }
+.scene.text-mode:not(.loading-art) .scene-fallback { object-fit: contain; }
+.scene.text-mode.loading-art .scenery::before,
+.scene.text-mode.loading-art .scenery::after { content: ""; position: absolute; border-radius: 50% 60% 0 0; }
+.scene.text-mode.loading-art .scenery::before { inset: 45% -15% -35%; background: #c6b0dc; transform: rotate(-8deg); }
+.scene.text-mode.loading-art .scenery::after { inset: 68% -20% -30%; background: #b299cb; transform: rotate(7deg); }
+.scene[data-scene="2"].text-mode .scenery { background: linear-gradient(165deg, #352b4a, #66507c 54%, #8c71a3); }
+.scene[data-scene="2"].text-mode.loading-art .scenery::before { background: #715888; }
+.scene[data-scene="2"].text-mode.loading-art .scenery::after { background: #57416c; }
 .scene-top { position: absolute; top: 30px; left: 25px; right: 24px; isolation: isolate; }
 .eyebrow { font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.06em; margin: 0px 0px 10px; }
 .scene h1 { font-family: Geologica, sans-serif; font-size: 20px; line-height: 24px; font-weight: 500; letter-spacing: 0; margin: 0px 0px 5px; }

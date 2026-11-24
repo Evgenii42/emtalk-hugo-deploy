@@ -20,7 +20,7 @@
   <p id="practice-load-error" role="alert" hidden>Could not load the journey. <a href="">Try again</a></p>
   <main class="workspace">
     <section id="practice" class="practice" aria-label="Breathing journey" tabindex="-1">
-      <div class="scene text-mode" data-scene="0">
+      <div class="scene text-mode loading-art" data-scene="0">
         <div class="scenery" aria-hidden="true"><img class="scene-fallback" src="./art/poster-0.svg?v=jacket4" alt="" width="360" height="800"><script>
           // Validated, local pre-paint preference. No clock or user data output.
           try{const saved=JSON.parse(localStorage.getItem('emtalk.bret.journey.preferences.v1')||'null'),requested=new URL(location.href).searchParams.get('character'),keys=['sport','soft','silhouette'];const key=keys.includes(requested)?requested:keys.includes(saved?.character)?saved.character:'sport';document.currentScript.previousElementSibling.src='./art/poster-0-'+key+'.svg?v=jacket4';}catch{}

@@ -1,6 +1,6 @@
 {
   "scope": "Meditation image/video contract overlay only; no whole site replacement or native player implementation.",
-  "canonicalSourceCommit": "fe77ffe9abf7442f6004a03fa4e7873e252d6678",
+  "canonicalSourceCommit": "8cb12a7e6108f85db9616ae20c0fd73bf6d9a31c",
   "parentDeploymentCommit": "33ef2342cce91c0f3e85da099d998bcf07d3f4ca",
   "authority": "Owner requested upload and gradual application contract on24November2026; temporary internal SDD policy.",
   "externalReviewInvoked": false,
@@ -13,8 +13,8 @@
     },
     {
       "path": "static/bret/meditation/background-video.schema.json",
-      "bytes": 1452,
-      "sha256": "a4775929db845be06cfadb0d9d763da59884dd22476fb4c3c372d15cee6a89a5"
+      "bytes": 1443,
+      "sha256": "4cfe7528cba4db8b8311a646ed768d09b123f9e14b20d2186b53c49ed8257aed"
     },
     {
       "path": "static/content/bret/meditations/focus-long.json",

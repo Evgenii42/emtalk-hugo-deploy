@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://www.emtalk.org/content/bret/meditations/background-video.schema.json",
+  "$id": "https://www.emtalk.org/bret/meditation/background-video.schema.json",
   "title": "Optional BRET meditation backgroundVideo",
   "type": "object",
   "required": [

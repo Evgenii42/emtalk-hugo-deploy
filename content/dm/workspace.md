@@ -1,5 +1,5 @@
 {
-  "title": "Decision Matrix guest workspace",
+  "title": "DOS workspace",
   "routeId": "/dm/workspace",
   "layout": "source",
   "url": "/dm/workspace.html",

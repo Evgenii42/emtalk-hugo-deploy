@@ -33,7 +33,7 @@
     const rows = value.resources.map(row => {
       object(row, ["id", "kind", "title", "summary", "topic", "url", "status", "questions", "minutes", "readingMinutes", "listeningMinutes"], ["id", "kind", "title", "summary", "topic", "url", "status"]);
       if (!Object.hasOwn(counts, row.kind) || !text(row.id, 128) || !new RegExp("^" + row.kind + ":[a-z0-9-]{1,110}$").test(row.id) || ids.has(row.id) ||
-          !text(row.title, 220) || !row.title || !text(row.summary, 900) || !topics.includes(row.topic) || !text(row.status, 80) || !text(row.url, 512)) throw invalid();
+          !text(row.title, 220) || !row.title.trim() || !text(row.summary, 900) || !row.summary.trim() || !topics.includes(row.topic) || !text(row.status, 80) || !text(row.url, 512)) throw invalid();
       const slug = row.id.split(":")[1], url = new URL(row.url);
       const route = row.kind === "product" ? "/" + slug : "/" + (row.kind === "article" ? "articles" : "tests") + "/" + slug;
       if (url.origin !== endpoint.origin || url.pathname !== prefix + route || url.search || url.hash || url.username || url.password ||
@@ -109,7 +109,7 @@
       { name: "emtalk_get_public_resource", description: "Read one public resource description by its catalog ID. No article body, test answers, scoring request or private workspace is accessed.", annotations,
         inputSchema: { type: "object", properties: { id: { type: "string", maxLength: 128, pattern: "^(article|test|product):[a-z0-9-]{1,110}$" } }, required: ["id"], additionalProperties: false },
         execute: (input, options) => execute(state, input, options, value => { object(value, ["id"], ["id"]); if (!text(value.id, 128) || !/^(article|test|product):[a-z0-9-]{1,110}$/.test(value.id)) throw invalid(); }, (rows, value) => ({ resource: rows.find(row => row.id === value.id) || null })) },
-      { name: "emtalk_get_product_availability", description: "Read the public availability descriptions for BRET, Decision Matrix or Tapl. Does not open a practice or app store. Website AI is not offered; DM AI is in its Android app, BRET has no AI, Tapl is in development.", annotations,
+      { name: "emtalk_get_product_availability", description: "Read the public availability descriptions for BRET, DOS or TAPL. Does not open a practice or app store. DOS web comparisons are local; AI, sign-in and cloud sync are not connected. BRET has no AI features; TAPL is in development.", annotations,
         inputSchema: { type: "object", properties: { product: { type: "string", enum: ["bret", "dm", "tapl"] } }, required: ["product"], additionalProperties: false },
         execute: (input, options) => execute(state, input, options, value => { object(value, ["product"], ["product"]); if (!["bret", "dm", "tapl"].includes(value.product)) throw invalid(); }, (rows, value) => ({ resource: rows.find(row => row.id === "product:" + value.product) })) }
     ];

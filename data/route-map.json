@@ -198,6 +198,11 @@
       "origin": "owned"
     },
     {
+      "path": "/news/dos-workspace-update",
+      "file": "news/dos-workspace-update.html",
+      "origin": "owned"
+    },
+    {
       "path": "/news/bret-journey-games",
       "file": "news/bret-journey-games.html",
       "origin": "owned"
@@ -694,6 +699,12 @@
     {
       "path": "/news",
       "exactSuffix": "/news",
+      "origin": "owned",
+      "sourceNoindex": false
+    },
+    {
+      "path": "/news/dos-workspace-update",
+      "exactSuffix": "/news/dos-workspace-update",
       "origin": "owned",
       "sourceNoindex": false
     },

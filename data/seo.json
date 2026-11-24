@@ -77,7 +77,7 @@
       "imageHeight": 1000
     },
     "/articles/how-to-know-if-you-are-burned-out": {
-      "title": "How to Know If You’re Burned Out: Signs and Burnout Tests | EmTalk",
+      "title": "How to Know If You\u2019re Burned Out: Signs and Burnout Tests | EmTalk",
       "description": "Read about signs of work-related burnout and questionnaires discussed in burnout research. Read or listen to the article on EmTalk.",
       "indexable": true,
       "image": "/media/405e3132b8bf95c14913-a870_6a8b1c1e55f48eb328f6f1ed_Generated-20Image-20August-2020-2C-202026-20--2012_34AM.webp",
@@ -122,11 +122,11 @@
       "imageHeight": 500
     },
     "/articles/what-burnout-really-is-and-why-rest-alone-wont-fix-it": {
-      "title": "What Burnout Really Is - and Why Rest Alone Won’t Fix It | EmTalk",
+      "title": "What Burnout Really Is - and Why Rest Alone Won\u2019t Fix It | EmTalk",
       "description": "Explore work-related exhaustion, the meaning of burnout and why recovery involves more than rest. Read or listen on EmTalk.",
       "indexable": true,
       "image": "/media/19b341ee6f2e1fce3890-f7a838_6a871eeb3441bbcea62f5ebc_-D0-B3-D0-BE-D0-BB-D1-83-D0-B1-D1-8C-201600-D1-851000.webp",
-      "headline": "What burnout really is and why rest alone won’t fix it",
+      "headline": "What burnout really is and why rest alone won\u2019t fix it",
       "imageWidth": 1600,
       "imageHeight": 1000
     },
@@ -135,7 +135,7 @@
       "description": "Explore sleep, rest and their role in everyday life in an introductory EmTalk article. Read the text or listen to the audio version.",
       "indexable": true,
       "image": "/media/bab45c4afdd0bb086900-d92fc3e55b10f7c03_6a6092212de65c51e9f8c5f4_-D0-B4-D0-B5-D1-81-D0-BA-D1-82-D0-BE-D0-BF.webp",
-      "headline": "A deep dive into sleep — the most underrated power hack in your career and life",
+      "headline": "A deep dive into sleep \u2014 the most underrated power hack in your career and life",
       "imageWidth": 1600,
       "imageHeight": 1000
     },
@@ -150,14 +150,14 @@
       "imageAlt": "Breathing rings and a leaf, with the Bret title on a lavender background"
     },
     "/dm": {
-      "title": "Decision Matrix App: Compare Options | EmTalk",
-      "description": "Explore the Decision Matrix app and its free browser workspace. Compare options in pairs or weigh your pros and cons, with no web account needed.",
+      "title": "DOS: Decision Operating System | EmTalk",
+      "description": "Work through a decision with DOS. Compare options, weigh pros and cons, and keep local copies in a free browser workspace. No account needed.",
       "indexable": true,
-      "image": "/media/social-decision-matrix.a2e2cafd242f.webp",
-      "headline": "Your Professional Prioritization Tool",
+      "image": "/media/social-decision-matrix.b3a65a6d8db5.webp",
+      "headline": "DOS: Decision Operating System",
       "imageWidth": 1200,
       "imageHeight": 630,
-      "imageAlt": "Overlapping angled option tiles and weighted dots for Decision Matrix"
+      "imageAlt": "Overlapping angled option tiles and weighted dots for DOS: Decision Operating System"
     },
     "/documents/bret-delete-your-account-and-associated-data": {
       "title": "BRET Account and Data Deletion | EmTalk",
@@ -284,7 +284,7 @@
     },
     "/tests/motivation-test-by-gerchikov": {
       "title": "Gerchikov Workplace Motivation Test | EmTalk",
-      "description": "Explore Gerchikov’s workplace motivation questionnaire covering five motivation types.",
+      "description": "Explore Gerchikov\u2019s workplace motivation questionnaire covering five motivation types.",
       "indexable": true,
       "image": "/media/ef13f351d1ca10926004-6a9dd83863edcc1eecfa6009_6a7a460b480ef2ffaef65209_motivation-test-by-gerchikov-16x10.webp",
       "headline": "Motivation Test by Gerchikov",
@@ -320,14 +320,14 @@
       "imageAlt": "An illustrated mirror and leaf for self-understanding articles and tests"
     },
     "/dm/workspace": {
-      "title": "Pairwise Comparison and Pros and Cons Tool | EmTalk",
-      "description": "Compare options in pairs or weigh your pros and cons with Decision Matrix. Free local browser workspace, with no account needed.",
+      "title": "DOS Workspace: Compare Options and Reasons | EmTalk",
+      "description": "Compare options in pairs or weigh your pros and cons with DOS. A free local browser workspace, with no account needed.",
       "indexable": true,
-      "headline": "Decision Matrix",
-      "image": "/media/social-dm-workspace.df414181cd1f.webp",
+      "headline": "DOS workspace",
+      "image": "/media/social-dm-workspace.ab9e5594ce69.webp",
       "imageWidth": 1200,
       "imageHeight": 630,
-      "imageAlt": "An illustrated balance of weighted options for the Decision Matrix workspace"
+      "imageAlt": "An illustrated balance of weighted options for the DOS workspace"
     },
     "/bret/practice": {
       "title": "Free Breathing Timer and Custom Rhythms | BRET",
@@ -428,6 +428,16 @@
       "imageWidth": 1200,
       "imageHeight": 630,
       "imageAlt": "A seed-keeper character, breathing orbit and path for the new Bret news"
+    },
+    "/news/dos-workspace-update": {
+      "title": "DOS: Decision Operating System Web Workspace | EmTalk",
+      "headline": "DOS: a clearer place to work through decisions",
+      "description": "Meet DOS: Decision Operating System. Compare options, explore your reasons and keep local drafts or portable backups in the web workspace.",
+      "indexable": true,
+      "image": "/media/social-news-dos-workspace.fac233762211.webp",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Two compared option shapes with the DOS title for the new decision workspace"
     }
   }
 }

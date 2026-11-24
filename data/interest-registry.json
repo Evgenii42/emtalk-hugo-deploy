@@ -200,6 +200,10 @@
     "/news/bret-journey-games": [
       "page",
       "news"
+    ],
+    "/news/dos-workspace-update": [
+      "page",
+      "news"
     ]
   },
   "labels": {

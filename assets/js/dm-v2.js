@@ -1,355 +1,215 @@
+import {createDecisionImporter} from './dm-v2-import.js';
+import {createDosAnalytics} from './dos-analytics.js';
+import {createDialogController, reportUnexpectedError} from './dm-v2-dialog.js';
+import {findToastPlacement} from './dm-v2-toast.js';
+import {createLocalDecisionStore, DRAFT_KEY, HISTORY_KEY} from './dm-v2-storage.js';
+import { createTopicsLoader } from './dm-v2-topics.js';
+import { createDecisionViews, escapeHtml as escape, localImage, priorities, priorityLetters, formatSavedDate, decisionLabel } from './dm-v2-views.js';
 import { createLocalIdFactory } from './dm-v2-id.js';
 import {
+  DecisionError,
   createDecision,
   validateDecision,
   makePairs,
   orderedResults,
   createDraft,
-  parseDraft,
-  serializeDraft,
   serializeDecision,
-  parseDecision,
   resultsCsv,
-  validateHistory,
   MAX_HISTORY,
 } from './dm-v2-model.js';
+import {createEarlierWorkspaceReader} from './dm-v2-earlier.js';
 
-// Prototype storage is intentionally independent of the live EmTalk workspace.
-const DRAFT_KEY = 'emtalk.dm.web-prototype.draft.v1';
-const HISTORY_KEY = 'emtalk.dm.web-prototype.history.v1';
+// DOS storage stays separate from the earlier workspace namespaces.
 const appRoot = document.querySelector('.dm-v2');
 const assetRoot =
   (document.documentElement.dataset.mountPrefix || '') + '/dm-v2/assets/';
 const $ = (selector, root = appRoot) => root.querySelector(selector);
-const screen = $('#screen');
+const stage = $('#screen');
 const dialog = $('#dialog');
-const escape = (value) =>
-  String(value).replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
-        c
-      ],
-  );
-const image = (name, cls = '') =>
-  `<img src="${assetRoot}${name}.svg" alt=""${cls ? ` class="${cls}"` : ''}>`;
 const id = createLocalIdFactory();
-const priorities = new Map([
-  [1, 'Low'],
-  [3, 'Medium'],
-  [5, 'High'],
-  [8, 'Essential'],
-]);
-const priorityLetters = new Map([
-  [1, 'L'],
-  [3, 'M'],
-  [5, 'H'],
-  [8, 'E'],
-]);
 const clone = (value) => JSON.parse(JSON.stringify(value));
 let state = createDecision();
+const measurement = createDosAnalytics(window);
 let pairIndex = 0;
 let optionIndex = 0;
 let savedEntryId = null;
-let history = { schemaVersion: 1, entries: [] };
-let draftRaw = null;
-let historyRaw = null;
-let storageBlocked = false;
-let unreadableDraftRaw = null;
-let historyBlocked = false;
+const localStore = createLocalDecisionStore({onWarning: storageWarning});
+const storageWarnings = { draft: '', history: '' };
 let topicTab = 'popular';
 let topicsVisible = true;
 let topicsExpanded = false;
-let topics = [];
-let topicsStatus = 'loading';
+let topicCatalog = {rows: [], status: 'loading', dataInvalid: false};
 let resultTab = 'reasons';
 let choicePending = false;
+let choiceUndoStack = [];
 let choiceTimer;
 let toastTimer;
-let dialogSubmit = null;
-let dialogTrigger = null;
-let dialogContext = null;
+let renderedView = null;
+let renderRevision = 0;
+let workspaceReady = false;
+let detailsDecision = null;
+const expandedResultOptions = new Set();
+const recoveryFreshnessNote = '<p class="dialog-note">This view is a snapshot. Close and reopen it to refresh. Before discarding or choosing a stored version, we check that the stored data still matches. Backups export the copy kept in this tab.</p>';
+
+const dialogUi = createDialogController({appRoot, screen: stage, onNotice: notify});
+const {open: openDialog, close: closeDialog, submit: submitDialog} = dialogUi;
+// The reader is lazy. Only the explicit Earlier workspace data action reads old keys.
+const earlierReader = createEarlierWorkspaceReader();
+const earlierSnapshots = new WeakMap();
+dialog.addEventListener('close', () => {
+  if (!dialog.open) earlierSnapshots.delete(dialogUi.session);
+});
+
+// Snapshot values are read by the pure views only; controller owns all mutations.
+function views() {
+  return createDecisionViews({state, history: localStore.snapshot.history, historyBlocked: localStore.snapshot.historyStatus !== 'ready', pairIndex, optionIndex,
+    topics: topicCatalog.rows, topicTab, topicsVisible, topicsExpanded,
+    topicsStatus: topicCatalog.status, topicsDataInvalid: topicCatalog.dataInvalid,
+    resultTab, undoCount: choiceUndoStack.length}, assetRoot);
+}
+const image = (name, cls = '') => localImage(assetRoot, name, cls);
+const topicRows = () => views().topicRows();
+const guideMarkup = () => views().guideMarkup();
+const balanceMarkup = () => views().balanceMarkup();
+const blockedHistoryMessage = () => views().blockedHistoryMessage();
+function renderRecent() { $('#recent').innerHTML = views().recentMarkup(); }
+
+// Re-evaluate action/header geometry rather than assuming a fixed bottom gap.
+// If the viewport has no free rectangle, normal document flow is the fallback.
+function placeToast(reveal = true) {
+  const toast = $('#toast');
+  if (!toast.classList.contains('visible')) return;
+  const header = document.querySelector('.site-header');
+  if (toast.classList.contains('in-flow')) {
+    // Keep this notice in flow until replacement/expiry. Measuring a flow box
+    // to promote it could change its wrapping under the fixed-width CSS cap.
+    const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+    toast.style.setProperty('--dm-toast-scroll-top', `${Math.max(0, headerBottom) + 12}px`);
+    return;
+  }
+  toast.style.removeProperty('--dm-toast-bottom');
+  toast.style.removeProperty('--dm-toast-left');
+  toast.style.removeProperty('--dm-toast-width');
+  const notice = toast.getBoundingClientRect();
+  const obstacles = [...appRoot.querySelectorAll('.bottom-actions, .result-actions, .stage-footer, .step-meta, .question-block, .choice-pair, .review-list, .option-list, .title-line, .option-nav, .option-heading, .pros-grid, .pros-instruction, .result-title, .result-intro, .result-list, button, input, textarea, select, summary, .appbar, .result-note, [role="progressbar"], .result-tabs')]
+    .map(bar => bar.getBoundingClientRect());
+  if (header) obstacles.push(header.getBoundingClientRect());
+  const viewport = {width: document.documentElement.clientWidth || window.innerWidth,
+    height: document.documentElement.clientHeight || window.innerHeight};
+  const placement = findToastPlacement(notice, obstacles, viewport);
+  if (placement) {
+    // Moving an auto-width fixed box changes its available shrink-to-fit width.
+    // Keep the measured border-box width so the chosen geometry stays valid.
+    toast.style.setProperty('--dm-toast-width', `${notice.width}px`);
+    toast.style.setProperty('--dm-toast-bottom', `${viewport.height - placement.bottom}px`);
+    toast.style.setProperty('--dm-toast-left', `${placement.left + placement.width / 2}px`);
+  } else {
+    toast.classList.add('in-flow');
+    const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+    toast.style.setProperty('--dm-toast-scroll-top', `${Math.max(0, headerBottom) + 12}px`);
+    // Only a new notice requests reveal. Passive layout changes must not
+    // pull the reader away from their manually chosen scroll position.
+    // End alignment avoids adding the shared page's top scroll padding twice.
+    if (reveal) toast.scrollIntoView({block: 'end', behavior: 'auto'});
+  }
+}
+let toastPlacementQueued = false;
+function queueToastPlacement() {
+  if (toastPlacementQueued) return;
+  toastPlacementQueued = true;
+  requestAnimationFrame(() => {
+    toastPlacementQueued = false;
+    placeToast(false);
+  });
+}
+window.addEventListener('resize', queueToastPlacement, {passive: true});
+window.addEventListener('scroll', queueToastPlacement, {passive: true, capture: true});
 
 function notify(message) {
+  if (dialogUi.routeNotice(message)) return;
   const toast = $('#toast');
   toast.textContent = message;
+  toast.classList.remove('in-flow');
   toast.classList.add('visible');
+  placeToast();
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('visible'), 4200);
+  toastTimer = setTimeout(() => { toast.classList.remove('visible'); toast.classList.remove('in-flow'); }, 4200);
 }
 
-function storageWarning(message) {
-  $('#storage-warning').hidden = false;
-  $('#storage-warning').textContent = message;
+function storageWarning(message, kind = 'draft') {
+  storageWarnings[kind] = message;
+  const labels = { draft: 'Current draft', history: 'Saved decisions' };
+  const messages = Object.entries(storageWarnings)
+    .filter(([, text]) => text)
+    .map(([key, text]) => `${Object.hasOwn(labels, key) ? labels[key] : 'Saved data'}: ${text}`);
+  $('#storage-warning').hidden = messages.length === 0;
+  $('#storage-warning').textContent = messages.join('\n\n');
 }
 
+function currentDraft() { return createDraft(state, {pairIndex, optionIndex, savedEntryId}); }
 function loadLocalData() {
-  try {
-    draftRaw = localStorage.getItem(DRAFT_KEY);
-    if (draftRaw !== null) {
-      try {
-        const draft = parseDraft(draftRaw);
-        state = draft.decision;
-        pairIndex = draft.pairIndex;
-        optionIndex = draft.optionIndex;
-        savedEntryId = draft.savedEntryId;
-      } catch {
-        unreadableDraftRaw = draftRaw;
-        throw new Error('Unreadable draft');
-      }
-    }
-  } catch {
-    storageBlocked = true;
-    storageWarning(
-      unreadableDraftRaw !== null
-        ? 'This draft could not be restored. Its stored data has been kept. Open Files & privacy to export a backup or discard the unreadable draft. You can keep working in this tab.'
-        : 'Draft storage is unavailable. You can work in this tab and export your decision from Files & privacy.',
-    );
+  const draft = localStore.loadDraft();
+  if (draft) {
+    state = draft.decision; pairIndex = draft.pairIndex;
+    optionIndex = draft.optionIndex; savedEntryId = draft.savedEntryId;
   }
-  try {
-    historyRaw = localStorage.getItem(HISTORY_KEY);
-    if (historyRaw) history = validateHistory(JSON.parse(historyRaw));
-  } catch {
-    historyBlocked = true;
-    storageWarning(
-      'Saved decisions could not be read. Their stored data has been kept. Your current decision can still be exported.',
-    );
-  }
+  loadHistory();
+  resetMeasurementOwner();
 }
-
-function persist() {
-  if (storageBlocked) return false;
-  try {
-    if (localStorage.getItem(DRAFT_KEY) !== draftRaw) {
-      storageBlocked = true;
-      storageWarning(
-        'This draft changed in another tab. Export your work before reloading to use the other version.',
-      );
-      return false;
-    }
-    const raw = serializeDraft(
-      createDraft(state, { pairIndex, optionIndex, savedEntryId }),
-    );
-    localStorage.setItem(DRAFT_KEY, raw);
-    draftRaw = raw;
-    return true;
-  } catch {
-    storageBlocked = true;
-    storageWarning(
-      'Your browser could not save this draft. You can continue here and export a copy from Files & privacy.',
-    );
-    return false;
-  }
-}
-
-function writeHistory(next) {
-  if (historyBlocked)
-    throw new Error(
-      'Saved decisions are unavailable. Export a file to keep this decision.',
-    );
-  if (localStorage.getItem(HISTORY_KEY) !== historyRaw) {
-    historyBlocked = true;
-    throw new Error(
-      'Saved decisions changed in another tab. Export your current work, then reload before saving.',
-    );
-  }
-  const raw = JSON.stringify(validateHistory(next));
-  localStorage.setItem(HISTORY_KEY, raw);
-  historyRaw = raw;
-  history = next;
-  renderRecent();
-}
+function resetMeasurementOwner(){measurement.replace(state,{unfinished:!['options','results'].includes(state.step),completed:state.step==='results'});}
+function validMeasurementState(){try{validateDecision(state);return true;}catch{return false;}}
+function loadHistory() { return localStore.loadHistory(); }
+function persist() { return localStore.persist(currentDraft); }
+function writeHistory(next, expectedRaw) { localStore.writeHistory(next, expectedRaw); renderRecent(); }
 
 function checkpoint() {
   validateDecision(state);
-  persist();
+  return persist();
 }
-
-function openDialog({
-  title,
-  body,
-  accept = null,
-  submit = null,
-  focus = null,
-  context = null,
-}) {
-  if (dialog.open) dialog.close();
-  dialogTrigger = document.activeElement;
-  dialogSubmit = submit;
-  dialogContext = context;
-  $('#dialog-title').textContent = title;
-  $('#dialog-body').innerHTML = body;
-  $('#dialog-error').textContent = '';
-  $('#dialog-actions').innerHTML = accept
-    ? `<button type="button" class="secondary-button" data-action="close-dialog">Cancel</button><button type="submit" class="primary-button accent">${escape(accept)}</button>`
-    : `<button type="button" class="secondary-button full-width" data-action="close-dialog">Done</button>`;
-  dialog.showModal();
-  if (focus) $(focus, dialog)?.focus();
-  else $('[data-action="close-dialog"]', dialog).focus();
-}
-
-function closeDialog() {
-  dialog.close();
-}
-
-dialog.addEventListener('close', () => {
-  if (dialog.open) return;
-  dialogSubmit = null;
-  dialogContext = null;
-  (dialogTrigger?.isConnected ? dialogTrigger : screen).focus({
-    preventScroll: true,
-  });
-});
-
-$('#dialog-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (!dialogSubmit) return;
-  try {
-    if (dialogSubmit() !== false) closeDialog();
-  } catch (error) {
-    $('#dialog-error').textContent = error.message || 'Please try again.';
-  }
-});
 
 function confirmAction(title, description, accept, action) {
   openDialog({
     title,
-    body: `<p>${escape(description)}</p>`,
+    body: `<p id="dialog-description">${escape(description)}</p>`,
+    descriptionId: 'dialog-description',
     accept,
     submit: action,
   });
 }
 
-function balanceMarkup() {
-  return `<div class="mini-balance" aria-hidden="true"><div class="balance-beam">${image('compare-ellipse2175')}<div class="balance-alternative">${image('compare-ellipse2174')}${image('compare-add-icon-medium', 'balance-plus')}</div></div>${image('compare-polygon3', 'balance-base')}</div>`;
+function otherReasonsDialog() {
+  const notes = state.opinions.filter((note) => !state.selected.includes(note.optionId));
+  if (!notes.length) return notify('There are no reasons outside the current selection.');
+  openDialog({
+    title: 'Other saved reasons',
+    body: `<p>These reasons belong to options outside your current selection. They stay in your decision and JSON exports, and are not included in the current Pros & Cons results. This view is read-only.</p><ul>${notes.map((note) => `<li><strong>${escape(state.options.find((option) => option.id === note.optionId).title)}</strong>: ${note.type === 'pros' ? 'Pro' : 'Con'} · ${escape(note.text)} <small>${priorities.get(note.priority)} importance</small></li>`).join('')}</ul>`,
+  });
 }
 
-function aiBanner(label = 'Find options with AI') {
-  return `<button class="ai-banner" data-action="ai"><span>${label}</span><span class="ai-orb">${image('home-ic-ai')}</span></button>`;
-}
-
-function primary(label, action, disabled = false) {
-  return `<button class="primary-button" data-action="${action}"${disabled ? ' disabled' : ''}>${label}</button>`;
-}
-
-function guideMarkup() {
-  return `<div class="empty-guide">${image('home-dm-welcome-motif-choices', 'motif')}<h4>How to compare</h4>
-    <button class="guide-row" data-action="add-option">${image('home-step-symbol')}<span><strong>Add your options</strong><small>Tap here or use + below.</small></span></button>
-    <div class="guide-row">${image('home-step-symbol1')}<span><strong>Pros & Cons · 1–3 options</strong><small>List the pros and cons of each option.</small></span></div>
-    <div class="guide-row">${image('home-step-symbol2')}<span><strong>Decision Matrix · 4–8 options</strong><small>Compare options two at a time to rank them.</small></span></div></div>`;
-}
-
-function topicRows() {
-  const rows = topicTab === 'history' ? history.entries : topics;
-  const displayed = topicsExpanded ? rows : rows.slice(0, 2);
-  if (topicTab === 'popular') {
-    if (topicsStatus === 'loading')
-      return '<p class="history-empty" role="status">Loading Popular topics...</p>';
-    if (topicsStatus === 'failed')
-      return '<p class="history-empty">Popular topics could not load. You can add your own options.</p><button class="text-button" data-action="retry-topics">Try loading topics again</button>';
-    if (!displayed.length)
-      return '<p class="history-empty">No Popular topics are available yet. Add your own options to begin.</p>';
+// Disclosure state belongs only to this decision while viewing results.
+// Capture from the old DOM before replacement; comparison mode has no panels.
+function captureResultDetails() {
+  if (detailsDecision !== state || state.step !== 'results') {
+    detailsDecision = state;
+    expandedResultOptions.clear();
+    return;
   }
-  if (!displayed.length)
-    return historyBlocked
-      ? '<p class="history-empty">Saved decisions could not be read. Their stored data has been kept. You can still add your own options.</p>'
-      : '<p class="history-empty">Your saved decisions will appear here. Try Popular for a starting point.</p>';
-  return displayed
-    .map(
-      (item) =>
-        `<button data-action="${topicTab === 'history' ? 'restore' : 'topic'}" data-id="${escape(item.id)}">${escape(topicTab === 'history' ? item.decision.title || 'Untitled decision' : item.title)}</button>`,
-    )
-    .join('');
-}
-
-function homeMarkup() {
-  const count = state.options.length;
-  const startText = count
-    ? count <= 3
-      ? 'Start Pros & Cons'
-      : 'Start Decision Matrix'
-    : 'Add options to start';
-  return `<div class="home-view">${aiBanner()}
-    ${topicsVisible ? `<section class="topics-section"><div class="section-label"><h3>Topics</h3><button class="text-button" data-action="expand-topics">${topicsExpanded ? 'Show less' : 'Show all'}</button></div><div class="topics-card"><div class="topic-tabs"><button aria-pressed="${topicTab === 'history'}" data-action="topic-tab" data-tab="history">${image('home-ic-clock')}History</button><button aria-pressed="${topicTab === 'popular'}" data-action="topic-tab" data-tab="popular">${image('home-uil-arrow-growth1')}Popular</button></div><div class="topic-list">${topicRows()}</div></div></section>` : ''}
-    <section class="list-section${count ? ' has-options' : ''}"><div class="section-label"><h3>List to compare</h3><div class="list-tools"><button class="icon-button" aria-label="How to compare" data-action="help"><span class="question-icon">?</span></button><button class="icon-button${topicsVisible ? ' active-topics' : ''}" data-action="toggle-topics" aria-label="${topicsVisible ? 'Hide' : 'Show'} Topics" aria-pressed="${topicsVisible}">${image('home-topics-toggle')}</button>${count ? '<button class="icon-button" data-action="clear" aria-label="Clear all options"><span class="trash-icon"></span></button>' : ''}</div></div>
-    ${count ? `<p class="count-caption">${count} of 8 options · ${count <= 3 ? 'Explore pros and cons' : `${(count * (count - 1)) / 2} pairwise comparisons`}</p><div class="option-list">${state.options.map((option) => `<div class="option-chip"><button data-action="edit-option" data-id="${option.id}" aria-label="Edit ${escape(option.title)}">${escape(option.title)}</button><button data-action="remove-option" data-id="${option.id}" aria-label="Remove ${escape(option.title)}">×</button></div>`).join('')}</div><div class="title-line"><span>${escape(state.title)}</span><button class="title-button" data-action="name">${state.title ? 'Rename' : 'Name this decision'}</button></div>` : guideMarkup()}
-    <div class="bottom-actions">${primary(startText, 'start', !count)}<button class="add-button" data-action="add-option" aria-label="Add option"${count === 8 ? ' disabled' : ''}>${image('home-ic-plus')}</button></div></section></div>`;
-}
-
-function compareMarkup() {
-  const pair = state.pairs[pairIndex];
-  const options = pair.map((id) =>
-    state.options.find((option) => option.id === id),
-  );
-  return `<div class="stage-view"><div class="step-meta"><span>Comparison ${pairIndex + 1} of ${state.pairs.length}</span>${pairIndex ? '<button class="text-button" data-action="undo">↶ Undo last choice</button>' : ''}</div><div class="progress-track" role="progressbar" aria-label="Comparisons completed" aria-valuemin="0" aria-valuemax="${state.pairs.length}" aria-valuenow="${pairIndex}"><span style="width:${(pairIndex / state.pairs.length) * 100}%"></span></div>
-    <div class="question-block"><h3>What works<br>better for you?</h3><div class="hint-row"><p>Tap a card to choose and see the next pair.</p>${balanceMarkup()}</div></div>
-    <div class="choice-pair">${options.map((option, i) => `<button class="choice-card" data-action="choose" data-id="${option.id}"><span>${escape(option.title)}</span><span class="keyboard-key" aria-hidden="true">${i + 1}</span></button>`).join('')}</div><div class="stage-footer"><span class="count-caption">One pair. One choice. Take your time.</span><button class="text-button" data-action="pause">Save & pause</button></div></div>`;
-}
-
-function reviewMarkup() {
-  const ranked = orderedResults(state);
-  return `<div class="stage-view"><div class="question-block"><h3>A clearer picture<br>of your options.</h3><div class="hint-row"><p>Choose up to three options to explore their pros and cons.</p>${balanceMarkup()}</div></div><div class="review-list">${ranked.map((option, i) => `<button class="review-card" data-action="select-review" data-id="${option.id}" aria-pressed="${state.selected.includes(option.id)}"><span class="select-circle">${state.selected.includes(option.id) ? '✓' : i + 1}</span><span class="review-label">${escape(option.title)}</span><span class="wins">${option.wins} ${option.wins === 1 ? 'choice' : 'choices'}</span></button>`).join('')}</div><p class="selected-count">${state.selected.length} of 3 selected</p><div class="bottom-actions">${primary('Explore Pros & Cons', 'begin-pros', !state.selected.length)}</div><div class="stage-footer"><button class="text-button" data-action="comparison-results">View comparison results</button></div></div>`;
-}
-
-function reasonRow(note) {
-  return `<div class="reason-row"><button class="reason-text" data-action="edit-reason" data-id="${note.id}">${escape(note.text)}</button><button class="priority-badge" data-value="${note.priority}" data-action="priority" data-id="${note.id}" aria-label="${escape(note.text)}: ${priorities.get(note.priority)} importance, change">${priorityLetters.get(note.priority)}</button></div>`;
-}
-
-function prosMarkup() {
-  const option = state.options.find(
-    (o) => o.id === state.selected[optionIndex],
-  );
-  return `<div class="stage-view"><div class="option-nav" aria-label="Options to explore">${state.selected.map((id, i) => `<button data-action="option-tab" data-index="${i}" aria-current="${i === optionIndex}">${escape(state.options.find((o) => o.id === id).title)}</button>`).join('')}</div><h3 class="option-heading">${escape(option.title)}</h3>${aiBanner('Find pros and cons with AI')}<div class="pros-grid">${[
-    'pros',
-    'cons',
-  ]
-    .map((type) => {
-      const notes = state.opinions.filter(
-        (n) => n.optionId === option.id && n.type === type,
-      );
-      return `<section class="pros-column"><div class="section-label"><h3>${type === 'pros' ? 'Pros' : 'Cons'}</h3>${type === 'pros' ? image('pros-priority') : ''}</div><div class="reasons-card">${notes.length ? notes.map(reasonRow).join('') : `<p class="reasons-empty">What ${type === 'pros' ? 'supports' : 'makes you hesitate about'} this option?</p>`}<button class="inline-add" data-action="add-reason" data-type="${type}"><span aria-hidden="true">+</span>Add a ${type === 'pros' ? 'pro' : 'con'}</button></div></section>`;
-    })
-    .join(
-      '',
-    )}</div><p class="pros-instruction">Tap a reason to edit it. Tap its letter to set how much it matters to you.</p><div class="bottom-actions">${primary(optionIndex < state.selected.length - 1 ? 'Next option' : 'See my result', 'next-pros')}<button class="add-button" data-action="add-reason" aria-label="Add a reason">${image('pros-ic-plus')}</button></div></div>`;
-}
-
-function resultMarkup() {
-  const reasonMode = resultTab === 'reasons' && state.selected.length;
-  const ranked = orderedResults(state);
-  const rows = reasonMode
-    ? ranked
-        .filter((row) => state.selected.includes(row.id))
-        .sort((a, b) => b.prosCons - a.prosCons)
-    : ranked;
-  return `<div class="stage-view"><h3 class="result-title">Your choice,<br>a little clearer.</h3>${aiBanner('Reflect on your result with AI')}<p class="result-intro">Here’s how your options look based on what you’ve shared.</p>
-    ${state.pairs.length && state.selected.length ? `<div class="result-tabs"><button data-action="result-tab" data-tab="reasons" aria-pressed="${!!reasonMode}">Pros & Cons</button><button data-action="result-tab" data-tab="comparison" aria-pressed="${!reasonMode}">Pairwise comparison</button></div>` : ''}
-    <div class="result-list">${rows
-      .map((row) => {
-        const score = reasonMode ? row.prosCons : row.comparison;
-        const notes = state.opinions.filter((n) => n.optionId === row.id);
-        return `<article class="result-card"><div><strong>${escape(row.title)}</strong><span class="result-score">${score ?? 50}<small>/ 100</small></span></div><div class="result-meter" role="meter" aria-label="${escape(row.title)} ${reasonMode ? 'pros and cons' : 'pairwise'} score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${score ?? 50}"><span style="width:${score ?? 50}%"></span></div><small>${reasonMode ? (notes.length ? `${notes.filter((n) => n.type === 'pros').length} pros · ${notes.filter((n) => n.type === 'cons').length} cons` : 'No reasons added. Neutral starting score.') : `${row.wins} of ${state.options.length - 1} pairwise choices`}</small>${reasonMode && notes.length ? `<details><summary>Review your reasons</summary><ul>${notes.map((n) => `<li>${n.type === 'pros' ? '+' : '−'} ${escape(n.text)} <small>${priorities.get(n.priority)} importance</small></li>`).join('')}</ul></details>` : ''}</article>`;
-      })
-      .join(
-        '',
-      )}</div><p class="result-note">${reasonMode ? 'The balance of your reasons, weighted by their importance.' : 'How often you chose each option in the pairwise comparisons.'} These scores reflect your inputs. They aren’t probabilities or instructions about what to choose.</p><div class="result-actions"><button class="secondary-button" data-action="${state.selected.length ? 'revise-pros' : 'revise-review'}">${state.selected.length ? 'Review reasons' : 'Explore reasons'}</button>${primary('Save decision', 'save')}</div></div>`;
-}
-
-function renderRecent() {
-  $('#recent').innerHTML = history.entries.length
-    ? history.entries
-        .slice(0, 2)
-        .map(
-          (entry) =>
-            `<button class="recent-row" data-action="restore" data-id="${entry.id}"><span><strong>${escape(entry.decision.title || 'Untitled decision')}</strong><small>${entry.decision.options.length} options · ${new Date(entry.savedAt).toLocaleDateString('en', { day: 'numeric', month: 'short' })}</small></span><span aria-hidden="true">↗</span></button>`,
-        )
-        .join('')
-    : '<p class="history-empty-note">A fresh start. Your saved decisions will find a home here.</p>';
+  for (const panel of stage.querySelectorAll('details[data-result-option-id]')) {
+    if (panel.open) expandedResultOptions.add(panel.dataset.resultOptionId);
+    else expandedResultOptions.delete(panel.dataset.resultOptionId);
+  }
 }
 
 function render(focus = true) {
+  captureResultDetails();
+  // Any rerender settles an accepted choice instead of leaving an answered
+  // pair on screen after cancelling its animation timer.
+  if (choicePending && state.step === 'compare' && Object.hasOwn(state.answers, String(pairIndex))) {
+    advanceComparison();
+    checkpoint();
+  }
   const previousFocus =
-    !focus && screen.contains(document.activeElement)
+    !focus && stage.contains(document.activeElement)
       ? document.activeElement
       : null;
   const focusIdentity = previousFocus?.dataset.action
@@ -359,7 +219,7 @@ function render(focus = true) {
   choicePending = false;
   const home = state.step === 'options';
   $('#app-title').textContent = home
-    ? 'Decision Matrix'
+    ? 'DOS'
     : state.step === 'compare'
       ? 'Compare options'
       : state.step === 'review'
@@ -372,34 +232,49 @@ function render(focus = true) {
   $('#back').innerHTML = home
     ? '<span class="menu-lines" aria-hidden="true"></span>'
     : image('home-ic-arrows', 'back-arrow');
-  screen.innerHTML = {
-    options: homeMarkup,
-    compare: compareMarkup,
-    review: reviewMarkup,
-    pros: prosMarkup,
-    results: resultMarkup,
-  }[state.step]();
-  screen.classList.remove('screen-enter');
-  requestAnimationFrame(() => screen.classList.add('screen-enter'));
-  for (const li of appRoot.querySelectorAll('.journey li'))
-    li.classList.toggle(
-      'current',
-      li.dataset.stage ===
-        (['pros', 'review'].includes(state.step) ? 'compare' : state.step),
-    );
+  stage.innerHTML = views().render();
+  if (state.step === 'results') {
+    for (const panel of stage.querySelectorAll('details[data-result-option-id]'))
+      panel.open = expandedResultOptions.has(panel.dataset.resultOptionId);
+  }
+  if (state.step === 'compare') {
+    const titles = state.pairs[pairIndex].map(optionId => state.options.find(option => option.id === optionId).title);
+    stage.removeAttribute('aria-labelledby');
+    stage.setAttribute('aria-label', `Comparison ${pairIndex + 1} of ${state.pairs.length}. Choose between ${titles[0]} and ${titles[1]}.`);
+  } else {
+    stage.removeAttribute('aria-label');
+    stage.setAttribute('aria-labelledby', 'app-title');
+  }
+  const viewIdentity = state.step === 'compare' ? `compare:${pairIndex}`
+    : state.step === 'pros' ? `pros:${optionIndex}` : state.step;
+  const enter = renderedView !== viewIdentity;
+  renderedView = viewIdentity;
+  const revision = ++renderRevision;
+  stage.classList.remove('screen-enter');
+  if (enter) requestAnimationFrame(() => {
+    if (revision === renderRevision) stage.classList.add('screen-enter');
+  });
+  for (const li of appRoot.querySelectorAll('.journey li')) {
+    const current = li.dataset.stage ===
+      (['pros', 'review'].includes(state.step) ? 'compare' : state.step);
+    li.classList.toggle('current', current);
+    if (current) li.setAttribute('aria-current', 'step');
+    else li.removeAttribute('aria-current');
+  }
   renderRecent();
+  queueToastPlacement();
   if (focus) {
-    screen.focus({ preventScroll: true });
-    $('#app').scrollIntoView({ block: 'start', behavior: 'instant' });
+    stage.focus({ preventScroll: true });
+    $('#app').scrollIntoView({ block: 'start', behavior: 'auto' });
   } else if (previousFocus) {
     const replacement =
       focusIdentity &&
-      [...screen.querySelectorAll('[data-action]')].find((node) =>
+      [...stage.querySelectorAll('[data-action]')].find((node) =>
         Object.entries(focusIdentity).every(
           ([key, value]) => node.dataset[key] === value,
         ),
       );
-    (replacement || screen).focus({ preventScroll: true });
+    (replacement || stage).focus({ preventScroll: true });
   }
 }
 
@@ -408,37 +283,53 @@ function renderAndSave(focus = true) {
   render(focus);
 }
 
+function mayEditOptions() {
+  if (state.step === 'options') return true;
+  notify('Return to your options before editing the list.');
+  return false;
+}
+
 function optionDialog(optionId = null) {
+  if (!mayEditOptions()) return;
+  const decision = state;
   const current = state.options.find((o) => o.id === optionId);
+  if (optionId && !current) return notify('This option is no longer available.');
   if (state.options.length >= 8 && !current)
     return notify('Eight options is the maximum for one decision.');
   openDialog({
     title: current ? 'Edit your option' : 'Add an option',
-    body: `<label class="form-label" for="option-input">What are you considering?</label><textarea class="form-input" id="option-input" maxlength="100" placeholder="For example, stay in my current role" rows="3" aria-describedby="dialog-error">${escape(current?.title || '')}</textarea><p class="form-help">Short or long, write it in your own words. Up to 100 characters.</p>`,
+    body: `<label class="form-label" for="option-input">What are you considering?</label><textarea class="form-input" id="option-input" maxlength="100" placeholder="For example, stay in my current role" rows="3" aria-describedby="option-help dialog-error">${escape(current?.title || '')}</textarea><p class="form-help" id="option-help">Short or long, write it in your own words. Up to 100 characters.</p>`,
     accept: current ? 'Save changes' : 'Add option',
     focus: '#option-input',
     submit: () => {
+      if (!mayEditOptions()) return false;
+      if (state !== decision || (current && !state.options.includes(current)))
+        throw new DecisionError('This decision changed. Close this editor and try again.');
+      if (!current && state.options.length >= 8)
+        throw new DecisionError('Eight options is the maximum for one decision.');
       const value = $('#option-input').value.trim();
-      if (!value) throw new Error('Give this option a name.');
+      if (!value) throw new DecisionError('Give this option a name.');
       if (value.length > 100)
-        throw new Error('Keep the name within 100 characters.');
+        throw new DecisionError('Keep the name within 100 characters.');
       if (
         state.options.some(
           (o) =>
-            o.id !== optionId && o.title.toLowerCase() === value.toLowerCase(),
+            o.id !== optionId && o.title.trim().toLowerCase() === value.toLowerCase(),
         )
       )
-        throw new Error('This option is already in your list.');
+        throw new DecisionError('This option is already in your list.');
       if (current) current.title = value;
       else state.options.push({ id: id('o'), title: value });
-      if (state.options.length >= 2) topicsExpanded = false;
+      if (!current && state.options.length >= 2) topicsExpanded = false;
       renderAndSave();
     },
   });
 }
 
 function start() {
+  choiceUndoStack = [];
   if (!state.options.length) return;
+  const metric=state.step==='options'&&validMeasurementState()?measurement.request(state):null;
   if (state.options.length <= 3) {
     state.step = 'pros';
     state.selected = state.options.map((o) => o.id);
@@ -449,7 +340,17 @@ function start() {
     pairIndex = 0;
     state.step = 'compare';
   }
-  renderAndSave();
+  try{renderAndSave();if(validMeasurementState())measurement.started(metric);}
+  catch(error){measurement.failed(metric);throw error;}
+}
+
+function updateComparisonProgress() {
+  const count = Object.keys(state.answers).length;
+  const progress = stage.querySelector('[role="progressbar"]');
+  if (!progress) return;
+  progress.setAttribute('aria-valuenow', String(count));
+  const fill = progress.querySelector('span');
+  if (fill) fill.style.width = `${count / state.pairs.length * 100}%`;
 }
 
 function choose(optionId) {
@@ -459,34 +360,49 @@ function choose(optionId) {
     !state.pairs[pairIndex].includes(optionId)
   )
     return;
-  choicePending = true;
-  const chosen = screen.querySelector(
+  const chosen = stage.querySelector(
     `[data-action="choose"][data-id="${optionId}"]`,
   );
+  if (!chosen) return notify('This comparison changed. Export your current decision from Files & privacy before reloading.');
+  const metric=measurement.capture(state),previous=state.answers[String(pairIndex)];
+  choicePending = true;
+  choiceUndoStack.push(pairIndex);
   chosen.classList.add('selected');
-  screen.querySelectorAll('[data-action="choose"]').forEach((b) => {
+  const choices = [...stage.querySelectorAll('[data-action="choose"]')];
+  if (choices.some(card => card.contains(document.activeElement)))
+    stage.focus({preventScroll: true});
+  choices.forEach((b) => {
     b.disabled = true;
   });
   state.answers[String(pairIndex)] = optionId;
   checkpoint();
+  if(previous!==optionId)measurement.advance(metric);
+  updateComparisonProgress();
   choiceTimer = setTimeout(
-    () => {
-      if (pairIndex < state.pairs.length - 1) pairIndex++;
-      else {
-        state.step = 'review';
-        state.selected = orderedResults(state)
-          .slice(0, 3)
-          .map((o) => o.id);
-      }
+    () => handleAction(() => {
+      advanceComparison();
       renderAndSave();
-    },
+    }),
     matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 240,
   );
 }
 
-function undo() {
+function advanceComparison() {
   clearTimeout(choiceTimer);
-  if (choicePending) delete state.answers[String(pairIndex)];
+  choicePending = false;
+  resumeComparison();
+}
+
+function undo() {
+  if (!choicePending && !choiceUndoStack.length && pairIndex === 0) return;
+  clearTimeout(choiceTimer);
+  if (choicePending) {
+    delete state.answers[String(pairIndex)];
+    choiceUndoStack.pop();
+  } else if (choiceUndoStack.length) {
+    pairIndex = choiceUndoStack.pop();
+    delete state.answers[String(pairIndex)];
+  }
   else if (pairIndex > 0) {
     pairIndex--;
     delete state.answers[String(pairIndex)];
@@ -495,7 +411,9 @@ function undo() {
 }
 
 function reasonDialog(noteId = null, type = 'pros', priorityOnly = false) {
+  const metric=measurement.capture(state);
   const current = state.opinions.find((n) => n.id === noteId);
+  if ((noteId || priorityOnly) && !current) return notify('This reason is no longer available. Reopen the reason list to continue.');
   if (!current && state.opinions.length >= 120)
     return notify(
       'You have reached the limit of 120 reasons. Edit an existing reason to continue.',
@@ -509,84 +427,88 @@ function reasonDialog(noteId = null, type = 'pros', priorityOnly = false) {
         ? 'Edit your reason'
         : 'Add a reason',
     context: { priority: weight },
-    focus: priorityOnly ? null : '#reason-input',
+    focus: priorityOnly ? `[data-action="set-priority"][data-value="${weight}"]` : '#reason-input',
     body: `
-    ${priorityOnly ? `<p>${escape(current.text)}</p>` : `<label class="form-label" for="reason-input">Your reason</label><textarea class="form-input" id="reason-input" maxlength="400" rows="3" placeholder="What matters to you?" aria-describedby="dialog-error">${escape(current?.text || '')}</textarea><label class="form-label" for="reason-type">This is a</label><select class="form-input" id="reason-type"><option value="pros"${type === 'pros' ? ' selected' : ''}>Pro</option><option value="cons"${type === 'cons' ? ' selected' : ''}>Con</option></select>`}
-    <p class="form-label">Importance</p><div class="priority-legend">${[1, 3, 5, 8].map((value) => `<button type="button" data-action="set-priority" data-value="${value}" aria-pressed="${value === weight}">${priorities.get(value)}<br><strong>${priorityLetters.get(value)}</strong></button>`).join('')}</div>${current && !priorityOnly ? `<button type="button" class="text-button danger-button" data-action="remove-reason" data-id="${current.id}">Delete this reason</button>` : ''}`,
+    ${priorityOnly ? `<p>${escape(current.text)}</p>` : `<label class="form-label" for="reason-input">Your reason</label><textarea class="form-input" id="reason-input" maxlength="400" rows="3" placeholder="What matters to you?" aria-describedby="reason-help dialog-error">${escape(current?.text || '')}</textarea><p id="reason-help" class="form-help">Up to 400 characters.</p><label class="form-label" for="reason-type">This is a</label><select class="form-input" id="reason-type"><option value="pros"${type === 'pros' ? ' selected' : ''}>Pro</option><option value="cons"${type === 'cons' ? ' selected' : ''}>Con</option></select>`}
+    <p class="form-label" id="reason-importance-label">Importance</p><div class="priority-legend" role="group" aria-labelledby="reason-importance-label">${[1, 3, 5, 8].map((value) => `<button type="button" data-action="set-priority" data-value="${value}" aria-pressed="${value === weight}">${priorities.get(value)}<br><strong>${priorityLetters.get(value)}</strong></button>`).join('')}</div>${current && !priorityOnly ? `<button type="button" class="text-button danger-button" data-action="remove-reason" data-id="${escape(current.id)}">Delete this reason</button>` : ''}`,
     accept: 'Save reason',
     submit: () => {
       const value = priorityOnly
         ? current.text
         : $('#reason-input').value.trim();
-      if (!value) throw new Error('Write a reason before saving.');
+      if (!value) throw new DecisionError('Write a reason before saving.');
+      if (value.length > 400) throw new DecisionError('Keep the reason within 400 characters.');
       const data = {
         text: value,
         type: priorityOnly ? type : $('#reason-type').value,
-        priority: dialogContext.priority,
+        priority: dialogUi.context.priority,
       };
-      if (current) Object.assign(current, data);
-      else
-        state.opinions.push({
-          id: id('n'),
-          optionId: state.selected[optionIndex],
-          ...data,
-        });
-      renderAndSave();
+      const note = current || {id: id('n'), optionId: state.selected[optionIndex]};
+      const productive=!current||current.text!==data.text||current.type!==data.type||current.priority!==data.priority;
+      Object.assign(note, data);
+      if (!current) state.opinions.push(note);
+      renderAndSave(false);
+      if(productive)measurement.advance(metric);
+      const action = priorityOnly ? 'priority' : 'edit-reason';
+      dialogUi.returnFocusTo(stage.querySelector(`[data-action="${action}"][data-id="${note.id}"]`), true);
     },
   });
 }
 
 function saveDialog() {
   if (!state.options.length) return notify('Add an option before saving.');
+  const target = localStore.snapshot.history.entries.find(entry => entry.id === savedEntryId);
+  const expectedRaw = localStore.snapshot.historyRaw;
   openDialog({
-    title: 'Keep this decision',
-    body: '<p>Save a named copy in this browser, so you can return to it.</p><label class="form-label" for="decision-name">Decision name</label><input class="form-input" id="decision-name" maxlength="160" aria-describedby="dialog-error">',
-    accept: 'Save decision',
+    title: target ? 'Update saved decision' : 'Save a new copy',
+    body: `${target ? `<p>Updating replaces your saved copy <strong>${escape(decisionLabel(target.decision.title))}</strong> with this decision. Choose Save as new copy to keep both versions.</p><button type="button" class="secondary-button" data-action="save-as-new">Save as new copy</button>` : '<p>Create a named copy of this decision in this browser.</p>'}<label class="form-label" for="decision-name">Decision name</label><input class="form-input" id="decision-name" maxlength="160" aria-describedby="decision-name-help dialog-error"><p id="decision-name-help" class="form-help">Up to 160 characters.</p>`,
+    accept: target ? 'Update saved copy' : 'Save new copy',
+    context: {kind: 'save-decision'},
     focus: '#decision-name',
-    submit: () => {
+    submit: (asNew = false) => {
       const title = $('#decision-name').value.trim();
-      if (!title) throw new Error('Give this decision a name.');
-      const current = history.entries.find((e) => e.id === savedEntryId);
-      if (!current && history.entries.length >= MAX_HISTORY)
-        throw new Error(
-          `Your history has ${MAX_HISTORY} decisions. Export a file or remove an old decision first.`,
-        );
-      const entryId = current?.id || id('d');
-      const decision = validateDecision({ ...clone(state), title });
-      const entry = { id: entryId, savedAt: Date.now(), decision };
-      const next = {
-        schemaVersion: 1,
-        entries: [entry, ...history.entries.filter((e) => e.id !== entryId)],
-      };
-      writeHistory(next);
-      savedEntryId = entryId;
-      state.title = title;
-      checkpoint();
-      render(false);
-      notify('Decision saved on this device.');
+      if (!title) throw new DecisionError('Give this decision a name.');
+      if (title.length > 160) throw new DecisionError('Keep the decision name within 160 characters.');
+      const update = target && !asNew;
+      if (update && !localStore.snapshot.history.entries.some(entry => entry.id === target.id))
+        throw new DecisionError('This saved copy changed. Reopen Saved decisions to view the current version.');
+      if (!update && localStore.snapshot.history.entries.length >= MAX_HISTORY)
+        throw new DecisionError(`Your history has ${MAX_HISTORY} decisions. Export a file or remove an old decision first.`);
+      const entryId = update ? target.id : id('d');
+      if (!update && localStore.snapshot.history.entries.some(entry => entry.id === entryId))
+        throw new DecisionError('A unique saved-copy id could not be created. Try saving again.');
+      const decision = validateDecision({...clone(state), title});
+      writeHistory({schemaVersion: 1, entries: [{id: entryId, savedAt: Date.now(), decision},
+        ...localStore.snapshot.history.entries.filter(entry => entry.id !== entryId)]}, expectedRaw);
+      savedEntryId = entryId; state.title = title;
+      checkpoint(); render(false);
+      notify(update ? 'Saved copy updated.' : target ? 'Saved as a new copy. The earlier saved copy is unchanged.' : 'Decision saved on this device.');
     },
   });
   $('#decision-name').value = state.title || '';
 }
 
 function historyDialog() {
+  if (localStore.snapshot.historyBlocked)
+    return openDialog({
+      title: localStore.snapshot.history.entries.length ? 'Recover named copies in this tab' : 'Saved decisions are unavailable',
+      body: `<p>${escape(blockedHistoryMessage())}</p>${recoveryFreshnessNote}${historyRecoveryMarkup()}<button type="button" class="secondary-button" data-action="files">Files & privacy</button>`,
+    });
   openDialog({
     title: 'Your decisions',
-    body: `<p class="form-help">Saved on this device only.</p>${history.entries.length ? history.entries.map((e) => `<button type="button" class="dialog-topic" data-action="restore" data-id="${e.id}"><strong>${escape(e.decision.title || 'Untitled decision')}</strong><small>${e.decision.options.length} options · ${new Date(e.savedAt).toLocaleDateString('en', { day: 'numeric', month: 'short', year: 'numeric' })}</small></button><div class="history-actions"><button type="button" data-action="export-saved" data-id="${e.id}">Export JSON</button><button type="button" data-action="delete-saved" data-id="${e.id}">Delete</button></div>`).join('') : '<p class="dialog-note">Your saved decisions will appear here. Start with a decision, then use Save to keep a named copy.</p>'}`,
+    body: `<p class="form-help">Saved on this device only.</p>${recoveryFreshnessNote}${localStore.snapshot.history.entries.length ? localStore.snapshot.history.entries.map((e) => `<button type="button" class="dialog-topic" data-action="restore" data-id="${escape(e.id)}"><strong>${escape(decisionLabel(e.decision.title))}</strong><small>${e.decision.options.length} options · ${formatSavedDate(e.savedAt, {day: 'numeric', month: 'short', year: 'numeric'})}</small></button><div class="history-actions"><button type="button" data-action="export-saved" data-id="${escape(e.id)}">Export JSON</button><button type="button" data-action="delete-saved" data-id="${escape(e.id)}">Delete</button></div>`).join('') : '<p class="dialog-note">Your saved decisions will appear here. Start with a decision, then use Save to keep a named copy.</p>'}`,
   });
 }
 
 function replaceDecision(decision, cursor = {}) {
   clearTimeout(choiceTimer);
+  choicePending = false;
   state = validateDecision(decision);
+  resetMeasurementOwner();
+  resultTab = 'reasons';
+  choiceUndoStack = [];
   pairIndex = cursor.pairIndex || 0;
-  if (state.step === 'compare') {
-    const next = state.pairs.findIndex(
-      (_, i) => !Object.hasOwn(state.answers, String(i)),
-    );
-    if (next >= 0) pairIndex = next;
-    else state.step = 'review';
-  }
+  resumeComparison();
   optionIndex = 0;
   savedEntryId = cursor.savedEntryId || null;
   checkpoint();
@@ -594,8 +516,8 @@ function replaceDecision(decision, cursor = {}) {
 }
 
 function restore(entryId) {
-  const entry = history.entries.find((e) => e.id === entryId);
-  if (!entry) return;
+  const entry = localStore.snapshot.history.entries.find((e) => e.id === entryId);
+  if (!entry) return unavailableSavedDecision();
   confirmAction(
     'Open this decision?',
     'Your current draft will be replaced. Save or export it first if you want to keep it.',
@@ -604,8 +526,12 @@ function restore(entryId) {
   );
 }
 
+function unavailableSavedDecision() {
+  notify('This saved decision is no longer in this tab. Reopen Saved decisions from the menu to view the current list.');
+}
+
 function applyTopic(topicId) {
-  const topic = topics.find((t) => t.id === topicId);
+  const topic = topicCatalog.rows.find((t) => t.id === topicId);
   if (!topic) return;
   const count = Math.min(8, topic.options.length);
   confirmAction(
@@ -632,7 +558,7 @@ function helpDialog() {
     ],
     compare: [
       'Choose what works better for you',
-      'Choose one of the two cards. The next pair appears automatically. There is no correct answer. Use Undo to reconsider your last choice. On a keyboard, press 1 or 2.',
+      'Choose one of the two cards. The next pair appears automatically. There is no correct answer. Undo last choice reverses your latest choice in this tab. After reopening, Previous saved answer steps back through earlier saved answers. On a keyboard, press 1 or 2.',
     ],
     review: [
       'Take a closer look',
@@ -644,68 +570,182 @@ function helpDialog() {
     ],
     results: [
       'Your perspective, brought together',
-      'Pairwise scores and pros-and-cons scores answer different questions. Pairwise scores count preferences. Pros-and-cons scores use the same importance-weighted curve as the DM app. With no reasons, the score starts at 50.',
+      'Pairwise scores and pros-and-cons scores answer different questions. Pairwise scores count preferences. Pros-and-cons scores reflect your reasons, weighted by their importance. With no reasons, the score starts at 50.',
     ],
   };
   const [title, description] = messages[state.step];
   openDialog({
     title,
-    body: `${balanceMarkup()}<p>${description}</p>${state.step === 'options' ? `<div class="help-steps">${guideMarkup()}</div>` : ''}<p class="dialog-note">Your choices stay in this browser. Scores describe your inputs and help you reflect. They are not predictions.</p>`,
+    body: `${balanceMarkup()}<p>${description}</p>${state.step === 'options' ? `<div class="help-steps">${guideMarkup()}</div>` : ''}<div class="file-actions"><button type="button" data-action="files">Files & privacy · Export or import a decision</button></div><p class="dialog-note">Your choices stay in this browser. Scores describe your inputs and help you reflect. They are not predictions.</p>`,
   });
+}
+
+function historyRecoveryMarkup() {
+  const originalChanged = localStore.snapshot.unreadableHistoryRaw !== null && localStore.snapshot.historyRaw !== localStore.snapshot.unreadableHistoryRaw;
+  const original = localStore.snapshot.unreadableHistoryRaw !== null
+    ? `<section><h3>Unreadable saved decisions</h3><p>A copy of the original data has been kept in this tab. Export it and your current decision before discarding it if you need backups. This backup may need repair and cannot be opened as a single decision file.</p><div class="file-actions"><button type="button" data-action="export-unreadable-history">Export unreadable saved decisions · Original data</button>${localStore.snapshot.pendingHistoryRaw === undefined && !originalChanged ? '<button type="button" data-action="discard-unreadable-history">Discard unreadable saved data</button>' : ''}</div>${originalChanged && localStore.snapshot.pendingHistoryRaw === undefined ? '<p class="dialog-note">The stored data changed after this backup was captured. Export the original backup, current decision and any named copies in this tab, then reload to inspect the other stored data. The replacement will not be discarded here.</p>' : localStore.snapshot.pendingHistoryRaw === undefined ? '<p class="dialog-note">Discarding removes the unreadable saved data and tries to save any named copies already in this tab. Your current draft is separate. Close other DOS tabs first to avoid competing changes.</p>' : ''}</section>`
+    : '';
+  const replacement = localStore.snapshot.pendingHistoryRaw !== undefined
+    ? `<section><h3>Choose your saved decisions</h3><p>The stored version changed. Any captured original backup and named copies in this tab remain available below or above. Export them before switching if you want to keep them. Your current draft stays separate.</p><div class="file-actions"><button type="button" data-action="use-stored-history">${localStore.snapshot.pendingHistoryRaw === null ? 'Use the now-empty saved history' : 'Use the stored saved decisions'}</button>${localStore.snapshot.pendingHistoryRaw === null && localStore.snapshot.history.entries.length ? '<button type="button" data-action="save-memory-history">Save named copies from this tab</button>' : ''}</div><p class="dialog-note">Each action asks for confirmation and checks the stored value again. Close other DOS tabs first to avoid competing changes.</p></section>`
+    : '';
+  const copies = localStore.snapshot.historyBlocked && localStore.snapshot.history.entries.length
+    ? `<section><h3>Named copies in this tab</h3><p>These copies are still in memory. Export each as a decision file before reloading.</p><div class="file-actions">${localStore.snapshot.history.entries.map((e) => `<button type="button" data-action="export-saved" data-id="${escape(e.id)}">Export ${escape(decisionLabel(e.decision.title))} · JSON</button>`).join('')}</div></section>`
+    : '';
+  const paused = localStore.snapshot.historyBlocked
+    ? '<p class="dialog-note">If saving named copies is still paused, export your current decision and copies kept in this tab, then reload to retry. We don’t automatically merge different versions or repeat a failed write.</p>'
+    : '';
+  return original + replacement + copies + paused;
+}
+
+function refreshDraftRecoveryState() { localStore.refreshDraftRecoveryState(); }
+
+function draftRecoveryMarkup() {
+  if (localStore.snapshot.unreadableDraftRaw === null) return '';
+  return `<section><h3>Unreadable draft</h3><p>Its original stored data has been kept. Export that data and your current decision before discarding it if you want backups. The unreadable backup may need repair before it can be imported.</p><div class="file-actions"><button type="button" data-action="export-unreadable-draft">Export unreadable draft · Original data</button>${localStore.snapshot.draftRecoveryChanged ? '' : '<button type="button" data-action="discard-unreadable-draft">Discard unreadable draft</button>'}</div><p class="dialog-note">${localStore.snapshot.draftRecoveryChanged ? 'The stored draft no longer matches this backup or cannot be checked. Export the original backup and your current decision, then reload to inspect the other stored version. It will not be discarded here.' : 'Discarding removes only this unreadable draft and enables saving your current decision. Named saved decisions are kept. Before discarding, we check that the stored draft still matches the unreadable data.'}</p></section>`;
+}
+
+function earlierWorkspaceDialog() {
+  const snapshot = earlierReader.capture();
+  const names = {draft: 'Earlier draft', history: 'Earlier saved decisions', single: 'Earlier single decision'};
+  const states = {
+    'malformed-json': 'The original text could not be read as JSON.',
+    'too-large': 'This copy is too large for a readable preview here.',
+    'unsupported-shape': 'This copy uses a format this reader cannot preview.',
+    'decoder-unavailable': 'A readable preview is unavailable in this browser.',
+    'decoded-with-issues': 'Some saved-copy metadata needs review. The original backup contains every entry.',
+  };
+  const sections = snapshot.slots.map(slot => {
+    const heading = `<h3>${names[slot.kind]}</h3>`;
+    if (slot.readState === 'absent') return `<section>${heading}<p>No copy found for this website in this browser profile.</p></section>`;
+    if (slot.readState === 'unavailable') return `<section>${heading}<p>Browser storage could not be read. Other copies are checked separately. Close and reopen this view after restoring access.</p></section>`;
+    return `<section>${heading}<button type="button" class="secondary-button" data-action="export-earlier-original" data-kind="${slot.kind}">Export original backup</button>${states[slot.parseState] ? `<p>${states[slot.parseState]}</p>` : ''}${slot.entries.length === 0 && slot.parseState === 'decoded' ? '<p>No saved copies in this snapshot.</p>' : ''}${slot.entries.map(entry => `<details><summary>Copy ${entry.position}: ${escape(decisionLabel(entry.preview?.title))}</summary>${entry.preview ? `<p>Options</p><ul>${entry.preview.options.map(option => `<li>${escape(decisionLabel(option.title, 'Untitled option'))}</li>`).join('')}</ul><p>Reasons</p>${entry.preview.reasons.length ? `<ul>${entry.preview.reasons.map(reason => `<li>${escape(reason.text)}</li>`).join('')}</ul>` : '<p>No reasons in this preview.</p>'}` : '<p>A readable preview is unavailable for this copy.</p>'}${entry.compatibility === 'compatible' ? `<p>This copy passes the current DOS decision-file checks. Export it, then use Import a decision in Files to review and confirm opening it.</p><button type="button" class="secondary-button" data-action="export-earlier-decision" data-kind="${slot.kind}" data-position="${entry.position}">Export this decision for DOS</button>` : `<p>${entry.compatibility === 'too-large' ? 'The prepared decision-file export exceeds the current import size limit.' : 'This copy needs review before DOS can open it. Earlier unanswered comparisons may use a different format.'} Export the original backup to keep it. This reader does not repair or score it.</p>`}</details>`).join('')}</section>`;
+  }).join('');
+  openDialog({title: 'Earlier workspace data', context: {kind: 'earlier-workspace'},
+    body: `<div class="earlier-data"><p>This read-only view checks earlier EmTalk decision data for this website in your current browser profile. It cannot look up data on another website, app, browser profile or device. It does not replace your DOS draft, change scores or write to either workspace.</p><p>This is a snapshot, not a synchronized view. Close and reopen it to check again. Separate storage reads can observe different moments.</p><p>Original backups keep the captured stored text. Draft and saved-history backups include older wrapper data; a single-decision backup may already be a decision file. Only copies that pass current checks offer a separate decision-file export. Earlier progress and saved-copy links remain in the original backup.</p>${sections}<button type="button" class="secondary-button" data-action="files">Back to Files & privacy</button></div>`,
+  });
+  earlierSnapshots.set(dialogUi.session, snapshot);
+}
+
+function exportEarlierCopy(el, original) {
+  if (!dialog.open || dialogUi.context?.kind !== 'earlier-workspace' || !el?.isConnected || !dialog.contains(el)) return;
+  const snapshot = earlierSnapshots.get(dialogUi.session);
+  const slot = snapshot?.slots.find(item => item.kind === el.dataset.kind);
+  if (!slot || slot.readState !== 'present') return;
+  if (original) return download(slot.originalRaw, `dos-earlier-${slot.kind}-original.json`, 'application/json', 'Original backup prepared. Keep it unchanged; it may need review before import.');
+  const entry = slot.entries.find(item => String(item.position) === el.dataset.position);
+  if (entry?.compatibility === 'compatible' && typeof entry.portableJson === 'string')
+    return download(entry.portableJson, `dos-earlier-${slot.kind}-copy-${entry.position}.json`, 'application/json', 'Decision file prepared. Use Import a decision in Files to review and confirm opening it.');
 }
 
 function filesDialog() {
+  refreshDraftRecoveryState();
+  if (localStore.snapshot.historyBlocked) loadHistory();
   openDialog({
     title: 'Files & privacy',
-    body: `<p>Your draft and saved decisions stay in this browser. Export a file to take a copy with you.</p><div class="file-actions"><button type="button" data-action="export">Export current decision · JSON</button><button type="button" data-action="csv">Export results · CSV</button><label>Import a decision · JSON<input class="file-input" type="file" id="import-file" accept="application/json,.json"></label></div>${unreadableDraftRaw !== null ? '<section><h3>Unreadable draft</h3><p>Its original stored data has been kept. Export that data and your current decision before discarding it if you want backups. The unreadable backup may need repair before it can be imported.</p><div class="file-actions"><button type="button" data-action="export-unreadable-draft">Export unreadable draft · Original data</button><button type="button" data-action="discard-unreadable-draft">Discard unreadable draft</button></div><p class="dialog-note">Discarding removes only this unreadable draft and enables saving your current decision. Named saved decisions are kept. Before discarding, we check that the stored draft still matches the unreadable data.</p></section>' : ''}<p class="dialog-note">This prototype uses local calculations. AI, sign-in and cloud sync are not connected. Draft and history storage are separate from the live EmTalk website.</p>`,
+    context: {kind: 'files'},
+    body: `${recoveryFreshnessNote}<p>Keep Files open while importing. Closing or changing this view cancels the import.</p><p>The DOS interface and saved-date labels are in English. Your decision text is not translated.</p><p>Your draft and saved decisions stay in this browser. Export a file to take a copy with you.</p><p>Topic display settings and the selected results tab reset when you reload. Your saved decision data is separate.</p><div class="file-actions"><button type="button" data-action="export">Export current decision · JSON</button><button type="button" data-action="csv">Export results · CSV</button><label>Import a decision · JSON<input class="file-input" type="file" id="import-file" accept="application/json,.json"></label></div><p class="dialog-note">CSV adds an apostrophe to formula-like or control-leading fields to reduce spreadsheet formula interpretation. This changes those CSV fields. Use JSON to keep your decision text unchanged.</p><section><h3>Used the earlier workspace?</h3><p>Its data stays separate. Open a read-only snapshot to preview available copies and export original backups or compatible decision files.</p><button type="button" class="secondary-button" data-action="earlier-workspace">Earlier workspace data</button></section>${draftRecoveryMarkup()}${localStore.snapshot.draftStatus === 'blocked' ? '<section><h3>Draft saving paused</h3><p>After freeing browser storage or restoring access, try saving again. We check that the stored draft is unchanged before writing. If it changed, export your current decision and reload to inspect the other version.</p><button type="button" data-action="retry-draft">Try saving draft again</button></section>' : ''}${historyRecoveryMarkup()}<p class="dialog-note">This workspace uses local calculations. AI, sign-in and cloud sync are not connected. Earlier workspace data stays separate unless you explicitly preview and export a copy. Other people using the same browser profile can access local copies; exported files are separate.</p>`,
   });
 }
 
+const historyRecoveryChangedNotice = 'Saved decisions changed. Reopen Files & privacy to see the current recovery choices.';
+
+// Only explicit confirmed recovery actions translate these native storage errors.
+// Preserve owner state/throws and keep all visitor text independent of raw errors.
+function runStorageRecovery(callback) {
+  try { return callback(); }
+  catch (error) {
+    if (error instanceof DecisionError) throw error;
+    let name;
+    try { name = error?.name; } catch { /* Unknown failures keep the existing safe boundary. */ }
+    if (!['SecurityError', 'QuotaExceededError'].includes(name)) throw error;
+    reportUnexpectedError(error, 'dialog-submit');
+    throw new DecisionError('Browser storage is unavailable for this recovery action. Close this confirmation and use Files & privacy to export your current decision and retained copies. Restore storage access or free space before retrying.');
+  }
+}
+
+function resolveHistoryReplacement(saveMemory = false) {
+  if (localStore.snapshot.pendingHistoryRaw === undefined || (saveMemory && (localStore.snapshot.pendingHistoryRaw !== null || !localStore.snapshot.history.entries.length)))
+    return notify(historyRecoveryChangedNotice);
+  const expectedRaw = localStore.snapshot.pendingHistoryRaw;
+  confirmAction(
+    saveMemory ? 'Save named copies from this tab?' : 'Use the stored saved decisions?',
+    saveMemory
+      ? 'This saves the named copies kept in this tab only if the saved-history store is still empty. Your current draft stays separate.'
+      : 'This adopts the current stored version, which may be empty, and releases captured backups and named copies in this tab. Export them first if you want to keep them. Your current draft stays separate.',
+    saveMemory ? 'Save these copies' : 'Use stored version',
+    () => {
+      runStorageRecovery(() => localStore.adoptHistory(expectedRaw, saveMemory));
+      if (state.step === 'options') render(false);
+      else renderRecent();
+      dialogUi.returnFocusToScreen();
+      notify(saveMemory ? 'Named copies in this tab are saved.' : 'Stored saved decisions are now in use.');
+    },
+  );
+}
+
 function discardUnreadableDraft() {
-  if (unreadableDraftRaw === null) return;
-  const expectedRaw = unreadableDraftRaw;
+  if (localStore.snapshot.unreadableDraftRaw === null) return;
+  refreshDraftRecoveryState();
+  if (localStore.snapshot.draftRecoveryChanged)
+    return notify('The stored draft changed or could not be checked. Export your backup and current decision, then reload to inspect it.');
+  const expectedRaw = localStore.snapshot.unreadableDraftRaw;
   confirmAction(
     'Discard this unreadable draft?',
     'Export the original stored data and your current decision first if you need backups. Only the unreadable draft will be removed. Your current decision and named saved decisions will be kept.',
     'Discard unreadable draft',
     () => {
-      // No await or other work between the final exact-value check and removal.
-      // Reject a replacement observed when the user confirms the action.
-      if (localStorage.getItem(DRAFT_KEY) !== expectedRaw) {
-        storageBlocked = true;
-        storageWarning(
-          'The stored draft changed. It has not been discarded. Export your current decision before reloading to use the other version.',
-        );
-        throw new Error('The stored draft changed. Nothing was discarded.');
-      }
-      localStorage.removeItem(DRAFT_KEY);
-      draftRaw = null;
-      unreadableDraftRaw = null;
-      storageBlocked = false;
-      // persist performs its own exact-value check, protecting a new value
-      // written by another tab after removal instead of overwriting it.
-      const saved = persist();
-      if (saved) {
-        if (!historyBlocked) $('#storage-warning').hidden = true;
-        notify('Unreadable draft discarded. Your current decision is saved.');
-      } else notify('Unreadable draft discarded. Export your current decision to keep it.');
-      dialogTrigger = screen;
+      const saved = runStorageRecovery(() => localStore.discardDraft(expectedRaw, currentDraft));
+      notify(saved ? 'Unreadable draft discarded. Your current decision is saved.' : 'Unreadable draft discarded. Export your current decision to keep it.');
+      dialogUi.returnFocusToScreen();
     },
   );
 }
 
-function download(contents, filename, type) {
-  const url = URL.createObjectURL(new Blob([contents], { type }));
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.append(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 30000);
+function discardUnreadableHistory() {
+  if (localStore.snapshot.unreadableHistoryRaw === null || localStore.snapshot.pendingHistoryRaw !== undefined)
+    return notify(historyRecoveryChangedNotice);
+  if (localStore.snapshot.historyRaw !== localStore.snapshot.unreadableHistoryRaw)
+    return notify('Stored saved data changed after the backup was captured. Export your backup and current work, then reload to inspect it.');
+  const expectedRaw = localStore.snapshot.unreadableHistoryRaw;
+  confirmAction(
+    'Discard unreadable saved data?',
+    'Export the original stored data, named copies in this tab and your current decision first if you need backups. The unreadable saved data will be removed. We will try to save any named copies already in this tab. Your current draft stays separate. Close other DOS tabs first to avoid competing changes.',
+    'Discard unreadable saved data',
+    () => {
+      const saved = runStorageRecovery(() => localStore.discardHistory(expectedRaw));
+      notify(saved ? 'Unreadable saved data discarded. Named copies in this tab are saved.' : 'Unreadable saved data discarded. Export named copies in this tab from Files & privacy to keep them.');
+      if (state.step === 'options') render(false);
+      else renderRecent();
+      dialogUi.returnFocusToScreen();
+    },
+  );
+}
+
+function download(contents, filename, type, notice = 'File prepared. Check your browser downloads.') {
+  let url = null, anchor = null;
+  try {
+    url = URL.createObjectURL(new Blob([contents], {type}));
+    anchor = document.createElement('a');
+    anchor.href = url; anchor.download = filename;
+    document.body.append(anchor); anchor.click();
+    notify(notice);
+    return true;
+  } catch (error) {
+    reportUnexpectedError(error, 'download');
+    notify('A file could not be prepared. Try again, or use another browser. Your decision has not changed.');
+    return false;
+  } finally {
+    try { anchor?.remove(); }
+    catch (error) { reportUnexpectedError(error, 'download-cleanup'); }
+    if (url) setTimeout(() => {
+      try { URL.revokeObjectURL(url); }
+      catch (error) { reportUnexpectedError(error, 'download-cleanup'); }
+    }, 30000);
+  }
 }
 
 function resetToOptions() {
+  choiceUndoStack = [];
   state.step = 'options';
   state.pairs = [];
   state.answers = {};
@@ -713,14 +753,41 @@ function resetToOptions() {
   state.opinions = [];
   pairIndex = 0;
   optionIndex = 0;
+  measurement.replace(state);
   renderAndSave();
 }
 
+function changeLastComparison() {
+  const index = state.pairs.length - 1;
+  if (state.step !== 'review' || index < 0 || !Object.hasOwn(state.answers, String(index))) return;
+  const pair = state.pairs[index];
+  const winner = state.answers[String(index)];
+  const options = pair.map(optionId => state.options.find(option => option.id === optionId));
+  openDialog({
+    title: 'Change the last comparison',
+    body: `<p>Choose the option you prefer for this pair. All other comparisons, selected options and saved reasons stay as they are.</p><label class="form-label" for="comparison-choice">Preferred option</label><select class="form-input" id="comparison-choice">${options.map(option => `<option value="${escape(option.id)}"${option.id === winner ? ' selected' : ''}>${escape(option.title)}</option>`).join('')}</select>`,
+    accept: 'Save comparison',
+    focus: '#comparison-choice',
+    submit: () => {
+      const selected = $('#comparison-choice').value;
+      if (!pair.includes(selected)) throw new DecisionError('Choose one of the two options.');
+      state.answers[String(index)] = selected;
+      choiceUndoStack = [];
+      renderAndSave();
+    },
+  });
+}
+
+const resetOptionsWarning = 'This resets comparison progress, selected options and any reasons in the current draft. Cancel and export first to keep a copy.';
 function back() {
+  if (choicePending && state.step === 'compare') {
+    advanceComparison();
+    return renderAndSave(false);
+  }
   if (state.step === 'compare')
     return confirmAction(
       'Return to your options?',
-      'Your comparison progress will be reset so you can edit the list.',
+      resetOptionsWarning,
       'Return to options',
       resetToOptions,
     );
@@ -731,10 +798,13 @@ function back() {
     } else
       confirmAction(
         'Return to your options?',
-        'Your reasons and comparison progress will be reset. Save or export first to keep a copy.',
+        resetOptionsWarning,
         'Return to options',
         resetToOptions,
       );
+  } else if (state.step === 'results' && !state.selected.length && state.pairs.length) {
+    state.step = 'review';
+    renderAndSave();
   } else if (state.step === 'results' && state.selected.length) {
     state.step = 'pros';
     optionIndex = 0;
@@ -742,7 +812,7 @@ function back() {
   } else
     confirmAction(
       'Return to your options?',
-      'The comparison will be reset so you can edit the list.',
+      resetOptionsWarning,
       'Return to options',
       resetToOptions,
     );
@@ -757,7 +827,7 @@ function action(name, el) {
     case 'menu':
       return openDialog({
         title: 'Your thinking space',
-        body: '<div class="menu-list"><button type="button" data-action="new">New decision <span>+</span></button><button type="button" data-action="history">Saved decisions <span>↗</span></button><button type="button" data-action="files">Files & privacy <span>↗</span></button></div>',
+        body: '<div class="menu-list"><button type="button" data-action="new">New decision <span aria-hidden="true">+</span></button><button type="button" data-action="history">Saved decisions <span aria-hidden="true">↗</span></button><button type="button" data-action="files">Files & privacy <span aria-hidden="true">↗</span></button></div>',
       });
     case 'new':
       return confirmAction(
@@ -776,69 +846,118 @@ function action(name, el) {
       return restore(el.dataset.id);
     case 'save':
       return saveDialog();
+    case 'save-as-new':
+      if (dialogUi.context?.kind !== 'save-decision') return;
+      return submitDialog(true);
     case 'name':
       return openDialog({
         title: 'Name this decision',
-        body: `<label class="form-label" for="decision-name">What are you deciding?</label><input class="form-input" id="decision-name" maxlength="160" value="${escape(state.title)}">`,
+        body: `<label class="form-label" for="decision-name">What are you deciding?</label><input class="form-input" id="decision-name" maxlength="160" value="${escape(state.title)}" aria-describedby="decision-name-help dialog-error"><p id="decision-name-help" class="form-help">Up to 160 characters.</p>`,
         accept: 'Save name',
         focus: '#decision-name',
         submit: () => {
-          state.title = $('#decision-name').value.trim();
-          renderAndSave();
+          const title = $('#decision-name').value.trim();
+          if (title.length > 160) throw new DecisionError('Keep the decision name within 160 characters.');
+          if (title === state.title) return;
+          if (!title && decisionLabel(state.title, '')) {
+            const decision = state, previousTitle = state.title;
+            confirmAction('Remove this draft title?',
+              'Your current draft will become untitled. Named saved copies stay unchanged until you update them.',
+              'Remove title', () => {
+                if (state !== decision || state.title !== previousTitle)
+                  throw new DecisionError('This decision changed. Close this dialog and try again.');
+                state.title = '';
+                renderAndSave(false);
+                dialogUi.returnFocusTo(stage.querySelector('[data-action="name"]'), true);
+              });
+            return false;
+          }
+          state.title = title;
+          renderAndSave(false);
+          dialogUi.returnFocusTo(stage.querySelector('[data-action="name"]'), true);
         },
       });
     case 'files':
       return filesDialog();
+    case 'earlier-workspace':
+      return earlierWorkspaceDialog();
+    case 'export-earlier-original':
+      return exportEarlierCopy(el, true);
+    case 'export-earlier-decision':
+      return exportEarlierCopy(el, false);
+    case 'other-reasons':
+      return otherReasonsDialog();
     case 'discard-unreadable-draft':
       return discardUnreadableDraft();
-    case 'export-unreadable-draft':
-      if (unreadableDraftRaw !== null)
+    case 'discard-unreadable-history':
+      return discardUnreadableHistory();
+    case 'use-stored-history':
+      return resolveHistoryReplacement();
+    case 'save-memory-history':
+      return resolveHistoryReplacement(true);
+    case 'export-unreadable-history':
+      if (localStore.snapshot.unreadableHistoryRaw !== null)
         download(
-          unreadableDraftRaw,
-          `decision-matrix-unreadable-draft-${Date.now()}.json`,
+          localStore.snapshot.unreadableHistoryRaw,
+          `dos-unreadable-history-${Date.now()}.json`,
           'application/json',
+          'Original-data backup prepared. Check your browser downloads.',
+        );
+      return;
+    case 'export-unreadable-draft':
+      if (localStore.snapshot.unreadableDraftRaw !== null)
+        download(
+          localStore.snapshot.unreadableDraftRaw,
+          `dos-unreadable-draft-${Date.now()}.json`,
+          'application/json',
+          'Original-data backup prepared. Check your browser downloads.',
         );
       return;
     case 'export':
       download(
         serializeDecision(state),
-        `decision-matrix-${Date.now()}.json`,
+        `dos-${Date.now()}.json`,
         'application/json',
+        'Your decision file is ready.',
       );
-      return notify('Your decision file is ready.');
+      return;
     case 'csv':
       download(
         resultsCsv(state),
-        `decision-matrix-results-${Date.now()}.csv`,
+        `dos-results-${Date.now()}.csv`,
         'text/csv;charset=utf-8',
       );
       return;
     case 'export-saved': {
-      const e = history.entries.find((e) => e.id === el.dataset.id);
-      if (e)
-        download(
-          serializeDecision(e.decision),
-          `decision-matrix-${e.id}.json`,
-          'application/json',
-        );
+      const e = localStore.snapshot.history.entries.find((e) => e.id === el.dataset.id);
+      if (!e) return unavailableSavedDecision();
+      download(
+        serializeDecision(e.decision),
+        `dos-${e.id}.json`,
+        'application/json',
+      );
       return;
     }
     case 'delete-saved':
+      if (!localStore.snapshot.history.entries.some((entry) => entry.id === el.dataset.id))
+        return unavailableSavedDecision();
       return confirmAction(
         'Delete this saved decision?',
         'This removes the named copy from this browser. Export it first if you need a backup.',
         'Delete saved copy',
         () => {
+          if (!localStore.snapshot.history.entries.some((entry) => entry.id === el.dataset.id))
+            throw new DecisionError('This saved decision is no longer available. Reopen Saved decisions from the menu to view the current list.');
           writeHistory({
             schemaVersion: 1,
-            entries: history.entries.filter((e) => e.id !== el.dataset.id),
+            entries: localStore.snapshot.history.entries.filter((e) => e.id !== el.dataset.id),
           });
           if (savedEntryId === el.dataset.id) {
             savedEntryId = null;
             checkpoint();
           }
           render(false);
-          dialogTrigger = screen;
+          dialogUi.returnFocusToScreen();
           notify('Saved copy deleted.');
         },
       );
@@ -849,6 +968,7 @@ function action(name, el) {
       topicsExpanded = !topicsExpanded;
       return render(false);
     case 'topic-tab':
+      if (!['history', 'popular'].includes(el.dataset.tab)) return notify('This topic tab is not available.');
       topicTab = el.dataset.tab;
       return render(false);
     case 'topic':
@@ -856,43 +976,73 @@ function action(name, el) {
     case 'retry-topics':
       return loadTopics();
     case 'ai':
-      return openDialog({
-        title: 'A little help getting started',
-        body: `${balanceMarkup()}<p>AI assistance is available in the Decision Matrix app. This web prototype doesn’t send your decision to an AI service.</p><p>For now, you can start with a Popular topic or add your own options.</p><div class="file-actions"><a class="secondary-button" href="https://play.google.com/store/apps/details?id=org.emtalk.dm" target="_blank" rel="noopener noreferrer">Get the DM app ↗</a></div>`,
-      });
+      return helpDialog();
     case 'add-option':
       return optionDialog();
     case 'edit-option':
       return optionDialog(el.dataset.id);
-    case 'remove-option':
-      state.options = state.options.filter((o) => o.id !== el.dataset.id);
-      return renderAndSave();
-    case 'clear':
+    case 'remove-option': {
+      if (!mayEditOptions()) return;
+      const decision = state;
+      const optionId = el.dataset.id;
+      const option = state.options.find(item => item.id === optionId);
+      if (!option) return notify('This option is no longer available.');
+      return confirmAction(
+        'Remove this option?',
+        `Remove ${option.title} from the current list?`,
+        'Remove option',
+        () => {
+          if (!mayEditOptions()) return false;
+          if (state !== decision || !state.options.includes(option))
+            throw new DecisionError('This option is no longer available. Reopen the option list.');
+          state.options = state.options.filter(item => item.id !== optionId);
+          renderAndSave();
+          dialogUi.returnFocusToScreen();
+          notify('Option removed.');
+        },
+      );
+    }
+    case 'clear': {
+      if (!mayEditOptions()) return;
+      const decision = state;
       return confirmAction(
         'Clear all options?',
-        'This clears the current list. Your named saved decisions will stay in history.',
+        'This clears the current option list and removes the current draft title. Your named saved decisions will stay in history.',
         'Clear options',
         () => {
+          if (!mayEditOptions()) return false;
+          if (state !== decision)
+            throw new DecisionError('This decision changed. Close this dialog and try again.');
           state.options = [];
           state.title = '';
           renderAndSave();
         },
       );
+    }
     case 'start':
       return start();
     case 'choose':
       return choose(el.dataset.id);
     case 'undo':
       return undo();
+    case 'change-last-comparison':
+      return changeLastComparison();
     case 'back':
       return back();
-    case 'pause':
-      checkpoint();
+    case 'retry-draft': {
+      if (!localStore.snapshot.storageBlocked || localStore.snapshot.unreadableDraftRaw !== null) return;
+      const saved = localStore.retryDraft(currentDraft);
+      filesDialog();
+      return notify(saved ? 'Your current draft is saved.' : 'Draft saving is still paused. Export your current decision to keep it.');
+    }
+    case 'pause': {
+      const saved = checkpoint();
       return notify(
-        storageBlocked
-          ? 'Your progress is in this tab. Export a copy to keep it.'
-          : 'Draft saved. You can return to this page to continue.',
+        saved
+          ? 'Draft saved. You can return to this page to continue.'
+          : 'Your progress is in this tab. Export a copy to keep it.',
       );
+    }
     case 'select-review': {
       const id = el.dataset.id;
       if (state.selected.includes(id))
@@ -901,41 +1051,74 @@ function action(name, el) {
       else return notify('Choose up to three options to explore further.');
       return renderAndSave(false);
     }
-    case 'begin-pros':
+    case 'begin-pros': {
       if (!state.selected.length) return;
+      const metric=measurement.capture(state),before=state.step;
       state.step = 'pros';
       optionIndex = 0;
-      return renderAndSave();
-    case 'option-tab':
-      optionIndex = Number(el.dataset.index);
+      const result=renderAndSave();
+      if(before==='review'&&validMeasurementState())measurement.advance(metric);
+      return result;
+    }
+    case 'option-tab': {
+      const index = Number(el.dataset.index);
+      if (!/^\d+$/.test(el.dataset.index) || !Number.isInteger(index) || index < 0 || index >= state.selected.length || state.step !== 'pros') return notify('This option is no longer available.');
+      optionIndex = index;
       return renderAndSave(false);
+    }
     case 'add-reason':
       return reasonDialog(null, el.dataset.type);
     case 'edit-reason':
+      if (!el.dataset.id) return notify('This reason is no longer available. Reopen the reason list to continue.');
       return reasonDialog(el.dataset.id);
     case 'priority':
       return reasonDialog(el.dataset.id, null, true);
     case 'set-priority':
-      dialogContext.priority = Number(el.dataset.value);
+      if (!dialogUi.context || !priorities.has(Number(el.dataset.value))) return notify('This importance is not available.');
+      dialogUi.patchContext({priority: Number(el.dataset.value)});
       for (const b of dialog.querySelectorAll('[data-action="set-priority"]'))
         b.setAttribute('aria-pressed', String(b === el));
       return;
-    case 'remove-reason':
-      state.opinions = state.opinions.filter((n) => n.id !== el.dataset.id);
+    case 'remove-reason': {
+      if (!dialog.open || !dialogUi.context) return;
+      const noteId = el.dataset.id;
+      if (!state.opinions.some(note => note.id === noteId)) return notify('This reason is no longer available.');
+      if (dialogUi.context?.deleteReasonId !== noteId) {
+        dialogUi.patchContext({deleteReasonId: noteId});
+        el.textContent = 'Confirm delete reason';
+        $('#dialog-status').textContent = 'Nothing has been deleted. Choose Confirm delete reason to remove it, or close this dialog to keep it.';
+        return;
+      }
+      state.opinions = state.opinions.filter(note => note.id !== noteId);
+      $('#dialog-status').textContent = '';
       closeDialog();
-      return renderAndSave();
-    case 'next-pros':
+      renderAndSave();
+      return notify('Reason deleted.');
+    }
+    case 'next-pros': {
+      const metric=measurement.capture(state),before=state.step,previous=optionIndex;
       if (optionIndex < state.selected.length - 1) optionIndex++;
       else {
         state.step = 'results';
         resultTab = 'reasons';
       }
-      return renderAndSave();
-    case 'comparison-results':
+      const result=renderAndSave();
+      if(before==='pros'&&validMeasurementState()){
+        if(state.step==='results')measurement.completed(metric);
+        else if(optionIndex!==previous)measurement.advance(metric);
+      }
+      return result;
+    }
+    case 'comparison-results': {
+      const metric=measurement.capture(state),before=state.step;
       state.step = 'results';
       resultTab = 'comparison';
-      return renderAndSave();
+      const result=renderAndSave();
+      if(before==='review'&&validMeasurementState())measurement.completed(metric);
+      return result;
+    }
     case 'result-tab':
+      if (state.step !== 'results' || !['reasons', 'comparison'].includes(el.dataset.tab)) return notify('This result tab is not available.');
       resultTab = el.dataset.tab;
       return render(false);
     case 'revise-pros':
@@ -948,14 +1131,20 @@ function action(name, el) {
   }
 }
 
+function handleAction(callback) {
+  try {
+    return callback();
+  } catch (error) {
+    notify(reportUnexpectedError(error, 'action')
+      ? 'Something went wrong. Your draft is still here.'
+      : error?.message || 'Something went wrong. Your draft is still here.');
+  }
+}
+
 document.addEventListener('click', (event) => {
   const el = event.target.closest('[data-action]');
   if (!el || !appRoot.contains(el) || el.disabled) return;
-  try {
-    action(el.dataset.action, el);
-  } catch (error) {
-    notify(error.message || 'Something went wrong. Your draft is still here.');
-  }
+  handleAction(() => action(el.dataset.action, el));
 });
 
 document.addEventListener('keydown', (event) => {
@@ -970,85 +1159,116 @@ document.addEventListener('keydown', (event) => {
     return;
   if (state.step === 'compare' && ['1', '2'].includes(event.key)) {
     event.preventDefault();
-    choose(state.pairs[pairIndex][Number(event.key) - 1]);
+    handleAction(() => choose(state.pairs[pairIndex][Number(event.key) - 1]));
   }
 });
 
-document.addEventListener('change', async (event) => {
-  if (event.target.id !== 'import-file') return;
-  const file = event.target.files?.[0];
-  if (!file) return;
-  try {
-    if (file.size > 200000)
-      throw new Error(
-        'Choose a Decision Matrix JSON file smaller than 200 KB.',
-      );
-    const decision = parseDecision(await file.text());
-    confirmAction(
-      'Open this decision file?',
+function importStamp() {
+  return JSON.stringify([state, pairIndex, optionIndex, savedEntryId, resultTab]);
+}
+const decisionImport = createDecisionImporter({
+  captureOrigin(input) {
+    if (!dialog.open || dialogUi.context?.kind !== 'files' || $('#import-file') !== input) return null;
+    return Object.freeze({session: dialogUi.session, stamp: importStamp()});
+  },
+  isOriginCurrent(origin, input) {
+    return dialog.open && dialogUi.session === origin.session && dialogUi.context?.kind === 'files'
+      && $('#import-file') === input && importStamp() === origin.stamp;
+  },
+  getSession: () => dialog.open ? dialogUi.session : null,
+  isDecisionCurrent: origin => importStamp() === origin.stamp,
+  onReading() { $('#dialog-error').textContent = ''; notify('Reading your decision file.'); },
+  onReady(ticket) {
+    confirmAction('Open this decision file?',
       'The file has been checked. Opening it replaces your current draft. Save or export your current decision first if you want to keep it.',
-      'Open file',
-      () => replaceDecision(decision),
-    );
-  } catch (error) {
-    $('#dialog-error').textContent =
-      error.message === 'Invalid decision data.'
-        ? 'This file is not a valid Decision Matrix decision. Your draft has not changed.'
-        : error.message;
-  } finally {
-    event.target.value = '';
-  }
+      'Open file', () => replaceDecision(ticket.take()));
+  },
+  onError: message => { $('#dialog-status').textContent = ''; $('#dialog-error').textContent = message; },
+  onFinished(origin, input) {
+    if (dialog.open && dialogUi.session === origin.session && dialogUi.context?.kind === 'files' && $('#import-file') === input)
+      $('#dialog-status').textContent = '';
+  },
+});
+document.addEventListener('change', event => {
+  if (event.target.id === 'import-file') return decisionImport.read(event.target);
 });
 
 window.addEventListener('storage', (event) => {
+  if (!workspaceReady) return;
+  try {
+    const area = event.storageArea;
+    if (area && area !== localStorage) return;
+  } catch { /* Let the owner's guarded read expose denied access without writing. */ }
   if (event.key === DRAFT_KEY || event.key === null) {
-    storageBlocked = true;
-    storageWarning(
-      'Your draft changed in another tab. Export your work before reloading to use the other version.',
-    );
+    localStore.observeDraft();
   }
   if (event.key === HISTORY_KEY || event.key === null) {
-    try {
-      historyRaw = localStorage.getItem(HISTORY_KEY);
-      history = historyRaw
-        ? validateHistory(JSON.parse(historyRaw))
-        : { schemaVersion: 1, entries: [] };
-      historyBlocked = false;
-      renderRecent();
-    } catch {
-      historyBlocked = true;
-    }
+    loadHistory();
+    // A history refresh must not cancel a pending comparison transition.
+    if (state.step === 'options') render(false);
+    else renderRecent();
   }
 });
 
-loadLocalData();
-if (
-  state.step === 'compare' &&
-  state.pairs.every((_, i) => Object.hasOwn(state.answers, String(i)))
-) {
-  state.step = 'review';
-  state.selected = orderedResults(state)
-    .slice(0, 3)
-    .map((o) => o.id);
-  persist();
+function focusRestoredComparison() {
+  if (state.step === 'compare' &&
+      [document.body, document.documentElement].includes(document.activeElement))
+    stage.focus({ preventScroll: true });
 }
-render(false);
-loadTopics();
 
-async function loadTopics() {
-  topicsStatus = 'loading';
-  if (state.step === 'options') render(false);
-  try {
-    const response = await fetch(assetRoot + 'topics.json');
-    if (!response.ok) throw new Error('Topics unavailable');
-    const data = await response.json();
-    topics = data.categories.flatMap((category) =>
-      category.topics.map((topic) => ({ ...topic, category: category.label })),
-    );
-    topicsStatus = 'ready';
-  } catch {
-    topicsStatus = 'failed';
-    /* The manual decision flow remains available without examples. */
-  }
-  if (state.step === 'options') render(false);
+function scheduleRestoredComparisonFocus() {
+  if (state.step !== 'compare') return;
+  const gate = window.EmTalkPageLoader;
+  // The common page loader temporarily makes the DM subtree inert. Its signal
+  // aborts only after original inert states have been restored.
+  if (gate?.isPending() && !gate.signal.aborted)
+    gate.signal.addEventListener('abort', focusRestoredComparison, { once: true });
+  else focusRestoredComparison();
 }
+
+function resumeComparison() {
+  if (state.step !== 'compare') return false;
+  const next = state.pairs.findIndex((_, i) => !Object.hasOwn(state.answers, String(i)));
+  if (next < 0) {
+    state.step = 'review';
+    state.selected = orderedResults(state).slice(0, 3).map((o) => o.id);
+    return true;
+  }
+  const changed = pairIndex !== next;
+  pairIndex = next;
+  return changed;
+}
+
+function initialize() {
+  workspaceReady = false;
+  const app = $('#app'), startup = $('#dm-startup-status');
+  // Static HTML remains explanatory even if the module itself cannot load/parse.
+  // These are required core APIs; optional topic loading does not gate readiness.
+  if (typeof Object.hasOwn !== 'function' || typeof dialog.showModal !== 'function') {
+    app.hidden = true;
+    if (startup) startup.hidden = false;
+    const copy = $('#dm-startup-copy');
+    if (copy) copy.textContent = 'This browser cannot open DOS. Update your browser, then reload this page.';
+    return;
+  }
+  loadLocalData();
+  if (resumeComparison()) persist();
+  render(false);
+  app.hidden = false;
+  if (startup) startup.hidden = true;
+  workspaceReady = true;
+  scheduleRestoredComparisonFocus();
+  return loadTopics();
+}
+
+const topicLoader = createTopicsLoader({
+  url: assetRoot + 'topics.json',
+  onChange(snapshot) {
+    topicCatalog = snapshot;
+    if (state.step === 'options') handleAction(() => render(false));
+  },
+});
+
+const initialization = initialize();
+
+function loadTopics() { return topicLoader.load(); }

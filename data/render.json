@@ -2118,7 +2118,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -3718,7 +3718,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -6674,7 +6674,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -8398,7 +8398,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -10084,7 +10084,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -11824,7 +11824,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -13430,7 +13430,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -14983,7 +14983,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -16843,7 +16843,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -18618,7 +18618,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -20447,7 +20447,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -21988,7 +21988,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -24615,7 +24615,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -25115,7 +25115,7 @@
     },
     "/dm": {
       "routeId": "/dm",
-      "title": "Decision Matrix – Make Better Decisions, Prioritize Tasks & Compare Options",
+      "title": "DOS: Decision Operating System",
       "language": "en",
       "family": "dm",
       "sourceHash": "a3fc9c6c8584c80c034e21bc447d83b07b2a3899674cc8f8213c0562d58b1daf",
@@ -27488,12 +27488,12 @@
                                   {
                                     "tag": "img",
                                     "attributes": {
-                                      "src": "/media/7ff81294fdd51c1a846e-697407c3e8d848be7704e0a5_DM.webp",
+                                      "src": "/dos/dos-icon.svg",
                                       "loading": "lazy",
-                                      "sizes": "(max-width: 512px) 100vw, 512px",
-                                      "srcset": "/media/292cd28982c84603d21e-697407c3e8d848be7704e0a5_DM-p-500.webp 500w, /media/7ff81294fdd51c1a846e-697407c3e8d848be7704e0a5_DM.webp 512w",
-                                      "alt": "Decision Matrix (DM) app logo",
-                                      "class": "image-7"
+                                      "alt": "DOS: Decision Operating System",
+                                      "class": "image-7",
+                                      "width": "128",
+                                      "height": "128"
                                     },
                                     "children": [],
                                     "void": true
@@ -27504,7 +27504,7 @@
                                       "class": "heading-6"
                                     },
                                     "children": [
-                                      "DM"
+                                      "DOS"
                                     ],
                                     "void": false
                                   }
@@ -27591,7 +27591,7 @@
                               "class": "link-3 w--current"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -27902,45 +27902,6 @@
       },
       "metadata": [
         {
-          "charset": "utf-8"
-        },
-        {
-          "content": "Struggling to choose what matters most? Decision Matrix helps you prioritize, compare options, and make clear decisions with confidence.",
-          "name": "description"
-        },
-        {
-          "content": "Decision Matrix – Make Better Decisions, Prioritize Tasks & Compare Options",
-          "property": "og:title"
-        },
-        {
-          "content": "Struggling to choose what matters most? Decision Matrix helps you prioritize, compare options, and make clear decisions with confidence.",
-          "property": "og:description"
-        },
-        {
-          "content": "/media/ce2e0b92be190f17e1a1-69c432ae7918b4bbf56cbf1a_Open-Graph-Image-DM.webp",
-          "property": "og:image"
-        },
-        {
-          "content": "Decision Matrix – Make Better Decisions, Prioritize Tasks & Compare Options",
-          "name": "twitter:title"
-        },
-        {
-          "content": "Struggling to choose what matters most? Decision Matrix helps you prioritize, compare options, and make clear decisions with confidence.",
-          "name": "twitter:description"
-        },
-        {
-          "property": "og:type",
-          "content": "website"
-        },
-        {
-          "content": "summary_large_image",
-          "name": "twitter:card"
-        },
-        {
-          "content": "width=device-width, initial-scale=1",
-          "name": "viewport"
-        },
-        {
           "content": "veJ5tbgYme_7rqnFiNzGfY_s4Nj-d8h3kXOW2TK1nZI",
           "name": "google-site-verification"
         }
@@ -27956,106 +27917,25 @@
           "rel": "apple-touch-icon"
         }
       ],
-      "structuredData": [
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "Decision Matrix",
-          "url": "/dm",
-          "description": "Decision Matrix helps you prioritize, compare options, and make clear decisions with confidence. A professional prioritization tool for work decisions, tasks, and career moves.",
-          "applicationCategory": "ProductivityApplication",
-          "operatingSystem": "iOS, Android",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          },
-          "inLanguage": "en",
-          "featureList": [
-            "AI-powered option generation",
-            "Manual and AI comparison modes",
-            "Step-by-step prioritization system",
-            "Pros and cons analysis",
-            "Team collaboration and sharing"
-          ],
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5",
-            "reviewCount": "3"
-          },
-          "review": [
-            {
-              "@type": "Review",
-              "author": {
-                "@type": "Person",
-                "name": "Anna M."
-              },
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5"
-              }
-            },
-            {
-              "@type": "Review",
-              "author": {
-                "@type": "Person",
-                "name": "David R."
-              },
-              "reviewBody": "I used it to choose between product features. The ranking made the next sprint plan obvious.",
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5"
-              }
-            },
-            {
-              "@type": "Review",
-              "author": {
-                "@type": "Person",
-                "name": "Lina K."
-              },
-              "reviewBody": "When I had to decide between universities, this tool made it simple — I could see my priorities clearly.",
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5"
-              }
-            }
-          ],
-          "provider": {
-            "@type": "Organization",
-            "name": "EmTalk",
-            "url": "/",
-            "email": "info@emtalk.org",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "/media/7ff81294fdd51c1a846e-697407c3e8d848be7704e0a5_DM.webp"
-            },
-            "sameAs": [
-              "https://www.facebook.com/emtalk",
-              "https://www.instagram.com/emtalk",
-              "https://t.me/emtalk"
-            ]
-          }
-        }
-      ],
+      "structuredData": [],
       "testModel": null,
       "audioMp3": "",
       "css": "css/pages/2de923b8040bd1ad.css",
       "ownedEntry": {
         "mode": "augment",
         "language": "en",
-        "title": "Decision Matrix app and free comparison tool",
-        "lead": "Explore the Decision Matrix app, or compare options in the free browser workspace. With four or more options, compare pairs first; with up to three, weigh pros and cons. No web account needed.",
+        "title": "DOS: Decision Operating System",
+        "lead": "A place to work through a decision. Compare options, explore pros and cons, and keep your work in this browser. No account needed.",
         "indexable": true,
         "sections": [],
         "actions": [
           {
-            "label": "Open free comparison tool",
+            "label": "Open DOS workspace",
             "path": "/dm/workspace"
           }
         ]
       },
-      "ownedHash": "0314f623b5882ff556bd68c20f9eeb2a53ddccaccb35570c593812943c11d837",
+      "ownedHash": "9075d1fee6e2b19e3253ad31217a5ce8ddb491f7d8ffd9e6704f1770258db527",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -28733,7 +28613,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -29734,7 +29614,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -31764,7 +31644,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -33795,7 +33675,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -37581,7 +37461,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -41368,7 +41248,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -42450,7 +42330,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -43533,7 +43413,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -45311,7 +45191,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -47090,7 +46970,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -51632,7 +51512,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -56175,7 +56055,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -57443,7 +57323,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -58950,7 +58830,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -60036,7 +59916,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -61875,7 +61755,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -71236,7 +71116,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -77582,7 +77462,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -88570,7 +88450,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -97033,7 +96913,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -111304,7 +111184,7 @@
                               "class": "link-3"
                             },
                             "children": [
-                              "Decision Matrix"
+                              "DOS"
                             ],
                             "void": false
                           }
@@ -113554,11 +113434,11 @@
     },
     "/dm/workspace": {
       "routeId": "/dm/workspace",
-      "title": "Decision Matrix guest workspace",
+      "title": "DOS workspace",
       "language": "en",
       "family": "owned",
       "origin": "owned",
-      "sourceHash": "747373db195d1791893879d3373225954141e8185ad904775e18db229f8aeb3e",
+      "sourceHash": "9e321dd1e5bbc4932ff53974af9b2554f96363d0b81f1eebcf4052dca18a1b75",
       "body": {
         "tag": "body",
         "attributes": {
@@ -113586,18 +113466,18 @@
       "ownedEntry": {
         "mode": "new",
         "language": "en",
-        "title": "Decision Matrix guest workspace",
+        "title": "DOS workspace",
         "lead": "Compare up to eight options. With four or more, compare pairs first; with up to three, weigh pros and cons. Free to use, without an account.",
         "indexable": true,
         "sections": [],
         "actions": [
           {
-            "label": "About the Decision Matrix app",
+            "label": "About DOS",
             "path": "/dm"
           }
         ]
       },
-      "ownedHash": "747373db195d1791893879d3373225954141e8185ad904775e18db229f8aeb3e",
+      "ownedHash": "9e321dd1e5bbc4932ff53974af9b2554f96363d0b81f1eebcf4052dca18a1b75",
       "skipTarget": {
         "id": "emtalk-main",
         "href": "#emtalk-main"
@@ -113897,6 +113777,74 @@
         "summary": "Project updates, product development and reading highlights across EmTalk.",
         "kind": "index",
         "draft": false
+      },
+      "skipTarget": {
+        "id": "emtalk-main",
+        "href": "#emtalk-main"
+      }
+    },
+    "/news/dos-workspace-update": {
+      "routeId": "/news/dos-workspace-update",
+      "title": "DOS: a clearer place to work through decisions",
+      "language": "en",
+      "family": "owned",
+      "origin": "owned",
+      "sourceHash": "16fca3b7471688d82560f06077065db896f65848146419f5e5ee5908801d7ae2",
+      "body": {
+        "tag": "body",
+        "attributes": {
+          "class": "intent-page"
+        },
+        "children": [],
+        "void": false
+      },
+      "metadata": [],
+      "icons": [
+        {
+          "href": "/media/3561a3f39e4c5c23f6bc-69b87b346447532decbf8440_Logo.webp",
+          "rel": "shortcut icon",
+          "type": "image/x-icon"
+        },
+        {
+          "href": "/media/eb833c3fa2140894824f-69b87aa84a31aee24299973c_Logo.webp",
+          "rel": "apple-touch-icon"
+        }
+      ],
+      "structuredData": [],
+      "testModel": null,
+      "audioMp3": "",
+      "css": "css/intent-pages.css",
+      "ownedEntry": {
+        "mode": "new",
+        "language": "en",
+        "title": "DOS: a clearer place to work through decisions",
+        "lead": "Meet DOS: Decision Operating System. Compare options, explore your reasons and keep local drafts or portable backups in the web workspace.",
+        "sections": [],
+        "actions": [],
+        "indexable": true
+      },
+      "ownedHash": "16fca3b7471688d82560f06077065db896f65848146419f5e5ee5908801d7ae2",
+      "newsEntry": {
+        "title": "DOS: a clearer place to work through decisions",
+        "routeId": "/news/dos-workspace-update",
+        "layout": "source",
+        "url": "/news/dos-workspace-update.html",
+        "managedBy": "news033-author",
+        "summary": "Meet DOS: Decision Operating System. Compare options, explore your reasons and keep local drafts or portable backups in the web workspace.",
+        "kind": "product",
+        "availability": "available",
+        "draft": false,
+        "date": "2026-11-24",
+        "bodyParagraphs": [
+          "The web decision tool now has a new name and a refreshed home: DOS, short for Decision Operating System. Open the workspace from its new product page to work through a choice in your browser. The existing /dm and /dm/workspace addresses remain, and no web account is needed.",
+          "Add one to eight options. With one to three, start with Pros & Cons and choose the importance of your own reasons. With four to eight, begin with pairwise comparisons, then explore up to three options in more depth. The results reflect your input; the choice stays yours.",
+          "When browser storage is available, DOS keeps a current draft and lets you save named decisions. Export decision JSON to keep a portable copy, import a compatible file after reviewing it, or export results as CSV. Files & privacy explains the CSV safeguards and how they can change spreadsheet-facing fields. Keep JSON when you need the original decision text.",
+          "Saving problems are shown in the workspace. If saved data cannot be read, recovery controls let you inspect the situation and export an original backup before an explicit discard. A warning is not a promise that every damaged file can be restored. People using the same browser profile can access local copies, so keep exported files somewhere appropriate for their contents.",
+          "Used the earlier Decision Matrix workspace? In Files & privacy, choose Earlier workspace data to open a read-only snapshot of older data available in this browser profile. You can export original backups or compatible decision copies. Older data is not automatically adopted or overwritten; opening an exported decision in DOS is a separate import and confirmation step.",
+          "DOS currently uses local calculations. Web AI, sign-in and cloud sync are not connected, and web decisions do not automatically transfer to the Android app. Check Google Play for the app's current features and availability. You can pause your thinking and return to local work when saving is available, or take an exported backup with you. Bret's breathing journey, meditation and games remain a separate part of EmTalk."
+        ],
+        "relatedRoute": "/dm/workspace",
+        "ctaLabel": "Open the DOS web workspace"
       },
       "skipTarget": {
         "id": "emtalk-main",

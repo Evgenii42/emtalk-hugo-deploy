@@ -1,0 +1,61 @@
+{{- $p := hugo.Data.render.mountPrefix -}}
+<main class="dos-landing" id="emtalk-main" lang="en" tabindex="-1" aria-labelledby="dos-hero-title">
+  <section class="dos-landing__hero">
+    <div class="dos-landing__container dos-landing__hero-grid">
+      <div>
+        <p class="dos-landing__eyebrow"><span class="dos-landing__mark" aria-hidden="true">✦</span> DOS BY EMTALK</p>
+        <p class="dos-landing__name">Decision Operating System</p>
+        <h1 id="dos-hero-title">Your next decision.<br>A little clearer.</h1>
+        <p class="dos-landing__lead">Make room for your options. Explore what matters. Keep your reasoning together, at your own pace.</p>
+        <div class="dos-landing__actions"><a class="dos-landing__button" data-dos-open="hero" href="{{ $p }}/dm/workspace" {{ partial "native-link-focus.html" . }}>Open DOS</a><a class="dos-landing__text-link" href="#dos-how" {{ partial "native-link-focus.html" . }}>See how it works</a></div>
+        <p class="dos-landing__hero-note">No account needed. Saving depends on this browser. Export a backup to keep a copy.</p>
+      </div>
+      <figure class="dos-landing__preview">
+        <div class="dos-landing__halo" aria-hidden="true"></div>
+        <img src="{{ $p }}/dos/dos-preview.svg" alt="" width="600" height="760" decoding="async" fetchpriority="high">
+        <figcaption>An illustrative workspace with fictional options.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="dos-landing__section" id="dos-how" tabindex="-1" aria-labelledby="dos-how-title">
+    <div class="dos-landing__container">
+      <div class="dos-landing__section-heading"><p class="dos-landing__eyebrow">A LITTLE STRUCTURE FOR YOUR THINKING</p><h2 id="dos-how-title">One decision. A few useful perspectives.</h2><p>You bring the possibilities. DOS gives you a way to look at them, one step at a time.</p></div>
+      <div class="dos-landing__ways">
+        <article class="dos-landing__way"><div class="dos-landing__art" aria-hidden="true">{{ partial "dos-landing-art.html" "options" }}</div><div class="dos-landing__way-copy"><p class="dos-landing__eyebrow">YOUR OPTIONS</p><h3>Give each possibility a little room.</h3><p>Add one to eight options. With one to three, start with Pros &amp; Cons. With four to eight, compare pairs first.</p></div></article>
+        <article class="dos-landing__way"><div class="dos-landing__art" aria-hidden="true">{{ partial "dos-landing-art.html" "reasons" }}</div><div class="dos-landing__way-copy"><p class="dos-landing__eyebrow">YOUR PERSPECTIVE</p><h3>Find what matters to you.</h3><p>Write your own pros and cons and choose their importance. After pairwise comparison, explore up to three options in more depth.</p></div></article>
+        <article class="dos-landing__way"><div class="dos-landing__art" aria-hidden="true">{{ partial "dos-landing-art.html" "return" }}</div><div class="dos-landing__way-copy"><p class="dos-landing__eyebrow">A PLACE TO RETURN</p><h3>Keep the thinking, too.</h3><p>Return to a local draft, save named copies, or export a decision as JSON. Import that file in the web workspace, or export results as CSV.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dos-landing__section dos-landing__principles" aria-labelledby="dos-principles-title">
+    <div class="dos-landing__container dos-landing__principles-grid">
+      <div><p class="dos-landing__eyebrow">A TOOL FOR YOUR JUDGMENT</p><h2 id="dos-principles-title">A clearer view.<br>The choice stays yours.</h2><p class="dos-landing__section-lead">You do not have to know the answer before you begin.</p></div>
+      <div class="dos-landing__principle-list">
+        <article><h3>Start where you are.</h3><p>Use your own words and take one comparison at a time. Pause when you need to.</p></article>
+        <article><h3>See your input reflected.</h3><p>The scores come from your choices and the importance you give your reasons. They offer a perspective, not a decision on your behalf.</p></article>
+        <article><h3>Keep a copy that is yours.</h3><p>Drafts and named decisions stay in this browser when storage is available. Export JSON before changing browsers or clearing storage.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dos-landing__section" aria-labelledby="dos-open-title">
+    <div class="dos-landing__container">
+      <div class="dos-landing__section-heading"><p class="dos-landing__eyebrow">YOUR NEXT SMALL STEP</p><h2 id="dos-open-title">Make a little space for your decision.</h2><p>Open the web workspace, or check the Android app's current availability.</p></div>
+      <div class="dos-landing__platforms">
+        <article class="dos-landing__platform dos-landing__platform--web"><span class="dos-landing__platform-symbol" aria-hidden="true">✦</span><p class="dos-landing__eyebrow">ON THE WEB</p><h3>Your thinking space, right here.</h3><p>Compare options, weigh reasons and keep local copies. Opening the workspace brings you back to an existing draft when one is available.</p><a class="dos-landing__button" data-dos-open="platform" href="{{ $p }}/dm/workspace" {{ partial "native-link-focus.html" . }}>Open DOS</a><small>Web AI, sign-in and cloud sync are not connected. Your decision files remain separate from any mobile app.</small></article>
+        <article class="dos-landing__platform"><span class="dos-landing__platform-symbol" aria-hidden="true">◈</span><p class="dos-landing__eyebrow">ON ANDROID</p><h3>Another way to explore.</h3><p>Find the Android app on Google Play. Check its listing for current features and availability.</p><a class="dos-landing__button dos-landing__button--outline" data-dos-platform="android" href="{{ partial "store-campaign-url.html" "https://play.google.com/store/apps/details?id=org.emtalk.dm" }}" target="_blank" rel="noopener noreferrer" {{ partial "native-link-focus.html" . }}>View Android app<span class="dos-landing__sr-only"> (opens Google Play in a new tab)</span></a><small>The Android app and web workspace can have different features. Web decisions do not automatically sync to the app.</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dos-landing__section dos-landing__faq" aria-labelledby="dos-faq-title">
+    <div class="dos-landing__container dos-landing__faq-grid"><div><p class="dos-landing__eyebrow">BEFORE YOU BEGIN</p><h2 id="dos-faq-title">A few useful details.</h2></div><div>
+      <details><summary>How many options can I compare?</summary><p>Add one to eight options. One to three go straight to Pros &amp; Cons. Four to eight begin with pairwise comparison; you can then explore up to three options through their pros and cons.</p></details>
+      <details><summary>Where are my decisions saved?</summary><p>Your current draft and named copies are saved in this browser when storage is available. Clearing browser data, private browsing or changing devices can affect access. Export a JSON file to keep a portable backup. If saving is blocked, the workspace explains how to keep your current work.</p></details>
+      <details><summary>Can I return to a decision?</summary><p>Yes. Opening DOS resumes an available local draft. Named copies are in Saved decisions. You can also import a previously exported decision JSON file in the web workspace. Compatible files exported under the earlier Decision Matrix name still work.</p></details>
+      <details><summary>Does the web workspace use AI or a cloud account?</summary><p>No. The current web preview uses local calculations. Web AI, sign-in and cloud sync are not connected, and decisions do not automatically transfer to the Android app.</p></details>
+    </div></div>
+  </section>
+</main>

@@ -18,7 +18,7 @@ SCHEMA_PINS = {
 }
 PUBLIC_LIMITATIONS = [
     'Public descriptions only, not personalized advice or questionnaire results.',
-    'DM AI is available in its Android app, not on this website. BRET has no AI features. Tapl is in development.',
+    'DOS comparisons run locally in this browser; AI, sign-in and cloud sync are not connected. BRET has no AI features. TAPL is in development.',
     'Optional browser tools require a supporting WebMCP implementation; these files do not provide an MCP backend or an AI model.',
 ]
 APPROVED_TOPICS = ['sleep', 'burnout', 'energy', 'anxiety', 'relationships', 'motivation', 'bret', 'dm', 'tapl']
@@ -169,7 +169,7 @@ def verify(build, root, prefix='', base_url='https://www.emtalk.org/'):
         expected_index = ('# EmTalk public page index\n\n'
                           + 'Canonical build origin: ' + base_url.rstrip('/') + '/\n\n'
                           + 'Descriptions below come from the same metadata as the public HTML pages. Follow each page for its full content and context. This index contains no visitor answers, results, decisions, contact submissions or account data.\n\n'
-                          + 'Self-assessments support reflection, not diagnosis. Decision Matrix AI is available in the Android app, not on this website. BRET has no AI features. TAPL is in development.\n\n')
+                          + 'Self-assessments support reflection, not diagnosis. DOS comparisons run locally in this browser; AI, sign-in and cloud sync are not connected. BRET has no AI features. TAPL is in development.\n\n')
         expected_index += ''.join('## ' + row['title'] + '\n\nURL: ' + base_url.rstrip('/') + route + '\n\n' + row['description'] + '\n\n'
                                  for route, row in sorted(seo.items()) if row['indexable'])
         markdown = (build / 'ai/index.md').read_bytes()

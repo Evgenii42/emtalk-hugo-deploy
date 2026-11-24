@@ -54,13 +54,13 @@
     "/dm/workspace": {
       "mode": "new",
       "language": "en",
-      "title": "Decision Matrix guest workspace",
+      "title": "DOS workspace",
       "lead": "Compare up to eight options. With four or more, compare pairs first; with up to three, weigh pros and cons. Free to use, without an account.",
       "indexable": true,
       "sections": [],
       "actions": [
         {
-          "label": "About the Decision Matrix app",
+          "label": "About DOS",
           "path": "/dm"
         }
       ]
@@ -68,13 +68,13 @@
     "/dm": {
       "mode": "augment",
       "language": "en",
-      "title": "Decision Matrix app and free comparison tool",
-      "lead": "Explore the Decision Matrix app, or compare options in the free browser workspace. With four or more options, compare pairs first; with up to three, weigh pros and cons. No web account needed.",
+      "title": "DOS: Decision Operating System",
+      "lead": "A place to work through a decision. Compare options, explore pros and cons, and keep your work in this browser. No account needed.",
       "indexable": true,
       "sections": [],
       "actions": [
         {
-          "label": "Open free comparison tool",
+          "label": "Open DOS workspace",
           "path": "/dm/workspace"
         }
       ]

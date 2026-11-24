@@ -1,4 +1,9 @@
 // Source: Android DM DecisionScoringService / ComparisonManager, revision3faddfbc.
+// Only deliberate, user-facing validation/workflow failures may cross a UI
+// boundary with their message. Browser/engine exceptions are never branded.
+export class DecisionError extends Error {
+  constructor(message) { super(message); this.name = 'DecisionError'; }
+}
 export const PRIORITIES = Object.freeze([1, 3, 5, 8]);
 export const MAX_OPTIONS = 8;
 const steps = ["options", "compare", "review", "pros", "results"];
@@ -11,7 +16,7 @@ const allowed = (v, keys) =>
 const text = (v, max, empty = false) =>
   typeof v === "string" && v.length <= max && (empty || v.trim().length > 0);
 function requireValue(value) {
-  if (!value) throw new Error("Invalid decision data.");
+  if (!value) throw new DecisionError("Invalid decision data.");
 }
 export function createDecision() {
   return {
@@ -321,55 +326,4 @@ export function parseHistory(raw) {
     typeof raw === "string" && new TextEncoder().encode(raw).length <= 2000000,
   );
   return validateHistory(JSON.parse(raw));
-}
-// Export-only inspection is deliberately separate from strict restore/import.
-// It never constructs a repaired history or changes the supplied stored text.
-export function recoverHistoryEntries(raw, legacy = false) {
-  requireValue(
-    typeof raw === "string" &&
-      new TextEncoder().encode(raw).length <= (legacy ? 200000 : 2000000),
-  );
-  const recovery = { entries: [], unreadable: 0, problem: null };
-  let value;
-  try {
-    value = JSON.parse(raw);
-  } catch {
-    return { ...recovery, problem: "invalid-json" };
-  }
-  if (legacy) {
-    try {
-      recovery.entries.push({ position: 1, decision: validateDecision(value) });
-    } catch {
-      recovery.unreadable = 1;
-    }
-    return recovery;
-  }
-  if (
-    !allowed(value, ["schemaVersion", "entries"]) ||
-    value.schemaVersion !== 1 ||
-    !Array.isArray(value.entries) ||
-    value.entries.length > MAX_HISTORY
-  )
-    return { ...recovery, problem: "invalid-envelope" };
-  value.entries.forEach((entry, index) => {
-    try {
-      const valid = validateHistory({ schemaVersion: 1, entries: [entry] });
-      recovery.entries.push({
-        position: index + 1,
-        decision: valid.entries[0].decision,
-      });
-    } catch {
-      recovery.unreadable++;
-    }
-  });
-  return recovery;
-}
-export function putHistory(history, entry, replace = false) {
-  const next = validateHistory(history);
-  const index = next.entries.findIndex((item) => item.id === entry.id);
-  if (replace) requireValue(index >= 0);
-  else requireValue(index < 0 && next.entries.length < MAX_HISTORY);
-  if (replace) next.entries.splice(index, 1);
-  next.entries.unshift(entry);
-  return validateHistory(next);
 }

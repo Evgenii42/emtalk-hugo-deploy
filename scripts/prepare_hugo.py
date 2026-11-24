@@ -79,6 +79,58 @@ def dm_web_copy(node):
     return result
 
 
+def dos_footer_branding(body, prefix, footer_classes):
+    """Copy registered footer identities only; source archives and legal bodies stay intact."""
+    result = copy.deepcopy(body)
+    def descendants(node):
+        if isinstance(node, dict):
+            yield node
+            for child in node.get('children', []):
+                yield from descendants(child)
+    for footer in result.get('children', []):
+        if (not isinstance(footer, dict) or footer.get('tag') != 'section'
+                or footer.get('attributes', {}).get('class') not in footer_classes):
+            continue
+        nodes = list(descendants(footer))
+        identities = [node for node in nodes if node.get('tag') == 'img'
+                      and node.get('attributes', {}).get('alt') == 'Decision Matrix (DM) app logo']
+        for node in nodes:
+            attrs = node.get('attributes', {})
+            if node.get('tag') == 'a' and attrs.get('href') == prefix + '/dm':
+                if node.get('children') != ['Decision Matrix']:
+                    raise ValueError('DOS footer product link changed; reconcile its source identity')
+                node['children'] = ['DOS']
+        headings = [node for node in nodes if node.get('tag') == 'h2' and node.get('children') == ['DM']]
+        if identities or headings:
+            if len(identities) != 1 or len(headings) != 1:
+                raise ValueError('DOS footer identity changed; reconcile logo and heading')
+            headings[0]['children'] = ['DOS']
+            attrs = identities[0]['attributes']
+            attrs.update(src=prefix + '/dos/dos-icon.svg', alt='DOS: Decision Operating System', width='128', height='128')
+            attrs.pop('srcset', None)
+            attrs.pop('sizes', None)
+    return result
+
+
+def validate_css_data_url(value):
+    """Keep owned image data and the existing embedded TrueType font case."""
+    if not isinstance(value, str) or not re.match(
+            r'^data:(?:image/(?:png|gif|jpeg|webp|avif|svg\+xml)|application/x-font-ttf)[;,]',
+            value.lstrip(), re.I):
+        raise ValueError('Unsupported CSS data URL media type')
+
+
+def owned_dos_metadata(page, entry):
+    """Replace authored DOS metadata; retain existing site verification, never invented claims."""
+    if page.get('routeId') not in {'/dm', '/dm/workspace'}:
+        return page
+    result = copy.deepcopy(page)
+    result.update(title=entry['title'], language=entry['language'], structuredData=[])
+    result['metadata'] = [row for row in result.get('metadata', [])
+                          if (row.get('property') or row.get('name') or '').lower() == 'google-site-verification']
+    return result
+
+
 def parse_json(value):
     def reject_constant(constant):
         raise ValueError('Nonfinite JSON constant: ' + constant)
@@ -374,6 +426,7 @@ def prepare(prefix='', preview=False):
             else:
                 quote, url = '', match[4]
             if url.lstrip().lower().startswith('data:'):
+                validate_css_data_url(url)
                 return match[0]
             return 'url(' + match[1] + quote + localize(url.strip()) + quote + match[5] + ')'
         return re.sub(pattern, localized_url, value)
@@ -625,6 +678,7 @@ def prepare(prefix='', preview=False):
                 'structuredData': page_schema(source, route), 'testModel': models.get(route)}
         if route == '/dm':
             page['body'] = dm_web_copy(page['body'])
+        page['body'] = dos_footer_branding(page['body'], prefix, source_roles['footer']['measuredFooterClasses'])
         audio_winner = fields.get('audio-url') if 'audio-url' in fields else source['audio'].get('url')
         selected_audio = audio_sources(audio_winner, route)
         page['audioMp3'] = selected_audio['mp3'] if selected_audio else ''
@@ -691,6 +745,12 @@ def prepare(prefix='', preview=False):
             if not (route == '/news' or route.startswith('/news/')):
                 plan_json(content_path, {'title': entry['title'], 'routeId': route, 'layout': route_layout(route),
                                          'url': '/' + route_file(route), 'managedBy': 'prepare_hugo-owned'})
+        if route in {'/dm', '/dm/workspace'}:
+            page = owned_dos_metadata(page, entry)
+            pages[route] = page
+            if entry['mode'] == 'augment':
+                plan_json(ROOT / 'content' / (route.strip('/') + '.md'),
+                          {'title': entry['title'], 'routeId': route, 'layout': 'source', 'url': route + '.html'})
         page['ownedEntry'] = copy.deepcopy(entry)
         page['ownedHash'] = digest
         if route in JOURNEY_ROUTES:

@@ -14,7 +14,7 @@
       {{ partial "site-direct-link.html" (dict "route" $route "path" "/tests" "label" "Tests" "section" true) }}
       {{ partial "site-direct-link.html" (dict "route" $route "path" "/news" "label" "News" "section" true) }}
       {{/* Apps marks only its product section. Generic mobile Menu keeps current-page semantics on its destination links. */ -}}
-      <details class="site-header__disclosure"><summary{{ if $apps }} data-current="true" aria-current="location"{{ end }}>Apps <span aria-hidden="true">⌄</span></summary>
+      <details class="site-header__disclosure"><summary{{ if $apps }} data-current="true"{{ if ne $route "/dm/workspace" }} aria-current="location"{{ end }}{{ end }}>Apps <span aria-hidden="true">⌄</span></summary>
         <div class="site-header__panel" role="group" aria-label="Apps">
           {{ partial "site-app-links.html" (dict "route" $route) }}
         </div>

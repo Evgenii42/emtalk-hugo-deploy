@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen unadmitted unpublished production140 candidate; strict reviews and live acceptance remain required.",
+  "scope": "Prepared candidate, independent admission and hosted acceptance separate.",
   "admitted": false,
   "published": false,
-  "canonicalSourceCommit": "6cfc789b2d6bcaac9c15217e7628dd8099743c8b",
-  "stageParentCommit": "44e7e74ad10c3203efd62785b608e29008b526c6",
+  "canonicalSourceCommit": "97f5df15b30a200c8eeb8a931b8915a01a3244db",
+  "stageParentCommit": "016499d7bb4cc403f823b35b91dbd818c96581b8",
   "productionBaseURL": "https://www.emtalk.org/",
-  "frozenReceiptSha256": "7b7065aef11a356ec5e9c2251d997c46fc8fffbd68c91aac80fe4b6417baa781",
-  "sourceInputSnapshotSha256": "896c3485d3a97c17b8be6be0c8c45516635b2bef16c1d5ff6e3b1025919866a1",
-  "outputSnapshotSha256": "e8ae8dcaf8614fb8761af427d635cee9d2f0708c45f15ecdf03895b5ac66e2ba",
+  "frozenReceiptSha256": "335e0cbc05618253ff3dea6ed9d6872dc6f30a372347ca345e24f0974fa021e9",
+  "sourceInputSnapshotSha256": "f0a8e5e4d6ea56702ef78c50e8d6d99953be7ef83c7552c34b2a54b398336ceb",
+  "outputSnapshotSha256": "fe11d3c922e91db5852cad1010d5ddb8eb63ee030509df28479de567b5850d32",
   "sourceFiles": [
     {
       "path": ".hugo-version",
@@ -892,8 +892,8 @@
     },
     {
       "path": "content/news/bret-journey-games.md",
-      "bytes": 3618,
-      "sha256": "c879847a816a1eb19bf8521104f6dd53b1625998e853cd9a4c654e380803cd72"
+      "bytes": 3858,
+      "sha256": "f56707afa051ed5e58cf89bfcbb41b84594751397d301cec9a4b7ebaaf2fca1f"
     },
     {
       "path": "content/news/decision-matrix-browser.md",
@@ -1077,18 +1077,18 @@
     },
     {
       "path": "data/render.json",
-      "bytes": 5807780,
-      "sha256": "420725c8863a51445b09651bf141860bc3e5681cdc9ef84146c6d0429d72e058"
+      "bytes": 5808025,
+      "sha256": "e3d0dbec5a76048feadc27c47f96b921d16caf3ccdcebf6b0bece55d7775c711"
     },
     {
       "path": "data/route-map.json",
       "bytes": 28611,
-      "sha256": "43a685102733deb1d64c55ca26dcaf2c953d6aaa12c0bf2758404a73a44a9818"
+      "sha256": "8fa7dd3b048ecf36ca7b8785967f0af21deb89da82f4044b5a78d77a41fa978f"
     },
     {
       "path": "data/seo.json",
-      "bytes": 23720,
-      "sha256": "04337d9a13ab3a5d4b87bc6021cfb53860f9dab83aaeb2824d557ec675994190"
+      "bytes": 23714,
+      "sha256": "a94ee00dff291ef6a5d5171b251bb3e652fc49dede8a33ff846af46fb60624e5"
     },
     {
       "path": "data/source-content-schema.json",
@@ -1127,73 +1127,73 @@
     },
     {
       "path": "experiments/breathing-journey/animations/runner-model-silhouette.json",
-      "bytes": 3019779,
-      "sha256": "56962b586875793b7b284a195628f3a5e7bfde41a4720c00fd66a7eeb12ad3cd"
+      "bytes": 3093767,
+      "sha256": "8397b95fbad43b0441624e254f726750086740daf839a31d89158ceee2851277"
     },
     {
       "path": "experiments/breathing-journey/animations/runner-model-soft.json",
-      "bytes": 3019871,
-      "sha256": "f400266fd17132904dac0a79639fadbac735a9ab149cb11584eaa74cec2074b2"
+      "bytes": 3093788,
+      "sha256": "29031ac31744fd9c937ee28949f217545e5f038574c0c3ec3f9dccb6bf135914"
     },
     {
       "path": "experiments/breathing-journey/animations/runner-model-sport.json",
-      "bytes": 3019890,
-      "sha256": "1db3a30d0f6304966f9d603935ed7cb21dcce9a28afad157dd813675df1c8e57"
+      "bytes": 3093765,
+      "sha256": "c3673ea5af7885308b0ec85722838e2c315dc34552b97ec199e76e26a90b9cf5"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-0-background.json",
-      "bytes": 8357,
-      "sha256": "c60f143865d94af3352098294fa5ff91d0911fadb7152dc325d5e8f55e09b60f"
+      "bytes": 6071,
+      "sha256": "eaffb602c82970f0e6ffe62246e1b589659005a3d1d9688b965c39adb2652171"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-0-road.json",
-      "bytes": 22917,
-      "sha256": "8978b69c21ac77d6ac99f821977c9dca719cf26a64e0e2c53bbcb5080813c1e5"
+      "bytes": 38904,
+      "sha256": "e79d6b48e2f0b35a7bd0dfe576a6892cb9e5ac22fa4abce6f8bdde41bb9d6d4e"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-1-background.json",
-      "bytes": 5393,
-      "sha256": "146346c7f55de4a5e0406919a6cccd83889aee8d319f13c5fd0784660a884d78"
+      "bytes": 5525,
+      "sha256": "c80740d470cc2d4d13721bba799d6bc7f1aa7d446c772e6fe6ea18a96b2a95d9"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-1-road.json",
-      "bytes": 22829,
-      "sha256": "e2ea9c9e70248ce40901906908c311f02610cfbff82049999ac6cf81fa80e358"
+      "bytes": 38823,
+      "sha256": "105be33b7328b6bb59137748ce94a66642322ad89479ebdaf730e753796e1198"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-2-background.json",
-      "bytes": 11055,
-      "sha256": "a6680ef6e9adb9153c2a9bbdb19ab956ab1b1e9ee209db898c2528103928496a"
+      "bytes": 11266,
+      "sha256": "cfa87ffadee477eb6e2c8cbbdf0f4c4d73795ca39ca1c88f89ee1472c6592487"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-2-road.json",
-      "bytes": 22858,
-      "sha256": "b81bdea74057aebabe251e35b8bed1abe3206de21ed7cc87c7df68fcf69a6c30"
+      "bytes": 38845,
+      "sha256": "c07db480af64f82bd9281dd8d76ef1127641a789d8d6dd5123d949703d799152"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-3-background.json",
-      "bytes": 5372,
-      "sha256": "bb787b2bbef679b378fc947f5fc25490330eea6f96f7d59b4a135c4297ee67b9"
+      "bytes": 8291,
+      "sha256": "8dd213685273936cbc710e8f69cf799366afcc51edb9ab5a8345261a2fd4f789"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-3-road.json",
-      "bytes": 23862,
-      "sha256": "48f83b34394fd9c8c76e9f51b654480da7614ea70fb34b86c31ed3f8ee6a8f95"
+      "bytes": 39852,
+      "sha256": "31a3f43bc35cdec8da9a75c9ea7500cbbb2433bcb77ec199fc5b35e8794bcfa0"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-4-background.json",
-      "bytes": 5905,
-      "sha256": "27ab50099fc2144cc7cd9059fa8c0a71b31754e6f64a86eff90a03e5e037386b"
+      "bytes": 6047,
+      "sha256": "18dc9a94db295186ac30c89226066a9313e3a48c35c8723f5d2a91a5756f9b92"
     },
     {
       "path": "experiments/breathing-journey/animations/scene-4-road.json",
-      "bytes": 23862,
-      "sha256": "803604b537f95821b3d11fc0cc58b4e912ced98b616bd0e2c0954c5cddf2125f"
+      "bytes": 39852,
+      "sha256": "a0220c8745e684179fa9e5df217e2a9d478877d7981d977694abf50581bbd7f3"
     },
     {
       "path": "experiments/breathing-journey/app.mjs",
-      "bytes": 21319,
-      "sha256": "b9cee178051e73ac63cd845e46c6c596ef359ab0cf49921d5dc25a28e6a18679"
+      "bytes": 21313,
+      "sha256": "7b1ce6e11ff2ff4289745dccf722735ab2b2f99cbdbe810415b280059810960f"
     },
     {
       "path": "experiments/breathing-journey/art/1714-13991.svg",
@@ -1209,11 +1209,6 @@
       "path": "experiments/breathing-journey/art/1714-14002.svg",
       "bytes": 314,
       "sha256": "3b59ac7aab511330e296ae9fc70da6e81a0744a1342d4c40efefee6e759d24db"
-    },
-    {
-      "path": "experiments/breathing-journey/art/1714-14012.svg",
-      "bytes": 708,
-      "sha256": "aa1d5c454e5accfaeafeecefedc0abdb3ec2e416763bf4e0856fd4268f71a0aa"
     },
     {
       "path": "experiments/breathing-journey/art/1714-9682.svg",
@@ -1271,29 +1266,9 @@
       "sha256": "7944896ce92741fb8eae269bc6bfadf23c399842eb8fec1d5bad22c9a7ff8f43"
     },
     {
-      "path": "experiments/breathing-journey/art/1716-18147.svg",
-      "bytes": 349,
-      "sha256": "845a28aab63c6b349c3cc75965ad185feeba65e0bf268bd23d4d5c0025a2f020"
-    },
-    {
-      "path": "experiments/breathing-journey/art/1716-18151.svg",
-      "bytes": 1586,
-      "sha256": "b24c2bce972d10ebff0e1810d7e269eec6f2fd85a1cd3b6a46b6fc7764d3945a"
-    },
-    {
       "path": "experiments/breathing-journey/art/1716-18297.svg",
       "bytes": 299,
       "sha256": "d8ee85f575e636d54d34e83f1b91546cf30d2953272a07b9a7e82ee7e903c72e"
-    },
-    {
-      "path": "experiments/breathing-journey/art/1716-18302.svg",
-      "bytes": 962,
-      "sha256": "8cc087ef2f697925c633bb1bf6ae76b1522023312bd828eeef5f30453f8639f0"
-    },
-    {
-      "path": "experiments/breathing-journey/art/1716-18307.svg",
-      "bytes": 502,
-      "sha256": "cc0203e3ce4c0bc093673a0868b1b44b9596244c9a0fd79147a828d30aebd2c6"
     },
     {
       "path": "experiments/breathing-journey/art/1716-18344.svg",
@@ -1341,159 +1316,184 @@
       "sha256": "7f010a02605cfc855cf298a2ba553636f0621f559550f7b7ce0a99d103d662bf"
     },
     {
+      "path": "experiments/breathing-journey/art/calm-forest-distant.svg",
+      "bytes": 1319,
+      "sha256": "7e0f447b52e375646174faec0d40e44a4449282b676acb1877ec28f1650ca8dd"
+    },
+    {
+      "path": "experiments/breathing-journey/art/calm-trees-alpine.svg",
+      "bytes": 1298,
+      "sha256": "2955778d0534d7a46094b572c1b43f3d779765740faf4715da2caafdc8ce116d"
+    },
+    {
+      "path": "experiments/breathing-journey/art/calm-valley-far.svg",
+      "bytes": 277,
+      "sha256": "a5680c2f8fa79a4ef448eda8466c7a281dfe4279f60630f6a11fe446d4340e0c"
+    },
+    {
+      "path": "experiments/breathing-journey/art/calm-valley-middle.svg",
+      "bytes": 308,
+      "sha256": "3578a37f1daca6c7689aec353a5b599aa044fb6363ea9f2fa23aab55a427a456"
+    },
+    {
+      "path": "experiments/breathing-journey/art/calm-valley.svg",
+      "bytes": 288,
+      "sha256": "1ce0912d3df11752bf69ba392610999980e8d07634b3052880c83678b0d517b8"
+    },
+    {
       "path": "experiments/breathing-journey/art/model-preview-silhouette.svg",
-      "bytes": 27382,
-      "sha256": "6f870f22e237a1f1b702c17f65a58df2dd5d355699c891311cd74b8b176869f2"
+      "bytes": 28900,
+      "sha256": "dee8dfeb6cc6c2c3262de2f6bf2b1213d61a5cd5d903bd773b01c9e834aa27fa"
     },
     {
       "path": "experiments/breathing-journey/art/model-preview-soft.svg",
-      "bytes": 27376,
-      "sha256": "a5729da4ba2472e6bee372b9286194f6f729448d045015a03f220710de60f2eb"
+      "bytes": 28894,
+      "sha256": "2951a1c731e7471ea37f980e21638e608cbbf55f401be17276e2312561daa60f"
     },
     {
       "path": "experiments/breathing-journey/art/model-preview-sport.svg",
-      "bytes": 27377,
-      "sha256": "dbe770d4f56afdbe7f381bb354580f547e0e8ec6d924ef4f144977e5cc346b6f"
+      "bytes": 28895,
+      "sha256": "4b997e08ae0f4fc22de16c0a2cab98e8712a9318bd8d2c0050e5c2383280e82c"
     },
     {
       "path": "experiments/breathing-journey/art/poster-0-silhouette.svg",
-      "bytes": 32311,
-      "sha256": "160c9323b7dfb7e7741878b3874b506bd63655af41ee2194a14af44f545ab66d"
+      "bytes": 33282,
+      "sha256": "4190a1918f60c0d690d4d8cd16a0d3d7dd76ab3a8d82d11905368e3e0ec5add1"
     },
     {
       "path": "experiments/breathing-journey/art/poster-0-soft.svg",
-      "bytes": 32305,
-      "sha256": "6c973952dd3aa170243976ec56e28e68bb6986ba85261844405eaaedbd82e5ed"
+      "bytes": 33276,
+      "sha256": "df03068d27dd75f33fbf29e6461aca0f1a11933a1e27b034f3ad5016726158ef"
     },
     {
       "path": "experiments/breathing-journey/art/poster-0-sport.svg",
-      "bytes": 32306,
-      "sha256": "967768d9a586e4440ef3af6dcee4438cf1db35788fabdd4b310d1d9b0eacf1d1"
+      "bytes": 33277,
+      "sha256": "1a9a668bf69a751005d5b40bf7b02cb0696de1f56558f8d7086b8dd71aac045b"
     },
     {
       "path": "experiments/breathing-journey/art/poster-0.svg",
-      "bytes": 32306,
-      "sha256": "967768d9a586e4440ef3af6dcee4438cf1db35788fabdd4b310d1d9b0eacf1d1"
+      "bytes": 33277,
+      "sha256": "1a9a668bf69a751005d5b40bf7b02cb0696de1f56558f8d7086b8dd71aac045b"
     },
     {
       "path": "experiments/breathing-journey/art/poster-1-silhouette.svg",
-      "bytes": 31724,
-      "sha256": "6c8136242d323fdb271216f7fd7c588c54dc3c7b73c9efc54fbe5fce2b571bd3"
+      "bytes": 34030,
+      "sha256": "7ed11dcad3ccda10b9bb16637279344a20381633328a8a06ce91997b0fc87c49"
     },
     {
       "path": "experiments/breathing-journey/art/poster-1-soft.svg",
-      "bytes": 31718,
-      "sha256": "b914d0fff6463f4fa432b80df2d3ca1c7e1185a0df664202cf6511819e6bbc1d"
+      "bytes": 34024,
+      "sha256": "bb0ecca59264c6f27c861120ffbcb055bdc3405d9b3a0de8ec8bae15b032b590"
     },
     {
       "path": "experiments/breathing-journey/art/poster-1-sport.svg",
-      "bytes": 31719,
-      "sha256": "da6d0eef1e2c77adb380f05d69048f31495840d60de747459caf173dbec69648"
+      "bytes": 34025,
+      "sha256": "90eab7d5f1e5fd7a1184b9393e6cce0d78cfdd1a2d54985e17dab6e656108537"
     },
     {
       "path": "experiments/breathing-journey/art/poster-1.svg",
-      "bytes": 31719,
-      "sha256": "da6d0eef1e2c77adb380f05d69048f31495840d60de747459caf173dbec69648"
+      "bytes": 34025,
+      "sha256": "90eab7d5f1e5fd7a1184b9393e6cce0d78cfdd1a2d54985e17dab6e656108537"
     },
     {
       "path": "experiments/breathing-journey/art/poster-2-silhouette.svg",
-      "bytes": 36742,
-      "sha256": "9f40d21d0bea5fb4c2f25bcaa17effe1724bd962573e918de092d9155e96046a"
+      "bytes": 37744,
+      "sha256": "5cf86117cb3e678e4d1691ef262d5918a9cc0e1a487478678ea1fa84655e4fa8"
     },
     {
       "path": "experiments/breathing-journey/art/poster-2-soft.svg",
-      "bytes": 36736,
-      "sha256": "95ff3f6f8f0cdb056c2de2a06c4f8710943999d6e09f636f4baf5dde217c132b"
+      "bytes": 37738,
+      "sha256": "27987d585a795cf8420fe77e67c24d073e2aa410fce57297783d25308d707f67"
     },
     {
       "path": "experiments/breathing-journey/art/poster-2-sport.svg",
-      "bytes": 36737,
-      "sha256": "4e70108a8a7855112f24767fd6fc13234de6cf269d38b7b7fa7b08b0a2df2b86"
+      "bytes": 37739,
+      "sha256": "3fd038a807fab9ad0e9ab7f7c61399833392f6f1599f04ae14af683ceab36761"
     },
     {
       "path": "experiments/breathing-journey/art/poster-2.svg",
-      "bytes": 36737,
-      "sha256": "4e70108a8a7855112f24767fd6fc13234de6cf269d38b7b7fa7b08b0a2df2b86"
+      "bytes": 37739,
+      "sha256": "3fd038a807fab9ad0e9ab7f7c61399833392f6f1599f04ae14af683ceab36761"
     },
     {
       "path": "experiments/breathing-journey/art/poster-3-silhouette.svg",
-      "bytes": 33367,
-      "sha256": "13652cb0fa32278ff22c12dd0841e02275395edc4aaa6913712864b39cb57390"
+      "bytes": 34167,
+      "sha256": "71ecc9643f822e83a5b31ec4f575d65a93572fa619d52d1ad34d67e269649478"
     },
     {
       "path": "experiments/breathing-journey/art/poster-3-soft.svg",
-      "bytes": 33361,
-      "sha256": "496f5425dd45d5ec9683e2956066bf20ddb80323d5007fe809ed9d84415785f7"
+      "bytes": 34161,
+      "sha256": "f47d445c7690d0fac0255eabfcd5437285ec0d5ac96d19b3770b6cd5de8e5146"
     },
     {
       "path": "experiments/breathing-journey/art/poster-3-sport.svg",
-      "bytes": 33362,
-      "sha256": "a6145d163a2be793e1fe2dceeb9590188936d1d4221fcc5016cb855aae1e608b"
+      "bytes": 34162,
+      "sha256": "e66f6deb4ddc29a23e924bd08b8b4c98ffdbedf0ce740ac9de841d56fe2f989f"
     },
     {
       "path": "experiments/breathing-journey/art/poster-3.svg",
-      "bytes": 33362,
-      "sha256": "a6145d163a2be793e1fe2dceeb9590188936d1d4221fcc5016cb855aae1e608b"
+      "bytes": 34162,
+      "sha256": "e66f6deb4ddc29a23e924bd08b8b4c98ffdbedf0ce740ac9de841d56fe2f989f"
     },
     {
       "path": "experiments/breathing-journey/art/poster-4-silhouette.svg",
-      "bytes": 32645,
-      "sha256": "cd9bf2268fd44bc6765f4c645cf81448e1f0788da12ebcb672a0ea7fb1895586"
+      "bytes": 34163,
+      "sha256": "dd24a6f6e6153d748463b78b2a79b15c03111268b5bf296b264d7282b9c3c461"
     },
     {
       "path": "experiments/breathing-journey/art/poster-4-soft.svg",
-      "bytes": 32639,
-      "sha256": "6b9ec1f3ca24530545d049a7798fae9c8909217667618c19e8aa3ad92b2c493c"
+      "bytes": 34157,
+      "sha256": "d3998846ff2c74bd0f6380cfb67a05db0ec83774663a1635d428e216eccaa22c"
     },
     {
       "path": "experiments/breathing-journey/art/poster-4-sport.svg",
-      "bytes": 32640,
-      "sha256": "aee70b3089d47068f2d2f8610db81cd38a52221bd36cb288b09a44d936a697ea"
+      "bytes": 34158,
+      "sha256": "32ae59947321bd1d2404e76a3fe9d1e61deb6e9e90d7cec630cae843b155522d"
     },
     {
       "path": "experiments/breathing-journey/art/poster-4.svg",
-      "bytes": 32640,
-      "sha256": "aee70b3089d47068f2d2f8610db81cd38a52221bd36cb288b09a44d936a697ea"
+      "bytes": 34158,
+      "sha256": "32ae59947321bd1d2404e76a3fe9d1e61deb6e9e90d7cec630cae843b155522d"
     },
     {
       "path": "experiments/breathing-journey/characters.html",
-      "bytes": 2748,
-      "sha256": "7141d19c2023b30023a7f22d86ba519cb511dbdc2d8fdcd29c9d7260bc4e59b7"
+      "bytes": 2842,
+      "sha256": "8ec2dd4ca7ddbe12d3679e6b5b41bd0dd7655a3095a69728619c7ca2e53e24d4"
     },
     {
       "path": "experiments/breathing-journey/characters.mjs",
-      "bytes": 5400,
-      "sha256": "ecdedcbc8e37197de6e278cfcf4aae3dcba9a3ae4831b4230ab7fbba91bfd53d"
+      "bytes": 5485,
+      "sha256": "57c2729e79680e49cb46af78972f8aa5c5fcbb8257cd0ccfd48fa5b8af84b3ab"
     },
     {
       "path": "experiments/breathing-journey/index.html",
-      "bytes": 9085,
-      "sha256": "7e7c5b47998312bb127c4cfbac54bbe570516ae62160416c67ac2584d4ddf2a1"
+      "bytes": 9075,
+      "sha256": "e252f78b9204bee8172d232134351ea17661e83abfe0ba6b92070ec607d3c355"
     },
     {
       "path": "experiments/breathing-journey/load-local.mjs",
-      "bytes": 2903,
-      "sha256": "72f68fcb38203e5a6f9283905ab2fd3f6d9ff7cdb1ea2df62913a864d3bd214a"
+      "bytes": 2951,
+      "sha256": "0bf6e7cc69a1ad1614e128ed8bf2a34f5766c1e6d9ad1622ca022e0cdc0ce35e"
     },
     {
       "path": "experiments/breathing-journey/model.mjs",
-      "bytes": 3584,
-      "sha256": "6d1dce74076d783a6b659f903b91b340eacf233d0fad2074ee906ba29c16911c"
+      "bytes": 3583,
+      "sha256": "1e9c19eb1b7dd8592c6ba0fc97f3b8821fe1bda59b5061109d5956dfb64f164e"
     },
     {
       "path": "experiments/breathing-journey/runner-character.mjs",
-      "bytes": 9619,
-      "sha256": "4791ec680b6976a73cf2e31d10044f6d1461173123829315347b3bf4c210c371"
+      "bytes": 10290,
+      "sha256": "0a6606f576959571e303f2bb382d00f877ba12abd96b1d63a2cf0b51000a2d7d"
     },
     {
       "path": "experiments/breathing-journey/runner-pose.mjs",
-      "bytes": 6182,
-      "sha256": "98a290adb2327311fbf8d248ff83a956f759fd24d866665f989add2861b38dfb"
+      "bytes": 6352,
+      "sha256": "441f6c51287ac21358dc744717fc1687c6f0bf13818890bd9cc7f1077d80245d"
     },
     {
       "path": "experiments/breathing-journey/scene.mjs",
-      "bytes": 9322,
-      "sha256": "17aa078689d1088107a6e1ae4710acdfdc4a0835b15d912d47088d34e138cc58"
+      "bytes": 9320,
+      "sha256": "afc6f737cabaa20ce798006a015f091090e3e93bf17982037185bce03b1c68d6"
     },
     {
       "path": "experiments/breathing-journey/site-preferences.mjs",
@@ -1657,8 +1657,8 @@
     },
     {
       "path": "layouts/partials/bret-meditation.html",
-      "bytes": 5636,
-      "sha256": "6178a59c56038e90bcbac99c58e060a990c07d83aafc37d77b23d30c9cef2d14"
+      "bytes": 6242,
+      "sha256": "bdd2f9f2cae4d9377bd46578a6088674c5bd6337611548ed6b968a8d23cc0e5e"
     },
     {
       "path": "layouts/partials/bret-practice.html",
@@ -2401,19 +2401,24 @@
       "sha256": "ec644521c4ba313b42b448900a57cd7c1c22f5e20bfdd453983ad2565aa0581b"
     },
     {
+      "path": "static/bret/games/meditation-background.mjs",
+      "bytes": 8982,
+      "sha256": "326e65b3fc8fa76b9f8f38c7f8f9d7b7ce981770939036e1d8b86bbf9f78e474"
+    },
+    {
       "path": "static/bret/games/meditation-data.mjs",
       "bytes": 19830,
       "sha256": "2f3c3c24f207b7bfd2452c701ff566bab52d11be5b8aac3039b1197b49df44a6"
     },
     {
       "path": "static/bret/games/meditation.css",
-      "bytes": 12102,
-      "sha256": "c95442c22da37e1e9c16975715123ee6ffc8cf04c3f62a60a75f28c817a0c627"
+      "bytes": 13083,
+      "sha256": "5f208f9fb89b58666be1e2a8e73958842ed3735ba736d5ae5f0bcefd5bf78b5a"
     },
     {
       "path": "static/bret/games/meditation.mjs",
-      "bytes": 29277,
-      "sha256": "d4511ad69c198a2fdce55f584e8b65ebbc76e7cebfb4cb124d0c4b0df68e262e"
+      "bytes": 29751,
+      "sha256": "05064f0b26998e9d13ac6e87e85f5642fbf300fe413d7cbb46f16c52a1357ea0"
     },
     {
       "path": "static/bret/games/navigation.mjs",
@@ -3890,6 +3895,5 @@
       "bytes": 1406,
       "sha256": "08081771136c6ac0a659b712141be52ccb8ef7761a4939b97e4f56c70d66d030"
     }
-  ],
-  "rollbackDeploymentId": "baa90284-cff0-4a9b-96af-87e635f5997d"
+  ]
 }

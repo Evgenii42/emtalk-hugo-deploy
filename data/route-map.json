@@ -198,13 +198,13 @@
       "origin": "owned"
     },
     {
-      "path": "/news/dos-workspace-update",
-      "file": "news/dos-workspace-update.html",
+      "path": "/news/bret-journey-games",
+      "file": "news/bret-journey-games.html",
       "origin": "owned"
     },
     {
-      "path": "/news/bret-journey-games",
-      "file": "news/bret-journey-games.html",
+      "path": "/news/dos-workspace-update",
+      "file": "news/dos-workspace-update.html",
       "origin": "owned"
     },
     {
@@ -703,14 +703,14 @@
       "sourceNoindex": false
     },
     {
-      "path": "/news/dos-workspace-update",
-      "exactSuffix": "/news/dos-workspace-update",
+      "path": "/news/bret-journey-games",
+      "exactSuffix": "/news/bret-journey-games",
       "origin": "owned",
       "sourceNoindex": false
     },
     {
-      "path": "/news/bret-journey-games",
-      "exactSuffix": "/news/bret-journey-games",
+      "path": "/news/dos-workspace-update",
+      "exactSuffix": "/news/dos-workspace-update",
       "origin": "owned",
       "sourceNoindex": false
     },

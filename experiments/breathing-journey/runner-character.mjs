@@ -1,19 +1,19 @@
-// New parkour silhouette, authored from an athletic profile rather than v1 art.
-import {HIP_HEIGHT,legPose,armPose,runBob,runnerLean,RUNNER_LEAN} from './runner-pose.mjs?v=jacket4';
-export const MODEL_ID='bret-runner-parkour-v4-jacket-sport';
+// One softly dressed character, shared by the scene, posters and comparison.
+import {HIP_HEIGHT,legPose,armPose,runBob,runnerLean,RUNNER_LEAN,RUNNER_SCALE} from './runner-pose.mjs?v=quiet5';
+export const MODEL_ID='bret-runner-soft-v5-sport';
 export const MODEL_STYLES=Object.freeze(['sport','soft','silhouette']);
-export const MODEL_NAMES=Object.freeze({sport:'Graphite',soft:'Ink',silhouette:'Contrast'});
+export const MODEL_NAMES=Object.freeze({sport:'Sage',soft:'Lilac',silhouette:'Dusk'});
 export const HIP_X=160,GROUND_Y=558;
 // The wardrobe separates shirt, trousers and shoes even in a small silhouette.
 const armFabrics = {
- sport:{sleeveFront:'595967',cuff:'787985',glove:'383844',gloveBack:'45434E'},
- soft:{sleeveFront:'69576C',cuff:'887887',glove:'453544',gloveBack:'50414E'},
- silhouette:{sleeveFront:'484850',cuff:'62626C',glove:'292934',gloveBack:'34343F'}
+ sport:{sleeveFront:'A5B7AF',cuff:'C2CBC1',glove:'D8B5A3',gloveBack:'BE9B90'},
+ soft:{sleeveFront:'B9A8C7',cuff:'D2C2D9',glove:'D8B5A3',gloveBack:'BE9B90'},
+ silhouette:{sleeveFront:'7E8297',cuff:'ABA9BD',glove:'D8B5A3',gloveBack:'BE9B90'}
 };
 const wardrobe = {
- sport: {body:'24242C',rear:'302E37',shirt:'4A4954',sleeveBack:'3D3B45',shirtFold:'64636D',pants:'292932',pantsBack:'393742',crease:'46444F',creaseBack:'494651',belt:'202029',shoe:'181820'},
- soft: {body:'322735',rear:'443548',shirt:'5B495E',sleeveBack:'4D3D52',shirtFold:'716075',pants:'382D3C',pantsBack:'47394B',crease:'56455B',creaseBack:'59485E',belt:'29212E',shoe:'27202B'},
- silhouette: {body:'15151B',rear:'23232A',shirt:'37373E',sleeveBack:'2C2C33',shirtFold:'4C4C53',pants:'202027',pantsBack:'2C2C33',crease:'383841',creaseBack:'41414A',belt:'121217',shoe:'101015'}
+ sport: {body:'D8B5A3',hair:'514952',rear:'5D626F',shirt:'96AAA2',sleeveBack:'7F958E',shirtFold:'B7C4BA',pants:'464557',pantsBack:'5B596C',crease:'666176',creaseBack:'706A7E',belt:'6A7473',shoe:'393645'},
+ soft: {body:'D8B5A3',hair:'514952',rear:'685C73',shirt:'AD99BD',sleeveBack:'917D9E',shirtFold:'CBB9D3',pants:'51475F',pantsBack:'685B75',crease:'776A83',creaseBack:'82748F',belt:'82718E',shoe:'423A4D'},
+ silhouette: {body:'D8B5A3',hair:'514952',rear:'53556B',shirt:'73788F',sleeveBack:'61677F',shirtFold:'9B9DB1',pants:'3D3E50',pantsBack:'505166',crease:'626077',creaseBack:'6D6B82',belt:'55586E',shoe:'30303D'}
 };
 export const RUNNER_COLORS=Object.freeze(wardrobe.sport);
 const mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
@@ -30,15 +30,26 @@ export const BODY_PARTS=[
  body('Collar',[[-5.5,-37.5],[-2,-39.3],[5,-38.6],[8,-36.8],[5,-36],[-1,-36.7]]),
  body('Shoulder seam',[[-9,-34],[-4,-36],[.5,-35.5],[-3,-34.8],[-8.8,-32.6]]),
  body('Neck',[[1,-43],[6,-43],[7,-35],[1,-34],[-1,-37]]),
- body('Head silhouette',[[-2,-49],[-1.2,-55.3],[4.6,-57.4],[12.2,-56.7],[11.6,-50],[13.1,-46.3],[11.8,-45.4],[11,-41],[4.5,-39.7],[-.4,-42.5]],
- [[0,1.5],[-.5,1.5],[-2,0],[-1,-1],[0,-1],[0,-.4],[.5,0],[0,-1],[1,0],[0,1]],
- [[0,-1.5],[1,-1],[2,0],[.5,1],[0,1],[0,.4],[-.5,1],[-1,.5],[-1,-.5],[-.5,-1]]),
+ body('Head silhouette',[[-2,-48],[-1,-54],[3,-57],[9,-57],[12,-53],[11.5,-49],[13,-46.5],[10.5,-45.5],[9.5,-42],[4,-40.5],[0,-43]],
+ [[0,2],[-1,2],[-2,0],[-2,0],[0,-2],[0,-1],[-.5,-.5],[.5,0],[.5,-1],[2,0],[1,1]],
+ [[0,-2],[1,-2],[2,0],[2,0],[0,2],[0,1],[.5,.5],[-.5,1],[-1,1],[-2,0],[-1,-1]]),
+ body('Hair',[[-2,-48],[-3,-52],[-1,-56],[4,-59],[9,-58],[12,-55],[11,-52],[8,-53],[4,-52],[1,-48]],
+ [[1,0],[0,2],[-1,1],[-2,0],[-2,0],[-1,-1],[1,0],[1,0],[1,-1],[1,0]],
+ [[-1,-1],[0,-2],[2,-1],[2,0],[2,1],[0,1],[-1,0],[-1,0],[-1,1],[-1,0]]),
 ];
+export function scalePoint([x,y]) {
+ return [HIP_X+(x-HIP_X)*RUNNER_SCALE,GROUND_Y+(y-GROUND_Y)*RUNNER_SCALE];
+}
+export function scaleOutline(shape) {
+ return {...shape,v:shape.v.map(scalePoint),
+  i:shape.i.map(point=>point.map(value=>value*RUNNER_SCALE)),
+  o:shape.o.map(point=>point.map(value=>value*RUNNER_SCALE))};
+}
 export function characterStyle(key='sport'){
  const style=MODEL_STYLES.includes(key)?key:'sport';
  const colors={...wardrobe[style],...armFabrics[style]};
- const material={'Trouser seat':'pants','Waistband':'belt','Jersey':'shirt','Jersey hem':'shirtFold','Collar':'belt','Shoulder seam':'shirtFold'};
- return {key:style,id:`bret-runner-parkour-v4-jacket-${style}`,name:MODEL_NAMES[style],colors,
+ const material={'Trouser seat':'pants','Waistband':'belt','Jersey':'shirt','Jersey hem':'shirtFold','Collar':'belt','Shoulder seam':'shirtFold','Hair':'hair'};
+ return {key:style,id:`bret-runner-soft-v5-${style}`,name:MODEL_NAMES[style],colors,
   parts:structuredClone(BODY_PARTS).map(p=>({...p,fill:colors[material[p.name]??'body']}))};
 }
 // Each bone has a convex tapered volume. Separate overlapping segments keep
@@ -88,7 +99,7 @@ export function armPanels(side,colors){
  return [
   ['Upper arm silhouette','upper',cloth],['Elbow joint','elbow',cloth],
   ['Shirt sleeve','sleeve',cloth],['Forearm silhouette','forearm',cloth],
-  ['Running glove','hand',side?colors.glove:colors.gloveBack],
+  ['Hand','hand',side?colors.glove:colors.gloveBack],
   ['Ribbed wrist cuff','cuff',side?colors.cuff:colors.shirtFold]
  ];
 }
@@ -122,11 +133,11 @@ export function pathData({v,i,o}){
 }
 export function partTransform(name,distance){
  const delta=runnerLean(distance)-RUNNER_LEAN;
- return name==='Head silhouette'?{angle:-.72*delta,pivot:[HIP_X+4,GROUND_Y-HIP_HEIGHT-44]}:(name==='Trouser seat'||name==='Waistband')?{angle:-.5*delta,pivot:[HIP_X,GROUND_Y-HIP_HEIGHT]}:{angle:0,pivot:[0,0]};
+ return (name==='Head silhouette'||name==='Hair')?{angle:-.72*delta,pivot:scalePoint([HIP_X+4,GROUND_Y-HIP_HEIGHT-44])}:(name==='Trouser seat'||name==='Waistband')?{angle:-.5*delta,pivot:scalePoint([HIP_X,GROUND_Y-HIP_HEIGHT])}:{angle:0,pivot:[0,0]};
 }
 export function posterRunnerSVG(x,y,key='sport',distance=0){
- const style=characterStyle(key),c=style.colors,bob=runBob(distance),hipY=GROUND_Y-HIP_HEIGHT;
- const fill=(shape,color)=>`<path d="${pathData(shape)}" fill="#${color}"/>`;
+ const style=characterStyle(key),c=style.colors,bob=runBob(distance)*RUNNER_SCALE,hipY=GROUND_Y-HIP_HEIGHT*RUNNER_SCALE;
+ const fill=(shape,color)=>`<path d="${pathData(scaleOutline(shape))}" fill="#${color}"/>`;
  const arm=side=>{
   const shapes=armOutlines(distance,side);
   return armPanels(side,c).map(([,part,color])=>fill(shapes[part],color)).join('');

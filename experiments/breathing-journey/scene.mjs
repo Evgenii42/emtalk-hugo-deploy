@@ -1,6 +1,6 @@
-import {lungFrame} from './model.mjs?v=jacket4';
-import {terrainPose} from './runner-pose.mjs?v=jacket4';
-import {loadJSON,loadRunner,createAnimation} from './load-local.mjs?v=jacket4';
+import {lungFrame} from './model.mjs?v=quiet5';
+import {terrainPose} from './runner-pose.mjs?v=quiet5';
+import {loadJSON,loadRunner,createAnimation} from './load-local.mjs?v=quiet5';
 function discard(player){try{player.destroy();}catch{}player.journeyContainer?.remove();}
 function transform(node,value){if(node.getAttribute('transform')!==value)node.setAttribute('transform',value);}
 // Session and cues still observe every RAF. Expensive SVG/DOM paints have a
@@ -12,7 +12,7 @@ export function createVisualPacer(){
     last=now;phaseKey=key;return true;
   }};
 }
-export function sceneFrames(snapshot,still=false,periods=[7200,720]){return still?[0,0,0]:[snapshot.distance%periods[0],snapshot.distance%periods[1],lungFrame(snapshot.phase,snapshot.offset/snapshot.phaseDuration)];}
+export function sceneFrames(snapshot,still=false,periods=[7200,2880]){return still?[0,0,0]:[snapshot.distance%periods[0],snapshot.distance%periods[1],lungFrame(snapshot.phase,snapshot.offset/snapshot.phaseDuration)];}
 export class JourneyScene {
   constructor(root,onError){
     this.root=root;this.onError=onError;this.version=0;this.players=[];this.pending=[];this.last=null;this.playerFrames=new WeakMap();

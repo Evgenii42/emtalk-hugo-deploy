@@ -1,8 +1,8 @@
 import {PRESETS, Session, breathingPlan} from '../../assets/js/bret-engine.js';
-import {MODEL_STYLES} from './runner-character.mjs?v=jacket4';
+import {MODEL_STYLES} from './runner-character.mjs?v=quiet5';
 
 export {PRESETS};
-export const BREATH_TRAVEL=1800;
+export const BREATH_TRAVEL=1440;
 export const PREVIEW_SPEED=BREATH_TRAVEL/4000;
 export const defaults = Object.freeze({scene:0, character:'sport',preset:'4444', custom:[4,2,4,2], cycles:10, sound:false, still:false});
 export function sanitize(value) {
@@ -50,7 +50,7 @@ export function motionTimeline(plan) {
   let total=0,previousBreath=null;
   for(const step of plan){
     offsets.push(total);
-    // 450 world pixels/sec for a four-second inhale. Stretch the same
+    // 360 world pixels/sec for a four-second inhale. Stretch the same
     // breath distance to its duration. A short custom hold must never outrun
     // the preceding breath; cap visual speed without changing hold timing.
     let speed=BREATH_TRAVEL*weights[step.phase]/step.duration;

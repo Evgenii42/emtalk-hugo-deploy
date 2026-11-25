@@ -1,3 +1,5 @@
+import {characterStyle} from './runner-character.mjs?v=quiet5';
+
 // Bound response and body parsing together; a stalled local request degrades.
 export async function loadJSON(url,timeoutMs=8000){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
@@ -40,8 +42,8 @@ export async function cloneRunnerData(value,{isCurrent=()=>true,now=()=>performa
 export async function loadRunner(key,options){
  let template=runnerTemplates.get(key);
  if(!template){
-  template=loadJSON(`./animations/runner-model-${key}.json?rig=jacket4`).then(model=>{
-   if(model.modelId!==`bret-runner-parkour-v4-jacket-${key}`||!Array.isArray(model.layers))throw Error('Incompatible runner asset');
+  template=loadJSON(`./animations/runner-model-${key}.json?rig=quiet5`).then(model=>{
+   if(model.modelId!==characterStyle(key).id||!Array.isArray(model.layers))throw Error('Incompatible runner asset');
    return model;
   }).catch(error=>{runnerTemplates.delete(key);throw error;});
   runnerTemplates.set(key,template);

@@ -5,10 +5,10 @@
   <meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="light">
   <title>Bret · Breathing Journey</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%238260AF'/%3E%3Cpath d='M13 10v20m0-10c12-9 17 15 0 9' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./style.css?v=jacket4">
+  <link rel="stylesheet" href="./style.css?v=quiet5">
   <script defer src="./vendor/lottie-5.13.0.min.js"></script>
   <script type="module">
-    import('./app.mjs?v=jacket4').catch(()=>{
+    import('./app.mjs?v=quiet5').catch(()=>{
       for(const control of document.querySelectorAll('button,input,select'))control.disabled=true;
       document.getElementById('practice-load-error').hidden=false;
     });
@@ -21,9 +21,9 @@
   <main class="workspace">
     <section id="practice" class="practice" aria-label="Breathing journey" tabindex="-1">
       <div class="scene text-mode loading-art" data-scene="0">
-        <div class="scenery" aria-hidden="true"><img class="scene-fallback" src="./art/poster-0.svg?v=jacket4" alt="" width="360" height="800"><script>
+        <div class="scenery" aria-hidden="true"><img class="scene-fallback" src="./art/poster-0.svg?v=quiet5" alt="" width="360" height="800"><script>
           // Validated, local pre-paint preference. No clock or user data output.
-          try{const saved=JSON.parse(localStorage.getItem('emtalk.bret.journey.preferences.v1')||'null'),requested=new URL(location.href).searchParams.get('character'),keys=['sport','soft','silhouette'];const key=keys.includes(requested)?requested:keys.includes(saved?.character)?saved.character:'sport';document.currentScript.previousElementSibling.src='./art/poster-0-'+key+'.svg?v=jacket4';}catch{}
+          try{const saved=JSON.parse(localStorage.getItem('emtalk.bret.journey.preferences.v1')||'null'),requested=new URL(location.href).searchParams.get('character'),keys=['sport','soft','silhouette'];const key=keys.includes(requested)?requested:keys.includes(saved?.character)?saved.character:'sport';document.currentScript.previousElementSibling.src='./art/poster-0-'+key+'.svg?v=quiet5';}catch{}
         </script><div data-animation="background"></div><div data-animation="road"></div></div>
         <div class="scene-top"><p class="eyebrow">A MOMENT FOR YOU</p><h1>Quiet Trail</h1><p class="scene-caption">Morning Hills</p><a class="icon-button exit" data-home href="../app#breath" aria-label="Back to Breath" title="Back to Breath"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a><button type="button" class="icon-button exit" data-stop aria-label="End journey" title="End journey" hidden><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
         <div class="journey-progress"><div><span data-progress-label>At the start</span><span data-percent>0%</span></div><progress max="1" value="0" aria-label="Session progress"></progress></div>
@@ -43,7 +43,7 @@
       <label class="motion-choice"><input type="checkbox" name="still"> Keep the scene still</label>
       <p class="settings-note" data-settings-note>The animation follows your chosen breathing pattern.</p>
       </div><div class="appearance-settings">
-      <fieldset class="character-choice"><legend>Character for every landscape</legend><label class="sr-only" for="character">Character</label><select id="character" name="character"><option value="sport">Graphite</option><option value="soft">Ink</option><option value="silhouette">Contrast</option></select><a href="./characters.html" data-compare>Compare them in motion</a></fieldset>
+      <fieldset class="character-choice"><legend>Character for every landscape</legend><label class="sr-only" for="character">Character</label><select id="character" name="character"><option value="sport">Sage</option><option value="soft">Lilac</option><option value="silhouette">Dusk</option></select><a href="./characters.html" data-compare>Compare them in motion</a></fieldset>
       <fieldset class="landscapes"><legend>Your landscape</legend><div class="landscape-options"></div></fieldset>
       </div><fieldset data-site-sound hidden><legend>Sound and cues</legend>
         <label class="motion-choice"><input type="checkbox" name="music">Background music</label>

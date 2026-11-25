@@ -1,7 +1,7 @@
-import {MODEL_STYLES} from './runner-character.mjs?v=jacket4';
-import {HIP_HEIGHT,runnerLean,runBob} from './runner-pose.mjs?v=jacket4';
-import {sanitize,PREVIEW_SPEED} from './model.mjs?v=jacket4';
-import {loadRunner,createAnimation} from './load-local.mjs?v=jacket4';
+import {MODEL_STYLES} from './runner-character.mjs?v=quiet5';
+import {HIP_HEIGHT,runnerLean,runBob,RUNNER_SCALE,RUNNER_PERIOD} from './runner-pose.mjs?v=quiet5';
+import {sanitize,PREVIEW_SPEED} from './model.mjs?v=quiet5';
+import {loadRunner,createAnimation} from './load-local.mjs?v=quiet5';
 const players=[],created=[],button=document.querySelector('[data-lab-toggle]');
 let failed=false,handle=0;
 function bootFailure(){
@@ -18,10 +18,10 @@ const destination=new URL('./',location.href);destination.search=location.search
 if(integrated)document.querySelector('.back-link').href=destination.href;
 let playing=!integrated&&!motionPreference.matches&&!savedStill,elapsed=0,last=null;
 function render(){
- const d=elapsed*PREVIEW_SPEED%720,hip=558-HIP_HEIGHT+runBob(d);
+ const d=elapsed*PREVIEW_SPEED%RUNNER_PERIOD,hip=558-HIP_HEIGHT*RUNNER_SCALE+runBob(d/RUNNER_SCALE)*RUNNER_SCALE;
  for(const player of players){
   player.goToAndStop(d,true);
-  const lean=runnerLean(d);
+  const lean=runnerLean(d/RUNNER_SCALE);
   for(const group of player.posture)group.setAttribute('transform',`translate(160 ${hip}) rotate(${lean}) translate(-160 ${-hip})`);
  }
 }

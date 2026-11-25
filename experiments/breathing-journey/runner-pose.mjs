@@ -1,5 +1,7 @@
 // One stride is two successive footfalls. Keys are fractions of that stride.
 export const STRIDE = 360;
+export const RUNNER_SCALE = .8;
+export const RUNNER_PERIOD = STRIDE * 2 * RUNNER_SCALE;
 export const STANCE_END = .20;
 export const HIP_HEIGHT = 62;
 export const LEG_UPPER = 36.5, LEG_LOWER = 31;
@@ -112,11 +114,12 @@ export function armPose(distance,side,hipX,groundY) {
 }
 
 export function terrainPose(snapshot,still=false){
-  if(still)return {angle:0,elevation:0,bodyLean:runnerLean(0),bob:0,hipY:558-HIP_HEIGHT};
+  if(still)return {angle:0,elevation:0,bodyLean:runnerLean(0),bob:0,hipY:558-HIP_HEIGHT*RUNNER_SCALE};
   const p=Math.max(0,Math.min(1,snapshot.offset/snapshot.phaseDuration));
   const direction=snapshot.phase===0?-1:snapshot.phase===2?1:0;
   const angle=direction*18*Math.sin(Math.PI*p);
   const elevation=snapshot.phase===0?-68*smooth(p):snapshot.phase===1?-68:snapshot.phase===2?-68*(1-smooth(p)):0;
-  const bob=runBob(snapshot.distance);
-  return {angle,elevation,bodyLean:runnerLean(snapshot.distance,angle),bob,hipY:558-HIP_HEIGHT};
+  const gaitDistance=snapshot.distance/RUNNER_SCALE;
+  const bob=runBob(gaitDistance)*RUNNER_SCALE;
+  return {angle,elevation,bodyLean:runnerLean(gaitDistance,angle),bob,hipY:558-HIP_HEIGHT*RUNNER_SCALE};
 }

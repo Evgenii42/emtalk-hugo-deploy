@@ -1,7 +1,7 @@
-import {Journey,sanitize,landscapeForCycle} from './model.mjs?v=jacket4';
-import {JourneyScene,createVisualPacer} from './scene.mjs?v=jacket4';
+import {Journey,sanitize,landscapeForCycle} from './model.mjs?v=quiet5';
+import {JourneyScene,createVisualPacer} from './scene.mjs?v=quiet5';
 import {sitePreferences} from './site-preferences.mjs';
-import {MODEL_STYLES} from './runner-character.mjs?v=jacket4';
+import {MODEL_STYLES} from './runner-character.mjs?v=quiet5';
 
 let fatal=false,stopFailedMedia=null;
 function updateText(node,value){const text=String(value);if(node.textContent!==text)node.textContent=text;}
@@ -97,7 +97,7 @@ music?.addEventListener('error',()=>{
   if(preferences.sound&&journey?.session.state==='running'){preferences.sound=false;pauseMusic();save();feedback('Music is unavailable. You can follow the timer instead.');render();}
 });
 
-$('.landscape-options').innerHTML=landscapes.map((name,i)=>`<label class="landscape-option" title="${name}"><input type="radio" name="scene" value="${i}" aria-label="${name}"><img src="./art/poster-${i}.svg?v=jacket4" width="360" height="800" alt=""><span>${shortLandscapes[i]}</span></label>`).join('');
+$('.landscape-options').innerHTML=landscapes.map((name,i)=>`<label class="landscape-option" title="${name}"><input type="radio" name="scene" value="${i}" aria-label="${name}"><img src="./art/poster-${i}.svg?v=quiet5" width="360" height="800" alt=""><span>${shortLandscapes[i]}</span></label>`).join('');
 function writeForm(){
   form.elements.preset.value=preferences.preset;
   form.elements.cycles.value=preferences.cycles;
@@ -136,8 +136,8 @@ function updateScene(snapshot=journey.snapshot()){
     const token=++mountToken;
     $('.scene-caption').textContent=landscapes[target];
     sceneRoot.dataset.scene=target;sceneRoot.dataset.character=preferences.character;
-    $('.scene-fallback').src=`./art/poster-${target}-${preferences.character}.svg?v=jacket4`;
-    document.querySelectorAll('.landscape-option img').forEach((img,i)=>{img.src=`./art/poster-${i}-${preferences.character}.svg?v=jacket4`;});
+    $('.scene-fallback').src=`./art/poster-${target}-${preferences.character}.svg?v=quiet5`;
+    document.querySelectorAll('.landscape-option img').forEach((img,i)=>{img.src=`./art/poster-${i}-${preferences.character}.svg?v=quiet5`;});
     void scene.mount(target,preferences.character).then(ok=>{
       if(fatal||token!==mountToken)return;
       if(ok){sceneAttempts.delete(key);if(renderKey===key&&$('[data-feedback]').textContent.startsWith(animationUnavailable))feedback('');}
